@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  company_name: MyString
+  edition: 1
+  subscription_status: 1
+  user_id: 1
+  access_key: MyString
+
+two:
+  company_name: MyString
+  edition: 1
+  subscription_status: 1
+  user_id: 1
+  access_key: MyString
