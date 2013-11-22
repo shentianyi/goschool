@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  type: 1
+  name: MyString
+  description: MyString
+  lesson: 1
+  start_date: 2013-11-22
+  end_date: 2013-11-22
+  expect_number: 1
+  actual_number: 1
+  sub_number: 1
+  user: 
+
+two:
+  type: 1
+  name: MyString
+  description: MyString
+  lesson: 1
+  start_date: 2013-11-22
+  end_date: 2013-11-22
+  expect_number: 1
+  actual_number: 1
+  sub_number: 1
+  user: 

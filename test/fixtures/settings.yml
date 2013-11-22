@@ -2,6 +2,8 @@
 
 one:
   default_pwd: MyString
+  tenant: one
 
 two:
   default_pwd: MyString
+  tenant: two
