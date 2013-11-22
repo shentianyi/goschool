@@ -1,0 +1,45 @@
+/*green*/
+/* #63A69F*/
+/*red*/
+/* #E44B3D*/
+@font-face {
+    font-family:'maven';
+    /*src:url("/assets/mavenprolight300.ttf"),*/
+    /*url("/assets/mavenprolight300.eot");*/
+    src:url("../fonts/mavenprolight300.ttf"),
+    url("../fonts/mavenprolight300.eot");
+}
+html,body{
+    margin:0px;
+    min-width:1024px;
+    min-height:768px;
+    font-family:"YouYuan","Arial",sans-serif;
+    font-weight:lighter;
+    /*background-color:#f7f0e0*/
+}
+a{
+    text-decoration:none;
+    cursor:pointer;
+}
+p{
+    color:#333;
+    margin:5px 0;
+}
+select{
+    width:120px;
+    border-radius:1px;
+    -moz-border-radius:1px;
+    -webkit-border-radius:1px;
+    background-color:white;
+    border:1px solid rgba(0,0,0,0.3);
+    padding:5px 4px;
+    font-size:13px;
+    color:#333;
+}
+/*基础布局操作*/
+.pull-left{
+    float:left
+}
+.pull-right{
+    float:right;
+}

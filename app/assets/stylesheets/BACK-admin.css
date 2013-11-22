@@ -1,0 +1,62 @@
+.admin-operate{
+    width:90%;
+    margin-left:-45%;
+    position:relative;
+    top:35px;
+    left:50%;
+}
+.admin-operate:after{
+    content:"";
+    display:block;
+    width:90%;
+    height:50px;
+}
+/*p*/
+.admin-operate>p{
+    display:inline-block;
+    font-size:21px;
+    color:#63A69F;
+}
+/*label*/
+.admin-operate>label{
+    float:right;
+    font-size:13px;
+    color:rgba(0,0,0,0.6);
+    margin-top:20px;
+    margin-right:7px;
+}
+/*table*/
+.admin-operate>table {
+    margin-top:5px !important;
+}
+.admin-operate>table .add-button{
+    width:125px;
+}
+.admin-operate>table td{
+    word-break:break-all;
+    word-wrap:break-word;
+}
+.admin-operate>table td input{
+    width:80%;
+}
+.admin-operate>table td i.trash{
+    font-size:18px;
+    font-weight:bolder;
+    cursor:pointer;
+    color:#E44B3D;
+}
+.admin-operate>table td i.trash:hover{
+    color:#ee877e;
+}
+.admin-operate>table .template{
+    background-color:#F2F8F0;
+}
+.admin-operate>table .template .checkmark{
+    color:#119000;
+    font-size:18px;
+    cursor:pointer;
+    margin-right:10px;
+}
+.admin-operate>table .template .checkmark:hover{
+    color:#63a69f;
+}
