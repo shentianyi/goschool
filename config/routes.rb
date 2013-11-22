@@ -1,4 +1,7 @@
 Goschool::Application.routes.draw do
+  resources :cources
+
+
    resources :settings
    resources :institutions
     # The priority is based upon order of creation:

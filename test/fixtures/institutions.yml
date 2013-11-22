@@ -4,10 +4,10 @@ one:
   name: Shanghai
   address: MyString
   tel: MyString
-  tenant: one
+  tenant: two
 
 two:
   name: Beijing
   address: MyString
   tel: MyString
-  tenant: two
+  tenant: one
