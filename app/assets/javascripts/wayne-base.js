@@ -152,32 +152,11 @@ function TCR(a,t){
         judge: judge
     }
 }
-//show loading
-function show_loading(top,right,bottom,left){
-    var body=document.getElementsByTagName("body")[0];
-    var loading=document.createElement("div");
-    loading.className="loading";
-    loading.innerHTML="<p>Wait a minute , it's coming </p>";
-    loading.setAttribute("id","loading");
-    loading.setAttribute("style","top:"+top+"px;right:"+right+"px;bottom:"+bottom+"px;left:"+left+"px;");
-    body.appendChild(loading);
-}
-function remove_loading(){
-    var body=document.getElementsByTagName("body")[0];
-    var loading=document.getElementById("loading");
-    body.removeChild(loading);
-}
-//dashboard-add show loading
-function dashboard_show_loading(out_id){
-    $("#"+out_id).prepend(
-        $("<div />").addClass("dashboard-show-loading")
-            .append($("<i />").addClass("icon-spinner icon-spin icon-2x"))
-    );
-    if(arguments.length>1){
-        var top=arguments[1],right=arguments[2],bottom=arguments[3],left=arguments[4];
-        $("#"+out_id).find(".dashboard-show-loading").css("top",top).css("right",right).css("bottom",bottom).css("left",left);
-    }
-}
-function dashboard_remove_loading(out_id){
-    $("#"+out_id).find(".dashboard-show-loading").remove();
+//Message box
+function MessageBox(str,position, type) {
+    $('#MessageBox').addClass(type).addClass(position).find("p").text(str);
+    $('#MessageBox').slideDown("2500");
+    setTimeout(function(){
+        $("#MessageBox").slideUp("2500");
+    },2500)
 }

@@ -413,7 +413,7 @@
   content: '';
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.8) url(../images/loader-large.gif) no-repeat 50% 50%;
+  /*background: rgba(255, 255, 255, 0.8) url(../images/loader-large.gif) no-repeat 50% 50%;*/
   visibility: visible;
 }
 
@@ -1580,7 +1580,7 @@ body > .ui.grid {
   left: 1px;
   margin: 0px;
   min-width: -webkit-calc(99%);
-  min-width: calc(99%);
+  /*min-width: calc(99%);*/
   -webkit-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
@@ -1747,7 +1747,7 @@ body > .ui.grid {
   content: '';
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.8) url(../images/loader-large.gif) no-repeat 50% 50%;
+  /*background: rgba(255, 255, 255, 0.8) url(../images/loader-large.gif) no-repeat 50% 50%;*/
   visibility: visible;
 }
 
@@ -5215,7 +5215,7 @@ i.massive.basic.icon {
   width: 100%;
   height: 100%;
   content: '';
-  background: transparent url(../images/loader-mini.gif) no-repeat 50% 50%;
+  /*background: transparent url(../images/loader-mini.gif) no-repeat 50% 50%;*/
 }
 
 .ui.labeled.icon.loading.button .icon {
@@ -5663,7 +5663,7 @@ i.massive.basic.icon {
 /* loading */
 
 .ui.huge.loading.button:after {
-  background-image: url(../images/loader-small.gif);
+  /*background-image: url(../images/loader-small.gif);*/
 }
 
 .ui.massive.buttons .loading.button:after,
@@ -5675,7 +5675,7 @@ i.massive.basic.icon {
 
 .ui.huge.loading.button:after,
 .ui.huge.loading.button.active:after {
-  background-image: url(../images/loader-small.gif);
+  /*background-image: url(../images/loader-small.gif);*/
 }
 
 .ui.massive.buttons .loading.button:after,
@@ -9080,11 +9080,11 @@ img.ui.image {
 
 /* browsers require these rules separate */
 
-.ui.input::-web inputkit-input-placeholder {
+.ui.input inputkit-input-placeholder {
   color: #BBBBBB;
 }
 
-.ui.input::-moz input-placeholder {
+.ui.input input-placeholder {
   color: #BBBBBB;
 }
 
@@ -9107,7 +9107,7 @@ img.ui.image {
 ---------------------*/
 
 .ui.loading.input > .icon {
-  background: url(../images/loader-mini.gif) no-repeat 50% 50%;
+  /*background: url(../images/loader-mini.gif) no-repeat 50% 50%;*/
 }
 
 .ui.loading.input > .icon:before,
@@ -10311,14 +10311,14 @@ a.ui.teal.label:hover:before {
 
 .ui.dimmer .mini.ui.loader,
 .ui.inverted .mini.ui.loader {
-  background-image: url(../images/loader-mini-inverted.gif);
+  /*background-image: url(../images/loader-mini-inverted.gif);*/
 }
 
 /* Small Size */
 
 .ui.dimmer .small.ui.loader,
 .ui.inverted .small.ui.loader {
-  background-image: url(../images/loader-small-inverted.gif);
+  /*background-image: url(../images/loader-small-inverted.gif);*/
 }
 
 /* Standard Size */
@@ -10332,7 +10332,7 @@ a.ui.teal.label:hover:before {
 
 .ui.dimmer .large.ui.loader,
 .ui.inverted .large.ui.loader {
-  background-image: url(../images/loader-large-inverted.gif);
+  /*background-image: url(../images/loader-large-inverted.gif);*/
 }
 
 /*-------------------
@@ -10345,7 +10345,7 @@ a.ui.teal.label:hover:before {
 .ui.mini.loader {
   width: 16px;
   height: 16px;
-  background-image: url(../images/loader-mini.gif);
+  /*background-image: url(../images/loader-mini.gif);*/
 }
 
 /* Small Size */
@@ -10354,7 +10354,7 @@ a.ui.teal.label:hover:before {
 .ui.small.loader {
   width: 24px;
   height: 24px;
-  background-image: url(../images/loader-small.gif);
+  /*background-image: url(../images/loader-small.gif);*/
 }
 
 .ui.inverted.dimmer .ui.loader,
@@ -10371,7 +10371,7 @@ a.ui.teal.label:hover:before {
 .ui.loader.large {
   width: 64px;
   height: 64px;
-  background-image: url(../images/loader-large.gif);
+  /*background-image: url(../images/loader-large.gif);*/
 }
 
 /*-------------------
@@ -12155,7 +12155,7 @@ a.ui.teal.label:hover:before {
 .ui.checkbox .box,
 .ui.checkbox label {
   cursor: pointer;
-  padding-left: 2em;
+  padding-left: 1.4em;
   outline: none;
 }
 
@@ -13088,7 +13088,7 @@ a.ui.teal.label:hover:before {
 
 .ui.pointing.dropdown .menu .active.item:first-child {
   background: transparent -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.03));
-  background: transparent-webkit-gradient(linear, top left, bottom left, from(transparent), to(rgba(0, 0, 0, 0.03)));
+  /*background: transparent-webkit-gradient(linear, top left, bottom left, from(transparent), to(rgba(0, 0, 0, 0.03)));*/
   background: transparent linear-gradient(transparent, rgba(0, 0, 0, 0.03));
 }
 
@@ -14227,7 +14227,7 @@ a.ui.nag {
 ---------------*/
 
 .ui.search.loading .input .icon {
-  background: url(../images/loader-mini.gif) no-repeat 50% 50%;
+  /*background: url(../images/loader-mini.gif) no-repeat 50% 50%;*/
 }
 
 .ui.search.loading .input .icon:before,
@@ -14718,7 +14718,7 @@ body {
   width: 100%;
   height: 100%;
   padding-top: 75px;
-  background: url(../images/loader-large.gif) no-repeat 0px 0px;
+  /*background: url(../images/loader-large.gif) no-repeat 0px 0px;*/
   visibility: visible;
 }
 /*******************************
