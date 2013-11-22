@@ -1,7 +1,7 @@
 #encoding: utf-8
 class InstitutionsController < ApplicationController
   before_filter :init_message ,:only=>[:create,:update,:destroy]
-  before_filter :get_institution , :only=>[:create,:show,:destroy]
+  before_filter :get_institution , :only=>[:update,:show,:destroy]
   before_filter :render_nil_msg , :only=>[:update,:destroy]
   def index
     render :json=>current_tenant.institutions

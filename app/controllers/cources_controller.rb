@@ -1,83 +1,52 @@
+#encoding: utf-8
 class CourcesController < ApplicationController
-  # GET /cources
-  # GET /cources.json
+  before_filter :init_message ,:only=>[:create,:update,:destroy]
+  before_filter :get_course,:only=>[:update,:show,:destroy]
+  before_filter :render_nil_msg , :only=>[:update,:destroy]
+  
   def index
-    @cources = Cource.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @cources }
-    end
+    render :json=> Cource.all
   end
 
-  # GET /cources/1
-  # GET /cources/1.json
   def show
-    @cource = Cource.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @cource }
-    end
+    render :json=>@cource
   end
 
-  # GET /cources/new
-  # GET /cources/new.json
-  def new
-    @cource = Cource.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @cource }
-    end
-  end
-
-  # GET /cources/1/edit
-  def edit
-    @cource = Cource.find(params[:id])
-  end
-
-  # POST /cources
-  # POST /cources.json
   def create
-    @cource = Cource.new(params[:cource])
-
-    respond_to do |format|
-      if @cource.save
-        format.html { redirect_to @cource, notice: 'Cource was successfully created.' }
-        format.json { render json: @cource, status: :created, location: @cource }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @cource.errors, status: :unprocessable_entity }
-      end
-    end
+    @cource = current_tenant.courses.build(params[:course].strip)
+    if @msg.result=@course.save
+     @msg.content=@course.errors.messages
+    end	
+    render :json=>@msg
   end
 
-  # PUT /cources/1
-  # PUT /cources/1.json
   def update
-    @cource = Cource.find(params[:id])
-
-    respond_to do |format|
-      if @cource.update_attributes(params[:cource])
-        format.html { redirect_to @cource, notice: 'Cource was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @cource.errors, status: :unprocessable_entity }
-      end
+    unless @msg.result=@course.update_attributes(params[:course].strip)
+       @msg.content=@course.errors.messages
     end
+    render :json=>@msg
   end
 
-  # DELETE /cources/1
-  # DELETE /cources/1.json
   def destroy
-    @cource = Cource.find(params[:id])
     @cource.destroy
-
-    respond_to do |format|
-      format.html { redirect_to cources_url }
-      format.json { head :no_content }
-    end
+    @msg.result=true
+    render :json=>@msg
   end
+
+  private
+
+  def init_message
+    @msg=Msg.new
+  end
+
+  def get_course
+    @course=Course.find_by_id(params[:id])
+  end
+  
+  def render_nil_msg
+    unless @course
+      @msg.content='不存在此课程'
+      render :json=>msg
+    end
+  end 
 end
