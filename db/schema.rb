@@ -11,6 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(:version => 20131122081418) do
+
+  create_table "tags", :force => true do |t|
+    t.string   "tenant_id"
+    t.string   "entity_type_id"
+    t.string   "entity_id"
+    t.string   "tag"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "tags", ["tenant_id", "entity_type_id", "entity_id", "tag"], :name => "index_tags_on_tenant_id_and_entity_type_id_and_entity_id_and_tag", :unique => true
+  add_index "tags", ["tenant_id", "entity_type_id", "entity_id"], :name => "index_tags_on_tenant_id_and_entity_type_id_and_entity_id"
+  add_index "tags", ["tenant_id", "entity_type_id", "tag"], :name => "index_tags_on_tenant_id_and_entity_type_id_and_tag"
+  add_index "tags", ["tenant_id", "tag"], :name => "index_tags_on_tenant_id_and_tag"
+=======
 ActiveRecord::Schema.define(:version => 20131122060711) do
 
   create_table "institutions", :force => true do |t|
@@ -45,5 +62,6 @@ ActiveRecord::Schema.define(:version => 20131122060711) do
   end
 
   add_index "tenants", ["user_id"], :name => "index_tenants_on_user_id"
+>>>>>>> 9753518252cb97bdc0401d4f54bbd0963219cfc8
 
 end
