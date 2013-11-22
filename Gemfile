@@ -7,6 +7,10 @@ gem 'rails', '3.2.13'
 
 gem 'mysql2'
 
+# auth
+gem 'acts_as_tenant'
+gem 'cancan'
+gem 'authlogic'
 
 # Gems used only for assets and not required
 # in production environments by default.

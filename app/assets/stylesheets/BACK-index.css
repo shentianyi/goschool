@@ -1,0 +1,255 @@
+
+/*green*/
+/* #63A69F*/
+/*red*/
+/* #E44B3D*/
+/************************************************************   left aside */
+.back-index-aside{
+    background:rgba(47, 47, 47, 0.98);
+    position:absolute;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    width:100px;
+    overflow:hidden;
+    z-index:30;
+    box-shadow:2px 0px 7px #595959;
+    -moz-box-shadow:2px 0px 7px #595959;
+    -webkit-box-shadow:2px 0px 7px #595959;
+    min-height:768px;
+}
+.back-index-aside>.logo{
+    dispaly:block;
+    position:absolute;
+    top:0px;
+    left:0px;
+    right:0px;
+    height:55px;
+    cursor:pointer;
+    border-bottom:1px solid rgba(255, 255, 255, 0.6);
+}
+.back-index-aside>.first-ul{
+    position:absolute;
+    top:52px;
+    left:0px;
+    right:0px;
+    width:auto;
+    list-style-type:none;
+    padding:0px;
+}
+.back-index-aside>.first-ul>li>a{
+    display:block;
+    text-align:center;
+    padding:9px 0;
+    color:rgba(255, 255, 255, 0.8);
+    font-size:13px;
+}
+.back-index-aside>.first-ul>li>a.active{
+    color:white;
+    background-color:#63A69F;
+}
+.back-index-aside>.first-ul>li>a:hover{
+    background-color:#63A69F;
+    color:#FFFFFF;
+}
+.back-index-aside>.second-ul{
+    position:absolute;
+    padding:0px;
+    margin:0px;
+    left:0px;
+    right:0px;
+    bottom:10px;
+    list-style-type:none;
+}
+.back-index-aside>.second-ul>li{
+    text-align:center;
+    padding:9px 0;
+}
+.back-index-aside>.second-ul>li>i{
+    color:rgba(255, 255, 255, 0.8);
+    font-size:25px;
+    cursor:pointer;
+    transition:color 0.3s ease-out;
+}
+.back-index-aside>.second-ul>li>i:hover{
+    color:#63A69F
+}
+/************************************************************   middle condition */
+.back-index-condition{
+    background:#fef9ee;
+    border-right:1px solid rgba(0,0,0,0.3);
+    z-index:20;
+    position:absolute;
+    top:0px;
+    bottom:0px;
+    left:100px;
+    width:230px;
+    overflow-x:hidden;
+    overflow-y:auto;
+    min-height:768px;
+}
+.back-index-side-header{
+    width:100%;
+    height:55px;
+    border-bottom:1px solid rgba(0,0,0,0.2);
+    box-shadow:0px 2px 3px rgba(0,0,0,0.2);
+}
+.back-index-side-header:before{
+    content:"";
+    display:block;
+    width:100%;
+    height:6px;
+    background:#63A69F;
+}
+.back-index-side-header>label{
+    position:relative;
+    top:13px;
+    left:14px;
+    font-size:19px;
+    font-weight:bold;
+    color:#444;
+}
+.back-index-side-header>.ui.button{
+    position:absolute;
+    right:10px;
+    top:17px;
+}
+/*中间段*/
+.back-index-condition>.ui.vertical.menu{
+    background-color:rgba(0,0,0,0);
+    box-shadow:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    width:230px;
+    margin-top:6px;
+}
+.back-index-condition>.ui.vertical.menu .item{
+    cursor:pointer;
+}
+.back-index-condition>.ui.vertical.menu label{
+    font-size:13px;
+    margin-top:3px;
+    display:block;
+    max-width:200px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    pointer-events:none;
+}
+.back-index-condition>.ui.vertical.menu .item.active{
+    color:#63A69F
+}
+/************************************************************   right main */
+.back-index-main{
+    background:#fef9ee;
+    position:absolute;
+    top:0px;
+    bottom:0px;
+    left:330px;
+    right:0px;
+    overflow-x:hidden;
+    overflow-y:auto;
+    min-height:768px;
+}
+.back-index-main .back-index-side-header>.ui.button{
+    position:absolute;
+    left:10px;
+    right:auto;
+    top:17px;
+}
+/************************************************************   view add  */
+.view-add{
+    position:fixed;
+    z-index:40;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    left:0px;
+    background-color:rgba(0,0,0,0.9);
+    display:none
+}
+.view-add>.inner{
+    position:absolute;
+    width:700px;
+    height:600px;
+    top:50%;
+    left:50%;
+    margin-top:-300px;
+    margin-left:-350px;
+    background-color:white;
+}
+.view-add>.inner>.remove.icon{
+    color:white;
+    font-size:28px;
+    position:absolute;
+    right:-35px;
+    top:-40px;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+    overflow-y: auto;
+}
+.view-add>.inner>.remove.icon:hover{
+    color:rgba(255,255,255,0.5)
+}
+.view-add>.inner>.input{
+    margin-top:30px;
+    margin-left:20px;
+    width:350px;
+}
+.view-add>.inner>.input>p{
+    color:#63A69F;
+}
+.view-add>.inner>.input>input{
+    border:1px solid rgba(0,0,0,0.3);
+}
+/*视图条件*/
+.view-add>.inner>.condition-block{
+    padding:8px 0;
+    width:660px;
+    border:1px dashed rgba(0,0,0,0.2);
+    border-radius:0.3125em;
+    -moz-border-radius:0.3125em;
+    -webkit-border-radius:0.3125em;
+    margin-left:20px;
+    margin-top:25px;
+    border-collapse:collapse;
+}
+.view-add>.inner>.condition-block caption{
+    text-align:left;
+    color:#63A69F;
+    padding:0px 0px 5px;
+}
+.view-add>.inner>.condition-block i{
+
+}
+.view-add>.inner>.condition-block tr:last-of-type{
+    border-top:1px solid #ddd;
+}
+.view-add>.inner>.condition-block td{
+    padding:7px 3px;
+}
+/*第1列*/
+.view-add>.inner>.condition-block tr td:first-of-type{
+    width:160px;
+}
+.view-add>.inner>.condition-block tr td:first-of-type select{
+    width:150px;
+}
+/*第2列*/
+.view-add>.inner>.condition-block tr td:nth-of-type(2){
+    width:110px;
+}
+.view-add>.inner>.condition-block tr td:nth-of-type(2) select{
+    width:100px;
+}
+/*第3列*/
+.view-add>.inner>.condition-block tr td:nth-of-type(3){
+    width:300px;
+}
+.view-add>.inner>.condition-block tr td:nth-of-type(3) select{
+    width:260px;
+}
+.view-add>.inner>.condition-block tr td:nth-of-type(3) input[type="text"]{
+    width:260px;
+}
+

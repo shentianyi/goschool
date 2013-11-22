@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: Shanghai
+  address: MyString
+  tel: MyString
+  tenant: one
+
+two:
+  name: Beijing
+  address: MyString
+  tel: MyString
+  tenant: two

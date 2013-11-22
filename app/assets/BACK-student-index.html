@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="stylesheets/semantic.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/base.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/BACK-index.css" type="text/css" />
+</head>
+<body>
+
+<aside class="back-index-aside">
+    <a class="logo" ></a>
+    <ul class="first-ul">
+        <li>
+            <a href="#" class="active">学生信息</a>
+        </li>
+        <li>
+            <a>老师信息</a>
+        </li>
+        <li>
+            <a>课程安排</a>
+        </li>
+    </ul>
+    <ul class="second-ul" id="main-navigator-bottom">
+        <li>
+            <i class="settings icon" data-content="全局配置"></i>
+        </li>
+        <li>
+            <i class="smile icon" data-content="我的账户"></i>
+        </li>
+        <li>
+            <i class="mail outline icon" data-content="发送信息"></i>
+        </li>
+        <li>
+            <i class="sign out icon" data-content="退出账户"></i>
+        </li>
+    </ul>
+</aside>
+
+<aside class="back-index-condition ">
+    <header class="back-index-side-header">
+        <label>视图</label>
+        <div class="ui teal animated mini button" id="view-add">
+            <div class="hidden content">视图</div>
+            <div class="visible content">
+                <i class="add icon"></i>
+            </div>
+        </div>
+    </header>
+    <div class="ui vertical menu">
+        <a class="item">
+            <div class="ui label">1</div>
+            <label>最近一天</label>
+        </a>
+        <a class="item">
+            <div class="ui label">21</div>
+            <label>最近一个月</label>
+        </a>
+        <a class="item">
+            <div class="ui red label">0</div>
+            <label>潜在学生</label>
+        </a>
+    </div>
+</aside>
+
+<article class="back-index-main">
+    <header class="back-index-side-header">
+        <div class="ui teal mini button">
+            <div class="visible content">
+                <i class="add icon"></i>
+                添加学生
+            </div>
+        </div>
+    </header>
+</article>
+
+
+<section class="view-add" id="view-add-student">
+    <div class="inner">
+        <i class="remove icon" id="view-add-close"></i>
+        <div class="ui left input">
+            <p>视图标题:</p>
+            <input placeholder="点此输入..." type="text">
+        </div>
+        <table class="condition-block">
+            <caption >
+                视图满足条件:
+            </caption>
+            <tr>
+                <td>
+                    <select>
+                        <option value=”“>点此选择条件...</option>
+                        <option value=”age“>年龄</option>
+                        <option value=”area“>区域</option>
+                        <option value=”course“>课程</option>
+                        <option value=”consult-time“>咨询时间</option>
+                    </select>
+                </td>
+                <td>
+                    <select>
+                        <option>等于</option>
+                        <option>大于</option>
+                        <option>小于</option>
+                    </select>
+                </td>
+                <td>
+                    <select>
+                        <option>a</option>
+                        <option>b</option>
+                        <option>c</option>
+                    </select>
+                </td>
+                <td>
+                    <div class="ui icon red button mini view-condition-minus">
+                        <i class="minus icon"></i>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                    <div class="ui icon teal button mini" id="view-condition-add">
+                        <i class="plus icon"></i>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+<script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>
+<script type='text/javascript' src="javascripts/semantic.min.js" ></script>
+<script type='text/javascript' src="javascripts/BACK_index.js" ></script>
+<script type='text/javascript' src="javascripts/wayne-base.js" ></script>
+</body>
+</html>

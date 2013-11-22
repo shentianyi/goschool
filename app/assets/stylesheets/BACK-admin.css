@@ -1,0 +1,86 @@
+.admin-operate{
+    width:90%;
+    margin-left:-45%;
+    position:relative;
+    top:35px;
+    left:50%;
+}
+.admin-operate:after{
+    content:"";
+    display:block;
+    width:90%;
+    height:50px;
+}
+/*p*/
+.admin-operate>p{
+    display:inline-block;
+    font-size:21px;
+    color:#63A69F;
+}
+/*label*/
+.admin-operate>label{
+    float:right;
+    font-size:13px;
+    color:rgba(0,0,0,0.6);
+    margin-top:20px;
+    margin-right:7px;
+}
+/*table*/
+.admin-operate>table {
+    margin-top:5px !important;
+}
+.admin-operate>table .add-button{
+    width:125px;
+}
+.admin-operate>table td{
+    word-break:break-all;
+    word-wrap:break-word;
+}
+.admin-operate[name="user"]>table tbody tr td:first-of-type img{
+    position:relative;
+    left:50%;
+    margin-left:-1em;
+}
+.admin-operate>table td input[type="text"]{
+    width:80%;
+}
+.admin-operate>table td i.trash{
+    font-size:18px;
+    font-weight:bolder;
+    cursor:pointer;
+    color:#E44B3D;
+}
+.admin-operate>table td i.trash:hover{
+    color:#ee877e;
+}
+.admin-operate>table .template{
+    background-color:#F2F8F0 !important;
+}
+.admin-operate>table .ui.checkbox{
+    margin-right:15px;
+    float:left
+}
+.admin-operate>table .template .checkmark{
+    color:#119000;
+    font-size:24px;
+    cursor:pointer;
+    margin-right:28px;
+}
+.admin-operate>table .template .checkmark:hover{
+    color:#63a69f;
+}
+/*默认密码*/
+.admin-operate>.default-password{
+    width:400px;
+    position:relative;
+    left:50%;
+    margin-left:-200px;
+}
+.admin-operate>.default-password>p{
+    margin-top:10px;
+    font-size:15px;
+    color:rgba(0,0,0,0.5);
+}
+.admin-operate>.default-password>.input{
+    width:250px;
+}

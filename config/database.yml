@@ -12,11 +12,12 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: goschool_development
+  database: goschooldb
   pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  username: goer
+  password:  goer@
+  socket: /var/run/mysqld/mysqld.sock
+
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -25,18 +26,20 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: goschool_test
+  database: goschooldb_test
   pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  username: goer
+  password:  goer@
+  socket: /var/run/mysqld/mysqld.sock
+
 
 production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: goschool_production
+  database: goschooldb
   pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  username: goer
+  password:  goer@
+  socket: /var/run/mysqld/mysqld.sock
+
