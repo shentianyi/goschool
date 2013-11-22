@@ -97,7 +97,7 @@ class TagUtility
   # @param [String] tenant_id if it remains nil, whole site's tag will be searched
   # @param [String] str
   # @return [Array] tag contents
-  def fast_search(str,tenant_id=nil)
+  def fast_search(str,from,take,tenant_id=nil)
 
   end
 
