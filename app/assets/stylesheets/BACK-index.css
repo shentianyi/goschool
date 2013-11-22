@@ -3,6 +3,8 @@
 /* #63A69F*/
 /*red*/
 /* #E44B3D*/
+/*blue*/
+/*#4092CC*/
 /************************************************************   left aside */
 .back-index-aside{
     background:rgba(47, 47, 47, 0.98);
@@ -151,12 +153,53 @@
     overflow-y:auto;
     min-height:768px;
 }
-.back-index-main .back-index-side-header>.ui.button{
-    position:absolute;
-    left:10px;
-    right:auto;
-    top:17px;
+.back-index-main>.search-list{
+    width:90%;
+    position:relative;
+    left:50%;
+    margin-left:-45%;
 }
+.back-index-main>.search-list>.search-input{
+    margin-top:20px;
+    margin-bottom:10px;
+}
+/*搜索结果*/
+.back-index-main>.search-list>.column>.segment{
+    padding:10px 1em;
+}
+.back-index-main>.search-list>.column>.segment>a{
+    color:#C69C6D;
+    font-size:14px;
+}
+.back-index-main>.search-list>.column>.segment>a:hover{
+    color:#855520;
+}
+.back-index-main>.search-list>.column>.segment>a:first-of-type:after{
+    content:"|";
+    color:rgba(0,0,0,0.2);
+    font-size:20px;
+    padding:0 4px 0 16px;
+}
+/*搜索结果列表*/
+.back-index-main>.search-list>.search-result{
+    list-style-type: none;
+    background-color:rgba(0, 0, 0, 0.02);
+    border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    box-shadow:0 1px 2px 1px rgba(0, 0, 0, 0.1);
+    -webkit-:0 1px 2px 1px rgba(0, 0, 0, 0.1);
+    -moz-:0 1px 2px 1px rgba(0, 0, 0, 0.1);
+    padding:5px 0;
+}
+.back-index-main>.search-list>.search-result>li{
+    padding:5px 15px
+}
+.back-index-main>.search-list>.search-result>li p{
+    font-size:13px;
+    cursor:default;
+}
+
 /************************************************************   view add  */
 .view-add{
     position:fixed;

@@ -1,0 +1,49 @@
+/*列表*/
+.back-index-main>.search-list>.search-result>li .portrait{
+    position:relative;
+    left:50%;
+    margin-left:-17.5px;
+}
+.back-index-main>.search-list>.search-result>li .name{
+    font-size:15px;
+    color:#63A69F;
+    font-weight:bolder;
+    text-align:center;
+}
+.back-index-main>.search-list>.search-result>li .type{
+    color:#E44B3D;
+    font-weight:bolder;
+}
+.back-index-main>.search-list>.search-result>li .parent>span:first-of-type,
+.back-index-main>.search-list>.search-result>li .phone>span:first-of-type,
+.back-index-main>.search-list>.search-result>li .consult-time>span:first-of-type{
+    display:inline-block;
+    margin-right:3px;
+}
+.back-index-main>.search-list>.search-result>li .labels{
+    font-size:0;
+}
+.back-index-main>.search-list>.search-result>li .labels>a{
+    padding:2px 4px;
+    margin:0px;
+    font-size:12px;
+    margin-right:3px;
+    margin-bottom:1px;
+}
+.back-index-main>.search-list>.search-result>li .maybe-know,
+.back-index-main>.search-list>.search-result>li .recommend{
+    text-align:center;
+}
+.back-index-main>.search-list>.search-result>li .maybe-know+p,
+.back-index-main>.search-list>.search-result>li .recommend+p>span{
+    display:block;
+    text-align:center;
+    color:#C69C6D;
+    font-size:15px;
+    cursor:pointer;
+    margin-bottom:2px;
+}
+.back-index-main>.search-list>.search-result>li .maybe-know+p:hover,
+.back-index-main>.search-list>.search-result>li .recommend+p>span:hover{
+    color:#855520;
+}

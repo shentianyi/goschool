@@ -6,7 +6,7 @@ class SettingsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "show update setting" do
+  test "should update setting" do
     put :update,:id=>1,:setting=>{:default_pwd=>"jack"}
     assert_response :success
     puts response.body

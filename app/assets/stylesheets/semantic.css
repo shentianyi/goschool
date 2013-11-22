@@ -9883,15 +9883,15 @@ a.ui.red.label:hover:before {
 
 .ui.blue.labels .label,
 .ui.blue.label {
-  background-color: #6ECFF5 !important;
-  border-color: #6ECFF5 !important;
+  background-color: #4092CC !important;
+  border-color: #4092CC !important;
   color: #FFFFFF !important;
 }
 
 .ui.labels .blue.label:before,
 .ui.blue.labels .label:before,
 .ui.blue.label:before {
-  background-color: #6ECFF5 !important;
+  background-color: #4092CC !important;
 }
 
 /* Hover */

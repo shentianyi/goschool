@@ -1,0 +1,57 @@
+<%= form_for(@cource) do |f| %>
+  <% if @cource.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cource.errors.count, "error") %> prohibited this cource from being saved:</h2>
+
+      <ul>
+      <% @cource.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :type %><br />
+    <%= f.number_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :lesson %><br />
+    <%= f.number_field :lesson %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br />
+    <%= f.date_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br />
+    <%= f.date_select :end_date %>
+  </div>
+  <div class="field">
+    <%= f.label :expect_number %><br />
+    <%= f.number_field :expect_number %>
+  </div>
+  <div class="field">
+    <%= f.label :actual_number %><br />
+    <%= f.number_field :actual_number %>
+  </div>
+  <div class="field">
+    <%= f.label :sub_number %><br />
+    <%= f.number_field :sub_number %>
+  </div>
+  <div class="field">
+    <%= f.label :user %><br />
+    <%= f.text_field :user %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
