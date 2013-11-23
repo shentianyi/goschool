@@ -11,8 +11,76 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20131122081418) do
+ActiveRecord::Schema.define(:version => 20131122093807) do
+
+  create_table "cources", :force => true do |t|
+    t.integer  "type"
+    t.string   "name"
+    t.string   "description"
+    t.integer  "lesson",         :default => 0
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "expect_number",  :default => 0
+    t.integer  "actual_number",  :default => 0
+    t.integer  "sub_number",     :default => 0
+    t.integer  "user_id"
+    t.integer  "tenant_id"
+    t.integer  "institution_id"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "cources", ["institution_id"], :name => "index_cources_on_institution_id"
+  add_index "cources", ["tenant_id"], :name => "index_cources_on_tenant_id"
+  add_index "cources", ["user_id"], :name => "index_cources_on_user_id"
+
+  create_table "institutions", :force => true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "tel"
+    t.integer  "tenant_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "institutions", ["tenant_id"], :name => "index_institutions_on_tenant_id"
+
+  create_table "logininfos", :force => true do |t|
+    t.string   "email",                                  :null => false
+    t.string   "crypted_password",                       :null => false
+    t.string   "password_salt",                          :null => false
+    t.string   "persistence_token",                      :null => false
+    t.string   "single_access_token",                    :null => false
+    t.string   "perishable_token",                       :null => false
+    t.integer  "login_count",                            :null => false
+    t.integer  "failed_login_count",                     :null => false
+    t.datetime "last_request_at"
+    t.datetime "current_login_at"
+    t.datetime "last_login_at"
+    t.string   "current_login_ip"
+    t.string   "last_login_ip"
+    t.boolean  "is_tenant",           :default => false
+    t.integer  "tenant_id"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "logininfos", ["tenant_id"], :name => "index_logininfos_on_tenant_id"
+
+  create_table "roles", :force => true do |t|
+    t.string   "role"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "settings", :force => true do |t|
+    t.string   "default_pwd"
+    t.integer  "tenant_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "settings", ["tenant_id"], :name => "index_settings_on_tenant_id"
 
   create_table "tags", :force => true do |t|
     t.string   "tenant_id"
@@ -27,28 +95,6 @@ ActiveRecord::Schema.define(:version => 20131122081418) do
   add_index "tags", ["tenant_id", "entity_type_id", "entity_id"], :name => "index_tags_on_tenant_id_and_entity_type_id_and_entity_id"
   add_index "tags", ["tenant_id", "entity_type_id", "tag"], :name => "index_tags_on_tenant_id_and_entity_type_id_and_tag"
   add_index "tags", ["tenant_id", "tag"], :name => "index_tags_on_tenant_id_and_tag"
-=======
-ActiveRecord::Schema.define(:version => 20131122060711) do
-
-  create_table "institutions", :force => true do |t|
-    t.string   "name"
-    t.string   "address"
-    t.string   "tel"
-    t.integer  "tenant_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "institutions", ["tenant_id"], :name => "index_institutions_on_tenant_id"
-
-  create_table "settings", :force => true do |t|
-    t.string   "default_pwd"
-    t.integer  "tenant_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "settings", ["tenant_id"], :name => "index_settings_on_tenant_id"
 
   create_table "tenants", :force => true do |t|
     t.string   "company_name"
@@ -62,6 +108,15 @@ ActiveRecord::Schema.define(:version => 20131122060711) do
   end
 
   add_index "tenants", ["user_id"], :name => "index_tenants_on_user_id"
->>>>>>> 9753518252cb97bdc0401d4f54bbd0963219cfc8
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.integer  "logininfo_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "users", ["logininfo_id"], :name => "index_users_on_logininfo_id"
 
 end
