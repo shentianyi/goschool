@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class CoursesControllerTest < ActionController::TestCase
+  self.use_transactional_fixtures = true
+
   setup do
     @course = courses(:one)
   end
@@ -10,23 +12,28 @@ class CoursesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
- 
   test "should create course" do
     assert_difference('Course.count') do
-      post :create, course: { actual_number: @course.actual_number, description: @course.description, end_date: @course.end_date, expect_number: @course.expect_number, lesson: @course.lesson, name: @course.name, start_date: @course.start_date, sub_number: @course.sub_number, type: @course.type }
+      post :create,
+      course: {
+        description: "jjj",
+        end_date: "2013-11-11",
+        expect_number: 100,
+        lesson:24,
+        name:  "TUOFU",
+        start_date:  "2013-11-01",
+        type: 0,
+        subs:[{name:'Game'},{name:'Read'}],
+        tags:['TUOFU','Game'] }
+      assert_response :success
+      puts response.body
     end
-
   end
 
-  test "should show course" do
-    get :show, id: @course
+  test "should get edit" do
+    get :edit, id: @course.id
     assert_response :success
-  end
-
-  
-
-  test "should update course" do
-    put :update, id: @course, course: { actual_number: @course.actual_number, description: @course.description, end_date: @course.end_date, expect_number: @course.expect_number, lesson: @course.lesson, name: @course.name, start_date: @course.start_date, sub_number: @course.sub_number, type: @course.type }
+    # puts response.body
   end
 
   test "should destroy course" do

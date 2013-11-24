@@ -5,13 +5,34 @@ class Course < ActiveRecord::Base
   belongs_to :tenant
   belongs_to :institution
   has_many :sub_courses,:dependent=>:destroy
-  attr_accessible :actual_number, :description, :end_date, :expect_number, :lesson, :name, :start_date, :sub_number, :type
-  attr_accessible :institution_id
+  attr_accessible :actual_number, :description, :end_date, :expect_number, :lesson, :name, :start_date, :type
+  attr_accessible :has_sub,:institution_id
   acts_as_tenant(:tenant)
 
+  after_save :add_default_sub_course
+
   validate :validate_save
+  
+  def add_tags tags
+    Resque.enqueue(TagAdder,self.tenant_id,self.class.name,self.id,tags)
+  end
+
+  def add_sub_courses sub_courses
+    sub_courses.each do |sub|
+      self.sub_courses<<SubCourse.new(:name=>sub[:name],:parent_name=>self.name)
+    end
+    self.has_sub=true
+  end
+
   private
+
   def validate_save
     errors.add(:name,'课程名称不可为空') if self.name.blank?
+  end
+
+  def add_default_sub_course
+    unless self.has_sub
+      self.sub_courses.create(:parent_name=>self.name)
+    end
   end
 end

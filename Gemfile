@@ -12,6 +12,11 @@ gem 'acts_as_tenant'
 gem 'cancan'
 gem 'authlogic'
 
+# gem for backgroud jobs based on redis
+gem 'redis'
+gem 'resque'
+gem 'redis-namespace'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

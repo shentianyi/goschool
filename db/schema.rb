@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(:version => 20131123114509) do
     t.date     "end_date"
     t.integer  "expect_number",  :default => 0
     t.integer  "actual_number",  :default => 0
-    t.integer  "sub_number",     :default => 0
     t.boolean  "has_sub",        :default => false
     t.string   "parent_name"
     t.integer  "user_id"

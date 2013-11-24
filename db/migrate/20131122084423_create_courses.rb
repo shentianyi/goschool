@@ -9,7 +9,6 @@ class CreateCourses < ActiveRecord::Migration
       t.date :end_date
       t.integer :expect_number,:default=>0
       t.integer :actual_number,:default=>0
-      t.integer :sub_number,:default=>0
       t.boolean :has_sub,:default=>false
       t.string :parent_name
       t.references :user
