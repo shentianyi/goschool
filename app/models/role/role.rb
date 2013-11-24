@@ -11,6 +11,7 @@ class Role
       define_method(m){ |id|
         @roles[id_sym(id)][:name]==m.to_s.sub(/\?/,'')
       }
+    end
   end
 
   def self.display id
