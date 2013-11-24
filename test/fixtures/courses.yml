@@ -10,6 +10,7 @@ one:
   expect_number: 1
   actual_number: 1
   has_sub: true
+  status: 1
   user: 
   tenant: two
   
@@ -23,6 +24,7 @@ two:
   expect_number: 1
   actual_number: 1
   has_sub: true
+  status: 0
   user: 
   tenant: one
   

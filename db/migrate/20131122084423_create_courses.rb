@@ -10,6 +10,7 @@ class CreateCourses < ActiveRecord::Migration
       t.integer :expect_number,:default=>0
       t.integer :actual_number,:default=>0
       t.boolean :has_sub,:default=>false
+      t.integer :status,:default=>CourseStatus::UNLOCK
       t.string :parent_name
       t.references :user
       t.references :tenant

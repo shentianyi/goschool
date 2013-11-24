@@ -6,7 +6,7 @@ class Course < ActiveRecord::Base
   belongs_to :institution
   has_many :sub_courses,:dependent=>:destroy
   attr_accessible :actual_number, :description, :end_date, :expect_number, :lesson, :name, :start_date, :type
-  attr_accessible :has_sub,:institution_id
+  attr_accessible :has_sub,:status,:institution_id
   acts_as_tenant(:tenant)
 
   after_create :create_default_sub_course
