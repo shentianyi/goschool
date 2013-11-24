@@ -16,7 +16,7 @@ class CoursesControllerTest < ActionController::TestCase
     assert_difference('Course.count') do
       post :create,
       course: {
-        description: "jjj",
+        description: "gaming TUOFU",
         end_date: "2013-11-11",
         expect_number: 100,
         lesson:24,

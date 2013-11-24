@@ -1,16 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: 
+  name: Game 
   parent_name: courseA
+  is_default: false
   course: one
 
 two:
-  name: 
-  parent_name: courseA
-  course: one
-
-one:
-  name: 
+  name: Read
   parent_name: courseB
+  is_default: false
+  course: two
+
+three:
+  name: Game
+  parent_name: courseB
+  is_default: false
   course: two

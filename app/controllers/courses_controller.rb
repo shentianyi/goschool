@@ -28,6 +28,7 @@ class CoursesController < ApplicationController
   end
 
   def update
+    # how to do with tag
     unless @msg.result=@course.update_attributes(params[:course].strip)
     @msg.content=@course.errors.messages
     end
@@ -41,10 +42,6 @@ class CoursesController < ApplicationController
   end
 
   private
-
-  def init_message
-    @msg=Msg.new
-  end
 
   def get_course
     @course=Course.find_by_id(params[:id])

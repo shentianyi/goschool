@@ -9,7 +9,7 @@ one:
   end_date: 2013-11-22
   expect_number: 1
   actual_number: 1
-  has_sub: false
+  has_sub: true
   user: 
   tenant: two
   
@@ -22,7 +22,7 @@ two:
   end_date: 2013-11-22
   expect_number: 1
   actual_number: 1
-  has_sub: false
+  has_sub: true
   user: 
   tenant: one
   

@@ -9,10 +9,9 @@ class Course < ActiveRecord::Base
   attr_accessible :has_sub,:institution_id
   acts_as_tenant(:tenant)
 
-  after_save :add_default_sub_course
+  after_create :create_default_sub_course
 
   validate :validate_save
-  
   def add_tags tags
     Resque.enqueue(TagAdder,self.tenant_id,self.class.name,self.id,tags)
   end
@@ -24,15 +23,13 @@ class Course < ActiveRecord::Base
     self.has_sub=true
   end
 
+  def create_default_sub_course
+    self.sub_courses.create(:parent_name=>self.name,:is_default=>true) unless self.has_sub
+  end
   private
 
   def validate_save
     errors.add(:name,'课程名称不可为空') if self.name.blank?
   end
 
-  def add_default_sub_course
-    unless self.has_sub
-      self.sub_courses.create(:parent_name=>self.name)
-    end
-  end
 end

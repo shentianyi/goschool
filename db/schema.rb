@@ -86,9 +86,10 @@ ActiveRecord::Schema.define(:version => 20131123114509) do
   create_table "sub_courses", :force => true do |t|
     t.string   "name"
     t.string   "parent_name"
+    t.boolean  "is_default",  :default => false
     t.integer  "course_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   add_index "sub_courses", ["course_id"], :name => "index_sub_courses_on_course_id"

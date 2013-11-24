@@ -1,83 +1,43 @@
+#encoding: utf-8
 class SubCoursesController < ApplicationController
-  # GET /sub_courses
-  # GET /sub_courses.json
-  def index
-    @sub_courses = SubCourse.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @sub_courses }
-    end
-  end
-
-  # GET /sub_courses/1
-  # GET /sub_courses/1.json
-  def show
-    @sub_course = SubCourse.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @sub_course }
-    end
-  end
-
-  # GET /sub_courses/new
-  # GET /sub_courses/new.json
-  def new
-    @sub_course = SubCourse.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @sub_course }
-    end
-  end
-
-  # GET /sub_courses/1/edit
-  def edit
-    @sub_course = SubCourse.find(params[:id])
-  end
-
-  # POST /sub_courses
-  # POST /sub_courses.json
+  before_filter :init_message ,:only=>[:create,:update,:destroy]
+  before_filter :get_sub_course,:only=>[:update,:show,:edit,:destroy]
+  before_filter :render_nil_msg , :only=>[:update,:destroy]
   def create
-    @sub_course = SubCourse.new(params[:sub_course])
-
-    respond_to do |format|
-      if @sub_course.save
-        format.html { redirect_to @sub_course, notice: 'Sub course was successfully created.' }
-        format.json { render json: @sub_course, status: :created, location: @sub_course }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @sub_course.errors, status: :unprocessable_entity }
+    if @course=Course.find_by_id(params[:course_id].strip)
+      @sub_course = @course.sub_courses.build(params[:sub_course].strip)
+      unless @msg.result=@sub_course.save
+      @msg.content=@sub_course.errors.messages
       end
+    else
+      @msg.content='课程不存在，无法添加内容'
     end
+    render :json=>@msg
   end
-
-  # PUT /sub_courses/1
-  # PUT /sub_courses/1.json
+ 
   def update
-    @sub_course = SubCourse.find(params[:id])
-
-    respond_to do |format|
-      if @sub_course.update_attributes(params[:sub_course])
-        format.html { redirect_to @sub_course, notice: 'Sub course was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @sub_course.errors, status: :unprocessable_entity }
-      end
+    unless @msg.result=@sub_course.update_attributes(params[:sub_course].strip)
+     @msg.content=@sub_course.errors.messages
     end
+    render :json=>@msg    
   end
 
-  # DELETE /sub_courses/1
-  # DELETE /sub_courses/1.json
   def destroy
-    @sub_course = SubCourse.find(params[:id])
-    @sub_course.destroy
+      @sub_course.destroy
+      @msg.result=true
+      render :json=>@msg
+  end
 
-    respond_to do |format|
-      format.html { redirect_to sub_courses_url }
-      format.json { head :no_content }
+  private
+
+  def get_sub_course
+    @sub_course=SubCourse.find_by_id(params[:id])
+  end
+
+  def render_nil_msg
+    unless @sub_course
+      @msg.content='不存在此课程/服务内容'
+      render :json=>msg
     end
   end
 end
