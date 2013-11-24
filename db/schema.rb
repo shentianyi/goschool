@@ -11,9 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131122093807) do
+ActiveRecord::Schema.define(:version => 20131123114509) do
 
-  create_table "cources", :force => true do |t|
+  create_table "courses", :force => true do |t|
     t.integer  "type"
     t.string   "name"
     t.string   "description"
@@ -23,16 +23,18 @@ ActiveRecord::Schema.define(:version => 20131122093807) do
     t.integer  "expect_number",  :default => 0
     t.integer  "actual_number",  :default => 0
     t.integer  "sub_number",     :default => 0
+    t.boolean  "has_sub",        :default => false
+    t.string   "parent_name"
     t.integer  "user_id"
     t.integer  "tenant_id"
     t.integer  "institution_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
-  add_index "cources", ["institution_id"], :name => "index_cources_on_institution_id"
-  add_index "cources", ["tenant_id"], :name => "index_cources_on_tenant_id"
-  add_index "cources", ["user_id"], :name => "index_cources_on_user_id"
+  add_index "courses", ["institution_id"], :name => "index_courses_on_institution_id"
+  add_index "courses", ["tenant_id"], :name => "index_courses_on_tenant_id"
+  add_index "courses", ["user_id"], :name => "index_courses_on_user_id"
 
   create_table "institutions", :force => true do |t|
     t.string   "name"
@@ -81,6 +83,16 @@ ActiveRecord::Schema.define(:version => 20131122093807) do
   end
 
   add_index "settings", ["tenant_id"], :name => "index_settings_on_tenant_id"
+
+  create_table "sub_courses", :force => true do |t|
+    t.string   "name"
+    t.string   "parent_name"
+    t.integer  "course_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "sub_courses", ["course_id"], :name => "index_sub_courses_on_course_id"
 
   create_table "tags", :force => true do |t|
     t.string   "tenant_id"

@@ -1,20 +1,23 @@
 #encoding: utf-8
-class CourcesController < ApplicationController
+class CoursesController < ApplicationController
   before_filter :init_message ,:only=>[:create,:update,:destroy]
   before_filter :get_course,:only=>[:update,:show,:destroy]
   before_filter :render_nil_msg , :only=>[:update,:destroy]
   
   def index
-    render :json=> Cource.all
+    render :json=> Course.all
   end
 
   def show
-    render :json=>@cource
+    render :json=>@course
   end
 
   def create
-    @cource = current_tenant.courses.build(params[:course].strip)
-    if @msg.result=@course.save
+    tags=params[:course].slice!(:tags).strip
+    subs=params[:course].slice!(:subs).strip
+    @course = current_tenant.courses.build(params[:course].strip)
+   
+    unless @msg.result=@course.save
      @msg.content=@course.errors.messages
     end	
     render :json=>@msg
@@ -28,7 +31,7 @@ class CourcesController < ApplicationController
   end
 
   def destroy
-    @cource.destroy
+    @course.destroy
     @msg.result=true
     render :json=>@msg
   end

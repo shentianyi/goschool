@@ -1,6 +1,6 @@
-class CreateCources < ActiveRecord::Migration
+class CreateCourses < ActiveRecord::Migration
   def change
-    create_table :cources do |t|
+    create_table :courses do |t|
       t.integer :type
       t.string :name
       t.string :description
@@ -10,13 +10,15 @@ class CreateCources < ActiveRecord::Migration
       t.integer :expect_number,:default=>0
       t.integer :actual_number,:default=>0
       t.integer :sub_number,:default=>0
+      t.boolean :has_sub,:default=>false
+      t.string :parent_name
       t.references :user
       t.references :tenant
       t.references :institution
       t.timestamps
     end
-    add_index :cources, :user_id
-    add_index :cources, :tenant_id
-    add_index :cources, :institution_id
+    add_index :courses, :user_id
+    add_index :courses, :tenant_id
+    add_index :courses, :institution_id
   end
 end
