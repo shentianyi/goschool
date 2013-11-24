@@ -7,7 +7,7 @@ class Hash
       when String then v.strip!
       when Array then v.each {|i| i.strip! if i.class==String}
       when Hash then v.strip
-      else raise ArgumentError, "Unhandled type #{v.class}"
+      else v
       end
     end
   end

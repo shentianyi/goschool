@@ -1,5 +1,10 @@
 Goschool::Application.routes.draw do
-  resources :cources
+
+
+  resources :sub_courses
+
+
+  resources :courses
 
 
    resources :settings

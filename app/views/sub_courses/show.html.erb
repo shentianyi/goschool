@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @sub_course.name %>
+</p>
+
+<p>
+  <b>Parent name:</b>
+  <%= @sub_course.parent_name %>
+</p>
+
+<p>
+  <b>Course:</b>
+  <%= @sub_course.course %>
+</p>
+
+
+<%= link_to 'Edit', edit_sub_course_path(@sub_course) %> |
+<%= link_to 'Back', sub_courses_path %>

@@ -16,11 +16,24 @@ class InstitutionsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should create institution" do
+    assert_difference('Institution.count') do
+      post :create, :institution=> { :name=>@institution.name}
+      puts response.body
+    end
+
+  end
+
+  test "should update institution" do
+    put :update,:id=>@institution.id, :institution=> { :name=>''}
+    assert_response :success
+    puts response.body
+  end
+
   test "show destroy institution" do
     assert_difference("Institution.count",-1) do
       delete :destroy , :id=>@institution.id
     end
-    puts response.body
   end
 
   private
