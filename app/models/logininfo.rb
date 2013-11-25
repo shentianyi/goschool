@@ -7,6 +7,7 @@ class Logininfo < ActiveRecord::Base
   belongs_to :user
 
   has_many :logininfo_roles ,dependent: :destroy
+  has_many :logininfo_institutions, dependent: :destroy
 
   # acts as tenant
   acts_as_tenant(:tenant)
