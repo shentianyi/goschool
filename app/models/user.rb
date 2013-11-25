@@ -3,9 +3,10 @@ class User < ActiveRecord::Base
   attr_accessible :name
   attr_accessible :email
 
-  belongs_to :logininfo
+  has_one :logininfo, dependent: :destroy
   has_many :teacher_courses,:dependent=>:destroy
   has_many :sub_courses,:through=>:teacher_courses
   has_many :courses,:through=>:sub_courses,:uniq => true
-  acts_as_authentic
+  has_many :logininfo_roles, through: :logininfo
+  #acts_as_authentic
 end
