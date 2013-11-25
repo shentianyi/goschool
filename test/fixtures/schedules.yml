@@ -7,5 +7,10 @@ one:
 
 two:
   start_time: 2013-11-26 15:43:31
-  end_time: 2013-11-29 17:48:31
+  end_time: 2013-11-26 17:48:31
   sub_course: one
+  
+three:
+  start_time: 2013-11-26 15:43:31
+  end_time: 2013-11-26 17:48:31
+  sub_course: two

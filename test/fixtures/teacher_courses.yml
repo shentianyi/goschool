@@ -9,7 +9,7 @@ two:
   user: two
   
 three:
-  sub_course: three
+  sub_course: two
   user: two
 
 four:

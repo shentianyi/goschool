@@ -14,21 +14,21 @@ class SchedulesControllerTest < ActionController::TestCase
 
   end
 
-  # test "should show schedule" do
-    # get :show, id: @schedule
-    # assert_response :success
-    # puts response.body
-  # end
-# 
-  # test "should update schedule" do
-    # put :update, id: @schedule, schedule: { end_time: @schedule.end_time, start_time: @schedule.start_time }
-    # puts response.body
-  # end
-# 
-  # test "should destroy schedule" do
-    # assert_difference('Schedule.count', -1) do
-      # delete :destroy, id: @schedule
-      # puts response.body
-    # end
-  # end
+  test "should show schedule" do
+    get :show, id: @schedule
+    assert_response :success
+    puts response.body
+  end
+
+  test "should update schedule" do
+    put :update, id: schedules(:three).id, schedule: { end_time: '2013-11-26 17:48:31', start_time: '2013-11-26 12:43:31' }
+    puts response.body
+  end
+
+  test "should destroy schedule" do
+    assert_difference('Schedule.count', -1) do
+      delete :destroy, id: @schedule
+      puts response.body
+    end
+  end
 end
