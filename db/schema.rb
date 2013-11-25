@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131125040416) do
+ActiveRecord::Schema.define(:version => 20131125072730) do
 
   create_table "courses", :force => true do |t|
     t.integer  "type"
@@ -102,6 +102,9 @@ ActiveRecord::Schema.define(:version => 20131125040416) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "tag_counts", ["tenant_id", "tag"], :name => "index_tag_counts_on_tenant_id_and_tag", :unique => true
+  add_index "tag_counts", ["tenant_id"], :name => "index_tag_counts_on_tenant_id"
 
   create_table "tags", :force => true do |t|
     t.string   "tenant_id"
