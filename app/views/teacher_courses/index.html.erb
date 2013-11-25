@@ -1,0 +1,25 @@
+<h1>Listing teacher_courses</h1>
+
+<table>
+  <tr>
+    <th>Sub course</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @teacher_courses.each do |teacher_course| %>
+  <tr>
+    <td><%= teacher_course.sub_course %></td>
+    <td><%= teacher_course.user %></td>
+    <td><%= link_to 'Show', teacher_course %></td>
+    <td><%= link_to 'Edit', edit_teacher_course_path(teacher_course) %></td>
+    <td><%= link_to 'Destroy', teacher_course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Teacher course', new_teacher_course_path %>
