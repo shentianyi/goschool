@@ -8,6 +8,6 @@ class User < ActiveRecord::Base
   has_many :sub_courses,:through=>:teacher_courses
   has_many :courses,:through=>:sub_courses,:uniq => true
   has_many :logininfo_roles, through: :logininfo
-  has_mant :logininfo_institutions, through: :logininfo
+  has_many :logininfo_institutions, through: :logininfo
   #acts_as_authentic
 end

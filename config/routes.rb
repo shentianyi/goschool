@@ -1,5 +1,8 @@
 Goschool::Application.routes.draw do
 
+  resources :students
+
+
   resources :teacher_courses
 
 
