@@ -1,7 +1,7 @@
 #encoding: utf-8
 class SubCoursesController < ApplicationController
   before_filter :init_message ,:only=>[:create,:update,:destroy]
-  before_filter :get_sub_course,:only=>[:update,:show,:edit,:destroy]
+  before_filter :get_sub_course,:only=>[:update,:edit,:destroy]
   before_filter :render_nil_msg , :only=>[:update,:destroy]
   def create
     if @course=Course.find_by_id(params[:course_id].strip)

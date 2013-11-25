@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131125040416) do
+ActiveRecord::Schema.define(:version => 20131125074331) do
 
   create_table "courses", :force => true do |t|
     t.integer  "type"
@@ -83,6 +83,16 @@ ActiveRecord::Schema.define(:version => 20131125040416) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "schedules", :force => true do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "sub_course_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "schedules", ["sub_course_id"], :name => "index_schedules_on_sub_course_id"
 
   create_table "settings", :force => true do |t|
     t.string   "default_pwd"

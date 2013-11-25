@@ -8,7 +8,7 @@ class InstitutionsController < ApplicationController
   end
 
   def create
-    @institution=current_tenant.institutions.build(params[:institution])
+    @institution=current_tenant.institutions.build(params[:institution].strip)
     unless @msg.result=@institution.save
     @msg.content=@institution.errors.messages
     end
@@ -20,7 +20,7 @@ class InstitutionsController < ApplicationController
   end
 
   def update
-    unless @msg.result=@institution.update_attributes(params[:institution])
+    unless @msg.result=@institution.update_attributes(params[:institution].strip)
     @msg.content=@institution.errors.messages
     end
     render :json=>@msg
@@ -34,7 +34,7 @@ class InstitutionsController < ApplicationController
 
   private
   def get_institution
-    @institution=Institution.find_by_id(params[:id])
+    @institution=Institution.find_by_id(params[:id].strip)
   end
 
   def render_nil_msg

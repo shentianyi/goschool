@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :teacher_courses,:dependent=>:destroy
   has_many :sub_courses,:through=>:teacher_courses
   has_many :courses,:through=>:sub_courses,:uniq => true
+  has_many :schedules,:through=>:sub_courses
   has_many :logininfo_roles, through: :logininfo
   #acts_as_authentic
 end

@@ -2,6 +2,7 @@
 class SubCourse < ActiveRecord::Base
   belongs_to :course
   has_many :teacher_courses,:dependent=>:destroy
+  has_many :schedules,:dependent=>:destroy
   has_many :teachers,:through=>:teacher_courses,:class_name=>'User'
   attr_accessible :name, :parent_name,:course_id,:is_default
 

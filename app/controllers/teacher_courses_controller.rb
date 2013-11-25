@@ -5,7 +5,7 @@ class TeacherCoursesController < ApplicationController
   before_filter :render_nil_msg , :only=>[:update,:destroy]
   
   def create
-    @teacher_course = TeacherCourse.new(params[:teacher_course])
+    @teacher_course = TeacherCourse.new(params[:teacher_course].strip)
     unless @msg.result=@teacher_course.save
      @msg.content=@teacher_course.errors.messages
     end
@@ -13,7 +13,7 @@ class TeacherCoursesController < ApplicationController
   end
 
   def update
-    unless @msg.result=@teacher_course.update_attributes(params[:teacher_course])
+    unless @msg.result=@teacher_course.update_attributes(params[:teacher_course].strip)
      @msg.content=@teacher_course.errors.messages
     end
     render :json=>@msg
@@ -28,7 +28,7 @@ class TeacherCoursesController < ApplicationController
   private
 
   def get_teacher_course
-    @teacher_course=TeacherCourse.find_by_id(params[:id])
+    @teacher_course=TeacherCourse.find_by_id(params[:id].strip)
   end
 
   def render_nil_msg

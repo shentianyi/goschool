@@ -1,17 +1,16 @@
 #encoding: utf-8
 class CoursesController < ApplicationController
   before_filter :init_message ,:only=>[:create,:update,:destroy]
-  before_filter :get_course,:only=>[:update,:show,:edit,:destroy]
-  before_filter :render_nil_msg , :only=>[:update,:destroy]
+  before_filter :get_course,:only=>[:update,:edit,:destroy]
+  before_filter :render_nil_msg , :only=>[:edit,:update,:destroy]
   def index
     render :json=> Course.all
   end
 
   def edit
-    if @course
-      @sub_courses=@course.sub_courses
-    end
-    render :json=>{:course=>@course,:sub_courses=>@sub_courses}
+    @msg.result=true
+    @msg.object={:course=>@course,:sub_courses=>@course.sub_courses}
+    render :json=>@msg
   end
 
   def create
