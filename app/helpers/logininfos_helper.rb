@@ -1,0 +1,2 @@
+module LogininfosHelper
+end

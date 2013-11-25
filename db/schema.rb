@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131123114509) do
+ActiveRecord::Schema.define(:version => 20131125020158) do
 
   create_table "courses", :force => true do |t|
     t.integer  "type"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20131123114509) do
     t.integer  "expect_number",  :default => 0
     t.integer  "actual_number",  :default => 0
     t.boolean  "has_sub",        :default => false
+    t.integer  "status",         :default => 1
     t.string   "parent_name"
     t.integer  "user_id"
     t.integer  "tenant_id"
@@ -45,6 +46,15 @@ ActiveRecord::Schema.define(:version => 20131123114509) do
   end
 
   add_index "institutions", ["tenant_id"], :name => "index_institutions_on_tenant_id"
+
+  create_table "logininfo_roles", :force => true do |t|
+    t.integer  "role_id"
+    t.integer  "logininfo_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "logininfo_roles", ["logininfo_id"], :name => "index_logininfo_roles_on_logininfo_id"
 
   create_table "logininfos", :force => true do |t|
     t.string   "email",                                  :null => false
@@ -125,8 +135,9 @@ ActiveRecord::Schema.define(:version => 20131123114509) do
     t.string   "name"
     t.string   "email"
     t.integer  "logininfo_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "status",       :default => 1
   end
 
   add_index "users", ["logininfo_id"], :name => "index_users_on_logininfo_id"

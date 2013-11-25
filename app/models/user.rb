@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
   # attr_accessible :title, :body
-  attr_accessible :name
-  attr_accessible :email
+  attr_accessible :name,:email
   
-  belongs_to :logininfo
+  has_one :logininfo, dependent: :destroy
+  has_many :logininfo_roles, through: :logininfo
 
-  acts_as_authentic
+  #acts_as_authentic
 end
