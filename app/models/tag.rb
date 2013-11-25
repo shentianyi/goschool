@@ -102,8 +102,7 @@ class Tag < ActiveRecord::Base
   # @param [String] entity_id
   # @param [Array] tags
   # @exception: raised by create exception
-  def self.add(tenant_id,entity_type_id,entity_id,tags)
-    raise ScriptError("haven't been finished. Need to build a find or create method")
+  def self.add!(tenant_id,entity_type_id,entity_id,tags)
     to_insert = []
     tags.each do |tag|
       Tag.update
@@ -119,7 +118,7 @@ class Tag < ActiveRecord::Base
   # @param [String] entity_type_id
   # @param [String] entity_id
   # @param [Array] tags
-  def self.remove(tenant_id,entity_type_id,entity_id,tags)
+  def self.remove!(tenant_id,entity_type_id,entity_id,tags)
     Tag.where('tenant_id=? and entity_type_id=? and entity_id=? and tags in (?)',\
               tenant_id,entity_type_id,entity_id,tags)\
     .destroy_all
@@ -131,6 +130,9 @@ class Tag < ActiveRecord::Base
   def self.remove_tags!(tenant_id,tags)
     Tag.where('tenant_id=? and tags in (?)',tenant_id,tags).destroy_all
   end
+
+
+
 
 
 #try to find a set of entities which has all or part of the tags as the source one

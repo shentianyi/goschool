@@ -4,9 +4,10 @@
 class TagUtility
 
   # support MYSQL currently
-  def initialize(persist='Tag')
+  def initialize(persist='Tag',counter='TagCount')
     @mode = persist
     @instance=  persist.constantize.new
+    @instance_counter = counter.constantize.new
   end
 
 
@@ -27,7 +28,7 @@ class TagUtility
   # @param [String] tag
   # @return [Array] contains the ids
   def find_by_tag_in_entity_type(tenant_id,entity_type_id,tag)
-    return find_by_tag_in_entity_type(tenant_id,entity_type_id,tag)
+    return @instance.find_by_tag_in_entity_type(tenant_id,entity_type_id,tag)
   end
 
 
@@ -38,7 +39,7 @@ class TagUtility
   # @param [Boolean] strict, true to match exactly the tags(no more no less).
   # @return [Array] Tag contains the [#<Tag tenant_id: , entity_type_id: , entity_id: >]
   def find_by_tags_in_entity_type(tenant_id,entity_type_id,tags,strict=true)
-    return find_by_tags_in_entity_type(tenant_id,entity_type_id,tags,strict)
+    return @instance.find_by_tags_in_entity_type(tenant_id,entity_type_id,tags,strict)
   end
 
 
@@ -50,7 +51,7 @@ class TagUtility
   # @return [Array] contains tags
   # like [#<Tag tenant_id: , entity_type_id: , entity_id: >]
   def find_by_tags(tenant_id,tags,strict=true)
-   return find_by_tags_in_entity_type(tenant_id,entity_type_id,tags,strict)
+   return @instance.find_by_tags_in_entity_type(tenant_id,entity_type_id,tags,strict)
   end
 
 
@@ -60,7 +61,7 @@ class TagUtility
   # @param [String] entity_id
   # @return [Array] contains the tags of target entity or an empty array if there is no record
   def get_tags(tenant_id, entity_type_id,entity_id)
-    return get_tags(tenant_id, entity_type_id,entity_id)
+    return @instance.get_tags(tenant_id, entity_type_id,entity_id)
   end
 
 
@@ -72,9 +73,17 @@ class TagUtility
   # @param [Array] tags
   # @exception: raised by create exception
   def add(tenant_id,entity_type_id,entity_id,tags)
-    add(tenant_id,entity_type_id,entity_id,tags)
+    @instance.add!(tenant_id,entity_type_id,entity_id,tags)
+    update_tag_count(tenant_id,tags)
   end
 
+  #update the tag count
+  # @param [String] tenant_id
+  # @param [Array] tags
+  # @exception: no exception will be raised.
+  def update_tag_count(tenant_id,tags)
+     @instance_counter.update_tag_count(tenant_id,tags)
+  end
 
 
   #remove tags from a certain entity. If the entity does not exist, ignore it.
@@ -83,22 +92,53 @@ class TagUtility
   # @param [String] entity_id
   # @param [Array] tags
   def remove(tenant_id,entity_type_id,entity_id,tags)
-    remove(tenant_id,entity_type_id,entity_id,tags)
+    @instance.remove!(tenant_id,entity_type_id,entity_id,tags)
   end
 
   #remove certain tags globally. it will scan all the objects and remove the tags from each of them
   # @param [String] tenant_id
   # @param [Array] tags
   def remove_tags!(tenant_id,tags)
-    remove_tags!(tenant_id,tags)
+    @instance.remove_tags!(tenant_id,tags)
   end
+
+
+
+  #Update tags from a certain entity.
+  # If remove the tags not in input tags and insert tags in input tags which are not in database
+  # @param [String] tenant_id
+  # @param [String] entity_type_id
+  # @param [String] entity_id
+  # @param [Array] tags
+  def add_or_update(tenant_id,entity_type_id,entity_id,tags)
+    if tags.is_a?(Array)
+
+      prev = self.get_tags(tenant_id,entity_type_id,entity_id)
+      to_delete = prev - tags
+      to_insert =  tags-prev
+      self.remove(tenant_id,entity_type_id,entity_id,to_delete) if (to_delete && to_delete.length>0)
+      self.add(tenant_id,entity_type_id,entity_id,to_insert) if(to_insert && to_insert.length>0)
+    end
+  end
+
 
   #full text search of all the exist tags in the system
   # @param [String] tenant_id if it remains nil, whole site's tag will be searched
   # @param [String] str
+  # @param [Integer] top records amount should be returned
   # @return [Array] tag contents
-  def fast_search(str,from,take,tenant_id=nil)
-
+  # @note: V1将使用REDIS－Search ＋ mongoid 的组合，这个组合还存在如下问题：
+  # 1. SCORE的更新是根据搜索热度而不是最终选择热度来的
+  # 2. 必须要有一个持久层
+  # 3. 现有机制中，都不支持AUTO_INCREMENT触发REINDEX机制，这造成每次AUTO_INCREMENT后都必须操作一次支持的SAVE或者UPDATE函数
+  #    这将不可避免地出现一到两次IO操作
+  # 4. 缓存对象被编制为JSON对象后存入REDIS，内存占用大，V3后希望重写整个快速搜索方法
+  def fast_search(str,top,tenant_id=nil)
+    if tenant_id
+      return Redis::Complete.query("TagCount", str, {:limit=>top,:conditions => {:tenant_id => tenant_id}})
+    else
+      return Redis::Complete.query("TagCount", str,{:limit=>top})
+    end
   end
 
 #try to find a set of entities which has all or part of the tags as the source one
@@ -112,7 +152,7 @@ class TagUtility
 #                              of same tags will be returned. place 0 if you want to exactly match (no more no less)
 # V2 function
   def intersect(tenant_id,entity_type_id_1,entity_id_1,entity_type_id_2,strict_number)
-    intersect(tenant_id,entity_type_id_1,entity_id_1,entity_type_id_2,strict_number)
+    @instance.intersect(tenant_id,entity_type_id_1,entity_id_1,entity_type_id_2,strict_number)
   end
 
 end

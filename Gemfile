@@ -5,8 +5,8 @@ gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
-
+#gem 'mysql2'
+gem 'sqlite3'
 # auth
 gem 'acts_as_tenant'
 gem 'cancan'
@@ -45,3 +45,10 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+
+#full text search
+gem 'chinese_pinyin'
+gem 'rmmseg-cpp-huacnlee'
+gem 'redis-search'
+

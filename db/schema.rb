@@ -95,6 +95,14 @@ ActiveRecord::Schema.define(:version => 20131125023407) do
 
   add_index "sub_courses", ["course_id"], :name => "index_sub_courses_on_course_id"
 
+  create_table "tag_counts", :force => true do |t|
+    t.string   "tag"
+    t.integer  "count"
+    t.string   "tenant_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "tags", :force => true do |t|
     t.string   "tenant_id"
     t.string   "entity_type_id"
