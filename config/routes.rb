@@ -1,15 +1,13 @@
 Goschool::Application.routes.draw do
 
-
   resources :sub_courses
-
 
   resources :courses
 
-
   resources :settings
   resources :institutions
-  
+  mount Resque::Server.new, :at=>"/admin/resque"
+
   resources :logininfos
   
   resource :user_session
