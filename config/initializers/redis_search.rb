@@ -2,7 +2,6 @@ require "redis"
 require "redis-namespace"
 require "redis-search"
 
-
 # don't forget change the namespace
 redis = Redis.new(:host => "127.0.0.1",:port => "6379")
 redis.select(3)
@@ -13,4 +12,11 @@ Redis::Search.configure do |config|
   config.pinyin_match = true
   config.disable_rmmseg =true
 end
-TagCount.new
+ # TagCount.new
+ActiveRecord::Base.connection.tables.map do |model|
+  _name = model.capitalize.singularize.camelize
+  if  Kernel.class_defined?(_name)
+    _class=eval _name
+    _class.new if _class.respond_to?(:redis_search_index)
+  end
+end
