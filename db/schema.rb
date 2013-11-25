@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131123114509) do
+ActiveRecord::Schema.define(:version => 20131125023407) do
 
   create_table "courses", :force => true do |t|
     t.integer  "type"
@@ -108,6 +108,16 @@ ActiveRecord::Schema.define(:version => 20131123114509) do
   add_index "tags", ["tenant_id", "entity_type_id", "entity_id"], :name => "index_tags_on_tenant_id_and_entity_type_id_and_entity_id"
   add_index "tags", ["tenant_id", "entity_type_id", "tag"], :name => "index_tags_on_tenant_id_and_entity_type_id_and_tag"
   add_index "tags", ["tenant_id", "tag"], :name => "index_tags_on_tenant_id_and_tag"
+
+  create_table "teacher_courses", :force => true do |t|
+    t.integer  "sub_course_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "teacher_courses", ["sub_course_id"], :name => "index_teacher_courses_on_sub_course_id"
+  add_index "teacher_courses", ["user_id"], :name => "index_teacher_courses_on_user_id"
 
   create_table "tenants", :force => true do |t|
     t.string   "company_name"
