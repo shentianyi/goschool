@@ -6,6 +6,6 @@ one:
   sub_course: one 
 
 two:
-  start_time: 2013-11-25 15:43:31
-  end_time: 2013-11-25 17:43:31
-  sub_course: two
+  start_time: 2013-11-26 15:43:31
+  end_time: 2013-11-29 17:48:31
+  sub_course: one

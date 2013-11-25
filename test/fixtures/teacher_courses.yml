@@ -5,8 +5,8 @@ one:
   user: one 
 
 two:
-  sub_course: two
-  user: one
+  sub_course: one
+  user: two
   
 three:
   sub_course: three
