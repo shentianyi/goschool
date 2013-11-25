@@ -5,7 +5,6 @@ class TeacherCoursesControllerTest < ActionController::TestCase
     @teacher_course = teacher_courses(:one)
   end
  
-
   test "should create teacher_course" do
     assert_difference('TeacherCourse.count') do
       post :create, teacher_course: {sub_course_id:sub_courses(:one).id,user_id:users(:one)  }
