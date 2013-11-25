@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20131123114509) do
     t.integer  "expect_number",  :default => 0
     t.integer  "actual_number",  :default => 0
     t.boolean  "has_sub",        :default => false
+    t.integer  "status",         :default => 1
     t.string   "parent_name"
     t.integer  "user_id"
     t.integer  "tenant_id"
