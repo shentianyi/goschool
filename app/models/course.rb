@@ -5,6 +5,7 @@ class Course < ActiveRecord::Base
   belongs_to :tenant
   belongs_to :institution
   has_many :sub_courses,:dependent=>:destroy
+
   attr_accessible :actual_number, :description, :end_date, :expect_number, :lesson, :name, :start_date, :type
   attr_accessible :has_sub,:status,:institution_id
   acts_as_tenant(:tenant)
@@ -18,7 +19,9 @@ class Course < ActiveRecord::Base
 
   def add_sub_courses sub_courses
     sub_courses.each do |sub|
-      self.sub_courses<<SubCourse.new(:name=>sub[:name],:parent_name=>self.name)
+      sub_course=SubCourse.new(:name=>sub[:name],:parent_name=>self.name)
+      sub_course.assign_teachers(sub[:teachers]) if sub[:teachers]
+      self.sub_courses<<sub_course
     end
     self.has_sub=true
   end

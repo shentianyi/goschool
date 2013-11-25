@@ -28,9 +28,11 @@ class CoursesController < ApplicationController
   end
 
   def update
-    # how to do with tag
+    tags=params[:course].slice(:tags).strip
     unless @msg.result=@course.update_attributes(params[:course].strip)
     @msg.content=@course.errors.messages
+    else
+      @course.add_tags(tags[:tags]) if tags.size>0
     end
     render :json=>@msg
   end

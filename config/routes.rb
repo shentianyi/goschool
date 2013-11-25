@@ -1,14 +1,20 @@
 Goschool::Application.routes.draw do
 
+  resources :teacher_courses
+
 
   resources :sub_courses
 
-
   resources :courses
 
+  resources :settings
+  resources :institutions
+  mount Resque::Server.new, :at=>"/admin/resque"
 
-   resources :settings
-   resources :institutions
+  resources :users
+  resources :logininfos
+
+  resource :user_session
     # The priority is based upon order of creation:
   # first created -> highest priority.
 

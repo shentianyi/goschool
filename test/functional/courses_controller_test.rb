@@ -23,7 +23,7 @@ class CoursesControllerTest < ActionController::TestCase
         name:  "TUOFU",
         start_date:  "2013-11-01",
         type: 0,
-        subs:[{name:'Game'},{name:'Read'}],
+        subs:[{name:'Game',teachers:[{teacher_id:users(:one).id},{teacher_id:users(:one).id}]},{name:'Read'}],
         tags:['TUOFU','Game'] }
       assert_response :success
       puts response.body
@@ -33,7 +33,7 @@ class CoursesControllerTest < ActionController::TestCase
   test "should get edit" do
     get :edit, id: @course.id
     assert_response :success
-    # puts response.body
+  # puts response.body
   end
 
   test "should destroy course" do
