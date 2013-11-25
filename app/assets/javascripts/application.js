@@ -10,6 +10,14 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
-//= require jquery_ujs
 //= require_tree .
+//= require jquery-1.8.2.min
+//= require BACK_admin
+//= require BACK_index
+//= require BACK_rightList
+//= require mustache
+//= require semantic.min
+//= require wayne-base
+
+
+

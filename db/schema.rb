@@ -10,8 +10,8 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended to check this file into your version control system.
-
-ActiveRecord::Schema.define(:version => 20131125074331) do
+ 
+ActiveRecord::Schema.define(:version => 20131125074331) do 
 
   create_table "courses", :force => true do |t|
     t.integer  "type"
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(:version => 20131125074331) do
 
   add_index "institutions", ["tenant_id"], :name => "index_institutions_on_tenant_id"
 
+  create_table "logininfo_institutions", :force => true do |t|
+    t.integer  "institution_id"
+    t.integer  "logininfo_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "logininfo_institutions", ["institution_id"], :name => "index_logininfo_institutions_on_institution_id"
+  add_index "logininfo_institutions", ["logininfo_id"], :name => "index_logininfo_institutions_on_logininfo_id"
+
   create_table "logininfo_roles", :force => true do |t|
     t.integer  "role_id"
     t.integer  "logininfo_id"
@@ -74,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20131125074331) do
     t.integer  "tenant_id"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.integer  "status",              :default => 1
   end
 
   add_index "logininfos", ["tenant_id"], :name => "index_logininfos_on_tenant_id"
@@ -102,6 +113,27 @@ ActiveRecord::Schema.define(:version => 20131125074331) do
   end
 
   add_index "settings", ["tenant_id"], :name => "index_settings_on_tenant_id"
+
+  create_table "students", :force => true do |t|
+    t.string   "name"
+    t.integer  "gender"
+    t.datetime "birthday"
+    t.string   "school"
+    t.datetime "graduation"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "address"
+    t.string   "guardian"
+    t.string   "guardian_phone"
+    t.string   "image_url"
+    t.integer  "logininfo_id"
+    t.integer  "referrer_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "students", ["logininfo_id"], :name => "index_students_on_logininfo_id"
+  add_index "students", ["referrer_id"], :name => "index_students_on_referrer_id"
 
   create_table "sub_courses", :force => true do |t|
     t.string   "name"
@@ -163,9 +195,8 @@ ActiveRecord::Schema.define(:version => 20131125074331) do
     t.string   "name"
     t.string   "email"
     t.integer  "logininfo_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-    t.integer  "status",       :default => 1
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   add_index "users", ["logininfo_id"], :name => "index_users_on_logininfo_id"

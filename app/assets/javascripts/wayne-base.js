@@ -160,3 +160,18 @@ function MessageBox(str,position, type) {
         $("#MessageBox").slideUp("2500");
     },2500)
 }
+//loader
+function loader(id){
+    if(id=="body"){
+        $("body").append($("<div />").attr("id","loader").addClass('ui active loader medium text').text('loading'));
+    }
+    else{
+        $("#"+id).append($("<div />").attr("id","loader").addClass('ui active loader medium text').text('loading'));
+    }
+    if(arguments.length>1){
+        $("#"+id).find(".loader").css("top",arguments[1]).css("right",arguments[2]).css("bottom",arguments[3]).css("left",arguments[4])
+    }
+}
+function remove_loader(){
+    $("#loader").remove();
+}

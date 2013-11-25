@@ -19,7 +19,7 @@ class SchedulesController < ApplicationController
     unless @msg.result=@schedule.update_attributes(params[:schedule].strip)
       @msg.content=@schedule.errors.messages
     end
-    render :json=>@msg
+    render :json=>@msg 
   end
  
   def destroy 
