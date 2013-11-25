@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131125072730) do
+ 
+ActiveRecord::Schema.define(:version => 20131125074331) do 
 
   create_table "courses", :force => true do |t|
     t.integer  "type"
@@ -47,6 +48,25 @@ ActiveRecord::Schema.define(:version => 20131125072730) do
 
   add_index "institutions", ["tenant_id"], :name => "index_institutions_on_tenant_id"
 
+  create_table "logininfo_institutions", :force => true do |t|
+    t.integer  "institution_id"
+    t.integer  "logininfo_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "logininfo_institutions", ["institution_id"], :name => "index_logininfo_institutions_on_institution_id"
+  add_index "logininfo_institutions", ["logininfo_id"], :name => "index_logininfo_institutions_on_logininfo_id"
+
+  create_table "logininfo_roles", :force => true do |t|
+    t.integer  "role_id"
+    t.integer  "logininfo_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "logininfo_roles", ["logininfo_id"], :name => "index_logininfo_roles_on_logininfo_id"
+
   create_table "logininfos", :force => true do |t|
     t.string   "email",                                  :null => false
     t.string   "crypted_password",                       :null => false
@@ -65,6 +85,7 @@ ActiveRecord::Schema.define(:version => 20131125072730) do
     t.integer  "tenant_id"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.integer  "status",              :default => 1
   end
 
   add_index "logininfos", ["tenant_id"], :name => "index_logininfos_on_tenant_id"
@@ -75,6 +96,16 @@ ActiveRecord::Schema.define(:version => 20131125072730) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "schedules", :force => true do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "sub_course_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "schedules", ["sub_course_id"], :name => "index_schedules_on_sub_course_id"
+
   create_table "settings", :force => true do |t|
     t.string   "default_pwd"
     t.integer  "tenant_id"
@@ -83,6 +114,27 @@ ActiveRecord::Schema.define(:version => 20131125072730) do
   end
 
   add_index "settings", ["tenant_id"], :name => "index_settings_on_tenant_id"
+
+  create_table "students", :force => true do |t|
+    t.string   "name"
+    t.integer  "gender"
+    t.datetime "birthday"
+    t.string   "school"
+    t.datetime "graduation"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "address"
+    t.string   "guardian"
+    t.string   "guardian_phone"
+    t.string   "image_url"
+    t.integer  "logininfo_id"
+    t.integer  "referrer_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "students", ["logininfo_id"], :name => "index_students_on_logininfo_id"
+  add_index "students", ["referrer_id"], :name => "index_students_on_referrer_id"
 
   create_table "sub_courses", :force => true do |t|
     t.string   "name"
@@ -119,6 +171,16 @@ ActiveRecord::Schema.define(:version => 20131125072730) do
   add_index "tags", ["tenant_id", "entity_type_id", "entity_id"], :name => "index_tags_on_tenant_id_and_entity_type_id_and_entity_id"
   add_index "tags", ["tenant_id", "entity_type_id", "tag"], :name => "index_tags_on_tenant_id_and_entity_type_id_and_tag"
   add_index "tags", ["tenant_id", "tag"], :name => "index_tags_on_tenant_id_and_tag"
+
+  create_table "teacher_courses", :force => true do |t|
+    t.integer  "sub_course_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "teacher_courses", ["sub_course_id"], :name => "index_teacher_courses_on_sub_course_id"
+  add_index "teacher_courses", ["user_id"], :name => "index_teacher_courses_on_user_id"
 
   create_table "tenants", :force => true do |t|
     t.string   "company_name"

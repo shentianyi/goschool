@@ -29,6 +29,7 @@
     font-size:12px;
     margin-right:3px;
     margin-bottom:1px;
+    cursor:default;
 }
 .back-index-main>.search-list>.search-result>li .maybe-know,
 .back-index-main>.search-list>.search-result>li .recommend{

@@ -10,4 +10,9 @@
  *
  *= require_self
  *= require_tree .
+ *= require BACK-admin
+ *= require BACK-index
+ *= require BACK-student-index
+ *= require base
+ *= require semantic
  */

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  start_time: 2013-11-25 15:43:31
+  end_time: 2013-11-25 16:43:31
+  sub_course: one 
+
+two:
+  start_time: 2013-11-25 15:43:31
+  end_time: 2013-11-25 17:43:31
+  sub_course: two

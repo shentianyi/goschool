@@ -2,10 +2,42 @@
 
 # This model initially had no columns defined.  If you add columns to the
 # model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
+# below each fixture, per the syntax in the
 #
-
+one:
+  email: jack@jack.com
+  crypted_password: b83892fa6065fe8f4319acdec9f0b6758dee3460a5f42dfe6779cff1d328be8cebc94c61593a41ee40ee11b03abd4f0ac3171b8a459ff3e2ec50b5fd397fc335
+  password_salt: 6KSU3lXGhALwez9JzgP5
+  persistence_token: fa0974fd41a5970affab146c4685cdec7bfa1b8a96d3e10dcbff25751139cc0559d6be117ba4ebb60e8515f3fbeee78d8b0d03332067ee7bac73ee5064c475be
+  single_access_token: yTR2PYWJY4w7YvDepUgn
+  perishable_token: xqcf4MOHqQ6tIWTH0KCc
+  login_count: 0
+  failed_login_count: 0
+  last_request_at: 2013-11-25 07:31:24
+  current_login_at: 2013-11-25 07:31:24
+  last_login_at: 2013-11-25 07:31:24
+  current_login_ip: 127.0.0.1
+  last_login_ip: 127.0.0.1
+  created_at: 2013-11-25 07:31:24
+  updated_at: 2013-11-25 07:31:24
+  status: 0
 # column: value
 #
-
+two:
+  email: helen@helen.com
+  crypted_password: b83892fa6065fe8f4319acdec9f0b6758dee3460a5f42dfe6779cff1d328be8cebc94c61593a41ee40ee11b03abd4f0ac3171b8a459ff3e2ec50b5fd397fc335
+  password_salt: 6KSU3lXGhALwez9JzgP5
+  persistence_token: fa0974fd41a5970affab146c4685cdec7bfa1b8a96d3e10dcbff25751139cc0559d6be117ba4ebb60e8515f3fbeee78d8b0d03332067ee7bac73ee5064c475be
+  single_access_token: yTR2PYWJY4w7YvDepUgn
+  perishable_token: xqcf4MOHqQ6tIWTH0KCc
+  login_count: 0
+  failed_login_count: 0
+  last_request_at: 2013-11-25 07:31:24
+  current_login_at: 2013-11-25 07:31:24
+  last_login_at: 2013-11-25 07:31:24
+  current_login_ip: 127.0.0.1
+  last_login_ip: 127.0.0.1
+  created_at: 2013-11-25 07:31:24
+  updated_at: 2013-11-25 07:31:24
+  status: 0
 #  column: value
