@@ -42,6 +42,18 @@ class CoursesController < ApplicationController
     render :json=>@msg
   end
 
+  def list_search
+    c=[]
+    ['Course','SubCourse'].each_with_index do |t,i|
+      c[i]= Redis::Search.query(t, params[:q], :conditions => {:tenant_id => current_tenant.id})
+    end
+    items=[]
+    (c[0].slice(0,6)+c[1].sclie(0,4)).each do |item|
+      items<<{:name=>item['title'],:content=>item['name'],:type=>item['type'],:id=>item['type']}
+    end
+    render :json=>items
+  end
+
   private
 
   def get_course

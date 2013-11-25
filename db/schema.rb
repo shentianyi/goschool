@@ -140,11 +140,13 @@ ActiveRecord::Schema.define(:version => 20131125101543) do
     t.string   "parent_name"
     t.boolean  "is_default",  :default => false
     t.integer  "course_id"
+    t.integer  "tenant_id"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
   end
 
   add_index "sub_courses", ["course_id"], :name => "index_sub_courses_on_course_id"
+  add_index "sub_courses", ["tenant_id"], :name => "index_sub_courses_on_tenant_id"
 
   create_table "tag_counts", :force => true do |t|
     t.string   "tag"

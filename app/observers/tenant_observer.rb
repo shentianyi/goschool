@@ -2,7 +2,7 @@
 class TenantObserver<ActiveRecord::Observer
   observe :tenant
   def after_create tenant
-    tenant.setting.create(:default_pwd=>'123456')
-    tenant.institutions.create(:name=>tenant.name)
+    tenant.setting=Setting.new(:default_pwd=>'123456') 
+    tenant.institutions<<Institution.new(:name=>tenant.company_name||'未设置名称')
   end
 end
