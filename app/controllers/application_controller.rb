@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
   #need login
   def require_user
     unless current_user
-      store_location
+      #store_location
       redirect_to new_user_session_url
       return false
     end
@@ -51,7 +51,7 @@ class ApplicationController < ActionController::Base
   #can't be login
   def require_no_user
     if current_user
-      store_location
+      #store_location
       redirect_to root_url
       return false
     end

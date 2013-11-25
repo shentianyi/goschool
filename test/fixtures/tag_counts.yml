@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  tag: MyString
+  count: 1
+  tenant_id: MyString
+
+two:
+  tag: MyString
+  count: 1
+  tenant_id: MyString
