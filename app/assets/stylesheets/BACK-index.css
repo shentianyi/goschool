@@ -152,6 +152,7 @@
     overflow-x:hidden;
     overflow-y:auto;
     min-height:768px;
+    transition:right 0.35s ease-out;
 }
 .back-index-main>.search-list{
     width:90%;
@@ -191,9 +192,10 @@
     -webkit-:0 1px 2px 1px rgba(0, 0, 0, 0.1);
     -moz-:0 1px 2px 1px rgba(0, 0, 0, 0.1);
     padding:5px 0;
+    position:relative;
 }
 .back-index-main>.search-list>.search-result>li{
-    padding:5px 15px
+    padding:8px 15px
 }
 .back-index-main>.search-list>.search-result>li p{
     font-size:13px;
@@ -294,5 +296,20 @@
 }
 .view-add>.inner>.condition-block tr td:nth-of-type(3) input[type="text"]{
     width:260px;
+}
+/************************************************************   item add  */
+.back-index-add{
+    position:fixed;
+    top:0px;
+    bottom:0px;
+    right:-260px;
+    left:auto;
+    width:250px;
+    transition:right 0.35s ease-out;
+    background:#fff;
+    border-left:1px solid rgba(0,0,0,0.4);
+    box-shadow:-2px 0px 8px rgba(0,0,0,0.6);
+    -moz-box-shadow:-2px 0px 8px rgba(0,0,0,0.6);
+    -webkit-box-shadow:-2px 0px 8px rgba(0,0,0,0.6);
 }
 

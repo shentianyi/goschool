@@ -10,6 +10,7 @@
 </head>
 <body>
 
+<!--global partial-->
 <aside class="back-index-aside">
     <a class="logo" ></a>
     <ul class="first-ul">
@@ -38,7 +39,9 @@
         </li>
     </ul>
 </aside>
+<!--global partial-->
 
+<!--view-->
 <aside class="back-index-condition ">
     <header class="back-index-side-header">
         <label>快捷视图</label>
@@ -64,17 +67,19 @@
         </a>
     </div>
 </aside>
+<!--view-->
 
-<article class="back-index-main">
+<!--list-->
+<article class="back-index-main" id="back-index-main" name="student">
     <header class="back-index-side-header">
-        <div class="ui teal mini button">
+        <div class="ui teal mini button" id="add-item">
             <div class="visible content">
                 <i class="add icon"></i>
                 添加学生
             </div>
         </div>
     </header>
-    <div class="search-list">
+    <div class="search-list" id="search-list">
         <div class="ui big fluid icon input search-input">
             <input placeholder="在此输入搜素条件..." type="text">
             <i class="search icon"></i>
@@ -86,7 +91,8 @@
                 <a><i class="icon up"></i> 根据最新活动排序</a>
             </div>
         </div>
-        <ul class="search-result">
+        <ul class="search-result" id="search-result">
+            <!--template-->
             <li>
                 <table class="ui table segment">
                     <tr>
@@ -132,12 +138,13 @@
                     </tr>
                 </table>
             </li>
-
+            <!--template-->
         </ul>
     </div>
 </article>
+<!--list-->
 
-
+<!--view select-->
 <section class="view-add" id="view-add-student">
     <div class="inner">
         <i class="remove icon" id="view-add-close"></i>
@@ -195,55 +202,18 @@
         </table>
     </div>
 </section>
+<!--view select-->
 
-<script type="text/template" id="student-list">
-    {{#student}}
-    <li>
-        <table class="ui table segment">
-            <tr>
-                <td class="two wide">
-                    <img class="circular ui image mini portrait" src="images/portrait/0.jpg" />
-                    <p class="name">{{name}}</p>
-                </td>
-                <td class="two wide">
-                    <p class="type">{{type}}</p>
-                    <p>{{school}}</p>
-                    <p>{{grade}}</p>
-                    <p>{{age}}岁</p>
-                </td>
-                <td class="five wide">
-                    <div class="ui blue labels small">
-                        {{#tag}}
-                        <a class="ui label">
-                            {{tag}}
-                        </a>
-                        {{/tag}}
-                    </div>
-                    <p class="parent"><span>监护人:</span><span>13901111123(王先生)</span></p>
-                    <p class="phone"><span>联系电话:</span><span>13918502286</span></p>
-                    <p class="consult-time"><span>上次咨询:</span><span>2013-11-11 16:00</span></p>
-                </td>
-                <td class="two wide">
-                    <p class="maybe-know">推荐人</p>
-                    <p>张三</p>
-                </td>
-                <td class="three wide">
-                    <p class="recommend">可能认识</p>
-                    <p><span>李四</span><span>王八</span><span>白一</span></p>
-                </td>
-                <td class="three wide">
-                    <div class="ui mini button teal">
-                        详情
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </li>
-    {{/student}}
-</script>
+<!--add student-->
+<section class="back-index-add" id="back-index-add">
+
+</section>
+
 <script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>
 <script type='text/javascript' src="javascripts/semantic.min.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_index.js" ></script>
 <script type='text/javascript' src="javascripts/wayne-base.js" ></script>
+<script type='text/javascript' src="javascripts/BACK_rightList.js" ></script>
+
 </body>
 </html>

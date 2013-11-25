@@ -73,14 +73,21 @@ select{
     bottom:0;
 }
 .message-box.success{
-    background:#45d263;
+    background:#63A69F;
     color:white;
 }
 .message-box.danger{
-    background-color:#fa4545;
+    background-color:#E44B3D;
     color:white
 }
 .message-box.warning{
     color:white;
-    background-color:#f3ca39;
+    background-color:#e4a73d;
+}
+/********************************************************************************************************* loader
+*******************************************************************************************************************/
+.ui.loader{
+    height:32px;
+    top:50% ;
+    margin-top:-16px ;
 }
