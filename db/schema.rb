@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131123114509) do
+ActiveRecord::Schema.define(:version => 20131125040416) do
 
   create_table "courses", :force => true do |t|
     t.integer  "type"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20131123114509) do
     t.integer  "expect_number",  :default => 0
     t.integer  "actual_number",  :default => 0
     t.boolean  "has_sub",        :default => false
+    t.integer  "status",         :default => 1
     t.string   "parent_name"
     t.integer  "user_id"
     t.integer  "tenant_id"
@@ -93,6 +94,14 @@ ActiveRecord::Schema.define(:version => 20131123114509) do
   end
 
   add_index "sub_courses", ["course_id"], :name => "index_sub_courses_on_course_id"
+
+  create_table "tag_counts", :force => true do |t|
+    t.string   "tag"
+    t.integer  "count"
+    t.string   "tenant_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "tags", :force => true do |t|
     t.string   "tenant_id"
