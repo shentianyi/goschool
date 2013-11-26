@@ -301,10 +301,11 @@
 .back-index-add{
     position:fixed;
     top:0px;
-    bottom:0px;
+    height:100%;
     right:-260px;
     left:auto;
     width:250px;
+    overflow-y:auto;
     transition:right 0.35s ease-out;
     background:#fff;
     border-left:1px solid rgba(0,0,0,0.4);
@@ -312,4 +313,57 @@
     -moz-box-shadow:-2px 0px 8px rgba(0,0,0,0.6);
     -webkit-box-shadow:-2px 0px 8px rgba(0,0,0,0.6);
 }
+.back-index-add>p{
+    text-align:center;
+    padding:15px 0 10px;
+    font-size:20px;
+    background:#D95C5C;
+    color:white;
+    margin:0px;
+    text-shadow:2px 2px 4px rgba(0,0,0,0.4);
+    -moz-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
+    -webkit-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
+}
+.back-index-add>.portrait{
+    position:relative;
+    display:block;
+    height:60px;
+}
+.back-index-add>.portrait>img{
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-17.5px;
+    margin-top:-17.5px;
+}
+.back-index-add>.sex{
+    margin:5px 0 10px 35px;
+}
+.back-index-add>.sex>.radio{
+    margin-right:20px;
+}
+.back-index-add>.input{
+    width:190px;
+    left:50%;
+    margin:5px 0 10px -90px;
+    display:block;
+}
+.back-index-add>.checkbox{
+    display:block;
+    margin:40px 0 5px 35px;
+}
+.back-index-add>.button{
+    margin-bottom:10px;
+    width:190px;
+    position:relative;
+    left:50%;
+    margin-left:-90px;
+}
+.back-index-add>div>i,
+.back-index-add>p,
+.back-index-add>.portrait{
+    pointer-events:none;
+}
+
+
 

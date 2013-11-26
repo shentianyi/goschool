@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="stylesheets/base.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/BACK-index.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/BACK-student-index.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/datepicker.css" type="text/css" />
 </head>
 <body>
 
@@ -206,14 +207,80 @@
 
 <!--add student-->
 <section class="back-index-add" id="back-index-add">
-
+   <p>新建学生</p>
+   <div class="portrait stop">
+       <img class="ui circular mini image stop" src="images/portrait/1.jpg">
+   </div>
+    <div class="ui left icon input">
+        <input placeholder="姓名..." type="text">
+        <i class="user icon"></i>
+    </div>
+    <div class="sex stop">
+        <div class="ui radio checkbox">
+            <input name="sex" checked="checked" type="radio">
+            <label>男</label>
+        </div>
+        <div class="ui radio checkbox">
+            <input name="sex" type="radio">
+            <label>女</label>
+        </div>
+    </div>
+    <div class="ui left icon input ">
+        <input placeholder="出生年月..." type="text" id="born-date">
+        <i class="calendar icon"></i>
+    </div>
+    <div class="ui left icon input">
+        <input placeholder="就读学校..." type="text">
+        <i class="building icon"></i>
+    </div>
+    <div class="ui left icon input">
+        <input placeholder="毕业年限..." type="text" id="graduation-date">
+        <i class="empty bookmark icon"></i>
+    </div>
+    <div class="ui left icon input">
+        <input placeholder="邮件地址..." type="text">
+        <i class="mail outline icon"></i>
+    </div>
+    <div class="ui left icon input">
+        <input placeholder="联系电话..." type="text">
+        <i class="phone icon"></i>
+    </div>
+    <div class="ui left icon input">
+        <input placeholder="联系地址..." type="text">
+        <i class="home icon"></i>
+    </div>
+    <div class="ui left icon input">
+        <input placeholder="监护人..." type="text">
+        <i class="male icon"></i>
+    </div>
+    <div class="ui left icon input">
+        <input placeholder="监护人电话..." type="text">
+        <i class="mobile icon"></i>
+    </div>
+    <div class="ui left icon input">
+        <input placeholder="标签..." type="text">
+        <i class="tag icon"></i>
+    </div>
+    <div class="ui left icon input">
+        <input placeholder="推荐人..." type="text">
+        <i class="smile icon"></i>
+    </div>
+    <div class="ui checkbox stop">
+        <input name="fun" type="checkbox">
+        <label>同时开设学生账号</label>
+    </div>
+    <div class="ui red button">
+        添加
+    </div>
 </section>
 
 <script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>
+<script type='text/javascript' src="javascripts/datepicker.js" ></script>
 <script type='text/javascript' src="javascripts/semantic.min.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_index.js" ></script>
 <script type='text/javascript' src="javascripts/wayne-base.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_rightList.js" ></script>
+<script type='text/javascript' src="javascripts/BACK_student.js" ></script>
 
 </body>
 </html>

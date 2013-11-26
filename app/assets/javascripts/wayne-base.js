@@ -175,3 +175,7 @@ function loader(id){
 function remove_loader(){
     $("#loader").remove();
 }
+//激活所有的radio和ccheckbox
+$('.ui.checkbox')
+    .checkbox()
+;

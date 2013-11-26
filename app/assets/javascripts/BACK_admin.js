@@ -85,7 +85,6 @@ BACKINDEX.admin.operate.init=function(){
         }
     });
     //user下的check box 修改
-    $("#admin-operate-table .checkbox").checkbox();
     $("#admin-operate-table").on("click",".checkbox",function(){
         if($("input",this).prop("checked")){
             //post

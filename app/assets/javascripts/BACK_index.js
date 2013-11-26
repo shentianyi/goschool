@@ -1,12 +1,14 @@
 var BACKINDEX=BACKINDEX || {};
 BACKINDEX.init=(function(){
     $("#main-navigator-bottom i").popup();
+    //添加view
     $("body").on("click","#view-add",function(){
           $(".view-add").css("display","block");
     });
     $("body").on("click","#view-add-close",function(){
         $(".view-add").css("display","none");
     });
+    //添加学生或老师或课程
     $("#add-item").on("click",function(event){
         stop_propagation(event);
         if($(this).attr("state")=="close" || $(this).attr("state")==null){
@@ -28,7 +30,7 @@ BACKINDEX.init=(function(){
            $("#add-item").attr("state","close");
        }
     });
-    $("#back-index-add").on("click","input",function(event){
+    $("#back-index-add").on("click","input,.radio,.stop",function(event){
         stop_propagation(event);
     });
 })();
