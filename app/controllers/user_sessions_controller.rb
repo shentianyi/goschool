@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 class UserSessionsController < ApplicationController
+  skip_before_filter :require_user,:only=>[:new,:create]
+  skip_before_filter :require_active_user,:only=>[:new,:create]
+  #skip_before_filter :check_tenant_status
+  #skip_defore_filter :find_cuurent_user_tenant,:only=>[:new,:create]
+  
   def new
     @user_session = UserSession.new
   end

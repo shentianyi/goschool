@@ -4,23 +4,24 @@ class Logininfo < ActiveRecord::Base
   attr_accessible :user
 
   belongs_to :tenant
-  belongs_to :user
-
-  has_many :logininfo_roles ,dependent: :destroy
-  has_many :logininfo_institutions, dependent: :destroy
+  
+  has_one :user, :dependent=> :destroy
+  has_one :student, :dependent=> :destroy
+  has_many :logininfo_roles ,:dependent=> :destroy
+  has_many :logininfo_institutions, :dependent=> :destroy
 
   # acts as tenant
   acts_as_tenant(:tenant)
 
   # authlogic
-  #acts_as_authentic do |c|
-  #  c.login_field = :email
-  #end
+  acts_as_authentic do |c|
+    c.login_field = :email
+  end
 
   #confirmed?
-  #def confirmed?
-  #  return true
-  #end
+  def confirmed?
+    return true
+  end
 
   #lock user account
   def lock (email)
