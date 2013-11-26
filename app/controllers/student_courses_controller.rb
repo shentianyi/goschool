@@ -1,83 +1,71 @@
 class StudentCoursesController < ApplicationController
-  # GET /student_courses
-  # GET /student_courses.json
-  def index
-    @student_courses = StudentCourse.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @student_courses }
-    end
-  end
-
-  # GET /student_courses/1
-  # GET /student_courses/1.json
-  def show
-    @student_course = StudentCourse.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @student_course }
-    end
-  end
-
-  # GET /student_courses/new
-  # GET /student_courses/new.json
-  def new
-    @student_course = StudentCourse.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @student_course }
-    end
-  end
-
-  # GET /student_courses/1/edit
-  def edit
-    @student_course = StudentCourse.find(params[:id])
-  end
-
-  # POST /student_courses
-  # POST /student_courses.json
+  before_filter :init_message ,:only=>[:create,:update,:destroy,:creates,:updates,:destroies]
+  before_filter :get_student_course , :only=>[:update,:show,:destroy]
+  before_filter :render_nil_msg , :only=>[:update,:destroy]
   def create
-    @student_course = StudentCourse.new(params[:student_course])
-
-    respond_to do |format|
-      if @student_course.save
-        format.html { redirect_to @student_course, notice: 'Student course was successfully created.' }
-        format.json { render json: @student_course, status: :created, location: @student_course }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @student_course.errors, status: :unprocessable_entity }
-      end
+    @student_course = StudentCourse.new(params[:student_course].strip)
+    unless @msg.result=@student_course.save
+    @msg.content=@student_course.errors.messages
     end
+    render :json=>@msg
   end
 
-  # PUT /student_courses/1
-  # PUT /student_courses/1.json
   def update
-    @student_course = StudentCourse.find(params[:id])
-
-    respond_to do |format|
-      if @student_course.update_attributes(params[:student_course])
-        format.html { redirect_to @student_course, notice: 'Student course was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @student_course.errors, status: :unprocessable_entity }
-      end
+    unless @msg.result=@student_course.update_attributes(params[:student_course].strip)
+    @msg.content=@student_course.errors.messages
     end
+    render :json=>@msg
   end
 
-  # DELETE /student_courses/1
-  # DELETE /student_courses/1.json
   def destroy
-    @student_course = StudentCourse.find(params[:id])
     @student_course.destroy
+    @msg.result=true
+    render :json=>@msg
+  end
+  
+  def creates
+    @msg.result=true
+    params[:student_courses].each do |param|
+      student_course=StudentCourse.new(param)
+      unless student_course.save
+        @msg.result=false
+	@msg.content=[] unless @msg.content
+	@msg.content<<{:student_id=>param[:student_id],:content=>student_course.errors.messages}
+      end 
+    end
+    render :json=>@msg
+  end
 
-    respond_to do |format|
-      format.html { redirect_to student_courses_url }
-      format.json { head :no_content }
+  def updates
+    @msg.result=true
+    params[:student_courses].each do |param|
+      unless student_course.update_attributes(params[:student_course])
+        @msg.result=false
+	@msg.content=[] unless @msg.content
+	@msg.content<<{:id=>param[:id],:content=>student_course.errors.messages}
+      end if student_course=StudentCourse.find_by_id(param[:id])
+    end
+    render :json=>@msg
+  end
+
+  def destroies
+    @msg.result=true
+    params[:ids].each do |id|
+     student_course.destroy if student_course=StudentCourse.find_by_id(param[:id])
+    end
+    render :json=>@msg
+  end
+
+  private
+
+  def get_student_course
+    @student_course=StudentCourse.find_by_id(params[:id].strip)
+  end
+
+  def render_nil_msg
+    unless @student_course
+      @msg.content='不存在此学生选课'
+      render :json=>msg
     end
   end
 end
