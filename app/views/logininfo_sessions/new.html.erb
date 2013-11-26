@@ -1,0 +1,66 @@
+<h1>Login&Signup</h1>
+<form action="/subscriptions" method="post">
+  <div>
+    <p>Name</p><input type="text" id="name" name="name"/>
+  </div>
+  <div>
+    <p>Email</p><input type="text" id="email" name="email"/>
+  </div>
+  <div>
+    <p>Password</p><input id="password" name="password" type="password"/>
+  </div>
+  <div>
+    <p>Password_confirmation</p><input  id="password_confirmation" name="password_confirmation" type="password"/>
+  </div>
+  <div>
+    <p>Company</p><input id="company_name" name="company_name" type="text"/>
+  </div>
+</form>
+<a onclick="document.forms[0].submit();">Sign up</a>
+
+<form action="/logininfo_session" method="post">
+  <div>
+    <p>Email</p>
+    <input type="text" id="email" name="email"/>
+  </div>
+  <div>
+    <p>Password</p>
+    <input id="password" name="password" type="password"/>
+  </div>
+</form>
+<a onclick="document.forms[1].submit();">Login in</a>
+
+<script type="text/javascript">
+  function signup(){
+      var name = $("#name").val();
+      var email = $("#email").val();
+      var password = $("#password").val();
+      var password_confirmation = $("#password_confirmation").val();
+      var company_name = $("#company_name").val();
+      var role = $("#role").val();
+
+      $.ajax({
+          url:'/subscriptions',
+          data: {
+              user : {
+                  name: name,
+                  email:email,
+              },
+              email: email,
+              password: password,
+              password_confirmation: password_confirmation,
+              company_name: company_name,
+              role: role
+          },
+          type: 'POST',
+          dataType: 'json',
+          success: function(data){
+
+          }
+      });
+  }
+
+  function login() {
+
+  }
+</script>

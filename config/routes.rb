@@ -20,7 +20,7 @@ Goschool::Application.routes.draw do
   resources :users
   resources :logininfos
   resource :subscriptions
-  resource :user_session
+  resource :logininfo_session
 
 
 # The priority is based upon order of creation:

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131125101543) do
+ActiveRecord::Schema.define(:version => 20131126071427) do
 
   create_table "courses", :force => true do |t|
     t.integer  "type"
@@ -73,18 +73,18 @@ ActiveRecord::Schema.define(:version => 20131125101543) do
     t.string   "persistence_token",                      :null => false
     t.string   "single_access_token",                    :null => false
     t.string   "perishable_token",                       :null => false
-    t.integer  "login_count",                            :null => false
-    t.integer  "failed_login_count",                     :null => false
+    t.integer  "login_count",         :default => 0,     :null => false
+    t.integer  "failed_login_count",  :default => 0,     :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
+    t.integer  "status",              :default => 1
     t.boolean  "is_tenant",           :default => false
     t.integer  "tenant_id"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.integer  "status",              :default => 1
   end
 
   add_index "logininfos", ["tenant_id"], :name => "index_logininfos_on_tenant_id"
@@ -140,11 +140,13 @@ ActiveRecord::Schema.define(:version => 20131125101543) do
     t.string   "parent_name"
     t.boolean  "is_default",  :default => false
     t.integer  "course_id"
+    t.integer  "tenant_id"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
   end
 
   add_index "sub_courses", ["course_id"], :name => "index_sub_courses_on_course_id"
+  add_index "sub_courses", ["tenant_id"], :name => "index_sub_courses_on_tenant_id"
 
   create_table "tag_counts", :force => true do |t|
     t.string   "tag"
@@ -187,12 +189,12 @@ ActiveRecord::Schema.define(:version => 20131125101543) do
     t.integer  "subscription_status"
     t.string   "access_key"
     t.string   "domain"
-    t.integer  "user_id"
+    t.integer  "logininfo_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
   end
 
-  add_index "tenants", ["user_id"], :name => "index_tenants_on_user_id"
+  add_index "tenants", ["logininfo_id"], :name => "index_tenants_on_logininfo_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

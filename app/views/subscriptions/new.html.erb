@@ -1,3 +1,34 @@
+<% if @logininfo && @logininfo.errors.any? %>
 <div>
-  <input type="field"></input>
+  <ul>
+    <% @logininfo.errors.full_messages.each do |msg| %>
+    <li>
+      <%= msg %>
+    </li>
+    <% end %>
+  </ul>
 </div>
+<% end %>
+<form action="/subscriptions" method="post">
+  <div>
+    <span>Name</span>
+    <input type="text" name="name" />
+  </div>
+  <div>
+    <span>Email</span>
+    <input type="text" name="email" />
+  </div>
+  <div>
+    <span>Password</span>
+    <input type="password" name="password">
+  </div>
+  <div>
+    <span>Password_confirmation</span>
+    <input type="password" name="password_confirmation"/>
+  </div>
+  <div>
+    <span>Company Name</span>
+    <input type="text" name="company_name" />
+  </div>
+</form>
+<a onclick="document.forms[0].submit();">Signup</a>

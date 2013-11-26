@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   set_current_tenant_through_filter
   def find_current_user_tenant
     current_tenant=Tenant.first
+
     set_current_tenant(current_tenant)
   end
 
@@ -25,7 +26,7 @@ class ApplicationController < ActionController::Base
 
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
-    @current_user_session = UserSession.find
+    @current_user_session = LogininfoSession.find
   end
 
   def current_user

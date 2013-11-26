@@ -4,12 +4,12 @@ one:
   company_name: Brilliantech
   edition: 1
   subscription_status: 1
-  user_id: 1
+  logininfo_id: 1
   access_key: Brilliantech
 
 two:
   company_name: HotFire
   edition: 1
   subscription_status: 1
-  user_id: 1
+  logininfo_id: 1
   access_key: HotFire
