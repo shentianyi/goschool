@@ -7,6 +7,8 @@ class Course < ActiveRecord::Base
   belongs_to :institution
   has_many :sub_courses,:dependent=>:destroy
   has_many :schedules,:through=>:sub_courses
+  has_many :student_courses,:dependent=>:destroy
+  has_many :students,:through=> :student_courses
   attr_accessible :actual_number, :description, :end_date, :expect_number, :lesson, :name, :start_date, :type
   attr_accessible :has_sub,:status,:institution_id
   acts_as_tenant(:tenant)
