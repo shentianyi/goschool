@@ -14,5 +14,6 @@ if defined?(PhusionPassenger)
 end
 # redis resque
 Resque.redis=Redis::Namespace.new("prefix_resque_job_", :redis => $redis)
+$recommendation_redis =Redis::Namespace.new('recommendation',:redis=>$redis)
 Dir["#{Rails.root}/app/jobs/*.rb"].each { |file| require file }
 

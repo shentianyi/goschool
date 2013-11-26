@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  tenant_id: MyString
+  entity_type_id: MyString
+  recommended_id: MyString
+  score: 1
+
+two:
+  tenant_id: MyString
+  entity_type_id: MyString
+  recommended_id: MyString
+  score: 1
