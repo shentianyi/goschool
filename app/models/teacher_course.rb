@@ -6,7 +6,7 @@ class TeacherCourse < ActiveRecord::Base
   attr_accessible :user_id,:sub_course_id
 
   validate :validate_save
-
+  acts_as_tenant(:tenant)
   private
   def validate_save
     errors.add(:user_id,'老师已登记此课程') if self.class.where(:user_id=>self.user_id,:sub_course_id=>self.sub_course_id).first if new_record?

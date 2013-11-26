@@ -2,14 +2,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
-  helper_method :current_user_session, :current_user
-  before_filter :require_user
-  before_filter :require_active_user
+  # helper_method :current_user_session, :current_user
+  # before_filter :require_user
+  # before_filter :require_active_user
   before_filter :find_current_user_tenant
 
   set_current_tenant_through_filter
   def find_current_user_tenant
-    current_tenant=Tenant.first
+    current_tenant=Tenant.find_by_company_name('Brilliantech')
 
     set_current_tenant(current_tenant)
   end

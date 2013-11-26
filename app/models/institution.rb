@@ -1,7 +1,7 @@
 #encoding: utf-8
 class Institution < ActiveRecord::Base
   belongs_to :tenant
-  has_many :cources,:dependent=>:destroy
+  has_many :courses,:dependent=>:destroy
   attr_accessible :address, :name, :tel
   acts_as_tenant(:tenant)
 

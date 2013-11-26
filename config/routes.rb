@@ -3,7 +3,8 @@ Goschool::Application.routes.draw do
   resources :student_courses do
    collection do
     post :creates
-    put :updates
+    put :pay
+    put :pays
     delete :destroies
    end
   end

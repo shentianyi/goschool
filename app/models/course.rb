@@ -23,7 +23,7 @@ class Course < ActiveRecord::Base
 
   def add_sub_courses sub_courses
     sub_courses.each do |sub|
-      sub_course=SubCourse.new(:name=>sub[:name],:parent_name=>self.name,:tenant_id=>self.tenant_id)
+      sub_course=SubCourse.new(:name=>sub[:name],:parent_name=>self.name)
       sub_course.assign_teachers(sub[:teachers]) if sub[:teachers]
       self.sub_courses<<sub_course
     end
@@ -31,7 +31,7 @@ class Course < ActiveRecord::Base
   end
 
   def create_default_sub_course
-    self.sub_courses.create(:parent_name=>self.name,:is_default=>true,:tenant_id=>self.tenant_id) unless self.has_sub
+    self.sub_courses.create(:parent_name=>self.name,:is_default=>true) unless self.has_sub
   end
   private
 

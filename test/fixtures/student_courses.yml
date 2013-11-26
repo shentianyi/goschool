@@ -5,9 +5,11 @@ one:
   course: one
   paid: false
   status: 1
+  tenant: one
 
 two:
   student: two
   course: two
   paid: false
   status: 1
+  tenant: one
