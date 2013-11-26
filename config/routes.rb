@@ -1,6 +1,11 @@
 Goschool::Application.routes.draw do
 
-  resources :schedules
+  resources :schedules do
+   collection do
+    get :dates
+    get :courses
+   end
+  end
   resources :students
 
   resources :teacher_courses
@@ -9,11 +14,15 @@ Goschool::Application.routes.draw do
 
   resources :courses do
     collection do
-      post :list_search
+      get :list_search
     end
   end
 
-  resources :settings
+  resources :settings do
+    collection do
+      get ':id/:ajax'=>:show
+    end
+  end
   resources :institutions
   mount Resque::Server.new, :at=>"/admin/resque"
 

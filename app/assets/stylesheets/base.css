@@ -9,13 +9,30 @@
     src:url("../fonts/mavenprolight300.ttf"),
     url("../fonts/mavenprolight300.eot");
 }
+@font-face {
+    font-family: 'Basic Icons';
+    /*src: url(/assets/basic.icons.eot);*/
+    /*src: url(/assets/basic.icons.eot?#iefix) format('embedded-opentype'),*/
+    /*url(/assets/basic.icons.woff) format('woff'),*/
+    /*url(/assets/basic.icons.ttf) format('truetype'),*/
+    /*url(/assets/basic.icons.svg#basic.icons) format('svg');*/
+    src: url(../fonts/basic.icons.eot);
+    src: url(../fonts/basic.icons.eot?#iefix) format('embedded-opentype'),
+    url(../fonts/basic.icons.woff) format('woff'),
+    url(../fonts/basic.icons.ttf) format('truetype'),
+    url(../fonts/basic.icons.svg#basic.icons) format('svg');
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-transform: none;
+}
 html,body{
     margin:0px;
     min-width:1024px;
     min-height:768px;
     font-family:"Arial",sans-serif;
     font-weight:lighter;
-    /*background-color:#f7f0e0*/
 }
 a{
     text-decoration:none;
@@ -42,6 +59,10 @@ select{
 }
 .pull-right{
     float:right;
+}
+/*date input*/
+.ui.input.calendar>input{
+
 }
 /********************************************************************************************************* Message
 *******************************************************************************************************************/
