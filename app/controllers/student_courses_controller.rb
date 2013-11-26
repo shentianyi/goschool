@@ -10,8 +10,9 @@ class StudentCoursesController < ApplicationController
     render :json=>@msg
   end
 
+  # just for update paid
   def update
-    unless @msg.result=@student_course.update_attributes(params[:student_course].strip)
+    unless @msg.result=@student_course.update_attributes(params[:student_course].strip.slice(:paid))
     @msg.content=@student_course.errors.messages
     end
     render :json=>@msg
@@ -39,7 +40,7 @@ class StudentCoursesController < ApplicationController
   def updates
     @msg.result=true
     params[:student_courses].each do |param|
-      unless student_course.update_attributes(params[:student_course])
+      unless student_course.update_attributes(params[:student_course].strip.slice(:paid))
         @msg.result=false
 	@msg.content=[] unless @msg.content
 	@msg.content<<{:id=>param[:id],:content=>student_course.errors.messages}

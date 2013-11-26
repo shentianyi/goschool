@@ -1,8 +1,13 @@
 Goschool::Application.routes.draw do
 
-  resources :student_courses
-
-
+  resources :student_courses do
+   collection do
+    post :creates
+    put :updates
+    delete :destroies
+   end
+  end
+ 
   resources :schedules do
    collection do
     get :dates
