@@ -18,7 +18,11 @@ Goschool::Application.routes.draw do
     end
   end
 
-  resources :settings
+  resources :settings do
+    collection do
+      get ':id/:ajax'=>:show
+    end
+  end
   resources :institutions
   mount Resque::Server.new, :at=>"/admin/resque"
 

@@ -13,7 +13,7 @@ BACKINDEX.admin.init=(function(){
     });
     $(document).ready(function(){
         BACKINDEX.admin.operate.init();
-
+        BACKINDEX.admin.operate.type=$("#admin-operate").attr("name");
     });
 })();
 BACKINDEX.admin.generateHTML=function(){
@@ -29,10 +29,10 @@ BACKINDEX.admin.generateHTML=function(){
 
 };
 BACKINDEX.admin.operate={};
-BACKINDEX.admin.operate.type=$("#admin-operate").attr("name");
+// BACKINDEX.admin.operate.type=$("#admin-operate").attr("name");
 BACKINDEX.admin.operate.entities={
     institutions:{
-        address:"../admin/institutions",
+        address:"/settings/institutions/ajax",
         item_template:
             "<tr id='template' class='template'>"
                 +"<td><input type='text' name='name'/></td>"
