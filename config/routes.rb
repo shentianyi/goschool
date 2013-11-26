@@ -1,5 +1,8 @@
 Goschool::Application.routes.draw do
 
+  resources :student_courses
+
+
   resources :schedules do
    collection do
     get :dates

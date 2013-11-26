@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  student: one
+  course: one
+  paid: false
+  status: 1
+
+two:
+  student: two
+  course: two
+  paid: false
+  status: 1

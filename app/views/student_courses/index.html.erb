@@ -1,0 +1,29 @@
+<h1>Listing student_courses</h1>
+
+<table>
+  <tr>
+    <th>Student</th>
+    <th>Course</th>
+    <th>Paid</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @student_courses.each do |student_course| %>
+  <tr>
+    <td><%= student_course.student %></td>
+    <td><%= student_course.course %></td>
+    <td><%= student_course.paid %></td>
+    <td><%= student_course.status %></td>
+    <td><%= link_to 'Show', student_course %></td>
+    <td><%= link_to 'Edit', edit_student_course_path(student_course) %></td>
+    <td><%= link_to 'Destroy', student_course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Student course', new_student_course_path %>
