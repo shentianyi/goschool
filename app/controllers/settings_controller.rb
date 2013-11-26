@@ -2,7 +2,7 @@
 class SettingsController < ApplicationController
   before_filter :get_setting,:only=>[:index,:update]
   def index
-    render :json=>@setting
+    render :partial=>'setting'
   end
 
   def update
