@@ -44,15 +44,15 @@
         <label>配置选项</label>
     </header>
     <div class="ui vertical menu" id="admin-setting">
-        <a class="item active" name="institution">
+        <a class="item active" name="institutions">
             <i class="sitemap icon"></i>
             <label>机构</label>
         </a>
-        <a class="item"name="user">
+        <a class="item"name="users">
             <i class="users icon"></i>
             <label>用户</label>
         </a>
-        <a class="item" name="default-password">
+        <a class="item" name="settings">
             <i class="shield icon"></i>
             <label>默认密码</label>
         </a>
@@ -64,117 +64,120 @@
         <label>机构</label>
     </header>
 
-    <!--partial  institution-->
-    <div></div>
-    <div class="admin-operate" name="institution" id="admin-operate" >
-        <p>已存在的机构</p>
-        <label><i class="icon info"></i>双击单项编辑</label>
-        <table class="ui column table segment celled" id="admin-operate-table">
-            <thead>
-            <tr>
-                <th class="three wide">机构名称</th>
-                <th class="seven wide ">地址</th>
-                <th class="three wide ">电话</th>
-                <th class="three wide "></th>
-            </tr>
-            </thead>
-            <tfoot>
-            <tr>
-                <th colspan="3"></th>
-                <th >
-                    <div class="ui teal small labeled icon button add-button" id="admin-operate-add">
-                        <i class="add icon"></i> 添加机构
-                    </div>
-                </th>
-            </tr>
-            </tfoot>
-            <tbody>
-            <tr id="institution2">
-                <td>John</td>
-                <td>street 1</td>
-                <td>1324324</td>
-                <td>
-                   <i class="trash icon" affect="institution2"></i>
-                </td>
-            </tr>
-            <tr id="institution3">
-                <td>John2</td>
-                <td>street 2</td>
-                <td>1324324</td>
-                <td>
-                    <i class="trash icon" affect="institution3"></i>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <!--partial-->
-
-    <!--partial  user-->
-    <div></div>
-    <div class="admin-operate" name="user" id="admin-operate">
-        <p>已存在的用户</p>
-        <label><i class="icon info"></i>双击单项编辑</label>
-        <table class="ui column table segment celled" id="admin-operate-table">
-            <thead>
-            <tr>
-                <th class="two wide"></th>
-                <th class="three wide">用户名</th>
-                <th class="eight wide">角色</th>
-                <th class="three wide"></th>
-            </tr>
-            </thead>
-            <tfoot>
-            <tr>
-                <th colspan="3"></th>
-                <th >
-                    <div class="ui teal small labeled icon button add-button" id="admin-operate-add">
-                        <i class="add icon"></i> 添加用户
-                    </div>
-                </th>
-            </tr>
-            </tfoot>
-            <tbody>
-            <tr id="institution2">
-                <td><image class="ui avatar image" src="images/portrait/0.jpg"/></td>
-                <td>Wayne</td>
-                <td>
-                    <div class="ui checkbox">
-                        <input name="education" type="checkbox">
-                        <label>教务人员</label>
-                    </div>
-                    <div class="ui checkbox">
-                        <input name="business" type="checkbox">
-                        <label>业务人员</label>
-                    </div>
-                    <div class="ui checkbox">
-                        <input name="teacher" type="checkbox">
-                        <label>老师</label>
-                    </div>
-                </td>
-                <td>
-                    <i class="trash icon" affect="institution2"></i>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <!--partial-->
-
-    <!--partial  default-password-->
-    <div></div>
-    <div class="admin-operate" name="default-password" id="admin-operate">
-        <div class="default-password">
-            <p>用户默认密码</p>
-            <div class="ui input">
-                <input  type="text">
-            </div>
-            <div class="ui teal button">
-                保存修改
-            </div>
+    <div id="partial-content">
+        <!--partial  institution-->
+        <div></div>
+        <div class="admin-operate" name="institutions" id="admin-operate" >
+            <p>已存在的机构</p>
+            <label><i class="icon info"></i>双击单项编辑</label>
+            <table class="ui column table segment celled" id="admin-operate-table">
+                <thead>
+                <tr>
+                    <th class="three wide">机构名称</th>
+                    <th class="seven wide ">地址</th>
+                    <th class="three wide ">电话</th>
+                    <th class="three wide "></th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th colspan="3"></th>
+                    <th >
+                        <div class="ui teal small labeled icon button add-button" id="admin-operate-add">
+                            <i class="add icon"></i> 添加机构
+                        </div>
+                    </th>
+                </tr>
+                </tfoot>
+                <tbody>
+                <tr id="institution2">
+                    <td>John</td>
+                    <td>street 1</td>
+                    <td>1324324</td>
+                    <td>
+                        <i class="trash icon" affect="institution2"></i>
+                    </td>
+                </tr>
+                <tr id="institution3">
+                    <td>John2</td>
+                    <td>street 2</td>
+                    <td>1324324</td>
+                    <td>
+                        <i class="trash icon" affect="institution3"></i>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
+        <!--partial-->
+
+        <!--&lt;!&ndash;partial  user&ndash;&gt;-->
+        <!--<div></div>-->
+        <!--<div class="admin-operate" name="users" id="admin-operate">-->
+            <!--<p>已存在的用户</p>-->
+            <!--<label><i class="icon info"></i>双击单项编辑</label>-->
+            <!--<table class="ui column table segment celled" id="admin-operate-table">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th class="two wide"></th>-->
+                    <!--<th class="three wide">用户名</th>-->
+                    <!--<th class="eight wide">角色</th>-->
+                    <!--<th class="three wide"></th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tfoot>-->
+                <!--<tr>-->
+                    <!--<th colspan="3"></th>-->
+                    <!--<th >-->
+                        <!--<div class="ui teal small labeled icon button add-button" id="admin-operate-add">-->
+                            <!--<i class="add icon"></i> 添加用户-->
+                        <!--</div>-->
+                    <!--</th>-->
+                <!--</tr>-->
+                <!--</tfoot>-->
+                <!--<tbody>-->
+                <!--<tr id="institution2">-->
+                    <!--<td><image class="ui avatar image" src="images/portrait/0.jpg"/></td>-->
+                    <!--<td>Wayne</td>-->
+                    <!--<td>-->
+                        <!--<div class="ui checkbox">-->
+                            <!--<input name="education" type="checkbox">-->
+                            <!--<label>教务人员</label>-->
+                        <!--</div>-->
+                        <!--<div class="ui checkbox">-->
+                            <!--<input name="business" type="checkbox">-->
+                            <!--<label>业务人员</label>-->
+                        <!--</div>-->
+                        <!--<div class="ui checkbox">-->
+                            <!--<input name="teacher" type="checkbox">-->
+                            <!--<label>老师</label>-->
+                        <!--</div>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<i class="trash icon" affect="institution2"></i>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;partial&ndash;&gt;-->
+
+        <!--&lt;!&ndash;partial  default-password&ndash;&gt;-->
+        <!--<div></div>-->
+        <!--<div class="admin-operate" name="settings" id="admin-operate">-->
+            <!--<div class="default-password">-->
+                <!--<p>用户默认密码</p>-->
+                <!--<div class="ui input">-->
+                    <!--<input  type="text">-->
+                <!--</div>-->
+                <!--<div class="ui teal button">-->
+                    <!--保存修改-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;partial&ndash;&gt;-->
+
     </div>
-    <!--partial-->
 
 </article>
 
