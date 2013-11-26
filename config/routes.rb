@@ -2,7 +2,8 @@ Goschool::Application.routes.draw do
 
   resources :schedules do
    collection do
-    get :list
+    get :dates
+    get :courses
    end
   end
   resources :students

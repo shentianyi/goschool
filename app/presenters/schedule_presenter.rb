@@ -4,7 +4,7 @@ class SchedulePresenter<Presenter
 	  unless schedule.is_a?(Array)
 	    @schedule=schedule
 	    @course=course||@schedule.sub_course
-	    @teachers=teachers||@course.teachers
+	    @teachers=teachers||@course.teachers.all
 	  else
 	    @schedules=schedule
 	  end
@@ -35,10 +35,10 @@ class SchedulePresenter<Presenter
        @schedules.each do |schedule|
       unless courses[schedule.sub_course_id]
           courses[schedule.sub_course_id]=schedule.sub_course 
-            teachers[schedule.sub_course_id]= courses[schedule.sub_course_id].teachers
+            teachers[schedule.sub_course_id]= courses[schedule.sub_course_id].teachers.all
       end
          jsons<<SchedulePresenter.new(schedule,courses[schedule.sub_course_id],teachers[schedule.sub_course_id]).to_json
-       end
+       end if @schedules
        return jsons
     end
 end
