@@ -9196,7 +9196,7 @@ img.ui.image {
 }
 
 .ui.icon.input input {
-  padding-right: 3em !important;
+  padding-right: 3em ;
 }
 
 .ui.icon.input > .circular.icon {
