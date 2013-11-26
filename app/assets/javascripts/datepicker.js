@@ -570,6 +570,10 @@
 										options.date = tmp.valueOf();
 										break;
 								}
+                                var value=new Date(tmp.valueOf()).toWayneString().day,
+                                    target=$(".datepicker:visible").attr("target");
+                                $("#"+target).val(value);
+                                $("#"+target).DatePickerHide();
 								break;
 						}
 						fillIt = true;
@@ -627,7 +631,9 @@
 				return false;
 			},
 			show = function (ev) {
+                var target=$(adapt_event(ev).target).attr("id");
 				var cal = $('#' + $(this).data('datepickerId'));
+                cal.attr("target",target);
 				if (!cal.is(':visible')) {
 					var calEl = cal.get(0);
 					fill(calEl);
@@ -698,6 +704,7 @@
 				options.mode = /single|multiple|range/.test(options.mode) ? options.mode : 'single';
 				return this.each(function(){
 					if (!$(this).data('datepicker')) {
+
 						options.el = this;
 						if (options.date.constructor == String) {
 							options.date = parseDate(options.date, options.format);
@@ -769,6 +776,7 @@
 			},
 			showPicker: function() {
 				return this.each( function () {
+
 					if ($(this).data('datepickerId')) {
 						show.apply(this);
 					}

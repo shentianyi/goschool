@@ -26,7 +26,6 @@ BACKINDEX.admin.generateHTML=function(){
             $("#partial-content").html(data);
         }
     });
-
 };
 BACKINDEX.admin.operate={};
 BACKINDEX.admin.operate.type=$("#admin-operate").attr("name");
