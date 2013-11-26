@@ -8,17 +8,31 @@ BACKINDEX.admin.init=(function(){
             var name=$("label",this).text();
             $("#back-index-main>header label").text(name);
             BACKINDEX.admin.operate.type=$(this).attr("name");
+            BACKINDEX.admin.generateHTML();
         }
     });
     $(document).ready(function(){
         BACKINDEX.admin.operate.init();
+
     });
 })();
+BACKINDEX.admin.generateHTML=function(){
+    var type=BACKINDEX.admin.operate.type;
+    var address=BACKINDEX.admin.operate.entities[type].address;
+    $.ajax({
+        url:address,
+        dataType:"html",
+        success:function(data){
+            $("#partial-content").html(data);
+        }
+    });
 
+};
 BACKINDEX.admin.operate={};
 BACKINDEX.admin.operate.type=$("#admin-operate").attr("name");
 BACKINDEX.admin.operate.entities={
-    institution:{
+    institutions:{
+        address:"../admin/institutions",
         item_template:
             "<tr id='template' class='template'>"
                 +"<td><input type='text' name='name'/></td>"
@@ -27,7 +41,8 @@ BACKINDEX.admin.operate.entities={
                 +"<td><i class='icon checkmark'></i><i class='icon trash' role='temp'></i></td>"+
             "</tr>"
     },
-    user:{
+    users:{
+        address:"../admin/users",
         item_template:
             "<tr id='template' class='template'>"
                 +"<td><img class='ui avatar image'/></td>"
@@ -39,6 +54,9 @@ BACKINDEX.admin.operate.entities={
                 +"</td>"
                 +"<td><i class='icon checkmark'></i><i class='icon trash' role='temp'></i></td>"+
             "</tr>"
+    },
+    settings:{
+        address:"/settings"
     }
 };
 BACKINDEX.admin.operate.init=function(){
@@ -85,7 +103,6 @@ BACKINDEX.admin.operate.init=function(){
         }
     });
     //user下的check box 修改
-    $("#admin-operate-table .checkbox").checkbox();
     $("#admin-operate-table").on("click",".checkbox",function(){
         if($("input",this).prop("checked")){
             //post
@@ -105,7 +122,7 @@ BACKINDEX.admin.operate.init=function(){
         var target=BACKINDEX.admin.operate.entities[BACKINDEX.admin.operate.type];
         if($("#admin-operate-table tbody").find("#template").length==0){
             $("#admin-operate-table tbody").append(target.item_template);
-            if(BACKINDEX.admin.operate.type=="user"){
+            if(BACKINDEX.admin.operate.type=="users"){
                 $("#admin-operate-table .checkbox").checkbox();
                 var number=Math.floor(Math.random()*9);
                 //image
@@ -119,7 +136,7 @@ BACKINDEX.admin.operate.init=function(){
     $("#admin-operate-table").on("click",".checkmark",function(){
         var $target=$("#template").find("input[type='text']"),
             value_array=[], i,validate=true;
-        if(BACKINDEX.admin.operate.type=="institution"){
+        if(BACKINDEX.admin.operate.type=="institutions"){
             for(i=0;i<$target.length;i++){
                 validate=$target.eq(i).val().length>0?$target.eq(i).val():false;
                 if(validate){
@@ -139,7 +156,7 @@ BACKINDEX.admin.operate.init=function(){
             $("#template").find(".trash").attr("role","").attr("affect",new_id);
             $("#template").removeClass("template").attr("id",new_id);
         }
-        else if(BACKINDEX.admin.operate.type=="user"){
+        else if(BACKINDEX.admin.operate.type=="users"){
             var checkbox_target=$("#template").find(".checkbox"), check_count= 0,chosen_authority=[];
             for(i=0;i<$target.length;i++){
                 validate=$target.eq(i).val().length>0?$target.eq(i).val():false;
