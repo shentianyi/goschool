@@ -1,16 +1,20 @@
 #encoding: utf-8
 class SchedulePresenter<Presenter
-    def initialize(schedule)
+    def initialize(schedule,course=nil,teachers=nil)
+	  unless schedule.is_a?(Array)
 	    @schedule=schedule
-	    @course=@schedule.sub_course
-	    @teachers=@course.teachers
+	    @course=course||@schedule.sub_course
+	    @teachers=teachers||@course.teachers
+	  else
+	    @schedules=schedule
+	  end
     end
 
     def teachers
 	    if @teachers.count>0
 	      t=[]
 	    @teachers.each do |teacher|
-	      t<<teacher.name
+	      t<<{name:teacher.name,id:teacher.id}
 	    end 
 	    end
 	    t
@@ -22,5 +26,19 @@ class SchedulePresenter<Presenter
         start_time:@schedule.start_time,
         end_time:@schedule.end_time,
         teachers:teachers}
+    end
+    
+    def to_jsons
+       courses={}
+       teachers={}
+       jsons=[]
+       @schedules.each do |schedule|
+      unless courses[schedule.sub_course_id]
+          courses[schedule.sub_course_id]=schedule.sub_course 
+            teachers[schedule.sub_course_id]= courses[schedule.sub_course_id].teachers
+      end
+         jsons<<SchedulePresenter.new(schedule,courses[schedule.sub_course_id],teachers[schedule.sub_course_id]).to_json
+       end
+       return jsons
     end
 end

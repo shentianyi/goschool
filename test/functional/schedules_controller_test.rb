@@ -31,4 +31,10 @@ class SchedulesControllerTest < ActionController::TestCase
       puts response.body
     end
   end
+
+  test 'should list schedules' do
+      get :list,{start_date:'2013-11-26',end_date:'2013-11-30'}
+      assert_response :success
+      puts response.body
+  end
 end

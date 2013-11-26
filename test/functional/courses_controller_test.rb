@@ -20,7 +20,7 @@ class CoursesControllerTest < ActionController::TestCase
         end_date: "2013-11-11",
         expect_number: 100,
         lesson:24,
-        name:  "TUOFU",
+        name:  "courseEat",
         start_date:  "2013-11-01",
         type: 0,
         subs:[{name:'Game',teachers:[{teacher_id:users(:one).id},{teacher_id:users(:one).id}]},{name:'Read'}],
@@ -40,5 +40,11 @@ class CoursesControllerTest < ActionController::TestCase
     assert_difference('Course.count', -1) do
       delete :destroy, id: @course
     end
+  end
+
+  test 'should list list search course' do
+     get :list_search ,q:'c'
+     assert_response :success
+     puts response.body
   end
 end

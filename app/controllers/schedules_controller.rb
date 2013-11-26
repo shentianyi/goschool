@@ -1,6 +1,6 @@
 #encoding: utf-8
 class SchedulesController < ApplicationController
-  before_filter :init_message ,:only=>[:show,:create,:update,:destroy]
+  before_filter :init_message ,:only=>[:show,:create,:update,:destroy,:list]
   before_filter :get_schedule,:only=>[:show,:update,:destroy]
   before_filter :render_nil_msg , :only=>[:show,:update,:destroy]
   def show
@@ -27,6 +27,14 @@ class SchedulesController < ApplicationController
   def destroy
     @schedule.destroy
     @msg.result=true
+    render :json=>@msg
+  end
+
+  def list
+    @msg.result=true
+    @msg.object=[]
+    @schedules=Schedule.where(:start_time=>params[:start_date].strip..params[:end_date].strip).all
+    @msg.object=SchedulePresenter.new(@schedules).to_jsons
     render :json=>@msg
   end
 

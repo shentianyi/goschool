@@ -1,6 +1,6 @@
 #encoding: utf-8
 class CoursesController < ApplicationController
-  before_filter :init_message ,:only=>[:create,:update,:destroy]
+  before_filter :init_message ,:only=>[:edit,:create,:update,:destroy]
   before_filter :get_course,:only=>[:update,:edit,:destroy]
   before_filter :render_nil_msg , :only=>[:edit,:update,:destroy]
   def index
@@ -48,8 +48,8 @@ class CoursesController < ApplicationController
       c[i]= Redis::Search.query(t, params[:q], :conditions => {:tenant_id => current_tenant.id})
     end
     items=[]
-    (c[0].slice(0,6)+c[1].sclie(0,4)).each do |item|
-      items<<{:name=>item['title'],:content=>item['name'],:type=>item['type'],:id=>item['type']}
+    (c[0].slice(0,6)+c[1].slice(0,4)).each do |item|
+      items<<{:name=>item['title'],:content=>item['name'],:type=>item['type'],:id=>item['id']} if(item['is_default']=='false' || item['is_default'].nil?)
     end
     render :json=>items
   end

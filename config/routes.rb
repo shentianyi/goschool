@@ -1,6 +1,10 @@
 Goschool::Application.routes.draw do
 
-  resources :schedules
+  resources :schedules do
+   collection do
+    get :list
+   end
+  end
   resources :students
 
   resources :teacher_courses
@@ -9,7 +13,7 @@ Goschool::Application.routes.draw do
 
   resources :courses do
     collection do
-      post :list_search
+      get :list_search
     end
   end
 
