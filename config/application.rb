@@ -19,6 +19,7 @@ module Goschool
     # config.autoload_paths += Dir["#{config.root}/lib/active_support/**/"]
     config.autoload_paths+=%W(#{config.root}/base)
     config.autoload_paths+=Dir[Rails.root.join('app','models','{**}')]
+    config.autoload_paths+=Dir[Rails.root.join('app','presenters','{**}')]
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]

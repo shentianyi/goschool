@@ -9,7 +9,7 @@ class Tag < ActiveRecord::Base
   # like {'1'=>['1','2','3','4','5'],'2'=>['1','2','3','4','5']}
   def self.find_by_tag(tenant_id,tag)
     result={}
-    Tag.where('tenant_id=? and tag=?',tenant_id,tag).distinct.each do |tag|
+    Tag.where('tenant_id=? and tag=?',tenant_id,tag).each do |tag|
       if (result.keys.include?(tag.entity_type_id))
         result[tag.entity_type_id].push(tag.entity_id) if !result[tag.entity_type_id].include?(tag.entity_id)
       else
@@ -74,7 +74,7 @@ class Tag < ActiveRecord::Base
         .group('entity_id')\
         .having('count(*)=?',tags.length)
       when false
-        return  Tag.where('tenant_id=? and tag in (?)',tenant_id,entity_type_id,tags)\
+        return  Tag.where('tenant_id=? and tag in (?)',tenant_id,tags)\
         .select('tenant_id,entity_type_id,entity_id')\
         .group('tenant_id')\
         .group('entity_type_id')\
@@ -105,7 +105,6 @@ class Tag < ActiveRecord::Base
   def self.add!(tenant_id,entity_type_id,entity_id,tags)
     to_insert = []
     tags.each do |tag|
-      Tag.update
       to_insert.push({:tenant_id=>tenant_id,:entity_type_id=>entity_type_id,:entity_id=>entity_id,:tag=>tag})
     end
     Tag.create!(to_insert)
@@ -119,7 +118,7 @@ class Tag < ActiveRecord::Base
   # @param [String] entity_id
   # @param [Array] tags
   def self.remove!(tenant_id,entity_type_id,entity_id,tags)
-    Tag.where('tenant_id=? and entity_type_id=? and entity_id=? and tags in (?)',\
+    Tag.where('tenant_id=? and entity_type_id=? and entity_id=? and tag in (?)',\
               tenant_id,entity_type_id,entity_id,tags)\
     .destroy_all
   end
@@ -128,7 +127,7 @@ class Tag < ActiveRecord::Base
   # @param [String] tenant_id
   # @param [Array] tags
   def self.remove_tags!(tenant_id,tags)
-    Tag.where('tenant_id=? and tags in (?)',tenant_id,tags).destroy_all
+    Tag.where('tenant_id=? and tag in (?)',tenant_id,tags).destroy_all
   end
 
 

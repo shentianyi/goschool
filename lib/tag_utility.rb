@@ -6,8 +6,8 @@ class TagUtility
   # support MYSQL currently
   def initialize(persist='Tag',counter='TagCount')
     @mode = persist
-    @instance=  persist.constantize.new
-    @instance_counter = counter.constantize.new
+    @instance=  persist.constantize
+    @instance_counter = counter.constantize
   end
 
 
@@ -72,7 +72,7 @@ class TagUtility
   # @param [String] entity_id
   # @param [Array] tags
   # @exception: raised by create exception
-  def add(tenant_id,entity_type_id,entity_id,tags)
+  def add!(tenant_id,entity_type_id,entity_id,tags)
     @instance.add!(tenant_id,entity_type_id,entity_id,tags)
     update_tag_count(tenant_id,tags)
   end
@@ -91,7 +91,7 @@ class TagUtility
   # @param [String] entity_type_id
   # @param [String] entity_id
   # @param [Array] tags
-  def remove(tenant_id,entity_type_id,entity_id,tags)
+  def remove!(tenant_id,entity_type_id,entity_id,tags)
     @instance.remove!(tenant_id,entity_type_id,entity_id,tags)
   end
 
@@ -112,12 +112,11 @@ class TagUtility
   # @param [Array] tags
   def add_or_update(tenant_id,entity_type_id,entity_id,tags)
     if tags.is_a?(Array)
-
       prev = self.get_tags(tenant_id,entity_type_id,entity_id)
       to_delete = prev - tags
       to_insert =  tags-prev
-      self.remove(tenant_id,entity_type_id,entity_id,to_delete) if (to_delete && to_delete.length>0)
-      self.add(tenant_id,entity_type_id,entity_id,to_insert) if(to_insert && to_insert.length>0)
+      self.remove!(tenant_id,entity_type_id,entity_id,to_delete) if (to_delete && to_delete.length>0)
+      self.add!(tenant_id,entity_type_id,entity_id,to_insert) if(to_insert && to_insert.length>0)
     end
   end
 
@@ -135,9 +134,9 @@ class TagUtility
   # 4. 缓存对象被编制为JSON对象后存入REDIS，内存占用大，V3后希望重写整个快速搜索方法
   def fast_search(str,top,tenant_id=nil)
     if tenant_id
-      return Redis::Complete.query("TagCount", str, {:limit=>top,:conditions => {:tenant_id => tenant_id}})
+      return Redis::Search.query("TagCount", str, {:limit=>top,:conditions => {:tenant_id => tenant_id}})
     else
-      return Redis::Complete.query("TagCount", str,{:limit=>top})
+      return Redis::Search.query("TagCount", str,{:limit=>top})
     end
   end
 

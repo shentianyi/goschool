@@ -1,28 +1,30 @@
 #encoding: utf-8
 class SchedulesController < ApplicationController
-  before_filter :init_message ,:only=>[:create,:update,:destroy]
-  before_filter :get_schedule,:only=>[:update,:show,:destroy]
+  before_filter :init_message ,:only=>[:show,:create,:update,:destroy]
+  before_filter :get_schedule,:only=>[:show,:update,:destroy]
   before_filter :render_nil_msg , :only=>[:show,:update,:destroy]
-  
   def show
-   @msg.result=true
-   course=@schedule.sub_course
-   @msg.object={:name=>course.parent_name,:sub_name=>course.name,}
-   render :json=>@msg
+    @msg.result=true
+    @msg.object=SchedulePresenter.new(@schedule).to_json
+    render :json=>@msg
   end
- 
+
   def create
-    @schedule = Schedule.new(params[:schedule])
+    @schedule=Schedule.new(params[:schedule].strip)
+    unless @msg.result=@schedule.save
+    @msg.content=@schedule.errors.messages
+    end
+    render :json=>@msg
   end
- 
+
   def update
     unless @msg.result=@schedule.update_attributes(params[:schedule].strip)
-      @msg.content=@schedule.errors.messages
+    @msg.content=@schedule.errors.messages
     end
-    render :json=>@msg 
+    render :json=>@msg
   end
- 
-  def destroy 
+
+  def destroy
     @schedule.destroy
     @msg.result=true
     render :json=>@msg
@@ -30,7 +32,7 @@ class SchedulesController < ApplicationController
 
   private
 
-  def get_shedule
+  def get_schedule
     @schedule=Schedule.find_by_id(params[:id].strip)
   end
 
