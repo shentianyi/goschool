@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131125101543) do
+ActiveRecord::Schema.define(:version => 20131126054700) do
 
   create_table "courses", :force => true do |t|
     t.integer  "type"
@@ -88,6 +88,19 @@ ActiveRecord::Schema.define(:version => 20131125101543) do
   end
 
   add_index "logininfos", ["tenant_id"], :name => "index_logininfos_on_tenant_id"
+
+  create_table "rec_results", :force => true do |t|
+    t.string   "tenant_id"
+    t.string   "entity_type_id"
+    t.string   "rec_target_id"
+    t.string   "reced_id"
+    t.integer  "score"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "rec_results", ["tenant_id", "entity_type_id", "rec_target_id", "reced_id"], :name => "rec_result_unique_index_with_four", :unique => true
+  add_index "rec_results", ["tenant_id", "entity_type_id", "rec_target_id"], :name => "rec_result_index_with_three"
 
   create_table "roles", :force => true do |t|
     t.string   "role"
