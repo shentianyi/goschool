@@ -5,17 +5,13 @@ class StudentCoursesController < ApplicationController
   before_filter :render_nil_msg , :only=>[:pay,:destroy]
   def create
     @student_course = StudentCourse.new(params[:student_course].strip)
-    unless @msg.result=@student_course.save
-    @msg.content=@student_course.errors.messages
-    end
+    @msg.content=(@msg.result=@student_course.save) ? @student_course.id :  @student_course.errors.messages
     render :json=>@msg
   end
 
   # just for update paid
   def pay
-    unless @msg.result=@student_course.update_attributes(:paid=>params[:paid])
-    @msg.content=@student_course.errors.messages
-    end
+    @msg.content=@student_course.errors.messages unless @msg.result=@student_course.update_attributes(:paid=>params[:paid])
     render :json=>@msg
   end
 
