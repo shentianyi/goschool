@@ -5,16 +5,16 @@
             <table class="ui column table segment celled" id="admin-operate-table">
                 <thead>
                 <tr>
-                    <th class="two wide"></th>
-		    <th class="two wide">名字</th>
-                    <th class="three wide">邮箱</th>
-                    <th class="seven wide">角色</th>
-                    <th class="three wide"></th>
+                  <th class="two wide"></th>
+                  <th class="two wide">用户名</th>
+                  <th class="three wide">邮箱</th>
+                  <th class="seven wide">角色</th>
+                  <th class="two wide"></th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
-                    <th colspan="3"></th>
+                    <th colspan="4"></th>
                     <th >
                         <div class="ui teal small labeled icon button add-button" id="admin-operate-add">
                             <i class="add icon"></i> 添加用户
@@ -26,8 +26,8 @@
 		  <% @logininfos.each_with_index do |logininfo,i|%>
 		  <tr id="<%=logininfo.id%>">
 		    <td><image class="ui avatar image" src="<%=logininfo.user.image_url%>"/></td>
-		    <td><%=logininfo.user.name%></td>
-		    <td><%=logininfo.email%></td>
+		    <td post="name"><%=logininfo.user.name%></td>
+		    <td post="email"><%=logininfo.email%></td>
             <td>
               <div class="ui checkbox">
                 <input <% if logininfo.check_role 100 %>
@@ -50,11 +50,11 @@
 		   name="teacher" type="checkbox">
                 <label>老师</label>
               </div>
-	      <div class="ui checkbox">
+	            <div class="ui checkbox">
                 <input <% if logininfo.check_role 500 %>
-		       checked
-		       <% end %>
-		   name="teacher" type="checkbox">
+		                checked
+		                <% end %>
+		            name="admin" type="checkbox">
                 <label>管理员</label>
               </div>
             </td>

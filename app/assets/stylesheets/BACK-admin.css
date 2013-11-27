@@ -42,7 +42,7 @@
     margin-left:-1em;
 }
 .admin-operate>table td input[type="text"]{
-    width:80%;
+    width:90%;
 }
 .admin-operate>table td i.trash{
     font-size:18px;

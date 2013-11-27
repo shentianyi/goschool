@@ -15,21 +15,23 @@ BACKINDEX.admin.init=(function(){
     $(document).ready(function(){
         BACKINDEX.admin.operate.init();
 
-//        BACKINDEX.admin.operate.type="institutions";
+        BACKINDEX.admin.operate.type="users";
 
-        var url=(window.location.href).split("/");
-        if(url[url.length-1]=="settings" && url[url.length-2]!="settings"){
-             $("#admin-setting>a").eq(0).addClass("active");
-             var name=$("#admin-setting>a").eq(0).attr("name");
-             BACKINDEX.admin.operate.type=name;
-            $("#back-index-main>header label").text($("#admin-setting>a").eq(0).find("label").text());
-        }
-        else{
-            var name=url[url.length-1];
-            $("#admin-setting").find("a[name='"+name+"']").addClass("active");
-            BACKINDEX.admin.operate.type=name;
-            $("#back-index-main>header label").text($("#admin-setting>a.active").find("label").text());
-        }
+//        //post
+//        var url=(window.location.href).split("/");
+//        if(url[url.length-1]=="settings" && url[url.length-2]!="settings"){
+//             $("#admin-setting>a").eq(0).addClass("active");
+//             var name=$("#admin-setting>a").eq(0).attr("name");
+//             BACKINDEX.admin.operate.type=name;
+//            $("#back-index-main>header label").text($("#admin-setting>a").eq(0).find("label").text());
+//        }
+//        else{
+//            var name=url[url.length-1];
+//            $("#admin-setting").find("a[name='"+name+"']").addClass("active");
+//            BACKINDEX.admin.operate.type=name;
+//            $("#back-index-main>header label").text($("#admin-setting>a.active").find("label").text());
+//        }
+
     });
 })();
 BACKINDEX.admin.generateHTML=function(){
@@ -66,11 +68,12 @@ BACKINDEX.admin.operate.entities={
             "<tr id='template' class='template'>"
                 +"<td><img class='ui avatar image'/></td>"
                 +"<td><input type='text' name='name'/></td>"
+                +"<td><input type='text' name='email'/></td>"
                 +"<td>"
-                    +"<div class='ui checkbox'><input type='checkbox' name='education'/><label>教务人员</label></div>"
-                    +"<div class='ui checkbox'><input type='checkbox' name='business'/><label>业务人员</label></div>"
-                    +"<div class='ui checkbox'><input type='checkbox' name='teacher'/><label>教师</label></div>"
-                +"<div class='ui checkbox'><input type='checkbox' name='admin'/><label>管理员</label></div>"
+                    +"<div class='ui checkbox' role='100'><input type='checkbox' name='education'/><label>教务人员</label></div>"
+                    +"<div class='ui checkbox' role='200'><input type='checkbox'  name='business'/><label>业务人员</label></div>"
+                    +"<div class='ui checkbox' role='400'><input type='checkbox'  name='teacher'/><label>教师</label></div>"
+                    +"<div class='ui checkbox' role='500'><input type='checkbox'  name='admin'/><label>管理员</label></div>"
                 +"</td>"
                 +"<td><i class='icon checkmark'></i><i class='icon trash' role='temp'></i></td>"+
             "</tr>"
@@ -146,8 +149,15 @@ BACKINDEX.admin.operate.init=function(){
             //post
             var type=BACKINDEX.admin.operate.type;
             var href=BACKINDEX.admin.operate.entities[type].post_href;
-            var postObject={id:id,institution:{}};
-            postObject.institution[postType]=value;
+            var postObject={id:id};
+            if(type=="institutions"){
+                postObject.institution={};
+                postObject.institution[postType]=value;
+            }
+            else if(type=="users"){
+                postObject.user={};
+                postObject.user[postType]=value;
+            }
             $.ajax({
                url:href+"/"+id,
                data:postObject,
@@ -162,16 +172,37 @@ BACKINDEX.admin.operate.init=function(){
                    }
                }
             })
-
         }
     });
     //user下的check box 修改
     $("body").on("click","#admin-operate-table .checkbox",function(){
-        if($("input",this).prop("checked")){
-            //post
+        var role_array=[],id=$(this).parent().parent().attr("id");
+         $(this).parent().find(".checkbox").each(function(){
+            if($("input",this).prop("checked")){
+                role_array.push($(this).attr("role"));
+            }
+         });
+        if(role_array.length==0){
+            MessageBox("每个用户至少要有一个角色","top","warning");
+            $(this).checkbox('enable');
         }
         else{
-            //post
+            $.ajax({
+                url:"/users/"+id,
+                type:"PUT",
+                data:{
+                    id:id,
+                    logininfo_roles:role_array
+                },
+                success:function(data){
+                    if(data.result){
+                        MessageBox("角色修改成功","top","warning");
+                    }
+                    else{
+                        MessageBox_content(data.content);
+                    }
+                }
+            })
         }
     })
 //  添加
@@ -198,7 +229,9 @@ BACKINDEX.admin.operate.init=function(){
     });
     $("body").on("click","#admin-operate-table .checkmark",function(){
         var $target=$("#template").find("input[type='text']"),
-            value_array=[], i,validate=true;
+            value_array=[], i,validate=true,
+            type=BACKINDEX.admin.operate.type;
+        var href=BACKINDEX.admin.operate.entities[type].post_href;
         if(BACKINDEX.admin.operate.type=="institutions"){
             for(i=0;i<$target.length;i++){
                 validate=$target.eq(i).val().length>0?$target.eq(i).val():false;
@@ -221,8 +254,7 @@ BACKINDEX.admin.operate.init=function(){
 
 
             //post
-            var type=BACKINDEX.admin.operate.type;
-            var href=BACKINDEX.admin.operate.entities[type].post_href;
+
             var postObject={institution:{}};
             postObject.institution.name=value_array[0];
             postObject.institution.address=value_array[1];
@@ -263,12 +295,11 @@ BACKINDEX.admin.operate.init=function(){
             for(i=0;i<checkbox_target.length;i++){
                if($("#template").find(".checkbox").eq(i).find("input").prop("checked")){
                    check_count++;
-                   chosen_authority.push($("#template").find(".checkbox").eq(i).find("input").attr("name"));
+                   chosen_authority.push($("#template").find(".checkbox").eq(i).attr("role"));
                }
             }
             if(check_count>0){
-                //post
-                console.log(chosen_authority)
+
                 for(i=0;i<$target.length;i++){
                     $("#template").find("td").eq(i+1).text(value_array[i]).find("input").remove();
                 }
@@ -276,6 +307,17 @@ BACKINDEX.admin.operate.init=function(){
                 $("#template").find(".checkmark").remove();
                 $("#template").find(".trash").attr("role","").attr("affect",new_id);
                 $("#template").removeClass("template").attr("id",new_id);
+
+                //post
+//                var postObject={user:{}};
+//                postObject.user.name=value_array[0];
+//                postObject.user.address=value_array[1];
+//                postObject.user.tel=value_array[2];
+//                postObject.user.logininfo_roles=value_array[3];
+//                $.ajax({
+//                    url:
+//                })
+
             }
             else{
                 MessageBox("请赋予该用户至少一个角色","top","warning");
