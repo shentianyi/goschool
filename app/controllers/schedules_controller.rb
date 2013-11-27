@@ -11,16 +11,12 @@ class SchedulesController < ApplicationController
 
   def create
     @schedule=Schedule.new(params[:schedule].strip)
-    unless @msg.result=@schedule.save
-    @msg.content=@schedule.errors.messages
-    end
+   @msg.content=(@msg.result=@schedule.save) ? @schedule.id :  @schedule.errors.messages
     render :json=>@msg
   end
 
   def update
-    unless @msg.result=@schedule.update_attributes(params[:schedule].strip)
-    @msg.content=@schedule.errors.messages
-    end
+    @msg.content=@schedule.errors.messages unless @msg.result=@schedule.update_attributes(params[:schedule].strip)
     render :json=>@msg
   end
 

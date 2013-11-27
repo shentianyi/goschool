@@ -6,16 +6,12 @@ class TeacherCoursesController < ApplicationController
   
   def create
     @teacher_course = TeacherCourse.new(params[:teacher_course].strip)
-    unless @msg.result=@teacher_course.save
-     @msg.content=@teacher_course.errors.messages
-    end
+   @msg.content=(@msg.result=@teacher_course.save) ? @teacher_course.id :  @teacher_course.errors.messages
     render :json=>@msg
   end
 
   def update
-    unless @msg.result=@teacher_course.update_attributes(params[:teacher_course].strip)
-     @msg.content=@teacher_course.errors.messages
-    end
+     @msg.content=@teacher_course.errors.messages unless @msg.result=@teacher_course.update_attributes(params[:teacher_course].strip)
     render :json=>@msg
   end
 

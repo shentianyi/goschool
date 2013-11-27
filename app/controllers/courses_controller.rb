@@ -21,6 +21,7 @@ class CoursesController < ApplicationController
     unless @msg.result=@course.save
     @msg.content=@course.errors.messages
     else
+      @msg.content=@course.id
       @course.add_tags(tags[:tags]) if tags.size>0
     end
     render :json=>@msg

@@ -9,9 +9,7 @@ class InstitutionsController < ApplicationController
 
   def create
     @institution=current_tenant.institutions.build(params[:institution].strip)
-    unless @msg.result=@institution.save
-    @msg.content=@institution.errors.messages
-    end
+    @msg.content=(@msg.result=@institution.save) ? @institution.id :  @institution.errors.messages
     render :json=>@msg
   end
 
