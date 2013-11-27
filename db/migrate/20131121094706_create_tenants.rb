@@ -6,9 +6,9 @@ class CreateTenants < ActiveRecord::Migration
       t.integer :subscription_status
       t.string :access_key
       t.string :domain
-      t.references :user
+      t.references :logininfo
       t.timestamps
     end
-     add_index :tenants, :user_id
+     add_index :tenants, :logininfo_id
   end
 end

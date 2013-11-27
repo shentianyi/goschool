@@ -2,14 +2,15 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
-  #helper_method :current_user_session, :current_user
-  #before_filter :require_user
-  #before_filter :require_active_user
-
+  # helper_method :current_user_session, :current_user
+  # before_filter :require_user
+  # before_filter :require_active_user
   before_filter :find_current_user_tenant
+
   set_current_tenant_through_filter
   def find_current_user_tenant
-    current_tenant=Tenant.first
+    current_tenant=Tenant.find_by_company_name('Brilliantech')
+
     set_current_tenant(current_tenant)
   end
 
@@ -25,7 +26,7 @@ class ApplicationController < ActionController::Base
 
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
-    @current_user_session = UserSession.find
+    @current_user_session = LogininfoSession.find
   end
 
   def current_user
@@ -38,11 +39,16 @@ class ApplicationController < ActionController::Base
     @current_ability ||= Ability.new(current_user)
   end
 
+  #
+  def store_location
+    session[:return_to] = request.fullpath
+  end
+
   #filter method
   #need login
   def require_user
     unless current_user
-      #store_location
+      store_location
       redirect_to new_user_session_url
       return false
     end
@@ -51,7 +57,7 @@ class ApplicationController < ActionController::Base
   #can't be login
   def require_no_user
     if current_user
-      #store_location
+      store_location
       redirect_to root_url
       return false
     end

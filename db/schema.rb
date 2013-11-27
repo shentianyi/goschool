@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131126054700) do
+ActiveRecord::Schema.define(:version => 20131126104948) do
 
   create_table "courses", :force => true do |t|
     t.integer  "type"
@@ -73,18 +73,18 @@ ActiveRecord::Schema.define(:version => 20131126054700) do
     t.string   "persistence_token",                      :null => false
     t.string   "single_access_token",                    :null => false
     t.string   "perishable_token",                       :null => false
-    t.integer  "login_count",                            :null => false
-    t.integer  "failed_login_count",                     :null => false
+    t.integer  "login_count",         :default => 0,     :null => false
+    t.integer  "failed_login_count",  :default => 0,     :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
+    t.integer  "status",              :default => 1
     t.boolean  "is_tenant",           :default => false
     t.integer  "tenant_id"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.integer  "status",              :default => 1
   end
 
   add_index "logininfos", ["tenant_id"], :name => "index_logininfos_on_tenant_id"
@@ -126,6 +126,20 @@ ActiveRecord::Schema.define(:version => 20131126054700) do
   end
 
   add_index "settings", ["tenant_id"], :name => "index_settings_on_tenant_id"
+
+  create_table "student_courses", :force => true do |t|
+    t.integer  "student_id"
+    t.integer  "course_id"
+    t.boolean  "paid",       :default => false
+    t.integer  "status"
+    t.integer  "tenant_id"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "student_courses", ["course_id"], :name => "index_student_courses_on_course_id"
+  add_index "student_courses", ["student_id"], :name => "index_student_courses_on_student_id"
+  add_index "student_courses", ["tenant_id"], :name => "index_student_courses_on_tenant_id"
 
   create_table "students", :force => true do |t|
     t.string   "name"
@@ -189,11 +203,13 @@ ActiveRecord::Schema.define(:version => 20131126054700) do
   create_table "teacher_courses", :force => true do |t|
     t.integer  "sub_course_id"
     t.integer  "user_id"
+    t.integer  "tenant_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
 
   add_index "teacher_courses", ["sub_course_id"], :name => "index_teacher_courses_on_sub_course_id"
+  add_index "teacher_courses", ["tenant_id"], :name => "index_teacher_courses_on_tenant_id"
   add_index "teacher_courses", ["user_id"], :name => "index_teacher_courses_on_user_id"
 
   create_table "tenants", :force => true do |t|
@@ -202,12 +218,12 @@ ActiveRecord::Schema.define(:version => 20131126054700) do
     t.integer  "subscription_status"
     t.string   "access_key"
     t.string   "domain"
-    t.integer  "user_id"
+    t.integer  "logininfo_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
   end
 
-  add_index "tenants", ["user_id"], :name => "index_tenants_on_user_id"
+  add_index "tenants", ["logininfo_id"], :name => "index_tenants_on_logininfo_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

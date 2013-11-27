@@ -1,26 +1,26 @@
 class Logininfo < ActiveRecord::Base
   # attr_accessible :title, :body
-  attr_accessible :email,:crypted_password,:perishable_token,:is_tenant,:tenant_id,:status
-  attr_accessible :user
+  attr_accessible :email,:password,:password_confirmation,:status,:is_tenant,:tenant_id,:persishable_token
 
   belongs_to :tenant
-  belongs_to :user
-
-  has_many :logininfo_roles ,dependent: :destroy
-  has_many :logininfo_institutions, dependent: :destroy
+  
+  has_one :user, :dependent=> :destroy
+  has_one :student, :dependent=> :destroy
+  has_many :logininfo_roles ,:dependent=> :destroy
+  has_many :logininfo_institutions, :dependent=> :destroy
 
   # acts as tenant
   acts_as_tenant(:tenant)
 
   # authlogic
-  #acts_as_authentic do |c|
-  #  c.login_field = :email
-  #end
+  acts_as_authentic do |c|
+    c.login_field = :email
+  end
 
   #confirmed?
-  #def confirmed?
-  #  return true
-  #end
+  def confirmed?
+    return true
+  end
 
   #lock user account
   def lock (email)
@@ -30,6 +30,33 @@ class Logininfo < ActiveRecord::Base
       return logininfo.save
     else
       return false
+    end
+  end
+
+  #create_tenant_user
+  def create_tenant_user!(email,password,password_confirmation,company_name)
+    self.email = email
+    self.password = password
+    self.password_confirmation = password_confirmation
+
+    @tenant = Tenant.new(:company_name=>company_name,
+    :edition=>$trail_edition,
+    :subscription_status=>SubscriptionStatus::TRIAL)
+
+    begin
+      ActiveRecord::Base.transaction do
+        @tenant.super_user = self
+
+        self.tenant = @tenant
+        self.status = UserStatus::ACTIVE
+        self.is_tenant = true
+        @tenant.save!
+        self.save!
+        @tenant.update_attributes :logininfo_id=>self.id
+        return self
+      end
+    rescue ActiveRecord::RecordInvalid => invalid
+      raise invalid
     end
   end
 end

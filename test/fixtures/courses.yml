@@ -12,11 +12,25 @@ one:
   has_sub: true
   status: 1
   user: 
-  tenant: two
+  tenant: one
   
 two:
   type: 1
   name: courseB
+  description: MyString
+  lesson: 1
+  start_date: 2013-11-22
+  end_date: 2013-11-22
+  expect_number: 1
+  actual_number: 1
+  has_sub: true
+  status: 0
+  user: 
+  tenant: one
+  
+three:
+  type: 1
+  name: courseC
   description: MyString
   lesson: 1
   start_date: 2013-11-22

@@ -25,6 +25,8 @@ BACKINDEX.right_list.id;
 BACKINDEX.right_list.generateResult=function(parameter){
     BACKINDEX.right_list.id=parameter;
     BACKINDEX.right_list.currentPage=0;
+    BACKINDEX.right_list.stillHave=true;
+    $("#search-result").empty();
     BACKINDEX.right_list.loadData();
 }
 BACKINDEX.right_list.loadData=function(){

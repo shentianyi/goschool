@@ -7,8 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<%=render partial:'shares/admin_aside'%>
 <%= yield %>
-
+<div class="message-box" id="MessageBox">
+    <p></p>
+</div>
 </body>
 </html>

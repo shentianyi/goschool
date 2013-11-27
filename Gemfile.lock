@@ -61,6 +61,7 @@ GEM
     mime-types (1.25)
     mono_logger (1.1.0)
     multi_json (1.8.2)
+    mysql2 (0.3.14)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -142,6 +143,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   jquery-rails
   memcache-client
+  mysql2
   rails (= 3.2.13)
   redis
   redis-namespace

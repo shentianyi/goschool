@@ -2,16 +2,20 @@
 
 one:
   sub_course: one 
-  user: one 
+  user: one
+  tenant: one 
 
 two:
   sub_course: one
   user: two
+  tenant: one
   
 three:
   sub_course: two
   user: two
+  tenant: one
 
 four:
   sub_course: three
   user: one
+  tenant: one

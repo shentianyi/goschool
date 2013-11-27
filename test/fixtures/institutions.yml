@@ -4,7 +4,7 @@ one:
   name: Shanghai
   address: MyString
   tel: MyString
-  tenant: two
+  tenant: one
 
 two:
   name: Beijing

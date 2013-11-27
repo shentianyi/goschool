@@ -1,8 +1,18 @@
 Goschool::Application.routes.draw do
 
+  resources :student_courses do
+   collection do
+    post :creates
+    put :pay
+    put :pays
+    delete :destroies
+   end
+  end
+ 
   resources :schedules do
    collection do
-    get :list
+    get :dates
+    get :courses
    end
   end
   resources :students
@@ -17,14 +27,20 @@ Goschool::Application.routes.draw do
     end
   end
 
-  resources :settings
+  resources :settings do
+    collection do
+      get ':id/:ajax'=>:show
+    end
+  end
   resources :institutions
   mount Resque::Server.new, :at=>"/admin/resque"
 
   resources :users
   resources :logininfos
+  resource :subscriptions
+  resource :logininfo_session
 
-  resource :user_session
+
 # The priority is based upon order of creation:
 # first created -> highest priority.
 
