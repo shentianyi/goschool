@@ -113,15 +113,15 @@ select{
 }
 .message-box.success{
     background:#63A69F;
-    color:white !important;
 }
 .message-box.danger{
     background-color:#E44B3D;
-    color:white !important
 }
 .message-box.warning{
-    color:white !important;
     background-color:#e4a73d;
+}
+.message-box>p{
+    color:white !important
 }
 /********************************************************************************************************* loader
 *******************************************************************************************************************/
