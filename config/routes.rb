@@ -35,6 +35,7 @@ Goschool::Application.routes.draw do
   resources :settings do
     collection do
       get ':id/:ajax'=>:show
+      put :update
     end
   end
   resources :institutions
