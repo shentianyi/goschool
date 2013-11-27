@@ -11,23 +11,35 @@ class UsersController < ApplicationController
     render :json=>"new"
   end
   
+  #create user,loginifo
   def create
     msg = Msg.new
     # create user and logininfo
-    @user = User.new(params[:user])
-    if @user.save
-      msg.result = true
-      msg.object = @user
-    else
-      msg.result = false
-      msg.content = @user.errors
+    begin
+      ActiveRecord::Base.transaction do
+        @logininfo = Logininfo.new(params[:logininfo])
+        @logininfo.tenant = current_tenant
+        @logininfo.status = UserStatus::ACTIVE
+        
+        @roles = params[:logininfo_roles]
+        @roles.each {|role|
+          @new_role = LogininfoRole.new(:role_id=>role)
+          @logininfo.logininfo_roles<<@new_role
+        }
+
+        @logininfo.save!
+        @user = User.new(params[:user])
+        @user.logininfo = @logininfo
+        @user.save!
+      end
     end
-    render :json=>msg
+    render @user.as_json
   end
 
   def destroy
     msg = Msg.new
     @user = User.find(params[:id])
+    
     if @user && !@user.logininfo.is_tenant
       msg.result = true
     else

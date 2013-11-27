@@ -2,7 +2,7 @@
 class Role
   @@roles={:'100'=>{:name=>'user',:display=>'教务'},
     :'200'=>{:name=>'sale',:display=>'销售'},
-    :'300'=>{:name=>'student',:display=>'学生'},
+    :'300'=>{:name=>'Student',:display=>'学生'},
     :'400'=>{:name=>'teacher',:display=>'老师'},
     :'500'=>{:name=>'admin',:display=>'管理员'}}
 

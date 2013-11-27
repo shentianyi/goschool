@@ -2,7 +2,6 @@
 class SettingsController < ApplicationController
   def index
     @institutions= current_tenant.institutions
-    @logininfos = current_tenant.logininfos
   end
 
   def show

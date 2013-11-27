@@ -4,7 +4,7 @@
  # retrieving the recommendation result will go through the cache.
 class Recommendation
 
-  # @param [String] student_id  the target student who need to recommend potential relation
+  # @param [String] student_id  the target Student who need to recommend potential relation
   # @param [String] tenant_id
   # @param [Integer] limit the amount of result to return, the obj will be order by score desc before that
   # @param [Integer] cache_expire_time in minute. Set the expire time of the cache in memcached.Please set this parameter
@@ -13,7 +13,7 @@ class Recommendation
   ##<RecResult id:int, tenant_id: string, entity_type_id: string, reced_id: string, score: int, created_at: nil, updated_at: nil>
   #score: the higher the score is, the more possibility of the recommendation is.
   def get_potential_relation(tenant_id,student_id,limit=20,cache_expire_time=30.minutes)
-    entity_type_id = 'STUDENT'
+    entity_type_id = Student.name
     get_recommendations(tenant_id,entity_type_id,student_id,cache_expire_time,limit)
   end
 
@@ -27,7 +27,7 @@ class Recommendation
   ##<RecResult id:int, tenant_id: string, entity_type_id: string, reced_id: string, score: int, created_at: nil, updated_at: nil>
   #score: the higher the score is, the more possibility of the recommendation is.  def get_course_potential_customers(tenant_id,course_id,limit=20,cache_expire_time=30.minutes)
   def get_potential_student_for_course(tenant_id,course_id,limit=20,cache_expire_time=30.minutes)
-    entity_type_id = 'COURSE'
+    entity_type_id = Course.name
     get_recommendations(tenant_id,entity_type_id,course_id,cache_expire_time,limit)
   end
 

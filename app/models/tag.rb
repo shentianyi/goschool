@@ -57,6 +57,37 @@ class Tag < ActiveRecord::Base
   end
 
 
+
+
+
+  #find the ids in the appointed entity type with the input tags
+  # @param [String] tenant_id
+  # @param [String] entity_type_id
+  # @param [String] tags
+  # @param [Boolean] strict, true to match exactly the tags(no more no less).
+  # @return [Hash] [[tenant_id,entity_type_id,entity_id]=>tag_count]]
+  def self.find_entity_and_tag_count_in_entity_type(tenant_id,entity_type_id,tags,strict=true)
+    case strict
+      when true
+        return  Tag.where('tenant_id=? and entity_type_id=? and tag in (?)',tenant_id,entity_type_id,tags)\
+        .group('tenant_id')\
+        .group('entity_type_id')\
+        .group('entity_id')\
+        .count('tag')
+        .having('count(*)=?',tags.length)
+      when false
+        return  Tag.where('tenant_id=? and entity_type_id=? and tag in (?)',tenant_id,entity_type_id,tags)\
+        .select("entity_id,count(*)")\
+        .group('tenant_id')\
+        .group('entity_type_id')\
+        .group('entity_id')
+        .count('tag')
+    end
+  end
+
+
+
+
   # find the entity_type_id and entity_id pairs which contains the input tags
   # @param [String] tenant_id
   # @param [String] tags
