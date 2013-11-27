@@ -1,0 +1,76 @@
+<div></div>
+        <div class="admin-operate" name="users" id="admin-operate">
+            <p>已存在的用户</p>
+            <label><i class="icon info"></i>双击单项编辑</label>
+            <table class="ui column table segment celled" id="admin-operate-table">
+                <thead>
+                <tr>
+                    <th class="two wide"></th>
+		    <th class="two wide">名字</th>
+                    <th class="two wide">邮箱</th>
+                    <th class="eight wide">角色</th>
+                    <th class="three wide"></th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th colspan="3"></th>
+                    <th >
+                        <div class="ui teal small labeled icon button add-button" id="admin-operate-add">
+                            <i class="add icon"></i> 添加用户
+                        </div>
+                    </th>
+                </tr>
+                </tfoot>
+                <tbody>
+		  <% @logininfos.each_with_index do |logininfo,i|%>
+		  <tr id="<%=logininfo.id%>">
+		    <td><image class="ui avatar image" src="<%=logininfo.user.image_url%>"/></td>
+		    <td><%=logininfo.user.name%></td>
+		    <td><%=logininfo.email%></td>
+            <td>
+              <div class="ui checkbox">
+                <input name="education" type="checkbox">
+                <label>教务人员</label>
+              </div>
+              <div class="ui checkbox">
+                <input name="business" type="checkbox">
+                <label>业务人员</label>
+              </div>
+              <div class="ui checkbox">
+                <input name="teacher" type="checkbox">
+                <label>老师</label>
+              </div>
+            </td>
+            <td>
+              <i class="trash icon" affect="institution2"></i>
+            </td>
+		  </tr>
+		  <%end%>
+		  <!-- 
+		       <tr id="institution2">
+			 <td><image class="ui avatar image" src="images/portrait/0.jpg"/></td>
+			 <td>Wayne</td>
+			 <td>
+                           <div class="ui checkbox">
+                             <input name="education" type="checkbox">
+                             <label>教务人员</label>
+                           </div>
+                           <div class="ui checkbox">
+                             <input name="business" type="checkbox">
+                             <label>业务人员</label>
+                           </div>
+                           <div class="ui checkbox">
+                             <input name="teacher" type="checkbox">
+                             <label>老师</label>
+                           </div>
+			 </td>
+			 <td>
+                           <i class="trash icon" affect="institution2"></i>
+			 </td>
+                       </tr>
+		       -->
+                </tbody>
+            </table>
+        </div>
+	

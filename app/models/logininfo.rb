@@ -16,6 +16,15 @@ class Logininfo < ActiveRecord::Base
   acts_as_authentic do |c|
     c.login_field = :email
   end
+  
+  #check role
+  def check_role role_id
+    role_id = self.logininfo_roles.find_by("role_id",role_id)
+    if role_id
+      return true
+    end
+    return false
+  end
 
   #confirmed?
   def confirmed?

@@ -2,16 +2,20 @@
 class SettingsController < ApplicationController
   def index
     @institutions= current_tenant.institutions
+    @logininfos = current_tenant.logininfos
   end
 
   def show
     case params[:id].strip
-    when 'institutions'
-      @institutions= current_tenant.institutions
-      @partial='institutions'
-    else
-    @setting=current_tenant.setting
-    @partial='settings'
+      when 'institutions'
+        @institutions= current_tenant.institutions
+        @partial='institutions'
+      when 'users'
+        @logininfos=current_tenant.logininfos
+        @partial='users'
+      else
+        @setting=current_tenant.setting
+        @partial='settings'
     end
     render :partial=>@partial if params[:ajax]
   end

@@ -14,9 +14,11 @@ class CreateStudents < ActiveRecord::Migration
       t.string :image_url
       t.references :logininfo
       t.integer :referrer_id
+      t.references :tenant
       t.timestamps
     end
     add_index :students, :logininfo_id
     add_index :students, :referrer_id
+    add_index :students, :tenant_id
   end
 end

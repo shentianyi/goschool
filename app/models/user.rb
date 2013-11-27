@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   attr_accessible :name
   attr_accessible :email
+  attr_accessible :image_url
 
   belongs_to :logininfo
   belongs_to :tenant

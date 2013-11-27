@@ -19,6 +19,7 @@ one:
   current_login_ip: 127.0.0.1
   last_login_ip: 127.0.0.1
   status: 0
+  tenant: one
 # column: value
 #
 two:
@@ -36,4 +37,5 @@ two:
   current_login_ip: 127.0.0.1
   last_login_ip: 127.0.0.1
   status: 0
+  tenant: one
 #  column: value
