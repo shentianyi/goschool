@@ -40,7 +40,7 @@ BACKINDEX.admin.generateHTML=function(){
 };
 BACKINDEX.admin.operate.entities={
     institutions:{
-        address:"settings/institutions/",
+        address:"/settings/institutions/",
         href:"/settings/institutions",
         item_template:
             "<tr id='template' class='template'>"
@@ -51,7 +51,7 @@ BACKINDEX.admin.operate.entities={
             "</tr>"
     },
     users:{
-        address:"settings/users/",
+        address:"/settings/users/",
         href:"/settings/users",
         item_template:
             "<tr id='template' class='template'>"
