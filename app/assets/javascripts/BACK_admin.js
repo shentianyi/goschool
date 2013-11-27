@@ -14,10 +14,13 @@ BACKINDEX.admin.init=(function(){
     });
     $(document).ready(function(){
         BACKINDEX.admin.operate.init();
+
+//        BACKINDEX.admin.operate.type="institutions";
+
         var url=(window.location.href).split("/");
         if(url[url.length-1]=="settings" && url[url.length-2]!="settings"){
              $("#admin-setting>a").eq(0).addClass("active");
-             var name=$("#admin-setting>a").eq(0);
+             var name=$("#admin-setting>a").eq(0).attr("name");
              BACKINDEX.admin.operate.type=name;
             $("#back-index-main>header label").text($("#admin-setting>a").eq(0).find("label").text());
         }
@@ -141,6 +144,7 @@ BACKINDEX.admin.operate.init=function(){
             var href=BACKINDEX.admin.operate.entities[type].post_href;
             var postObject={id:id,institution:{}};
             postObject.institution[postType]=value;
+            console.log(postObject)
             $.ajax({
                url:href+"/"+id,
                date:postObject,

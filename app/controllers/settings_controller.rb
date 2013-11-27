@@ -23,9 +23,7 @@ class SettingsController < ApplicationController
   def update
     msg=Msg.new
     @setting=current_tenant.setting
-    unless msg.result=@setting.update_attributes(params[:setting].strip)
-    msg.content=@setting.errors.messages
-    end
+    msg.content=@setting.errors.messages unless msg.result=@setting.update_attributes(params[:setting].strip)
     render :json=>msg
   end
 end
