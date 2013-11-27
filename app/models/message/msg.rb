@@ -4,7 +4,7 @@ require 'base_class'
 class Msg<CZ::BaseClass
   attr_accessor :result,:object,:content
   def default
-    {:result=>true}
+    {:result=>false}
   end
 
   def set_false msg=nil

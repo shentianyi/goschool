@@ -45,6 +45,6 @@ class SchedulesControllerTest < ActionController::TestCase
     
       get :courses,{type:'SubCourse',id:sub_courses(:one).id}
       assert_response :success
-      puts response.bod
+      puts response.body
   end
 end

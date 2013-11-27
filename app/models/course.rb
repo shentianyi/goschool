@@ -38,7 +38,7 @@ class Course < ActiveRecord::Base
   end
   
   def course_students
-    self.students.select('student_courses.*,student_courses.created_at as enrol_time,students.*')
+    self.students.select('student_courses.*,student_courses.created_at as enrol_time,students.*').all
   end
   
   private
