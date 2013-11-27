@@ -4,23 +4,41 @@
 /* #E44B3D*/
 @font-face {
     font-family:'maven';
-    /*src:url("/assets/mavenprolight300.ttf"),*/
-    /*url("/assets/mavenprolight300.eot");*/
-    src:url("../fonts/mavenprolight300.ttf"),
-    url("../fonts/mavenprolight300.eot");
+    /*src:url("../fonts/mavenprolight300.ttf"),*/
+    /*url("../fonts/mavenprolight300.eot");*/
+    src:url("/assets/mavenprolight300.ttf"),
+    url("/assets/mavenprolight300.eot");
+}
+@font-face {
+    font-family: 'Icons';
+    /*src: url(../fonts/icons.eot);*/
+    /*src: url(../fonts/icons.eot?#iefix) format('embedded-opentype'),*/
+    /*url(../fonts/icons.woff) format('woff'),*/
+    /*url(../fonts/icons.ttf) format('truetype'),*/
+    /*url(../fonts/icons.svg#icons) format('svg');*/
+    src: url(/assets/icons.eot);
+    src: url(/assets/icons.eot?#iefix) format('embedded-opentype'),
+    url(/assets/icons.woff) format('woff'),
+    url(/assets/icons.ttf) format('truetype'),
+    url(/assets/icons.svg#icons) format('svg');
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-transform: none;
 }
 @font-face {
     font-family: 'Basic Icons';
-    src: url(/assets/basic.icons.eot);
-    src: url(/assets/basic.icons.eot?#iefix) format('embedded-opentype'),
-    url(/assets/basic.icons.woff) format('woff'),
-    url(/assets/basic.icons.ttf) format('truetype'),
-    url(/assets/basic.icons.svg#basic.icons) format('svg');
     /*src: url(../fonts/basic.icons.eot);*/
     /*src: url(../fonts/basic.icons.eot?#iefix) format('embedded-opentype'),*/
     /*url(../fonts/basic.icons.woff) format('woff'),*/
     /*url(../fonts/basic.icons.ttf) format('truetype'),*/
     /*url(../fonts/basic.icons.svg#basic.icons) format('svg');*/
+    src: url(/assets/basic.icons.eot);
+    src: url(/assets/basic.icons.eot?#iefix) format('embedded-opentype'),
+    url(/assets/basic.icons.woff) format('woff'),
+    url(/assets/basic.icons.ttf) format('truetype'),
+    url(/assets/basic.icons.svg#basic.icons) format('svg');
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -126,7 +144,7 @@ select{
     border-radius: 0.3125em;
     color: rgba(0, 0, 0, 0.7);
     font-family: "Helvetica Neue","Helvetica",Arial;
-    font-size: 0.875em;
+    font-size: 0.775em;
     margin: 0;
     outline: medium none;
     padding: 0.85em 0 0.85em 1.2em;
@@ -141,12 +159,13 @@ select{
 }
 .specialInput ul>li{
     float:left;
-    padding:3px 2px;
+    padding:0px 2px 3px;
 }
 .specialInput ul>li>input{
     border-width:0px !important;
     display:inline !important;
     width:10px;
+    font-size:13px !important;
 }
 .specialInput ul>li>.label{
     font-size:12px;

@@ -15,13 +15,17 @@ BACKINDEX.admin.init=(function(){
     $(document).ready(function(){
         BACKINDEX.admin.operate.init();
         var url=(window.location.href).split("/");
-        if(url[url.length-1]!="ajax"){
-             $("#admin-setting>a").eq(0).click();
+        if(url[url.length-1]=="settings" && url[url.length-2]!="settings"){
+             $("#admin-setting>a").eq(0).addClass("active");
+             var name=$("#admin-setting>a").eq(0);
+             BACKINDEX.admin.operate.type=name;
+            $("#back-index-main>header label").text($("#admin-setting>a").eq(0).find("label").text());
         }
         else{
-            var name=url[url.length-2];
-            $("##admin-setting").find("a[name='"+name+"']").addClass("active");
+            var name=url[url.length-1];
+            $("#admin-setting").find("a[name='"+name+"']").addClass("active");
             BACKINDEX.admin.operate.type=name;
+            $("#back-index-main>header label").text($("#admin-setting>a.active").find("label").text());
         }
     });
 })();
@@ -30,18 +34,19 @@ BACKINDEX.admin.generateHTML=function(){
     var address=BACKINDEX.admin.operate.entities[type].address,
         href=BACKINDEX.admin.operate.entities[type].href;
     $.ajax({
-        url:href,
+        url:address,
         dataType:"html",
         success:function(data){
-            window.history.pushState({},"",address+"ajax");
+            window.history.pushState({},"",href);
             $("#partial-content").html(data);
         }
     });
 };
 BACKINDEX.admin.operate.entities={
     institutions:{
-        address:"/settings/institutions/",
+        address:"/settings/institutions/ajax",
         href:"/settings/institutions",
+        post_href:"/institutions",
         item_template:
             "<tr id='template' class='template'>"
                 +"<td post='name'><input type='text' name='name'/></td>"
@@ -51,8 +56,9 @@ BACKINDEX.admin.operate.entities={
             "</tr>"
     },
     users:{
-        address:"/settings/users/",
+        address:"/settings/users/ajax",
         href:"/settings/users",
+        post_href:"/users",
         item_template:
             "<tr id='template' class='template'>"
                 +"<td><img class='ui avatar image'/></td>"
@@ -66,12 +72,14 @@ BACKINDEX.admin.operate.entities={
             "</tr>"
     },
     settings:{
-
+        address:"/settings/settings/ajax",
+        href:"/settings/settings",
+        post_href:"/settings"
     }
 };
 BACKINDEX.admin.operate.init=function(){
 //  删除
-    $("#admin-operate-table").on("click",".trash",function(){
+    $("body").on("click","#admin-operate-table .trash",function(){
          if($(this).attr("role")!="temp"){
              if(confirm("确定删除该项吗？")){
                  var id=$(this).attr('affect');
@@ -80,9 +88,9 @@ BACKINDEX.admin.operate.init=function(){
 
                  //post
                  var type=BACKINDEX.admin.operate.type;
-                 var href=BACKINDEX.admin.operate.entities[type].href;
+                 var href=BACKINDEX.admin.operate.entities[type].post_href;
                  $.ajax({
-                     url:href+"/id",
+                     url:href+"/"+id,
                      type:"DELETE",
                      success:function(data){
                          if(data.result){
@@ -98,7 +106,7 @@ BACKINDEX.admin.operate.init=function(){
          }
     });
 //  修改
-    $("#admin-operate-table").on("dblclick","tbody td",function(){
+    $("body").on("dblclick","#admin-operate-table tbody td",function(){
         if($(this).children().length==0){
             var text=$(this).text();
             $(this).text("");
@@ -106,7 +114,7 @@ BACKINDEX.admin.operate.init=function(){
             $("input",this).focus().val(text);
         }
     });
-    $("#admin-operate-table").on("keyup","input[type='text']",function(event){
+    $("body").on("keyup","#admin-operate-table input[type='text']",function(event){
         var e=adapt_event(event).event;
         if(e.keyCode==  13){
             if($(this).parent().parent().attr("id")!="template"){
@@ -118,7 +126,7 @@ BACKINDEX.admin.operate.init=function(){
             stop_propagation(event);
         }
     });
-    $("#admin-operate-table").on("blur","input[type='text']",function(){
+    $("body").on("blur","#admin-operate-table input[type='text']",function(){
         if($(this).parent().parent().attr("id")!="template"){
             var value=$(this).val(),
                 postType=$(this).parent().attr("post"),
@@ -130,11 +138,11 @@ BACKINDEX.admin.operate.init=function(){
 
             //post
             var type=BACKINDEX.admin.operate.type;
-            var href=BACKINDEX.admin.operate.entities[type].href;
+            var href=BACKINDEX.admin.operate.entities[type].post_href;
             var postObject={id:id,institution:{}};
             postObject.institution[postType]=value;
             $.ajax({
-               url:href,
+               url:href+"/"+id,
                date:postObject,
                type:"PUT",
                success:function(data){
@@ -148,7 +156,7 @@ BACKINDEX.admin.operate.init=function(){
         }
     });
     //user下的check box 修改
-    $("#admin-operate-table").on("click",".checkbox",function(){
+    $("body").on("click","#admin-operate-table .checkbox",function(){
         if($("input",this).prop("checked")){
             //post
         }
@@ -163,7 +171,7 @@ BACKINDEX.admin.operate.init=function(){
             $("#admin-operate-table #template").find(".checkmark").click();
         }
     });
-    $("#admin-operate-table").on("click","#admin-operate-add",function(event){
+    $("body").on("click","#admin-operate-table #admin-operate-add",function(event){
         var target=BACKINDEX.admin.operate.entities[BACKINDEX.admin.operate.type];
         if($("#admin-operate-table tbody").find("#template").length==0){
             $("#admin-operate-table tbody").append(target.item_template);
@@ -178,7 +186,7 @@ BACKINDEX.admin.operate.init=function(){
             $("#template").find("input[type='text']").eq(0).focus();
         }
     });
-    $("#admin-operate-table").on("click",".checkmark",function(){
+    $("body").on("click","#admin-operate-table .checkmark",function(){
         var $target=$("#template").find("input[type='text']"),
             value_array=[], i,validate=true;
         if(BACKINDEX.admin.operate.type=="institutions"){
@@ -204,7 +212,7 @@ BACKINDEX.admin.operate.init=function(){
 
             //post
             var type=BACKINDEX.admin.operate.type;
-            var href=BACKINDEX.admin.operate.entities[type].href;
+            var href=BACKINDEX.admin.operate.entities[type].post_href;
             var postObject={institution:{}};
             postObject.institution.name=value_array[0];
             postObject.institution.address=value_array[1];

@@ -19,7 +19,7 @@ one:
   tenant: one
 two:
   name: MyString
-  gender: 1
+  gender: 0
   birthday: 2013-11-25 18:15:43
   school: MyString
   graduation: 2013-11-25 18:15:43

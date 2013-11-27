@@ -10,27 +10,17 @@ BACKINDEX.init=(function(){
     });
     //添加学生或老师或课程
     $("#add-item").on("click",function(event){
-        stop_propagation(event);
-        if($(this).attr("state")=="close" || $(this).attr("state")==null){
-            $("#back-index-add").css("right","0");
-            $("#back-index-main").css("right","250px");
-            $(this).attr("state","open");
-        }
-        else{
-            $("#back-index-add").css("right","-260px");
-            $("#back-index-main").css("right","0px");
-            $(this).attr("state","close");
-        }
+        $("#back-index-add").css("left","0").css("right","0");
     });
-    $("body").on("click",function(event){
-       var target=adapt_event(event).target;
-       if(target!=document.getElementById("back-index-add")){
-           $("#back-index-add").css("right","-260px");
-           $("#back-index-main").css("right","0px");
-           $("#add-item").attr("state","close");
-       }
-    });
-    $("#back-index-add").on("click","input,.radio,.stop",function(event){
-        stop_propagation(event);
+    $(document).ready(function(){
+        BACKINDEX.type=$("#back-index-add").attr("name");
+        $("body").on("click","#back-index-add .remove",function(){
+            if(BACKINDEX.type=="student"){
+                BACKSTUDENT.addItem.clear();
+                $("#back-index-add .radio.ui").eq(0).checkbox('enable');
+            }
+            $("#back-index-add").css("left","-999em").css("right","auto");
+        });
     });
 })();
+

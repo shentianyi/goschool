@@ -9,7 +9,7 @@ one:
 
 two:
   student: two
-  course: two
+  course: one
   paid: false
   status: 1
   tenant: one
