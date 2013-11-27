@@ -16,15 +16,15 @@ class StudentsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create student" do
+  test "should create Student" do
     assert_difference('Student.count') do
-      post :create, student: { address: @student.address, birthday: @student.birthday, email: @student.email, gender: @student.gender, graduation: @student.graduation, guardian: @student.guardian, guardian_phone: @student.guardian_phone, name: @student.name, phone: @student.phone, school: @student.school }
+      post :create, Student: { address: @student.address, birthday: @student.birthday, email: @student.email, gender: @student.gender, graduation: @student.graduation, guardian: @student.guardian, guardian_phone: @student.guardian_phone, name: @student.name, phone: @student.phone, school: @student.school }
     end
 
-    assert_redirected_to student_path(assigns(:student))
+    assert_redirected_to student_path(assigns(:Student))
   end
 
-  test "should show student" do
+  test "should show Student" do
     get :show, id: @student
     assert_response :success
   end
@@ -34,12 +34,12 @@ class StudentsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should update student" do
-    put :update, id: @student, student: { address: @student.address, birthday: @student.birthday, email: @student.email, gender: @student.gender, graduation: @student.graduation, guardian: @student.guardian, guardian_phone: @student.guardian_phone, name: @student.name, phone: @student.phone, school: @student.school }
-    #assert_redirected_to student_path(assigns(:student))
+  test "should update Student" do
+    put :update, id: @student, Student: { address: @student.address, birthday: @student.birthday, email: @student.email, gender: @student.gender, graduation: @student.graduation, guardian: @student.guardian, guardian_phone: @student.guardian_phone, name: @student.name, phone: @student.phone, school: @student.school }
+    #assert_redirected_to student_path(assigns(:Student))
   end
 
-  test "should destroy student" do
+  test "should destroy Student" do
     assert_difference('Student.count', -1) do
       delete :destroy, id: @student
     end
