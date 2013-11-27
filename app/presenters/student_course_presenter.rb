@@ -1,8 +1,9 @@
 #encoding: utf-8
 class StudentCoursePresenter<Presenter
-  def initialize(course)
-    @course=course
-    @students=@course.students.select('student_courses.*,student_courses.created_at as enrol_time,students.*')
+  def_delegators :students,:name,:id,:email,:gender,:phone,:paid
+
+  def initialize(student)
+    @student=student
   end
 
 
