@@ -15,8 +15,11 @@ BACKINDEX.admin.init=(function(){
     $(document).ready(function(){
         BACKINDEX.admin.operate.init();
         var url=(window.location.href).split("/");
-        if(url[url.length-1]=="settings"){
+        if(url[url.length-1]=="settings" && url[url.length-2]!="settings"){
              $("#admin-setting>a").eq(0).addClass("active");
+             var name=$("#admin-setting>a").eq(0);
+             BACKINDEX.admin.operate.type=name;
+
         }
         else{
             var name=url[url.length-1];

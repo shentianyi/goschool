@@ -67,13 +67,13 @@
     text-align:center;
     padding:9px 0;
 }
-.back-index-aside>.second-ul>li>i{
+.back-index-aside>.second-ul>li>a>i{
     color:rgba(255, 255, 255, 0.8);
     font-size:25px;
     cursor:pointer;
     transition:color 0.3s ease-out;
 }
-.back-index-aside>.second-ul>li>i:hover{
+.back-index-aside>.second-ul>li>a>i:hover{
     color:#63A69F
 }
 /************************************************************   middle condition */
