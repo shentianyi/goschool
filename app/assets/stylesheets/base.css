@@ -11,16 +11,16 @@
 }
 @font-face {
     font-family: 'Icons';
-    /*src: url(../fonts/icons.eot);*/
-    /*src: url(../fonts/icons.eot?#iefix) format('embedded-opentype'),*/
-    /*url(../fonts/icons.woff) format('woff'),*/
-    /*url(../fonts/icons.ttf) format('truetype'),*/
-    /*url(../fonts/icons.svg#icons) format('svg');*/
-    src: url(/assets/icons.eot);
-    src: url(/assets/icons.eot?#iefix) format('embedded-opentype'),
-    url(/assets/icons.woff) format('woff'),
-    url(/assets/icons.ttf) format('truetype'),
-    url(/assets/icons.svg#icons) format('svg');
+    src: url(../fonts/icons.eot);
+    src: url(../fonts/icons.eot?#iefix) format('embedded-opentype'),
+    url(../fonts/icons.woff) format('woff'),
+    url(../fonts/icons.ttf) format('truetype'),
+    url(../fonts/icons.svg#icons) format('svg');
+    /*src: url(/assets/icons.eot);*/
+    /*src: url(/assets/icons.eot?#iefix) format('embedded-opentype'),*/
+    /*url(/assets/icons.woff) format('woff'),*/
+    /*url(/assets/icons.ttf) format('truetype'),*/
+    /*url(/assets/icons.svg#icons) format('svg');*/
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -113,14 +113,14 @@ select{
 }
 .message-box.success{
     background:#63A69F;
-    color:white;
+    color:white !important;
 }
 .message-box.danger{
     background-color:#E44B3D;
-    color:white
+    color:white !important
 }
 .message-box.warning{
-    color:white;
+    color:white !important;
     background-color:#e4a73d;
 }
 /********************************************************************************************************* loader

@@ -155,12 +155,14 @@ ActiveRecord::Schema.define(:version => 20131126104948) do
     t.string   "image_url"
     t.integer  "logininfo_id"
     t.integer  "referrer_id"
+    t.integer  "tenant_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
 
   add_index "students", ["logininfo_id"], :name => "index_students_on_logininfo_id"
   add_index "students", ["referrer_id"], :name => "index_students_on_referrer_id"
+  add_index "students", ["tenant_id"], :name => "index_students_on_tenant_id"
 
   create_table "sub_courses", :force => true do |t|
     t.string   "name"
@@ -228,6 +230,7 @@ ActiveRecord::Schema.define(:version => 20131126104948) do
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
+    t.string   "image_url"
     t.integer  "logininfo_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false

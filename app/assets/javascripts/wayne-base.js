@@ -160,6 +160,15 @@ function MessageBox(str,position, type) {
         $("#MessageBox").slideUp("2500");
     },2500)
 }
+//Message box with content
+function MessageBox_content(content){
+    var i,content=content,all_array=[],show_text;
+    for(i in content){
+        all_array=all_array.concat(content[i]);
+    }
+    show_text=all_array.join("/n");
+    MessageBox(show_text,"top","warning")
+}
 //loader
 function loader(id){
     if(id=="body"){
@@ -176,6 +185,22 @@ function remove_loader(){
     $("#loader").remove();
 }
 //激活所有的radio和ccheckbox
-$('.ui.checkbox')
-    .checkbox()
+$('.ui.checkbox').checkbox()
 ;
+//special input
+(function(){
+    $("body").on("click",".specialInput.labelForm",function(){
+        $(this).find("input").focus();
+        var max_width=parseInt($(this).css("width"))
+//        $(this).find("input").css("max-width",)
+    });
+    $("body").on("keyup",".specialInput.labelForm input",function(event){
+        var e=adapt_event(event).event;
+        if(e.keyCode==8){
+
+        }
+        else{
+            $(e.target).css("width",$(e.target).css("width")+2)
+        }
+    });
+})()

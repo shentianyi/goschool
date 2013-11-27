@@ -70,6 +70,7 @@ BACKINDEX.admin.operate.entities={
                     +"<div class='ui checkbox'><input type='checkbox' name='education'/><label>教务人员</label></div>"
                     +"<div class='ui checkbox'><input type='checkbox' name='business'/><label>业务人员</label></div>"
                     +"<div class='ui checkbox'><input type='checkbox' name='teacher'/><label>教师</label></div>"
+                +"<div class='ui checkbox'><input type='checkbox' name='admin'/><label>管理员</label></div>"
                 +"</td>"
                 +"<td><i class='icon checkmark'></i><i class='icon trash' role='temp'></i></td>"+
             "</tr>"
@@ -98,6 +99,9 @@ BACKINDEX.admin.operate.init=function(){
                      success:function(data){
                          if(data.result){
                              $("#admin-operate-table").find("#"+id).remove();
+                         }
+                         else{
+                             MessageBox_content(data.content);
                          }
                      }
                  })
@@ -144,7 +148,6 @@ BACKINDEX.admin.operate.init=function(){
             var href=BACKINDEX.admin.operate.entities[type].post_href;
             var postObject={id:id,institution:{}};
             postObject.institution[postType]=value;
-            console.log(postObject)
             $.ajax({
                url:href+"/"+id,
                data:postObject,
@@ -153,6 +156,9 @@ BACKINDEX.admin.operate.init=function(){
                    if(data.result){
                        $this.parent().text(value);
                        $this.remove();
+                   }
+                   else{
+                       MessageBox_content(data.content);
                    }
                }
             })
@@ -230,10 +236,13 @@ BACKINDEX.admin.operate.init=function(){
                         for(i=0;i<$target.length;i++){
                             $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
                         }
-                        var new_id=data.object;
+                        var new_id=data.content;
                         $("#template").find(".checkmark").remove();
                         $("#template").find(".trash").attr("role","").attr("affect",new_id);
                         $("#template").removeClass("template").attr("id",new_id);
+                    }
+                    else{
+                        MessageBox_content(data.content);
                     }
                 }
             })
@@ -273,5 +282,25 @@ BACKINDEX.admin.operate.init=function(){
             }
         }
     });
-
+//    default-password 修改
+    $("body").on("click","#default-password-update",function(){
+       var password=$("#default-password").val();
+        $.ajax({
+            url:"/settings",
+            type:"PUT",
+            data:{
+                setting:{
+                    default_pwd:password
+                }
+            },
+            success:function(data){
+                if(data.result){
+                    MessageBox("修改成功！","top","success");
+                }
+                else{
+                    MessageBox_content(data.content);
+                }
+            }
+        })
+    });
 };
