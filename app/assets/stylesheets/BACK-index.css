@@ -299,71 +299,102 @@
 }
 /************************************************************   item add  */
 .back-index-add{
-    position:fixed;
+    position:absolute;
+    min-height:768px;
     top:0px;
-    height:100%;
-    right:00px;
-    left:auto;
-    width:250px;
-    overflow-y:auto;
-    transition:right 0.35s ease-out;
-    background:#fff;
-    border-left:1px solid rgba(0,0,0,0.4);
-    box-shadow:-2px 0px 8px rgba(0,0,0,0.6);
-    -moz-box-shadow:-2px 0px 8px rgba(0,0,0,0.6);
-    -webkit-box-shadow:-2px 0px 8px rgba(0,0,0,0.6);
+    right:auto;
+    bottom:0px;
+    left:-999em;
+    background:rgba(0,0,0,0.9);
+    z-index:99;
 }
-.back-index-add>p{
+.back-index-add>.inner{
+    position:absolute;
+    width:700px;
+    height:600px;
+    top:50%;
+    left:50%;
+    margin-top:-300px;
+    margin-left:-350px;
+    background-color:white;
+}
+.back-index-add>.inner>.remove.icon{
+    color:white;
+    font-size:28px;
+    position:absolute;
+    right:-35px;
+    top:-40px;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+    overflow-y: auto;
+}
+.back-index-add>.inner>p{
     text-align:center;
-    padding:15px 0 10px;
-    font-size:20px;
+    height:35px;
+    font-size:16px;
     background:#D95C5C;
     color:white;
+    line-height:35px;
     margin:0px;
     text-shadow:2px 2px 4px rgba(0,0,0,0.4);
     -moz-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
     -webkit-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
 }
-.back-index-add>.portrait{
-    position:relative;
-    display:block;
-    height:60px;
+/*left*/
+.back-index-add>.inner>.left-part{
+    float:left;
+    width:50%;
+    height:500px;
+    margin-top:35px;
 }
-.back-index-add>.portrait>img{
+.back-index-add>.inner>.left-part>.portrait{
+    margin:5px 0;
+    height:95px;
+    position:relative
+}
+.back-index-add>.inner>.left-part>.portrait>img{
     position:absolute;
-    left:50%;
     top:50%;
-    margin-left:-17.5px;
-    margin-top:-17.5px;
+    left:50%;
+    margin-top:-38px;
+    margin-left:-40px;
 }
-.back-index-add>.sex{
-    margin:5px 0 10px 35px;
+.back-index-add>.inner>.left-part>div.input{
+    width:300px;
+    margin:5px 0px 6px 25px;
 }
-.back-index-add>.sex>.radio{
+.back-index-add>.inner>.left-part>.sex{
+    margin:16px 0 16px 26px;
+}
+.back-index-add>.inner>.left-part>.sex>.radio{
     margin-right:20px;
 }
-.back-index-add>.input{
-    width:190px;
-    left:50%;
-    margin:5px 0 10px -90px;
-    display:block;
+/*right*/
+.back-index-add>.inner>.right-part{
+    float:right;
+    width:50%;
+    height:500px;
+    margin-top:35px;
+    overflow-y:auto;
 }
-.back-index-add>.checkbox{
-    display:block;
-    margin:40px 0 5px 35px;
+.back-index-add>.inner>.right-part>div.input{
+    width:300px;
+    margin:5px 0px 6px 25px;
 }
-.back-index-add>.button{
-    margin-bottom:10px;
-    width:190px;
+.back-index-add>.inner>.right-part>div.input.specialInput{
+    margin:5px 0px 2px 25px;
+}
+.back-index-add>.inner>.right-part>.checkbox{
+    display:inline-block;
+    margin:40px 0 5px 25px;
+}
+.back-index-add>.inner>.right-part>.button{
+    width:130px;
     position:relative;
-    left:50%;
-    margin-left:-90px;
+    left:26px;
+    top:25px;
 }
-.back-index-add>div>i,
-.back-index-add>p,
-.back-index-add>.portrait{
-    pointer-events:none;
-}
+
 
 
 
