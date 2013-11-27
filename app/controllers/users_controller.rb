@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     render :json=>"new"
   end
   
+  #create user,loginifo
   def create
     msg = Msg.new
     # create user and logininfo
@@ -38,6 +39,7 @@ class UsersController < ApplicationController
   def destroy
     msg = Msg.new
     @user = User.find(params[:id])
+    
     if @user && !@user.logininfo.is_tenant
       msg.result = true
     else
