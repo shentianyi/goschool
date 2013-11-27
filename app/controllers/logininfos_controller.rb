@@ -1,6 +1,13 @@
 class LogininfosController < ApplicationController
+  #filter with ability
   #
   def index
+    @logininfos = Logininfo.all
+    render :json=>@users.as_json
+  end
+  
+  #create logininfo at the same time
+  def create
     
   end
 
