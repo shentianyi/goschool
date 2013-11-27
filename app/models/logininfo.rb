@@ -19,7 +19,7 @@ class Logininfo < ActiveRecord::Base
   
   #check role
   def check_role role_id
-    role_id = self.logininfo_roles.find_by("role_id",role_id)
+    role_id = self.logininfo_roles.find_by_role_id(role_id)
     if role_id
       return true
     end
