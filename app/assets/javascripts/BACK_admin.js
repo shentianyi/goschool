@@ -15,12 +15,12 @@ BACKINDEX.admin.init=(function(){
     $(document).ready(function(){
         BACKINDEX.admin.operate.init();
         var url=(window.location.href).split("/");
-        if(url[url.length-1]!="ajax"){
-             $("#admin-setting>a").eq(0).click();
+        if(url[url.length-1]=="settings"){
+             $("#admin-setting>a").eq(0).addClass("active");
         }
         else{
-            var name=url[url.length-2];
-            $("##admin-setting").find("a[name='"+name+"']").addClass("active");
+            var name=url[url.length-1];
+            $("#admin-setting").find("a[name='"+name+"']").addClass("active");
             BACKINDEX.admin.operate.type=name;
         }
     });
@@ -30,17 +30,17 @@ BACKINDEX.admin.generateHTML=function(){
     var address=BACKINDEX.admin.operate.entities[type].address,
         href=BACKINDEX.admin.operate.entities[type].href;
     $.ajax({
-        url:href,
+        url:address,
         dataType:"html",
         success:function(data){
-            window.history.pushState({},"",address+"ajax");
+            window.history.pushState({},"",href);
             $("#partial-content").html(data);
         }
     });
 };
 BACKINDEX.admin.operate.entities={
     institutions:{
-        address:"/settings/institutions/",
+        address:"/settings/institutions/ajax",
         href:"/settings/institutions",
         item_template:
             "<tr id='template' class='template'>"
@@ -51,7 +51,7 @@ BACKINDEX.admin.operate.entities={
             "</tr>"
     },
     users:{
-        address:"/settings/users/",
+        address:"/settings/users/ajax",
         href:"/settings/users",
         item_template:
             "<tr id='template' class='template'>"
@@ -66,7 +66,8 @@ BACKINDEX.admin.operate.entities={
             "</tr>"
     },
     settings:{
-
+        address:"/settings/settings/ajax",
+        href:"/settings/settings"
     }
 };
 BACKINDEX.admin.operate.init=function(){
