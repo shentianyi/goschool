@@ -5,7 +5,6 @@ class ScoreStudentSchool
 
   def calculate(arg)
     result = {}
-    tenant_id = arg[:tenant_id]
     student_id = arg[:student_id]
 
     target = Student.find(student_id.to_i)

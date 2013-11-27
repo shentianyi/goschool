@@ -9,7 +9,7 @@ class ScoreStudentTagSimilar
 
     tag_utility = TagUtility.new
 
-    tags =tag_utility.get_tags(tenant_id,type_id,student_id)
+    tags =tag_utility.get_tags(tenant_id.to_s,type_id.to_s,student_id.to_s)
 
     if tag
       potential = tag_utility.find_entity_and_tag_count_in_entity_type(tenant_id,type_id,tags,false)

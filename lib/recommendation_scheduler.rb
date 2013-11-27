@@ -3,11 +3,17 @@
 #可能认识
 #1.	学校 同一学校同一年级 300分 ok
 #2.	年级 同一学校不同年级 100分 ok
-#3.	地区 有限的同一地区分数分级 30＊
+#3.	地区 有限的同一地区分数分级 30＊无地区数据库，暂缓
 #4.	标签相似度 50分 ok
-#5.	推荐人的推荐人 80分
+#5.	推荐人的推荐人 80分ok
 #6.	推荐人同时也推荐的人 80分 ok
-#7.	曾经在同一course中学习 100分
+#7.	曾经在同一course中学习 200分
+
+
+#课程
+#1.标签符合率 100 ＊标签符合率
+#2.学生参加过的课程的标签与课程标签的符合率 －100*标签符合率
+
 class RecommendationScheduler
 
   #warning! persistence_result will insert the new data intelligently.
@@ -50,11 +56,24 @@ class RecommendationScheduler
 
   #load all the calculate module seperately and reduce here
   def do_reduce(type,arg={})
-    processors={}
-    Dir[File.dirname(__FILE__) + "/recommendation/#{type.camelize}/*.rb"].each do |path|
-      processors.merge!(File.basename(path,'.*').camelize.constantize.new.calculate(arg)) {|key,v1,v2| v1+v2}
+    result ={}
+    init_processors(type)
+    @processors[type].each do |process|
+      result.merge!(process.calculate(arg)){|key,v1,v2| v1+v2}
     end
-    return processors
+    return result
+  end
+
+  def init_processors(type)
+    @processors || @processors={}
+    @processors[type] || load_processors(type)
+  end
+
+  def load_processors(type)
+    @processors[type] = []
+    Dir[File.dirname(__FILE__) + "/recommendation/#{type.camelize}/*.rb"].each do |path|
+      @processors[type].push(File.basename(path,'.*').camelize.constantize.new)
+    end
   end
 
 
@@ -77,3 +96,8 @@ class RecommendationScheduler
 
 
 end
+
+
+
+
+
