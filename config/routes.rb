@@ -24,6 +24,7 @@ Goschool::Application.routes.draw do
   resources :courses do
     collection do
       get :list_search
+      get :students
     end
   end
 
