@@ -1,5 +1,6 @@
 var BACKINDEX=BACKINDEX || {};
 BACKINDEX.admin={};
+BACKINDEX.admin.operate={};
 BACKINDEX.admin.init=(function(){
     $("body").on("click","#admin-setting>a",function(){
         if(!$(this).hasClass("active")){
@@ -13,35 +14,45 @@ BACKINDEX.admin.init=(function(){
     });
     $(document).ready(function(){
         BACKINDEX.admin.operate.init();
-        BACKINDEX.admin.operate.type=$("#admin-operate").attr("name");
+        var url=(window.location.href).split("/");
+        if(url[url.length-1]!="ajax"){
+             $("#admin-setting>a").eq(0).click();
+        }
+        else{
+            var name=url[url.length-2];
+            $("##admin-setting").find("a[name='"+name+"']").addClass("active");
+            BACKINDEX.admin.operate.type=name;
+        }
     });
 })();
 BACKINDEX.admin.generateHTML=function(){
     var type=BACKINDEX.admin.operate.type;
-    var address=BACKINDEX.admin.operate.entities[type].address;
+    var address=BACKINDEX.admin.operate.entities[type].address,
+        href=BACKINDEX.admin.operate.entities[type].href;
     $.ajax({
-        url:address,
+        url:href,
         dataType:"html",
         success:function(data){
+            window.history.pushState({},"",address+"ajax");
             $("#partial-content").html(data);
         }
     });
 };
-BACKINDEX.admin.operate={};
-// BACKINDEX.admin.operate.type=$("#admin-operate").attr("name");
 BACKINDEX.admin.operate.entities={
     institutions:{
-        address:"/settings/institutions/ajax",
+        address:"/settings/institutions/",
+        href:"/settings/institutions",
         item_template:
             "<tr id='template' class='template'>"
-                +"<td><input type='text' name='name'/></td>"
-                +"<td><input type='text' name='address'/></td>"
-                +"<td><input type='text' name='phone'/></td>"
+                +"<td post='name'><input type='text' name='name'/></td>"
+                +"<td post='address'><input type='text' name='address'/></td>"
+                +"<td post='tel'><input type='text' name='phone'/></td>"
                 +"<td><i class='icon checkmark'></i><i class='icon trash' role='temp'></i></td>"+
             "</tr>"
     },
     users:{
-        address:"../admin/users",
+        address:"/settings/users/",
+        href:"/settings/users",
         item_template:
             "<tr id='template' class='template'>"
                 +"<td><img class='ui avatar image'/></td>"
@@ -55,7 +66,7 @@ BACKINDEX.admin.operate.entities={
             "</tr>"
     },
     settings:{
-        address:"/settings"
+
     }
 };
 BACKINDEX.admin.operate.init=function(){
@@ -64,8 +75,22 @@ BACKINDEX.admin.operate.init=function(){
          if($(this).attr("role")!="temp"){
              if(confirm("确定删除该项吗？")){
                  var id=$(this).attr('affect');
-                 $("#admin-operate-table").find("#"+id).remove();
+
+//                 $("#admin-operate-table").find("#"+id).remove();
+
                  //post
+                 var type=BACKINDEX.admin.operate.type;
+                 var href=BACKINDEX.admin.operate.entities[type].href;
+                 $.ajax({
+                     url:href+"/id",
+                     type:"DELETE",
+                     success:function(data){
+                         if(data.result){
+                             $("#admin-operate-table").find("#"+id).remove();
+                         }
+                     }
+                 })
+
              }
          }
          else{
@@ -95,10 +120,31 @@ BACKINDEX.admin.operate.init=function(){
     });
     $("#admin-operate-table").on("blur","input[type='text']",function(){
         if($(this).parent().parent().attr("id")!="template"){
-            var value=$(this).val();
-            $(this).parent().text(value);
-            $(this).remove();
+            var value=$(this).val(),
+                postType=$(this).parent().attr("post"),
+                id=$(this).parent().parent().attr("id"),
+                $this=$(this);
+
+//            $this.parent().text(value);
+//            $this.remove();
+
             //post
+            var type=BACKINDEX.admin.operate.type;
+            var href=BACKINDEX.admin.operate.entities[type].href;
+            var postObject={id:id,institution:{}};
+            postObject.institution[postType]=value;
+            $.ajax({
+               url:href,
+               date:postObject,
+               type:"PUT",
+               success:function(data){
+                   if(data.result){
+                       $this.parent().text(value);
+                       $this.remove();
+                   }
+               }
+            })
+
         }
     });
     //user下的check box 修改
@@ -146,14 +192,40 @@ BACKINDEX.admin.operate.init=function(){
                     return;
                 }
             }
+
+//            for(i=0;i<$target.length;i++){
+//                $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
+//            }
+//            var new_id=21;
+//            $("#template").find(".checkmark").remove();
+//            $("#template").find(".trash").attr("role","").attr("affect",new_id);
+//            $("#template").removeClass("template").attr("id",new_id);
+
+
             //post
-            for(i=0;i<$target.length;i++){
-                $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
-            }
-            var new_id=21;
-            $("#template").find(".checkmark").remove();
-            $("#template").find(".trash").attr("role","").attr("affect",new_id);
-            $("#template").removeClass("template").attr("id",new_id);
+            var type=BACKINDEX.admin.operate.type;
+            var href=BACKINDEX.admin.operate.entities[type].href;
+            var postObject={institution:{}};
+            postObject.institution.name=value_array[0];
+            postObject.institution.address=value_array[1];
+            postObject.institution.tel=value_array[2];
+            $.ajax({
+                url:href,
+                data:postObject,
+                type:"POST",
+                success:function(data){
+                    if(data.result){
+                        for(i=0;i<$target.length;i++){
+                            $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
+                        }
+                        var new_id=data.object;
+                        $("#template").find(".checkmark").remove();
+                        $("#template").find(".trash").attr("role","").attr("affect",new_id);
+                        $("#template").removeClass("template").attr("id",new_id);
+                    }
+                }
+            })
+
         }
         else if(BACKINDEX.admin.operate.type=="users"){
             var checkbox_target=$("#template").find(".checkbox"), check_count= 0,chosen_authority=[];
