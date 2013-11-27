@@ -1,6 +1,6 @@
 //type name
 //should be
-//student teacher course
+//Student teacher course
 
 var BACKINDEX=BACKINDEX || {};
 BACKINDEX.right_list=BACKINDEX.right_list||{};
@@ -69,7 +69,7 @@ BACKINDEX.right_list.observeScroll=function(){
    }
 };
 BACKINDEX.right_list.student.template="\
-    {{#student}}\
+    {{#Student}}\
     <li>\
     <table class='ui table segment'>\
         <tr>\
@@ -115,6 +115,6 @@ BACKINDEX.right_list.student.template="\
         </tr>\
     </table>\
     </li>\
-{{/student}}"
+{{/Student}}"
 //////////////////////////////////////////////////////////////////////////////////////////////////// 添加
 

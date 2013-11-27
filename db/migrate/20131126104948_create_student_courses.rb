@@ -1,7 +1,7 @@
 class CreateStudentCourses < ActiveRecord::Migration
   def change
     create_table :student_courses do |t|
-      t.references :student
+      t.references :Student
       t.references :course
       t.boolean :paid,:default=>false
       t.integer :status
