@@ -19,13 +19,13 @@ BACKINDEX.admin.init=(function(){
              $("#admin-setting>a").eq(0).addClass("active");
              var name=$("#admin-setting>a").eq(0);
              BACKINDEX.admin.operate.type=name;
-            $("#back-index-main>header label").text(name);
+            $("#back-index-main>header label").text($("#admin-setting>a").eq(0).find("label").text());
         }
         else{
             var name=url[url.length-1];
             $("#admin-setting").find("a[name='"+name+"']").addClass("active");
             BACKINDEX.admin.operate.type=name;
-            $("#back-index-main>header label").text(name);
+            $("#back-index-main>header label").text($("#admin-setting>a.active").find("label").text());
         }
     });
 })();
@@ -90,7 +90,7 @@ BACKINDEX.admin.operate.init=function(){
                  var type=BACKINDEX.admin.operate.type;
                  var href=BACKINDEX.admin.operate.entities[type].post_href;
                  $.ajax({
-                     url:href+"/id",
+                     url:href+"/"+id,
                      type:"DELETE",
                      success:function(data){
                          if(data.result){
@@ -142,7 +142,7 @@ BACKINDEX.admin.operate.init=function(){
             var postObject={id:id,institution:{}};
             postObject.institution[postType]=value;
             $.ajax({
-               url:href,
+               url:href+"/"+id,
                date:postObject,
                type:"PUT",
                success:function(data){
