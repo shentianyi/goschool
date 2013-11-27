@@ -677,6 +677,7 @@
 					}
 					cal.css({
 						visibility: 'visible',
+                        zIndex:100,
 						display: 'block',
 						top: top + 'px',
 						left: left + 'px'

@@ -1,7 +1,8 @@
 //添加学生，里面的插件初始化
 var BACKSTUDENT=BACKSTUDENT||{};
 BACKSTUDENT.addItem={};
-BACKSTUDENT.addItem.add=(function(){
+//student init
+(function(){
      $("#born-date").DatePicker({
          view:"years",
          date:$("#born-date").val()
