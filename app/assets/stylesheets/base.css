@@ -11,16 +11,16 @@
 }
 @font-face {
     font-family: 'Basic Icons';
-    /*src: url(/assets/basic.icons.eot);*/
-    /*src: url(/assets/basic.icons.eot?#iefix) format('embedded-opentype'),*/
-    /*url(/assets/basic.icons.woff) format('woff'),*/
-    /*url(/assets/basic.icons.ttf) format('truetype'),*/
-    /*url(/assets/basic.icons.svg#basic.icons) format('svg');*/
-    src: url(../fonts/basic.icons.eot);
-    src: url(../fonts/basic.icons.eot?#iefix) format('embedded-opentype'),
-    url(../fonts/basic.icons.woff) format('woff'),
-    url(../fonts/basic.icons.ttf) format('truetype'),
-    url(../fonts/basic.icons.svg#basic.icons) format('svg');
+    src: url(/assets/basic.icons.eot);
+    src: url(/assets/basic.icons.eot?#iefix) format('embedded-opentype'),
+    url(/assets/basic.icons.woff) format('woff'),
+    url(/assets/basic.icons.ttf) format('truetype'),
+    url(/assets/basic.icons.svg#basic.icons) format('svg');
+    /*src: url(../fonts/basic.icons.eot);*/
+    /*src: url(../fonts/basic.icons.eot?#iefix) format('embedded-opentype'),*/
+    /*url(../fonts/basic.icons.woff) format('woff'),*/
+    /*url(../fonts/basic.icons.ttf) format('truetype'),*/
+    /*url(../fonts/basic.icons.svg#basic.icons) format('svg');*/
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -151,6 +151,8 @@ select{
 .specialInput ul>li>.label{
     font-size:12px;
     padding:3px 2px;
+    background-color:#4092CC;
+    color:white;
 }
 .specialInput ul>li>.label>i{
     position:relative;
