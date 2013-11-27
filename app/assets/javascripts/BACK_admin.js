@@ -147,7 +147,7 @@ BACKINDEX.admin.operate.init=function(){
             console.log(postObject)
             $.ajax({
                url:href+"/"+id,
-               date:postObject,
+               data:postObject,
                type:"PUT",
                success:function(data){
                    if(data.result){
