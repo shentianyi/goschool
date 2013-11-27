@@ -1,5 +1,6 @@
 var BACKINDEX=BACKINDEX || {};
 BACKINDEX.admin={};
+BACKINDEX.admin.operate={};
 BACKINDEX.admin.init=(function(){
     $("body").on("click","#admin-setting>a",function(){
         if(!$(this).hasClass("active")){
@@ -13,35 +14,54 @@ BACKINDEX.admin.init=(function(){
     });
     $(document).ready(function(){
         BACKINDEX.admin.operate.init();
-        BACKINDEX.admin.operate.type=$("#admin-operate").attr("name");
+
+//        BACKINDEX.admin.operate.type="institutions";
+
+        var url=(window.location.href).split("/");
+        if(url[url.length-1]=="settings" && url[url.length-2]!="settings"){
+             $("#admin-setting>a").eq(0).addClass("active");
+             var name=$("#admin-setting>a").eq(0).attr("name");
+             BACKINDEX.admin.operate.type=name;
+            $("#back-index-main>header label").text($("#admin-setting>a").eq(0).find("label").text());
+        }
+        else{
+            var name=url[url.length-1];
+            $("#admin-setting").find("a[name='"+name+"']").addClass("active");
+            BACKINDEX.admin.operate.type=name;
+            $("#back-index-main>header label").text($("#admin-setting>a.active").find("label").text());
+        }
     });
 })();
 BACKINDEX.admin.generateHTML=function(){
     var type=BACKINDEX.admin.operate.type;
-    var address=BACKINDEX.admin.operate.entities[type].address;
+    var address=BACKINDEX.admin.operate.entities[type].address,
+        href=BACKINDEX.admin.operate.entities[type].href;
     $.ajax({
         url:address,
         dataType:"html",
         success:function(data){
+            window.history.pushState({},"",href);
             $("#partial-content").html(data);
         }
     });
 };
-BACKINDEX.admin.operate={};
-// BACKINDEX.admin.operate.type=$("#admin-operate").attr("name");
 BACKINDEX.admin.operate.entities={
     institutions:{
         address:"/settings/institutions/ajax",
+        href:"/settings/institutions",
+        post_href:"/institutions",
         item_template:
             "<tr id='template' class='template'>"
-                +"<td><input type='text' name='name'/></td>"
-                +"<td><input type='text' name='address'/></td>"
-                +"<td><input type='text' name='phone'/></td>"
+                +"<td post='name'><input type='text' name='name'/></td>"
+                +"<td post='address'><input type='text' name='address'/></td>"
+                +"<td post='tel'><input type='text' name='phone'/></td>"
                 +"<td><i class='icon checkmark'></i><i class='icon trash' role='temp'></i></td>"+
             "</tr>"
     },
     users:{
-        address:"../admin/users",
+        address:"/settings/users/ajax",
+        href:"/settings/users",
+        post_href:"/users",
         item_template:
             "<tr id='template' class='template'>"
                 +"<td><img class='ui avatar image'/></td>"
@@ -50,22 +70,42 @@ BACKINDEX.admin.operate.entities={
                     +"<div class='ui checkbox'><input type='checkbox' name='education'/><label>教务人员</label></div>"
                     +"<div class='ui checkbox'><input type='checkbox' name='business'/><label>业务人员</label></div>"
                     +"<div class='ui checkbox'><input type='checkbox' name='teacher'/><label>教师</label></div>"
+                +"<div class='ui checkbox'><input type='checkbox' name='admin'/><label>管理员</label></div>"
                 +"</td>"
                 +"<td><i class='icon checkmark'></i><i class='icon trash' role='temp'></i></td>"+
             "</tr>"
     },
     settings:{
-        address:"/settings"
+        address:"/settings/settings/ajax",
+        href:"/settings/settings",
+        post_href:"/settings"
     }
 };
 BACKINDEX.admin.operate.init=function(){
 //  删除
-    $("#admin-operate-table").on("click",".trash",function(){
+    $("body").on("click","#admin-operate-table .trash",function(){
          if($(this).attr("role")!="temp"){
              if(confirm("确定删除该项吗？")){
                  var id=$(this).attr('affect');
-                 $("#admin-operate-table").find("#"+id).remove();
+
+//                 $("#admin-operate-table").find("#"+id).remove();
+
                  //post
+                 var type=BACKINDEX.admin.operate.type;
+                 var href=BACKINDEX.admin.operate.entities[type].post_href;
+                 $.ajax({
+                     url:href+"/"+id,
+                     type:"DELETE",
+                     success:function(data){
+                         if(data.result){
+                             $("#admin-operate-table").find("#"+id).remove();
+                         }
+                         else{
+                             MessageBox_content(data.content);
+                         }
+                     }
+                 })
+
              }
          }
          else{
@@ -73,7 +113,7 @@ BACKINDEX.admin.operate.init=function(){
          }
     });
 //  修改
-    $("#admin-operate-table").on("dblclick","tbody td",function(){
+    $("body").on("dblclick","#admin-operate-table tbody td",function(){
         if($(this).children().length==0){
             var text=$(this).text();
             $(this).text("");
@@ -81,7 +121,7 @@ BACKINDEX.admin.operate.init=function(){
             $("input",this).focus().val(text);
         }
     });
-    $("#admin-operate-table").on("keyup","input[type='text']",function(event){
+    $("body").on("keyup","#admin-operate-table input[type='text']",function(event){
         var e=adapt_event(event).event;
         if(e.keyCode==  13){
             if($(this).parent().parent().attr("id")!="template"){
@@ -93,16 +133,40 @@ BACKINDEX.admin.operate.init=function(){
             stop_propagation(event);
         }
     });
-    $("#admin-operate-table").on("blur","input[type='text']",function(){
+    $("body").on("blur","#admin-operate-table input[type='text']",function(){
         if($(this).parent().parent().attr("id")!="template"){
-            var value=$(this).val();
-            $(this).parent().text(value);
-            $(this).remove();
+            var value=$(this).val(),
+                postType=$(this).parent().attr("post"),
+                id=$(this).parent().parent().attr("id"),
+                $this=$(this);
+
+//            $this.parent().text(value);
+//            $this.remove();
+
             //post
+            var type=BACKINDEX.admin.operate.type;
+            var href=BACKINDEX.admin.operate.entities[type].post_href;
+            var postObject={id:id,institution:{}};
+            postObject.institution[postType]=value;
+            $.ajax({
+               url:href+"/"+id,
+               data:postObject,
+               type:"PUT",
+               success:function(data){
+                   if(data.result){
+                       $this.parent().text(value);
+                       $this.remove();
+                   }
+                   else{
+                       MessageBox_content(data.content);
+                   }
+               }
+            })
+
         }
     });
     //user下的check box 修改
-    $("#admin-operate-table").on("click",".checkbox",function(){
+    $("body").on("click","#admin-operate-table .checkbox",function(){
         if($("input",this).prop("checked")){
             //post
         }
@@ -117,7 +181,7 @@ BACKINDEX.admin.operate.init=function(){
             $("#admin-operate-table #template").find(".checkmark").click();
         }
     });
-    $("#admin-operate-table").on("click","#admin-operate-add",function(event){
+    $("body").on("click","#admin-operate-table #admin-operate-add",function(event){
         var target=BACKINDEX.admin.operate.entities[BACKINDEX.admin.operate.type];
         if($("#admin-operate-table tbody").find("#template").length==0){
             $("#admin-operate-table tbody").append(target.item_template);
@@ -132,7 +196,7 @@ BACKINDEX.admin.operate.init=function(){
             $("#template").find("input[type='text']").eq(0).focus();
         }
     });
-    $("#admin-operate-table").on("click",".checkmark",function(){
+    $("body").on("click","#admin-operate-table .checkmark",function(){
         var $target=$("#template").find("input[type='text']"),
             value_array=[], i,validate=true;
         if(BACKINDEX.admin.operate.type=="institutions"){
@@ -146,14 +210,43 @@ BACKINDEX.admin.operate.init=function(){
                     return;
                 }
             }
+
+//            for(i=0;i<$target.length;i++){
+//                $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
+//            }
+//            var new_id=21;
+//            $("#template").find(".checkmark").remove();
+//            $("#template").find(".trash").attr("role","").attr("affect",new_id);
+//            $("#template").removeClass("template").attr("id",new_id);
+
+
             //post
-            for(i=0;i<$target.length;i++){
-                $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
-            }
-            var new_id=21;
-            $("#template").find(".checkmark").remove();
-            $("#template").find(".trash").attr("role","").attr("affect",new_id);
-            $("#template").removeClass("template").attr("id",new_id);
+            var type=BACKINDEX.admin.operate.type;
+            var href=BACKINDEX.admin.operate.entities[type].post_href;
+            var postObject={institution:{}};
+            postObject.institution.name=value_array[0];
+            postObject.institution.address=value_array[1];
+            postObject.institution.tel=value_array[2];
+            $.ajax({
+                url:href,
+                data:postObject,
+                type:"POST",
+                success:function(data){
+                    if(data.result){
+                        for(i=0;i<$target.length;i++){
+                            $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
+                        }
+                        var new_id=data.content;
+                        $("#template").find(".checkmark").remove();
+                        $("#template").find(".trash").attr("role","").attr("affect",new_id);
+                        $("#template").removeClass("template").attr("id",new_id);
+                    }
+                    else{
+                        MessageBox_content(data.content);
+                    }
+                }
+            })
+
         }
         else if(BACKINDEX.admin.operate.type=="users"){
             var checkbox_target=$("#template").find(".checkbox"), check_count= 0,chosen_authority=[];
@@ -189,5 +282,25 @@ BACKINDEX.admin.operate.init=function(){
             }
         }
     });
-
+//    default-password 修改
+    $("body").on("click","#default-password-update",function(){
+       var password=$("#default-password").val();
+        $.ajax({
+            url:"/settings",
+            type:"PUT",
+            data:{
+                setting:{
+                    default_pwd:password
+                }
+            },
+            success:function(data){
+                if(data.result){
+                    MessageBox("修改成功！","top","success");
+                }
+                else{
+                    MessageBox_content(data.content);
+                }
+            }
+        })
+    });
 };

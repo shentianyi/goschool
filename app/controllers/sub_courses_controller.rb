@@ -6,9 +6,7 @@ class SubCoursesController < ApplicationController
   def create
     if @course=Course.find_by_id(params[:course_id].strip)
       @sub_course = @course.sub_courses.build(params[:sub_course].strip)
-      unless @msg.result=@sub_course.save
-      @msg.content=@sub_course.errors.messages
-      end
+     @msg.content=(@msg.result=@sub_course.save) ? @sub_course.id :  @sub_course.errors.messages
     else
       @msg.content='课程不存在，无法添加内容'
     end

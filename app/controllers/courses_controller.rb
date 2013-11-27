@@ -1,7 +1,7 @@
 #encoding: utf-8
 class CoursesController < ApplicationController
-  before_filter :init_message ,:only=>[:edit,:create,:update,:destroy]
-  before_filter :get_course,:only=>[:update,:edit,:destroy]
+  before_filter :init_message ,:only=>[:edit,:create,:update,:destroy,:students]
+  before_filter :get_course,:only=>[:update,:edit,:destroy,:students]
   before_filter :render_nil_msg , :only=>[:edit,:update,:destroy]
   def index
     render :json=> Course.all
@@ -21,6 +21,7 @@ class CoursesController < ApplicationController
     unless @msg.result=@course.save
     @msg.content=@course.errors.messages
     else
+      @msg.content=@course.id
       @course.add_tags(tags[:tags]) if tags.size>0
     end
     render :json=>@msg
@@ -54,6 +55,10 @@ class CoursesController < ApplicationController
     render :json=>items
   end
 
+  def students
+    render :json=> @course.course_students.all.collect{|student|  StudentCoursePresenter.new(student).to_json}
+  end
+  
   private
 
   def get_course

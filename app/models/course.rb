@@ -19,6 +19,7 @@ class Course < ActiveRecord::Base
 
   redis_search_index(:title_field => :name,
                      :condition_fields => [:tenant_id])
+                     
   def add_tags tags
     Resque.enqueue(TagAdder,self.tenant_id,self.class.name,self.id,tags)
   end
@@ -35,6 +36,11 @@ class Course < ActiveRecord::Base
   def create_default_sub_course
     self.sub_courses.create(:parent_name=>self.name,:is_default=>true) unless self.has_sub
   end
+  
+  def course_students
+    self.students.select('student_courses.*,student_courses.created_at as enrol_time,students.*')
+  end
+  
   private
 
   def validate_save

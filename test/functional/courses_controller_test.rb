@@ -33,7 +33,7 @@ class CoursesControllerTest < ActionController::TestCase
   test "should get edit" do
     get :edit, id: @course.id
     assert_response :success
-  # puts response.body
+    puts response.body
   end
 
   test "should destroy course" do
@@ -42,9 +42,15 @@ class CoursesControllerTest < ActionController::TestCase
     end
   end
 
-  test 'should list list search course' do
-     get :list_search ,q:'c'
-     assert_response :success
-     puts response.body
+  test 'should list  search course' do
+    get :list_search ,q:'c'
+    assert_response :success
+    puts response.body
+  end
+
+  test 'should list course students' do
+    get :students ,id:@course.id
+    assert_response :success
+    puts response.body
   end
 end

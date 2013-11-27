@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
@@ -41,7 +40,7 @@ class StudentsController < ApplicationController
   # POST /students
   # POST /students.json
   def create
-    @student = Student.new(params[:Student])
+    @student = Student.new(params[:student])
 
     respond_to do |format|
       if @student.save
@@ -60,7 +59,7 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
 
     respond_to do |format|
-      if @student.update_attributes(params[:Student])
+      if @student.update_attributes(params[:student])
         format.html { redirect_to @student, notice: 'Student was successfully updated.' }
         format.json { head :no_content }
       else
@@ -79,30 +78,6 @@ class StudentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to students_url }
       format.json { head :no_content }
-    end
-  end
-
-  # List Search Result
-  def list_search
-    results = []
-    results = Redis::Search.query('Student',params[:query],:conditions =>{:tenant_id=>current_tenant.id})
-    students = []
-    results.slice(0,10).each do |student|
-      students<<{:name=>student['name'],:school=>student['school'],:address=>student['address'],:guardian=>student['guardian']}
-    end
-    render :json=>students
-  end
-
-  #get student
-  def get_student
-    @student=Student.find_by_id(params[:id])
-  end
-  
-  #nil msg
-  def render_all_msg
-    unless @student
-      @msg.content='不存在此学生'
-      render :json=>msg
     end
   end
 end
