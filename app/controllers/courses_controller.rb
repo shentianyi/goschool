@@ -56,7 +56,7 @@ class CoursesController < ApplicationController
   end
 
   def students
-    render :json=> @course.course_students.all.collect{|student|  StudentCoursePresenter.new(student).to_json}
+    render :json=> @course.course_students.collect{|student|  StudentCoursePresenter.new(student).to_json}
   end
   
   private
