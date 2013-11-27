@@ -35,6 +35,7 @@ class Course < ActiveRecord::Base
   def create_default_sub_course
     self.sub_courses.create(:parent_name=>self.name,:is_default=>true) unless self.has_sub
   end
+  
   private
 
   def validate_save
