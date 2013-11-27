@@ -1,6 +1,6 @@
 #encoding: utf-8
 class StudentCoursePresenter<Presenter
-  def_delegators :students,:name,:id,:email,:gender,:phone,:paid,:image_url,:enrol_time
+  def_delegators :@student,:name,:id,:email,:gender,:phone,:paid,:image_url,:enrol_time
 
   def initialize(student)
     @student=student
@@ -13,13 +13,8 @@ class StudentCoursePresenter<Presenter
   def paid_display
     @student.paid ? '是' : '否'
   end
-
-
-  def to_jsons
-    
-  end
   
-  def to_json student
+  def to_json
     {
         name:self.name,
          id: self.id,

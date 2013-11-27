@@ -54,4 +54,16 @@ class UsersController < ApplicationController
     end 
     render :json=>msg
   end
+
+  def get_user
+    msg = Msg.new
+    msg.result = false
+    @user = User.find_by_id(params[:id])
+    if @user
+      msg.result = true
+      msg.object = @user.as_json 
+    end
+   
+    render :json=>msg
+  end
 end

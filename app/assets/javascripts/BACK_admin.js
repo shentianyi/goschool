@@ -150,7 +150,7 @@ BACKINDEX.admin.operate.init=function(){
             postObject.institution[postType]=value;
             $.ajax({
                url:href+"/"+id,
-               date:postObject,
+               data:postObject,
                type:"PUT",
                success:function(data){
                    if(data.result){
