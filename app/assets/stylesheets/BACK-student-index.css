@@ -35,7 +35,7 @@
 .back-index-main>.search-list>.search-result>li .recommend{
     text-align:center;
 }
-.back-index-main>.search-list>.search-result>li .maybe-know+p,
+.back-index-main>.search-list>.search-result>li .maybe-know+p>span,
 .back-index-main>.search-list>.search-result>li .recommend+p>span{
     display:block;
     text-align:center;

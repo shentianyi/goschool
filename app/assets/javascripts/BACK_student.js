@@ -12,7 +12,14 @@ BACKSTUDENT.addItem.add=(function(){
     });
 })();
 BACKSTUDENT.addItem.clear=function(){
-   $("#back-index-add input[type='text']").val("");
    $("#back-index-add .radio.ui").eq(0).checkbox('enable');
+   $("#back-index-add input[type='text']").val("");
    $("#back-index-add .checkbox.ui").checkbox('enable');
+   var specialInput_size=$("#back-index-add .specialInput>ul").size,i;
+   if(specialInput_size>1){
+        for(i=0;i<specialInput_size-1;i++){
+            $("#back-index-add .specialInput>ul>li").eq(i).remove();
+        }
+   }
+   $("#back-index-add .specialInput>ul>li").eq(specialInput_size-1).find("input").val("");
 }
