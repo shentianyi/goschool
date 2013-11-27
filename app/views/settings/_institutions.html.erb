@@ -25,9 +25,9 @@
           <tbody>
                <%@institutions.each_with_index do |institution,i|%>
                <tr id="<%=institution.id%>">
-                    <td><%=institution.name%></td>
-                    <td><%=institution.address%></td>
-                    <td><%=institution.tel%></td>
+                    <td post='name'><%=institution.name%></td>
+                    <td post='address'><%=institution.address%></td>
+                    <td post='tel'><%=institution.tel%></td>
                     <td><i class="trash icon" affect="<%=institution.id%>"></i></td>
                </tr>
                <%end%>
