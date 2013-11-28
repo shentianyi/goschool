@@ -33,6 +33,8 @@ class InstitutionsControllerTest < ActionController::TestCase
   test "show destroy institution" do
     assert_difference("Institution.count",-1) do
       delete :destroy , :id=>@institution.id
+      assert_response :success
+      puts response.body
     end
   end
 

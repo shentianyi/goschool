@@ -8,35 +8,29 @@ class InstitutionsController < ApplicationController
   end
 
   def create
-    @institution=current_tenant.institutions.build(params[:institution].strip)
-    @msg.content=(@msg.result=@institution.save) ? @institution.id :  @institution.errors.messages
+    @instance=current_tenant.institutions.build(params[:institution].strip)
+    @msg.content=(@msg.result=@instance.save) ? @instance.id :  @instance.errors.messages
     render :json=>@msg
   end
 
   def show
-    render :json=>@institution
+    render :json=>@instance
   end
 
   def update
-    unless @msg.result=@institution.update_attributes(params[:institution].strip)
-    @msg.content=@institution.errors.messages
+    unless @msg.result=@instance.update_attributes(params[:institution].strip)
+    @msg.content=@instance.errors.messages
     end
     render :json=>@msg
   end
 
-  def destroy
-    @institution.destroy
-    @msg.result=true
-    render :json=>@msg
-  end
-
   private
-  def get_institution
-    @institution=Institution.find_by_id(params[:id].strip)
-  end
+  # def get_institution
+    # @instance=Institution.find_by_id(params[:id].strip)
+  # end
 
   def render_nil_msg
-    unless @institution
+    unless @instance
       @msg.content='不存在此机构'
       render :json=>msg
     end
