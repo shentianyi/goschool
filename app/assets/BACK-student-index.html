@@ -275,15 +275,12 @@
                 <i class="mobile icon"></i>
             </div>
             <div class="ui left icon input specialInput labelForm autoComplete">
-                <ul class="stop">
-                    <!--<li><div class="ui label">SAT<i class="delete icon"></i> </div></li>-->
-                    <!--<li><div class="ui label">托福<i class="delete icon"></i> </div></li>-->
-                    <!--<li><div class="ui label">雅思<i class="delete icon"></i> </div></li>-->
-                    <li><input type='text' style="padding:0;width:40px;"/></li>
+                <ul>
+                    <li><input type='text' placeholder="标签..." style="padding:0;width:40px;"/></li>
                 </ul>
                 <i class="tag icon stop"></i>
             </div>
-            <div class="ui left icon input">
+            <div class="ui left icon input autoComplete">
                 <input placeholder="推荐人..." type="text">
                 <i class="smile icon"></i>
             </div>
@@ -297,6 +294,15 @@
         </div>
     </div>
 </section>
+
+<div id="autoComplete-call" class="autoComplete-call">
+    <ul>
+        <li>托福夏季班</li>
+        <li>托福秋季班</li>
+        <li>托福春季班</li>
+        <li>托福冬季班</li>
+    </ul>
+</div>
 
 <script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>
 <script type='text/javascript' src="javascripts/datepicker.js" ></script>
