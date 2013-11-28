@@ -222,7 +222,8 @@ BACKINDEX.admin.operate.init=function(){
                 $("#admin-operate-table .checkbox").checkbox();
                 var number=Math.floor(Math.random()*9);
                 //image
-                $("#admin-operate-table #template").find("img").attr("src","images/portrait/"+number+".jpg");
+//                $("#admin-operate-table #template").find("img").attr("src","images/portrait/"+number+".jpg");
+                $("#admin-operate-table #template").find("img").attr("src","/assets/"+number+".jpg");
             }
         }
         if($("#template").find("input[type='text']").length>0){
