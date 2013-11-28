@@ -45,9 +45,9 @@ class StudentsController < ApplicationController
     msg.result = false
     begin 
       ActiveRecord::Base.transaction do
-        @student = Student.new(params[:Student])
+        @student = Student.new(params[:student])
         @default_pwd = current_tenant.setting.default_pwd
-        @logininfo = Logininfo.new(:email=>params[:Student][:email],:password=>@default_pwd,:password_confirmation=>@default_pwd)
+        @logininfo = Logininfo.new(:email=>params[:student][:email],:password=>@default_pwd,:password_confirmation=>@default_pwd)
         @new_role = LogininfoRole.new(:role_id=>'300')
         @logininfo.logininfo_roles<<@new_role
         @logininfo.tenant = current_tenant
@@ -71,29 +71,36 @@ class StudentsController < ApplicationController
   # PUT /students/1
   # PUT /students/1.json
   def update
-    @student = Student.find(params[:id])
-
-    respond_to do |format|
-      if @student.update_attributes(params[:Student])
-        format.html { redirect_to @student, notice: 'Student was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
+    msg = Msg.new
+    msg.result = false
+    begin
+      @student = Student.find(params[:id])
+      ActiveRecord::Base.transaction do
+        if params[:student][:email]
+          @student.logininfo.update_attribute(:email=>params[:student][:email])
+          @student.logininfo.save!
+        end
+        @student.update_attributes(params[:student])
+        msg.result = true
       end
+    rescue ActiveRecord::RecordInvalid => invalid 
+      msg.result = false
+      msg.content = invalid.record.errors
     end
+    render :json=>msg
   end
 
   # DELETE /students/1
   # DELETE /students/1.json
   def destroy
-    @student = Student.find(params[:id])
-    @student.destroy
+    @sutdent = Student.find_by_id(params[:id])
+    @logininfo = Logininfo.find_by_id(@student.logininfo.id) 
+    
+    @logininfo.destroy
 
-    respond_to do |format|
-      format.html { redirect_to students_url }
-      format.json { head :no_content }
-    end
+    msg = Msg.new
+    msg.result = true
+    render :json=>msg
   end
 
   # List Search Result
