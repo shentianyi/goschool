@@ -111,9 +111,14 @@
     font-weight:bold;
     color:#444;
 }
-.back-index-side-header>.ui.button{
+.back-index-side-header>.ui.button:first-of-type{
     position:absolute;
     right:10px;
+    top:17px;
+}
+.back-index-side-header>.ui.button:nth-of-type(2){
+    position:absolute;
+    right:125px;
     top:17px;
 }
 /*中间段*/

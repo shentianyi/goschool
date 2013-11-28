@@ -5811,7 +5811,7 @@ i.massive.basic.icon {
 .ui.labeled.icon.buttons .button,
 .ui.labeled.icon.button {
   position: relative;
-  padding-left: 4em !important;
+  padding-left: 3.7em !important;
   padding-right: 1.4em !important;
 }
 

@@ -57,7 +57,7 @@ BACKINDEX.admin.operate.entities={
                 +"<td post='name'><input type='text' name='name'/></td>"
                 +"<td post='address'><input type='text' name='address'/></td>"
                 +"<td post='tel'><input type='text' name='phone'/></td>"
-                +"<td><i class='icon checkmark'></i><i class='icon trash' role='temp'></i></td>"+
+                +"<td><i class='icon add sign box'></i><i class='icon trash' role='temp'></i></td>"+
             "</tr>"
     },
     users:{
@@ -75,7 +75,7 @@ BACKINDEX.admin.operate.entities={
                     +"<div class='ui checkbox' role='400'><input type='checkbox'  name='teacher'/><label>教师</label></div>"
                     +"<div class='ui checkbox' role='500'><input type='checkbox'  name='admin'/><label>管理员</label></div>"
                 +"</td>"
-                +"<td><i class='icon checkmark'></i><i class='icon trash' role='temp'></i></td>"+
+                +"<td><i class='icon add sign box'></i><i class='icon trash' role='temp'></i></td>"+
             "</tr>"
     },
     settings:{
@@ -131,7 +131,7 @@ BACKINDEX.admin.operate.init=function(){
                 $(e.target).blur();
             }
             else{
-                $("#admin-operate-table #template").find(".checkmark").click();
+                $("#admin-operate-table #template").find(".add.sign.box").click();
             }
             stop_propagation(event);
         }
@@ -211,7 +211,7 @@ BACKINDEX.admin.operate.init=function(){
     $("body").on("keyup",function(event){
         var e=adapt_event(event).event;
         if($("#admin-operate-table #template").length>0 && e.keyCode==13){
-            $("#admin-operate-table #template").find(".checkmark").click();
+            $("#admin-operate-table #template").find(".add.sign.box").click();
         }
     });
     $("body").on("click","#admin-operate-table #admin-operate-add",function(event){
@@ -230,7 +230,7 @@ BACKINDEX.admin.operate.init=function(){
             $("#template").find("input[type='text']").eq(0).focus();
         }
     });
-    $("body").on("click","#admin-operate-table .checkmark",function(){
+    $("body").on("click","#admin-operate-table .add.sign.box",function(){
         var $target=$("#template").find("input[type='text']"),
             value_array=[], i,validate=true,
             type=BACKINDEX.admin.operate.type;
@@ -251,7 +251,7 @@ BACKINDEX.admin.operate.init=function(){
 //                $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
 //            }
 //            var new_id=21;
-//            $("#template").find(".checkmark").remove();
+//            $("#template").find(".add.sign.box").remove();
 //            $("#template").find(".trash").attr("role","").attr("affect",new_id);
 //            $("#template").removeClass("template").attr("id",new_id);
 
@@ -271,7 +271,7 @@ BACKINDEX.admin.operate.init=function(){
                             $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
                         }
                         var new_id=data.content;
-                        $("#template").find(".checkmark").remove();
+                        $("#template").find(".add.sign.box").remove();
                         $("#template").find(".trash").attr("role","").attr("affect",new_id);
                         $("#template").removeClass("template").attr("id",new_id);
                     }
@@ -306,7 +306,7 @@ BACKINDEX.admin.operate.init=function(){
 //                    $("#template").find("td").eq(i+1).text(value_array[i]).find("input").remove();
 //                }
 //                var new_id=21;
-//                $("#template").find(".checkmark").remove();
+//                $("#template").find(".add.sign.box").remove();
 //                $("#template").find(".trash").attr("role","").attr("affect",new_id);
 //                $("#template").removeClass("template").attr("id",new_id);
 
@@ -327,7 +327,7 @@ BACKINDEX.admin.operate.init=function(){
                                 $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
                             }
                             var new_id=data.content.id;
-                            $("#template").find(".checkmark").remove();
+                            $("#template").find(".add.sign.box").remove();
                             $("#template").find(".trash").attr("role","").attr("affect",new_id);
                             $("#template").removeClass("template").attr("id",new_id);
                         }
