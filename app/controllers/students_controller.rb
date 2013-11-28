@@ -41,17 +41,31 @@ class StudentsController < ApplicationController
   # POST /students
   # POST /students.json
   def create
-    @student = Student.new(params[:Student])
-
-    respond_to do |format|
-      if @student.save
-        format.html { redirect_to @student, notice: 'Student was successfully created.' }
-        format.json { render json: @student, status: :created, location: @student }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
+    msg = Msg.new
+    msg.result = false
+    begin 
+      ActiveRecord::Base.transaction do
+        @student = Student.new(params[:Student])
+        @default_pwd = current_tenant.setting.default_pwd
+        @logininfo = Logininfo.new(:email=>params[:Student][:email],:password=>@default_pwd,:password_confirmation=>@default_pwd)
+        @new_role = LogininfoRole.new(:role_id=>'300')
+        @logininfo.logininfo_roles<<@new_role
+        @logininfo.tenant = current_tenant
+        if params[:is_active_account]
+          @logininfo.status = UserStatus::ACTIVE
+        else
+          @logininfo.status = UserStatus::LOCKED
+        end
+        @logininfo.save!
+        @student.logininfo = @loginnfo
+        @student.save!
+        msg.result = true
       end
+    rescue ActiveRecord::RecordInvalid=>invalid
+      msg.result = false
+      msg.content = invalid.record.errors
     end
+    render :json => msg
   end
 
   # PUT /students/1

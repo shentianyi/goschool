@@ -9,64 +9,64 @@ one:
   name: 'Jack'
   email: 'jack@jack.com'
   image_url: ''
-  logininfo: 1
+  logininfo: one
 # column: value
 #
 two:
   name: 'Helen'
   email: 'helen@helen.com'
   image_url: ''
-  logininfo: 2
+  logininfo: two
 #  column: value
 three:
   name: 'Jack'
   email: '3@3.com'
   image_url: ''
-  logininfo: 3
+  logininfo: three
 # column: value
 #
 four:
   name: 'Helen'
   email: '4@4.com'
   image_url: ''
-  logininfo: 4
+  logininfo: four
 #  column: value
 five:
   name: 'Jack'
   email: '5@5.com'
   image_url: ''
-  logininfo: 5
+  logininfo: five
 # column: value
 #
 six:
   name: 'Helen'
   email: '6@6.com'
   image_url: ''
-  logininfo: 6
+  logininfo: six
 #  column: value
 seven:
   name: 'Jack'
   email: '7@7.com'
   image_url: ''
-  logininfo: 7
+  logininfo: seven
 # column: value
 #
 eight:
   name: 'Helen'
   email: '8@8.com'
   image_url: ''
-  logininfo: 8
+  logininfo: eight
 #  column: value
 nine:
   name: 'Jack'
   email: '9@9.com'
   image_url: ''
-  logininfo: 9
+  logininfo: nine
 # column: value
 #
 ten:
   name: 'Helen'
   email: '10@10.com'
   image_url: ''
-  logininfo: 10
+  logininfo: ten
 #  column: value
