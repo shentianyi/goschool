@@ -154,7 +154,7 @@ function TCR(a,t){
 }
 //Message box
 function MessageBox(str,position, type) {
-    $('#MessageBox').addClass(type).addClass(position).find("p").text(str);
+    $('#MessageBox').addClass(type).addClass(position).find("p").html(str);
     $('#MessageBox').slideDown("2500");
     setTimeout(function(){
         $("#MessageBox").slideUp("2500");
@@ -166,7 +166,7 @@ function MessageBox_content(content){
     for(i in content){
         all_array=all_array.concat(content[i]);
     }
-    show_text=all_array.join("/n");
+    show_text=all_array.join("</br>");
     MessageBox(show_text,"top","warning")
 }
 //loader

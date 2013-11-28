@@ -5,17 +5,16 @@ class SettingsController < ApplicationController
   end
 
   def show
-    case params[:id].strip
+    case params[:id]
       when 'institutions'
         @institutions= current_tenant.institutions
-        @partial='institutions'
       when 'users'
         @logininfos=current_tenant.logininfos
-        @partial='users'
       else
         @setting=current_tenant.setting
         @partial='settings'
     end
+    @partial||=params[:id]
     render :partial=>@partial if params[:ajax]
   end
 
