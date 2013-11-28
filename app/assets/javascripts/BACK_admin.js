@@ -15,22 +15,22 @@ BACKINDEX.admin.init=(function(){
     $(document).ready(function(){
         BACKINDEX.admin.operate.init();
 
-        BACKINDEX.admin.operate.type="users";
+//        BACKINDEX.admin.operate.type="institutions";
 
-//        //post
-//        var url=(window.location.href).split("/");
-//        if(url[url.length-1]=="settings" && url[url.length-2]!="settings"){
-//             $("#admin-setting>a").eq(0).addClass("active");
-//             var name=$("#admin-setting>a").eq(0).attr("name");
-//             BACKINDEX.admin.operate.type=name;
-//            $("#back-index-main>header label").text($("#admin-setting>a").eq(0).find("label").text());
-//        }
-//        else{
-//            var name=url[url.length-1];
-//            $("#admin-setting").find("a[name='"+name+"']").addClass("active");
-//            BACKINDEX.admin.operate.type=name;
-//            $("#back-index-main>header label").text($("#admin-setting>a.active").find("label").text());
-//        }
+        //post
+        var url=(window.location.href).split("/");
+        if(url[url.length-1]=="settings" && url[url.length-2]!="settings"){
+             $("#admin-setting>a").eq(0).addClass("active");
+             var name=$("#admin-setting>a").eq(0).attr("name");
+             BACKINDEX.admin.operate.type=name;
+            $("#back-index-main>header label").text($("#admin-setting>a").eq(0).find("label").text());
+        }
+        else{
+            var name=url[url.length-1];
+            $("#admin-setting").find("a[name='"+name+"']").addClass("active");
+            BACKINDEX.admin.operate.type=name;
+            $("#back-index-main>header label").text($("#admin-setting>a.active").find("label").text());
+        }
 
     });
 })();
