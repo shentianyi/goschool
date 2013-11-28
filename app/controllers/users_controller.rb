@@ -32,10 +32,13 @@ class UsersController < ApplicationController
         @user = User.new(params[:user])
         @user.logininfo = @logininfo
         @user.save!
+        msg.result = true
+        msg.content = @user
       end
-    end
-    msg.result = true
-    msg.content = @user
+    rescue ActiveRecord::RecordInvalid => invalid
+      msg.result = false
+      msg.content = invalid.record.errors
+    end   
     render :json=>msg
   end
 
@@ -48,7 +51,7 @@ class UsersController < ApplicationController
       msg.result = true
       @logininfo.destroy
     elsif @logininfo && @logininfo.is_tenant
-      msg.content = "不能删除管理员"
+      msg.content = "不能删除创建者"
     end
     render :json=>msg
   end
@@ -63,31 +66,37 @@ class UsersController < ApplicationController
     msg.result = false
     @logininfo = Logininfo.find_by_id(params[:id])
     @user = @logininfo.user
-    
-    #update user
-    if params[:user]
-      if @user.update_attributes(params[:user])
-        if params[:user][:email]
-          puts '=============='
-          puts params[:user][:email]
-          @logininfo.update_attributes!(:email=>params[:user][:email])
+    begin
+      ActiveRecord::Base.transaction do
+        #update user
+        if params[:user]
+          if @user.update_attributes(params[:user])
+            if params[:user][:email]
+              puts '=============='
+              puts params[:user][:email]
+              @logininfo.update_attributes!(:email=>params[:user][:email])
+            end
+            msg.result = true
+          end
         end
-        msg.result = true
+        
+        #update role
+        if params[:logininfo_roles]
+          @logininfo.logininfo_roles.destroy_all
+          @roles = params[:logininfo_roles]
+          @roles.each {| role |
+            @new_role = LogininfoRole.new(:role_id=>role)
+            @logininfo.logininfo_roles<<@new_role
+          }
+          @logininfo.save
+          msg.result = true
+        end
       end
+    rescue ActiveRecord::RecordInvalid=>invalid
+      msg.result = false
+      msg.content = invalid.record.errors
     end
-
-    #update role
-    if params[:logininfo_roles]
-      @logiinfo.logininfo_roles.destroy
-      @roles = params[:logininfo_roles]
-      @roles.each {| role |
-        @role = LogininfoRole.new(role)
-        @logininfo.logininfo_roles<<@role
-      }
-      @logininfo.update!
-    end
-    
-    render :json=>msg
+      render :json=>msg
   end
 
   def get_user
