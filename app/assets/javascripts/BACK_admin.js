@@ -325,7 +325,7 @@ BACKINDEX.admin.operate.init=function(){
                             for(i=0;i<$target.length;i++){
                                 $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
                             }
-                            var new_id=data.content;
+                            var new_id=data.content.id;
                             $("#template").find(".checkmark").remove();
                             $("#template").find(".trash").attr("role","").attr("affect",new_id);
                             $("#template").removeClass("template").attr("id",new_id);

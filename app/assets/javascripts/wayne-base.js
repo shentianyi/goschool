@@ -218,30 +218,7 @@ $('.ui.checkbox').checkbox()
 GLOBAL.autoComplete={};
 GLOBAL.autoComplete.count=0;
 (function(){
-    $("body").on("keypress",".autoComplete input",function(event){
-        GLOBAL.autoComplete.count++;
-        var $this=$(adapt_event(event).target).parents(".autoComplete").eq(0);
-        var $my=$(adapt_event(event).target);
-        window.setTimeout(function(){
-            if(GLOBAL.autoComplete.count>1){
-                GLOBAL.autoComplete.count--;
-                return ;
-            }
-            else{
-                GLOBAL.autoComplete.count--;
-                if($.trim($my.val()).length==0){
-                    $("#autoComplete-call").css("left","-999em");
-                }
-                else{
-                    var width=parseInt($this.css("width")),
-                        left=$this[0].getBoundingClientRect().left,
-                        top=$this[0].getBoundingClientRect().bottom;
-                    $("#autoComplete-call").css("width",width-2).css("left",left).css("top",top);
-                }
-            }
-        },200)
-    });
-    $("body").on("keydown",".autoComplete input",function(event){
+    $("body").on("keyup",".autoComplete input",function(event){
         var e=adapt_event(event).event,validate=false;
         if(e.keyCode==40){
             if($("#autoComplete-call ul").find(".active").length==0){
@@ -263,12 +240,39 @@ GLOBAL.autoComplete.count=0;
             }
             validate=true;
         }
+        else{
+            GLOBAL.autoComplete.count++;
+            var $this=$(adapt_event(event).target).parents(".autoComplete").eq(0);
+            var $my=$(adapt_event(event).target);
+            window.setTimeout(function(){
+                if(GLOBAL.autoComplete.count>1){
+                    GLOBAL.autoComplete.count--;
+                    return ;
+                }
+                else{
+                    GLOBAL.autoComplete.count--;
+                    if($.trim($my.val()).length==0){
+                        $("#autoComplete-call").css("left","-999em");
+                    }
+                    else{
+                        var width=parseInt($this.css("width")),
+                            left=$this[0].getBoundingClientRect().left,
+                            top=$this[0].getBoundingClientRect().bottom;
+                        $("#autoComplete-call").css("width",width-2).css("left",left).css("top",top);
+                    }
+                }
+            },200)
+        }
         if(validate){
             if($("#autoComplete-call ul").find(".active").text().length>0){
                 var text=$("#autoComplete-call ul").find(".active").text();
                 $(document.activeElement).val(text);
             }
         }
+
+    });
+    $("body").on("keydown",".autoComplete input",function(event){
+
     });
     $("body").on("blur",".autoComplete input",function(){
         $("#autoComplete-call").css("left","-999em")
@@ -288,9 +292,9 @@ GLOBAL.autoComplete.count=0;
         $(this).find("input").val(value);
     });
     $("body").on("keydown",".labelForm input",function(event){
-        var $parent=$(event.target).parents(".labelForm").eq(0);
+        var $parent=$(adapt_event(event).target).parents(".labelForm").eq(0);
         var max_width=parseInt($parent.css("width"))*0.8;
-        var $this=$(event.target);
+        var $this=$(adapt_event(event).target);
         $(this).css("maxWidth",max_width);
         if(event.keyCode==32 || event.keyCode==13){
             var value=$this.val();
@@ -300,7 +304,7 @@ GLOBAL.autoComplete.count=0;
                         .append($("<i />").addClass("delete icon")))
                 );
             }
-            console.log($this.val().match());
+            $this.val("");
         }
     });
     $("body").on("click",".labelForm .delete.icon",function(){

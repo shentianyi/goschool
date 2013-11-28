@@ -29,28 +29,28 @@
 		    <td post="name"><%=logininfo.user.name%></td>
 		    <td post="email"><%=logininfo.email%></td>
             <td>
-              <div class="ui checkbox">
+              <div class="ui checkbox" role="100">
                 <input <% if logininfo.check_role 100 %>
 		       checked
 		       <% end %>
 		       name="education" type="checkbox">
                 <label>教务人员</label>
               </div>
-              <div class="ui checkbox">
+              <div class="ui checkbox" role="200">
                 <input  <% if logininfo.check_role 200 %>
 		       checked
 		       <% end %>
 		   name="business" type="checkbox">
                 <label>业务人员</label>
               </div>
-              <div class="ui checkbox">
+              <div class="ui checkbox" role="400">
                 <input <% if logininfo.check_role 400 %>
 		       checked
 		       <% end %>
 		   name="teacher" type="checkbox">
                 <label>老师</label>
               </div>
-	            <div class="ui checkbox">
+	            <div class="ui checkbox" role="500">
                 <input <% if logininfo.check_role 500 %>
 		                checked
 		                <% end %>
