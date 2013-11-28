@@ -326,7 +326,7 @@
     top:-40px;
     cursor:pointer;
     transition:color 0.25s ease-out;
-    overflow-y: auto;
+
 }
 .back-index-add>.inner>p{
     text-align:center;

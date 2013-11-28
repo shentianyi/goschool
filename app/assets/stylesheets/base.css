@@ -164,7 +164,6 @@ select{
     outline: medium none;
     padding: 0.85em 0 0.85em 1.2em;
     transition: background-color 0.3s ease-out 0s, box-shadow 0.2s ease 0s, border-color 0.2s ease 0s;
-    width: 100%;
     list-style: none;
 }
 .specialInput ul:after{

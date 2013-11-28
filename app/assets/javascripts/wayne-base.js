@@ -221,24 +221,28 @@ GLOBAL.autoComplete.count=0;
     $("body").on("keyup",".autoComplete input",function(event){
         var e=adapt_event(event).event,validate=false;
         if(e.keyCode==40){
-            if($("#autoComplete-call ul").find(".active").length==0){
-                $("#autoComplete-call ul li").eq(0).addClass("active");
+            if($.trim($(adapt_event(event).target).val()).length>0){
+                if($("#autoComplete-call ul").find(".active").length==0){
+                    $("#autoComplete-call ul li").eq(0).addClass("active");
+                }
+                else{
+                    $("#autoComplete-call ul").find(".active").removeClass("active").next().addClass("active")
+                }
+                validate=true;
             }
-            else{
-                $("#autoComplete-call ul").find(".active").removeClass("active").next().addClass("active")
-            }
-            validate=true;
+
         }
         else if(e.keyCode==38){
-            e.preventDefault();
-            if($("#autoComplete-call ul").find(".active").length==0){
-                var count=$("#autoComplete-call ul li").length;
-                $("#autoComplete-call ul li").eq(count-1).addClass("active");
+            if($.trim($(adapt_event(event).target).val()).length>0){
+                if($("#autoComplete-call ul").find(".active").length==0){
+                    var count=$("#autoComplete-call ul li").length;
+                    $("#autoComplete-call ul li").eq(count-1).addClass("active");
+                }
+                else{
+                    $("#autoComplete-call ul").find(".active").removeClass("active").prev().addClass("active")
+                }
+                validate=true;
             }
-            else{
-                $("#autoComplete-call ul").find(".active").removeClass("active").prev().addClass("active")
-            }
-            validate=true;
         }
         else{
             GLOBAL.autoComplete.count++;
@@ -272,7 +276,10 @@ GLOBAL.autoComplete.count=0;
 
     });
     $("body").on("keydown",".autoComplete input",function(event){
-
+        var e=adapt_event(event).event;
+        if(e.keyCode==38){
+            e.preventDefault();
+        }
     });
     $("body").on("blur",".autoComplete input",function(){
         $("#autoComplete-call").css("left","-999em")
@@ -283,7 +290,7 @@ GLOBAL.autoComplete.count=0;
 (function(){
     $(".labelForm").each(function(){
         var $input=$(this).find("input");
-        var max_width=parseInt($(this).css("width"))*0.75;
+        var max_width=parseInt($(this).css("width"))*0.85;
         $input.css("width",max_width);
     });
     $("body").on("click",".labelForm",function(){
@@ -293,17 +300,16 @@ GLOBAL.autoComplete.count=0;
     });
     $("body").on("keydown",".labelForm input",function(event){
         var $parent=$(adapt_event(event).target).parents(".labelForm").eq(0);
-        var max_width=parseInt($parent.css("width"))*0.8;
-        var $this=$(adapt_event(event).target);
-        $(this).css("maxWidth",max_width);
-        if(event.keyCode==32 || event.keyCode==13){
-            var value=$this.val();
-            if($.trim(value).length>0){
+        var $this=$(adapt_event(event).target),e=adapt_event(event).event;
+        if(e.keyCode==32 || e.keyCode==13){
+            var value=$.trim($this.val());
+            if(value.length>0){
                 $this.parent().before($("<li />")
                     .append($("<div />").addClass("ui label").text(value)
                         .append($("<i />").addClass("delete icon")))
                 );
             }
+            e.preventDefault();
             $this.val("");
         }
     });
