@@ -1,7 +1,9 @@
 /*green*/
 /* #63A69F*/
 /*red*/
-/* #E44B3D*/
+/* #D95C5C*/
+/*blue*/
+/*#4092CC*/
 @font-face {
     font-family:'maven';
     /*src:url("../fonts/mavenprolight300.ttf"),*/
@@ -115,7 +117,7 @@ select{
     background:#63A69F;
 }
 .message-box.danger{
-    background-color:#E44B3D;
+    background-color:#D95C5C;
 }
 .message-box.warning{
     background-color:#e4a73d;
@@ -130,8 +132,21 @@ select{
     top:50% ;
     margin-top:-16px ;
 }
-/********************************************************************************************************* 自动补全框
+/********************************************************************************************************* specialInput
 *******************************************************************************************************************/
+/*********************************** 左侧有图标
+********************************************/
+.ui.left.icon.specialInput > ul {
+    padding-left: 3.2em !important;
+}
+.ui.left.icon.specialInput>i:before{
+    position:absolute;
+    top:50%;
+    margin-top:-6px;
+    left:15px;
+}
+/*********************************** labelForm
+********************************************/
 .specialInput{
     color: rgba(0, 0, 0, 0.7);
     position: relative;
@@ -179,14 +194,39 @@ select{
     right:1px;
 
 }
-/*********************************** 左侧有图标
+/*********************************** autoComplete
 ********************************************/
-.ui.left.icon.specialInput > ul {
-    padding-left: 3em !important;
+.autoComplete-call{
+    position:fixed;
+    z-index:100;
+    left:-999em;
+    background:white;
+    border:1px solid rgba(0, 0, 0, 0.15);
+    max-height:110px;
+    overflow-y:auto;
+    border-radius:0 0 0.3125em 0.3125em;
+    -moz-border-radius:0 0 0.3125em 0.3125em;
+    -webkit-border-radius:0 0 0.3125em 0.3125em;
+    box-shadow:4px 3px 3px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow:4px 3px 3px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow:4px 3px 3px rgba(0, 0, 0, 0.3);
 }
-.ui.left.icon.specialInput>i:before{
-     position:absolute;
-     top:50%;
-     margin-top:-6px;
-     left:15px;
+.autoComplete-call>ul{
+    list-style-type: none;
+    margin:0px;
+    padding:0;
+    word-break:break-all;
+    word-wrap:break-word;
+}
+.autoComplete-call>ul>li{
+    padding:1px 2px;
+    cursor:default;
+    font-size:13.5px;
+}
+.autoComplete-call>ul>li:hover,
+.autoComplete-call>ul>li:focus,
+.autoComplete-call>ul>li:active,
+.autoComplete-call>ul>li.active{
+    background-color:#4092CC;
+    color:white;
 }

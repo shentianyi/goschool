@@ -1,3 +1,4 @@
+var GLOBAL=GLOBAL || {};
 //保持event兼容性
 function adapt_event(event) {
     var e = event ? event : window.event;
@@ -141,17 +142,42 @@ function deepCopy(p,c){
     }
     return c
 }
-
-//计算百分率
-function TCR(a,t){
-    var a=parseFloat(a);
-    var t=parseFloat(t);
-    var judge= (a / t) < 1 ? "low" : ((a / t) == 1 ? "middle" : "high");
-    return {
-        value: (a / t * 100).toFixed(1)+" %",
-        judge: judge
+//////////////////////////////////////////////////////  固定光标位置
+(function($) {
+    $.fn.getCursorPosition = function() {
+        var input = this.get(0);
+        if (!input) return; // No (input) element found
+        if ('selectionStart' in input) {
+            // Standard-compliant browsers
+            return input.selectionStart;
+        } else if (document.selection) {
+            // IE
+            input.focus();
+            var sel = document.selection.createRange();
+            var selLen = document.selection.createRange().text.length;
+            sel.moveStart('character', -input.value.length);
+            return sel.text.length - selLen;
+        }
+    }
+})(jQuery);
+function setSelectionRange(input, selectionStart, selectionEnd) {
+    if (input.setSelectionRange) {
+        input.focus();
+        input.setSelectionRange(selectionStart, selectionEnd);
+    }
+    else if (input.createTextRange) {
+        var range = input.createTextRange();
+        range.collapse(true);
+        range.moveEnd('character', selectionEnd);
+        range.moveStart('character', selectionStart);
+        range.select();
     }
 }
+
+function setCaretToPos (input, pos) {
+    setSelectionRange(input, pos, pos);
+}
+/////////////////////////////////////////////////////////////////////
 //Message box
 function MessageBox(str,position, type) {
     $('#MessageBox').addClass(type).addClass(position).find("p").html(str);
@@ -187,20 +213,97 @@ function remove_loader(){
 //激活所有的radio和ccheckbox
 $('.ui.checkbox').checkbox()
 ;
-//special input
+//autoComplete
+//(add class 'autoComplete' to the outer div wrapping input,you need #autoComplete-call)
+GLOBAL.autoComplete={};
+GLOBAL.autoComplete.count=0;
 (function(){
-    $("body").on("click",".specialInput.labelForm",function(){
+    $("body").on("keypress",".autoComplete input",function(event){
+        GLOBAL.autoComplete.count++;
+        var $this=$(adapt_event(event).target).parents(".autoComplete").eq(0);
+        var $my=$(adapt_event(event).target);
+        window.setTimeout(function(){
+            if(GLOBAL.autoComplete.count>1){
+                GLOBAL.autoComplete.count--;
+                return ;
+            }
+            else{
+                GLOBAL.autoComplete.count--;
+                if($.trim($my.val()).length==0){
+                    $("#autoComplete-call").css("left","-999em");
+                }
+                else{
+                    var width=parseInt($this.css("width")),
+                        left=$this[0].getBoundingClientRect().left,
+                        top=$this[0].getBoundingClientRect().bottom;
+                    $("#autoComplete-call").css("width",width-2).css("left",left).css("top",top);
+                }
+            }
+        },200)
+    });
+    $("body").on("keydown",".autoComplete input",function(event){
+        var e=adapt_event(event).event,validate=false;
+        if(e.keyCode==40){
+            if($("#autoComplete-call ul").find(".active").length==0){
+                $("#autoComplete-call ul li").eq(0).addClass("active");
+            }
+            else{
+                $("#autoComplete-call ul").find(".active").removeClass("active").next().addClass("active")
+            }
+            validate=true;
+        }
+        else if(e.keyCode==38){
+            e.preventDefault();
+            if($("#autoComplete-call ul").find(".active").length==0){
+                var count=$("#autoComplete-call ul li").length;
+                $("#autoComplete-call ul li").eq(count-1).addClass("active");
+            }
+            else{
+                $("#autoComplete-call ul").find(".active").removeClass("active").prev().addClass("active")
+            }
+            validate=true;
+        }
+        if(validate){
+            if($("#autoComplete-call ul").find(".active").text().length>0){
+                var text=$("#autoComplete-call ul").find(".active").text();
+                $(document.activeElement).val(text);
+            }
+        }
+    });
+    $("body").on("blur",".autoComplete input",function(){
+        $("#autoComplete-call").css("left","-999em")
+    });
+})();
+//labelForm
+//(add class 'labelForm' to the outer div wrapping ul and add class 'specialInput' to decorate)
+(function(){
+    $(".labelForm").each(function(){
+        var $input=$(this).find("input");
+        var max_width=parseInt($(this).css("width"))*0.75;
+        $input.css("width",max_width);
+    });
+    $("body").on("click",".labelForm",function(){
         $(this).find("input").focus();
-        var max_width=parseInt($(this).css("width"))
-//        $(this).find("input").css("max-width",)
+        var value=$(this).find("input").val();
+        $(this).find("input").val(value);
     });
-    $("body").on("keyup",".specialInput.labelForm input",function(event){
-        var e=adapt_event(event).event;
-        if(e.keyCode==8){
-
-        }
-        else{
-            $(e.target).css("width",$(e.target).css("width")+2)
+    $("body").on("keydown",".labelForm input",function(event){
+        var $parent=$(event.target).parents(".labelForm").eq(0);
+        var max_width=parseInt($parent.css("width"))*0.8;
+        var $this=$(event.target);
+        $(this).css("maxWidth",max_width);
+        if(event.keyCode==32 || event.keyCode==13){
+            var value=$this.val();
+            if($.trim(value).length>0){
+                $this.parent().before($("<li />")
+                    .append($("<div />").addClass("ui label").text(value)
+                        .append($("<i />").addClass("delete icon")))
+                );
+            }
+            console.log($this.val().match());
         }
     });
-})()
+    $("body").on("click",".labelForm .delete.icon",function(){
+        $(this).parents("li").eq(0).remove();
+    });
+})();

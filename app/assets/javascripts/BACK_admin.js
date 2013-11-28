@@ -15,7 +15,7 @@ BACKINDEX.admin.init=(function(){
     $(document).ready(function(){
         BACKINDEX.admin.operate.init();
 
-//        BACKINDEX.admin.operate.type="institutions";
+//        BACKINDEX.admin.operate.type="users";
 
         //post
         var url=(window.location.href).split("/");
@@ -309,12 +309,13 @@ BACKINDEX.admin.operate.init=function(){
 //                $("#template").find(".trash").attr("role","").attr("affect",new_id);
 //                $("#template").removeClass("template").attr("id",new_id);
 
+
                 //post
                 var postObject={user:{}};
-                postObject.user.image_url=$("#template td").eq(0).find("img").attr("src");
+                postObject.user.portrait=$("#template td").eq(0).find("img").attr("src");
                 postObject.user.name=value_array[0];
                 postObject.user.email=value_array[1];
-                postObject.logininfo_roles=chosen_authority;
+                postObject.user.logininfo_roles=chosen_authority;
                 $.ajax({
                     url:href,
                     data:postObject,
@@ -322,7 +323,7 @@ BACKINDEX.admin.operate.init=function(){
                     success:function(data){
                         if(data.result){
                             for(i=0;i<$target.length;i++){
-                                $("#template").find("td").eq(i+1).text(value_array[i]).find("input").remove();
+                                $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
                             }
                             var new_id=data.content;
                             $("#template").find(".checkmark").remove();
