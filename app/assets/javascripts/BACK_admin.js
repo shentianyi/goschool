@@ -176,33 +176,35 @@ BACKINDEX.admin.operate.init=function(){
     });
     //user下的check box 修改
     $("body").on("click","#admin-operate-table .checkbox",function(){
-        var role_array=[],id=$(this).parent().parent().attr("id");
-         $(this).parent().find(".checkbox").each(function(){
-            if($("input",this).prop("checked")){
-                role_array.push($(this).attr("role"));
-            }
-         });
-        if(role_array.length==0){
-            MessageBox("每个用户至少要有一个角色","top","warning");
-            $(this).checkbox('enable');
-        }
-        else{
-            $.ajax({
-                url:"/users/"+id,
-                type:"PUT",
-                data:{
-                    id:id,
-                    logininfo_roles:role_array
-                },
-                success:function(data){
-                    if(data.result){
-                        MessageBox("角色修改成功","top","warning");
-                    }
-                    else{
-                        MessageBox_content(data.content);
-                    }
+        if($(this).parent().parent().attr("id")!="template"){
+            var role_array=[],id=$(this).parent().parent().attr("id");
+            $(this).parent().find(".checkbox").each(function(){
+                if($("input",this).prop("checked")){
+                    role_array.push($(this).attr("role"));
                 }
-            })
+            });
+            if(role_array.length==0){
+                MessageBox("每个用户至少要有一个角色","top","warning");
+                $(this).checkbox('enable');
+            }
+            else{
+                $.ajax({
+                    url:"/users/"+id,
+                    type:"PUT",
+                    data:{
+                        id:id,
+                        logininfo_roles:role_array
+                    },
+                    success:function(data){
+                        if(data.result){
+                            MessageBox("角色修改成功","top","warning");
+                        }
+                        else{
+                            MessageBox_content(data.content);
+                        }
+                    }
+                })
+            }
         }
     })
 //  添加
@@ -254,7 +256,6 @@ BACKINDEX.admin.operate.init=function(){
 
 
             //post
-
             var postObject={institution:{}};
             postObject.institution.name=value_array[0];
             postObject.institution.address=value_array[1];
@@ -277,7 +278,7 @@ BACKINDEX.admin.operate.init=function(){
                         MessageBox_content(data.content);
                     }
                 }
-            })
+            });
 
         }
         else if(BACKINDEX.admin.operate.type=="users"){
@@ -300,23 +301,39 @@ BACKINDEX.admin.operate.init=function(){
             }
             if(check_count>0){
 
-                for(i=0;i<$target.length;i++){
-                    $("#template").find("td").eq(i+1).text(value_array[i]).find("input").remove();
-                }
-                var new_id=21;
-                $("#template").find(".checkmark").remove();
-                $("#template").find(".trash").attr("role","").attr("affect",new_id);
-                $("#template").removeClass("template").attr("id",new_id);
+//                for(i=0;i<$target.length;i++){
+//                    $("#template").find("td").eq(i+1).text(value_array[i]).find("input").remove();
+//                }
+//                var new_id=21;
+//                $("#template").find(".checkmark").remove();
+//                $("#template").find(".trash").attr("role","").attr("affect",new_id);
+//                $("#template").removeClass("template").attr("id",new_id);
 
                 //post
-//                var postObject={user:{}};
-//                postObject.user.name=value_array[0];
-//                postObject.user.address=value_array[1];
-//                postObject.user.tel=value_array[2];
-//                postObject.user.logininfo_roles=value_array[3];
-//                $.ajax({
-//                    url:
-//                })
+                var postObject={user:{}};
+                postObject.user.image_url=$("#template td").eq(0).find("img").attr("src");
+                postObject.user.name=value_array[0];
+                postObject.user.email=value_array[1];
+                postObject.logininfo_roles=chosen_authority;
+                $.ajax({
+                    url:href,
+                    data:postObject,
+                    type:"POST",
+                    success:function(data){
+                        if(data.result){
+                            for(i=0;i<$target.length;i++){
+                                $("#template").find("td").eq(i+1).text(value_array[i]).find("input").remove();
+                            }
+                            var new_id=data.content;
+                            $("#template").find(".checkmark").remove();
+                            $("#template").find(".trash").attr("role","").attr("affect",new_id);
+                            $("#template").removeClass("template").attr("id",new_id);
+                        }
+                        else{
+                            MessageBox_content(data.content);
+                        }
+                    }
+                });
 
             }
             else{
