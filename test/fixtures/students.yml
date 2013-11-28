@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-1:
+one:
   name: u1
   gender: 1
   birthday: 2013-11-25 18:15:43
@@ -12,14 +12,14 @@
   guardian: MyString
   guardian_phone: MyString
   image_url: test
-  logininfo: 1
+  logininfo: one
   referrer: two
   created_at: 2013-11-25 18:15:43
   updated_at: 2013-11-25 18:15:43
   tenant: one
 
 
-2:
+two:
   name: u2
   gender: 0
   birthday: 2013-11-25 18:15:43
@@ -31,14 +31,14 @@
   guardian: MyStringxs
   guardian_phone: MyString
   image_url: test
-  logininfo: 2
+  logininfo: two
   referrer: one
   created_at: 2013-11-25 18:15:43
   updated_at: 2013-11-25 18:15:43
   tenant: one
 
 
-3:
+three:
   name: u3
   gender: 1
   birthday: 2013-11-25 18:15:43
@@ -50,14 +50,14 @@
   guardian: MyString
   guardian_phone: MyString
   image_url: test
-  logininfo: 3
+  logininfo: three
   referrer: two
   created_at: 2013-11-25 18:15:43
   updated_at: 2013-11-25 18:15:43
   tenant: one
 
 
-4:
+four:
   name: u4
   gender: 0
   birthday: 2013-11-25 18:15:43
@@ -69,13 +69,13 @@
   guardian: MyStringxs
   guardian_phone: MyString
   image_url: test
-  logininfo: 4
+  logininfo: four
   referrer: one
   created_at: 2013-11-25 18:15:43
   updated_at: 2013-11-25 18:15:43
   tenant: one
 
-5:
+five:
   name: u5
   gender: 1
   birthday: 2013-11-25 18:15:43
@@ -87,14 +87,14 @@
   guardian: MyString
   guardian_phone: MyString
   image_url: test
-  logininfo: 5
+  logininfo: five
   referrer: two
   created_at: 2013-11-25 18:15:43
   updated_at: 2013-11-25 18:15:43
   tenant: one
 
 
-6:
+six:
   name: u6
   gender: 0
   birthday: 2013-11-25 18:15:43
@@ -106,13 +106,13 @@
   guardian: MyStringxs
   guardian_phone: MyString
   image_url: test
-  logininfo: 6
+  logininfo: six
   referrer: one
   created_at: 2013-11-25 18:15:43
   updated_at: 2013-11-25 18:15:43
   tenant: one
 
-7:
+seven:
   name: u7
   gender: 0
   birthday: 2013-11-25 18:15:43
@@ -124,13 +124,13 @@
   guardian: MyStringxs
   guardian_phone: MyString
   image_url: test
-  logininfo: 7
+  logininfo: seven
   referrer: one
   created_at: 2013-11-25 18:15:43
   updated_at: 2013-11-25 18:15:43
   tenant: one
 
-8:
+eight:
   name: u8
   gender: 0
   birthday: 2013-11-25 18:15:43
@@ -142,13 +142,13 @@
   guardian: MyStringxs
   guardian_phone: MyString
   image_url: test
-  logininfo: 8
+  logininfo: eight
   referrer: one
   created_at: 2013-11-25 18:15:43
   updated_at: 2013-11-25 18:15:43
   tenant: one
 
-9:
+nine:
   name: u9
   gender: 0
   birthday: 2013-11-25 18:15:43
@@ -160,13 +160,13 @@
   guardian: MyStringxs
   guardian_phone: MyString
   image_url: test
-  logininfo: 9
+  logininfo: nine
   referrer: one
   created_at: 2013-11-25 18:15:43
   updated_at: 2013-11-25 18:15:43
   tenant: one
 
-10:
+ten:
   name: u10
   gender: 0
   birthday: 2013-11-25 18:15:43
@@ -178,7 +178,7 @@
   guardian: MyStringxs
   guardian_phone: MyString
   image_url: test
-  logininfo: 10
+  logininfo: ten
   referrer: one
   created_at: 2013-11-25 18:15:43
   updated_at: 2013-11-25 18:15:43

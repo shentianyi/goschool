@@ -4,7 +4,7 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the
 #
-1:
+one:
   email: u1@u1.com
   crypted_password: b83892fa6065fe8f4319acdec9f0b6758dee3460a5f42dfe6779cff1d328be8cebc94c61593a41ee40ee11b03abd4f0ac3171b8a459ff3e2ec50b5fd397fc335
   password_salt: 6KSU3lXGhALwez9JzgP5
@@ -22,7 +22,7 @@
   tenant: one
 # column: value
 #
-2:
+two:
   email: u2@u2.com
   crypted_password: b83892fa6065fe8f4319acdec9f0b6758dee3460a5f42dfe6779cff1d328be8cebc94c61593a41ee40ee11b03abd4f0ac3171b8a459ff3e2ec50b5fd397fc335
   password_salt: 6KSU3lXGhALwez9JzgP5
@@ -40,7 +40,7 @@
   tenant: one
 #  column: value
 
-3:
+three:
   email: u3@u3.com
   crypted_password: b83892fa6065fe8f4319acdec9f0b6758dee3460a5f42dfe6779cff1d328be8cebc94c61593a41ee40ee11b03abd4f0ac3171b8a459ff3e2ec50b5fd397fc335
   password_salt: 6KSU3lXGhALwez9JzgP5
@@ -58,7 +58,7 @@
   tenant: one
 #  column: value
 
-4:
+four:
   email: u4@u4.com
   crypted_password: b83892fa6065fe8f4319acdec9f0b6758dee3460a5f42dfe6779cff1d328be8cebc94c61593a41ee40ee11b03abd4f0ac3171b8a459ff3e2ec50b5fd397fc335
   password_salt: 6KSU3lXGhALwez9JzgP5
@@ -76,7 +76,7 @@
   tenant: one
 #  column: value
 
-5:
+five:
   email: u5@u5.com
   crypted_password: b83892fa6065fe8f4319acdec9f0b6758dee3460a5f42dfe6779cff1d328be8cebc94c61593a41ee40ee11b03abd4f0ac3171b8a459ff3e2ec50b5fd397fc335
   password_salt: 6KSU3lXGhALwez9JzgP5
@@ -94,7 +94,7 @@
   tenant: one
 #  column: value
 
-6:
+six:
   email: u6@u6.com
   crypted_password: b83892fa6065fe8f4319acdec9f0b6758dee3460a5f42dfe6779cff1d328be8cebc94c61593a41ee40ee11b03abd4f0ac3171b8a459ff3e2ec50b5fd397fc335
   password_salt: 6KSU3lXGhALwez9JzgP5
@@ -112,7 +112,7 @@
   tenant: one
 #  column: value
 
-7:
+seven:
   email: u7@u7.com
   crypted_password: b83892fa6065fe8f4319acdec9f0b6758dee3460a5f42dfe6779cff1d328be8cebc94c61593a41ee40ee11b03abd4f0ac3171b8a459ff3e2ec50b5fd397fc335
   password_salt: 6KSU3lXGhALwez9JzgP5
@@ -130,7 +130,7 @@
   tenant: one
 #  column: value
 
-8:
+eight:
   email: u8@u8.com
   crypted_password: b83892fa6065fe8f4319acdec9f0b6758dee3460a5f42dfe6779cff1d328be8cebc94c61593a41ee40ee11b03abd4f0ac3171b8a459ff3e2ec50b5fd397fc335
   password_salt: 6KSU3lXGhALwez9JzgP5
@@ -148,7 +148,7 @@
   tenant: one
 #  column: value
 
-9:
+nine:
   email: u9@u9.com
   crypted_password: b83892fa6065fe8f4319acdec9f0b6758dee3460a5f42dfe6779cff1d328be8cebc94c61593a41ee40ee11b03abd4f0ac3171b8a459ff3e2ec50b5fd397fc335
   password_salt: 6KSU3lXGhALwez9JzgP5
@@ -166,7 +166,7 @@
   tenant: one
 #  column: value
 
-10:
+ten:
   email: u10@u10.com
   crypted_password: b83892fa6065fe8f4319acdec9f0b6758dee3460a5f42dfe6779cff1d328be8cebc94c61593a41ee40ee11b03abd4f0ac3171b8a459ff3e2ec50b5fd397fc335
   password_salt: 6KSU3lXGhALwez9JzgP5
