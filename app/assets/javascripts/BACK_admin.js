@@ -316,7 +316,7 @@ BACKINDEX.admin.operate.init=function(){
                 postObject.user.image_url=$("#template td").eq(0).find("img").attr("src");
                 postObject.user.name=value_array[0];
                 postObject.user.email=value_array[1];
-                postObject.user.logininfo_roles=chosen_authority;
+                postObject.logininfo_roles=chosen_authority;
                 $.ajax({
                     url:href,
                     data:postObject,

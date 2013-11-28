@@ -13,11 +13,12 @@ class UsersController < ApplicationController
   
   #create user,loginifo
   def create
-    msg = Msg.new
     # create user and logininfo
+    msg = Msg.new
+    msg.result = false
     begin
       ActiveRecord::Base.transaction do
-        @logininfo = Logininfo.new(params[:logininfo])
+        @logininfo = Logininfo.new(:email=>params[:user][:email],:password=>current_tenant.setting.default_pwd,:password_confirmation=>current_tenant.setting.default_pwd)
         @logininfo.tenant = current_tenant
         @logininfo.status = UserStatus::ACTIVE
         
@@ -31,20 +32,26 @@ class UsersController < ApplicationController
         @user = User.new(params[:user])
         @user.logininfo = @logininfo
         @user.save!
+        msg.result = true
+        msg.content = @user
       end
-    end
-    render @user.as_json
+    rescue ActiveRecord::RecordInvalid => invalid
+      msg.result = false
+      msg.content = invalid.record.errors
+    end   
+    render :json=>msg
   end
 
   def destroy
     msg = Msg.new
-    @user = User.find(params[:id])
-    
-    if @user && !@user.logininfo.is_tenant
+    msg.result = false
+    msg.content = "删除失败"
+    @logininfo = Logininfo.find_by_id(params[:id])
+    if @logininfo && !@logininfo.is_tenant
       msg.result = true
-    else
-      msg.result = false
-      msg.content = @user.errors
+      @logininfo.destroy
+    elsif @logininfo && @logininfo.is_tenant
+      msg.content = "不能删除创建者"
     end
     render :json=>msg
   end
@@ -56,15 +63,40 @@ class UsersController < ApplicationController
 
   def update
     msg = Msg.new
-    @user = User.find_by_id(params[:id])
-    if @user && @user.update_attributes(params[:user])
-      msg.result = true
-      msg.object = @user
-    else
+    msg.result = false
+    @logininfo = Logininfo.find_by_id(params[:id])
+    @user = @logininfo.user
+    begin
+      ActiveRecord::Base.transaction do
+        #update user
+        if params[:user]
+          if @user.update_attributes(params[:user])
+            if params[:user][:email]
+              puts '=============='
+              puts params[:user][:email]
+              @logininfo.update_attributes!(:email=>params[:user][:email])
+            end
+            msg.result = true
+          end
+        end
+        
+        #update role
+        if params[:logininfo_roles]
+          @logininfo.logininfo_roles.destroy_all
+          @roles = params[:logininfo_roles]
+          @roles.each {| role |
+            @new_role = LogininfoRole.new(:role_id=>role)
+            @logininfo.logininfo_roles<<@new_role
+          }
+          @logininfo.save
+          msg.result = true
+        end
+      end
+    rescue ActiveRecord::RecordInvalid=>invalid
       msg.result = false
-      msg.content = @user.errors
-    end 
-    render :json=>msg
+      msg.content = invalid.record.errors
+    end
+      render :json=>msg
   end
 
   def get_user
