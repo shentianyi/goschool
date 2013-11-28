@@ -6,15 +6,15 @@
 #
 one:
   role_id: 100
-  logininfo: one
-two: 
+  logininfo: 1
+two:
   role_id: 500
-  logininfo: one
+  logininfo: 1
 
 three:
   role_id: 200
-  logininfo: two
-  
+  logininfo: 2
+
 # column: value
 #
 # column: value
