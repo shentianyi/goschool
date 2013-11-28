@@ -23,4 +23,12 @@ BACKINDEX.init=(function(){
         });
     });
 })();
+BACKINDEX.checkLog=function(){
+    if($("#search-list").height()+60+$("#back-index-log").height()>$(window).height()){
+        $("#back-index-log").css("position","relative");
+    }
+    else{
+        $("#back-index-log").css("position","absolute");
+    }
+}
 

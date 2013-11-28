@@ -189,8 +189,8 @@
     -webkit-border-radius:5px;
     -moz-border-radius:5px;
     box-shadow:0 1px 2px 1px rgba(0, 0, 0, 0.1);
-    -webkit-:0 1px 2px 1px rgba(0, 0, 0, 0.1);
-    -moz-:0 1px 2px 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow:0 1px 2px 1px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow:0 1px 2px 1px rgba(0, 0, 0, 0.1);
     padding:5px 0;
     position:relative;
 }
@@ -201,7 +201,35 @@
     font-size:13px;
     cursor:default;
 }
-
+/*记录*/
+.back-index-log{
+    position:absolute;
+    bottom:0px;
+    right:0px;
+    left:0px;
+    max-height:80px;
+    background:rgba(0, 0, 0, 0.02);
+    border-top:1px solid rgba(0,0,0,0.1);
+    overflow-y:auto;
+}
+.back-index-log>p{
+    color:rgba(0,0,0,0.5);
+    font-size:13px;
+    padding-left:10px;
+    margin-bottom:2px;
+}
+.back-index-log>ul{
+    list-style-type: none;
+    margin:0px;
+    padding:0 2px 8px 30px;
+}
+.back-index-log>ul>li{
+    word-break:break-all;
+    word-wrap:break-word;
+    font-size:12px;
+    padding:1px 0;
+    color:rgba(0,0,0,0.4);
+}
 /************************************************************   view add  */
 .view-add{
     position:fixed;
@@ -349,7 +377,7 @@
 }
 .back-index-add>.inner>.left-part>.portrait{
     margin:5px 0;
-    height:95px;
+    height:98px;
     position:relative
 }
 .back-index-add>.inner>.left-part>.portrait>img{

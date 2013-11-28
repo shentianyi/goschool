@@ -34,7 +34,9 @@ BACKINDEX.right_list.loadData=function(){
     BACKINDEX.right_list.loadCheck++;
     loader("search-result","auto","auto","0","50%");
     window.setTimeout(function(){
+        //post
         $.getJSON(BACKINDEX.right_list.nextPage(),{},function(data){
+            BACKINDEX.checkLog();
             remove_loader();
             if(data.length==0){
                 BACKINDEX.right_list.stillHave=false;
