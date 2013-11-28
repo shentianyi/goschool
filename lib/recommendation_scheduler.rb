@@ -91,10 +91,6 @@ class RecommendationScheduler
         end
       end
   end
-
-
-
-
 end
 
 
