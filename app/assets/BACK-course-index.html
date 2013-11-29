@@ -86,7 +86,7 @@
         <div class="ui teal mini button" id="add-item">
             <div class="visible content">
                 <i class="add icon"></i>
-                新建课程
+                新建课程/服务
             </div>
         </div>
         <div class="ui teal mini button" >
@@ -178,77 +178,81 @@
 <section class="back-index-add" id="back-index-add" name="course">
     <div class="inner">
         <i class="remove icon"></i>
-        <p>新建课程</p>
-        <div class="left-part">
-            <div class="portrait">
-                <img class="ui circular image " src="images/portrait/1.jpg">
-            </div>
-            <div class="ui left icon input">
-                <input placeholder="姓名..." type="text">
-                <i class="user icon"></i>
-            </div>
-            <div class="sex stop">
-                <div class="ui radio checkbox">
-                    <input name="sex" checked="checked" type="radio">
-                    <label>男</label>
-                </div>
-                <div class="ui radio checkbox">
-                    <input name="sex" type="radio">
-                    <label>女</label>
-                </div>
-            </div>
-            <div class="ui left icon input calendar">
-                <input placeholder="出生年月..." type="text" readonly id="born-date">
-                <i class="calendar icon"></i>
-            </div>
-            <div class="ui left icon input">
-                <input placeholder="就读学校..." type="text">
-                <i class="building icon"></i>
-            </div>
-            <div class="ui left icon input calendar">
-                <input placeholder="毕业年限..." type="text" readonly id="graduation-date">
-                <i class="empty bookmark icon"></i>
-            </div>
+        <p>新建课程/服务</p>
+        <div class="tab" id="add-course-tab">
+            <div class="tab-item active">课程</div>
+            <div class="tab-item">服务</div>
         </div>
-        <div class="right-part">
-            <div class="ui left icon input">
-                <input placeholder="邮件地址..." type="text">
-                <i class="mail outline icon"></i>
-            </div>
-            <div class="ui left icon input">
-                <input placeholder="联系电话..." type="text">
-                <i class="phone icon"></i>
-            </div>
-            <div class="ui left icon input">
-                <input placeholder="联系地址..." type="text">
-                <i class="home icon"></i>
-            </div>
-            <div class="ui left icon input">
-                <input placeholder="监护人..." type="text">
-                <i class="male icon"></i>
-            </div>
-            <div class="ui left icon input">
-                <input placeholder="监护人电话..." type="text">
-                <i class="mobile icon"></i>
-            </div>
-            <div class="ui left icon input specialInput labelForm autoComplete">
-                <ul>
-                    <li><input type='text' placeholder="标签..." id="autoC2" style="padding:0;width:40px;"/></li>
-                </ul>
-                <i class="tag icon stop"></i>
-            </div>
-            <div class="ui left icon input autoComplete">
-                <input placeholder="推荐人..." id="autoC3" type="text">
-                <i class="smile icon"></i>
-            </div>
-            <div class="ui checkbox stop">
-                <input name="fun" type="checkbox" checked>
-                <label>同时开设学生账号</label>
-            </div>
-            <div class="ui red button">
-                添加
-            </div>
-        </div>
+        <!--<div class="left-part">-->
+            <!--<div class="portrait">-->
+                <!--<img class="ui circular image " src="images/portrait/1.jpg">-->
+            <!--</div>-->
+            <!--<div class="ui left icon input">-->
+                <!--<input placeholder="姓名..." type="text">-->
+                <!--<i class="user icon"></i>-->
+            <!--</div>-->
+            <!--<div class="sex stop">-->
+                <!--<div class="ui radio checkbox">-->
+                    <!--<input name="sex" checked="checked" type="radio">-->
+                    <!--<label>男</label>-->
+                <!--</div>-->
+                <!--<div class="ui radio checkbox">-->
+                    <!--<input name="sex" type="radio">-->
+                    <!--<label>女</label>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="ui left icon input calendar">-->
+                <!--<input placeholder="出生年月..." type="text" readonly id="born-date">-->
+                <!--<i class="calendar icon"></i>-->
+            <!--</div>-->
+            <!--<div class="ui left icon input">-->
+                <!--<input placeholder="就读学校..." type="text">-->
+                <!--<i class="building icon"></i>-->
+            <!--</div>-->
+            <!--<div class="ui left icon input calendar">-->
+                <!--<input placeholder="毕业年限..." type="text" readonly id="graduation-date">-->
+                <!--<i class="empty bookmark icon"></i>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="right-part">-->
+            <!--<div class="ui left icon input">-->
+                <!--<input placeholder="邮件地址..." type="text">-->
+                <!--<i class="mail outline icon"></i>-->
+            <!--</div>-->
+            <!--<div class="ui left icon input">-->
+                <!--<input placeholder="联系电话..." type="text">-->
+                <!--<i class="phone icon"></i>-->
+            <!--</div>-->
+            <!--<div class="ui left icon input">-->
+                <!--<input placeholder="联系地址..." type="text">-->
+                <!--<i class="home icon"></i>-->
+            <!--</div>-->
+            <!--<div class="ui left icon input">-->
+                <!--<input placeholder="监护人..." type="text">-->
+                <!--<i class="male icon"></i>-->
+            <!--</div>-->
+            <!--<div class="ui left icon input">-->
+                <!--<input placeholder="监护人电话..." type="text">-->
+                <!--<i class="mobile icon"></i>-->
+            <!--</div>-->
+            <!--<div class="ui left icon input specialInput labelForm autoComplete">-->
+                <!--<ul>-->
+                    <!--<li><input type='text' placeholder="标签..." id="autoC2" style="padding:0;width:40px;"/></li>-->
+                <!--</ul>-->
+                <!--<i class="tag icon stop"></i>-->
+            <!--</div>-->
+            <!--<div class="ui left icon input autoComplete">-->
+                <!--<input placeholder="推荐人..." id="autoC3" type="text">-->
+                <!--<i class="smile icon"></i>-->
+            <!--</div>-->
+            <!--<div class="ui checkbox stop">-->
+                <!--<input name="fun" type="checkbox" checked>-->
+                <!--<label>同时开设学生账号</label>-->
+            <!--</div>-->
+            <!--<div class="ui red button">-->
+                <!--添加-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </section>
 
@@ -282,6 +286,7 @@
 <script type='text/javascript' src="javascripts/wayne-base.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_rightList.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_student.js" ></script>
+<script type='text/javascript' src="javascripts/BACK_course.js" ></script>
 
 </body>
 </html>

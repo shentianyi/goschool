@@ -55,4 +55,35 @@
 .back-index-main > .search-list > .search-result[name="course"] > li table tr:nth-child(3) td p{
     margin:0px 0px 5px;
 }
-
+/*新建课程/服务*/
+.back-index-add[name='course'] .tab{
+    position:relative;
+    width:96%;
+    left:50%;
+    margin-left:-48%;
+    top:20px;
+    border-collapse:collapse;
+    display:table;
+}
+.back-index-add[name='course'] .tab>.tab-item{
+    width:50%;
+    border-color:rgba(0,0,0,0.4);
+    color:rgba(0,0,0,0.4);
+    cursor:pointer;
+    border-style:solid;
+    border-width:0px 1px 1px;
+    font-size:21px;
+    text-align:center;
+    padding:6px 0;
+    display:table-cell;
+    transition:color 0.25s ease-out;
+}
+.back-index-add[name='course'] .tab>.tab-item:not(.active):hover{
+    color:rgba(0,0,0,0.8);
+}
+.back-index-add[name='course'] .tab>.tab-item.active{
+    border-top-width:1px;
+    border-bottom-width:0;
+    color:#D95C5C;
+    cursor:default;
+}

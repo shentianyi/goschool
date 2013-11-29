@@ -273,7 +273,7 @@ GLOBAL.autoComplete.count=0;
                         $("#autoComplete-call").scrollTop(origin_top-18);
                     }
                     else if(realHeight-(activeTop-outerTop)-itemHeight<=3){
-                        $("#autoComplete-call").scrollTop(maxHeight);
+                        $("#autoComplete-call").scrollTop("999");
                     }
 
                 }

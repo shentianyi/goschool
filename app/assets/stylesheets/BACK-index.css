@@ -118,7 +118,7 @@
 }
 .back-index-side-header>.ui.button:nth-of-type(2){
     position:absolute;
-    right:110px;
+    right:138px;
     top:17px;
 }
 /*中间段*/
@@ -339,9 +339,9 @@
     position:absolute;
     min-height:768px;
     top:0px;
-    right:auto;
+    right:0;
     bottom:0px;
-    left:-999em;
+    left:0em;
     background:rgba(0,0,0,0.9);
     z-index:99;
 }
@@ -363,7 +363,9 @@
     top:-40px;
     cursor:pointer;
     transition:color 0.25s ease-out;
-
+}
+.back-index-add>.inner>.remove.icon:hover{
+    color:rgba(255,255,255,0.5);
 }
 .back-index-add>.inner>p{
     text-align:center;
