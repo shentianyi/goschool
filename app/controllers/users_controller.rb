@@ -33,7 +33,7 @@ class UsersController < ApplicationController
         @user.logininfo = @logininfo
         @user.save!
         msg.result = true
-        msg.content = @user
+        #msg.content = @user
       end
     rescue ActiveRecord::RecordInvalid => invalid
       msg.result = false
@@ -46,13 +46,15 @@ class UsersController < ApplicationController
     msg = Msg.new
     msg.result = false
     msg.content = "删除失败"
-    @logininfo = Logininfo.find_by_id(params[:id])
-    if @logininfo && !@logininfo.is_tenant
-      msg.result = true
-      @logininfo.destroy
-    elsif @logininfo && @logininfo.is_tenant
+    @user = User.find_by_id(params[:id])
+    @logininfo = @user.logininfo
+    if @logininfo && @logininfo.is_tenant
       msg.content = "不能删除创建者"
+    else
+      @user.destroy
+      msg.result = true
     end
+
     render :json=>msg
   end
 
@@ -64,16 +66,14 @@ class UsersController < ApplicationController
   def update
     msg = Msg.new
     msg.result = false
-    @logininfo = Logininfo.find_by_id(params[:id])
-    @user = @logininfo.user
+    @user = User.find_by_id(params[:id])
+    @logininfo = @user.logininfo
     begin
       ActiveRecord::Base.transaction do
         #update user
         if params[:user]
           if @user.update_attributes(params[:user])
             if params[:user][:email]
-              puts '=============='
-              puts params[:user][:email]
               @logininfo.update_attributes!(:email=>params[:user][:email])
             end
             msg.result = true

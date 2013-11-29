@@ -1,92 +1,92 @@
 <div></div>
-        <div class="admin-operate" name="users" id="admin-operate">
-            <p>已存在的用户</p>
-            <label><i class="icon info"></i>双击单项编辑</label>
-            <table class="ui column table segment celled" id="admin-operate-table">
-                <thead>
-                <tr>
-                  <th class="two wide"></th>
-                  <th class="two wide">用户名</th>
-                  <th class="three wide">邮箱</th>
-                  <th class="seven wide">角色</th>
-                  <th class="two wide"></th>
-                </tr>
-                </thead>
-                <tfoot>
-                <tr>
-                    <th colspan="4"></th>
-                    <th >
-                        <div class="ui teal small labeled icon button add-button" id="admin-operate-add">
-                            <i class="add icon"></i> 添加用户
-                        </div>
-                    </th>
-                </tr>
-                </tfoot>
-                <tbody>
-		  <% @logininfos.each_with_index do |logininfo,i|%>
-		  <tr id="<%=logininfo.id%>">
-		    <td><image class="ui avatar image" src="<%=logininfo.user.image_url%>"/></td>
-		    <td post="name"><%=logininfo.user.name%></td>
-		    <td post="email"><%=logininfo.email%></td>
-            <td>
-              <div class="ui checkbox" role="100">
-                <input <% if logininfo.check_role 100 %>
-		       checked
-		       <% end %>
-		       name="education" type="checkbox">
-                <label>教务人员</label>
-              </div>
-              <div class="ui checkbox" role="200">
-                <input  <% if logininfo.check_role 200 %>
-		       checked
-		       <% end %>
-		   name="business" type="checkbox">
-                <label>业务人员</label>
-              </div>
-              <div class="ui checkbox" role="400">
-                <input <% if logininfo.check_role 400 %>
-		       checked
-		       <% end %>
+<div class="admin-operate" name="users" id="admin-operate">
+  <p>已存在的用户</p>
+  <label><i class="icon info"></i>双击单项编辑</label>
+  <table class="ui column table segment celled" id="admin-operate-table">
+    <thead>
+      <tr>
+        <th class="two wide"></th>
+        <th class="two wide">用户名</th>
+        <th class="three wide">邮箱</th>
+        <th class="seven wide">角色</th>
+        <th class="two wide"></th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th colspan="4"></th>
+        <th >
+          <div class="ui teal small labeled icon button add-button" id="admin-operate-add">
+            <i class="add icon"></i> 添加用户
+          </div>
+        </th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <% @users.each_with_index do |user,i|%>
+      <tr id="<%=user.id%>">
+	<td><image class="ui avatar image" src="<%=user.image_url%>"/></td>
+	<td post="name"><%=user.name%></td>x
+	<td post="email"><%=user.email%></td>
+        <td>
+          <div class="ui checkbox" role="100">
+            <input <% if user.logininfo.check_role 100 %>
+		   checked
+		   <% end %>
+		   name="education" type="checkbox">
+            <label>教务人员</label>
+          </div>
+          <div class="ui checkbox" role="200">
+            <input  <% if user.logininfo.check_role 200 %>
+		    checked
+		    <% end %>
+		    name="business" type="checkbox">
+            <label>业务人员</label>
+          </div>
+          <div class="ui checkbox" role="400">
+            <input <% if user.logininfo.check_role 400 %>
+		   checked
+		   <% end %>
 		   name="teacher" type="checkbox">
-                <label>老师</label>
-              </div>
-	            <div class="ui checkbox" role="500">
-                <input <% if logininfo.check_role 500 %>
-		                checked
-		                <% end %>
-		            name="admin" type="checkbox">
-                <label>管理员</label>
-              </div>
-            </td>
-            <td>
-              <i class="trash icon" affect="<%=logininfo.id%>"></i>
-            </td>
-		  </tr>
-		  <%end%>
-		  <!-- 
-		       <tr id="institution2">
-			 <td><image class="ui avatar image" src="images/portrait/0.jpg"/></td>
-			 <td>Wayne</td>
-			 <td>
-                           <div class="ui checkbox">
-                             <input name="education" type="checkbox">
-                             <label>教务人员</label>
-                           </div>
-                           <div class="ui checkbox">
-                             <input name="business" type="checkbox">
-                             <label>业务人员</label>
-                           </div>
-                           <div class="ui checkbox">
-                             <input name="teacher" type="checkbox">
-                             <label>老师</label>
-                           </div>
-			 </td>
-			 <td>
-                           <i class="trash icon" affect="institution2"></i>
-			 </td>
-                       </tr>
-		       -->
-                </tbody>
-            </table>
-        </div>
-	
+            <label>老师</label>
+          </div>
+	  <div class="ui checkbox" role="500">
+            <input <% if user.logininfo.check_role 500 %>
+		   checked
+		   <% end %>
+		   name="admin" type="checkbox">
+            <label>管理员</label>
+          </div>
+        </td>
+        <td>
+          <i class="trash icon" affect="<%=user.id%>"></i>
+        </td>
+      </tr>
+      <%end%>
+      <!-- 
+	   <tr id="institution2">
+	     <td><image class="ui avatar image" src="images/portrait/0.jpg"/></td>
+	     <td>Wayne</td>
+	     <td>
+               <div class="ui checkbox">
+                 <input name="education" type="checkbox">
+                 <label>教务人员</label>
+               </div>
+               <div class="ui checkbox">
+                 <input name="business" type="checkbox">
+                 <label>业务人员</label>
+               </div>
+               <div class="ui checkbox">
+                 <input name="teacher" type="checkbox">
+                 <label>老师</label>
+               </div>
+	     </td>
+	     <td>
+               <i class="trash icon" affect="institution2"></i>
+	     </td>
+           </tr>
+	   -->
+    </tbody>
+  </table>
+</div>
+

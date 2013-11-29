@@ -77,7 +77,7 @@ class StudentsController < ApplicationController
       @student = Student.find(params[:id])
       ActiveRecord::Base.transaction do
         if params[:student][:email]
-          @student.logininfo.update_attribute(:email=>params[:student][:email])
+          @student.logininfo.update_attributes!(:email=>params[:student][:email])
           @student.logininfo.save!
         end
         @student.update_attributes(params[:student])
@@ -93,13 +93,14 @@ class StudentsController < ApplicationController
   # DELETE /students/1
   # DELETE /students/1.json
   def destroy
-    @sutdent = Student.find_by_id(params[:id])
-    @logininfo = Logininfo.find_by_id(@student.logininfo.id) 
-    
-    @logininfo.destroy
-
     msg = Msg.new
-    msg.result = true
+    msg.result = false
+    @sutdent = Student.find_by_id(params[:id])
+    if @student
+      @logininfo = Logininfo.find_by_id(@student.logininfo.id) 
+      @logininfo.destroy
+      msg.result = true
+    end
     render :json=>msg
   end
 
