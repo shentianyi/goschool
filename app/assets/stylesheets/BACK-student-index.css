@@ -48,3 +48,58 @@
 .back-index-main>.search-list>.search-result>li .recommend+p>span:hover{
     color:#855520;
 }
+/*新建学生*/
+/*left*/
+.back-index-add>.inner>.left-part{
+    float:left;
+    width:50%;
+    height:500px;
+    margin-top:35px;
+}
+.back-index-add>.inner>.left-part>.portrait{
+    margin:3px 0;
+    height:98px;
+    position:relative
+}
+.back-index-add>.inner>.left-part>.portrait>img{
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-top:-38px;
+    margin-left:-40px;
+}
+.back-index-add>.inner>.left-part>div.input{
+    width:300px;
+    margin:5px 0px 6px 25px;
+}
+.back-index-add>.inner>.left-part>.sex{
+    margin:16px 0 16px 26px;
+}
+.back-index-add>.inner>.left-part>.sex>.radio{
+    margin-right:20px;
+}
+/*right*/
+.back-index-add>.inner>.right-part{
+    float:right;
+    width:50%;
+    height:500px;
+    margin-top:35px;
+    overflow-y:auto;
+}
+.back-index-add>.inner>.right-part>div.input{
+    width:300px;
+    margin:5px 0px 6px 25px;
+}
+.back-index-add>.inner>.right-part>div.input.specialInput{
+    margin:5px 0px 2px 25px;
+}
+.back-index-add>.inner>.right-part>.checkbox{
+    display:inline-block;
+    margin:40px 0 5px 25px;
+}
+.back-index-add>.inner>.right-part>.button{
+    width:130px;
+    position:relative;
+    left:26px;
+    top:25px;
+}

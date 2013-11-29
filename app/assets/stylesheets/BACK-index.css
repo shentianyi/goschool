@@ -118,7 +118,7 @@
 }
 .back-index-side-header>.ui.button:nth-of-type(2){
     position:absolute;
-    right:125px;
+    right:138px;
     top:17px;
 }
 /*中间段*/
@@ -201,6 +201,10 @@
 }
 .back-index-main>.search-list>.search-result>li{
     padding:8px 15px
+}
+.back-index-main>.search-list>.search-result>li td{
+    word-break:break-all;
+    word-wrap:break-word;
 }
 .back-index-main>.search-list>.search-result>li p{
     font-size:13px;
@@ -335,9 +339,9 @@
     position:absolute;
     min-height:768px;
     top:0px;
-    right:auto;
+    right:0;
     bottom:0px;
-    left:-999em;
+    left:0em;
     background:rgba(0,0,0,0.9);
     z-index:99;
 }
@@ -359,7 +363,9 @@
     top:-40px;
     cursor:pointer;
     transition:color 0.25s ease-out;
-
+}
+.back-index-add>.inner>.remove.icon:hover{
+    color:rgba(255,255,255,0.5);
 }
 .back-index-add>.inner>p{
     text-align:center;
@@ -372,60 +378,6 @@
     text-shadow:2px 2px 4px rgba(0,0,0,0.4);
     -moz-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
     -webkit-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
-}
-/*left*/
-.back-index-add>.inner>.left-part{
-    float:left;
-    width:50%;
-    height:500px;
-    margin-top:35px;
-}
-.back-index-add>.inner>.left-part>.portrait{
-    margin:5px 0;
-    height:98px;
-    position:relative
-}
-.back-index-add>.inner>.left-part>.portrait>img{
-    position:absolute;
-    top:50%;
-    left:50%;
-    margin-top:-38px;
-    margin-left:-40px;
-}
-.back-index-add>.inner>.left-part>div.input{
-    width:300px;
-    margin:5px 0px 6px 25px;
-}
-.back-index-add>.inner>.left-part>.sex{
-    margin:16px 0 16px 26px;
-}
-.back-index-add>.inner>.left-part>.sex>.radio{
-    margin-right:20px;
-}
-/*right*/
-.back-index-add>.inner>.right-part{
-    float:right;
-    width:50%;
-    height:500px;
-    margin-top:35px;
-    overflow-y:auto;
-}
-.back-index-add>.inner>.right-part>div.input{
-    width:300px;
-    margin:5px 0px 6px 25px;
-}
-.back-index-add>.inner>.right-part>div.input.specialInput{
-    margin:5px 0px 2px 25px;
-}
-.back-index-add>.inner>.right-part>.checkbox{
-    display:inline-block;
-    margin:40px 0 5px 25px;
-}
-.back-index-add>.inner>.right-part>.button{
-    width:130px;
-    position:relative;
-    left:26px;
-    top:25px;
 }
 
 

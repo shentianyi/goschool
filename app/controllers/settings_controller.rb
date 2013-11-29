@@ -9,7 +9,7 @@ class SettingsController < ApplicationController
       when 'institutions'
         @institutions= current_tenant.institutions
       when 'users'
-        @logininfos=current_tenant.logininfos
+        @users=current_tenant.users
       else
         @setting=current_tenant.setting
         @partial='settings'

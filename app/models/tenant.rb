@@ -5,6 +5,7 @@ class Tenant < ActiveRecord::Base
   has_many :institutions,:dependent=>:destroy
   has_many :courses,:dependent=>:destroy
   has_many :logininfos, :dependent=>:destroy
+  has_many :users, :through=>:logininfos
   has_many :students, :dependent=>:destroy
   attr_accessible :access_key, :company_name, :edition, :subscription_status,:domain,:logininfo_id
 end
