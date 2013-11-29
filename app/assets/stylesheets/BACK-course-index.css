@@ -1,0 +1,58 @@
+/*列表*/
+.back-index-main > .search-list > .search-result[name="course"] > li .course-name{
+    color:#63A69F;
+    font-size:21px;
+    margin-bottom:0px;
+    float:left;
+}
+.back-index-main > .search-list > .search-result[name="course"] > li .labels{
+    float:left;
+    margin-top:10px;
+    margin-left:20px;
+}
+.back-index-main > .search-list > .search-result[name="course"] > li .course-desc{
+    vertical-align:top;
+}
+.back-index-main > .search-list > .search-result[name="course"] > li .class-size{
+    color:#C69C6D;
+}
+.back-index-main > .search-list > .search-result[name="course"] > li .course-desc span:first-of-type{
+    display:block;
+    margin-bottom:3px;
+}
+.back-index-main > .search-list > .search-result[name="course"] > li .button{
+    position:relative;
+    left:50%;
+    width:70px;
+    margin-left:-35px;
+    top:-20px;
+}
+.back-index-main > .search-list > .search-result[name="course"] > li .course-status{
+    max-width:60px;
+    min-width:60px;
+    width:60px;
+    padding:0.4em 0em
+}
+.back-index-main > .search-list > .search-result[name="course"] > li .course-status p{
+    text-align:center;
+}
+.back-index-main > .search-list > .search-result[name="course"] > li .course-status p:nth-of-type(2){
+    color:#E44B3D;
+}
+.back-index-main > .search-list > .search-result[name="course"] > li table tr:nth-child(2) td:first-of-type{
+    width:280px;
+    min-width:280px;
+    max-width:280px;
+}
+.back-index-main > .search-list > .search-result[name="course"] > li table tr:nth-child(2n){
+    background-color:white;
+}
+.back-index-main > .search-list > .search-result[name="course"] > li table tr:nth-child(2n) td,
+.back-index-main > .search-list > .search-result[name="course"] > li table tr:nth-child(3) td{
+    padding:0em 0.7em
+}
+.back-index-main > .search-list > .search-result[name="course"] > li table tr:nth-child(2n) td p,
+.back-index-main > .search-list > .search-result[name="course"] > li table tr:nth-child(3) td p{
+    margin:0px 0px 5px;
+}
+

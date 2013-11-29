@@ -13,6 +13,7 @@
  *= require BACK-admin
  *= require BACK-index
  *= require BACK-student-index
+ *= require BACK-course-index
  *= require base
  *= require datepicker
  *= require semantic

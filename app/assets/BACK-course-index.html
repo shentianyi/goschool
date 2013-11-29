@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="stylesheets/base.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/BACK-index.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/BACK-student-index.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/BACK-course-index.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/datepicker.css" type="text/css" />
 </head>
 <body>
@@ -85,7 +86,7 @@
         <div class="ui teal mini button" id="add-item">
             <div class="visible content">
                 <i class="add icon"></i>
-                添加课程
+                新建课程
             </div>
         </div>
         <div class="ui teal mini button" >
@@ -107,22 +108,13 @@
                 <a><i class="icon up"></i> 根据最新活动排序</a>
             </div>
         </div>
-        <ul class="search-result" id="search-result">
+        <ul class="search-result" id="search-result" name="course">
             <!--template-->
             <li>
                 <table class="ui table segment">
                     <tr>
-                        <td class="two wide">
-                            <img class="circular ui image mini portrait" src="images/portrait/0.jpg" />
-                            <p class="name">王子骁</p>
-                        </td>
-                        <td class="two wide">
-                            <p class="type">潜在客户</p>
-                            <p>七宝中学</p>
-                            <p>高二</p>
-                            <p>17岁</p>
-                        </td>
-                        <td class="five wide">
+                        <td colspan="3" class="fourteen wide">
+                            <p class="course-name">托福秋季班</p>
                             <div class="ui blue labels small">
                                 <a class="ui label">
                                     托福
@@ -133,24 +125,38 @@
                                 <a class="ui label">
                                     SAT
                                 </a>
+                                <a class="ui label">
+                                    听力
+                                </a>
+                                <a class="ui label">
+                                    口语
+                                </a>
+                                <a class="ui label">
+                                    写作
+                                </a>
+
                             </div>
-                            <p class="parent"><span>监护人:</span><span>13901111123(王先生)</span></p>
-                            <p class="phone"><span>联系电话:</span><span>13918502286</span></p>
-                            <p class="consult-time"><span>上次咨询:</span><span>2013-11-11 16:00</span></p>
                         </td>
-                        <td class="two wide">
-                            <p class="maybe-know">推荐人</p>
-                            <p><span>张三</span></p>
+                        <td rowspan="2" class="course-status">
+                            <p>状态</p>
+                            <p>正在进行</p>
                         </td>
-                        <td class="three wide">
-                            <p class="recommend">可能认识</p>
-                            <p><span>李四</span><span>王八</span><span>白一</span></p>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p >授课时间:<span>2013年10月13日-2013年12月31日</span></p>
+                            <p>授课老师:<span>Mary,Laura,Frank</span></p>
+                            <p>已报班: <span class="class-size">21</span> 人</p>
+                        </td>
+                        <td class="course-desc">
+                            <p ><span>简介:</span><span>秋季班为一月份托福考试冲刺，强化听力冲刺，还有很多乱七八糟的</span></p>
                         </td>
                         <td class="three wide">
                             <div class="ui mini button teal">
                                 详情
                             </div>
                         </td>
+
                     </tr>
                 </table>
             </li>
@@ -172,7 +178,7 @@
 <section class="back-index-add" id="back-index-add" name="course">
     <div class="inner">
         <i class="remove icon"></i>
-        <p>新建学生</p>
+        <p>新建课程</p>
         <div class="left-part">
             <div class="portrait">
                 <img class="ui circular image " src="images/portrait/1.jpg">

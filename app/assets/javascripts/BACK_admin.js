@@ -38,10 +38,12 @@ BACKINDEX.admin.generateHTML=function(){
     var type=BACKINDEX.admin.operate.type;
     var address=BACKINDEX.admin.operate.entities[type].address,
         href=BACKINDEX.admin.operate.entities[type].href;
+    loader("partial-content");
     $.ajax({
         url:address,
         dataType:"html",
         success:function(data){
+            remove_loader()
             window.history.pushState({},"",href);
             $("#partial-content").html(data);
         }

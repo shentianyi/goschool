@@ -19,7 +19,7 @@ BACKINDEX.right_list.initital=(function(){
 //////////////////////////////////////////////////////////////////////////////////////////////////// 列表的呈现
 BACKINDEX.right_list.currentPage;
 BACKINDEX.right_list.loadCheck=0;
-BACKINDEX.right_list.stillHave=true;
+BACKINDEX.right_list.stillHave=false;
 BACKINDEX.right_list.threshold=50;
 BACKINDEX.right_list.id;
 BACKINDEX.right_list.generateResult=function(parameter){
