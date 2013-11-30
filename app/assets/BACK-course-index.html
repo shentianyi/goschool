@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="stylesheets/BACK-index.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/BACK-student-index.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/BACK-course-index.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/jquery-datepicker.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/datepicker.css" type="text/css" />
 </head>
 <body>
@@ -180,79 +181,96 @@
         <i class="remove icon"></i>
         <p>新建课程/服务</p>
         <div class="tab" id="add-course-tab">
-            <div class="tab-item active">课程</div>
-            <div class="tab-item">服务</div>
+            <div class="tab-item active" for="course">课程</div>
+            <div class="tab-item" for="service">服务</div>
         </div>
-        <!--<div class="left-part">-->
-            <!--<div class="portrait">-->
-                <!--<img class="ui circular image " src="images/portrait/1.jpg">-->
-            <!--</div>-->
-            <!--<div class="ui left icon input">-->
-                <!--<input placeholder="姓名..." type="text">-->
-                <!--<i class="user icon"></i>-->
-            <!--</div>-->
-            <!--<div class="sex stop">-->
-                <!--<div class="ui radio checkbox">-->
-                    <!--<input name="sex" checked="checked" type="radio">-->
-                    <!--<label>男</label>-->
-                <!--</div>-->
-                <!--<div class="ui radio checkbox">-->
-                    <!--<input name="sex" type="radio">-->
-                    <!--<label>女</label>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="ui left icon input calendar">-->
-                <!--<input placeholder="出生年月..." type="text" readonly id="born-date">-->
-                <!--<i class="calendar icon"></i>-->
-            <!--</div>-->
-            <!--<div class="ui left icon input">-->
-                <!--<input placeholder="就读学校..." type="text">-->
-                <!--<i class="building icon"></i>-->
-            <!--</div>-->
-            <!--<div class="ui left icon input calendar">-->
-                <!--<input placeholder="毕业年限..." type="text" readonly id="graduation-date">-->
-                <!--<i class="empty bookmark icon"></i>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="right-part">-->
-            <!--<div class="ui left icon input">-->
-                <!--<input placeholder="邮件地址..." type="text">-->
-                <!--<i class="mail outline icon"></i>-->
-            <!--</div>-->
-            <!--<div class="ui left icon input">-->
-                <!--<input placeholder="联系电话..." type="text">-->
-                <!--<i class="phone icon"></i>-->
-            <!--</div>-->
-            <!--<div class="ui left icon input">-->
-                <!--<input placeholder="联系地址..." type="text">-->
-                <!--<i class="home icon"></i>-->
-            <!--</div>-->
-            <!--<div class="ui left icon input">-->
-                <!--<input placeholder="监护人..." type="text">-->
-                <!--<i class="male icon"></i>-->
-            <!--</div>-->
-            <!--<div class="ui left icon input">-->
-                <!--<input placeholder="监护人电话..." type="text">-->
-                <!--<i class="mobile icon"></i>-->
-            <!--</div>-->
-            <!--<div class="ui left icon input specialInput labelForm autoComplete">-->
-                <!--<ul>-->
-                    <!--<li><input type='text' placeholder="标签..." id="autoC2" style="padding:0;width:40px;"/></li>-->
-                <!--</ul>-->
-                <!--<i class="tag icon stop"></i>-->
-            <!--</div>-->
-            <!--<div class="ui left icon input autoComplete">-->
-                <!--<input placeholder="推荐人..." id="autoC3" type="text">-->
-                <!--<i class="smile icon"></i>-->
-            <!--</div>-->
-            <!--<div class="ui checkbox stop">-->
-                <!--<input name="fun" type="checkbox" checked>-->
-                <!--<label>同时开设学生账号</label>-->
-            <!--</div>-->
-            <!--<div class="ui red button">-->
-                <!--添加-->
-            <!--</div>-->
-        <!--</div>-->
+        <div id="new-class" class="tab-block" from="course">
+            <div class="left-part">
+                <div class="ui left icon input">
+                    <input placeholder="课程名称..." type="text">
+                    <i class="browser icon"></i>
+                </div>
+                <textarea placeholder="课程描述..."></textarea>
+                <div class="ui left icon input">
+                    <input placeholder="预计课时数..." type="text">
+                    <i class="time icon"></i>
+                </div>
+                <div class="ui left icon input">
+                    <input placeholder="预计报名人数..." type="text">
+                    <i class="users icon"></i>
+                </div>
+                <div class="ui left icon input calendar">
+                    <input placeholder="课程开始时间..." type="text" readonly id="course-begin-date">
+                    <i class="calendar icon"></i>
+                </div>
+                <div class="ui left icon input calendar">
+                    <input placeholder="课程结束时间..." type="text" readonly id="course-end-date">
+                    <i class="calendar icon"></i>
+                </div>
+            </div>
+            <div class="right-part">
+                <div class="ui left icon input specialInput labelForm autoComplete">
+                    <ul>
+                        <li><input type='text' placeholder="标签..." id="autoC2" style="padding:0;width:40px;"/></li>
+                    </ul>
+                    <i class="tag icon stop"></i>
+                </div>
+                <div class="ui buttons choose-teacher-delivery" id="choose-teacher-delivery">
+                        <div class="ui mini teal button active">以总课程安排老师</div>
+                        <div class="or"></div>
+                        <div class="ui mini button">以子课程安排老师</div>
+                </div>
+                <div class="ui left icon input specialInput labelForm autoComplete total-teachers" id="total-teachers">
+                    <ul>
+                        <li><input type='text' placeholder="授课老师..." id="autoC2" style="padding:0;width:40px;"/></li>
+                    </ul>
+                    <i class="male icon"></i>
+                </div>
+            </div>
+        </div>
+        <div id="new-service" class="tab-block" style="display:none" from="service">
+            <div class="left-part">
+                <div class="ui left icon input">
+                    <input placeholder="服务名称..." type="text">
+                    <i class="browser icon"></i>
+                </div>
+                <textarea placeholder="服务描述..."></textarea>
+                <div class="ui left icon input">
+                    <input placeholder="预计报名人数..." type="text">
+                    <i class="users icon"></i>
+                </div>
+                <div class="ui left icon input calendar">
+                    <input placeholder="服务开始时间..." type="text" readonly id="service-begin-date">
+                    <i class="calendar icon"></i>
+                </div>
+                <div class="ui left icon input calendar">
+                    <input placeholder="服务结束时间..." type="text" readonly id="service-end-date">
+                    <i class="calendar icon"></i>
+                </div>
+            </div>
+            <div class="right-part">
+                <div class="ui left icon input specialInput labelForm autoComplete">
+                    <ul>
+                        <li><input type='text' placeholder="标签..." id="autoC2" style="padding:0;width:40px;"/></li>
+                    </ul>
+                    <i class="tag icon stop"></i>
+                </div>
+                <div class="ui buttons choose-teacher-delivery" id="choose-teacher-delivery">
+                    <div class="ui mini teal button active">以总服务安排老师</div>
+                    <div class="or"></div>
+                    <div class="ui mini button">以子服务安排老师</div>
+                </div>
+                <div class="ui left icon input specialInput labelForm autoComplete total-teachers" id="total-teachers">
+                    <ul>
+                        <li><input type='text' placeholder="授课老师..." id="autoC2" style="padding:0;width:40px;"/></li>
+                    </ul>
+                    <i class="male icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="ui red button">
+            添加
+        </div>
     </div>
 </section>
 
@@ -280,6 +298,7 @@
 </div>
 
 <script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="javascripts/jquery-datepicker.js"></script>
 <script type='text/javascript' src="javascripts/datepicker.js" ></script>
 <script type='text/javascript' src="javascripts/semantic.min.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_index.js" ></script>

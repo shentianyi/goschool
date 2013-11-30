@@ -73,6 +73,11 @@ select{
     font-size:13px;
     color:#333;
 }
+.ui-datepicker-title>select{
+    padding:2px 1px;
+    background:#111;
+    color:#fff;
+}
 /*基础布局操作*/
 .pull-left{
     float:left
@@ -81,9 +86,6 @@ select{
     float:right;
 }
 /*date input*/
-.ui.input.calendar>input{
-
-}
 /********************************************************************************************************* Message
 *******************************************************************************************************************/
 .message-box{

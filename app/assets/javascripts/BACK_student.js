@@ -2,13 +2,14 @@
 var BACKSTUDENT=BACKSTUDENT||{};
 //student init
 (function(){
-     $("#born-date").DatePicker({
-         view:"years",
-         date:$("#born-date").val()
-     });
-    $("#graduation-date").DatePicker({
-        view:"years",
-        date:$("#graduation-date").val()
+    $("#born-date,#graduation-date").datepicker({
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        changeMonth: true,
+        changeYear: true,
+        showMonthAfterYear:true,
+        yearRange: "-30:+10",
+        dateFormat:'yy-mm-dd'
     });
 })();
 

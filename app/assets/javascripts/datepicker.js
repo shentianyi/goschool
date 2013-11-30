@@ -223,6 +223,7 @@
 						if (fromUser.className) {
 							data.weeks[indic].days[indic2].classname.push(fromUser.className);
 						}
+
 						data.weeks[indic].days[indic2].classname = data.weeks[indic].days[indic2].classname.join(' ');
 						cnt++;
 						date.addDays(1);

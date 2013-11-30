@@ -343,7 +343,7 @@ GLOBAL.autoComplete.count=0;
            $(this).siblings().removeClass("active");
            $(this).addClass("active");
            var text=$("#autoComplete-call ul").find(".active").text();
-           $("#"+target).val(text);
+           $("#"+target).focus().val(text);
        }
     });
 })();
@@ -352,7 +352,7 @@ GLOBAL.autoComplete.count=0;
 (function(){
     $(".labelForm").each(function(){
         var $input=$(this).find("input");
-        var max_width=parseInt($(this).css("width"))*0.85;
+        var max_width=parseInt($(this).css("width"))*0.8;
         $input.css("width",max_width);
     });
     $("body").on("click",".labelForm",function(){
