@@ -1,10 +1,22 @@
 #encoding: utf-8
 class CoursesController < ApplicationController
-  before_filter :init_message ,:only=>[:edit,:create,:update,:destroy,:students]
-  before_filter :get_course,:only=>[:update,:edit,:destroy,:students]
+  before_filter :init_message ,:only=>[:edit,:create,:update,:destroy]
+  before_filter :get_course,:only=>[:show,:update,:edit,:destroy]
   before_filter :render_nil_msg , :only=>[:edit,:update,:destroy]
-  def index
-    render :json=> Course.all
+
+  def show
+    @course_presenter=CoursePresenter.new(@course)
+    case params[:part]
+     when 'teachers'
+       teachers()
+     when 'recommendations'
+	 # recommendations()
+    else
+	students()
+	@partal='students'
+    end	
+    @partial||=params[:part]
+    render :partial=>@partial if params[:ajax] 
   end
 
   def edit
@@ -61,11 +73,15 @@ class CoursesController < ApplicationController
     render :json=>items
   end
 
-  def students
-    render :json=> @course.course_students.collect{|student|  StudentCoursePresenter.new(student).to_json}
-  end
-
   private
+
+  def teachers
+    @teachers=@course.course_teachers.collect{|teacher| TeacherCoursePresenter.new(teacher)}
+  end
+  
+  def students
+    @students=@course.course_students.collect{|student|  StudentCoursePresenter.new(student)}
+  end
 
   def get_course
     @course=Course.find_by_id(params[:id])

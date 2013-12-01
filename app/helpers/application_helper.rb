@@ -21,7 +21,9 @@ module ApplicationHelper
 
   def method_missing(method_name, *args, &block)
     if method_name.to_s=="get_#{model_name}"
-        @instance=model_class.find_by_id(params[:id])
+      @instance=model_class.find_by_id(params[:id])
+    else
+    super
     end
   end
 end

@@ -27,8 +27,8 @@ Goschool::Application.routes.draw do
 
   resources :courses do
     collection do
+      get ':id/:part/:ajax'=>:show
       get :list_search
-      get :students
     end
   end
 
