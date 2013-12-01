@@ -20,3 +20,10 @@ three:
   is_default: false
   course: two
   tenant: one
+  
+four:
+  name: Jump
+  parent_name: courseB
+  is_default: false
+  course: two
+  tenant: one
