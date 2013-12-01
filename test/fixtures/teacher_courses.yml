@@ -19,3 +19,8 @@ four:
   sub_course: three
   user: one
   tenant: one
+
+five:
+  sub_course: four
+  user: one
+  tenant: one
