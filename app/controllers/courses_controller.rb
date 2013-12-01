@@ -45,11 +45,17 @@ class CoursesController < ApplicationController
 
   def list_search
     c=[]
+    total=10
+    l=[6,4]
     ['Course','SubCourse'].each_with_index do |t,i|
       c[i]= Redis::Search.query(t, params[:q], :conditions => {:tenant_id => current_tenant.id})
     end
     items=[]
-    (c[0].slice(0,6)+c[1].slice(0,4)).each do |item|
+    
+    l[0]=c[0].count if c[0].count<l[0]
+    l[1]=total-l[0]
+    
+    (c[0].slice(0,l[0])+c[1].slice(0,l[1])).each do |item|
       items<<{:name=>item['title'],:content=>item['name'],:type=>item['type'],:id=>item['id']} if(item['is_default']=='false' || item['is_default'].nil?)
     end
     render :json=>items
@@ -58,7 +64,7 @@ class CoursesController < ApplicationController
   def students
     render :json=> @course.course_students.collect{|student|  StudentCoursePresenter.new(student).to_json}
   end
-  
+
   private
 
   def get_course
