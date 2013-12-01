@@ -184,6 +184,7 @@
             <div class="tab-item active" for="course">课程</div>
             <div class="tab-item" for="service">服务</div>
         </div>
+
         <div id="new-class" class="tab-block" from="course">
             <div class="left-part">
                 <div class="ui left icon input">
@@ -211,23 +212,38 @@
             <div class="right-part">
                 <div class="ui left icon input specialInput labelForm autoComplete">
                     <ul>
-                        <li><input type='text' placeholder="标签..." id="autoC2" style="padding:0;width:40px;"/></li>
+                        <li><input type='text' placeholder="标签..." id="new-class-label" /></li>
                     </ul>
                     <i class="tag icon stop"></i>
                 </div>
-                <div class="ui buttons choose-teacher-delivery" id="choose-teacher-delivery">
-                        <div class="ui mini teal button active">以总课程安排老师</div>
+                <div class="ui buttons choose-teacher-delivery" id="choose-teacher-delivery" name="class">
+                        <div class="ui mini teal button active" for="total-teachers">以总课程安排老师</div>
                         <div class="or"></div>
-                        <div class="ui mini button">以子课程安排老师</div>
+                        <div class="ui mini button" for="sub-teachers">以子课程安排老师</div>
                 </div>
-                <div class="ui left icon input specialInput labelForm autoComplete total-teachers" id="total-teachers">
+                <div class="ui left icon input specialInput labelForm autoComplete total-teachers" id="total-teachers" >
                     <ul>
-                        <li><input type='text' placeholder="授课老师..." id="autoC2" style="padding:0;width:40px;"/></li>
+                        <li><input type='text' placeholder="授课老师..." id="autoC5" /></li>
                     </ul>
                     <i class="male icon"></i>
                 </div>
+                <div class="sub-course-block" id="sub-teachers">
+                    <div class="sub-course-block-item">
+                        <div class="ui input sub-course-name">
+                            <input placeholder="子课程名..." type="text">
+                        </div>
+                        <div class="ui input specialInput labelForm autoComplete total-teachers" >
+                            <ul>
+                                <li><input type='text' placeholder="老师..." id="autoC3" /></li>
+                            </ul>
+                        </div>
+                        <i class="icon collapse" ></i>
+                    </div>
+                    <i class="icon expand" id="add-sub-class"></i>
+                </div>
             </div>
         </div>
+
         <div id="new-service" class="tab-block" style="display:none" from="service">
             <div class="left-part">
                 <div class="ui left icon input">
@@ -251,20 +267,34 @@
             <div class="right-part">
                 <div class="ui left icon input specialInput labelForm autoComplete">
                     <ul>
-                        <li><input type='text' placeholder="标签..." id="autoC2" style="padding:0;width:40px;"/></li>
+                        <li><input type='text' placeholder="标签..." id="service-label" /></li>
                     </ul>
                     <i class="tag icon stop"></i>
                 </div>
-                <div class="ui buttons choose-teacher-delivery" id="choose-teacher-delivery">
-                    <div class="ui mini teal button active">以总服务安排老师</div>
+                <div class="ui buttons choose-teacher-delivery" id="choose-teacher-service-delivery" name="service">
+                    <div class="ui mini teal button active" for="total-service-teachers">以总服务安排老师</div>
                     <div class="or"></div>
-                    <div class="ui mini button">以子服务安排老师</div>
+                    <div class="ui mini button" for="sub-service-teachers">以子服务安排老师</div>
                 </div>
-                <div class="ui left icon input specialInput labelForm autoComplete total-teachers" id="total-teachers">
+                <div class="ui left icon input specialInput labelForm autoComplete total-teachers" id="total-service-teachers">
                     <ul>
-                        <li><input type='text' placeholder="授课老师..." id="autoC2" style="padding:0;width:40px;"/></li>
+                        <li><input type='text' placeholder="授课老师..." id="service-teachers"/></li>
                     </ul>
                     <i class="male icon"></i>
+                </div>
+                <div class="sub-course-block" id="sub-service-teachers">
+                    <div class="sub-course-block-item">
+                        <div class="ui input sub-course-name">
+                            <input placeholder="子服务名..." type="text">
+                        </div>
+                        <div class="ui input specialInput labelForm autoComplete total-teachers" >
+                            <ul>
+                                <li><input type='text' placeholder="老师..." id="sub-teacher-service-1" /></li>
+                            </ul>
+                        </div>
+                        <i class="icon collapse"></i>
+                    </div>
+                    <i class="icon expand" id="add-sub-service"></i>
                 </div>
             </div>
         </div>
@@ -306,6 +336,6 @@
 <script type='text/javascript' src="javascripts/BACK_rightList.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_student.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_course.js" ></script>
-
+<script type='text/javascript' src="javascripts/mustache.js" ></script>
 </body>
 </html>

@@ -352,8 +352,8 @@ GLOBAL.autoComplete.count=0;
 (function(){
     $(".labelForm").each(function(){
         var $input=$(this).find("input");
-        var max_width=parseInt($(this).css("width"))*0.8;
-        $input.css("width",max_width);
+        var max_width=parseInt($(this).css("width"))*0.45;
+        $input.css("width",max_width).css("maxWidth","999em");
     });
     $("body").on("click",".labelForm",function(){
         $(this).find("input").focus();

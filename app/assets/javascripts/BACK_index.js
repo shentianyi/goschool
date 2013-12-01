@@ -24,10 +24,22 @@ BACKINDEX.init=(function(){
                     $("#choose-teacher-delivery div").eq(0).addClass("active teal");
                     $("#choose-teacher-delivery div").eq(2).removeClass("active teal");
                 }
-                $("#new-class").css("display","block");
-                $("#new-course").css("display","none");
+                if(!$("#choose-teacher-service-delivery div").eq(0).hasClass("active")){
+                    $("#choose-teacher-service-delivery div").eq(0).addClass("active teal");
+                    $("#choose-teacher-service-delivery div").eq(2).removeClass("active teal");
+                }
+                $("#new-class,#total-service-teachers,#total-teachers").css("display","block");
+                $("#new-service,#sub-service-teachers,#sub-teachers").css("display","none");
                 $("#add-course-tab>div").eq(0).addClass("active");
                 $("#add-course-tab>div").eq(1).removeClass("active");
+                var i,length_class=$("#sub-teachers>.sub-course-block-item").length,
+                    length_service=$("#sub-service-teachers>.sub-course-block-item").length;
+                for(i=0;i<length_class-1;i++){
+                    $("#sub-teachers>.sub-course-block-item").eq(1).remove();
+                }
+                for(i=0;i<length_service-1;i++){
+                    $("#sub-service-teachers>.sub-course-block-item").eq(1).remove();
+                }
             }
             BACKINDEX.addItem.clear();
             $("#back-index-add").css("left","-999em").css("right","auto");

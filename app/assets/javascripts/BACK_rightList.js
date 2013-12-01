@@ -71,7 +71,7 @@ BACKINDEX.right_list.observeScroll=function(){
    }
 };
 BACKINDEX.right_list.student.template="\
-    {{#Student}}\
+    {{#student}}\
     <li>\
     <table class='ui table segment'>\
         <tr>\
@@ -117,6 +117,6 @@ BACKINDEX.right_list.student.template="\
         </tr>\
     </table>\
     </li>\
-{{/Student}}"
+{{/student}}"
 //////////////////////////////////////////////////////////////////////////////////////////////////// 添加
 

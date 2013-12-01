@@ -132,3 +132,54 @@
     right:30px;
     bottom:27px;
 }
+/*填写子课程老师的地方*/
+.back-index-add[name='course']>.inner .right-part>.sub-course-block{
+    margin-top:-10px;
+    position:relative;
+    display:none;
+}
+.back-index-add[name='course']>.inner .right-part .sub-course-block-item{
+    position:relative;
+    left:25px;
+    top:2px;
+    width:320px;
+ }
+.back-index-add[name='course']>.inner .right-part .sub-course-block-item .sub-course-name{
+    width:110px;
+}
+.back-index-add[name='course']>.inner .right-part .sub-course-block-item .sub-course-name>input{
+    padding:0.85em 0.5em;
+    font-size:0.81em
+}
+.back-index-add[name='course']>.inner .right-part .sub-course-block-item .specialInput{
+   width:150px;
+   top:15px;
+}
+.back-index-add[name='course']>.inner .right-part .sub-course-block-item .specialInput ul{
+    padding:0.85em 0 0.85em 0.5em;
+}
+.back-index-add[name='course']>.inner .right-part .sub-course-block-item .specialInput li{
+    padding:0 2px;
+}
+.back-index-add[name='course']>.inner .right-part .sub-course-block-item>i{
+    font-size:29px;
+    color:#D95C5C;
+    position:relative;
+    left:5px;
+    top:5px;
+    cursor:pointer;
+}
+.back-index-add[name='course']>.inner .right-part .sub-course-block-item>i:hover{
+    color:rgba(217,92,92,0.8);
+}
+.back-index-add[name='course']>.inner .right-part>.sub-course-block>i{
+    font-size:29px;
+    color:#63A69F;
+    position:absolute;
+    left:299px;
+    margin-top:10px;
+    cursor:pointer
+}
+.back-index-add[name='course']>.inner .right-part>.sub-course-block>i:hover{
+    color:rgba(99,166,159,0.8);
+}
