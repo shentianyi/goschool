@@ -15,6 +15,6 @@
  *= require BACK-student-index
  *= require BACK-course-index
  *= require base
- *= require datepicker
+ *= require jquery-datepicker
  *= require semantic
  */

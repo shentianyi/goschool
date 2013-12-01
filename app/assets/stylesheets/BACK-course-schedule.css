@@ -1,0 +1,29 @@
+/*大框架*/
+.back-index-main[name='schedule']{
+    left:100px;
+    min-width:924px;
+}
+.back-index-main[name='schedule']:after{
+    content:"",
+    display:block;
+    clear:both;
+}
+.back-index-main[name='schedule'] header .ui.button:first-of-type{
+    right:auto;
+    left:27px;
+}
+/*放full calendar的*/
+.schedule-calendar{
+    float:left;
+    width:75%;
+    overflow-y:auto;
+    background:#fff;
+    height:100%;
+}
+
+/*放search的地方*/
+.schedule-search{
+    float:left;
+    width:25%;
+    overflow-y:auto;
+}
