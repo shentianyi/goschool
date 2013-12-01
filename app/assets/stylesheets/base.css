@@ -216,7 +216,7 @@ select{
 .autoComplete-call>ul{
     list-style-type: none;
     margin:0px;
-    padding:0;
+    padding:3px 0;
     word-break:break-all;
     word-wrap:break-word;
 }
@@ -225,11 +225,32 @@ select{
     cursor:default;
     font-size:13.5px;
 }
-
 .autoComplete-call>ul>li:hover,
 .autoComplete-call>ul>li:focus,
 .autoComplete-call>ul>li:active,
 .autoComplete-call>ul>li.active{
     background-color:#4092CC;
+}
+.autoComplete-call>ul>li:hover p,
+.autoComplete-call>ul>li:focus p,
+.autoComplete-call>ul>li:active p,
+.autoComplete-call>ul>li.active p,
+.autoComplete-call>ul>li:hover p:first-of-type,
+.autoComplete-call>ul>li:focus p:first-of-type,
+.autoComplete-call>ul>li:active p:first-of-type,
+.autoComplete-call>ul>li.active p:first-of-type{
     color:white;
+}
+.autoComplete-call>ul>li>p:first-of-type{
+    font-size:12px;
+    color:#333;
+    line-height:13px;
+}
+.autoComplete-call>ul>li>p{
+    font-size:11px;
+    line-height:13px;
+    margin:0px;
+    color:rgba(0,0,0,0.5);
+    word-break:break-all;
+    word-wrap:break-word;
 }

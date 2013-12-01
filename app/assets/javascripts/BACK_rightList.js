@@ -70,6 +70,7 @@ BACKINDEX.right_list.observeScroll=function(){
        BACKINDEX.right_list.loadData();
    }
 };
+//////////////////////////////////////////////////////////////////////////////////////////////////// 模板
 BACKINDEX.right_list.student.template="\
     {{#student}}\
     <li>\
@@ -118,5 +119,48 @@ BACKINDEX.right_list.student.template="\
     </table>\
     </li>\
 {{/student}}"
-//////////////////////////////////////////////////////////////////////////////////////////////////// 添加
+
+BACKINDEX.right_list.course.template='\
+    {{#course}}\
+    <li>\
+    <table class="ui table segment">\
+    <tr>\
+        <td colspan="3" class="fourteen wide">\
+            <p class="course-name">{{name}}</p>\
+            <div class="ui blue labels small">\
+                {{#tag}}\
+                <a class="ui label">\
+                   {{title}}\
+                </a>\
+                {{/tag}}\
+            </div>\
+        </td>\
+        <td rowspan="2" class="course-status">\
+            <p>状态</p>\
+            <p>{{status}}</p>\
+        </td>\
+    </tr>\
+    <tr>\
+    <td>\
+        <p>授课时间:<span>{{course-time}}</span></p>\
+        <p class="course-teachers">授课老师:\
+        {{#teachers}}\
+        <span>{{teacher}}</span>\
+        {{/teachers}}\
+        </p>\
+        <p>已报班: <span class="class-size">{{course-student}}</span> 人</p>\
+    </td>\
+    <td class="course-desc">\
+    <p ><span>简介:</span><span>{{desc}}</span></p>\
+    </td>\
+    <td class="three wide">\
+    <div class="ui mini button teal">\
+    详情\
+    </div>\
+</td>\
+</tr>\
+</table>\
+</li>\
+{{/course}}'
+
 

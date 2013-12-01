@@ -39,6 +39,9 @@
 .back-index-main > .search-list > .search-result[name="course"] > li .course-status p:nth-of-type(2){
     color:#E44B3D;
 }
+.back-index-main > .search-list > .search-result[name="course"] > li .course-teachers>span{
+    margin-right:6px;
+}
 .back-index-main > .search-list > .search-result[name="course"] > li table tr:nth-child(2) td:first-of-type{
     width:280px;
     min-width:280px;

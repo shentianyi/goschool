@@ -339,9 +339,9 @@
     position:absolute;
     min-height:768px;
     top:0px;
-    right:0;
+    right:auto;
     bottom:0px;
-    left:0em;
+    left:-999em;
     background:rgba(0,0,0,0.9);
     z-index:99;
 }
