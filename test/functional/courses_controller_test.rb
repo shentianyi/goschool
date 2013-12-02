@@ -15,7 +15,7 @@ class CoursesControllerTest < ActionController::TestCase
   test "should create course" do
     assert_difference('Course.count') do
       post :create,
-      Course: {
+      course: {
         description: "gaming TUOFU",
         end_date: "2013-11-11",
         expect_number: 100,

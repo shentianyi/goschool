@@ -1,7 +1,7 @@
 #encoding: utf-8
 class Schedule < ActiveRecord::Base
   belongs_to :sub_course
-  delegate :Course,:to=>:sub_course
+  delegate :course,:to=>:sub_course
   has_many :teachers,:through=>:sub_course
   attr_accessible :end_time, :start_time
   attr_accessible :sub_course_id

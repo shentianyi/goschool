@@ -3,7 +3,7 @@
 # 3.寻找学生已经完成的课程
 # 4.根据课程和课程的TAG匹配程度乘以权重80
 # 5.1点分数减去4点的分数得出最后总分
-
+require 'tag_utility'
 class ScoreCourseAttendedCourseTag
   def calculate(arg)
     tenant_id = arg[:tenant_id].to_s

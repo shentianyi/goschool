@@ -1,7 +1,7 @@
 #encoding: utf-8
 class StudentCourse < ActiveRecord::Base
-  belongs_to :Student
-  belongs_to :Course
+  belongs_to :student
+  belongs_to :course
   belongs_to :tenant
   attr_accessible :paid, :status
   attr_accessible :student_id,:course_id
