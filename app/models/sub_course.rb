@@ -3,6 +3,7 @@ class SubCourse < ActiveRecord::Base
   include Redis::Search
   belongs_to :course
   belongs_to :tenant
+  belongs_to :institution
   has_many :teacher_courses,:dependent=>:destroy
   has_many :schedules,:dependent=>:destroy
   has_many :teachers,:through=>:teacher_courses,:class_name=>'User'
@@ -14,7 +15,7 @@ class SubCourse < ActiveRecord::Base
   after_destroy :create_default_sub_course
 
   redis_search_index(:title_field => :parent_name,
-                     :condition_fields => [:tenant_id],
+                     :condition_fields => [:tenant_id,:institution_id],
                      :ext_fields =>[:name,:is_default])
   # notice name blank validate !! default sub course
   def assign_teachers teachers
