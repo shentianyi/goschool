@@ -29,22 +29,20 @@ class CoursesController < ApplicationController
     tags=params[:course].slice(:tags).strip
     subs=params[:course].slice(:subs).strip
     @course = current_tenant.courses.build(params[:course].except(:subs).except(:tags).strip)
-    @course.add_sub_courses(subs[:subs]) if subs.size>0
+    @course.subs=subs[:subs]
+    @course.tags=tags
     unless @msg.result=@course.save
     @msg.content=@course.errors.messages
     else
       @msg.content=@course.id
-      @course.add_tags(tags[:tags]) if tags.size>0
     end
     render :json=>@msg
   end
 
   def update
-    tags=params[:course].slice(:tags).strip
+    @course.tags=params[:course].slice(:tags).strip
     unless @msg.result=@course.update_attributes(params[:course].strip)
     @msg.content=@course.errors.messages
-    else
-      @course.add_tags(tags[:tags]) if tags.size>0
     end
     render :json=>@msg
   end

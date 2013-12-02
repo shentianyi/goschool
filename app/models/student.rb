@@ -3,7 +3,7 @@ class Student < ActiveRecord::Base
   include Redis::Search
 
   attr_accessible :address, :birthday, :email, :gender, :graduation, :guardian, :guardian_phone, :name, :phone, :school,:referrer_id,:logininfo_id,:image_url,:tenant_id
-  attr_accessible :student_statussss
+  attr_accessible :student_status
   
   belongs_to :logininfo
   belongs_to :tenant
