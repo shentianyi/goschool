@@ -21,14 +21,14 @@ class CoursesController < ApplicationController
 
   def edit
     @msg.result=true
-    @msg.object={:course=>@course,:sub_courses=>@course.sub_courses}
+    @msg.object={:Course=>@course,:sub_courses=>@course.sub_courses}
     render :json=>@msg
   end
 
   def create
-    tags=params[:course].slice(:tags).strip
-    subs=params[:course].slice(:subs).strip
-    @course = current_tenant.courses.build(params[:course].except(:subs).except(:tags).strip)
+    tags=params[:Course].slice(:tags).strip
+    subs=params[:Course].slice(:subs).strip
+    @course = current_tenant.courses.build(params[:Course].except(:subs).except(:tags).strip)
     @course.add_sub_courses(subs[:subs]) if subs.size>0
     unless @msg.result=@course.save
     @msg.content=@course.errors.messages
@@ -40,8 +40,8 @@ class CoursesController < ApplicationController
   end
 
   def update
-    tags=params[:course].slice(:tags).strip
-    unless @msg.result=@course.update_attributes(params[:course].strip)
+    tags=params[:Course].slice(:tags).strip
+    unless @msg.result=@course.update_attributes(params[:Course].strip)
     @msg.content=@course.errors.messages
     else
       @course.add_tags(tags[:tags]) if tags.size>0
