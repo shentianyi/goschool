@@ -11,7 +11,7 @@ class Course < ActiveRecord::Base
   has_many :students,:through=> :student_courses
   has_many :teachers,:through=>:sub_courses
   attr_accessible :actual_number, :description, :end_date, :expect_number, :lesson, :name, :start_date, :type
-  attr_accessible :has_sub,:status,:institution_id
+  attr_accessible :has_sub,:status,:institution_id,:tenant_id
   acts_as_tenant(:tenant)
 
   validate :validate_save

@@ -11,15 +11,15 @@ class ScoreStudentReferTest  < ActiveSupport::TestCase
     Logininfo.delete_all
                                          school='abc'
     graduation= Date.new(2012)
-    ts = Student.new(name:'TS',school:school,graduation:graduation,tenant_id:1)
+    ts = Student.new(name:'TS',school:school,graduation:graduation,tenant_id:1,phone:'2222',guardian:'ssss',guardian_phone:'wwwww')
     ts.save!
-    s1 =Student.new(name:'s1',school:school,graduation:graduation,tenant_id:1)
+    s1 =Student.new(name:'s1',school:school,graduation:graduation,tenant_id:1,phone:'2222',guardian:'ssss',guardian_phone:'wwwww')
     s1.save!
 
-    s2 =   Student.new(name:'s2',school:school,graduation:Date.new(1990),tenant_id:1)
+    s2 =   Student.new(name:'s2',school:school,graduation:Date.new(1990),tenant_id:1,phone:'2222',guardian:'ssss',guardian_phone:'wwwww')
     s2.save!
 
-    s3 =   Student.new(name:'s3',school:school + 'sss',graduation:graduation,tenant_id:1)
+    s3 =   Student.new(name:'s3',school:school + 'sss',graduation:graduation,tenant_id:1,phone:'2222',guardian:'ssss',guardian_phone:'wwwww')
     s3.save!
 
     1.upto(5) do |i|
