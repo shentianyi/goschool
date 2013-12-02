@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131126104948) do
+ActiveRecord::Schema.define(:version => 20131202041051) do
+
+  create_table "consultations", :force => true do |t|
+    t.integer  "student_id"
+    t.integer  "logininfo_id"
+    t.string   "consultants"
+    t.datetime "consult_time"
+    t.string   "content"
+    t.string   "comment"
+    t.datetime "comment_time"
+    t.string   "commenter"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "consultations", ["logininfo_id"], :name => "index_consultations_on_logininfo_id"
+  add_index "consultations", ["student_id"], :name => "index_consultations_on_student_id"
 
   create_table "courses", :force => true do |t|
     t.integer  "type"
@@ -153,11 +169,12 @@ ActiveRecord::Schema.define(:version => 20131126104948) do
     t.string   "guardian"
     t.string   "guardian_phone"
     t.string   "image_url"
+    t.boolean  "is_potential_cus", :default => false
     t.integer  "logininfo_id"
     t.integer  "referrer_id"
     t.integer  "tenant_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   add_index "students", ["logininfo_id"], :name => "index_students_on_logininfo_id"
