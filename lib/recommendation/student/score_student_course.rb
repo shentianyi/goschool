@@ -16,3 +16,4 @@ class ScoreStudentCourse
     return result
   end
 end
+
