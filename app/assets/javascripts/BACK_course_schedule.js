@@ -25,6 +25,7 @@ SCHEDULE.widget.init=function(){
     scheduler.locale.labels.section_time = '时间范围:';
     scheduler.config.event_duration = 60;
     scheduler.config.auto_end_date = true;
+    scheduler.config.details_on_create=true;
     scheduler.config.buttons_left = ["dhx_delete_btn"];
     scheduler.config.buttons_right = ["dhx_cancel_btn","dhx_save_btn"];
     scheduler.config.lightbox.sections = [
@@ -56,6 +57,7 @@ SCHEDULE.widget.init=function(){
            MessageBox("请至少安排一位老师","top","warning");
         }
         else{
+            console.log(data.start_date.toWayneString().day)
             data.teachers=[];
             for(i=0;i<teacher_length;i++){
                 teacher_name=$.trim($("#schedule-teachers li").eq(i).text());

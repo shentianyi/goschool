@@ -333,7 +333,6 @@ GLOBAL.autoComplete.count=0;
     $("body").on("blur",".autoComplete input",function(){
         var $this=$(this);
         window.setTimeout(function(){
-            $this.removeClass("superAutoComplete");
             $("#autoComplete-call").css("left","-999em").attr("target","")
         },100);
     });

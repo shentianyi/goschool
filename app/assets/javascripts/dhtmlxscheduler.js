@@ -2178,7 +2178,7 @@ scheduler.addEventNow=function(start,end,e){
 	}
 	var end_date = new Date(end);
 
-	// scheduler.addEventNow(new Date(), new Date()) + collision though get_visible events defect (such event was not retrieved)
+//	scheduler.addEventNow(new Date(), new Date()) + collision though get_visible events defect (such event was not retrieved)
 	if(start_date.valueOf() == end_date.valueOf())
 		end_date.setTime(end_date.valueOf()+d);
 
@@ -2199,7 +2199,6 @@ scheduler.addEventNow=function(start,end,e){
 scheduler._on_dbl_click=function(e,src){
 	src = src||(e.target||e.srcElement);
 	if (this.config.readonly || !src.className) return;
-
 	var name = src.className.split(" ")[0];
 	switch(name){
 		case "dhx_scale_holder":
@@ -2221,7 +2220,7 @@ scheduler._on_dbl_click=function(e,src){
 			if (this.config.details_on_dblclick || this._table_view || !this.getEvent(id)._timed || !this.config.select)
 				this.showLightbox(id);
 			else{
-                this.edit(id);
+                this.showLightbox(id);
             }
 			break;
 		case "dhx_time_block":
@@ -4740,7 +4739,7 @@ scheduler.form_blocks={
 					case "%Y":
 						sns._time_format_order[3] = p;
 						//year
-						html+="<select>";
+						html+="<select style='display:none'>";
 						var year = dt.getFullYear()-5; //maybe take from config?
 						for (var i=0; i < 10; i++)
 							html+="<option value='"+(year+i)+"'>"+(year+i)+"</option>";
@@ -4748,8 +4747,9 @@ scheduler.form_blocks={
 						break;
 					case "%m":
 						sns._time_format_order[2] = p;
+
 						//month
-						html+="<select>";
+						html+="<select style='display:none'>";
 						for (var i=0; i < 12; i++)
 							html+="<option value='"+i+"'>"+this.locale.date.month_full[i]+"</option>";
 						html += "</select>";
@@ -4757,10 +4757,10 @@ scheduler.form_blocks={
 					case "%d":
 						sns._time_format_order[1] = p;
 						//days
-						html+="<select>";
+						html+="<select style='display:none'>";
 						for (var i=1; i < 32; i++)
 							html+="<option value='"+i+"'>"+i+"</option>";
-						html += "</select>";
+						html+="</select>";
 						break;
 					case "%H:%i":
 						sns._time_format_order[0] = p;
@@ -4857,8 +4857,13 @@ scheduler.form_blocks={
 				s[i+map[1]].value=d.getDate();
 				s[i+map[2]].value=d.getMonth();
 				s[i+map[3]].value=d.getFullYear();
+                if(i==0){
+                    $(s[i+map[1]]).before($("<label />").text(d.getDate()));
+                    $(s[i+map[2]]).before($("<label />").text(d.getMonth()+1+"."));
+                    $(s[i+map[3]]).before($("<label />").text(d.getFullYear()+"."));
+                }
 			}
-
+            $(".dhx_section_time label").remove();
 			_fill_lightbox_select(s,0,ev.start_date);
 			_fill_lightbox_select(s,4,ev.end_date);
 		},
@@ -4914,6 +4919,7 @@ scheduler.showLightbox=function(id){
 	this.showCover(box);
 	this._fill_lightbox(id,box);
 	this.callEvent("onLightbox",[id]);
+    $("#schedule-course").focus();
 };
 scheduler._fill_lightbox = function(id, box) {
 	var ev = this.getEvent(id);
@@ -4931,9 +4937,7 @@ scheduler._fill_lightbox = function(id, box) {
 		var current_sns = sns[i];
 		var node = document.getElementById(current_sns.id).nextSibling;
 		var block = this.form_blocks[current_sns.type];
-        console.log(current_sns.map_to)
 		var value = (ev[current_sns.map_to] !== undefined) ? ev[current_sns.map_to] : current_sns.default_value;
-
 		block.set_value.call(this, node, value, ev, current_sns);
 		if (sns[i].focus)
 			block.focus.call(this, node);

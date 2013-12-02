@@ -22,18 +22,61 @@
 .dhx_cal_template .specialInput ul > li > .label{
     padding:0 2px;
 }
+.dhx_section_time{
+    float:left;
+    margin-left:12px;
+}
+.dhx_section_time>label{
+    padding:0px 0px;
+    margin-left:-3px;
+    font-size:12px;
+}
+.dhx_section_time>label:last-of-type{
+    margin-right:8px;
+}
 /*放full calendar的*/
 .schedule-calendar{
-    float:left;
     width:75%;
-    overflow-y:auto;
-    background:#fff;
-    height:100%;
+    position:absolute;
+    left:0px;
+    top:55px;
+    bottom:0px;
+}
+.schedule-calendar>.schedule-calendar-inner{
+    position:relative;
+    width:90%;
+    left:29px;
+    height:90%;
+    top:2%;
+    box-shadow:2px 3px 9px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow:2px 3px 9px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow:2px 3px 9px rgba(0, 0, 0, 0.6);
+
+}
+.schedule-calendar>.schedule-calendar-inner,
+.schedule-calendar .dhx_cal_container,
+.schedule-calendar .dhx_cal_navline{
+    border-radius:5px 5px 0 0;
+    -moz-border-radius:5px 5px 0 0;
+    -webkit-border-radius:5px 5px 0 0;
+}
+.schedule-calendar>.schedule-calendar-inner table tr:last-of-type .dhx_month_body{
+    border-bottom:0px solid black;
 }
 
 /*放search的地方*/
 .schedule-search{
-    float:left;
+    position:absolute;
+    right:0px;
+    top:55px;
+    bottom:0px;
     width:25%;
-    overflow-y:auto;
+}
+.schedule-search>.ui.button.dropdown{
+    position:absolute;
+    top:0px;
+}
+.schedule-search>.search-input{
+    position:absolute;
+    top:100px;
 }
