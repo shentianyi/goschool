@@ -11,6 +11,7 @@ namespace :recommendation do
 
   desc "make a large calculation for student"
   task :calculate_student => :environment do
+
     scheduler = RecommendationScheduler.new
     scheduler.cal_all_potential_relation
 

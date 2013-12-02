@@ -1,11 +1,11 @@
-#1.	学校 同一学校同一年级 100分
-#2.	年级 同一学校不同年级 80分
+#1.	学校 同一学校同一年级 300分
+#2.	年级 同一学校不同年级 100分
 class ScoreStudentSchool
 
 
   def calculate(arg)
     result = {}
-    student_id = arg[:student_id]
+    student_id = arg[:student_id].to_s
 
     target = Student.find(student_id.to_i)
 
@@ -26,3 +26,9 @@ class ScoreStudentSchool
 
 
 end
+
+##数据准备
+#1. STUDENT WITH SCHOOL 'abc' 毕业时间2012年
+#1个学生相同学校相同毕业时间
+#1个学生相同学校不相同毕业时间
+#N个学生干扰项目
