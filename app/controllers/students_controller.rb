@@ -58,6 +58,7 @@ class StudentsController < ApplicationController
         end
         @logininfo.save!
         @student.logininfo = @loginnfo
+        @student.tenant = current_tenant
         @student.save!
         msg.result = true
       end
@@ -96,11 +97,8 @@ class StudentsController < ApplicationController
     msg = Msg.new
     msg.result = false
     @sutdent = Student.find_by_id(params[:id])
-    if @student
-      @logininfo = Logininfo.find_by_id(@student.logininfo.id) 
-      @logininfo.destroy
-      msg.result = true
-    end
+    @student.destroy
+    msg.result = true
     render :json=>msg
   end
 

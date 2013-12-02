@@ -4,6 +4,7 @@ class CreateStudentCourses < ActiveRecord::Migration
     # t.references :Student #bug! take care of the name
       t.references :student
       t.references :course
+      t.references :tenant
       t.boolean :paid,:default=>false
       t.integer :status
       t.references :tenant
