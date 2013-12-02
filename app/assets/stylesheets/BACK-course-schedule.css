@@ -12,6 +12,16 @@
     right:auto;
     left:27px;
 }
+/*跳出来分配课程*/
+.dhx_section_time>select{
+    width:70px;
+}
+.dhx_cal_template .specialInput ul > li{
+    padding:0 2px 1px;
+}
+.dhx_cal_template .specialInput ul > li > .label{
+    padding:0 2px;
+}
 /*放full calendar的*/
 .schedule-calendar{
     float:left;

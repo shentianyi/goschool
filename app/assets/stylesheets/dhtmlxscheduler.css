@@ -1631,7 +1631,7 @@ div.dhx_cal_editor {
 }
 
 div.dhx_menu_head, div.dhx_menu_icon {
-	background-image: url(imgs_dhx_terrace/controls.png);
+	background-image: url(../images/controls.png);
 }
 
 .dhx_cal_event_line {
@@ -1924,17 +1924,17 @@ div.dhx_menu_head, div.dhx_menu_icon {
 	margin-right: 20px;
 }
 .dhx_save_btn_set {
-	border: 1px solid #22A1BC;
+	border: 1px solid #63A69F;
 	color: white;
-	text-shadow:0px -1px 0px #6F6F6F;
-	background-color: #22A1BC;
+	/*text-shadow:0px -1px 0px #6F6F6F;*/
+	background-color: #63A69F;
 }
 .dhx_btn_set, .dhx_cancel_btn_set {
 	border: 1px solid #CECECE;
 }
 .dhx_delete_btn_set {
-	border: 1px solid #FF8831;
-	background-color: #FF8831;
+	border: 1px solid #D95C5C;
+	background-color: #D95C5C;
 	color: white;
 	text-shadow:0px -1px 0px #93755F;
 }

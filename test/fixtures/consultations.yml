@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one:
+  student: one
+  logininfo: one
+  consultants: "张先生"
+  consult_time: 2103-12-1
+  content: "咨询了学费和课程的相关问题"
+  comment: "重要客户"
+  comment_time: 2013-12-2
+  commenter: "XXX"
+# column: value
+#
+two:
+  student: one
+  logininfo: one
+  consultants: "刘女士"
+  consult_time: 2103-12-1
+  content: "咨询了学费和课程的相关问题，询问何时开学"
+  comment: "不重要客户"
+  comment_time: 2013-12-2
+  commenter: "XXX"
+#  column: value
