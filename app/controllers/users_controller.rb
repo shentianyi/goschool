@@ -33,7 +33,7 @@ class UsersController < ApplicationController
         @user.logininfo = @logininfo
         @user.save!
         msg.result = true
-        #msg.content = @user
+        msg.content = @user
       end
     rescue ActiveRecord::RecordInvalid => invalid
       msg.result = false

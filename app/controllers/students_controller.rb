@@ -96,11 +96,8 @@ class StudentsController < ApplicationController
     msg = Msg.new
     msg.result = false
     @sutdent = Student.find_by_id(params[:id])
-    if @student
-      @logininfo = Logininfo.find_by_id(@student.logininfo.id) 
-      @logininfo.destroy
-      msg.result = true
-    end
+    @student.destroy
+    msg.result = true
     render :json=>msg
   end
 
