@@ -47,7 +47,7 @@
     width:90%;
     left:29px;
     height:90%;
-    top:2%;
+    top:4%;
     box-shadow:2px 3px 9px rgba(0, 0, 0, 0.6);
     -moz-box-shadow:2px 3px 9px rgba(0, 0, 0, 0.6);
     -webkit-box-shadow:2px 3px 9px rgba(0, 0, 0, 0.6);
@@ -74,9 +74,35 @@
 }
 .schedule-search>.ui.button.dropdown{
     position:absolute;
-    top:0px;
+    top:4%;
+    width:80%;
+    min-width:230px;
 }
-.schedule-search>.search-input{
+.schedule-search>.search-block{
     position:absolute;
-    top:100px;
+    top:110px;
+    width:80%;
+    min-width:230px;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+}
+.schedule-search>.search-block>.input{
+    width:100%;
+}
+.schedule-search>.search-block>.input>input{
+    font-size:12px;
+}
+.schedule-search>.search-block>.search-list{
+    height:400px;
+    width:100%;
+    overflow-y:auto;
+}
+.schedule-search>.save-schedule{
+    position:absolute;
+    bottom:6%;
+    min-width:170px;
+    left:50%;
+    width:46%;
+    margin-left:-31%;
 }
