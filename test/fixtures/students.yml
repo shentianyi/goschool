@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
+<<<<<<< HEAD
   name: u1
   gender: 1
   birthday: 2013-11-25 18:15:43
@@ -183,3 +184,187 @@ ten:
   created_at: 2013-11-25 18:15:43
   updated_at: 2013-11-25 18:15:43
   tenant: one
+=======
+ name: u1
+ gender: 1
+ birthday: 2013-11-25 18:15:43
+ school: MyString
+ graduation: 2013-11-25 18:15:43
+ email: MyString
+ phone: MyString
+ address: MyString
+ guardian: MyString
+ guardian_phone: MyString
+ image_url: test
+ logininfo: one
+ referrer: two
+ created_at: 2013-11-25 18:15:43
+ updated_at: 2013-11-25 18:15:43
+ tenant: one
+
+
+two:
+ name: u2
+ gender: 0
+ birthday: 2013-11-25 18:15:43
+ school: MyString
+ graduation: 2013-11-25 18:15:43
+ email: MyString
+ phone: MyString
+ address: MyString
+ guardian: MyStringxs
+ guardian_phone: MyString
+ image_url: test
+ logininfo: two
+ referrer: one
+ created_at: 2013-11-25 18:15:43
+ updated_at: 2013-11-25 18:15:43
+ tenant: one
+
+
+three:
+ name: u3
+ gender: 1
+ birthday: 2013-11-25 18:15:43
+ school: MyString
+ graduation: 2013-11-25 18:15:43
+ email: MyString
+ phone: MyString
+ address: MyString
+ guardian: MyString
+ guardian_phone: MyString
+ image_url: test
+ logininfo: three
+ referrer: two
+ created_at: 2013-11-25 18:15:43
+ updated_at: 2013-11-25 18:15:43
+ tenant: one
+
+
+four:
+ name: u4
+ gender: 0
+ birthday: 2013-11-25 18:15:43
+ school: MyString
+ graduation: 2013-11-25 18:15:43
+ email: MyString
+ phone: MyString
+ address: MyString
+ guardian: MyStringxs
+ guardian_phone: MyString
+ image_url: test
+ logininfo: four
+ referrer: one
+ created_at: 2013-11-25 18:15:43
+ updated_at: 2013-11-25 18:15:43
+ tenant: one
+
+five:
+ name: u5
+ gender: 1
+ birthday: 2013-11-25 18:15:43
+ school: MyString
+ graduation: 2013-11-25 18:15:43
+ email: MyString
+ phone: MyString
+ address: MyString
+ guardian: MyString
+ guardian_phone: MyString
+ image_url: test
+ logininfo: five
+ referrer: two
+ created_at: 2013-11-25 18:15:43
+ updated_at: 2013-11-25 18:15:43
+ tenant: one
+
+
+six:
+ name: u6
+ gender: 0
+ birthday: 2013-11-25 18:15:43
+ school: MyString
+ graduation: 2013-11-25 18:15:43
+ email: MyString
+ phone: MyString
+ address: MyString
+ guardian: MyStringxs
+ guardian_phone: MyString
+ image_url: test
+ logininfo: six
+ referrer: one
+ created_at: 2013-11-25 18:15:43
+ updated_at: 2013-11-25 18:15:43
+ tenant: one
+
+seven:
+ name: u7
+ gender: 0
+ birthday: 2013-11-25 18:15:43
+ school: MyString
+ graduation: 2013-11-25 18:15:43
+ email: MyString
+ phone: MyString
+ address: MyString
+ guardian: MyStringxs
+ guardian_phone: MyString
+ image_url: test
+ logininfo: seven
+ referrer: one
+ created_at: 2013-11-25 18:15:43
+ updated_at: 2013-11-25 18:15:43
+ tenant: one
+
+eight:
+ name: u8
+ gender: 0
+ birthday: 2013-11-25 18:15:43
+ school: MyString
+ graduation: 2013-11-25 18:15:43
+ email: MyString
+ phone: MyString
+ address: MyString
+ guardian: MyStringxs
+ guardian_phone: MyString
+ image_url: test
+ logininfo: eight
+ referrer: one
+ created_at: 2013-11-25 18:15:43
+ updated_at: 2013-11-25 18:15:43
+ tenant: one
+
+nine:
+ name: u9
+ gender: 0
+ birthday: 2013-11-25 18:15:43
+ school: MyString
+ graduation: 2013-11-25 18:15:43
+ email: MyString
+ phone: MyString
+ address: MyString
+ guardian: MyStringxs
+ guardian_phone: MyString
+ image_url: test
+ logininfo: nine
+ referrer: one
+ created_at: 2013-11-25 18:15:43
+ updated_at: 2013-11-25 18:15:43
+ tenant: one
+
+ten:
+ name: u10
+ gender: 0
+ birthday: 2013-11-25 18:15:43
+ school: MyString
+ graduation: 2013-11-25 18:15:43
+ email: MyString
+ phone: MyString
+ address: MyString
+ guardian: MyStringxs
+ guardian_phone: MyString
+ image_url: test
+ logininfo: ten
+ referrer: one
+ created_at: 2013-11-25 18:15:43
+ updated_at: 2013-11-25 18:15:43
+ tenant: one
+>>>>>>> 13249ed8a02263225996a9c9728f6a9e62ac8284

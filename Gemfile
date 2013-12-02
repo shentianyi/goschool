@@ -6,7 +6,11 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
+<<<<<<< HEAD
 gem 'sqlite3'
+=======
+#gem 'sqlite3'
+>>>>>>> 13249ed8a02263225996a9c9728f6a9e62ac8284
 # auth
 gem 'acts_as_tenant'
 gem 'cancan'

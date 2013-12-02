@@ -45,9 +45,9 @@ class StudentsController < ApplicationController
     msg.result = false
     begin 
       ActiveRecord::Base.transaction do
-        @student = Student.new(params[:Student])
+        @student = Student.new(params[:student])
         @default_pwd = current_tenant.setting.default_pwd
-        @logininfo = Logininfo.new(:email=>params[:Student][:email],:password=>@default_pwd,:password_confirmation=>@default_pwd)
+        @logininfo = Logininfo.new(:email=>params[:student][:email],:password=>@default_pwd,:password_confirmation=>@default_pwd)
         @new_role = LogininfoRole.new(:role_id=>'300')
         @logininfo.logininfo_roles<<@new_role
         @logininfo.tenant = current_tenant
@@ -77,11 +77,11 @@ class StudentsController < ApplicationController
     begin
       @student = Student.find(params[:id])
       ActiveRecord::Base.transaction do
-        if params[:Student][:email]
-          @student.logininfo.update_attributes!(:email=>params[:Student][:email])
+        if params[:student][:email]
+          @student.logininfo.update_attributes!(:email=>params[:student][:email])
           @student.logininfo.save!
         end
-        @student.update_attributes(params[:Student])
+        @student.update_attributes(params[:student])
         msg.result = true
       end
     rescue ActiveRecord::RecordInvalid => invalid 
@@ -97,7 +97,9 @@ class StudentsController < ApplicationController
     msg = Msg.new
     msg.result = false
     @sutdent = Student.find_by_id(params[:id])
-    @student.destroy
+    if @student
+      @student.destroy
+    end
     msg.result = true
     render :json=>msg
   end

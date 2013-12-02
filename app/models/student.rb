@@ -3,7 +3,7 @@ class Student < ActiveRecord::Base
   include Redis::Search
 
   attr_accessible :address, :birthday, :email, :gender, :graduation, :guardian, :guardian_phone, :name, :phone, :school,:referrer_id,:logininfo_id,:image_url,:tenant_id
-  attr_accessible :student_status
+  attr_accessible :student_statussss
   
   belongs_to :logininfo
   belongs_to :tenant
@@ -37,6 +37,6 @@ class Student < ActiveRecord::Base
     errors.add(:name,'名字不能为空') if self.name.blank?
     errors.add(:phone, '电话不能为空') if self.phone.blank?
     errors.add(:guardian, '监护人不能为空') if self.guardian.blank?
-    errors.add(:guardian, '监护人号码不能为空') if self.guardian_phone.blank?
+    errors.add(:guardian_phone, '监护人号码不能为空') if self.guardian_phone.blank?
   end
 end

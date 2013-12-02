@@ -89,7 +89,7 @@ class RecommendationScheduler
                single.tenant_id = tenant_id
                single.rec_target_id = target_id
                 single.entity_type_id = type_id
-                single.reced_id = res
+              single.reced_id = res
           end
           new_or_update.score = result[res]
           new_or_update.save
