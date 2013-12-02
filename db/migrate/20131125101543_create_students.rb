@@ -12,7 +12,7 @@ class CreateStudents < ActiveRecord::Migration
       t.string :guardian
       t.string :guardian_phone
       t.string :image_url
-      t.boolean :is_potential_cus
+      t.boolean :is_potential_cus :default=>false
       t.references :logininfo
       t.integer :referrer_id
       t.references :tenant
