@@ -58,6 +58,7 @@ class StudentsController < ApplicationController
         end
         @logininfo.save!
         @student.logininfo = @loginnfo
+        @student.tenant = current_tenant
         @student.save!
         msg.result = true
       end
