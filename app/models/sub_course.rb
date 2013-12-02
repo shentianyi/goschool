@@ -1,7 +1,7 @@
 #encoding: utf-8
 class SubCourse < ActiveRecord::Base
   include Redis::Search
-  belongs_to :Course
+  belongs_to :course
   belongs_to :tenant
   belongs_to :institution
   has_many :teacher_courses,:dependent=>:destroy
