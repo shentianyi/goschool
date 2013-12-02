@@ -10,6 +10,8 @@ class Student < ActiveRecord::Base
 
   has_one :logininfo_role, :through=>:logininfo
   has_many :consultations, :dependent=>:destroy
+  has_many :student_courses
+  has_many :courses,:through=>:student_courses
   belongs_to :referrer, :foreign_key => :referrer_id, :class_name => "Logininfo"
   
   after_destroy :delete_related
