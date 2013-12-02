@@ -19,7 +19,8 @@ class Course < ActiveRecord::Base
   validate :validate_save
 
   redis_search_index(:title_field => :name,
-                     :condition_fields => [:tenant_id])
+                     :condition_fields => [:tenant_id,:institution_id])
+                     
   def add_tags tags
     Resque.enqueue(TagAdder,self.tenant_id,self.class.name,self.id,tags)
   end
