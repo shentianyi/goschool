@@ -7,7 +7,7 @@ class StudentPresenter<Presenter
   end
   
   def gender_display
-    @student.genter==0 ? '男' ： '女'
+    @student.gender==0 ? '男' : '女'
   end
 
   def courses
