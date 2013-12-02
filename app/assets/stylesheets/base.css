@@ -90,7 +90,7 @@ select{
 *******************************************************************************************************************/
 .message-box{
     position:fixed;
-    z-index:100;
+    z-index:99999;
     width:600px;
     margin-left:-300px;
     word-break:break-all;
@@ -200,7 +200,7 @@ select{
 ********************************************/
 .autoComplete-call{
     position:fixed;
-    z-index:100;
+    z-index:10002;
     left:-999em;
     background:white;
     border:1px solid rgba(0, 0, 0, 0.15);

@@ -2199,6 +2199,7 @@ scheduler.addEventNow=function(start,end,e){
 scheduler._on_dbl_click=function(e,src){
 	src = src||(e.target||e.srcElement);
 	if (this.config.readonly || !src.className) return;
+
 	var name = src.className.split(" ")[0];
 	switch(name){
 		case "dhx_scale_holder":
@@ -2219,8 +2220,9 @@ scheduler._on_dbl_click=function(e,src){
 			if (!this.callEvent("onDblClick",[id,e])) return;
 			if (this.config.details_on_dblclick || this._table_view || !this.getEvent(id)._timed || !this.config.select)
 				this.showLightbox(id);
-			else
-				this.edit(id);
+			else{
+                this.edit(id);
+            }
 			break;
 		case "dhx_time_block":
 		case "dhx_cal_container":
@@ -4683,7 +4685,7 @@ scheduler.form_blocks={
 	select:{
 		render:function(sns){
 			var height=(sns.height||"23")+"px";
-			var html="<div class='dhx_cal_ltext' style='height:"+height+";'><select style='width:100%;'>";
+			var html="<div class='dhx_cal_ltext' style='height:"+height+";'><select style='width:98%;'>";
 			for (var i=0; i < sns.options.length; i++)
 				html+="<option value='"+sns.options[i].key+"'>"+sns.options[i].label+"</option>";
 			html+="</select></div>";
@@ -4929,7 +4931,9 @@ scheduler._fill_lightbox = function(id, box) {
 		var current_sns = sns[i];
 		var node = document.getElementById(current_sns.id).nextSibling;
 		var block = this.form_blocks[current_sns.type];
+        console.log(current_sns.map_to)
 		var value = (ev[current_sns.map_to] !== undefined) ? ev[current_sns.map_to] : current_sns.default_value;
+
 		block.set_value.call(this, node, value, ev, current_sns);
 		if (sns[i].focus)
 			block.focus.call(this, node);
@@ -5039,6 +5043,7 @@ scheduler._init_lightbox_events=function(){
 
 					break;
 				case "dhx_cancel_btn":
+
 					scheduler.cancel_lightbox();
 					break;
 
