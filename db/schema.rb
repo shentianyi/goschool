@@ -128,8 +128,8 @@ ActiveRecord::Schema.define(:version => 20131126104948) do
   add_index "settings", ["tenant_id"], :name => "index_settings_on_tenant_id"
 
   create_table "student_courses", :force => true do |t|
-    t.integer  "student_id"
-    t.integer  "course_id"
+    t.integer  "Student_id"
+    t.integer  "Course_id"
     t.boolean  "paid",       :default => false
     t.integer  "status"
     t.integer  "tenant_id"
@@ -137,8 +137,8 @@ ActiveRecord::Schema.define(:version => 20131126104948) do
     t.datetime "updated_at",                    :null => false
   end
 
-  add_index "student_courses", ["course_id"], :name => "index_student_courses_on_course_id"
-  add_index "student_courses", ["student_id"], :name => "index_student_courses_on_student_id"
+  add_index "student_courses", ["Course_id"], :name => "index_student_courses_on_course_id"
+  add_index "student_courses", ["Student_id"], :name => "index_student_courses_on_student_id"
   add_index "student_courses", ["tenant_id"], :name => "index_student_courses_on_tenant_id"
 
   create_table "students", :force => true do |t|
@@ -168,13 +168,13 @@ ActiveRecord::Schema.define(:version => 20131126104948) do
     t.string   "name"
     t.string   "parent_name"
     t.boolean  "is_default",  :default => false
-    t.integer  "course_id"
+    t.integer  "Course_id"
     t.integer  "tenant_id"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
   end
 
-  add_index "sub_courses", ["course_id"], :name => "index_sub_courses_on_course_id"
+  add_index "sub_courses", ["Course_id"], :name => "index_sub_courses_on_course_id"
   add_index "sub_courses", ["tenant_id"], :name => "index_sub_courses_on_tenant_id"
 
   create_table "tag_counts", :force => true do |t|

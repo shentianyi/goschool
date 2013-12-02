@@ -4,7 +4,7 @@ class CreateSubCourses < ActiveRecord::Migration
       t.string :name
       t.string :parent_name
       t.boolean :is_default,:default=>false
-      t.references :course
+      t.references :Course
       t.references :tenant
       t.timestamps
     end

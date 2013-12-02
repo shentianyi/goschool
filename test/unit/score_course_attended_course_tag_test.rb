@@ -4,16 +4,18 @@ require 'recommendation/course/score_course_attended_course_tag'
 class ScoreCourseAttendedCourseTagTest  < ActiveSupport::TestCase
    test "normal calculation" do
      tag_utility = TagUtility.new()
-     StudentCourse.destroy_all
-     Student.destroy_all
-     Course.destroy_all
-     Tag.destroy_all
+     StudentCourse.delete_all
+     Student.delete_all
+     Course.delete_all
+     Tag.delete_all
+
+
      # insert course
-     c1 = Course.new(name:'c1',actual_number:1)
-     c1.save
+     c1 = Course.new(name:'c1',has_sub:false,actual_number:1)
+     c1.save!
      tag_utility.add_or_update('1',Course.name,c1.id,['托福','美国','出国','SAT','summer','住宿'])
 
-     c2 = Course.new(name:'c2',actual_number:1)
+     c2 = Course.new(name:'c2',has_sub:false,actual_number:1)
      c2.save
      tag_utility.add_or_update('1',Course.name,c2.id,['托福','美国','出国','x3','x2','x1'])
      c3 = Course.new(name:'c3',actual_number:1)
@@ -41,10 +43,15 @@ class ScoreCourseAttendedCourseTagTest  < ActiveSupport::TestCase
      assert(Student.count ==3)
      assert(Course.count ==3)
      assert(StudentCourse.count==2)
+
+     #result1= tag_utility.find_entity_and_tag_count_in_entity_type("1",Student.name,['托福','美国','出国','SAT','summer','住宿'],false)
+     #assert(result1==0,"actual result: #{result1}")
      #assert(tag_utility.get_tags("1",Student.name,))
      cal = ScoreCourseAttendedCourseTag.new
      result = cal.calculate({:tenant_id=>'1',:course_id=>c1.id,:entity_type_id=>Course.name})
      assert(result.length==2,"actual: #{result}")
+     assert(result[s1.id.to_s] == 73)
+     assert(result[s2.id.to_s]==10)
    end
 
 end

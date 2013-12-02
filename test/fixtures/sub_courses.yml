@@ -1,29 +1,29 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  name: Game 
-  parent_name: courseA
-  is_default: false
-  course: one
-  tenant: one
-  
-two:
-  name: Read
-  parent_name: courseB
-  is_default: false
-  course: two
-  tenant: one
-  
-three:
-  name: Game
-  parent_name: courseB
-  is_default: false
-  course: two
-  tenant: one
-  
-four:
-  name: Jump
-  parent_name: courseB
-  is_default: false
-  course: two
-  tenant: one
+## Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+#
+#one:
+#  name: Game
+#  parent_name: courseA
+#  is_default: false
+#  course: one
+#  tenant: one
+#
+#two:
+#  name: Read
+#  parent_name: courseB
+#  is_default: false
+#  course: two
+#  tenant: one
+#
+#three:
+#  name: Game
+#  parent_name: courseB
+#  is_default: false
+#  course: two
+#  tenant: one
+#
+#four:
+#  name: Jump
+#  parent_name: courseB
+#  is_default: false
+#  course: two
+#  tenant: one
