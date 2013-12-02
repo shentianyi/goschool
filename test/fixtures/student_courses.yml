@@ -1,15 +1,15 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
+## Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+#
 one:
-  student: one
-  course: one
-  paid: false
-  status: 1
-  tenant: one
+ student: one
+ course: one
+ paid: false
+ status: 1
+ tenant: one
 
 two:
-  student: two
-  course: one
-  paid: false
-  status: 1
-  tenant: one
+ student: two
+ course: one
+ paid: false
+ status: 1
+ tenant: one

@@ -7,12 +7,10 @@ class SubCourse < ActiveRecord::Base
   has_many :teacher_courses,:dependent=>:destroy
   has_many :schedules,:dependent=>:destroy
   has_many :teachers,:through=>:teacher_courses,:class_name=>'User'
-  attr_accessible :name, :parent_name,:course_id,:is_default
+  attr_accessible :name, :parent_name,:course_id,:is_default,:institution_id
   
   acts_as_tenant(:tenant)
-  before_create :del_default_sub_course
-  after_create :update_course_attr
-  after_destroy :create_default_sub_course
+
 
   redis_search_index(:title_field => :parent_name,
                      :condition_fields => [:tenant_id,:institution_id],
@@ -31,13 +29,5 @@ class SubCourse < ActiveRecord::Base
 
   def update_course_attr
     self.course.update_attributes(:has_sub=>true) unless self.is_default
-  end
-
-  def create_default_sub_course
-    course=self.course
-    if course.sub_courses.count==0
-      course.update_attributes(:has_sub=>false)
-    course.create_default_sub_course
-    end
   end
 end

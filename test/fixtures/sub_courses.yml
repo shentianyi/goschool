@@ -6,6 +6,7 @@ one:
   is_default: false
   course: one
   tenant: one
+  institution: one
   
 two:
   name: Read
@@ -13,6 +14,7 @@ two:
   is_default: false
   course: two
   tenant: one
+  institution: one
   
 three:
   name: Game
@@ -20,6 +22,7 @@ three:
   is_default: false
   course: two
   tenant: one
+  institution: one
   
 four:
   name: Jump
@@ -27,3 +30,4 @@ four:
   is_default: false
   course: two
   tenant: one
+  institution: one

@@ -97,7 +97,9 @@ class StudentsController < ApplicationController
     msg = Msg.new
     msg.result = false
     @sutdent = Student.find_by_id(params[:id])
-    @student.destroy
+    if @student
+      @student.destroy
+    end
     msg.result = true
     render :json=>msg
   end
@@ -123,6 +125,22 @@ class StudentsController < ApplicationController
     unless @student
       @msg.content='不存在此学生'
       render :json=>msg
+    end
+  end
+
+  #create consulting record
+  def add_consultation
+    msg = Msg.new
+    msg.result = false
+    @student = Student.find_by_id(params[:id])
+    if @student
+      @consultation = Consultation.new(params[:consultation])
+      @consultation.logininfo = current_user
+      student.consultations<<@consultation
+      student.save!
+      msg.result = true
+    else
+      msg.content = '学生不存在'
     end
   end
 end

@@ -22,7 +22,7 @@ class StudentsControllerTest < ActionController::TestCase
       is_active_account:true
     end
 
-    assert_redirected_to student_path(assigns(:Student))
+    assert_redirected_to student_path(assigns(:student))
   end
 
   test "should show Student" do

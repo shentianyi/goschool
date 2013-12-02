@@ -12,7 +12,7 @@ class CreateStudents < ActiveRecord::Migration
       t.string :guardian
       t.string :guardian_phone
       t.string :image_url
-      t.integer :student_status :default=>0
+      t.integer :student_status ,:default=>0
       t.references :logininfo
       t.integer :referrer_id
       t.references :tenant

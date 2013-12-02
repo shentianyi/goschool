@@ -72,6 +72,7 @@ class RecommendationScheduler
   def load_processors(type)
     @processors[type] = []
     Dir[File.dirname(__FILE__) + "/recommendation/#{type.camelize}/*.rb"].each do |path|
+      require path
       @processors[type].push(File.basename(path,'.*').camelize.constantize.new)
     end
   end
@@ -85,6 +86,10 @@ class RecommendationScheduler
           'tenant_id=? and rec_target_id=? and entity_type_id=? and reced_id=?',\
           tenant_id,target_id,type_id,res).first_or_create! do |single|
                single.score = result[res]
+               single.tenant_id = tenant_id
+               single.rec_target_id = target_id
+                single.entity_type_id = type_id
+              single.reced_id = res
           end
           new_or_update.score = result[res]
           new_or_update.save
