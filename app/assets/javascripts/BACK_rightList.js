@@ -1,6 +1,6 @@
 //type name
 //should be
-//Student teacher course
+//student teacher course
 
 var BACKINDEX=BACKINDEX || {};
 BACKINDEX.right_list=BACKINDEX.right_list||{};
