@@ -11,8 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-ActiveRecord::Schema.define(:version => 20131203032401) do
+ActiveRecord::Schema.define(:version => 20131203075328) do
 
   create_table "comments", :force => true do |t|
     t.integer  "post_id"
@@ -223,6 +222,7 @@ ActiveRecord::Schema.define(:version => 20131203032401) do
     t.integer  "institution_id"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
+    t.integer  "status",         :default => 1
   end
 
   add_index "sub_courses", ["course_id"], :name => "index_sub_courses_on_course_id"
