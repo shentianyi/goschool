@@ -17,4 +17,10 @@ class CourseObserver<ActiveRecord::Observer
   def after_create course
     course.create_default_sub_course
   end
+
+  def after_update course
+   if course.status_changed?
+     course.sub_courses.update_all(:status=>course.status)
+   end
+  end
 end

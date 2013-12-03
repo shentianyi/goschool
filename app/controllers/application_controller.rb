@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   helper :all
   include ApplicationHelper
   # helper_method :current_user_session, :current_user
-  # before_filter :require_user
+   before_filter :require_user
   # before_filter :require_active_user
   before_filter :find_current_user_tenant
 
@@ -20,9 +20,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
- 
-
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = LogininfoSession.find
@@ -46,11 +43,12 @@ class ApplicationController < ActionController::Base
   #filter method
   #need login
   def require_user
-    unless current_user
-      store_location
-      redirect_to new_user_session_url
-      return false
-    end
+    @current_user = Logininfo.first
+    #unless current_user
+    #  store_location
+    #  redirect_to new_user_session_url
+    #  return false
+    #end
   end
 
   #can't be login

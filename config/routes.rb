@@ -1,5 +1,11 @@
 Goschool::Application.routes.draw do
 
+  resources :comments
+
+
+  resources :posts
+
+
   resources :student_courses do
    collection do
     post :creates
