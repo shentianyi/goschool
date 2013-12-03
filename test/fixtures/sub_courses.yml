@@ -6,6 +6,7 @@ one:
   is_default: false
   course: one
   tenant: one
+  status: 1
   institution: one
   
 two:
@@ -14,6 +15,7 @@ two:
   is_default: false
   course: two
   tenant: one
+  status: 1
   institution: one
   
 three:
@@ -22,6 +24,7 @@ three:
   is_default: false
   course: two
   tenant: one
+  status: 1
   institution: one
   
 four:
@@ -30,4 +33,5 @@ four:
   is_default: false
   course: two
   tenant: one
+  status: 1
   institution: one

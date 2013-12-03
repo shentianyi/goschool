@@ -13,14 +13,14 @@ class Schedule < ActiveRecord::Base
   end
   
   def self.between_date params
-    joins(:sub_course).where(:start_time=>params[:start_date]..params[:end_date]).select('*,sub_courses.*').all
+    joins(:sub_course).where(start_time:params[:start_date]..params[:end_date],sub_courses:{institution_id:params[:institution_id],status:CourseStatus::UNLOCK}).select('*,sub_courses.*').all
   end
   
-  def self.by_course_id id,type=nil
-    if type=='SubCourse'
-      joins(:sub_course).where('sub_courses.id=?',id).select('*,sub_courses.*').all
-    elsif type=='Course'
-      joins(:sub_course).where('sub_courses.course_id=?',id).select('*,sub_courses.*').all
+  def self.by_course_id params
+    if params[:type]=='SubCourse'
+      joins(:sub_course).where(sub_courses:{id:params[:id],institution_id:params[:institution_id],status:CourseStatus::UNLOCK}).select('*,sub_courses.*').all
+    elsif params[:type]=='Course'
+      joins(:sub_course).where(sub_courses:{course_id:params[:id],institution_id:params[:institution_id],status:CourseStatus::UNLOCK}).select('*,sub_courses.*').all
     else
       []
     end 
