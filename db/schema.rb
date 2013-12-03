@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131202041051) do
+ActiveRecord::Schema.define(:version => 20131203072554) do
 
   create_table "consultations", :force => true do |t|
     t.integer  "student_id"
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(:version => 20131202041051) do
     t.integer  "tenant_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.integer  "course_number",  :default => 0
   end
 
   add_index "students", ["logininfo_id"], :name => "index_students_on_logininfo_id"

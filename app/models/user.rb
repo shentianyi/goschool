@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
   attr_accessible :image_url
 
   belongs_to :logininfo
-  belongs_to :tenant
   
   has_many :teacher_courses,:dependent=>:destroy
   has_many :sub_courses,:through=>:teacher_courses
