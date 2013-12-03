@@ -24,7 +24,7 @@ scheduler.locale={
 		icon_edit: "编辑",
 		icon_delete: "删除",
 		confirm_closing: "请确认是否撤销修改!", //Your changes will be lost, are your sure?
-		confirm_deleting: "是否删除日程?",
+		confirm_deleting: "是否删除课程?",
 		section_description: "描述",
 		section_time: "时间范围",
 		full_day: "整天",

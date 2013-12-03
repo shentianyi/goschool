@@ -25,7 +25,7 @@
             <a>老师信息</a>
         </li>
         <li>
-            <a class="active">课程安排</a>
+            <a class="active">课程信息</a>
         </li>
     </ul>
     <ul class="second-ul" id="main-navigator-bottom">
@@ -80,12 +80,15 @@
         </div>
     </div>
     <div class="schedule-search ">
-        <div class="ui red labeled icon top right pointing dropdown button">
+        <div class="ui red labeled icon top right pointing dropdown button" id="schedule-select-institution">
             <i class="sitemap icon"></i>
-            <span class="text">闵行漕河泾学区</span>
+            <span class="text">闵行漕河泾学区1</span>
             <div class="menu">
-                <div class="item"><i class="edit icon"></i>闵行漕河泾学区</div>
-                <div class="item"><i class="delete icon"></i>闵行紫竹学区</div>
+                <div class="item" value="default">闵行漕河泾学区1</div>
+                <div class="item" value="1">闵行漕河泾学区2</div>
+                <div class="item" value="2">闵行漕河泾学区3</div>
+                <div class="item" value="3">闵行漕河泾学区4</div>
+                <div class="item" value="4">闵行漕河泾学区5</div>
             </div>
         </div>
         <div class="search-block">
@@ -93,11 +96,29 @@
                 <input placeholder="在此搜索课程..." type="text" id="autoC1">
                 <i class="search icon"></i>
             </div>
-            <div class="search-list">
-
+            <div class="search-list" id="search-list">
+                <p class="search-class-name"><span>课程：</span><span>托福秋季班</span></p>
+                <p class='search-class-teachers'><span>讲师：</span><span>Mary,John</span></p>
+                <ul class="search-class-schedule">
+                    <li id="1">
+                        <span>2013-10-01 18:00-20:00</span>
+                        <span>May</span>
+                        <i class="trash icon" affect="1"></i>
+                    </li>
+                    <li id="2">
+                        <span>2013-10-02 18:00-20:00</span>
+                        <span>May</span>
+                        <i class="trash icon" affect="2"></i>
+                    </li>
+                    <li id="3">
+                        <span>2013-10-12 18:00-20:00</span>
+                        <span>May</span>
+                        <i class="trash icon" affect="3"></i>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="ui button teal save-schedule">保存并发送课表</div>
+        <div class="ui button teal save-schedule">发送课表</div>
     </div>
 </article>
 <!--list-->
@@ -136,6 +157,7 @@
 <script type='text/javascript' src="javascripts/BACK_course_schedule.js" ></script>
 <script type='text/javascript' src="javascripts/mustache.js" ></script>
 <script type='text/javascript' src="javascripts/dhtmlxscheduler.js" ></script>
+<script type='text/javascript' src="javascripts/dhtmlxscheduler_quick_info.js" ></script>
 <script type='text/javascript' src="javascripts/locale_cn.js" ></script>
 </body>
 </html>

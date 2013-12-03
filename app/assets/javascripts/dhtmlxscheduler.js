@@ -958,8 +958,10 @@ if(!window.dhtmlx)
 			modality(false);
 			config.box.parentNode.removeChild(config.box);
 			_dhx_msg_cfg = config.box = null;
-			if (usercall)
-				usercall(result);
+			if (usercall){
+                usercall(result);
+            }
+
 	}
 	function modal_key(e){
 		if (_dhx_msg_cfg){
@@ -2222,6 +2224,7 @@ scheduler._on_dbl_click=function(e,src){
 			else{
                 this.showLightbox(id);
             }
+
 			break;
 		case "dhx_time_block":
 		case "dhx_cal_container":
@@ -2312,6 +2315,7 @@ scheduler._correct_shift=function(start, back){
 	return start-=((new Date(scheduler._min_date)).getTimezoneOffset()-(new Date(start)).getTimezoneOffset())*60000*(back?-1:1);	
 };
 scheduler._on_mouse_move=function(e){
+    console.log(this._drag_mode)
 	if (this._drag_mode){
 		var pos=this._mouse_coords(e);
 		if (!this._drag_pos || pos.force_redraw || this._drag_pos.x!=pos.x || this._drag_pos.y!=pos.y ){
@@ -3381,12 +3385,13 @@ scheduler.deleteEvent = function(id, silent) {
 	if (!silent && (!this.callEvent("onBeforeEventDelete", [id, ev]) || !this.callEvent("onConfirmedBeforeEventDelete", [id, ev])))
 		return;
 	if (ev) {
+        //post
 		delete this._events[id];
 		this.unselect(id);
 		this.event_updated(ev);
 	}
-
 	this.callEvent("onEventDeleted", [id, ev]);
+    SCHEDULE.calendar.delete_item(id);
 };
 scheduler.getEvent = function(id) {
 	return this._events[id];
@@ -4919,7 +4924,6 @@ scheduler.showLightbox=function(id){
 	this.showCover(box);
 	this._fill_lightbox(id,box);
 	this.callEvent("onLightbox",[id]);
-    $("#schedule-course").focus();
 };
 scheduler._fill_lightbox = function(id, box) {
 	var ev = this.getEvent(id);
@@ -4942,7 +4946,9 @@ scheduler._fill_lightbox = function(id, box) {
 		if (sns[i].focus)
 			block.focus.call(this, node);
 	}
-
+//    if(ev.color!=null){
+//        SCHEDULE.calendar.edit_item(ev);
+//    }
 	scheduler._lightbox_id = id;
 };
 scheduler._lightbox_out=function(ev){

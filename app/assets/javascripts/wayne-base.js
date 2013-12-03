@@ -324,12 +324,6 @@ GLOBAL.autoComplete.count=0;
         }
 
     });
-    $("body").on("keydown",".autoComplete input",function(event){
-        var e=adapt_event(event).event;
-        if(e.keyCode==38){
-            e.preventDefault();
-        }
-    });
     $("body").on("blur",".autoComplete input",function(){
         var $this=$(this);
         window.setTimeout(function(){
