@@ -5,6 +5,8 @@ class Student < ActiveRecord::Base
   attr_accessible :address, :birthday, :email, :gender, :graduation, :guardian, :guardian_phone, :name, :phone, :school,:referrer_id,:logininfo_id,:image_url,:tenant_id
   attr_accessible :student_status,:course_number
   
+  attr_accessor :tags
+
   belongs_to :logininfo
   belongs_to :tenant
 
@@ -23,10 +25,6 @@ class Student < ActiveRecord::Base
   redis_search_index(:title_field =>:name,
                      :condition_field => [:tenant_id],
                      :ext_fields=>[:email,:address,:school,:guardian])
-
-  def add_tags tags
-    Resque.enqueue(TagAdder,self.tenant_id,self.class.name,self.id,tags)
-  end
 
   def delete_related
     @logininfo = self.logininfo

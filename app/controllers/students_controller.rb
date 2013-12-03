@@ -45,7 +45,9 @@ class StudentsController < ApplicationController
     msg.result = false
     begin 
       ActiveRecord::Base.transaction do
-        @student = Student.new(params[:student])
+        tags = params[:student].slice(:tags).strip
+        @student = Student.new(params[:student].except(:tags))
+        @student.tags = tags
         @default_pwd = current_tenant.setting.default_pwd
         @logininfo = Logininfo.new(:email=>params[:student][:email],:password=>@default_pwd,:password_confirmation=>@default_pwd)
         @new_role = LogininfoRole.new(:role_id=>'300')
@@ -76,12 +78,13 @@ class StudentsController < ApplicationController
     msg.result = false
     begin
       @student = Student.find(params[:id])
+      @student.tags = params[:student].slice(:tags).strip
       ActiveRecord::Base.transaction do
         if params[:student][:email]
           @student.logininfo.update_attributes!(:email=>params[:student][:email])
           @student.logininfo.save!
         end
-        @student.update_attributes(params[:student])
+        @student.update_attributes(params[:student].except(:tags))
         msg.result = true
       end
     rescue ActiveRecord::RecordInvalid => invalid 
