@@ -12,15 +12,20 @@ class Schedule < ActiveRecord::Base
     joins(:sub_course).where(:id=>id).select('*,sub_courses.*').first
   end
   
+  def self.by_insititution_id institution_id
+   base_query(institution_id).all
+  end
+  
   def self.between_date params
-    joins(:sub_course).where(start_time:params[:start_date]..params[:end_date],sub_courses:{institution_id:params[:institution_id],status:CourseStatus::UNLOCK}).select('*,sub_courses.*').all
+    base_query(params[:institution_id]).where(start_time:params[:start_date]..params[:end_date]).all
   end
   
   def self.by_course_id params
+    bq=base_query(params[:institution_id])
     if params[:type]=='SubCourse'
-      joins(:sub_course).where(sub_courses:{id:params[:id],institution_id:params[:institution_id],status:CourseStatus::UNLOCK}).select('*,sub_courses.*').all
+     bq.where(sub_courses:{id:params[:id]}).all
     elsif params[:type]=='Course'
-      joins(:sub_course).where(sub_courses:{course_id:params[:id],institution_id:params[:institution_id],status:CourseStatus::UNLOCK}).select('*,sub_courses.*').all
+       bq.where(course_id:{id:params[:id]}).all
     else
       []
     end 
@@ -35,5 +40,9 @@ class Schedule < ActiveRecord::Base
       ex= new_record? ? new_record_where.first : new_record_where.where("schedules.id<>?",self.id).first
       errors.add(:start_time,"冲突：老师#{teacher.name}在此时间段已经有排课") if ex
     end
+  end
+  
+  def self.base_query institution_id
+     joins(:sub_course).where(sub_courses:{institution_id:institution_id,status:CourseStatus::UNLOCK}).select('*,sub_courses.*')
   end
 end
