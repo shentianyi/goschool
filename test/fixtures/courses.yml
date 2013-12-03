@@ -25,7 +25,7 @@ two:
   expect_number: 1
   actual_number: 1
   has_sub: true
-  status: 0
+  status: 1
   user: 
   tenant: one
   institution: one
@@ -40,7 +40,7 @@ three:
   expect_number: 1
   actual_number: 1
   has_sub: true
-  status: 0
+  status: 1
   user: 
   tenant: one
   institution: one
