@@ -22,6 +22,16 @@ class User < ActiveRecord::Base
     @logininfo = self.logininfo
     @logininfo.destroy
   end
+  
+  #find all the teachers by institution_id
+  def self.get_teachers institutions_id
+    User.joins(:logininfo_institutions).joins(:logininfo_roles).where(logininfo_roles:{role_id:400},logininfo_instutions:{institution_id:institution_id}).all
+  end
+
+  #find all the employees by institution_id
+  def self.get_emplayees institution_id
+    User.joins(:logininfo_institutions).joins(:logininfo_roles).where(logininfo_roles:{role_id:[100,200]},logininfo_instutions:{institution_id:institution_id}).all
+  end
 
   private
     
@@ -29,16 +39,4 @@ class User < ActiveRecord::Base
     errors.add(:name, '名字不能为空') if self.name.blank?
     errors.add(:email, '邮箱不能为空') if self.email.blank?
   end 
-
-  #find all the teachers by institution_id
-  def self.get_teachers institutions_id
-    @teachers = User.joins(:logininfo_institutions).joins(:logininfo_roles).where(logininfo_roles:{role_id:400},logininfo_instutions:{institution_id:institution_id})
-    return @teachers.count > 0 ? @teachers : nil
-  end
-
-  #find all the employees by institution_id
-  def self.get_emplayees institution_id
-    @employees =User.joins(:logininfo_institutions).joins(:logininfo_roles).where(logininfo_roles:{role_id:[100,200]},logininfo_instutions:{institution_id:institution_id})
-    return @employees.count > 0 ? @employees : nil
-  end
 end
