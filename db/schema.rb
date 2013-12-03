@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131202041051) do
+ActiveRecord::Schema.define(:version => 20131203032401) do
+
+  create_table "comments", :force => true do |t|
+    t.integer  "post_id"
+    t.boolean  "is_teacher"
+    t.integer  "logininfo_id"
+    t.string   "content"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "consultations", :force => true do |t|
     t.integer  "student_id"
@@ -104,6 +113,28 @@ ActiveRecord::Schema.define(:version => 20131202041051) do
   end
 
   add_index "logininfos", ["tenant_id"], :name => "index_logininfos_on_tenant_id"
+
+  create_table "posts", :force => true do |t|
+    t.integer  "course_id"
+    t.string   "content"
+    t.integer  "logininfo_id"
+    t.integer  "posttype_id"
+    t.integer  "tenant_id"
+    t.string   "status"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "posts", ["course_id"], :name => "index_posts_on_course_id"
+  add_index "posts", ["logininfo_id"], :name => "index_posts_on_logininfo_id"
+  add_index "posts", ["posttype_id"], :name => "index_posts_on_posttype_id"
+  add_index "posts", ["tenant_id"], :name => "index_posts_on_tenant_id"
+
+  create_table "posttypes", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "rec_results", :force => true do |t|
     t.string   "tenant_id"
