@@ -1,7 +1,7 @@
 class CreateCourses < ActiveRecord::Migration
   def change
     create_table :courses do |t|
-      t.integer :type
+      t.integer :type,:default=>CourseType::COURSE
       t.string :name
       t.string :description
       t.integer :lesson,:default=>0
