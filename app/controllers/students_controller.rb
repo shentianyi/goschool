@@ -143,4 +143,14 @@ class StudentsController < ApplicationController
       msg.content = '学生不存在'
     end
   end
+
+  #search
+  def search
+    msg = Msg.new
+    msg.result = false
+    @results = SearchEngine.search(params[:query_string])
+    msg.result = false
+    msg.content = @results
+    render :json=>msg
+  end
 end
