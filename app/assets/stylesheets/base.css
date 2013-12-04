@@ -53,6 +53,7 @@ html,body{
     min-height:768px;
     font-family:"Arial",sans-serif;
     font-weight:lighter;
+    height:100%;
 }
 a{
     text-decoration:none;

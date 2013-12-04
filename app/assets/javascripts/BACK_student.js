@@ -11,5 +11,11 @@ var BACKSTUDENT=BACKSTUDENT||{};
         yearRange: "-30:+10",
         dateFormat:'yy-mm-dd'
     });
+    $(document).ready(function(){
+        //add student
+        $("body").on("click",id,function(){
+               //write your post code here
+        });
+    })
 })();
 

@@ -1,17 +1,4 @@
-/*大框架*/
-.back-index-main[name='schedule']{
-    left:100px;
-    min-width:924px;
-}
-.back-index-main[name='schedule']:after{
-    content:"",
-    display:block;
-    clear:both;
-}
-.back-index-main[name='schedule'] header .ui.button:first-of-type{
-    right:auto;
-    left:27px;
-}
+
 /********************************************************************************* 跳出来分配课程*/
 .dhx_section_time>select{
     width:70px;

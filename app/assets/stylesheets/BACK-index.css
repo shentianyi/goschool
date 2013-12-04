@@ -151,13 +151,13 @@
     background:#fef9ee;
     position:absolute;
     top:0px;
-    bottom:0px;
     left:330px;
     right:0px;
     overflow-x:hidden;
     overflow-y:auto;
     min-height:768px;
     transition:right 0.35s ease-out;
+    height:100%;
 }
 .back-index-main>.search-list{
     width:90%;
@@ -238,6 +238,29 @@
     font-size:12px;
     padding:1px 0;
     color:rgba(0,0,0,0.4);
+}
+/*只有左右两块布局的*/
+.back-index-main[name='2column']{
+    left:100px;
+    min-width:924px;
+}
+.back-index-main[name='2column']:after{
+    content:"",
+    display:block;
+    clear:both;
+}
+.back-index-main[name='2column'] header{
+    text-align:center;
+}
+.back-index-main[name='2column'] header .ui.button:first-of-type{
+    right:auto;
+    left:27px;
+}
+.back-index-main[name='2column'] header p{
+    margin-top:17px;
+    color:rgba(0,0,0,0.7);
+    font-size:15px;
+    font-weight:bold;
 }
 /************************************************************   view add  */
 .view-add{

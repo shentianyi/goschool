@@ -1,0 +1,38 @@
+
+/******************************************************************************** 左侧的导航 */
+.back-index-main .detail-navigation{
+    float:left;
+    width:182px;
+    height:90%;
+    padding-left:28px
+}
+.detail-navigation .ui.vertical.menu{
+    width:100%;
+    margin-top:18px;
+}
+.detail-navigation .ui.vertical.menu .active.item:nth-of-type(1){
+    color:#3fa2ef;
+    border-color:#3fa2ef;
+}
+.detail-navigation .ui.vertical.menu .active.item:nth-of-type(2){
+    color:#f5a802;
+    border-color:#f5a802;
+}
+.detail-navigation .ui.vertical.menu .active.item:nth-of-type(3){
+    color:#EF3F49;
+    border-color:#EF3F49;
+}
+/******************************************************************************** 右侧的内容*/
+.back-index-main .detail-content{
+    float:right;
+    margin-top:18px;
+    height:90%;
+    margin-right:30px;
+    background-color: #FFFFFF;
+    border-radius: 0.1875rem;
+    -moz-border-radius: 0.1875rem;
+    -webkit-border-radius: 0.1875rem;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
