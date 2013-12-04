@@ -41,6 +41,7 @@ var BACKCOURSE=BACKCOURSE || {};
             $( "#service-begin-date" ).datepicker( "option", "maxDate", selectedDate );
         }
     });
+    $("#add-class-choose-institution,#add-service-choose-institution").dropdown();
     $("body").on("click","#add-course-tab>.tab-item",function(){
         if(!$(this).hasClass("active")){
             $(this).siblings().removeClass("active");
