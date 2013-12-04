@@ -59,9 +59,18 @@ SCHEDULE.widget.init=function(){
     scheduler.config.buttons_left = ["dhx_delete_btn"];
     scheduler.config.buttons_right = ["dhx_cancel_btn","dhx_save_btn"];
     scheduler.config.icons_select = [
-        "icon_delete",
-        "icon_details"
+        "icon_delete"
     ];
+    scheduler.templates.quick_info_title = function(start, end, ev){
+        var teachers=ev.teachers.join(",");
+        if(ev.sub_courses.value=="default"){
+            return ev.text.substr(0,50)+'<span>'+teachers+'</span>';
+        }
+        else{
+            return ev.text.substr(0,50)+'<span>'+ev.sub_courses.text.substr(0,50)+'</span><span>'+teachers+'</span>';
+        }
+    };
+    //绑定模板
     scheduler.attachEvent("onBeforeLightbox", function(id) {
         var ev = scheduler.getEvent(id);
         ev.my_courses ="<div class='ui input autoComplete'>\
@@ -83,6 +92,7 @@ SCHEDULE.widget.init=function(){
             </div>";
         return true
     });
+    //模板的信息
     scheduler.config.lightbox.sections = [
         {name:"courses", height:40, type:"template", map_to:"my_courses"},
         {name:"sub_courses", height:25, type:"template",map_to:"my_sub_courses" },
@@ -90,21 +100,23 @@ SCHEDULE.widget.init=function(){
         {name:"colors", height: 25, type:"template", map_to:"my_colors"},
         {name: "time", height: 72, type: "time",time_format:["%Y","%m","%d","%H:%i"] , map_to: "auto"}
     ];
+    //点击保存按钮
     scheduler.save_lightbox=function(){
         var teacher_length=$("#schedule-teachers li").length- 1,
             i,teacher_name,sub_course_length=$("#schedule-sub-courses option").length;
         data=scheduler.formSection('time').getValue();
         data.text= $.trim($("#schedule-course").val());
-        data.sub_courses=[];
-        for(i=0;i<sub_course_length;i++){
-            var sub_item={};
-            sub_item.value=$("#schedule-sub-courses option").eq(i).attr("value");
-            sub_item.text=$("#schedule-sub-courses option").eq(i).text();
-            if($("#schedule-sub-courses option").eq(i).prop("selected")){
-                sub_item.selected=true
-            }
-            data.sub_courses.push(sub_item);
-        }
+//        data.sub_courses=[];
+//        for(i=0;i<sub_course_length;i++){
+//            var sub_item={};
+//            sub_item.value=$("#schedule-sub-courses option").eq(i).attr("value");
+//            sub_item.text=$("#schedule-sub-courses option").eq(i).text();
+//            if($("#schedule-sub-courses option").eq(i).prop("selected")){
+//                sub_item.selected=true
+//            }
+//            data.sub_courses.push(sub_item);
+//        }
+        data.sub_courses={value:$("#schedule-sub-courses :selected").attr("value"),text:$("#schedule-sub-courses :selected").text()}
         data.color=$("#schedule-color .active").attr("color");
         if(teacher_length==0){
            MessageBox("请至少安排一位老师","top","warning");
@@ -146,9 +158,9 @@ SCHEDULE.calendar.getData=function(){
         SCHEDULE.calendar.have_load.min=maxDate>SCHEDULE.calendar.have_load.min?minDate:SCHEDULE.calendar.have_load.min;
         SCHEDULE.calendar.have_load.institution=institution;
         var experiment=[
-            {id:"1",text:"1111111",teachers:["w","z"],start_date:new Date(2013,11,1,12,0),end_date:new Date(2013,11,1,12,30),color:'#FFA500',sub_courses:[{value:"0",text:"0",selected:true}]},
-            {id:"2",text:"2222222",teachers:["w","z"],start_date:new Date(2013,11,4,0,0),end_date:new Date(2013,11,4,0,30),color:'#63A69F',sub_courses:[{value:"0",text:"0",selected:true}]},
-            {id:"3",text:"3333333",teachers:["w","z"],start_date:new Date(2013,11,5,18,0),end_date:new Date(2013,11,5,18,30),color:'#D95C5C',sub_courses:[{value:"0",text:"0",selected:true}]}
+            {id:"1",text:"儿童秋季班",teachers:["Wayne","王子骁"],start_date:new Date(2013,11,1,12,0),end_date:new Date(2013,11,1,12,30),color:'#FFA500',sub_courses:{value:"default",text:"没指定"}},
+            {id:"2",text:"SAT秋季冲刺班",teachers:["Kobe","Bryant"],start_date:new Date(2013,11,4,0,0),end_date:new Date(2013,11,4,0,30),color:'#63A69F',sub_courses:{value:"0",text:"听力"}},
+            {id:"3",text:"托福秋季班",teachers:["Wayne","王子骁"],start_date:new Date(2013,11,5,18,0),end_date:new Date(2013,11,5,18,30),color:'#D95C5C',sub_courses:{value:"0",text:"口语强化"}}
         ];
         scheduler.parse(experiment ,"json")
     }
