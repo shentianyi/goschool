@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20131203075328) do
   add_index "consultations", ["student_id"], :name => "index_consultations_on_student_id"
 
   create_table "courses", :force => true do |t|
-    t.integer  "type"
+    t.integer  "type",           :default => 100
     t.string   "name"
     t.string   "description"
     t.integer  "lesson",         :default => 0
