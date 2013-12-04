@@ -147,6 +147,8 @@
     background-color: #D95C5C !important;
     border: 1px solid #D95C5C !important;
 }
+
+/*单击跳出来来的info*/
 .dhx_cal_qi_content{
     display:none
 }
@@ -159,6 +161,19 @@
 .dhx_cal_quick_info{
     background: none repeat scroll 0 0 rgba(0,0,0,0.7) !important;
     border: 1px solid rgba(0,0,0,0.7) !important;
+}
+.dhx_cal_qi_tcontent>span:nth-of-type(1){
+    font-size:13px;
+    display:block;
+    font-weight:lighter;
+    color:rgba(255,255,255,0.8);
+    margin: -3px 0 2px;
+}
+.dhx_cal_qi_tcontent>span:nth-of-type(2){
+    font-weight:lighter;
+    margin:3px 0 5px;
+    display:block;
+    font-size:14px;
 }
 /********************************************************************************* 右侧*/
 /*选择机构的*/
