@@ -15,6 +15,10 @@ class Schedule < ActiveRecord::Base
   def self.by_insititution_id institution_id
    base_query(institution_id).all
   end
+
+  def self.count_by_institution_id institution_id
+   base_query(institution_id).count
+  end  
   
   def self.between_date params
     base_query(params[:institution_id]).where(start_time:params[:start_date]..params[:end_date]).all

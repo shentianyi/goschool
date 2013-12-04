@@ -17,6 +17,7 @@
 /tmp
 /.idea/*
 /.project
+/export/pdf/schedule/*.pdf
 
 *~
 *#
