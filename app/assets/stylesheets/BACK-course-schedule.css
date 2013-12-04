@@ -12,7 +12,7 @@
     right:auto;
     left:27px;
 }
-/*跳出来分配课程*/
+/********************************************************************************* 跳出来分配课程*/
 .dhx_section_time>select{
     width:70px;
 }
@@ -34,7 +34,44 @@
 .dhx_section_time>label:last-of-type{
     margin-right:8px;
 }
-/*放full calendar的*/
+.schedule-color{
+    padding:0px;
+    margin:0px;
+    list-style-type: none;
+    display:block;
+}
+.schedule-color>li{
+    float:left;
+    display:block;
+    width:14px;
+    height:14px;
+    margin-right:7px;
+    margin-top:3px;
+    cursor:pointer;
+    position:relative;
+}
+.schedule-color>li.active:after{
+    content:"*";
+    position:absolute;
+    top:11px;
+    left:4px;
+}
+.schedule-color>li[color='#000']{
+    background:#000;
+}
+.schedule-color>li[color='#FFA500']{
+    background:#FFA500;
+}
+.schedule-color>li[color='#63A69F']{
+    background:#63A69F;
+}
+.schedule-color>li[color='#D95C5C']{
+    background:#D95C5C;
+}
+.schedule-color>li[color='#4092CC']{
+    background:#4092CC;
+}
+/********************************************************************************* 放full calendar的*/
 .schedule-calendar{
     width:75%;
     position:absolute;
@@ -63,8 +100,83 @@
 .schedule-calendar>.schedule-calendar-inner table tr:last-of-type .dhx_month_body{
     border-bottom:0px solid black;
 }
+.dhx_cal_ltext.dhx_cal_template>.total-teachers,
+.dhx_cal_ltext.dhx_cal_template>select{
+    min-width:167px;
+}
+/*课程的样式*/
+.schedule-calendar-inner .dhx_cal_event_clear{
+    font-size:10px;
+    color:#fff;
+    text-shadow:1px 1px 1px rgba(0, 0, 0, 0.6);
+    -moz-text-shadow:1px 1px 1px rgba(0, 0, 0, 0.6);
+    -webkit-text-shadow:1px 1px 1px rgba(0, 0, 0, 0.6);
+    padding:1px 0px 5px 2px;
+    border-radius:0px 4px 4px 0;
+    -moz-border-radius:0px 4px 4px 0;
+    -webkit-border-radius:0px 4px 4px 0;
+}
+.schedule-calendar-inner .dhx_cal_event_clear b{
+    font-weight:lighter;
+}
+.schedule-calendar-inner .dhx_cal_event>.dhx_title,
+.schedule-calendar-inner .dhx_cal_event>.dhx_body,
+.schedule-calendar-inner .dhx_cal_event>.dhx_footer{
+    /*background-color:#FFA500;*/
+}
+.schedule-calendar-inner .dhx_cal_event>.dhx_title{
+    cursor:move;
+}
+/*.dhx_event_resize.dhx_footer{*/
+    /*position:relative;*/
+/*}*/
+/*.dhx_event_resize.dhx_footer:after{*/
+    /*content:url(../images/resizing.png);*/
+    /*position:absolute;*/
+    /*width:20px;*/
+    /*left:50%;*/
+    /*margin-left:-13px;*/
+    /*top:-4px;*/
 
-/*放search的地方*/
+/*}*/
+.dhtmlx_popup_button.dhtmlx_ok_button div{
+    background:#D95C5C !important;
+    border:1px solid #D95C5C !important;
+}
+.dhtmlx_popup_button.dhtmlx_ok_button {
+    background-color: #D95C5C !important;
+    border: 1px solid #D95C5C !important;
+}
+
+/*单击跳出来来的info*/
+.dhx_cal_qi_content{
+    display:none
+}
+.dhx_cal_qi_controls .dhx_qi_big_icon{
+    background-color:#63A69F;
+}
+.dhx_cal_qi_controls .dhx_qi_big_icon.icon_delete{
+    background-color: #D95C5C
+}
+.dhx_cal_quick_info{
+    background: none repeat scroll 0 0 rgba(0,0,0,0.7) !important;
+    border: 1px solid rgba(0,0,0,0.7) !important;
+}
+.dhx_cal_qi_tcontent>span:nth-of-type(1){
+    font-size:13px;
+    display:block;
+    font-weight:lighter;
+    color:rgba(255,255,255,0.8);
+    margin: -3px 0 2px;
+}
+.dhx_cal_qi_tcontent>span:nth-of-type(2){
+    font-weight:lighter;
+    margin:3px 0 5px;
+    display:block;
+    font-size:14px;
+}
+/********************************************************************************* 右侧*/
+/*选择机构的*/
 .schedule-search{
     position:absolute;
     right:0px;
@@ -78,6 +190,11 @@
     width:80%;
     min-width:230px;
 }
+.schedule-search>.ui.button.dropdown .menu{
+    max-height:219px;
+    overflow-y:auto;
+}
+/*放search的地方*/
 .schedule-search>.search-block{
     position:absolute;
     top:110px;
@@ -93,16 +210,62 @@
 .schedule-search>.search-block>.input>input{
     font-size:12px;
 }
+/*search结果列出来*/
 .schedule-search>.search-block>.search-list{
-    height:400px;
-    width:100%;
+    max-height:400px;
+    height:auto;
+    width:99%;
     overflow-y:auto;
+    background:white;
+    border-color:rgba(0, 0, 0, 0.15);
+    border-style:solid;
+    border-width:0px 1px 1px 1px;
 }
+.search-list>.search-class-name{
+    font-size:13px;
+    margin:10px 8px 1px;
+}
+.search-list>.search-class-name>span:nth-of-type(2),
+.search-list>.search-class-teachers>span:nth-of-type(2){
+    color:#C69C6D
+}
+.search-list>.search-class-teachers{
+    font-size:13px;
+    margin:4px 8px 1px;
+}
+.search-list>.search-class-schedule{
+    list-style-type: none;
+    padding:5px 0px 2px;
+    margin:0px;
+    font-size:0;
+}
+.search-list>.search-class-schedule>li{
+    font-size:13px;
+    padding:4px 10px;
+    word-break:break-all;
+    word-wrap:break-word;
+}
+.search-list>.search-class-schedule>li:nth-child(odd){
+    background:rgba(220,220,220,0.5);
+}
+.search-list>.search-class-schedule>li>span:nth-of-type(1){
+    width:147px;
+    display:inline-block;
+}
+.search-list>.search-class-schedule>li>span:nth-of-type(2){
+    color:rgba(0,0,0,0.6);
+}
+.search-list>.search-class-schedule>li>i{
+    float:right;
+    color:#D95C5C;
+    cursor:pointer;
+}
+/*按钮*/
 .schedule-search>.save-schedule{
     position:absolute;
     bottom:6%;
     min-width:170px;
     left:50%;
     width:46%;
-    margin-left:-31%;
+    margin-left:-35%;
 }

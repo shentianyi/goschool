@@ -1611,7 +1611,7 @@ input.dhx_repeat_checkbox {
 	height: 5px;
 	border: 0;
 	margin-top: -6px;
-	background: url(imgs_dhx_terrace/resizing.png) no-repeat center center;
+	background: url(../images/resizing.png) no-repeat center center;
 }
 
 .dhx_cal_event .dhx_header, .dhx_cal_event .dhx_footer, .dhx_cal_event .dhx_body, .dhx_cal_event .dhx_title {

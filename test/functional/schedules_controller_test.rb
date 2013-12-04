@@ -33,7 +33,7 @@ class SchedulesControllerTest < ActionController::TestCase
   end
 
   test 'should get schedules by date' do
-      get :dates,{start_date:'2013-11-26',end_date:'2013-11-30'}
+      get :dates,{start_date:'2013-11-26',end_date:'2013-11-30',institution_id:institutions(:one).id}
       assert_response :success
       puts response.body
   end 
@@ -43,7 +43,7 @@ class SchedulesControllerTest < ActionController::TestCase
       # assert_response :success
       # puts response.body
     
-      get :courses,{type:'SubCourse',id:sub_courses(:one).id}
+      get :courses,{type:'SubCourse',id:sub_courses(:one).id,institution_id:institutions(:one).id}
       assert_response :success
       puts response.body
   end

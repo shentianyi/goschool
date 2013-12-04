@@ -38,7 +38,7 @@ class SchedulesController < ApplicationController
 
   def courses
     @msg.result=true
-    @msg.object=Schedule.by_course_id(params[:id],params[:type]).collect{|schedule| SchedulePresenter.new(schedule).to_json}
+    @msg.object=Schedule.by_course_id(params).collect{|schedule| SchedulePresenter.new(schedule).to_json}
     render :json=>@msg
   end
 
