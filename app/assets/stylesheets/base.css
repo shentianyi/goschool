@@ -144,7 +144,7 @@ select{
 .ui.left.icon.specialInput>i:before{
     position:absolute;
     top:50%;
-    margin-top:-6px;
+    margin-top:-8px;
     left:15px;
 }
 /*********************************** labelForm

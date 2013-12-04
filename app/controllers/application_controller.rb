@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
   include ApplicationHelper
-  # helper_method :current_user_session, :current_user
-   before_filter :require_user
-  # before_filter :require_active_user
+  helper_method :current_user_session, :current_user
+  before_filter :require_user
+  before_filter :require_active_user
   before_filter :find_current_user_tenant
 
   set_current_tenant_through_filter
@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
     @current_user = Logininfo.first
     #unless current_user
     #  store_location
-    #  redirect_to new_user_session_url
+    #  redirect_to new_logininfo_sessions_url
     #  return false
     #end
   end
@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
     unless current_user && current_user.status == UserStatus::ACTIVE
       flash[:alert] = "帐号被锁定，请联系管理员！"
       current_user_session.destroy
-      redirect_to new_user_session_url
+      redirect_to new_logininfo_sessions_url
       return false
     end
   end

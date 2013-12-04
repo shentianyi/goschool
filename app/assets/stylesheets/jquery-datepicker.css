@@ -110,7 +110,7 @@
 	left: 2px;
 }
 .ui-datepicker .ui-datepicker-next {
-	right: 2px;
+	right: -4px;
 }
 
 .ui-datepicker .ui-datepicker-prev i,
@@ -123,7 +123,7 @@
 	margin-top: -6px;
 }
 .ui-datepicker .ui-datepicker-title {
-	margin: 0 2.3em;
+	margin: 0 2em;
 	line-height: 1.8em;
 	text-align: center;
 }
