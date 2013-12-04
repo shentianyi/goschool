@@ -11,7 +11,7 @@ class Course < ActiveRecord::Base
   has_many :students,:through=> :student_courses
   has_many :teachers,:through=>:sub_courses
   attr_accessible :actual_number, :description, :end_date, :expect_number, :lesson, :name, :start_date, :type
-  attr_accessible :has_sub,:status,:institution_id,:tenant_id
+  attr_accessible :has_sub,:status,:institution_id,:tenant_id,:code
   # for callback
   attr_accessor :tags,:subs
   acts_as_tenant(:tenant)
@@ -20,7 +20,6 @@ class Course < ActiveRecord::Base
 
   redis_search_index(:title_field => :name,
                      :condition_fields => [:tenant_id,:institution_id])
-
   def create_default_sub_course
     self.sub_courses.create(:parent_name=>self.name,:is_default=>true) unless self.has_sub
   end
@@ -37,6 +36,8 @@ class Course < ActiveRecord::Base
 
   def validate_save
     errors.add(:name,'课程名称不可为空') if self.name.blank?
+    errors.add(:code,'课程代码不可重复') if self.class.where(code:self.code).first if new_record?
+    errors.add(:code,'课程代码不可重复') if self.class.where('id<>? and code=?',self.id,self.code).first unless new_record?
   end
 
 end
