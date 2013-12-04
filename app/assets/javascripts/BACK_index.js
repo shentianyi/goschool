@@ -40,6 +40,8 @@ BACKINDEX.init=(function(){
                 for(i=0;i<length_service-1;i++){
                     $("#sub-service-teachers>.sub-course-block-item").eq(1).remove();
                 }
+                $("#add-class-choose-institution,#add-service-choose-institution").find(".text").text("选择机构...");
+                $("#add-class-choose-institution,#add-service-choose-institution").find(".item").removeClass("active");
             }
             BACKINDEX.addItem.clear();
             $("#back-index-add").css("left","-999em").css("right","auto");
