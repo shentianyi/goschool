@@ -1,13 +1,14 @@
 #encoding: utf-8
 class SchedulePresenter<Presenter
-  def_delegators :@schedules,:name,:parent_name,:id,:start_time,:end_time,:teachers
+  def_delegators :@schedule,:name,:parent_name,:id,:start_time,:end_time,:teachers
   def initialize(schedule)
-    @schedules=schedule
+    @schedule=schedule
   end
 
   def teacher_infos
     self.teachers.collect{|teacher| {id:teacher.id,name:teacher.name}}
   end
+  
 
   def to_json
     {course_name:self.parent_name,

@@ -5,6 +5,8 @@ class LogininfoSessionsController < ApplicationController
   #skip_before_filter :check_tenant_status
   skip_before_filter :find_current_user_tenant,:only=>[:new,:create]
   
+  layout 'non_authorized'
+
   def new
     @user_session = LogininfoSession.new
   end
@@ -14,7 +16,7 @@ class LogininfoSessionsController < ApplicationController
 
     if @user_session.save
       flash[:notice] = "登录成功！"
-      redirect_to new_logininfo_session_url
+      redirect_to root_url
     else
       flash[:notice] = "登录失败！"
       render :action => :new
@@ -24,6 +26,6 @@ class LogininfoSessionsController < ApplicationController
   def destroy
     current_user_session.destroy
     flash[:notice] = "注销成功！"
-    redirect_to new_logininfo_session_url
+    redirect_to new_logininfo_sessions_url
   end
 end

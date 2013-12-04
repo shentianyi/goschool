@@ -55,7 +55,8 @@ class Logininfo < ActiveRecord::Base
     begin
       ActiveRecord::Base.transaction do
         @tenant.super_user = self
-
+        @new_role = LogininfoRole.new(:role_id=>100)
+        self.logininfo_roles<<@new_role
         self.tenant = @tenant
         self.status = UserStatus::ACTIVE
         self.is_tenant = true

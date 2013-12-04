@@ -6,12 +6,7 @@ class CoursesControllerTest < ActionController::TestCase
   setup do
     @course = courses(:one)
   end
-
-  # test "should get index" do
-    # get :index
-    # assert_response :success
-  # end
-
+  
   test "should create course" do
     assert_difference('Course.count') do
       post :create,
@@ -47,10 +42,10 @@ class CoursesControllerTest < ActionController::TestCase
     assert_response :success
     puts response.body
   end
-# 
-  # test 'should list course students' do
-    # get :students ,id:@course.id
-    # assert_response :success
-    # puts response.body
-  # end
+ 
+  test 'should show' do
+    get :show ,id:@course.id,part:'students'
+    assert_response :success
+    puts response.body
+  end
 end
