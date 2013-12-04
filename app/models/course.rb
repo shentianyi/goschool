@@ -30,7 +30,7 @@ class Course < ActiveRecord::Base
   end
 
   def course_teachers
-    self.teachers.select('sub_courses.id as sub_course_id,sub_courses.name as sub_courses_name,sub_courses.parent_name as course_name').all
+    self.teachers.select('users.*,sub_courses.id as sub_course_id,sub_courses.name as sub_courses_name,sub_courses.parent_name as course_name').all
   end
 
   private

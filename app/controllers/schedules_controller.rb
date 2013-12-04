@@ -8,7 +8,7 @@ class SchedulesController < ApplicationController
       @msg.result=true
       @msg.content=  SchedulePresenter.new(@schedule).to_json
     else
-        @msg.content='不存在此课程表安排'
+      @msg.content='不存在此课程表安排'
     end
     render :json=>@msg
   end
@@ -32,13 +32,13 @@ class SchedulesController < ApplicationController
 
   def dates
     @msg.result=true
-    @msg.object=Schedule.between_date(params).collect{|schedule| SchedulePresenter.new(schedule).to_json}
+    @msg.object=SchedulePresenter.init_json_presenters( Schedule.between_date(params))
     render :json=>@msg
   end
 
   def courses
     @msg.result=true
-    @msg.object=Schedule.by_course_id(params).collect{|schedule| SchedulePresenter.new(schedule).to_json}
+    @msg.object=SchedulePresenter.init_json_presenters( Schedule.by_course_id(params))
     render :json=>@msg
   end
 

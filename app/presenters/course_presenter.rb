@@ -5,7 +5,7 @@ class CoursePresenter<Presenter
     def initialize(course)
      @course=course
     end
-
+    
     def tags
       TagUtility.new.get_tags(self.tenant_id,self.class.name,self.id)
     end
