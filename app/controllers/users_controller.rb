@@ -50,11 +50,12 @@ class UsersController < ApplicationController
     @logininfo = @user.logininfo
     if @logininfo && @logininfo.is_tenant
       msg.content = "不能删除创建者"
+    elsif @logininfo.id == current_user.id
+      msg.content = "不能删除自己"
     else
       @user.destroy
       msg.result = true
     end
-
     render :json=>msg
   end
 
@@ -97,9 +98,5 @@ class UsersController < ApplicationController
       msg.content = invalid.record.errors
     end
       render :json=>msg
-  end
-
-  def get_user
-    
   end
 end

@@ -1,10 +1,8 @@
 Goschool::Application.routes.draw do
+  root :to => 'settings#index'
 
   resources :comments
-
-
   resources :posts
-
 
   resources :student_courses do
    collection do
@@ -51,7 +49,12 @@ Goschool::Application.routes.draw do
 
   resources :logininfos
   resource :subscriptions
-  resource :logininfo_session
+  resource :logininfo_sessions
+
+  controller :logininfo_sessions do
+    match 'logininfo_sessions/destroy' => :create
+    match 'logininfo_sesisons/destroy' => :destroy
+  end
 
 
 # The priority is based upon order of creation:
