@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="stylesheets/BACK-index.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/BACK-course-detail.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/BACK-detail.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/BACK-course-index.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/jquery-datepicker.css" type="text/css" />
 </head>
 <body>
 
@@ -57,69 +59,338 @@
         </a>
         <p>课程详细信息</p>
     </header>
-    <div class="detail-navigation" id="detail-navigation">
-        <div class="ui vertical pointing menu">
+    <div class="detail-navigation" id="detail-navigation" origin_top=56>
+        <div class="ui vertical pointing menu" id="detail-navigation-menu">
             <div class="header item">
                 内容菜单
             </div>
-            <a class="active item">
-                <i class="user icon"></i> 学生
+            <a class="item active" href="#student">
+                <i class="user icon"></i> 已报班学生
             </a>
-            <a class="item">
-                <i class="male icon"></i> 老师
+            <a class="item" href="#teacher">
+                <i class="male icon"></i> 授课老师
             </a>
-            <a class="item">
-                <i class="heart icon"></i> 推荐
+            <a class="item" href="#recommend">
+                <i class="heart icon"></i> 推荐报班
             </a>
         </div>
     </div>
     <div class="detail-content" id="detail-content">
         <div class="info">
-            <p>托福秋季班</p>
-            <p>托福秋季班是为一月份的托福进行最后的冲刺准备，旨在提高学生的各项能力</p>
-            <p><span>授课老师：</span><span>May,Laura,Frank</span></p>
-            <p><span>授课时间：</span><span>2013年10月10日 - 2013年12月12日</span></p>
-            <p><span>标签：</span><a class="ui blue label">托福</a><a class="ui blue label">雅思</a></p>
-            <a class="ui teal button">编辑课程信息</a>
-            <a class="ui red button">删除此课程</a>
+            <p class="detail-name">托福秋季班</p>
+            <p class='detail-desc'>托福秋季班是为一月份的托福进行最后的冲刺准备，旨在提高学生的各项能力</p>
+            <!--<p class='detail-teachers'><span>授课老师:</span><span>May,Laura,Frank</span></p>-->
+            <p class="detail-time"><span>授课时间:</span><span>2013年10月10日 - 2013年12月12日</span></p>
+            <p class="detail-count"><span>课时数:</span><span>32课时</span></p>
+            <p class="detail-people"><span>预计人数:</span><span>108</span></p>
+            <p class="detail-institution"><span>所属机构:</span><span>闵行区</span></p>
+            <p class="detail-code"><span>课程代号:</span><span>201101</span></p>
+            <p class="detail-labels"><span>标签:</span>
+                <span>
+                   <a class="ui blue label">托福</a>
+                   <a class="ui blue label">雅思</a>
+                </span>
+            </p>
+            <a class="ui red button detail-button">删除此课程</a>
+            <a class="ui teal button detail-button" id="course-detail-edit">编辑课程信息</a>
         </div>
-        <div class="ui fluid accordion">
-            <div class="active title">
-                <i class="dropdown icon"></i>
-                What is a dog?
+        <div class="ui fluid accordion" id="accordion" name="course">
+
+            <!--partial-->
+            <div class="item student" id="student">
+                <div class="active title">
+                    <i class="dropdown icon"></i>已报班学生
+                </div>
+                <div class="active content">
+                    <table class="ui celled table segment">
+                        <thead>
+                            <tr>
+                                <th class="wide two"></th>
+                                <th class="wide three">姓名</th>
+                                <th class="wide four">报班时间</th>
+                                <th class="wide four">支付情况</th>
+                                <th class="wide three"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img class="ui avatar image" src="images/portrait/0.jpg"/>
+                                </td>
+                                <td>王子骁</td>
+                                <td>2013-12-12</td>
+                                <td><div class="ui checkbox">
+                                    <input type="checkbox">
+                                    <label>已经支付</label>
+                                </div></td>
+                                <td>
+                                    <div class="red button ui mini">退班</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ui mini button" id="course-detail-new-student"><i class="browser icon"></i> 报班新生</div>
             </div>
-            <div class="active content">
-                <p>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>
+            <!--partial-->
+
+            <!--partial-->
+            <div class="item teacher" id="teacher">
+                <div class="title">
+                    <i class="dropdown icon"></i>授课老师
+                </div>
+                <div class="content">
+                    <table class="ui celled table segment">
+                        <thead>
+                        <tr>
+                            <th class="wide two"></th>
+                            <th class="wide five">姓名</th>
+                            <th class="wide six">授课内容</th>
+                            <th class="wide three"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <img class="ui avatar image" src="images/portrait/2.jpg"/>
+                            </td>
+                            <td>Mary</td>
+                            <td>听力</td>
+                            <td>
+                                <div class="red button ui mini">删除</div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ui mini button"><i class="add icon"></i> 添加老师</div>
             </div>
-            <div class="title">
-                <i class="dropdown icon"></i>
-                What kinds of dogs are there?
+            <!--partial-->
+
+            <!--template-->
+            <div class="item recommend" id="recommend">
+                <div class="title">
+                    <i class="dropdown icon"></i>推荐报班
+                </div>
+                <div class="content">
+                    <table class="ui table segment">
+                        <tr>
+                            <td class="two wide">
+                                <img class="circular ui image mini portrait" src="images/portrait/0.jpg" />
+                                <p class="name">王子骁</p>
+                            </td>
+                            <td class="two wide">
+                                <p class="type">潜在客户</p>
+                                <p>七宝中学</p>
+                                <p>高二</p>
+                                <p>17岁</p>
+                            </td>
+                            <td class="five wide">
+                                <div class="ui blue labels small">
+                                    <a class="ui label">
+                                        托福
+                                    </a>
+                                    <a class="ui label">
+                                        雅思
+                                    </a>
+                                    <a class="ui label">
+                                        SAT
+                                    </a>
+                                </div>
+                                <p class="parent"><span>监护人:</span><span>13901111123(王先生)</span></p>
+                                <p class="phone"><span>联系电话:</span><span>13918502286</span></p>
+                                <p class="consult-time"><span>上次咨询:</span><span>2013-11-11 16:00</span></p>
+                            </td>
+                            <td class="two wide">
+                                <p class="maybe-know">推荐人</p>
+                                <p><span>张三</span></p>
+                            </td>
+                            <td class="three wide">
+                                <p class="recommend">可能认识</p>
+                                <p><span>李四</span><span>王八</span><span>白一</span></p>
+                            </td>
+                            <td class="three wide">
+                                <div class="ui mini button teal">
+                                    报班
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div class="content">
-                <p>There are many breeds of dogs. Each breed varies in size and temperament. Owners often select a breed of dog that they find to be compatible with their own lifestyle and desires from a companion.</p>
+            <!--template-->
+
+        </div>
+
+
+        <footer class="back-index-log" name="detail">
+            <p>最新记录:</p>
+            <ul>
+                <li>2013-10-13 13:00 开始课程 1</li>
+                <li>2013-10-13 12:00 开始课程 21</li>
+            </ul>
+        </footer>
+    </div>
+</article>
+
+
+<!--编辑课程信息-->
+<section class="back-index-add" id="back-index-add" name="course">
+    <div class="inner">
+        <i class="remove icon"></i>
+        <p>编辑课程信息</p>
+        <div id="new-class" class="tab-block" from="course">
+            <div class="left-part">
+                <div class="select">
+                    <div class="ui selection dropdown" id="add-class-choose-institution">
+                        <div class="text">选择机构...</div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <div class="item">闵行校区</div>
+                            <div class="item">徐汇校区肇嘉浜路分机构</div>
+                        </div>
+                    </div>
+                    <i class="sitemap icon"></i>
+                </div>
+                <div class="ui left icon input">
+                    <input placeholder="课程名称..." type="text">
+                    <i class="browser icon"></i>
+                </div>
+                <div class="course-desc">
+                    <textarea placeholder="课程描述..."></textarea>
+                    <i class="book icon"></i>
+                </div>
+                <div class="ui left icon input">
+                    <input placeholder="预计课时数..." type="text">
+                    <i class="time icon"></i>
+                </div>
+                <div class="ui left icon input">
+                    <input placeholder="预计报名人数..." type="text">
+                    <i class="users icon"></i>
+                </div>
+                <div class="ui left icon input calendar">
+                    <input placeholder="课程开始时间..." type="text" readonly id="course-begin-date">
+                    <i class="calendar icon"></i>
+                </div>
+                <div class="ui left icon input calendar">
+                    <input placeholder="课程结束时间..." type="text" readonly id="course-end-date">
+                    <i class="calendar icon"></i>
+                </div>
             </div>
-            <div class="title">
-                <i class="dropdown icon"></i>
-                How do you acquire a dog?
+            <div class="right-part">
+                <div class="ui left icon input">
+                    <input placeholder="课程代号..." type="text">
+                    <i class="globe icon"></i>
+                </div>
+                <div class="ui left icon input specialInput labelForm autoComplete">
+                    <ul>
+                        <li><input type='text' placeholder="标签..." id="new-class-label" /></li>
+                    </ul>
+                    <i class="tag icon stop"></i>
+                </div>
+
             </div>
-            <div class="content">
-                <p>Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.</p>
-                <p>A pet shop may be the most convenient way to buy a dog. Buying a dog from a private owner allows you to assess the pedigree and upbringing of your dog before choosing to take it home. Lastly, finding your dog from a shelter, helps give a good home to a dog who may not find one so readily.</p>
-            </div>
+        </div>
+
+        <!--<div id="new-service" class="tab-block" style="display:none" from="service">-->
+            <!--<div class="left-part">-->
+                <!--<div class="select">-->
+                    <!--<div class="ui selection dropdown" id="add-service-choose-institution">-->
+                        <!--<div class="text">选择机构...</div>-->
+                        <!--<i class="dropdown icon"></i>-->
+                        <!--<div class="menu">-->
+                            <!--<div class="item">闵行校区</div>-->
+                            <!--<div class="item">徐汇校区肇嘉浜路分机构</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<i class="sitemap icon"></i>-->
+                <!--</div>-->
+                <!--<div class="ui left icon input">-->
+                    <!--<input placeholder="服务名称..." type="text">-->
+                    <!--<i class="browser icon"></i>-->
+                <!--</div>-->
+                <!--<div class="course-desc">-->
+                    <!--<textarea placeholder="服务描述..."></textarea>-->
+                    <!--<i class="book icon"></i>-->
+                <!--</div>-->
+                <!--<div class="ui left icon input">-->
+                    <!--<input placeholder="预计报名人数..." type="text">-->
+                    <!--<i class="users icon"></i>-->
+                <!--</div>-->
+                <!--<div class="ui left icon input calendar">-->
+                    <!--<input placeholder="服务开始时间..." type="text" readonly id="service-begin-date">-->
+                    <!--<i class="calendar icon"></i>-->
+                <!--</div>-->
+                <!--<div class="ui left icon input calendar">-->
+                    <!--<input placeholder="服务结束时间..." type="text" readonly id="service-end-date">-->
+                    <!--<i class="calendar icon"></i>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="right-part">-->
+                <!--<div class="ui left icon input">-->
+                    <!--<input placeholder="服务代号..." type="text">-->
+                    <!--<i class="globe icon"></i>-->
+                <!--</div>-->
+                <!--<div class="ui left icon input specialInput labelForm autoComplete">-->
+                    <!--<ul>-->
+                        <!--<li><input type='text' placeholder="标签..." id="service-label" /></li>-->
+                    <!--</ul>-->
+                    <!--<i class="tag icon stop"></i>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="ui red button">
+            添加
         </div>
     </div>
+</section>
 
-</article>
+
+<!--报班-->
+<section class="detail-add" id="detail-add" name="student">
+    <div class="inner">
+        <div class="ui mini icon input">
+            <input placeholder="Search mini..." type="text">
+            <i class="search icon"></i>
+        </div>
+        <table class="ui compact table small segment">
+            <thead>
+            <tr><th>Name</th>
+                <th>Status</th>
+                <th>Notes</th>
+            </tr></thead>
+            <tbody>
+            <tr>
+                <td>John</td>
+                <td>Approved</td>
+                <td>None</td>
+            </tr>
+            <tr>
+                <td>Jamie</td>
+                <td>Approved</td>
+                <td>Requires call</td>
+            </tr>
+            <tr>
+                <td>John</td>
+                <td>Approved</td>
+                <td>None</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</section>
+
 
 
 <script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="javascripts/jquery-datepicker.js"></script>
-<script type='text/javascript' src="javascripts/waypoints.min.js" ></script>
-<script type='text/javascript' src="javascripts/jquery.pin.min.js" ></script>
 <script type='text/javascript' src="javascripts/semantic.min.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_index.js" ></script>
 <script type='text/javascript' src="javascripts/wayne-base.js" ></script>
 <script type='text/javascript' src="javascripts/mustache.js" ></script>
+<script type='text/javascript' src="javascripts/BACK_course.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_course_detail.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_detail.js" ></script>
 </body>

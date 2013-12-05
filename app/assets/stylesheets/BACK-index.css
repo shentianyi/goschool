@@ -169,6 +169,17 @@
     margin-top:20px;
     margin-bottom:10px;
 }
+/*搜索条件的记录*/
+.back-index-main>.search-list>.search-conditions{
+    padding:6px 20px;
+    margin:0 0 15px;
+}
+.back-index-main>.search-list>.search-conditions p{
+    color:white;
+    font-size:13px;
+    margin:1px 0px;
+    line-height:20px;
+}
 /*搜索结果*/
 .back-index-main>.search-list>.column>.segment{
     padding:10px 1em;
@@ -214,9 +225,9 @@
 .back-index-log{
     position:absolute;
     bottom:0px;
-    right:0px;
     left:0px;
-    max-height:80px;
+    width:100%;
+    max-height:72px;
     background:rgba(0, 0, 0, 0.02);
     border-top:1px solid rgba(0,0,0,0.1);
     overflow-y:auto;
@@ -245,9 +256,13 @@
     min-width:924px;
 }
 .back-index-main[name='2column']:after{
-    content:"",
-    display:block;
+    content:"";
+    display:table;
     clear:both;
+}
+.back-index-main[name='2column']:before{
+    content:"";
+    display:table;
 }
 .back-index-main[name='2column'] header{
     text-align:center;
