@@ -1,4 +1,7 @@
 Goschool::Application.routes.draw do
+  resources :achievements
+
+
   root :to => 'settings#index'
 
   resources :comments
@@ -17,6 +20,7 @@ Goschool::Application.routes.draw do
    collection do
     get :dates
     get :courses
+    post :send_email
    end
   end
   resources :students do
