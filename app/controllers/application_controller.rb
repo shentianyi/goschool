@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   helper :all
   include ApplicationHelper
   helper_method :current_user_session, :current_user
-  before_filter :require_user
-  before_filter :require_active_user
+  #before_filter :require_user
+  #before_filter :require_active_user
   before_filter :find_current_user_tenant
 
   set_current_tenant_through_filter
