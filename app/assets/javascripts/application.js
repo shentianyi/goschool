@@ -16,9 +16,15 @@
 //= require semantic.min
 //= require BACK_admin
 //= require BACK_index
+//= require BACK_detail
 //= require BACK_rightList
 //= require BACK_student
 //= require BACK_course
+//= require BACK_course_detail
+//= require BACK_course_schedule
+//= require dhtmlxscheduler
+//= require dhtmlxscheduler_quick_info
+//= require locale_cn
 //= require wayne-base
 
 

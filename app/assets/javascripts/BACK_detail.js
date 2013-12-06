@@ -38,9 +38,22 @@
             $(target).children().addClass("active");
         }
     });
-    $("body").on("click","#course-detail-edit",function(){
-        $("#back-index-add").css("left","0px").css("right","0px");
-    })
+    $("body").on("click","[for='detail-add']",function(){
+        var type=$(this).attr("type");
+        $(".detail-add[type='"+type+"']").css("left","0").css("right","0");
+    });
+    $("body").on("click",".detail-add-close",function(){
+        var $parent=$(this).parent();
+        $parent.find("input[type='text']").val("");
+        $parent.find("input[type='checkbox']").prop("checked",false);
+        $parent.find(".positive").removeClass("positive");
+//        $parent.find("tbody").empty();
+        $parent.parent().css("left","-999em").css("right","auto");
+    });
+    $("body").on("click",".add-item",function(){
+        var name=$(this).attr("type")
+        $(".back-index-add[name='"+name+"']").css("left","0").css("right","0");
+    });
     $(document).ready(function(){
 
     });
