@@ -12,10 +12,10 @@ var BACKSTUDENT=BACKSTUDENT||{};
         dateFormat:'yy-mm-dd'
     });
     $(document).ready(function(){
-        //add student
-        $("body").on("click",id,function(){
-               //write your post code here
-        });
+//        //add student
+//        $("body").on("click",id,function(){
+//               //write your post code here
+//        });
     })
 })();
 

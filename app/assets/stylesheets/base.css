@@ -117,13 +117,13 @@ select{
     bottom:0;
 }
 .message-box.success{
-    background:#63A69F;
+    background:#119000;
 }
 .message-box.danger{
-    background-color:#D95C5C;
+    background-color:#ed3030;
 }
 .message-box.warning{
-    background-color:#e4a73d;
+    background-color:#FFA500;;
 }
 .message-box>p{
     color:white !important

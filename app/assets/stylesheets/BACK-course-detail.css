@@ -8,6 +8,9 @@
     left:50%;
     margin-left:-16px;
 }
+.accordion[name='course'] .student .positive label{
+    color:#119000
+}
 /******************** 推荐*/
 .recommend .portrait{
     position:relative;

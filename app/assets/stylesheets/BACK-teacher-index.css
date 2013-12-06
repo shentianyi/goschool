@@ -1,0 +1,31 @@
+/*新建老师*/
+.back-index-add[name='teacher'] .whole-block{
+    width:70%;
+    position:relative;
+    left:50%;
+    margin-left:-35%;
+    top:111px;
+    height:49%;
+}
+.back-index-add[name='teacher'] .whole-block>.ui.input{
+    width:80%;
+    position:relative;
+    left:50%;
+    margin-left:-40%;
+    display:block;
+    margin-bottom:27px;
+}
+.back-index-add[name='teacher'] .whole-block .sex{
+    margin-left:50px;
+    margin-top:-9px;
+    margin-bottom:18px;
+}
+.back-index-add[name='teacher'] .whole-block .sex .radio{
+    margin-right:18px;
+}
+.back-index-add[name='teacher'] .button{
+    width:130px;
+    position:absolute;
+    right:50px;
+    bottom:0px;
+}
