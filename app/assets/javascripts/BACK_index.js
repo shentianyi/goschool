@@ -13,6 +13,16 @@ BACKINDEX.init=(function(){
         var name=$(this).attr("type")
         $(".back-index-add[name='"+name+"']").css("left","0").css("right","0");
     });
+    $("body").on("click","#control-log",function(){
+        if($(this).attr("state")=="close"){
+            $("#back-index-log").css("left","100px");
+            $(this).attr("state","open").find("i").removeClass("right").addClass("left");
+        }
+        else{
+            $("#back-index-log").css("left","-210px");
+            $(this).attr("state","close").find("i").removeClass("left").addClass("right");
+        }
+    });
     $(document).ready(function(){
         $("body").on("click",".back-index-add .remove",function(){
             var name=$(this).parents(".back-index-add").attr("name");
@@ -49,14 +59,6 @@ BACKINDEX.init=(function(){
         });
     });
 })();
-BACKINDEX.checkLog=function(){
-    if($("#search-list").height()+60+$("#back-index-log").height()>$(window).height()){
-        $("#back-index-log").css("position","relative");
-    }
-    else{
-        $("#back-index-log").css("position","absolute");
-    }
-};
 BACKINDEX.addItem={};
 BACKINDEX.addItem.clear=function(){
     $(".back-index-add .radio.ui").eq(0).checkbox('enable');

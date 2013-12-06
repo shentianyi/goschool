@@ -7,7 +7,7 @@
 /*#4092CC*/
 /************************************************************   left aside */
 .back-index-aside{
-    background:rgba(47, 47, 47, 0.98);
+    background:rgba(47, 47, 47,1);
     position:absolute;
     top:0px;
     bottom:0px;
@@ -221,34 +221,67 @@
     font-size:13px;
     cursor:default;
 }
+
 /*记录*/
-.back-index-log{
-    position:absolute;
+.control-log{
+    position:fixed;
     bottom:0px;
-    left:0px;
-    width:100%;
-    max-height:72px;
-    background:rgba(0, 0, 0, 0.02);
-    border-top:1px solid rgba(0,0,0,0.1);
-    overflow-y:auto;
+    width:20px;
+    z-index:31;
+    left:100px;
+    background:rgba(47, 47, 47,1);
+    line-height:12px;
+    color:white;
+    font-size:11px;
+    padding:6px 2px;
+    magin:0px;
+    border-radius:0 3px 0 0;
+    -moz-border-radius:0 3px 0 0;
+    -webkit-border-radius:0 3px 0 0;
+    text-align:center;
+    cursor:pointer;
+    transition:color 0.2s ease-out;
+    border-left:1px solid rgba(255,255,255,0.3);
+    height:65px;
 }
-.back-index-log>p{
-    color:rgba(0,0,0,0.5);
-    font-size:13px;
-    padding-left:10px;
-    margin-bottom:2px;
+.control-log:hover{
+    color:rgba(255,255,255,0.5);
+}
+.control-log i{
+    position:relative;
+    top:-2px;
+}
+.control-log i.right{
+    right:3px;
+}
+.control-log i.left{
+    left:3px;
+}
+.back-index-log{
+    position:fixed;
+    bottom:0px;
+    left:-210px;
+    width:310px;
+    height:77px;
+    background-color:#222;
+    overflow-y:auto;
+    z-index:28;
+    border-radius:0 3px 0 0;
+    -moz-border-radius:0 3px 0 0;
+    -webkit-border-radius:0 3px 0 0;
+    transition:left 0.35s ease-out;
 }
 .back-index-log>ul{
     list-style-type: none;
     margin:0px;
-    padding:0 2px 8px 30px;
+    padding:8px 2px 8px 42px;
 }
 .back-index-log>ul>li{
     word-break:break-all;
     word-wrap:break-word;
     font-size:12px;
     padding:1px 0;
-    color:rgba(0,0,0,0.4);
+    color:white;
 }
 /*只有左右两块布局的*/
 .back-index-main[name='2column']{

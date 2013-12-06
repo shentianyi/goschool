@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="stylesheets/semantic.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/base.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/BACK-index.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/BACK-student-detail.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/BACK-detail.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/jquery-datepicker.css" type="text/css" />
+</head>
+<body>
+
+<aside class="back-index-aside">
+    <a class="logo" ></a>
+    <ul class="first-ul">
+        <li>
+            <a href="#" >学生信息</a>
+        </li>
+        <li>
+            <a>老师信息</a>
+        </li>
+        <li>
+            <a class="active">课程信息</a>
+        </li>
+    </ul>
+    <ul class="second-ul" id="main-navigator-bottom">
+        <li>
+            <a>
+                <i class="settings icon" data-content="全局配置"></i>
+            </a>
+
+        </li>
+        <li>
+            <a>
+                <i class="smile icon" data-content="我的账户"></i>
+            </a>
+        </li>
+        <li>
+            <a>
+                <i class="mail outline icon" data-content="发送信息"></i>
+            </a>
+        </li>
+        <li>
+            <a>
+                <i class="sign out icon" data-content="退出账户"></i>
+            </a>
+        </li>
+    </ul>
+</aside>
+
+<article class="back-index-main" id="back-index-main" name="2column">
+    <header class="back-index-side-header">
+        <a class="ui down button teal mini" href="BACK-student-index.html">
+            <i class="left icon"></i>
+            返回上层
+        </a>
+        <p>学生详细信息</p>
+    </header>
+    <div class="detail-navigation" id="detail-navigation" origin_top=56>
+        <div class="ui vertical pointing menu" id="detail-navigation-menu">
+            <div class="header item">
+                内容菜单
+            </div>
+            <a class="item active">
+                <i class="browser icon"></i> 课程及服务
+            </a>
+            <a class="item">
+                <i class="bookmark icon"></i> 在校成绩
+            </a>
+            <a class="item" >
+                <i class="trophy icon"></i> 所获成就
+            </a>
+            <a class="item" >
+                <i class="meh icon"></i> 人际
+            </a>
+            <a class="item" >
+                <i class="chat outline icon"></i> 咨询记录
+            </a>
+        </div>
+    </div>
+    <div class="detail-content" id="detail-content">
+        <div class="info">
+            <p class="detail-name">托福秋季班</p>
+            <p class='detail-desc'>托福秋季班是为一月份的托福进行最后的冲刺准备，旨在提高学生的各项能力</p>
+            <p class="detail-time"><span>授课时间:</span><span>2013年10月10日 - 2013年12月12日</span></p>
+            <p class="detail-count"><span>课时数:</span><span>32课时</span></p>
+            <p class="detail-people"><span>预计人数:</span><span>108</span></p>
+            <p class="detail-institution"><span>所属机构:</span><span>闵行区</span></p>
+            <p class="detail-code"><span>课程代号:</span><span>201101</span></p>
+            <p class="detail-labels"><span>标签:</span>
+                <span>
+                   <a class="ui blue label">托福</a>
+                   <a class="ui blue label">雅思</a>
+                </span>
+            </p>
+            <a class="ui red button detail-button">删除此课程</a>
+            <a class="ui teal button detail-button" id="course-detail-edit">编辑课程信息</a>
+        </div>
+        <div class="ui fluid accordion" id="accordion" name="student">
+            <!--partial-->
+            <div class="item student" id="student">
+                <div class="active title">
+                    <i class="dropdown icon"></i>已报班学生
+                </div>
+                <div class="active content">
+
+                </div>
+                <div class="ui mini button" id="course-detail-new-student" for="detail-add" type="student"><i class="browser icon"></i> 报班新生</div>
+            </div>
+            <!--partial-->
+
+            <!--partial-->
+            <div class="item teacher" id="teacher">
+                <div class="title">
+                    <i class="dropdown icon"></i>授课老师
+                </div>
+                <div class="content">
+
+                </div>
+                <div class="ui mini button" for="detail-add" type="teacher"><i class="add icon"></i> 添加老师</div>
+            </div>
+            <!--partial-->
+
+            <!--template-->
+            <div class="item recommend" id="recommend">
+                <div class="title">
+                    <i class="dropdown icon"></i>推荐报班
+                </div>
+                <div class="content">
+
+                </div>
+            </div>
+            <!--template-->
+
+        </div>
+    </div>
+</article>
+
+<!--操作记录-->
+<footer class="control-log" id="control-log" state="close">
+    <i class="icon double angle right"></i>
+    操作记录
+</footer>
+<footer class="back-index-log" id="back-index-log" >
+    <ul>
+        <li>2013-10-13 13:00 开始课程 1</li>
+        <li>2013-10-13 12:00 开始课程 21</li>
+    </ul>
+</footer>
+
+
+<div class="message-box" id="MessageBox">
+    <p></p>
+</div>
+
+
+<script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="javascripts/jquery-datepicker.js"></script>
+<script type='text/javascript' src="javascripts/semantic.min.js" ></script>
+<script type='text/javascript' src="javascripts/BACK_index.js" ></script>
+<script type='text/javascript' src="javascripts/wayne-base.js" ></script>
+<script type='text/javascript' src="javascripts/mustache.js" ></script>
+<script type='text/javascript' src="javascripts/BACK_student_detail.js" ></script>
+<script type='text/javascript' src="javascripts/BACK_detail.js" ></script>
+</body>
+</html>
+
+
