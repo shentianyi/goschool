@@ -5,12 +5,16 @@ class SearchEngineType
     end
 
     @@instance = SearchEngineType.new
+    @@redis_query = nil
 
 
     def self.instance
       return @@instance
     end
 
+    def self.redis_query(redis)
+      @@redis_query = redis
+    end
 
     def search_entity_type
       [Student.name,Course.name]
@@ -32,31 +36,55 @@ class SearchEngineType
       return @search_query_types
     end
 
+    #add the set item
+    def reindex_all
+      index_all
+      all_keys = @@redis_query.keys('*')
+      validate_type = []
+
+      search_query_types[type.camelize].keys.each do |key|
+        validate_type << search_query_types[type.camelize][key].query_type
+      end
+
+      if all_keys
+        all_keys.each do |key|
+           raise exception('unfinished')
+        end
+      end
+
+    end
 
 
-    def index_all
+
+    def index_all(flush=false)
+      @@redis_query.flushdb if flush
       search_entity_type.each do |type|
-        search_query_types[type.camelize].keys.each do |obj|
-          keys = split_pinyin_or_en(obj.index_key_word)
-          save_index(type,key,obj.class.name)
+        search_query_types[type.camelize].keys.each do |key|
+          keys = split_pinyin_or_en(search_query_types[type.camelize][key].index_key_word)
+          save_index(type,keys,search_query_types[type.camelize][key].class.name)
         end
       end
     end
 
 
+    def feed_query_hit(entity_type,key,query_type)
+      save_index(entity_type,[key],query_type)
+    end
+
 
     def save_index(entity_type,keys,query_type)
       keys.uniq.each do |key|
         index_key = mk_index_key(entity_type,key)
-           raise error("unfinished")
+        @@redis_query.zincrby(index_key,1,query_type)
       end
     end
 
-    def get_query_type(entity_type,key)
-      search_key = mk_index_key(entity_type,key)
-      raise error("unfinished")
 
+    def get_query_types(entity_type,key,limit=10)
+      search_key = mk_index_key(entity_type,key)
+      result = @@redis_query.zrevrange(search_key,0,limit)
     end
+
 
     def mk_index_key(entity_type,key)
       return entity_type + '|' + key

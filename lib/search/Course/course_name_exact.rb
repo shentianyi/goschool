@@ -1,6 +1,10 @@
 #encoding:UTF-8
 class CourseNameExact
 
+  def query_type
+    self.class.name
+  end
+
   def name
      '课程名'
   end
