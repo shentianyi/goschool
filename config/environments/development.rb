@@ -20,9 +20,9 @@ Goschool::Application.configure do
   config.action_mailer.smtp_settings = {
     :address              => "smtp.163.com",
     :port                 => 25,
-    :domain               => '',
-    :user_name            => 'iwangsong@163.com',
-    :password             => '',
+    :domain               => 'http://goschool.com',
+    :user_name            => 'igoschool@163.com',
+    :password             => 'igoschool@',
     :authentication       => :plain,
     :enable_starttls_auto => true  }
 

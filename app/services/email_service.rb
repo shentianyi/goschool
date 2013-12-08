@@ -5,6 +5,7 @@ class EmailService
       file_name=SecureRandom.uuid+'.pdf'
       schedule_pdf=PdfService.generate_schedule_pdf(schedules)
       url=AliyunOssService.store_schedule(file_name,schedule_pdf)
+      ScheduleMailer.download_notify(['song.wang@cz-tek.com'],url)
     end
   end
 end
