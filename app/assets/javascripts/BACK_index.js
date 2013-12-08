@@ -9,17 +9,28 @@ BACKINDEX.init=(function(){
         $(".view-add").css("display","none");
     });
     //添加学生或老师或课程
-    $("#add-item").on("click",function(event){
-        $("#back-index-add").css("left","0").css("right","0");
+    $("#add-item").on("click",function(){
+        var name=$(this).attr("type")
+        $(".back-index-add[name='"+name+"']").css("left","0").css("right","0");
+    });
+    $("body").on("click","#control-log",function(){
+        if($(this).attr("state")=="close"){
+            $("#back-index-log").css("left","100px");
+            $(this).attr("state","open").find("i").removeClass("right").addClass("left");
+        }
+        else{
+            $("#back-index-log").css("left","-210px");
+            $(this).attr("state","close").find("i").removeClass("left").addClass("right");
+        }
     });
     $(document).ready(function(){
-        BACKINDEX.type=$("#back-index-add").attr("name");
-        $("body").on("click","#back-index-add .remove",function(){
-            if(BACKINDEX.type=="student"){
+        $("body").on("click",".back-index-add .remove",function(){
+            var name=$(this).parents(".back-index-add").attr("name");
+            if(name=="student"){
                 $("#back-index-add .radio.ui").eq(0).checkbox('enable');
                 $("#back-index-add .checkbox.ui").checkbox('enable');
             }
-            else if(BACKINDEX.type=="course"){
+            else if(name=="course"){
                 if(!$("#choose-teacher-delivery div").eq(0).hasClass("active")){
                     $("#choose-teacher-delivery div").eq(0).addClass("active teal");
                     $("#choose-teacher-delivery div").eq(2).removeClass("active teal");
@@ -44,24 +55,16 @@ BACKINDEX.init=(function(){
                 $("#add-class-choose-institution,#add-service-choose-institution").find(".item").removeClass("active");
             }
             BACKINDEX.addItem.clear();
-            $("#back-index-add").css("left","-999em").css("right","auto");
+            $(this).parents(".back-index-add").css("left","-999em").css("right","auto");
         });
     });
 })();
-BACKINDEX.checkLog=function(){
-    if($("#search-list").height()+60+$("#back-index-log").height()>$(window).height()){
-        $("#back-index-log").css("position","relative");
-    }
-    else{
-        $("#back-index-log").css("position","absolute");
-    }
-};
 BACKINDEX.addItem={};
 BACKINDEX.addItem.clear=function(){
-    $("#back-index-add .radio.ui").eq(0).checkbox('enable');
-    $("#back-index-add input[type='text']").val("");
-    $("#back-index-add textarea").val("");
-    $("#back-index-add .labelForm").each(function(){
+    $(".back-index-add .radio.ui").eq(0).checkbox('enable');
+    $(".back-index-add input[type='text']").val("");
+    $(".back-index-add textarea").val("");
+    $(".back-index-add .labelForm").each(function(){
         var length=$(this).find("ul li").length;
         if(length>1){
             $(this).find("ul li").eq(length-1).prevAll().remove();

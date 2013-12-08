@@ -11665,7 +11665,8 @@ a.ui.teal.label:hover:before {
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
 }
 
-.ui.accordion .title {
+.ui.accordion .title,
+.ui.accordion .title{
   cursor: pointer;
   margin: 0em;
   padding: 0.75em 1em;

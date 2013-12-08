@@ -1,4 +1,7 @@
 Goschool::Application.routes.draw do
+  resources :achievements
+
+
   root :to => 'settings#index'
 
   resources :comments
