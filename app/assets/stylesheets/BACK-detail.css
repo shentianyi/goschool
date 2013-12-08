@@ -49,10 +49,23 @@
     -moz-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
+.back-index-main .detail-content .content-info{
+    background:rgba(0, 0, 0, 0.04);
+    color:rgba(0, 0, 0, 0.75);
+    font-weight:bold;
+    border-bottom:1px solid rgba(0, 0, 0, 0.05);
+    font-size:14px;
+    padding: 0.7em 0.95em;
+}
 /******************** info那一块的 */
 .detail-content .info{
     padding:10px 15px 15px;
     position:relative;
+}
+.detail-content .info:after{
+    content:'';
+    display:block;
+    clear:both;
 }
 .info p{
     font-size:0px;
@@ -121,7 +134,7 @@
     box-shadow:none;
     -moz-box-shadow:none;
     -webkit-box-shadow:none;
-    margin-top:20px;
+    margin-top:10px;
 }
 .ui.accordion .item{
     position:relative;

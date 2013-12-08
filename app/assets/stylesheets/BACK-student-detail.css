@@ -1,0 +1,177 @@
+/*info*/
+.info .left p,
+.info .middle p,
+.info .right p{
+    font-size:13px;
+    word-break:break-all;
+    word-wrap:break-word;
+}
+.info .left,
+.info .middle,
+.info .right{
+    float:left;
+    margin-top:8px;
+    margin-bottom:20px;
+}
+/*left*/
+.info .left{
+    width:12%;
+    text-align:center;
+}
+.info .left .name{
+    font-size:24px;
+    color:#63A69F;
+}
+.info .left .type{
+    color:#D95C5C;
+    line-height:7px;
+}
+.info .left img{
+    position:relative;
+    left:50%;
+    margin-left:-35px;
+    margin-top:10px;
+}
+/*middle*/
+.info .middle{
+    width:255px;
+}
+.info .middle p>span:first-of-type{
+    text-align:right;
+    width:62px;
+    display:inline-block;
+    margin-right:5px;
+}
+.info .middle p>span:last-of-type{
+    color:rgba(0,0,0,0.6);
+}
+.info .middle .labels>span:first-of-type{
+    vertical-align:top;
+}
+.info .middle .labels>span:last-of-type{
+    font-size:0;
+    display:inline-block;
+    width:180px;
+}
+.info .middle .labels .label{
+    padding:2px 8px;
+    font-size:12px;
+    margin:0px 2px 1px 0px;
+}
+/*right*/
+.info .right{
+    width:270px;
+}
+.info .right p>span:first-of-type{
+    text-align:right;
+    width:81px;
+    display:inline-block;
+    margin-right:5px;
+}
+.info .right p>span:last-of-type{
+    color:rgba(0,0,0,0.6);
+}
+/*button*/
+.info .detail-student-button{
+    position:absolute;
+    right:17px;
+    bottom:27px;
+    font-size:13px;
+}
+.info .detail-student-button:nth-of-type(2){
+    right:120px;
+}
+/*accordion*/
+.accordion[name='student'] .class-and-service table th,
+.accordion[name='student'] .class-and-service table td{
+    font-size:14px;
+}
+.accordion[name='student'] .class-and-service table td .progress{
+    height:24px;
+    padding:3px;
+}
+.accordion[name='student'] .class-and-service table td .progress .bar{
+    background-color:#6ECFF5;
+}
+.accordion[name='student'] .class-and-service table td .progress.complete .bar{
+    background-color:#A1CF64;
+}
+.accordion[name='student'] .class-and-service table td.pay-lack{
+    color:#D95C5C;
+}
+/*人际*/
+.accordion[name='student'] .friendship label{
+    display:inline-block;
+    width:100px;
+    text-align:left;
+    margin-right:0px;
+}
+.accordion[name='student'] .friendship .item{
+    position:relative;
+}
+.accordion[name='student'] .friendship .item img{
+    position:relative;
+    top:50%;
+    margin-top:11px;
+    left:8px;
+}
+.accordion[name='student'] .friendship .item .content{
+    padding:13px 5px;
+    font-size:13px;
+}
+.accordion[name='student'] .friendship .item .content,
+.accordion[name='student'] .friendship .item .content .header{
+    max-width:200px;
+    word-break:break-all;
+    word-wrap:break-word;
+}
+/*咨询记录*/
+.accordion[name='student'] .consult-record .content .item{
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border:1px solid rgba(0,0,0,0.5);
+    padding:10px 8px 5px;
+    margin-bottom:38px;
+}
+.accordion[name='student'] .consult-record .content .item p{
+    font-size:13px;
+    margin:0px;
+    line-height:16px;
+}
+.accordion[name='student'] .consult-record .content .item dl dt{
+    font-size:13px;
+}
+.accordion[name='student'] .consult-record .content .item dl dd{
+    font-size:12px;
+    color:rgba(0,0,0,0.5);
+}
+.accordion[name='student'] .consult-record .content .item dl dd span:last-of-type{
+    margin-left:5px;
+}
+.accordion[name='student'] .consult-record .content .item dl dd .remove{
+    cursor:pointer;
+    margin-left:15px;
+    transition:color 0.25s ease-out;
+}
+.accordion[name='student'] .consult-record .content .item dl dd .remove:hover{
+    color:#EF3F49;
+}
+.accordion[name='student'] .consult-record .content .item .comment-block{
+    margin-top:-5px;
+}
+.accordion[name='student'] .consult-record .content .item input[type='text']{
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border:1px solid rgba(0,0,0,0.3);
+    padding:5px 3px;
+    width:350px;
+}
+.accordion[name='student'] .consult-record .content .item .button{
+    font-size:13px;
+    padding:7px 21px;
+    margin-left:8px;
+}
+
+
