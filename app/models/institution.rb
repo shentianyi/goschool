@@ -9,7 +9,7 @@ class Institution < ActiveRecord::Base
   private
   def validate_save
     errors.add(:name,'机构名称不可为空') if self.name.blank?
-    errors.add(:name,'机构名称不可重复') if self.class.where(:name=>self.name).first if new_record?
+    errors.add(:name,'机构名称不可重复') if self.class.where(name:self.name).first if new_record?
     errors.add(:name,'机构名称不可重复') if self.class.where('id<>? and name=?',self.id,self.name).first unless new_record?
   end
 end

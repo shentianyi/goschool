@@ -17,9 +17,13 @@ gem 'redis'
 gem 'resque'
 gem 'redis-namespace'
 
-# gem fo generate pdf
+# gem for generate pdf
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
+
+# gem for store file in aliyun oss 
+gem 'carrierwave-aliyun'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
