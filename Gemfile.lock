@@ -31,6 +31,10 @@ GEM
     acts_as_tenant (0.3.1)
       rails (>= 3.1)
       request_store (>= 1.0.5)
+    aliyun-oss (0.7.0.1349333720)
+      builder
+      mime-types
+      xml-simple
     arel (3.0.3)
     authlogic (3.3.0)
       activerecord (>= 3.2)
@@ -134,12 +138,14 @@ GEM
     wicked_pdf (0.9.7)
       rails
     wkhtmltopdf-binary (0.9.9.1)
+    xml-simple (1.1.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   acts_as_tenant
+  aliyun-oss
   authlogic
   cancan
   chinese_pinyin
