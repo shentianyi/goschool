@@ -42,6 +42,11 @@ class SchedulesController < ApplicationController
     render :json=>@msg
   end
 
+  def send_email
+    EmailService.send_schedule_email(params[:type],params[:institution_id])
+    render :json=>1
+  end
+
   private
 
   def get_schedule

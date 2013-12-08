@@ -1,0 +1,13 @@
+<div>
+	<%schedules.each_with_index do |schedule,i|%>
+	<div>
+		<span><%= i+1%></span>
+		<span><%= schedule.parent_name%></span>
+		<span><%= schedule.name%></span>
+		<span><%= schedule.start_time%></span>
+		<span><%= schedule.end_time%></span>
+		<span><% schedule.teachers.each do |teacher|%> <span><%= teacher.name%></span> <%end%> </span>
+	</div>
+	<hr />
+	<%end%>
+</div>
