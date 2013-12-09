@@ -5,7 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  role_id: 100
+  role_id: 400
   logininfo: one
 two:
   role_id: 200
@@ -18,6 +18,11 @@ three:
 four:
   role_id: 100
   logininfo: two
+
+four-a:
+  role_id: 400
+  logininfo: two
+  
 five:
   role_id: 200
   logininfo: two

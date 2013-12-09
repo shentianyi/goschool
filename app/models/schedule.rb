@@ -19,6 +19,14 @@ class Schedule < ActiveRecord::Base
   def self.count_by_institution_id institution_id
    base_query(institution_id).count
   end  
+   
+   def self.by_teacher_id institution_id,teacher_id
+     base_query(institution_id).joins(:teachers).where(teacher_courses:{user_id:teacher_id}).all
+   end
+   
+   def self.count_by_teacher_id institution_id,teacher_id
+     base_query(institution_id).joins(:teachers).where(teacher_courses:{user_id:teacher_id}).count
+   end
   
   def self.between_date params
     base_query(params[:institution_id]).where(start_time:params[:start_date]..params[:end_date]).all
@@ -46,7 +54,11 @@ class Schedule < ActiveRecord::Base
     end
   end
   
-  def self.base_query institution_id
-     joins(:sub_course).where(sub_courses:{institution_id:institution_id,status:CourseStatus::UNLOCK}).select('*,sub_courses.*')
+  def self.base_query institution_id=nil
+    if institution_id
+     return  joins(:sub_course).where(sub_courses:{institution_id:institution_id,status:CourseStatus::UNLOCK}).select('*,sub_courses.*')
+     else
+        return joins(:sub_course).where({status:CourseStatus::UNLOCK}).select('*,sub_courses.*')
+     end
   end
 end

@@ -1,10 +1,11 @@
 #encoding: utf-8
 class CourseScheduleService
 
-  attr_accessor :type,:institution_id,:users
+  attr_accessor :type,:institution_id,:user_id
   def initialize params={}
-    self.type=params[:type].to_i
-    self.institution_id=params[:institution_id]
+    self.type=params[:type]
+    self.institution_id=params[:institution_id] if params[:institution_id]
+    self.user_id=params[:user_id] if params[:user_id]
   end
 
   def generate_schedule
@@ -12,7 +13,7 @@ class CourseScheduleService
     when ScheduleType::EMPLOYEE
       generate_employee_schedule_by_institution(self.institution_id)
     when ScheduleType::TEACHER
-      nil
+      generate_teacher_schedule(self.institution_id,self.user_id)
     when ScheduleType::STUDENT
       nil
     else
@@ -24,13 +25,13 @@ class CourseScheduleService
 
   def generate_employee_schedule_by_institution institution_id
     if Schedule.count_by_institution_id(institution_id)>0
-      self.users=User.get_employees(institution_id)
       return Schedule.by_insititution_id(institution_id)
     end
   end
-  
-  def user_emails
-     self.users.collect{|user| user.email}
-  end
 
+  def generate_teacher_schedule institution_id,teacher_id
+    if Schedule.count_by_teacher_id(institution_id,teacher_id)>0
+      Schedule.by_teacher_id(institution_id,teacher_id)
+    end
+  end
 end
