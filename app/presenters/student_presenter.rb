@@ -14,6 +14,12 @@ class StudentPresenter<Presenter
     StudentCourse.find_by_student_id(self.id)
   end
 
+  def age
+    birthday = self.birthday
+    now = Time.now
+    
+  end
+
   def potential_relation
     Recommendation.new.get_potential_relation(self.tenant_id,self.id)
   end
@@ -23,6 +29,13 @@ class StudentPresenter<Presenter
   end
 
   def last_consulting
-    Consultation.find_by_student_id(self.id,:order=>"created_at")
+    Consultation.find_by_student_id(self.id,:order=>"created_at").first
+  end
+
+  def referrer
+    if self.referrer_id
+      return Logininfo.find_by_id(self.referrer_id).student
+    end
+    return nil
   end
 end

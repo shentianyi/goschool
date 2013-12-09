@@ -14,6 +14,7 @@ class Student < ActiveRecord::Base
   has_many :consultations, :dependent=>:destroy
   has_many :student_courses
   has_many :courses,:through=>:student_courses
+  has_many :achievements, :dependent=>:destroy
   belongs_to :referrer, :foreign_key => :referrer_id, :class_name => "Logininfo"
   
   after_destroy :delete_related

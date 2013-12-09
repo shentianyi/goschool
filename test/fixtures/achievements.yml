@@ -3,7 +3,9 @@
 one:
   type: 1
   achievementstring: MyString
+  student: one
 
 two:
   type: 1
   achievementstring: MyString
+  studnet: two
