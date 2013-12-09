@@ -20,7 +20,7 @@ Goschool::Application.routes.draw do
    collection do
     get :dates
     get :courses
-    post :send_email
+    get :send_email
    end
   end
   resources :students do

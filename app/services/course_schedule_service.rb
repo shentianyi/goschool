@@ -1,7 +1,7 @@
 #encoding: utf-8
 class CourseScheduleService
 
-  attr_accessor :type,:institution_id
+  attr_accessor :type,:institution_id,:users
   def initialize params={}
     self.type=params[:type].to_i
     self.institution_id=params[:institution_id]
@@ -24,9 +24,13 @@ class CourseScheduleService
 
   def generate_employee_schedule_by_institution institution_id
     if Schedule.count_by_institution_id(institution_id)>0
-      # emails=User.get_employees(institution_id).collect{|user| user.email}
+      self.users=User.get_employees(institution_id)
       return Schedule.by_insititution_id(institution_id)
     end
+  end
+  
+  def user_emails
+     self.users.collect{|user| user.email}
   end
 
 end
