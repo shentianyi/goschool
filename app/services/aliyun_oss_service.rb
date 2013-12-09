@@ -3,6 +3,7 @@ require 'aliyun/oss'
 
 class AliyunOssService
   SCHEDULE_BUCKET='goschool-schedule'
+  ATTACH_BUCKET='goschool-attach'
   EMAIL_SCHEDULE_LINK_EXPIRES=Time.mktime(2555, 12, 12).to_i
   def self.store_schedule name,data
      Aliyun::OSS::OSSObject.store(name,data,SCHEDULE_BUCKET)

@@ -25,21 +25,21 @@ class CourseScheduleService
   end
 
   def generate_employee_schedule institution_id
-    if Schedule.count_by_institution_id(institution_id)>0
-      return Schedule.by_insititution_id(institution_id)
+    if Schedule.by_institution_id(institution_id).count>0
+      return Schedule.by_insititution_id(institution_id).all
     end
   end
 
   def generate_teacher_schedule institution_id,teacher_id
-    if Schedule.count_by_teacher_id(institution_id,teacher_id)>0
-      return Schedule.by_teacher_id(institution_id,teacher_id)
+    if Schedule.by_teacher_id(institution_id,teacher_id).count>0
+      return Schedule.by_teacher_id(institution_id,teacher_id).all
     end
   end
 
   def generate_student_schedule institution_id,course_id
     p={institution_id:institution_id,id:course_id,type:'Course'}
-    if Schedule.count_by_course_id(p)>0
-      return Schedule.by_course_id(p)
+    if Schedule.by_course_id(p).count>0
+      return Schedule.by_course_id(p).all
     end
   end
   
