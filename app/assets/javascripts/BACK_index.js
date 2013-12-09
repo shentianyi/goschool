@@ -27,8 +27,8 @@ BACKINDEX.init=(function(){
         $("body").on("click",".back-index-add .remove",function(){
             var name=$(this).parents(".back-index-add").attr("name");
             if(name=="student"){
-                $("#back-index-add .radio.ui").eq(0).checkbox('enable');
-                $("#back-index-add .checkbox.ui").checkbox('enable');
+                $(".back-index-add[name='student'] .radio.ui").eq(0).checkbox('enable');
+                $(".back-index-add[name='student'] .checkbox.ui").checkbox('enable');
             }
             else if(name=="course"){
                 if(!$("#choose-teacher-delivery div").eq(0).hasClass("active")){

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="stylesheets/BACK-student-detail.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/BACK-detail.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/jquery-datepicker.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/BACK-student-index.css" type="text/css" />
 </head>
 <body>
 
@@ -22,7 +23,7 @@
             <a>老师信息</a>
         </li>
         <li>
-            <a class="active">课程信息</a>
+            <a>课程信息</a>
         </li>
     </ul>
     <ul class="second-ul" id="main-navigator-bottom">
@@ -81,58 +82,211 @@
         </div>
     </div>
     <div class="detail-content" id="detail-content">
+        <div class="content-info">内容主页</div>
         <div class="info">
-            <p class="detail-name">托福秋季班</p>
-            <p class='detail-desc'>托福秋季班是为一月份的托福进行最后的冲刺准备，旨在提高学生的各项能力</p>
-            <p class="detail-time"><span>授课时间:</span><span>2013年10月10日 - 2013年12月12日</span></p>
-            <p class="detail-count"><span>课时数:</span><span>32课时</span></p>
-            <p class="detail-people"><span>预计人数:</span><span>108</span></p>
-            <p class="detail-institution"><span>所属机构:</span><span>闵行区</span></p>
-            <p class="detail-code"><span>课程代号:</span><span>201101</span></p>
-            <p class="detail-labels"><span>标签:</span>
+            <div class="left">
+                <img class="circular ui image" src="images/portrait/4.jpg"/>
+                <p class="name">王子骁</p>
+                <P class="type">潜在客户</P>
+            </div>
+            <div class="middle">
+                <p><span>性别:</span><span>男</span></p>
+                <p><span>出生年月:</span><span>1990-08-21</span></p>
+                <p><span>联系电话:</span><span>13918502286</span></p>
+                <p><span>联系邮件:</span><span>superxiao21@sina.com</span></p>
+                <p><span>居住地址:</span><span>闵行区漕宝路</span></p>
+                <p class="labels"><span>标签:</span>
                 <span>
                    <a class="ui blue label">托福</a>
                    <a class="ui blue label">雅思</a>
                 </span>
-            </p>
-            <a class="ui red button detail-button">删除此课程</a>
-            <a class="ui teal button detail-button" id="course-detail-edit">编辑课程信息</a>
+                </p>
+
+            </div>
+            <div class="right">
+                <p><span>就读学校：</span><span>七宝中学</span></p>
+                <p><span>毕业年限：</span><span>2009</span></p>
+                <p><span>监护人：</span><span>王先生</span></p>
+                <p><span>监护人电话：</span><span>13918502286</span></p>
+                <p><span>推荐人：</span><span>王子骁</span></p>
+            </div>
+            <a class="ui red button detail-student-button">删除学生</a>
+            <a class="ui teal button detail-student-button" id="add-item" type="student">编辑学生信息</a>
         </div>
         <div class="ui fluid accordion" id="accordion" name="student">
             <!--partial-->
-            <div class="item student" id="student">
+            <div class="item" >
                 <div class="active title">
-                    <i class="dropdown icon"></i>已报班学生
+                    <i class="dropdown icon"></i>课程及服务
                 </div>
-                <div class="active content">
-
+                <div class="active content class-and-service">
+                    <table class="ui celled table segment">
+                        <thead>
+                        <tr>
+                            <th class="wide three">课程/服务</th>
+                            <th class="wide one">课时</th>
+                            <th class="wide four">上课时间</th>
+                            <th class="wide three">支付情况</th>
+                            <th class="wide five">完成进度</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr id="id">
+                            <td>托福秋季班</td>
+                            <td>96</td>
+                            <td>2013.10.11-2013.12.13</td>
+                            <td class="pay-lack">没有支付</td>
+                            <td>
+                                <div class="ui striped progress">
+                                    <div class="bar" style="width: 30%;"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr id="id_another_0">
+                            <td>托福秋季班</td>
+                            <td>96</td>
+                            <td>2013.9.11-2013.10.13</td>
+                            <td>已经支付</td>
+                            <td>
+                                <div class="ui striped progress">
+                                    <div class="bar" style="width: 90%;"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr id="id_another">
+                            <td>托福夏季班</td>
+                            <td>96</td>
+                            <td>2013.7.11-2013.8.13</td>
+                            <td >已经支付</td>
+                            <td>
+                                <div class="ui striped progress complete">
+                                    <div class="bar" style="width: 100%;"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="ui mini button" id="course-detail-new-student" for="detail-add" type="student"><i class="browser icon"></i> 报班新生</div>
             </div>
             <!--partial-->
 
             <!--partial-->
-            <div class="item teacher" id="teacher">
+            <div class="item" >
                 <div class="title">
-                    <i class="dropdown icon"></i>授课老师
+                    <i class="dropdown icon"></i>在校成绩
                 </div>
                 <div class="content">
 
                 </div>
-                <div class="ui mini button" for="detail-add" type="teacher"><i class="add icon"></i> 添加老师</div>
+
             </div>
             <!--partial-->
 
             <!--template-->
-            <div class="item recommend" id="recommend">
+            <div class="item">
                 <div class="title">
-                    <i class="dropdown icon"></i>推荐报班
+                    <i class="dropdown icon"></i>所获成就
                 </div>
                 <div class="content">
 
                 </div>
             </div>
             <!--template-->
+
+            <!--partial-->
+            <div class="item friendship" >
+                <div class="title">
+                    <i class="dropdown icon"></i>人际
+                </div>
+                <div class="content">
+                   <label>推荐人：</label>
+                    <div class="ui horizontal list">
+                        <div class="item">
+                            <img class="ui avatar image" src="images/portrait/1.jpg">
+                            <div class="content">
+                                <div class="header">王子骁</div>
+                                上海市位育中学高三2班
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                   <label>可能认识：</label>
+                    <div class="ui horizontal list">
+                        <div class="item">
+                            <img class="ui avatar image" src="images/portrait/5.jpg">
+                            <div class="content">
+                                <div class="header">王子骁</div>
+                                上海市位育中学高三2班
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img class="ui avatar image" src="images/portrait/4.jpg">
+                            <div class="content">
+                                <div class="header">王子骁</div>
+                                上海市位育中学高三2班
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img class="ui avatar image" src="images/portrait/8.jpg">
+                            <div class="content">
+                                <div class="header">王子骁</div>
+                                上海市位育中学高三2班
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--partial-->
+
+            <!--partial-->
+            <div class="item consult-record" >
+                <div class="title">
+                    <i class="dropdown icon"></i>咨询记录
+                </div>
+                <div class="content">
+                    <div class="item">
+                        <p>2013-10-13 15:00 李女士</p>
+                        <p>询问了一些课程开设的情况，希望下周一联系她</p>
+                        <p>接线人:May</p>
+                        <dl>
+                            <dt>评论：</dt>
+                            <dd><span>重要客户，请抓紧联系</span><span>2013-10-15</span><i class="icon remove"></i></dd>
+                        </dl>
+                        <div class="comment-block">
+                            <input type="text"/>
+                            <div class="ui button tiny">评论</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <p>2013-10-13 15:00 李女士</p>
+                        <p>询问了一些课程开设的情况，希望下周一联系她</p>
+                        <p>接线人:May</p>
+                        <dl>
+                            <dt>评论：</dt>
+                            <dd><span>重要客户，请抓紧联系</span><span>2013-10-15</span><i class="icon remove"></i></dd>
+                        </dl>
+                        <div class="comment-block">
+                            <input type="text"/>
+                            <div class="ui button tiny">评论</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <p>2013-10-13 15:00 李女士</p>
+                        <p>询问了一些课程开设的情况，希望下周一联系她</p>
+                        <p>接线人:May</p>
+                        <dl>
+                            <dt>评论：</dt>
+                            <dd><span>重要客户，请抓紧联系</span><span>2013-10-15</span><i class="icon remove"></i></dd>
+                        </dl>
+                        <div class="comment-block">
+                            <input type="text"/>
+                            <div class="ui button tiny">评论</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui mini button" for="detail-add" type="consult-record"><i class="add icon"></i> 添加咨询记录</div>
+            </div>
+            <!--partial-->
 
         </div>
     </div>
@@ -149,6 +303,99 @@
         <li>2013-10-13 12:00 开始课程 21</li>
     </ul>
 </footer>
+
+
+
+<!--new partial-->
+<!--新建咨询记录-->
+<section class="detail-add" type="consult-record">
+    <div class="inner">
+        <i class="remove icon detail-add-close"></i>
+        <p>添加咨询记录</p>
+        <div class="ui button teal ok" for="teacher">完成添加</div>
+    </div>
+</section>
+
+
+<!--编辑学生信息-->
+<section class="back-index-add"  name="student">
+    <div class="inner">
+        <i class="remove icon"></i>
+        <p>新建学生</p>
+        <div class="left-part">
+            <div class="portrait">
+                <img class="ui circular image " src="images/portrait/1.jpg">
+            </div>
+            <div class="ui left icon input">
+                <input placeholder="姓名..." type="text">
+                <i class="user icon"></i>
+            </div>
+            <div class="sex stop">
+                <div class="ui radio checkbox">
+                    <input name="sex" checked="checked" type="radio">
+                    <label>男</label>
+                </div>
+                <div class="ui radio checkbox">
+                    <input name="sex" type="radio">
+                    <label>女</label>
+                </div>
+            </div>
+            <div class="ui left icon input calendar">
+                <input placeholder="出生年月..." type="text" readonly id="born-date">
+                <i class="calendar icon"></i>
+            </div>
+            <div class="ui left icon input">
+                <input placeholder="就读学校..." type="text">
+                <i class="building icon"></i>
+            </div>
+            <div class="ui left icon input calendar">
+                <input placeholder="毕业年限..." type="text" readonly id="graduation-date">
+                <i class="empty bookmark icon"></i>
+            </div>
+        </div>
+        <div class="right-part">
+            <div class="ui left icon input">
+                <input placeholder="邮件地址..." type="text">
+                <i class="mail outline icon"></i>
+            </div>
+            <div class="ui left icon input">
+                <input placeholder="联系电话..." type="text">
+                <i class="phone icon"></i>
+            </div>
+            <div class="ui left icon input">
+                <input placeholder="联系地址..." type="text">
+                <i class="home icon"></i>
+            </div>
+            <div class="ui left icon input">
+                <input placeholder="监护人..." type="text">
+                <i class="male icon"></i>
+            </div>
+            <div class="ui left icon input">
+                <input placeholder="监护人电话..." type="text">
+                <i class="mobile icon"></i>
+            </div>
+            <div class="ui left icon input specialInput labelForm autoComplete">
+                <ul>
+                    <li><input type='text' placeholder="标签..." id="autoC2"/></li>
+                </ul>
+                <i class="tag icon stop"></i>
+            </div>
+            <div class="ui left icon input autoComplete">
+                <input placeholder="推荐人..." id="autoC3" type="text">
+                <i class="smile icon"></i>
+            </div>
+            <div class="ui red button">
+                添加
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
 
 
 <div class="message-box" id="MessageBox">
@@ -168,3 +415,4 @@
 </html>
 
 
+<!--需要 student-index-->

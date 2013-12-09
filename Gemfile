@@ -22,8 +22,8 @@ gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 
 # gem for store file in aliyun oss 
-gem 'carrierwave-aliyun'
-
+# gem 'carrierwave-aliyun'
+gem 'aliyun-oss'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
