@@ -6,9 +6,10 @@ class CreateHomeworks < ActiveRecord::Migration
       t.string :content
       t.references :teacher_course
       t.integer :unmark_number
-
+      t.references :tenant
       t.timestamps
     end
     add_index :homeworks, :teacher_course_id
+    add_index :homeworks, :tenant_id
   end
 end

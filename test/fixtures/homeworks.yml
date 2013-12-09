@@ -4,12 +4,14 @@ one:
   title: MyString
   deadline: 2013-12-09 16:42:58
   content: MyString
-  teacher_course: 
-  unmark_number: 1
+  teacher_course: one
+  unmark_number: 12
+  tenant: one
 
 two:
   title: MyString
   deadline: 2013-12-09 16:42:58
   content: MyString
-  teacher_course: 
-  unmark_number: 1
+  teacher_course: two
+  unmark_number: 13
+  tenant: one

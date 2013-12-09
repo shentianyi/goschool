@@ -7,6 +7,7 @@ class SubCourse < ActiveRecord::Base
   has_many :teacher_courses,:dependent=>:destroy
   has_many :schedules,:dependent=>:destroy
   has_many :teachers,:through=>:teacher_courses,:class_name=>'User'
+  has_many :homeworks,:through=>:teacher_courses
   attr_accessible :name, :parent_name,:course_id,:is_default,:institution_id
   
   acts_as_tenant(:tenant)
@@ -21,6 +22,7 @@ class SubCourse < ActiveRecord::Base
       self.teacher_courses<<TeacherCourse.new(:user_id=>teacher[:teacher_id])
     end
   end
+   
   private
 
   def del_default_sub_course

@@ -62,7 +62,12 @@ Goschool::Application.routes.draw do
   resources :institutions
   mount Resque::Server.new, :at=>"/admin/resque"
 
-  resources :users
+  resources :users do
+    collection do
+      get :schedules
+      get :teacher
+    end
+  end
 
   resources :logininfos
   resource :subscriptions

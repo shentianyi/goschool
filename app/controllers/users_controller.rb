@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.new
     render :json=>"new"
   end
-  
+
   #create user,loginifo
   def create
     # create user and logininfo
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
         @logininfo = Logininfo.new(:email=>params[:user][:email],:password=>current_tenant.setting.default_pwd,:password_confirmation=>current_tenant.setting.default_pwd)
         @logininfo.tenant = current_tenant
         @logininfo.status = UserStatus::ACTIVE
-        
+
         @roles = params[:logininfo_roles]
         @roles.each {|role|
           @new_role = LogininfoRole.new(:role_id=>role)
@@ -36,9 +36,9 @@ class UsersController < ApplicationController
         msg.content = @user
       end
     rescue ActiveRecord::RecordInvalid => invalid
-      msg.result = false
-      msg.content = invalid.record.errors
-    end   
+    msg.result = false
+    msg.content = invalid.record.errors
+    end
     render :json=>msg
   end
 
@@ -53,8 +53,8 @@ class UsersController < ApplicationController
     elsif @logininfo.id == current_user.id
       msg.content = "不能删除自己"
     else
-      @user.destroy
-      msg.result = true
+    @user.destroy
+    msg.result = true
     end
     render :json=>msg
   end
@@ -71,16 +71,16 @@ class UsersController < ApplicationController
     @logininfo = @user.logininfo
     begin
       ActiveRecord::Base.transaction do
-        #update user
+      #update user
         if params[:user]
           if @user.update_attributes(params[:user])
             if params[:user][:email]
               @logininfo.update_attributes!(:email=>params[:user][:email])
             end
-            msg.result = true
+          msg.result = true
           end
         end
-        
+
         #update role
         if params[:logininfo_roles]
           @logininfo.logininfo_roles.destroy_all
@@ -89,14 +89,29 @@ class UsersController < ApplicationController
             @new_role = LogininfoRole.new(:role_id=>role)
             @logininfo.logininfo_roles<<@new_role
           }
-          @logininfo.save
-          msg.result = true
+        @logininfo.save
+        msg.result = true
         end
       end
     rescue ActiveRecord::RecordInvalid=>invalid
-      msg.result = false
-      msg.content = invalid.record.errors
+    msg.result = false
+    msg.content = invalid.record.errors
     end
-      render :json=>msg
+    render :json=>msg
+  end
+
+ # teacher index
+  def teacher
+     # teacher=current_user.user -- at last use this 
+     teacher=User.find(params[:id]) # for test
+     @courses=TeacherCoursePresenter.init_presenters(teacher.sub_courses.all,teacher.id)
+     render :json=>@courses.map{|course| course.unmark_number }# for test
+  end
+
+  def schedules
+    @msg.result=true
+    params[:teacher_id]=session[:teacher_id] || params[:teacher_id]
+    @msg.object=SchedulePresenter.init_json_presenters( Schedule.by_teacher_date(params).all)
+    render :json=>@msg
   end
 end
