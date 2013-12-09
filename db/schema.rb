@@ -10,9 +10,9 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended to check this file into your version control system.
-
+ 
 ActiveRecord::Schema.define(:version => 20131209074324) do
-
+ 
   create_table "achievements", :force => true do |t|
     t.integer  "type"
     t.string   "achievementstring"
@@ -22,6 +22,20 @@ ActiveRecord::Schema.define(:version => 20131209074324) do
   end
 
   add_index "achievements", ["student_id"], :name => "index_achievements_on_student_id"
+
+  create_table "attachments", :force => true do |t|
+    t.string   "name"
+    t.string   "path"
+    t.string   "size"
+    t.string   "type"
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "attachments", ["attachable_id"], :name => "index_attachments_on_attachable_id"
+  add_index "attachments", ["attachable_type"], :name => "index_attachments_on_attachable_type"
 
   create_table "comments", :force => true do |t|
     t.integer  "post_id"

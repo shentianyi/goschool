@@ -7,8 +7,14 @@ Goschool::Application.routes.draw do
 
   root :to => 'settings#index'
 
-  resources :comments
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
+
+  controller :files do
+    post 'files/attach'=>:attach
+    get 'files/download'=>:download
+  end
 
   resources :student_courses do
    collection do

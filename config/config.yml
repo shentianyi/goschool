@@ -1,0 +1,5 @@
+#coding:utf-8
+conf:
+ :attach_tmp_path: 'uploadfiles/attach/tmp'
+ :attach_path: 'uploadfiles/attach/uped' 
+ :attach_max_size: 20971520
