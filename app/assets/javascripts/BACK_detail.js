@@ -45,6 +45,7 @@
     $("body").on("click",".detail-add-close",function(){
         var $parent=$(this).parent();
         $parent.find("input[type='text']").val("");
+        $parent.find("textarea").val("");
         $parent.find("input[type='checkbox']").prop("checked",false);
         $parent.find(".positive").removeClass("positive");
 //        $parent.find("tbody").empty();

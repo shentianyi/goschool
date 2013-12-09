@@ -246,12 +246,108 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
                 MessageBox("请输入内容","top","warning");
             }
     });
+    $(window).resize(function(){
+        STUDENTDETAIL.check++;
+        window.setTimeout(function(){
+            if(STUDENTDETAIL.check==1){
+                var width=$("#accordion").width()-40;
+                $("#grade canvas").attr("height",400).attr("width",width);
+                var canvas = $('#myChart')[0];
+                canvas.width=canvas.width;
+                canvas.height=canvas.height;
+                var data = {
+                    labels : STUDENTDETAIL.labels,
+                    datasets : [
+                        {
+                            fillColor : "rgba(151,187,205,0.5)",
+                            strokeColor : "rgba(151,187,205,1)",
+                            pointColor : "rgba(151,187,205,1)",
+                            pointStrokeColor : "#fff",
+                            data :STUDENTDETAIL.data
+                        }
+                    ]
+                }
+                var ctx = $("#myChart").get(0).getContext("2d");
+                var myNewChart = new Chart(ctx);
+                new Chart(ctx).Line(data,STUDENTDETAIL.option);
+                STUDENTDETAIL.check--;
+            }
+            else{
+                STUDENTDETAIL.check--;
+            }
+        },600);
+    });
+    //添加咨询记录验证
+    $('.detail-add[type="consult-record"] .form').form({
+        time: {
+                identifier:'time',
+                rules: [
+                    {
+                        type   : 'empty',
+                        prompt : '请选择时间'
+                    }
+                ]
+            },
+        customer: {
+                identifier  : 'customer',
+                rules: [
+                    {
+                        type   : 'empty',
+                        prompt : '请填写咨询人姓名'
+                    }
+                ]
+            },
+        content: {
+                identifier : 'content',
+                rules: [
+                    {
+                        type   : 'empty',
+                        prompt : '请填写咨询内容'
+                    }
+                ]
+            },
+        service:{
+            identifier : 'service',
+            rules: [
+                {
+                    type   : 'empty',
+                    prompt : '请填写接线人姓名'
+                }
+            ]
+        }
+    },{
+        inline : true
+    });
+    $("#consult-record-time").datepicker({
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        changeMonth: true,
+        changeYear: true,
+        dateFormat:'yy-mm-dd',
+        onOpen: function( selectedDate ) {
+            $( "#consult-record-time" ).datepicker( "option", "maxDate", new Date() );
+        }
+    });
+    $("body").on("click","div[for='detail-add'][type='consult-record']",function(){
+       if($(".detail-add[type='consult-record'] select").attr("state")=="unload"){
+           for(var i=0;i<=23;i++){
+               var hour=i<10?"0"+i+":00":i+":00";
+               $(".detail-add[type='consult-record'] select").append($("<option />").text(hour))
+           }
+           $(".detail-add[type='consult-record'] select").attr("state","loaded");
+       }
+    }).on("click",".detail-add-close",function(){
+         $(".detail-add select").find("option").eq(0).prop("selected",true);
+         $(".detail-add .field").removeClass("error");
+         $(".prompt.label").remove()
+    });
     $(document).ready(function(){
         STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
     });
 })();
 STUDENTDETAIL.labels;
 STUDENTDETAIL.data;
+STUDENTDETAIL.check=0;
 STUDENTDETAIL.option={
     bezierCurve:false
 }
@@ -263,9 +359,10 @@ STUDENTDETAIL.generateCanvas=function(labels,scores){
     }
     else{
         if($("#myChart").length==0){
-            var width=$("#grade").width();
-            $("#grade").append($("<canvas />").attr("id","myChart").attr("height",400).attr("width",width))
+            $("#grade").append($("<canvas />").attr("id","myChart"))
         }
+        var width=$("#accordion").width()-40;
+        $("#grade canvas").attr("height",400).attr("width",width);
         var canvas = $('#myChart')[0];
         canvas.width=canvas.width;
         canvas.height=canvas.height;
