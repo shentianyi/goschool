@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  score: 1.5
+  content: MyString
+  improved: false
+  marked: false
+  marked_time: 2013-12-09 20:07:58
+  submited_time: 2013-12-09 20:07:58
+  student: 
+  homework: 
+
+two:
+  score: 1.5
+  content: MyString
+  improved: false
+  marked: false
+  marked_time: 2013-12-09 20:07:58
+  submited_time: 2013-12-09 20:07:58
+  student: 
+  homework: 

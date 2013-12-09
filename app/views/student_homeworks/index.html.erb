@@ -1,0 +1,37 @@
+<h1>Listing student_homeworks</h1>
+
+<table>
+  <tr>
+    <th>Score</th>
+    <th>Content</th>
+    <th>Improved</th>
+    <th>Marked</th>
+    <th>Marked time</th>
+    <th>Submited time</th>
+    <th>Student</th>
+    <th>Homework</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @student_homeworks.each do |student_homework| %>
+  <tr>
+    <td><%= student_homework.score %></td>
+    <td><%= student_homework.content %></td>
+    <td><%= student_homework.improved %></td>
+    <td><%= student_homework.marked %></td>
+    <td><%= student_homework.marked_time %></td>
+    <td><%= student_homework.submited_time %></td>
+    <td><%= student_homework.student %></td>
+    <td><%= student_homework.homework %></td>
+    <td><%= link_to 'Show', student_homework %></td>
+    <td><%= link_to 'Edit', edit_student_homework_path(student_homework) %></td>
+    <td><%= link_to 'Destroy', student_homework, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Student homework', new_student_homework_path %>
