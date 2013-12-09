@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Score:</b>
+  <%= @student_homework.score %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @student_homework.content %>
+</p>
+
+<p>
+  <b>Improved:</b>
+  <%= @student_homework.improved %>
+</p>
+
+<p>
+  <b>Marked:</b>
+  <%= @student_homework.marked %>
+</p>
+
+<p>
+  <b>Marked time:</b>
+  <%= @student_homework.marked_time %>
+</p>
+
+<p>
+  <b>Submited time:</b>
+  <%= @student_homework.submited_time %>
+</p>
+
+<p>
+  <b>Student:</b>
+  <%= @student_homework.student %>
+</p>
+
+<p>
+  <b>Homework:</b>
+  <%= @student_homework.homework %>
+</p>
+
+
+<%= link_to 'Edit', edit_student_homework_path(@student_homework) %> |
+<%= link_to 'Back', student_homeworks_path %>

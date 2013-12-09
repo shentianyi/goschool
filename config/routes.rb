@@ -1,4 +1,7 @@
 Goschool::Application.routes.draw do
+  resources :student_homeworks
+
+
   resources :homeworks
 
 
