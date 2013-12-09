@@ -1,5 +1,15 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <b>Course:</b>
+  <%= @post.course.name%> <br />
+  <b>Content:</b>
+  <%= @post.content%>  <br />
+  <b>Poster:</b>
+  <%= @post.logininfo.email%>  <br />
+  <b>PostType:</b>
+  <%= @post.posttype.value%>  <br />
+</p>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>

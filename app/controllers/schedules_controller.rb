@@ -1,6 +1,6 @@
 #encoding: utf-8
 class SchedulesController < ApplicationController
-  before_filter :init_message ,:only=>[:show,:create,:update,:destroy,:dates,:courses]
+  before_filter :init_message ,:only=>[:show,:create,:update,:destroy,:dates,:courses,:teachers]
   before_filter :get_schedule,:only=>[:update,:destroy]
   before_filter :render_nil_msg , :only=>[:update,:destroy]
   def show
@@ -32,18 +32,25 @@ class SchedulesController < ApplicationController
 
   def dates
     @msg.result=true
-    @msg.object=SchedulePresenter.init_json_presenters( Schedule.between_date(params))
+    @msg.object=SchedulePresenter.init_json_presenters( Schedule.between_date(params).all)
+    render :json=>@msg
+  end
+
+  def teachers
+    @msg.result=true
+    params[:teacher_id]=session[:teacher_id] || params[:teacher_id]
+    @msg.object=SchedulePresenter.init_json_presenters( Schedule.by_teacher_date(params).all)
     render :json=>@msg
   end
 
   def courses
     @msg.result=true
-    @msg.object=SchedulePresenter.init_json_presenters( Schedule.by_course_id(params))
+    @msg.object=SchedulePresenter.init_json_presenters( Schedule.by_course_id(params).all)
     render :json=>@msg
   end
 
   def send_email
-    EmailService.send_schedule_email(params[:type],params[:institution_id])
+    EmailService.send_schedule_email(params[:type].to_i,params[:institution_id])
     render :json=>1
   end
 

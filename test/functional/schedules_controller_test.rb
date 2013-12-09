@@ -37,6 +37,13 @@ class SchedulesControllerTest < ActionController::TestCase
       # assert_response :success
       # puts response.body
   # end 
+  
+    # test 'should get schedules by date and teacher' do
+      # get :teachers,{start_date:'2013-11-26',end_date:'2013-11-30',institution_id:institutions(:one).id}
+      # assert_response :success
+      # puts response.body
+  # end 
+  
 #  
   # test 'should get schedules by course or sub_course' do
       # # get :courses,{type:'Course',id:courses(:one).id}
@@ -49,7 +56,9 @@ class SchedulesControllerTest < ActionController::TestCase
   # end
 #   
    test 'should send schedules' do
-      post :send_email,{type:ScheduleType::EMPLOYEE,institution_id:institutions(:one).id}
+      # post :send_email,{type:ScheduleType::EMPLOYEE,institution_id:institutions(:one).id}
+       # post :send_email,{type:ScheduleType::TEACHER,institution_id:institutions(:one).id}
+            post :send_email,{type:ScheduleType::STUDENT,institution_id:institutions(:one).id}
       assert_response :success
       puts response.body
   end 

@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
   belongs_to :logininfo
   belongs_to :posttype
   belongs_to :tenant
+  has_many :attachments, :as=>:attachable
   has_many :comments, :dependent=>:destroy
   
   validate :validate_save

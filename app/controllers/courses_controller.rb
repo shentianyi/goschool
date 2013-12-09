@@ -74,11 +74,11 @@ class CoursesController < ApplicationController
   private
 
   def teachers
-    @teachers=TeacherCoursePresenter.init_presenters(@course.course_teachers)
+    @teachers=CourseTeacherPresenter.init_presenters(@course.course_teachers)
   end
   
   def students
-    @teachers=TeacherCoursePresenter.init_presenters(@course.course_students)
+    @teachers=CourseStudentPresenter.init_presenters(@course.course_students)
   end
 
   def get_course

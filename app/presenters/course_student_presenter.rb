@@ -1,5 +1,5 @@
 #encoding: utf-8
-class StudentCoursePresenter<Presenter
+class CourseStudentPresenter<Presenter
   def_delegators :@student,:name,:id,:email,:gender,:phone,:paid,:image_url,:enrol_time
 
   def initialize(student)

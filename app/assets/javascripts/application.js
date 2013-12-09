@@ -28,6 +28,7 @@
 //= require dhtmlxscheduler_quick_info
 //= require locale_cn
 //= require wayne-base
+//= require jquery.file.upload/jquery.fileupload
 
 
 

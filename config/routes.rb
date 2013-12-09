@@ -1,11 +1,23 @@
 Goschool::Application.routes.draw do
+  resources :homeworks
+
+
+  resources :home_works
+
+
   resources :achievements
 
 
   root :to => 'settings#index'
 
-  resources :comments
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
+
+  controller :files do
+    post 'files/attach'=>:attach
+    get 'files/download'=>:download
+  end
 
   resources :student_courses do
    collection do
@@ -20,6 +32,7 @@ Goschool::Application.routes.draw do
    collection do
     get :dates
     get :courses
+    get :teachers
     post :send_email
    end
   end
