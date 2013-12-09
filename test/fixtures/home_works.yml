@@ -4,10 +4,12 @@ one:
   title: MyString
   deadline: 2013-12-09 15:43:27
   content: MyString
-  teacher_course: 
+  teacher_course: one
+  unmark_number: 0
 
 two:
   title: MyString
   deadline: 2013-12-09 15:43:27
   content: MyString
-  teacher_course: 
+  teacher_course: two
+  unmark_number: 0  

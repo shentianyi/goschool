@@ -37,6 +37,13 @@ class SchedulesControllerTest < ActionController::TestCase
       # assert_response :success
       # puts response.body
   # end 
+  
+    # test 'should get schedules by date and teacher' do
+      # get :teachers,{start_date:'2013-11-26',end_date:'2013-11-30',institution_id:institutions(:one).id}
+      # assert_response :success
+      # puts response.body
+  # end 
+  
 #  
   # test 'should get schedules by course or sub_course' do
       # # get :courses,{type:'Course',id:courses(:one).id}

@@ -4,6 +4,7 @@ class CreateHomeWorks < ActiveRecord::Migration
       t.string :title
       t.datetime :deadline
       t.string :content
+      t.integer :unmark_number ,:default=>0
       t.references :teacher_course
 
       t.timestamps

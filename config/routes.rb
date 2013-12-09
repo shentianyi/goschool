@@ -29,6 +29,7 @@ Goschool::Application.routes.draw do
    collection do
     get :dates
     get :courses
+    get :teachers
     post :send_email
    end
   end
