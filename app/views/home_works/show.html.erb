@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @home_work.title %>
+</p>
+
+<p>
+  <b>Deadline:</b>
+  <%= @home_work.deadline %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @home_work.content %>
+</p>
+
+<p>
+  <b>Teacher course:</b>
+  <%= @home_work.teacher_course %>
+</p>
+
+
+<%= link_to 'Edit', edit_home_work_path(@home_work) %> |
+<%= link_to 'Back', home_works_path %>
