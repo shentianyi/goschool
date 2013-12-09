@@ -7,7 +7,7 @@ class EmailService
     when ScheduleType::TEACHER
       send_teacher_schedule_email type,institution_id
     when ScheduleType::STUDENT
-      nil
+      send_student_schedule_email type,institution_id
     else
     nil
     end
@@ -29,6 +29,16 @@ class EmailService
        send_schedule schedules,teacher.email
      end
     end
+  end
+
+  def self.send_student_schedule_email type,institution_id
+   Course.where('actual_number>0').all.each do |course|
+    css=CourseScheduleService.new({type:type,institution_id:institution_id,course_id:course.id})
+    if schedules=css.generate_schedule
+      emails=course.students.pluck(:email)
+      send_schedule schedules,emails
+    end
+   end
   end
 
   private

@@ -50,7 +50,8 @@ class SchedulesControllerTest < ActionController::TestCase
 #   
    test 'should send schedules' do
       # post :send_email,{type:ScheduleType::EMPLOYEE,institution_id:institutions(:one).id}
-       post :send_email,{type:ScheduleType::TEACHER,institution_id:institutions(:one).id}
+       # post :send_email,{type:ScheduleType::TEACHER,institution_id:institutions(:one).id}
+            post :send_email,{type:ScheduleType::STUDENT,institution_id:institutions(:one).id}
       assert_response :success
       puts response.body
   end 

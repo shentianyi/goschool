@@ -6,7 +6,7 @@ one:
   birthday: 2013-11-25 18:15:43
   school: MyString
   graduation: 2013-11-25 18:15:43
-  email: MyString
+  email: song.wang@cz-tek.com
   phone: MyString
   address: MyString
   guardian: MyString
@@ -23,9 +23,9 @@ two:
   name: u2
   gender: 0
   birthday: 2013-11-25 18:15:43
-  school: MyString
+  school: song.wang@cz-tek.com
   graduation: 2013-11-25 18:15:43
-  email: MyString
+  email: song.wang@cz-tek.com
   phone: MyString
   address: MyString
   guardian: MyStringxs
@@ -44,7 +44,7 @@ three:
   birthday: 2013-11-25 18:15:43
   school: MyString
   graduation: 2013-11-25 18:15:43
-  email: MyString
+  email: song.wang@cz-tek.com
   phone: MyString
   address: MyString
   guardian: MyString
@@ -63,7 +63,7 @@ four:
   birthday: 2013-11-25 18:15:43
   school: MyString
   graduation: 2013-11-25 18:15:43
-  email: MyString
+  email: song.wang@cz-tek.com
   phone: MyString
   address: MyString
   guardian: MyStringxs
@@ -81,7 +81,7 @@ five:
   birthday: 2013-11-25 18:15:43
   school: MyString
   graduation: 2013-11-25 18:15:43
-  email: MyString
+  email: song.wang@cz-tek.com
   phone: MyString
   address: MyString
   guardian: MyString
@@ -100,7 +100,7 @@ six:
   birthday: 2013-11-25 18:15:43
   school: MyString
   graduation: 2013-11-25 18:15:43
-  email: MyString
+  email: song.wang@cz-tek.com
   phone: MyString
   address: MyString
   guardian: MyStringxs
@@ -118,7 +118,7 @@ seven:
   birthday: 2013-11-25 18:15:43
   school: MyString
   graduation: 2013-11-25 18:15:43
-  email: MyString
+  email: song.wang@cz-tek.com
   phone: MyString
   address: MyString
   guardian: MyStringxs
@@ -136,7 +136,7 @@ eight:
   birthday: 2013-11-25 18:15:43
   school: MyString
   graduation: 2013-11-25 18:15:43
-  email: MyString
+  email: song.wang@cz-tek.com
   phone: MyString
   address: MyString
   guardian: MyStringxs
@@ -154,7 +154,7 @@ nine:
   birthday: 2013-11-25 18:15:43
   school: MyString
   graduation: 2013-11-25 18:15:43
-  email: MyString
+  email: song.wang@cz-tek.com
   phone: MyString
   address: MyString
   guardian: MyStringxs
@@ -172,7 +172,7 @@ ten:
   birthday: 2013-11-25 18:15:43
   school: MyString
   graduation: 2013-11-25 18:15:43
-  email: MyString
+  email: song.wang@cz-tek.com
   phone: MyString
   address: MyString
   guardian: MyStringxs

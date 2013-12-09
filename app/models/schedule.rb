@@ -37,9 +37,20 @@ class Schedule < ActiveRecord::Base
     if params[:type]=='SubCourse'
      bq.where(sub_courses:{id:params[:id]}).all
     elsif params[:type]=='Course'
-       bq.where(course_id:{id:params[:id]}).all
+       bq.where(sub_courses:{course_id:params[:id]}).all
     else
       []
+    end 
+  end
+  
+  def self.count_by_course_id params
+    bq=base_query(params[:institution_id])
+    if params[:type]=='SubCourse'
+     bq.where(sub_courses:{id:params[:id]}).count
+    elsif params[:type]=='Course'
+      bq.where(sub_courses:{course_id:params[:id]}).count
+    else
+     0
     end 
   end
   
