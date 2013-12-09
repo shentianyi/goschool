@@ -19,6 +19,8 @@
 //= require BACK_detail
 //= require BACK_rightList
 //= require BACK_student
+//= require BACK_student_detail
+//= require Chart.min
 //= require BACK_course
 //= require BACK_course_detail
 //= require BACK_course_schedule

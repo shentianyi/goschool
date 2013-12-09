@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="stylesheets/BACK-detail.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/jquery-datepicker.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/BACK-student-index.css" type="text/css" />
+
 </head>
 <body>
 
@@ -59,28 +60,27 @@
         </a>
         <p>学生详细信息</p>
     </header>
+
     <div class="detail-navigation" id="detail-navigation" origin_top=56>
         <div class="ui vertical pointing menu" id="detail-navigation-menu">
             <div class="header item">
                 内容菜单
             </div>
-            <a class="item active">
+            <a class="item active" href="#class-and-service">
                 <i class="browser icon"></i> 课程及服务
             </a>
-            <a class="item">
-                <i class="bookmark icon"></i> 在校成绩
-            </a>
-            <a class="item" >
+            <a class="item" href="#achieve">
                 <i class="trophy icon"></i> 所获成就
             </a>
-            <a class="item" >
+            <a class="item" href="#friendship">
                 <i class="meh icon"></i> 人际
             </a>
-            <a class="item" >
+            <a class="item" href="#consult-record">
                 <i class="chat outline icon"></i> 咨询记录
             </a>
         </div>
     </div>
+
     <div class="detail-content" id="detail-content">
         <div class="content-info">内容主页</div>
         <div class="info">
@@ -115,7 +115,7 @@
         </div>
         <div class="ui fluid accordion" id="accordion" name="student">
             <!--partial-->
-            <div class="item" >
+            <div class="item" id="class-and-service">
                 <div class="active title">
                     <i class="dropdown icon"></i>课程及服务
                 </div>
@@ -127,7 +127,7 @@
                             <th class="wide one">课时</th>
                             <th class="wide four">上课时间</th>
                             <th class="wide three">支付情况</th>
-                            <th class="wide five">完成进度</th>
+                            <th class="wide five">表现/进度</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -137,10 +137,13 @@
                             <td>2013.10.11-2013.12.13</td>
                             <td class="pay-lack">没有支付</td>
                             <td>
-                                <div class="ui striped progress">
-                                    <div class="bar" style="width: 30%;"></div>
-                                </div>
+                                <input type="text" />
                             </td>
+                            <!--<td>-->
+                                <!--<div class="ui striped progress">-->
+                                    <!--<div class="bar" style="width: 30%;"></div>-->
+                                <!--</div>-->
+                            <!--</td>-->
                         </tr>
                         <tr id="id_another_0">
                             <td>托福秋季班</td>
@@ -148,10 +151,13 @@
                             <td>2013.9.11-2013.10.13</td>
                             <td>已经支付</td>
                             <td>
-                                <div class="ui striped progress">
-                                    <div class="bar" style="width: 90%;"></div>
-                                </div>
+                                <input type="text" />
                             </td>
+                            <!--<td>-->
+                                <!--<div class="ui striped progress">-->
+                                    <!--<div class="bar" style="width: 90%;"></div>-->
+                                <!--</div>-->
+                            <!--</td>-->
                         </tr>
                         <tr id="id_another">
                             <td>托福夏季班</td>
@@ -159,10 +165,13 @@
                             <td>2013.7.11-2013.8.13</td>
                             <td >已经支付</td>
                             <td>
-                                <div class="ui striped progress complete">
-                                    <div class="bar" style="width: 100%;"></div>
-                                </div>
+                                <input type="text" />
                             </td>
+                            <!--<td>-->
+                                <!--<div class="ui striped progress complete">-->
+                                    <!--<div class="bar" style="width: 100%;"></div>-->
+                                <!--</div>-->
+                            <!--</td>-->
                         </tr>
                         </tbody>
                     </table>
@@ -170,31 +179,93 @@
             </div>
             <!--partial-->
 
-            <!--partial-->
-            <div class="item" >
-                <div class="title">
-                    <i class="dropdown icon"></i>在校成绩
-                </div>
-                <div class="content">
-
-                </div>
-
-            </div>
-            <!--partial-->
-
             <!--template-->
-            <div class="item">
+            <div class="item achievement" id="achieve">
                 <div class="title">
                     <i class="dropdown icon"></i>所获成就
                 </div>
                 <div class="content">
-
+                    <div class="content-item achieve" >
+                        <p>最终成就<i class="icon plus"></i></p>
+                        <dl class="list">
+                            <dd>MIT,麻省理工大学，建筑系<i class="icon remove"></i></dd>
+                        </dl>
+                    </div>
+                    <div class="content-item offer" id="offer">
+                        <p>所有录取<i class="icon plus"></i></p>
+                        <table class="ui small table segment celled">
+                            <thead>
+                            <tr><th>学校</th>
+                                <th>专业</th>
+                                <th>时间</th>
+                                <th>奖学金</th>
+                                <th>操作</th>
+                            </tr></thead>
+                            <tbody>
+                            <tr>
+                                <td>MIT</td>
+                                <td>建筑</td>
+                                <td>2013-10</td>
+                                <td>否</td>
+                                <td><span class="remove">删除</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="content-item grade" id="grade">
+                        <p>最终成绩<i class="icon plus"></i></p>
+                        <div id="grade-add" class="grade-add">
+                            <p>添加新课程名称</p>
+                            <input type='text'/>
+                        </div>
+                        <div class="ui tabular menu">
+                            <a class="active item">
+                                <div class="floating ui label"><i class="icon remove"></i></div>
+                                托福
+                            </a>
+                            <a class="item">
+                                SAT
+                            </a>
+                        </div>
+                        <table class="ui small table segment celled">
+                            <thead>
+                            <tr><th class="five wide">时间</th>
+                                <th class="four wide">成绩<span>(双击可编辑)</span></th>
+                                <th>入校</th>
+                                <th>操作</th>
+                            </tr></thead>
+                            <tfoot>
+                            <tr><th colspan="4">添加记录</th>
+                            </tr></tfoot>
+                            <tbody>
+                            <tr>
+                                <td>2013-01-28</td>
+                                <td class="score">57</td>
+                                <td>入校前</td>
+                                <td><span class="remove">删除</span></td>
+                            </tr>
+                            <tr>
+                                <td>2013-01-29</td>
+                                <td class="score">68</td>
+                                <td>入校后</td>
+                                <td><span class="remove">删除</span></td>
+                            </tr>
+                            <tr>
+                                <td>2013-10-02</td>
+                                <td class="score">89</td>
+                                <td>入校后</td>
+                                <td><span class="remove">删除</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <canvas id="myChart" width="1000" height="400"></canvas>
+                    </div>
                 </div>
             </div>
             <!--template-->
 
             <!--partial-->
-            <div class="item friendship" >
+            <div class="item friendship" id="friendship">
                 <div class="title">
                     <i class="dropdown icon"></i>人际
                 </div>
@@ -239,7 +310,7 @@
             <!--partial-->
 
             <!--partial-->
-            <div class="item consult-record" >
+            <div class="item consult-record" id="consult-record">
                 <div class="title">
                     <i class="dropdown icon"></i>咨询记录
                 </div>
@@ -411,6 +482,10 @@
 <script type='text/javascript' src="javascripts/mustache.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_student_detail.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_detail.js" ></script>
+<script type='text/javascript' src="javascripts/Chart.min.js" ></script>
+<!--[if lte IE 8]>
+<script type='text/javascript'  src="javascripts/excanvas.js"></script>
+<![endif]-->
 </body>
 </html>
 
