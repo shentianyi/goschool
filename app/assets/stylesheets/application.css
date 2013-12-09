@@ -13,6 +13,7 @@
  *= require BACK-admin
  *= require BACK-index
  *= require BACK-student-index
+ *= require BACK-student-detail
  *= require BACK-course-index
  *= require BACK-teacher-index
  *= require BACK-detail

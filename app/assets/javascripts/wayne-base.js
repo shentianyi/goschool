@@ -80,6 +80,19 @@ function standardParse(date_value){
         template:date_template
     }
 }
+function clearNoNumZero(obj)
+{
+    //先把非数字的都替换掉，除了数字和.
+    obj.value = obj.value.replace(/[^\d.]/g,"");
+    //必须保证第一个为数字而不是.
+    obj.value = obj.value.replace(/^\./g,"");
+    //保证只有出现一个.而没有多个.
+    obj.value = obj.value.replace(/\.{2,}/g,".");
+    obj.value = obj.value.replace(/^0{2,}/g,"0");
+    obj.value = obj.value.replace(/^0\d+/g,"0");
+    //保证.只出现一次，而不能出现两次以上
+    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+}
 //获取窗口可视部分的宽、高
 function inner_size(){
     var width,height
