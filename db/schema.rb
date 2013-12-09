@@ -16,9 +16,12 @@ ActiveRecord::Schema.define(:version => 20131205091941) do
   create_table "achievements", :force => true do |t|
     t.integer  "type"
     t.string   "achievementstring"
+    t.integer  "student_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
+
+  add_index "achievements", ["student_id"], :name => "index_achievements_on_student_id"
 
   create_table "comments", :force => true do |t|
     t.integer  "post_id"
