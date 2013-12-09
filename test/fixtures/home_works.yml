@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  deadline: 2013-12-09 15:43:27
+  content: MyString
+  teacher_course: 
+
+two:
+  title: MyString
+  deadline: 2013-12-09 15:43:27
+  content: MyString
+  teacher_course: 

@@ -1,4 +1,7 @@
 Goschool::Application.routes.draw do
+  resources :home_works
+
+
   resources :achievements
 
 

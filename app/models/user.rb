@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   end
   
   #find all the teachers by institution_id
-  def self.get_teachers institutions_id
+  def self.get_teachers institution_id
     User.joins(:logininfo_institutions).joins(:logininfo_roles).where(logininfo_roles:{role_id:400},logininfo_institutions:{institution_id:institution_id}).all
   end
 

@@ -3,6 +3,7 @@ class TeacherCourse < ActiveRecord::Base
   belongs_to :sub_course
   belongs_to :user
   belongs_to :teacher,:class_name=>'User',:foreign_key=>'user_id'
+  has_many :home_works
   attr_accessible :user_id,:sub_course_id
 
   validate :validate_save
