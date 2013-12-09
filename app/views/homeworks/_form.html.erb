@@ -1,10 +1,10 @@
-<%= form_for(@home_work) do |f| %>
-  <% if @home_work.errors.any? %>
+<%= form_for(@homework) do |f| %>
+  <% if @homework.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@home_work.errors.count, "error") %> prohibited this home_work from being saved:</h2>
+      <h2><%= pluralize(@homework.errors.count, "error") %> prohibited this homework from being saved:</h2>
 
       <ul>
-      <% @home_work.errors.full_messages.each do |msg| %>
+      <% @homework.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -26,6 +26,10 @@
   <div class="field">
     <%= f.label :teacher_course %><br />
     <%= f.text_field :teacher_course %>
+  </div>
+  <div class="field">
+    <%= f.label :unmark_number %><br />
+    <%= f.number_field :unmark_number %>
   </div>
   <div class="actions">
     <%= f.submit %>

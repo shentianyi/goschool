@@ -10,9 +10,9 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended to check this file into your version control system.
- 
+
 ActiveRecord::Schema.define(:version => 20131209074324) do
- 
+
   create_table "achievements", :force => true do |t|
     t.integer  "type"
     t.string   "achievementstring"
@@ -90,9 +90,10 @@ ActiveRecord::Schema.define(:version => 20131209074324) do
     t.string   "title"
     t.datetime "deadline"
     t.string   "content"
+    t.integer  "unmark_number",     :default => 0
     t.integer  "teacher_course_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   add_index "home_works", ["teacher_course_id"], :name => "index_home_works_on_teacher_course_id"
