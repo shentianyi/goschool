@@ -71,12 +71,14 @@ var BACKCOURSE=BACKCOURSE || {};
         var data={counts:{count:BACKCOURSE.sub_teacher.count}};
         var render=Mustache.render(BACKCOURSE.sub_teacher.class.template,data);
         $(this).before(render);
+        $("#"+BACKCOURSE.sub_teacher.count).autoComplete("/teachers/fast_search");
         BACKCOURSE.sub_teacher.count++;
     });
     $("body").on("click","#add-sub-service",function(){
         var data={counts:{count:BACKCOURSE.sub_teacher.count}};
         var render=Mustache.render(BACKCOURSE.sub_teacher.service.template,data);
         $(this).before(render);
+        $("#"+BACKCOURSE.sub_teacher.count).autoComplete("/teachers/fast_search");
         BACKCOURSE.sub_teacher.count++;
     });
     $("body").on("keyup","input[name='long'],input[name='people']",function(event){
