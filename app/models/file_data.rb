@@ -13,8 +13,6 @@ class FileData<CZ::BaseClass
     @extention = File.extname(@oriName).downcase
     @pathName = @uuidName + @extention if @pathName.nil?
 
-    self.write(@data.read)
-
     File.open(File.join(@path,@pathName),'wb') do |f|
       f.write(@data.read)
     end

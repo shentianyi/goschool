@@ -16,6 +16,7 @@ var BACKSTUDENT=BACKSTUDENT||{};
 //        $("body").on("click",id,function(){
 //               //write your post code here
 //        });
+	
     })
 })();
 

@@ -1,6 +1,12 @@
 <div>
+  <!--放附件的地方-->
+  <label id="attachmentLabel" class="desc-label">附件(最大为20M)</label><br />
+  <i class="icon-folder-open description-ad-btn" title="添加附件" onclick="$('#task-attach-uploader').click()">Add </i>
+  <input id="task-attach-uploader" class="task-attach-upload" type="file" name="files[]" data-url="/files/attach" multiple="true" style="display: none;"/>
+  <div class="atta-line" id="task-attach-uploader-preview" ></div>
 </div>
 
 <% content_for :javascript_includes do%>
   <%= javascript_include_tag "jquery.file.upload/jquery.fileupload.js"%>
+  <%= javascript_include_tag "_file_upload.js"%>
 <%end%>

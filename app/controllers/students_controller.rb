@@ -16,11 +16,39 @@ class StudentsController < ApplicationController
   # GET /students/1.json
   def show
     @student = Student.find(params[:id])
+    @student_presenter=StudentPresenter.new(@student)
+    
+    case params[:part]
+    when 'courses'
+      courses()
+    when 'achievements'
+      achievements()
+    when 'relation'
+      relation()
+    when 'consultingrecord'
+      consultation()
+    end
 
     respond_to do |format|
       format.html # show.html.erb 
       format.json { render json: @student }
     end
+  end
+
+  def courses()
+    @courses = StudentCoursePresenter.new(@student.course_student)
+  end
+
+  def achievements()
+    #@achievements = StudentAchievementsPresenter.new(@student.achievements)
+  end
+
+  def relation()
+    
+  end
+
+  def consultation()
+    @consultations = StudentConsultingrecordPresenter.new(@studnet.consultations)
   end
 
   # GET /students/new
