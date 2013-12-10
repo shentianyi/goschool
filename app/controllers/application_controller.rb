@@ -10,8 +10,7 @@ class ApplicationController < ActionController::Base
 
   set_current_tenant_through_filter
   def find_current_user_tenant
-    current_tenant=Tenant.find_by_company_name('Brilliantech')
-
+    current_tenant=Tenant.find_by_id(current_user.tenant_id)
     set_current_tenant(current_tenant)
   end
 
