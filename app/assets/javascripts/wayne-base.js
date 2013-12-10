@@ -352,6 +352,7 @@ GLOBAL.autoComplete.count=0;
                                     }
                                 });
                                 $("#autoComplete-call").css("width",width-2).css("left",left).css("top",top).attr("target",target);
+                                if(value===$("#autoComplete-call"))
                                 $(window).resize(function(){
                                     var width=parseInt($this.css("width")),
                                         left=$this[0].getBoundingClientRect().left,
