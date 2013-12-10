@@ -17,9 +17,12 @@ class SubCourse < ActiveRecord::Base
                      :condition_fields => [:tenant_id,:institution_id],
                      :ext_fields =>[:name,:is_default])
   # notice name blank validate !! default sub course
+  #
+  validate :validate_save
+
   def assign_teachers teachers
     teachers.each do |teacher|
-      self.teacher_courses<<TeacherCourse.new(:user_id=>teacher[:teacher_id])
+      self.teacher_courses<<TeacherCourse.new(:user_id=>teacher[:teacher_id]) unless teacher[:teacher_id].blank?
     end
   end
    
@@ -31,5 +34,13 @@ class SubCourse < ActiveRecord::Base
 
   def update_course_attr
     self.course.update_attributes(:has_sub=>true) unless self.is_default
+  end
+
+  def validate_save
+   unless self.is_default
+     errors.add(:name,'子课程名称不可为空') if self.name.blank?
+     errors.add(:name,'子课程名称不可重复') if self.class.where(name:self.name,course_id:self.course_id).first if new_record?
+     errors.add(:code,'子课程代码不可重复') if self.class.where('id<>? and name=? and course_id=?',self.id,self.name,self.course_id).first unless new_record?
+   end
   end
 end
