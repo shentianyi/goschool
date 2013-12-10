@@ -18,16 +18,11 @@ class InstitutionsController < ApplicationController
   end
 
   def update
-    unless @msg.result=@instance.update_attributes(params[:institution].strip)
-    @msg.content=@instance.errors.messages
-    end
+    @msg.content=@instance.errors.messages unless @msg.result=@instance.update_attributes(params[:institution].strip)
     render :json=>@msg
   end
 
   private
-  # def get_institution
-    # @instance=Institution.find_by_id(params[:id].strip)
-  # end
 
   def render_nil_msg
     unless @instance

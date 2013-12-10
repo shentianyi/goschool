@@ -1,15 +1,18 @@
 Goschool::Application.routes.draw do
-  resources :student_homeworks
 
+  controller :teachers do
+    get 'teacher'=>:index
+    get 'teachers/index'
+    get 'teachers/schedules'
+  end
+
+  resources :student_homeworks
 
   resources :homeworks
 
-
   resources :home_works
 
-
   resources :achievements
-
 
   root :to => 'settings#index'
 
@@ -23,21 +26,21 @@ Goschool::Application.routes.draw do
   end
 
   resources :student_courses do
-   collection do
-    post :creates
-    put :pay
-    put :pays
-    delete :destroies
-   end
+    collection do
+      post :creates
+      put :pay
+      put :pays
+      delete :destroies
+    end
   end
- 
+
   resources :schedules do
-   collection do
-    get :dates
-    get :courses
-    get :teachers
-    post :send_email
-   end
+    collection do
+      get :dates
+      get :courses
+      get :teachers
+      post :send_email
+    end
   end
   resources :students do
     collection do
@@ -80,7 +83,6 @@ Goschool::Application.routes.draw do
     match 'logininfo_sessions/destroy' => :create
     match 'logininfo_sesisons/destroy' => :destroy
   end
-
 
 # The priority is based upon order of creation:
 # first created -> highest priority.
