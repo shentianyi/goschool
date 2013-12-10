@@ -19,7 +19,7 @@ module Goschool
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
-    # config.autoload_paths += Dir["#{config.root}/lib/active_support/**/"]
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
     config.autoload_paths+=%W(#{config.root}/base)
     config.autoload_paths+=Dir[Rails.root.join('app','models','{**}')]
     config.autoload_paths+=Dir[Rails.root.join('app','presenters','{**}')]
