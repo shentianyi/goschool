@@ -1,5 +1,6 @@
 #encoding: utf-8
 require 'base_class'
+require 'tempfile'
 
 class FileData<CZ::BaseClass
   attr_accessor :type, :oriName, :size, :path, :pathName, :data, :extentiaon, :uuidName
@@ -11,6 +12,9 @@ class FileData<CZ::BaseClass
   def saveFile
     @extention = File.extname(@oriName).downcase
     @pathName = @uuidName + @extention if @pathName.nil?
+
+    self.write(@data.read)
+
     File.open(File.join(@path,@pathName),'wb') do |f|
       f.write(@data.read)
     end

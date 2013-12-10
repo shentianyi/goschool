@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   helper :all
   include ApplicationHelper
   helper_method :current_user_session, :current_user
-  #before_filter :require_user
-  #before_filter :require_active_user
+  before_filter :require_user
+  before_filter :require_active_user
   before_filter :find_current_user_tenant
 
   set_current_tenant_through_filter
@@ -43,12 +43,11 @@ class ApplicationController < ActionController::Base
   #filter method
   #need login
   def require_user
-    @current_user = Logininfo.first
-    #unless current_user
-    #  store_location
-    #  redirect_to new_logininfo_sessions_url
-    #  return false
-    #end
+    unless current_user
+      store_location
+      redirect_to new_logininfo_sessions_url
+      return false
+    end
   end
 
   #can't be login

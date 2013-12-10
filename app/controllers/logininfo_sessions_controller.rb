@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 class LogininfoSessionsController < ApplicationController
+  before_filter :require_no_user,:only=>[:new,:create]
   skip_before_filter :require_user,:only=>[:new,:create]
   skip_before_filter :require_active_user,:only=>[:new,:create]
   #skip_before_filter :check_tenant_status
@@ -24,8 +25,18 @@ class LogininfoSessionsController < ApplicationController
   end
 
   def destroy
+    puts "======================="
     current_user_session.destroy
+    puts "======================="
     flash[:notice] = "注销成功！"
+    puts "======================="
     redirect_to new_logininfo_sessions_url
+  end
+  
+  def switch
+    #if user
+    redirect_to root_url
+    #if teacher or student
+    #redirect_to front_end_url
   end
 end

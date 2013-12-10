@@ -237,12 +237,14 @@ ActiveRecord::Schema.define(:version => 20131210022056) do
     t.datetime "submited_time"
     t.integer  "student_id"
     t.integer  "homework_id"
+    t.integer  "tenant_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
 
   add_index "student_homeworks", ["homework_id"], :name => "index_student_homeworks_on_homework_id"
   add_index "student_homeworks", ["student_id"], :name => "index_student_homeworks_on_student_id"
+  add_index "student_homeworks", ["tenant_id"], :name => "index_student_homeworks_on_tenant_id"
 
   create_table "students", :force => true do |t|
     t.string   "name"
