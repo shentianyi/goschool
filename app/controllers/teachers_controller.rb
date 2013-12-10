@@ -14,4 +14,12 @@ class TeachersController < ApplicationController
     @msg.object=SchedulePresenter.init_json_presenters( Schedule.by_teacher_date(params).all)
     render :json=>@msg
   end
+
+  def fast_search
+    items=[]
+    Redis::Search.query('User', params[:q], :conditions => {:tenant_id => current_tenant.id,:is_teacher=>true}).each do |item|
+      items<<{id:item['id'],name:item['name'],email:item['email']}
+    end
+    render json:items
+  end
 end
