@@ -10,6 +10,9 @@ class ApplicationController < ActionController::Base
 
   set_current_tenant_through_filter
   def find_current_user_tenant
+    puts '---------------------'
+    puts current_user.user.to_json
+    puts '-------------------------'
     current_tenant=Tenant.find_by_id(current_user.tenant_id)
     set_current_tenant(current_tenant)
   end
@@ -18,7 +21,18 @@ class ApplicationController < ActionController::Base
     render :json=>{:access=>false},:status => 403
   end
 
+  # must be teacher
+  def require_user_as_teacher
+    unless current_user.user.is_teacher
+      respond_to do |format|
+        format.html {render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false}
+        format.json { render json: @student_homework,status: 403 }
+      end
+    end
+  end
+
   private
+
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = LogininfoSession.find
@@ -45,7 +59,7 @@ class ApplicationController < ActionController::Base
     unless current_user
       store_location
       redirect_to new_logininfo_sessions_url
-      return false
+    return false
     end
   end
 
@@ -54,7 +68,7 @@ class ApplicationController < ActionController::Base
     if current_user
       store_location
       redirect_to root_url
-      return false
+    return false
     end
   end
 
@@ -64,7 +78,7 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "帐号被锁定，请联系管理员！"
       current_user_session.destroy
       redirect_to new_logininfo_sessions_url
-      return false
+    return false
     end
   end
 end
