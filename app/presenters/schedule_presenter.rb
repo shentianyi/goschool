@@ -6,7 +6,7 @@ class SchedulePresenter<Presenter
   end
 
   def teacher_infos
-    self.teachers.collect{|teacher| {id:teacher.id,name:teacher.name}}
+    self.teachers.all
   end
   
 
@@ -15,7 +15,7 @@ class SchedulePresenter<Presenter
       sub_course_name:self.name,
       start_time:self.start_time,
       end_time:self.end_time,
-      teachers:self.teacher_infos
+      teachers:self.teacher_infos.collect{|teacher| {id:teacher.id,name:teacher.name}}
     }
   end
 

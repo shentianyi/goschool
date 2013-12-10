@@ -5,7 +5,7 @@ class HomeworksController < ApplicationController
   before_filter :render_nil_msg , :only=>[:edit,:update,:destroy]
 
   def create
-   attach=params[:homework].slice(:attach)
+   attach=params[:homework].slice(:attach)[:attach] if params[:homework].has_key?(:attach)
    @homework = Homework.new(params[:homework].except(:attach))
    Attachment.add(attach,@homework)
    @msg.content=(@msg.result=@homework.save) ? @homework.id :  @homework.errors.messages
