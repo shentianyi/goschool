@@ -3,6 +3,10 @@ class CoursesController < ApplicationController
   before_filter :init_message ,:only=>[:edit,:create,:update,:destroy]
   before_filter :get_course,:only=>[:show,:update,:edit,:destroy]
   before_filter :render_nil_msg , :only=>[:edit,:update,:destroy]
+  
+  def index
+    @active_left_aside='courses'
+  end
 
   def show
     @course_presenter=CoursePresenter.new(@course)
@@ -26,11 +30,10 @@ class CoursesController < ApplicationController
   end
 
   def create
-    tags=params[:course].slice(:tags).strip
-    subs=params[:course].slice(:subs).strip
-    @course = current_tenant.courses.build(params[:course].except(:subs).except(:tags).strip)
-    @course.subs=subs[:subs]
-    @course.tags=tags
+    @course = current_tenant.courses.build(params[:course].except(:subs).except(:tags).except(:teachers))
+    @course.subs=params[:course].slice(:subs)
+    @course.tags=params[:course].slice(:tags)
+    @course.teachs=params[:course].slice(:teachers) if params[:course].has_key?(:teachers)
     unless @msg.result=@course.save
     @msg.content=@course.errors.messages
     else

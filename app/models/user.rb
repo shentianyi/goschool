@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 class User < ActiveRecord::Base
   # attr_accessible :title, :body
+    include Redis::Search
   attr_accessible :name
   attr_accessible :email
   attr_accessible :image_url,:is_teacher,:tenant_id
@@ -20,6 +21,10 @@ class User < ActiveRecord::Base
   after_destroy :delete_related
   
   acts_as_tenant(:tenant)
+
+  redis_search_index(:title_field => :name,
+                     :condition_fields => [:tenant_id,:is_teacher],
+                     :ext_fields=>[:email])
 
   def delete_related
     @logininfo = self.logininfo

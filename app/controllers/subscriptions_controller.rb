@@ -8,7 +8,6 @@ class SubscriptionsController < ApplicationController
   #before_filter :is_sign_up_allowed, :only=>[:new,:create]
   
   layout "non_authorized"
-
   def new
     
   end

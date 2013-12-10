@@ -244,6 +244,7 @@ ActiveRecord::Schema.define(:version => 20131210042900) do
 
   add_index "student_homeworks", ["homework_id"], :name => "index_student_homeworks_on_homework_id"
   add_index "student_homeworks", ["student_id"], :name => "index_student_homeworks_on_student_id"
+  add_index "student_homeworks", ["tenant_id"], :name => "index_student_homeworks_on_tenant_id"
 
   create_table "students", :force => true do |t|
     t.string   "name"
