@@ -10,15 +10,12 @@ class ApplicationController < ActionController::Base
 
   set_current_tenant_through_filter
   def find_current_user_tenant
-    puts '---------------------'
-    puts current_user.user.to_json
-    puts '-------------------------'
     current_tenant=Tenant.find_by_id(current_user.tenant_id)
     set_current_tenant(current_tenant)
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    render :json=>{:access=>false},:status => 403
+    render json:{access:false},status:403
   end
 
   # must be teacher
@@ -26,7 +23,7 @@ class ApplicationController < ActionController::Base
     unless current_user.user.is_teacher
       respond_to do |format|
         format.html {render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false}
-        format.json { render json: @student_homework,status: 403 }
+        format.json { render json: {access:false} ,status: 403 }
       end
     end
   end
