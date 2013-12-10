@@ -6,6 +6,10 @@ Goschool::Application.routes.draw do
     get 'teachers/schedules'
     get 'teachers/fast_search'
   end
+  
+  controller :tags do
+    get 'tags/fast_search'
+  end
 
   resources :student_homeworks
 

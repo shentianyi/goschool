@@ -6,6 +6,7 @@ class CoursesController < ApplicationController
   
   def index
     @active_left_aside='courses'
+    @institutions=current_tenant.institutions
   end
 
   def show
