@@ -23,7 +23,7 @@
                               <i class="dropdown icon"></i>
                               <div class="menu">
                                    <%@institutions.each do |ins|%>
-                                   <div class="item">
+                                   <div class="item" value="<%=ins.id%>">
                                         <%= ins.name%>
                                    </div>
                                    <%end%>
@@ -117,7 +117,7 @@
                               <i class="dropdown icon"></i>
                               <div class="menu">
                                    <%@institutions.each do |ins|%>
-                                   <div class="item">
+                                   <div class="item" value="<%=ins.id%>">
                                         <%= ins.name%>
                                    </div>
                                    <%end%>
