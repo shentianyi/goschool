@@ -320,7 +320,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         onSuccess:function(){
             STUDENTDETAIL.add_consult_record();
         }
-    })
+    });
     $("#consult-record-time").datepicker({
         showOtherMonths: true,
         selectOtherMonths: true,
