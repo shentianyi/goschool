@@ -334,6 +334,7 @@ GLOBAL.autoComplete.count=0;
                                 //post
                                 var value= $.trim($my.val());
                                 $.get(href,{q:value},function(data){
+
                                     var $target=$("#autoComplete-call>ul");
                                     if(data.length>0){
                                         if(arguments_length>1){
@@ -370,7 +371,7 @@ GLOBAL.autoComplete.count=0;
                                 });
                             }
                         }
-                    },200)
+                    },100)
                 }
                 if(validate){
                     var text=$("#autoComplete-call ul").find(".active>p:first-of-type").text();
@@ -396,25 +397,37 @@ GLOBAL.autoComplete.count=0;
            $(this).addClass("active");
            var text=$("#autoComplete-call ul").find(".active>p:first-of-type").text();
            $("#"+target).focus().val(text);
+           if($("#"+target).attr("use")!==undefined){
+               var $this=$("#"+target);
+               var value=$.trim($this.val());
+               var id=$("#autoComplete-call").find(".active").attr("id");
+               if(value.length>0){
+                   $this.parent().before($("<li />")
+                       .append($("<div />").addClass("ui label").attr("id",id).text(value)
+                           .append($("<i />").addClass("delete icon")))
+                   );
+               }
+               $this.val("");
+           }
        }
         else{
            var text=$("#autoComplete-call ul").find(".active>p:first-of-type").text();
            $("#"+target).focus().val(text);
+           if($("#"+target).attr("use")!==undefined){
+               var $this=$("#"+target);
+               var value=$.trim($this.val());
+               var id=$("#autoComplete-call").find(".active").attr("id");
+               if(value.length>0){
+                   $this.parent().before($("<li />")
+                       .append($("<div />").addClass("ui label").attr("id",id).text(value)
+                           .append($("<i />").addClass("delete icon")))
+                   );
+               }
+               $this.val("");
+           }
        }
-        if($("#"+target).attr("use")!==undefined){
-            var $this=$("#"+target);
-            var value=$.trim($this.val());
-            var id=$("#autoComplete-call").find(".active").attr("id");
-            var length=$this.parents("ul").children().length-1;
-            if(value.length>0){
-                $this.parent().before($("<li />")
-                    .append($("<div />").addClass("ui label").attr("id",id).text(value)
-                        .append($("<i />").addClass("delete icon")))
-                );
-            }
-            e.preventDefault();
-            $this.val("");
-        }
+
+
     });
 })();
 //labelForm
@@ -444,7 +457,6 @@ GLOBAL.autoComplete.count=0;
                             .append($("<i />").addClass("delete icon")))
                     );
                 }
-                e.preventDefault();
                 $this.val("");
             }
             else if($(this).attr("use")===undefined){
