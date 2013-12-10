@@ -18,7 +18,7 @@ class HomeworksController < ApplicationController
 
   def update
    @msg.content=@homework.errors.messages unless @msg.result=@homework.update_attributes(params[:homework])
-    render :json=>@msg
+   render :json=>@msg
   end
 
   def destroy
