@@ -328,29 +328,29 @@ GLOBAL.autoComplete.count=0;
                                     target=$my.attr("id");
                                 //post
                                 var value=$my.val();
-//                                $.get(href,{q:value},function(data){
-//                                    $target=$("#autoComplete-call>ul");
-//                                    $target.empty();
-//                                    if(arguments_length>1){
-//                                        for(var i=0;i<data.length;i++){
-//                                            var data={label:data[i]};
-//                                            var render=Mustache.render("{{#label}}<li>" +
-//                                                "<p>{{name}}</p>"+
-//                                                "</li>{{/label}}",data);
-//                                            $target.append(render);
-//                                        }
-//                                    }
-//                                    else{
-//                                        for(var i=0;i<data.length;i++){
-//                                            var data={entity:data[i]};
-//                                            var render=Mustache.render("{{#entity}}<li id='{{id}}'>" +
-//                                                "<p>{{name}}</p>"+
-//                                                "<p>{{information}}</p>"+
-//                                                "</li>{{/entity}}",data);
-//                                            $target.append(render);
-//                                        }
-//                                    }
-//                                });
+                                $.get(href,{q:value},function(data){
+                                    $target=$("#autoComplete-call>ul");
+                                    $target.empty();
+                                    if(arguments_length>1){
+                                        for(var i=0;i<data.length;i++){
+                                            var data={label:data[i]};
+                                            var render=Mustache.render("{{#label}}<li>" +
+                                                "<p>{{name}}</p>"+
+                                                "</li>{{/label}}",data);
+                                            $target.append(render);
+                                        }
+                                    }
+                                    else{
+                                        for(var i=0;i<data.length;i++){
+                                            var data={entity:data[i]};
+                                            var render=Mustache.render("{{#entity}}<li id='{{id}}'>" +
+                                                "<p>{{name}}</p>"+
+                                                "<p>{{information}}</p>"+
+                                                "</li>{{/entity}}",data);
+                                            $target.append(render);
+                                        }
+                                    }
+                                });
                                 $("#autoComplete-call").css("width",width-2).css("left",left).css("top",top).attr("target",target);
                                 $(window).resize(function(){
                                     var width=parseInt($this.css("width")),
