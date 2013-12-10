@@ -13,7 +13,7 @@ class Course < ActiveRecord::Base
   attr_accessible :actual_number, :description, :end_date, :expect_number, :lesson, :name, :start_date, :type
   attr_accessible :has_sub,:status,:institution_id,:tenant_id,:code
   # for callback
-  attr_accessor :tags,:subs
+  attr_accessor :tags,:subs,:teachs
   acts_as_tenant(:tenant)
 
   validate :validate_save
@@ -21,7 +21,10 @@ class Course < ActiveRecord::Base
   redis_search_index(:title_field => :name,
                      :condition_fields => [:tenant_id,:institution_id])
   def create_default_sub_course
-    self.sub_courses.create(:parent_name=>self.name,:is_default=>true) unless self.has_sub
+    unless self.has_sub
+      sub_course= self.sub_courses.create(:parent_name=>self.name,:is_default=>true)
+    sub_course.assign_teachers(self.teachs) if self.teachs
+    end
   end
 
   def course_students
