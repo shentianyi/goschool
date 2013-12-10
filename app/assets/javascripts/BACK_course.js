@@ -41,7 +41,7 @@ var BACKCOURSE=BACKCOURSE || {};
             $( "#service-begin-date" ).datepicker( "option", "maxDate", selectedDate );
         }
     });
-    $("#add-class-choose-institution,#add-service-choose-institution").dropdown();
+
     $("body").on("click","#add-course-tab>.tab-item",function(){
         if(!$(this).hasClass("active")){
             $(this).siblings().removeClass("active");
@@ -71,12 +71,14 @@ var BACKCOURSE=BACKCOURSE || {};
         var data={counts:{count:BACKCOURSE.sub_teacher.count}};
         var render=Mustache.render(BACKCOURSE.sub_teacher.class.template,data);
         $(this).before(render);
+        $("#"+BACKCOURSE.sub_teacher.count).autoComplete("/teachers/fast_search");
         BACKCOURSE.sub_teacher.count++;
     });
     $("body").on("click","#add-sub-service",function(){
         var data={counts:{count:BACKCOURSE.sub_teacher.count}};
         var render=Mustache.render(BACKCOURSE.sub_teacher.service.template,data);
         $(this).before(render);
+        $("#"+BACKCOURSE.sub_teacher.count).autoComplete("/teachers/fast_search");
         BACKCOURSE.sub_teacher.count++;
     });
     $("body").on("keyup","input[name='long'],input[name='people']",function(event){
@@ -117,8 +119,9 @@ var BACKCOURSE=BACKCOURSE || {};
                            end_date: end,
                            expect_number: people,
                            lesson:long,
-                           institution:institution,
+                           institution_id:institution,
                            name:  name,
+                           code:code,
                            start_date:begin,
                            type: type,
                            teachers:teacher_id_array
@@ -145,11 +148,12 @@ var BACKCOURSE=BACKCOURSE || {};
                    }
                    var option={
                        description: desc,
-                       institution:institution,
+                       institution_id:institution,
                        end_date: end,
                        expect_number: people,
                        lesson:long,
                        name:  name,
+                       code:code,
                        start_date:begin,
                        type: type,
                        subs:sub_teacher_array
@@ -168,6 +172,7 @@ var BACKCOURSE=BACKCOURSE || {};
     $(document).ready(function(){
        $("#new-class-label,#service-label").autoComplete("/tags/fast_search","label");
        $("#autoC5,#autoC3,#service-teachers,#sub-teacher-service-1").autoComplete("/teachers/fast_search");
+        $("#add-class-choose-institution,#add-service-choose-institution").dropdown();
     });
 })();
 BACKCOURSE.sub_teacher={};
@@ -200,13 +205,12 @@ BACKCOURSE.sub_teacher.service.template=
          <i class="icon collapse" ></i>\
     </div>{{/counts}}';
 BACKCOURSE.post_add_class=function(option){
-    $.post("/course",{
-        data:{
-            course:option
-        }
+    $.post("/courses",{ 
+            course:option 
     },function(data){
          if(data.result){
-             MessageBox("添加成功","top","success")
+             $(".back-index-add .remove").click();
+             MessageBox("添加成功","top","success");
          }
         else{
              MessageBox_content(data.content);

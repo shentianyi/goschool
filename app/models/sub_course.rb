@@ -14,7 +14,7 @@ class SubCourse < ActiveRecord::Base
 
 
   redis_search_index(:title_field => :parent_name,
-                     # :prefix_index_enable => true,
+                     :prefix_index_enable => true,
                      :condition_fields => [:tenant_id,:institution_id],
                      :ext_fields =>[:name,:is_default])
   # notice name blank validate !! default sub course
@@ -22,8 +22,8 @@ class SubCourse < ActiveRecord::Base
   validate :validate_save
 
   def assign_teachers teachers
-    teachers.each do |teacher|
-      self.teacher_courses<<TeacherCourse.new(:user_id=>teacher[:teacher_id]) unless teacher[:teacher_id].blank?
+    teachers.uniq.each do |teacher|
+      self.teacher_courses<<TeacherCourse.new(:user_id=>teacher[:id]) unless teacher[:id].blank?
     end
   end
    

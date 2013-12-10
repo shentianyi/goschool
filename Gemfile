@@ -57,7 +57,7 @@ gem 'jquery-rails'
 #full text search
 gem 'chinese_pinyin'
 gem 'rmmseg-cpp-huacnlee'
-gem 'redis-search'
+# gem 'redis-search'
 
 
 gem 'memcache-client'

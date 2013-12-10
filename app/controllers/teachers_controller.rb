@@ -17,7 +17,7 @@ class TeachersController < ApplicationController
 
   def fast_search
     items=[]
-    Redis::Search.query('User', params[:q], :conditions => {:tenant_id => current_tenant.id,:is_teacher=>true}).each do |item|
+    Redis::Search.complete('User', params[:q], :conditions => {:tenant_id => current_tenant.id,:is_teacher=>true}).each do |item|
       items<<{id:item['id'],name:item['name'],info:item['email']}
     end
     render json:items

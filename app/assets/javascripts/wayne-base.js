@@ -238,6 +238,9 @@ GLOBAL.autoComplete.count=0;
     $.fn.extend({
         autoComplete:function(href){
             var arguments_length=arguments.length;
+            if(arguments.length==1){
+                $(this).attr("use","entity");
+            }
             $(this).on("keyup",function(event){
                 var e=adapt_event(event).event,validate=false;
                 if(e.keyCode==40){
@@ -329,8 +332,9 @@ GLOBAL.autoComplete.count=0;
                                     top=$this[0].getBoundingClientRect().bottom,
                                     target=$my.attr("id");
                                 //post
-                                var value=$my.val();
+                                var value= $.trim($my.val());
                                 $.get(href,{q:value},function(data){
+
                                     var $target=$("#autoComplete-call>ul");
                                     if(data.length>0){
                                         if(arguments_length>1){
@@ -343,27 +347,19 @@ GLOBAL.autoComplete.count=0;
                                             }
                                         }
                                         else{
-                                            $my.attr("use","entity")
+
                                             for(var i=0;i<data.length;i++){
                                                 var data={entity:data[i]};
                                                 var render=Mustache.render("{{#entity}}<li id='{{id}}'>" +
                                                     "<p>{{name}}</p>"+
-                                                    "<p>{{information}}</p>"+
+                                                    "<p>{{info}}</p>"+
                                                     "</li>{{/entity}}",data);
                                                 $target.append(render);
                                             }
                                         }
                                     }
                                     else{
-                                        for(var i=0;i<data.length;i++){
-                                            var data={entity:data[i]};
-                                            var render=Mustache.render("{{#entity}}<li id='{{id}}'>" +
-                                                "<p>{{name}}</p>"+
-                                                "<p>{{info}}</p>"+
-                                                "</li>{{/entity}}",data);
-                                            $target.append(render);
-                                        }
-                                       $(target).append($("<p />").addClass("no_match").text("没有匹配内容..."))
+                                       $target.append($("<p />").addClass("no_match").text("没有匹配内容..."))
                                     }
                                 });
                                 $("#autoComplete-call").css("width",width-2).css("left",left).css("top",top).attr("target",target);
@@ -375,7 +371,7 @@ GLOBAL.autoComplete.count=0;
                                 });
                             }
                         }
-                    },200)
+                    },100)
                 }
                 if(validate){
                     var text=$("#autoComplete-call ul").find(".active>p:first-of-type").text();
@@ -401,11 +397,37 @@ GLOBAL.autoComplete.count=0;
            $(this).addClass("active");
            var text=$("#autoComplete-call ul").find(".active>p:first-of-type").text();
            $("#"+target).focus().val(text);
+           if($("#"+target).attr("use")!==undefined){
+               var $this=$("#"+target);
+               var value=$.trim($this.val());
+               var id=$("#autoComplete-call").find(".active").attr("id");
+               if(value.length>0){
+                   $this.parent().before($("<li />")
+                       .append($("<div />").addClass("ui label").attr("id",id).text(value)
+                           .append($("<i />").addClass("delete icon")))
+                   );
+               }
+               $this.val("");
+           }
        }
         else{
            var text=$("#autoComplete-call ul").find(".active>p:first-of-type").text();
            $("#"+target).focus().val(text);
+           if($("#"+target).attr("use")!==undefined){
+               var $this=$("#"+target);
+               var value=$.trim($this.val());
+               var id=$("#autoComplete-call").find(".active").attr("id");
+               if(value.length>0){
+                   $this.parent().before($("<li />")
+                       .append($("<div />").addClass("ui label").attr("id",id).text(value)
+                           .append($("<i />").addClass("delete icon")))
+                   );
+               }
+               $this.val("");
+           }
        }
+
+
     });
 })();
 //labelForm
@@ -427,14 +449,14 @@ GLOBAL.autoComplete.count=0;
         if(e.keyCode==32 || e.keyCode==13){
             if($(this).attr("use")!==undefined&&$("#autoComplete-call").find(".active").length>0){
                 var value=$.trim($this.val());
-                var id=$("#autoComplete-call").find(".active").attr("id")
+                var id=$("#autoComplete-call").find(".active").attr("id");
+                var length=$this.parents("ul").children().length-1;
                 if(value.length>0){
                     $this.parent().before($("<li />")
                         .append($("<div />").addClass("ui label").attr("id",id).text(value)
                             .append($("<i />").addClass("delete icon")))
                     );
                 }
-                e.preventDefault();
                 $this.val("");
             }
             else if($(this).attr("use")===undefined){

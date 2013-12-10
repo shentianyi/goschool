@@ -32,9 +32,16 @@ class CoursesController < ApplicationController
 
   def create
     @course = current_tenant.courses.build(params[:course].except(:subs).except(:tags).except(:teachers))
-    @course.subs=params[:course].slice(:subs)
-    @course.tags=params[:course].slice(:tags)
-    @course.teachs=params[:course].slice(:teachers) if params[:course].has_key?(:teachers)
+    @course.subs=params[:course].slice(:subs)[:subs].values if params[:course].has_key?(:subs)
+    @course.tags=params[:course].slice(:tags)[:tags].values if params[:course].has_key?(:tags)
+    @course.teachs=params[:course].slice(:teachers)[:teachers].values if params[:course].has_key?(:teachers)
+      
+    @course.subs.each do |sub|
+      sub_course=SubCourse.new(:name=>sub[:name],:parent_name=>@course.name,:institution_id=>@course.institution_id,:is_default=>false)
+      sub_course.assign_teachers(sub[:teachers].values) if sub.has_key?(:teachers)
+      @course.sub_courses<<sub_course
+    end if @course.subs
+    @course.has_sub=true if @course.subs
     unless @msg.result=@course.save
     @msg.content=@course.errors.messages
     else
@@ -62,7 +69,7 @@ class CoursesController < ApplicationController
     total=10
     l=[6,4]
     ['Course','SubCourse'].each_with_index do |t,i|
-      c[i]= Redis::Search.query(t, params[:q], :conditions => {:tenant_id => current_tenant.id})
+      c[i]= Redis::Search.complete(t, params[:q], :conditions => {:tenant_id => current_tenant.id})
     end
     items=[]
     
