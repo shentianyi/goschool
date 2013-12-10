@@ -355,6 +355,14 @@ GLOBAL.autoComplete.count=0;
                                         }
                                     }
                                     else{
+                                        for(var i=0;i<data.length;i++){
+                                            var data={entity:data[i]};
+                                            var render=Mustache.render("{{#entity}}<li id='{{id}}'>" +
+                                                "<p>{{name}}</p>"+
+                                                "<p>{{info}}</p>"+
+                                                "</li>{{/entity}}",data);
+                                            $target.append(render);
+                                        }
                                        $(target).append($("<p />").addClass("no_match").text("没有匹配内容..."))
                                     }
                                 });

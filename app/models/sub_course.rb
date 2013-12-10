@@ -14,6 +14,7 @@ class SubCourse < ActiveRecord::Base
 
 
   redis_search_index(:title_field => :parent_name,
+                     # :prefix_index_enable => true,
                      :condition_fields => [:tenant_id,:institution_id],
                      :ext_fields =>[:name,:is_default])
   # notice name blank validate !! default sub course
