@@ -264,6 +264,7 @@ GLOBAL.autoComplete.count=0;
                                 $("#autoComplete-call").scrollTop(0);
                             }
                         }
+
                         validate=true;
                     }
 
@@ -301,6 +302,7 @@ GLOBAL.autoComplete.count=0;
                     }
                 }
                 else if(e.keyCode!=37 && e.keyCode!=39){
+//                    $("#autoComplete-call>ul").empty();
                     GLOBAL.autoComplete.count++;
                     var $this=$(adapt_event(event).target).parents(".autoComplete").eq(0);
                     var $my=$(adapt_event(event).target);
@@ -329,30 +331,34 @@ GLOBAL.autoComplete.count=0;
                                 //post
                                 var value=$my.val();
                                 $.get(href,{q:value},function(data){
-                                    $target=$("#autoComplete-call>ul");
-                                    $target.empty();
-                                    if(arguments_length>1){
-                                        for(var i=0;i<data.length;i++){
-                                            var data={label:data[i]};
-                                            var render=Mustache.render("{{#label}}<li>" +
-                                                "<p>{{name}}</p>"+
-                                                "</li>{{/label}}",data);
-                                            $target.append(render);
+                                    var $target=$("#autoComplete-call>ul");
+                                    if(data.length>0){
+                                        if(arguments_length>1){
+                                            for(var i=0;i<data.length;i++){
+                                                var data={label:data[i]};
+                                                var render=Mustache.render("{{#label}}<li>" +
+                                                    "<p>{{name}}</p>"+
+                                                    "</li>{{/label}}",data);
+                                                $target.append(render);
+                                            }
+                                        }
+                                        else{
+                                            $my.attr("use","entity")
+                                            for(var i=0;i<data.length;i++){
+                                                var data={entity:data[i]};
+                                                var render=Mustache.render("{{#entity}}<li id='{{id}}'>" +
+                                                    "<p>{{name}}</p>"+
+                                                    "<p>{{information}}</p>"+
+                                                    "</li>{{/entity}}",data);
+                                                $target.append(render);
+                                            }
                                         }
                                     }
                                     else{
-                                        for(var i=0;i<data.length;i++){
-                                            var data={entity:data[i]};
-                                            var render=Mustache.render("{{#entity}}<li id='{{id}}'>" +
-                                                "<p>{{name}}</p>"+
-                                                "<p>{{information}}</p>"+
-                                                "</li>{{/entity}}",data);
-                                            $target.append(render);
-                                        }
+                                       $(target).append($("<p />").addClass("no_match").text("没有匹配内容..."))
                                     }
                                 });
                                 $("#autoComplete-call").css("width",width-2).css("left",left).css("top",top).attr("target",target);
-                                if(value===$("#autoComplete-call"))
                                 $(window).resize(function(){
                                     var width=parseInt($this.css("width")),
                                         left=$this[0].getBoundingClientRect().left,
@@ -378,6 +384,7 @@ GLOBAL.autoComplete.count=0;
         window.setTimeout(function(){
             $("#autoComplete-call").css("left","-999em").attr("target","")
         },100);
+
     });
     $("body").on("click","#autoComplete-call li",function(){
        var target=$("#autoComplete-call").attr("target");
@@ -410,15 +417,32 @@ GLOBAL.autoComplete.count=0;
         var $parent=$(adapt_event(event).target).parents(".labelForm").eq(0);
         var $this=$(adapt_event(event).target),e=adapt_event(event).event;
         if(e.keyCode==32 || e.keyCode==13){
-            var value=$.trim($this.val());
-            if(value.length>0){
-                $this.parent().before($("<li />")
-                    .append($("<div />").addClass("ui label").text(value)
-                        .append($("<i />").addClass("delete icon")))
-                );
+            if($(this).attr("use")!==undefined&&$("#autoComplete-call").find(".active").length>0){
+                var value=$.trim($this.val());
+                var id=$("#autoComplete-call").find(".active").attr("id")
+                if(value.length>0){
+                    $this.parent().before($("<li />")
+                        .append($("<div />").addClass("ui label").attr("id",id).text(value)
+                            .append($("<i />").addClass("delete icon")))
+                    );
+                }
+                e.preventDefault();
+                $this.val("");
             }
-            e.preventDefault();
-            $this.val("");
+            else if($(this).attr("use")===undefined){
+                var value=$.trim($this.val());
+                if(value.length>0){
+                    $this.parent().before($("<li />")
+                        .append($("<div />").addClass("ui label").text(value)
+                            .append($("<i />").addClass("delete icon")))
+                    );
+                }
+                e.preventDefault();
+                $this.val("");
+            }
+            else{
+                $(this).val("");
+            }
         }
     });
     $("body").on("click",".labelForm .delete.icon",function(){
