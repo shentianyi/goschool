@@ -28,6 +28,7 @@ class SubscriptionsController < ApplicationController
       #@logininfo.deliver_logininfo_confirmation
       if @logininfo
         @user.logininfo_id = @logininfo.id
+        @user.tenant = @logininfo.tenant
         if @user.save
           flash[:notice] = '注册成功！'
           redirect_to root_url
