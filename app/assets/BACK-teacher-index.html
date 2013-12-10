@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="stylesheets/semantic.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/base.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/BACK-index.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/BACK-teacher-index.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/jquery-datepicker.css" type="text/css" />
+</head>
+<body>
+
+<!--global partial-->
+<aside class="back-index-aside">
+    <a class="logo" ></a>
+    <ul class="first-ul">
+        <li>
+            <a href="#" >学生信息</a>
+        </li>
+        <li>
+            <a class="active">老师信息</a>
+        </li>
+        <li>
+            <a>课程信息</a>
+        </li>
+    </ul>
+    <ul class="second-ul" id="main-navigator-bottom">
+        <li>
+            <a>
+                <i class="settings icon" data-content="全局配置"></i>
+            </a>
+
+        </li>
+        <li>
+            <a>
+                <i class="smile icon" data-content="我的账户"></i>
+            </a>
+        </li>
+        <li>
+            <a>
+                <i class="mail outline icon" data-content="发送信息"></i>
+            </a>
+        </li>
+        <li>
+            <a>
+                <i class="sign out icon" data-content="退出账户"></i>
+            </a>
+        </li>
+    </ul>
+</aside>
+<!--global partial-->
+
+<!--view-->
+<aside class="back-index-condition ">
+    <header class="back-index-side-header">
+        <label>快捷视图</label>
+        <div class="ui teal animated mini button" id="view-add">
+            <div class="hidden content">视图</div>
+            <div class="visible content">
+                <i class="add icon"></i>
+            </div>
+        </div>
+    </header>
+    <div class="ui vertical menu">
+        <a class="item">
+            <div class="ui label">1</div>
+            <label>最近一天</label>
+        </a>
+        <a class="item">
+            <div class="ui label">21</div>
+            <label>最近一个月</label>
+        </a>
+        <a class="item">
+            <div class="ui red label">0</div>
+            <label>SAT</label>
+        </a>
+    </div>
+</aside>
+<!--view-->
+
+<!--list-->
+<article class="back-index-main" id="back-index-main" name="teacher">
+    <header class="back-index-side-header">
+        <a class="ui teal mini button" id="add-item" type="teacher">
+            <div class="visible content">
+                <i class="add icon"></i>
+                新建老师
+            </div>
+        </a>
+    </header>
+    <div class="search-list" id="search-list">
+        <div class="ui big fluid icon input search-input autoComplete customAutoHeight" autoMaxHeight="210px">
+            <input placeholder="在此输入搜素条件..." type="text" id="autoC1">
+            <i class="search icon"></i>
+        </div>
+        <div class="ui inverted segment search-conditions">
+            <p>所在高中：七宝中学</p>
+            <p>年龄：大于 18岁</p>
+        </div>
+        <div class="column">
+            <div class="ui raised segment">
+                <div class="ui red ribbon label">搜索结果: <div class="ui red label">1</div></div>
+                <a><i class="icon up"></i> 根据相关性排序</a>
+                <a><i class="icon up"></i> 根据最新活动排序</a>
+            </div>
+        </div>
+        <ul class="search-result" id="search-result" name="teacher">
+            <!--template-->
+            <li>
+                <table class="ui table segment">
+                    <tr>
+                        <td class="three wide">MAY</td>
+                        <td class="four wide">MAY@hotmial.com</td>
+                        <td class="four wide">13918502286</td>
+                    </tr>
+                </table>
+            </li>
+            <!--template-->
+        </ul>
+    </div>
+</article>
+<!--list-->
+
+<!--新建老师-->
+<section class="back-index-add" name="teacher">
+    <div class="inner">
+        <i class="remove icon"></i>
+        <p>新建老师</p>
+        <div class='whole-block'>
+            <div class="ui left icon input">
+                <input placeholder="姓名..." type="text">
+                <i class="user icon"></i>
+            </div>
+            <div class="sex">
+                <div class="ui radio checkbox">
+                    <input name="sex" checked="checked" type="radio">
+                    <label>男</label>
+                </div>
+                <div class="ui radio checkbox">
+                    <input name="sex" type="radio">
+                    <label>女</label>
+                </div>
+            </div>
+            <div class="ui left icon input">
+                <input placeholder="联系电话..." type="text">
+                <i class="phone icon"></i>
+            </div>
+            <div class="ui left icon input">
+                <input placeholder="邮件地址..." type="text">
+                <i class="mail outline icon"></i>
+            </div>
+            <div class="ui red button">
+                添加
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--操作记录-->
+<footer class="control-log" id="control-log" state="close">
+    <i class="icon double angle right"></i>
+    操作记录
+</footer>
+<footer class="back-index-log" id="back-index-log" >
+    <ul>
+        <li>2013-10-13 13:00 开始课程 1</li>
+        <li>2013-10-13 12:00 开始课程 21</li>
+    </ul>
+</footer>
+
+
+<div id="autoComplete-call" class="autoComplete-call">
+    <ul>
+        <li>
+            <p>托福夏季班</p>
+            <p>www.sina.com</p>
+        </li>
+        <li>
+            <p>2</p>
+            <p>托福的夏季版</p>
+        </li>
+        <li>
+            <p>3</p>
+            <p>托福的夏季版</p>
+        </li>
+        <li>
+            <p>4</p>
+            <p>托福的夏季版</p>
+        </li>
+    </ul>
+</div>
+
+<script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="javascripts/jquery-datepicker.js"></script>
+<script type='text/javascript' src="javascripts/semantic.min.js" ></script>
+<script type='text/javascript' src="javascripts/BACK_index.js" ></script>
+<script type='text/javascript' src="javascripts/wayne-base.js" ></script>
+<script type='text/javascript' src="javascripts/BACK_rightList.js" ></script>
+<script type='text/javascript' src="javascripts/BACK_teacher.js" ></script>
+<script type='text/javascript' src="javascripts/mustache.js" ></script>
+</body>
+</html>

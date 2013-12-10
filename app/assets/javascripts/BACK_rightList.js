@@ -10,6 +10,12 @@ BACKINDEX.right_list.course={};
 BACKINDEX.right_list.student.info={
      href:""
 };
+BACKINDEX.right_list.teacher.info={
+    href:""
+};
+BACKINDEX.right_list.course.info={
+    href:""
+};
 BACKINDEX.right_list.initital=(function(){
     BACKINDEX.right_list.type=$("#back-index-main").attr("name");
     $(document).ready(function(){
@@ -36,7 +42,6 @@ BACKINDEX.right_list.loadData=function(){
     window.setTimeout(function(){
         //post
         $.getJSON(BACKINDEX.right_list.nextPage(),{},function(data){
-            BACKINDEX.checkLog();
             remove_loader();
             if(data.length==0){
                 BACKINDEX.right_list.stillHave=false;
@@ -162,5 +167,17 @@ BACKINDEX.right_list.course.template='\
 </table>\
 </li>\
 {{/course}}'
+
+BACKINDEX.right_list.teacher.template='\
+    {{#teacher}}\
+    <li>\
+    <table class="ui table segment">\
+    <tr>\
+        <td class="three wide">{{name}}</td>\
+        <td class="four wide">{{mail}}</td>\
+        <td class="four wide">{{phone}}</td>\
+    </table>\
+</li>\
+{{/teacher}}'
 
 

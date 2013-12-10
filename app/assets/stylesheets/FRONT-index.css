@@ -1,0 +1,79 @@
+/****************************************************总体*/
+.front-people-detail{
+    width:100%;
+    height:100%;
+    background-color:#fef9ee;
+}
+/****************************************************头部*/
+.front-header{
+    background:#2F2F2F;
+    width:100%;
+    height:55px;
+    box-shadow:0px 2px 4px rgba(0,0,0,0.4);
+}
+.front-header:after{
+    content:"";
+    display:block;
+    clear:both;
+}
+.front-header .logo{
+    height:55px;
+    float:left;
+    width:75px;
+    margin-right:20px;
+    border-right:1px solid rgba(255,255,255,0.4);
+}
+.front-header ul{
+    display:block;
+    list-style: none;
+    padding:20px 0 0;
+    margin:0px;
+}
+.front-header ul li{
+    display:inline-block;
+    position:relative;
+}
+.front-header ul li a{
+    transition:color 0.25s ease-out;
+}
+.front-header ul li a:hover{
+    color:#63A69F !important;
+}
+/*第一个UL*/
+.front-header ul:first-of-type{
+    float:left;
+}
+.front-header ul:first-of-type li {
+    margin-right:15px;
+}
+.front-header ul:first-of-type li a{
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    padding:5px 10px 8px;
+}
+.front-header ul:first-of-type li.active a:after{
+    content:"";
+    position:absolute;
+    left:0px;
+    right:0px;
+    height:4px;
+    background-color:#63A69F;
+    top:31px;
+}
+/*第二个UL*/
+.front-header ul:last-of-type{
+    float:right;
+    margin-right:25px;
+    padding:14px 0 0;
+}
+.front-header ul:last-of-type li{
+    margin-left:13px;
+}
+.front-header ul:last-of-type li a{
+    color: rgba(255, 255, 255, 0.8);
+    font-size:21px;
+}
+/*header下面的内容*/
+.front-people-inner{
+    padding:35px 25px 0 20px;
+}
