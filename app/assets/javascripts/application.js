@@ -14,21 +14,25 @@
 //= require jquery-datepicker
 //= require mustache
 //= require semantic.min
+//= require jquery.file.upload/jquery.fileupload
+//= require locale_cn
+//= require Chart.min
+//= require dhtmlxscheduler
+//= require dhtmlxscheduler_quick_info
+//= require wayne-base
 //= require BACK_admin
 //= require BACK_index
 //= require BACK_detail
 //= require BACK_rightList
 //= require BACK_student
 //= require BACK_student_detail
-//= require Chart.min
 //= require BACK_course
 //= require BACK_course_detail
 //= require BACK_course_schedule
-//= require dhtmlxscheduler
-//= require dhtmlxscheduler_quick_info
-//= require locale_cn
-//= require wayne-base
-//= require jquery.file.upload/jquery.fileupload
+
+
+
+
 
 
 

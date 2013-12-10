@@ -167,7 +167,7 @@ var BACKCOURSE=BACKCOURSE || {};
     });
     $(document).ready(function(){
        $("#new-class-label,#service-label").autoComplete("/tags/fast_search","label");
-        $("#autoC5,#autoC3,#service-teachers,#sub-teacher-service-1").autoComplete("/teachers/fast-search");
+       $("#autoC5,#autoC3,#service-teachers,#sub-teacher-service-1").autoComplete("/teachers/fast-search");
     });
 })();
 BACKCOURSE.sub_teacher={};
