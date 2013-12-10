@@ -23,7 +23,7 @@ class SubCourse < ActiveRecord::Base
 
   def assign_teachers teachers
     teachers.uniq.each do |teacher|
-      self.teacher_courses<<TeacherCourse.new(:user_id=>teacher[:teacher_id]) unless teacher[:teacher_id].blank?
+      self.teacher_courses<<TeacherCourse.new(:user_id=>teacher[:id]) unless teacher[:id].blank?
     end
   end
    

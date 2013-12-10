@@ -117,7 +117,7 @@ var BACKCOURSE=BACKCOURSE || {};
                            end_date: end,
                            expect_number: people,
                            lesson:long,
-                           institution:institution,
+                           institution_id:institution,
                            name:  name,
                            start_date:begin,
                            type: type,
@@ -145,7 +145,7 @@ var BACKCOURSE=BACKCOURSE || {};
                    }
                    var option={
                        description: desc,
-                       institution:institution,
+                       institution_id:institution,
                        end_date: end,
                        expect_number: people,
                        lesson:long,
@@ -201,10 +201,8 @@ BACKCOURSE.sub_teacher.service.template=
          <i class="icon collapse" ></i>\
     </div>{{/counts}}';
 BACKCOURSE.post_add_class=function(option){
-    $.post("/course",{
-        data:{
-            course:option
-        }
+    $.post("/courses",{ 
+            course:option 
     },function(data){
          if(data.result){
              MessageBox("添加成功","top","success")

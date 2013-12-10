@@ -1,4 +1,4 @@
-#encoding: utf-8
+                                                                #encoding: utf-8
 class Course < ActiveRecord::Base
   include Redis::Search
   self.inheritance_column = :_type_disabled
