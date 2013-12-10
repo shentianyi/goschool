@@ -19,6 +19,7 @@ class Course < ActiveRecord::Base
   validate :validate_save
 
   redis_search_index(:title_field => :name,
+                     # :prefix_index_enable => true,
                      :condition_fields => [:tenant_id,:institution_id])
   def create_default_sub_course
     unless self.has_sub

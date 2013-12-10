@@ -345,7 +345,7 @@ GLOBAL.autoComplete.count=0;
                                             var data={entity:data[i]};
                                             var render=Mustache.render("{{#entity}}<li id='{{id}}'>" +
                                                 "<p>{{name}}</p>"+
-                                                "<p>{{information}}</p>"+
+                                                "<p>{{info}}</p>"+
                                                 "</li>{{/entity}}",data);
                                             $target.append(render);
                                         }

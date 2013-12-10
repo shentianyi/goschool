@@ -24,7 +24,9 @@ class User < ActiveRecord::Base
 
   redis_search_index(:title_field => :name,
                      :condition_fields => [:tenant_id,:is_teacher],
-                     :ext_fields=>[:email])
+                     # :prefix_index_enable => true,
+                     :alias_field=>:email,
+                     :ext_fields=>[:email,:name])
 
   def delete_related
     @logininfo = self.logininfo
