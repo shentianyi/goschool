@@ -200,7 +200,6 @@ BACKCOURSE.sub_teacher.service.template=
          <i class="icon collapse" ></i>\
     </div>{{/counts}}';
 BACKCOURSE.post_add_class=function(option){
-    console.log(option);
     $.post("/course",{
         data:{
             course:option
