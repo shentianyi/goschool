@@ -207,7 +207,7 @@ BACKCOURSE.post_add_class=function(option){
         }
     },function(data){
          if(data.result){
-             MessageBox("添加成功","top","success")
+             MessageBox("添加成功","top","success");
          }
         else{
              MessageBox_content(data.content);
