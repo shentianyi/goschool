@@ -1,0 +1,33 @@
+/*老师的信息*/
+.teacher-info{
+
+}
+.teacher-info>p:first-of-type{
+    color:#63A69F;
+    font-weight:bold;
+    font-size:30px;
+}
+/*老师的课程列表*/
+.teacher-class{
+    list-style-type: none;
+    background-color:rgba(0, 0, 0, 0.02);
+    border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    box-shadow:0 1px 2px 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow:0 1px 2px 1px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow:0 1px 2px 1px rgba(0, 0, 0, 0.1);
+    padding:5px 0;
+    position:relative;
+}
+.teacher-class>li{
+    padding:8px 15px
+}
+.teacher-class td{
+    word-break:break-all;
+    word-wrap:break-word;
+}
+.teacher-class p{
+    font-size:13px;
+    cursor:default;
+}
