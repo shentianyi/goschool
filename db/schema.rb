@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131210022056) do
+ActiveRecord::Schema.define(:version => 20131210042900) do
 
   create_table "achievements", :force => true do |t|
     t.integer  "type"
@@ -237,6 +237,7 @@ ActiveRecord::Schema.define(:version => 20131210022056) do
     t.datetime "submited_time"
     t.integer  "student_id"
     t.integer  "homework_id"
+    t.integer  "tenant_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
@@ -340,10 +341,13 @@ ActiveRecord::Schema.define(:version => 20131210022056) do
     t.string   "email"
     t.string   "image_url"
     t.integer  "logininfo_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.integer  "tenant_id"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "is_teacher",   :default => false
   end
 
   add_index "users", ["logininfo_id"], :name => "index_users_on_logininfo_id"
+  add_index "users", ["tenant_id"], :name => "index_users_on_tenant_id"
 
 end

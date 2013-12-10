@@ -25,11 +25,8 @@ class LogininfoSessionsController < ApplicationController
   end
 
   def destroy
-    puts "======================="
     current_user_session.destroy
-    puts "======================="
     flash[:notice] = "注销成功！"
-    puts "======================="
     redirect_to new_logininfo_sessions_url
   end
   

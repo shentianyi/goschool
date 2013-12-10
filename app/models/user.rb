@@ -3,9 +3,10 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   attr_accessible :name
   attr_accessible :email
-  attr_accessible :image_url
+  attr_accessible :image_url,:is_teacher,:tenant_id
 
   belongs_to :logininfo
+  belongs_to :tenant
   
   has_many :teacher_courses,:dependent=>:destroy
   has_many :sub_courses,:through=>:teacher_courses
@@ -17,6 +18,8 @@ class User < ActiveRecord::Base
   validate :validate_save
 
   after_destroy :delete_related
+  
+  acts_as_tenant(:tenant)
 
   def delete_related
     @logininfo = self.logininfo
