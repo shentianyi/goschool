@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131209084254) do
+ActiveRecord::Schema.define(:version => 20131210022056) do
 
   create_table "achievements", :force => true do |t|
     t.integer  "type"
@@ -93,8 +93,9 @@ ActiveRecord::Schema.define(:version => 20131209084254) do
     t.integer  "teacher_course_id"
     t.integer  "unmark_number"
     t.integer  "tenant_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.integer  "status",            :default => 1
   end
 
   add_index "homeworks", ["teacher_course_id"], :name => "index_homeworks_on_teacher_course_id"
@@ -226,6 +227,22 @@ ActiveRecord::Schema.define(:version => 20131209084254) do
   add_index "student_courses", ["course_id"], :name => "index_student_courses_on_course_id"
   add_index "student_courses", ["student_id"], :name => "index_student_courses_on_student_id"
   add_index "student_courses", ["tenant_id"], :name => "index_student_courses_on_tenant_id"
+
+  create_table "student_homeworks", :force => true do |t|
+    t.float    "score"
+    t.string   "content"
+    t.boolean  "improved"
+    t.boolean  "marked"
+    t.datetime "marked_time"
+    t.datetime "submited_time"
+    t.integer  "student_id"
+    t.integer  "homework_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "student_homeworks", ["homework_id"], :name => "index_student_homeworks_on_homework_id"
+  add_index "student_homeworks", ["student_id"], :name => "index_student_homeworks_on_student_id"
 
   create_table "students", :force => true do |t|
     t.string   "name"

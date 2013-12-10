@@ -45,10 +45,4 @@ class UsersControllerTest < ActionController::TestCase
     # assert_redirected_to users_path
   # end
 
-  test "should get  user courses" do
-    get :teacher,id:@user.id
-    assert_response :success
-    puts response.body
-  end
-
 end
