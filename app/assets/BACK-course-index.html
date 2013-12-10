@@ -97,7 +97,7 @@
         </a>
     </header>
     <div class="search-list" id="search-list">
-        <div class="ui big fluid icon input search-input autoComplete customAutoHeight" autoMaxHeight="210px">
+        <div class="ui big fluid icon input search-input autoComplete customAutoHeight" load="course" autoMaxHeight="210px">
             <input placeholder="在此输入搜素条件..." type="text" id="autoC1">
             <i class="search icon"></i>
         </div>
@@ -203,8 +203,8 @@
                         <div class="text">选择机构...</div>
                         <i class="dropdown icon"></i>
                         <div class="menu">
-                            <div class="item">闵行校区</div>
-                            <div class="item">徐汇校区肇嘉浜路分机构</div>
+                            <div class="item" value="1">闵行校区</div>
+                            <div class="item" value="2">徐汇校区肇嘉浜路分机构</div>
                         </div>
                     </div>
                     <i class="sitemap icon"></i>
@@ -239,7 +239,7 @@
                     <input placeholder="课程代号..." name="code" type="text">
                     <i class="globe icon"></i>
                 </div>
-                <div class="ui left icon input specialInput labelForm autoComplete">
+                <div class="ui left icon input specialInput labelForm autoComplete" >
                     <ul name="label">
                         <li><input type='text' placeholder="标签..." id="new-class-label" /></li>
                     </ul>
@@ -251,7 +251,7 @@
                         <div class="ui mini button" for="sub-teachers">以子课程安排老师</div>
                 </div>
 
-                <div class="ui left icon input specialInput labelForm autoComplete total-teachers" id="total-teachers" >
+                <div class="ui left icon input specialInput labelForm autoComplete total-teachers" id="total-teachers">
                     <ul>
                         <li><input type='text' placeholder="授课老师..." id="autoC5" /></li>
                     </ul>
@@ -272,6 +272,7 @@
                     </div>
                     <i class="icon expand" id="add-sub-class"></i>
                 </div>
+
             </div>
         </div>
 
@@ -314,7 +315,7 @@
                     <input placeholder="服务代号..." name='code' type="text">
                     <i class="globe icon"></i>
                 </div>
-                <div class="ui left icon input specialInput labelForm autoComplete">
+                <div class="ui left icon input specialInput labelForm autoComplete" >
                     <ul name='label'>
                         <li><input type='text' placeholder="标签..." id="service-label" /></li>
                     </ul>
