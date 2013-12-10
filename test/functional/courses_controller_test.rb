@@ -17,8 +17,8 @@ class CoursesControllerTest < ActionController::TestCase
         lesson:24,
         name:  "courseEat",
         start_date:  "2013-11-01",
-        type: 0,
-        subs:[{name:'Game',teachers:[{teacher_id:users(:one).id},{teacher_id:users(:one).id}]},{name:'Read'}],
+        type: 100,
+        subs:[{name:'Game',teachers:[{teacher_id:users(:one).id},{teacher_id:users(:two).id}]},{name:'Read'}],
         tags:['TUOFU','Game'] }
       assert_response :success
       puts response.body
