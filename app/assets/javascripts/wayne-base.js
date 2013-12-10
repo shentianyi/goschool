@@ -238,6 +238,9 @@ GLOBAL.autoComplete.count=0;
     $.fn.extend({
         autoComplete:function(href){
             var arguments_length=arguments.length;
+            if(arguments.length==1){
+                $(this).attr("use","entity");
+            }
             $(this).on("keyup",function(event){
                 var e=adapt_event(event).event,validate=false;
                 if(e.keyCode==40){
@@ -329,7 +332,7 @@ GLOBAL.autoComplete.count=0;
                                     top=$this[0].getBoundingClientRect().bottom,
                                     target=$my.attr("id");
                                 //post
-                                var value=$my.val();
+                                var value= $.trim($my.val());
                                 $.get(href,{q:value},function(data){
                                     var $target=$("#autoComplete-call>ul");
                                     if(data.length>0){
@@ -343,7 +346,7 @@ GLOBAL.autoComplete.count=0;
                                             }
                                         }
                                         else{
-                                            $my.attr("use","entity")
+
                                             for(var i=0;i<data.length;i++){
                                                 var data={entity:data[i]};
                                                 var render=Mustache.render("{{#entity}}<li id='{{id}}'>" +
@@ -355,7 +358,7 @@ GLOBAL.autoComplete.count=0;
                                         }
                                     }
                                     else{
-                                       $(target).append($("<p />").addClass("no_match").text("没有匹配内容..."))
+                                       $target.append($("<p />").addClass("no_match").text("没有匹配内容..."))
                                     }
                                 });
                                 $("#autoComplete-call").css("width",width-2).css("left",left).css("top",top).attr("target",target);
@@ -419,7 +422,8 @@ GLOBAL.autoComplete.count=0;
         if(e.keyCode==32 || e.keyCode==13){
             if($(this).attr("use")!==undefined&&$("#autoComplete-call").find(".active").length>0){
                 var value=$.trim($this.val());
-                var id=$("#autoComplete-call").find(".active").attr("id")
+                var id=$("#autoComplete-call").find(".active").attr("id");
+                var length=$this.parents("ul").children().length-1;
                 if(value.length>0){
                     $this.parent().before($("<li />")
                         .append($("<div />").addClass("ui label").attr("id",id).text(value)
