@@ -14,7 +14,7 @@ class SubCourse < ActiveRecord::Base
 
 
   redis_search_index(:title_field => :parent_name,
-                     # :prefix_index_enable => true,
+                     :prefix_index_enable => true,
                      :condition_fields => [:tenant_id,:institution_id],
                      :ext_fields =>[:name,:is_default])
   # notice name blank validate !! default sub course
@@ -42,7 +42,6 @@ class SubCourse < ActiveRecord::Base
      errors.add(:name,'子课程名称不可为空') if self.name.blank?
      errors.add(:name,'子课程名称不可重复') if self.class.where(name:self.name,course_id:self.course_id).first if new_record?
      errors.add(:code,'子课程代码不可重复') if self.class.where('id<>? and name=? and course_id=?',self.id,self.name,self.course_id).first unless new_record?
-     return false
    end
   end
 end
