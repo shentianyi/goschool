@@ -29,3 +29,12 @@
     right:50px;
     bottom:0px;
 }
+/*老师列表*/
+.search-result[name='teacher'] table tr td{
+    padding: 0.8em 0.7em;
+}
+
+.search-result[name='teacher'] table tr td:first-of-type{
+    color:#63A69F;
+    font-size:21px;
+}

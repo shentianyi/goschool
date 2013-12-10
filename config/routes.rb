@@ -12,7 +12,7 @@ Goschool::Application.routes.draw do
 
   resources :achievements
 
-  root :to => 'settings#index'
+  root :to => 'students#index'
 
   resources :posts do
     resources :comments
@@ -78,8 +78,8 @@ Goschool::Application.routes.draw do
   resource :logininfo_sessions
 
   controller :logininfo_sessions do
-    match 'logininfo_sessions/destroy' => :create
-    match 'logininfo_sesisons/destroy' => :destroy
+    match 'logininfo_sessions/create' => :create
+    match 'logininfo_sessions/destroy' => :destroy
   end
 
 # The priority is based upon order of creation:

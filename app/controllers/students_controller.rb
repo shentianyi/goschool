@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 class StudentsController < ApplicationController
-  layout "non_authorized"
+  # layout "non_authorized"
   # GET /students
   # GET /students.json
   def index
