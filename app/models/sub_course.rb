@@ -22,7 +22,7 @@ class SubCourse < ActiveRecord::Base
   validate :validate_save
 
   def assign_teachers teachers
-    teachers.each do |teacher|
+    teachers.uniq.each do |teacher|
       self.teacher_courses<<TeacherCourse.new(:user_id=>teacher[:teacher_id]) unless teacher[:teacher_id].blank?
     end
   end
