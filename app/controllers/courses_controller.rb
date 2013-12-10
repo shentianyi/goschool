@@ -3,6 +3,11 @@ class CoursesController < ApplicationController
   before_filter :init_message ,:only=>[:edit,:create,:update,:destroy]
   before_filter :get_course,:only=>[:show,:update,:edit,:destroy]
   before_filter :render_nil_msg , :only=>[:edit,:update,:destroy]
+  
+  def index
+    @active_left_aside='courses'
+    @institutions=current_tenant.institutions
+  end
 
   def show
     @course_presenter=CoursePresenter.new(@course)

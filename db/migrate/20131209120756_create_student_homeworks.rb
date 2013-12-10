@@ -14,6 +14,5 @@ class CreateStudentHomeworks < ActiveRecord::Migration
     end
     add_index :student_homeworks, :student_id
     add_index :student_homeworks, :homework_id
-     add_index :student_homeworks, :tenant_id
   end
 end

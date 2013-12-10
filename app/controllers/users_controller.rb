@@ -27,9 +27,16 @@ class UsersController < ApplicationController
           @new_role = LogininfoRole.new(:role_id=>role)
           @logininfo.logininfo_roles<<@new_role
         }
-
+        
         @logininfo.save!
+        
         @user = User.new(params[:user])
+        @user.tenant = current_tenant
+        if @logininfo.check_role(400)
+          @user.is_teacher = true
+        else
+          @user.is_teacher = false
+        end
         @user.logininfo = @logininfo
         @user.save!
         msg.result = true
@@ -89,7 +96,13 @@ class UsersController < ApplicationController
             @new_role = LogininfoRole.new(:role_id=>role)
             @logininfo.logininfo_roles<<@new_role
           }
-        @logininfo.save
+          @logininfo.save
+          if @logininfo.check_role(400)
+            @user.update_attributes!(:is_teacher=>true)
+          else
+            @user.update_attributes!(:is_teacher=>false)
+          end
+          
         msg.result = true
         end
       end

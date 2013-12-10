@@ -18,6 +18,7 @@ class CoursesControllerTest < ActionController::TestCase
         name:  "courseEat",
         start_date:  "2013-11-01",
         type: 100,
+        institution_id:institutions(:one).id,
         subs:[{name:'Game',teachers:[{teacher_id:users(:one).id},{teacher_id:users(:two).id}]},{name:'Read'}],
         tags:['TUOFU','Game'] }
       assert_response :success

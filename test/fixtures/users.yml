@@ -10,6 +10,7 @@ one:
   email: 'song.wang@cz-tek.com'
   image_url: ''
   logininfo: one
+  tenant: one
 # column: value
 #
 two:
@@ -17,12 +18,14 @@ two:
   email: 'hong.gao@cz-tek.com'
   image_url: ''
   logininfo: two
+  tenant: one
 #  column: value
 three:
   name: 'Jack'
   email: 'qi.li@cz-tek.com'
   image_url: ''
   logininfo: three
+  tenant: one
 # column: value
 #
 four:
@@ -30,12 +33,14 @@ four:
   email: 'song.wang@cz-tek.com'
   image_url: ''
   logininfo: four
+  tenant: one
 #  column: value
 five:
   name: 'Jack'
   email: 'igoschool@163.com'
   image_url: ''
   logininfo: five
+  tenant: one
 # column: value
 #
 six:
@@ -43,12 +48,14 @@ six:
   email: 'song.wang@cz-tek.com'
   image_url: ''
   logininfo: six
+  tenant: one
 #  column: value
 seven:
   name: 'Jack'
   email: 'song.wang@cz-tek.com'
   image_url: ''
   logininfo: seven
+  tenant: one
 # column: value
 #
 eight:
@@ -56,12 +63,14 @@ eight:
   email: 'song.wang@cz-tek.com'
   image_url: ''
   logininfo: eight
+  tenant: one
 #  column: value
 nine:
   name: 'Jack'
   email: 'song.wang@cz-tek.com'
   image_url: ''
   logininfo: nine
+  tenant: one
 # column: value
 #
 ten:
@@ -69,4 +78,5 @@ ten:
   email: 'song.wang@cz-tek.com'
   image_url: ''
   logininfo: ten
+  tenant: one
 #  column: value

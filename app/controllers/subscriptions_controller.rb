@@ -7,6 +7,7 @@ class SubscriptionsController < ApplicationController
   before_filter :require_no_user, :only=>[:new,:create]
   #before_filter :is_sign_up_allowed, :only=>[:new,:create]
   
+  layout "non_authorized"
   def new
     
   end
@@ -27,6 +28,7 @@ class SubscriptionsController < ApplicationController
       #@logininfo.deliver_logininfo_confirmation
       if @logininfo
         @user.logininfo_id = @logininfo.id
+        @user.tenant = @logininfo.tenant
         if @user.save
           flash[:notice] = '注册成功！'
           redirect_to root_url

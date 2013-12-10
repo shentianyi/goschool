@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131210022056) do
+ActiveRecord::Schema.define(:version => 20131210042900) do
 
   create_table "achievements", :force => true do |t|
     t.integer  "type"
@@ -244,7 +244,6 @@ ActiveRecord::Schema.define(:version => 20131210022056) do
 
   add_index "student_homeworks", ["homework_id"], :name => "index_student_homeworks_on_homework_id"
   add_index "student_homeworks", ["student_id"], :name => "index_student_homeworks_on_student_id"
-  add_index "student_homeworks", ["tenant_id"], :name => "index_student_homeworks_on_tenant_id"
 
   create_table "students", :force => true do |t|
     t.string   "name"
@@ -342,10 +341,13 @@ ActiveRecord::Schema.define(:version => 20131210022056) do
     t.string   "email"
     t.string   "image_url"
     t.integer  "logininfo_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.integer  "tenant_id"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "is_teacher",   :default => false
   end
 
   add_index "users", ["logininfo_id"], :name => "index_users_on_logininfo_id"
+  add_index "users", ["tenant_id"], :name => "index_users_on_tenant_id"
 
 end
