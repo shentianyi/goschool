@@ -8,7 +8,8 @@ one:
   marked_time: 2013-12-09 20:07:58
   submited_time: 2013-12-09 20:07:58
   student: 
-  homework: 
+  homework: one
+  tenant: one
 
 two:
   score: 1.5
@@ -18,4 +19,5 @@ two:
   marked_time: 2013-12-09 20:07:58
   submited_time: 2013-12-09 20:07:58
   student: 
-  homework: 
+  homework: two
+  tenant: one

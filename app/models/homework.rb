@@ -2,6 +2,7 @@
 class Homework < ActiveRecord::Base
   belongs_to :teacher_course
   delegate :sub_course,:to=>:teacher_course
+  has_many :attachments,:as=>:attachable
   attr_accessible :content, :deadline, :title, :unmark_number
     acts_as_tenant(:tenant)
   def self.sub_total_unmark sub_course_id,teacher_id
