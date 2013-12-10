@@ -387,21 +387,21 @@
             <div class="field">
                 <label>咨询时间</label>
                 <input name="time" type="text" readonly id="consult-record-time"/>
-                <select state="unload"></select>
+                <select state="unload" id="consult-record-hour"></select>
             </div>
             <div class="field">
                 <label>咨询人</label>
-                <input name="customer" type="text">
+                <input name="customer" type="text" id="consult-record-customer" />
             </div>
             <div class="field">
                 <label>咨询内容</label>
-                <textarea name="content"></textarea>
+                <textarea name="content" id="consult-record-content"></textarea>
             </div>
             <div class="field">
                 <label>接线人</label>
-                <input name="service" type="text">
+                <input name="service" type="text" id="consult-record-service" />
             </div>
-            <div class="ui submit button teal ok" for="teacher">完成添加</div>
+            <div class="ui submit button teal ok" for="consult-record">完成添加</div>
         </div>
 
     </div>

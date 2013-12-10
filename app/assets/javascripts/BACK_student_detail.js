@@ -1,5 +1,5 @@
 /**
- * Created with JetBrains RubyMine.
+ * Cdted with JetBrains RubyMine.
  * User: wayne
  * Date: 13-12-6
  * Time: 下午3:10
@@ -316,8 +316,11 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
             ]
         }
     },{
-        inline : true
-    });
+        inline : true,
+        onSuccess:function(){
+            STUDENTDETAIL.add_consult_record();
+        }
+    })
     $("#consult-record-time").datepicker({
         showOtherMonths: true,
         selectOtherMonths: true,
@@ -447,6 +450,28 @@ STUDENTDETAIL.deleteCanvas=function(index){
     var ctx = $("#myChart").get(0).getContext("2d");
     var myNewChart = new Chart(ctx);
     new Chart(ctx).Line(data,STUDENTDETAIL.option);
+}
+STUDENTDETAIL.add_consult_record=function(){
+    //post
+    var time=$("#consult-record-time").val()+" "+$("#consult-record-hour :selected").text(),
+        customer=$("#consult-record-customer").val(),
+        content=$("#consult-record-content").val(),
+        service=$("#consult-record-service").val();
+    var data={consult_record:{time:time,customer:customer,content:content,service:service}};
+    var render=Mustache.render("{{#consult_record}}<div class='item'>"+
+            "<p>{{time}}"+" "+"{{customer}}</p>"+
+            "<p>{{content}}</p>"+
+            "<p>接线人:{{service}}</p>"+
+            "<dl>"+
+                "<dt>评论：</dt>"+
+            "</dl>"+
+            "<div class='comment-block'>"+
+                "<input type='text'/>"+
+                "<div class='ui button tiny'>评论</div>"+
+             "</div>"+
+         "</div>{{/consult_record}}",data);
+    $("#consult-record .content").append(render);
+    $(".detail-add[type='consult-record'] .icon.remove").click();
 }
 
 
