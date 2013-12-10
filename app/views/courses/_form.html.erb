@@ -1,57 +1,203 @@
-<%= form_for(@course) do |f| %>
-  <% if @course.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
+<section class="back-index-add" name="course">
+     <div class="inner">
+          <i class="remove icon"></i>
+          <p>
+               新建课程/服务
+          </p>
+          <div class="tab" id="add-course-tab">
+               <div class="tab-item active" for="course">
+                    课程
+               </div>
+               <div class="tab-item" for="service">
+                    服务
+               </div>
+          </div>
 
-      <ul>
-      <% @course.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <div id="new-class" class="tab-block" from="course">
+               <div class="left-part ">
+                    <div class="select">
+                         <div class="ui selection dropdown" id="add-class-choose-institution">
+                              <div class="text">
+                                   选择机构...
+                              </div>
+                              <i class="dropdown icon"></i>
+                              <div class="menu">
+                                   <div class="item">
+                                        闵行校区
+                                   </div>
+                                   <div class="item">
+                                        徐汇校区肇嘉浜路分机构
+                                   </div>
+                              </div>
+                         </div>
+                         <i class="sitemap icon"></i>
+                    </div>
+                    <div class="ui left icon input">
+                         <input placeholder="课程名称..." name='name' type="text">
+                         <i class="browser icon"></i>
+                    </div>
+                    <div class="course-desc">
+                         <textarea placeholder="课程描述..." name='desc'></textarea>
+                         <i class="book icon"></i>
+                    </div>
+                    <div class="ui left icon input">
+                         <input placeholder="预计课时数..." type="text" name='long'>
+                         <i class="time icon"></i>
+                    </div>
+                    <div class="ui left icon input">
+                         <input placeholder="预计报名人数..." type="text" name='people'>
+                         <i class="users icon"></i>
+                    </div>
+                    <div class="ui left icon input calendar">
+                         <input placeholder="课程开始时间..." type="text" name="begin" readonly id="course-begin-date">
+                         <i class="calendar icon"></i>
+                    </div>
+                    <div class="ui left icon input calendar">
+                         <input placeholder="课程结束时间..." type="text" name="end" readonly id="course-end-date">
+                         <i class="calendar icon"></i>
+                    </div>
+               </div>
+               <div class="right-part">
+                    <div class="ui left icon input">
+                         <input placeholder="课程代号..." name="code" type="text">
+                         <i class="globe icon"></i>
+                    </div>
+                    <div class="ui left icon input specialInput labelForm autoComplete">
+                         <ul name="label">
+                              <li>
+                                   <input type='text' placeholder="标签..." id="new-class-label" />
+                              </li>
+                         </ul>
+                         <i class="tag icon stop"></i>
+                    </div>
+                    <div class="ui buttons choose-teacher-delivery" id="choose-teacher-delivery" name="class">
+                         <div class="ui mini teal button active" for="total-teachers">
+                              以总课程安排老师
+                         </div>
+                         <div class="or"></div>
+                         <div class="ui mini button" for="sub-teachers">
+                              以子课程安排老师
+                         </div>
+                    </div>
 
-  <div class="field">
-    <%= f.label :type %><br />
-    <%= f.number_field :type %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :lesson %><br />
-    <%= f.number_field :lesson %>
-  </div>
-  <div class="field">
-    <%= f.label :start_date %><br />
-    <%= f.date_select :start_date %>
-  </div>
-  <div class="field">
-    <%= f.label :end_date %><br />
-    <%= f.date_select :end_date %>
-  </div>
-  <div class="field">
-    <%= f.label :expect_number %><br />
-    <%= f.number_field :expect_number %>
-  </div>
-  <div class="field">
-    <%= f.label :actual_number %><br />
-    <%= f.number_field :actual_number %>
-  </div>
-  <div class="field">
-    <%= f.label :sub_number %><br />
-    <%= f.number_field :sub_number %>
-  </div>
-  <div class="field">
-    <%= f.label :user %><br />
-    <%= f.text_field :user %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+                    <div class="ui left icon input specialInput labelForm autoComplete total-teachers" id="total-teachers" >
+                         <ul>
+                              <li>
+                                   <input type='text' placeholder="授课老师..." id="autoC5" />
+                              </li>
+                         </ul>
+                         <i class="male icon"></i>
+                    </div>
+
+                    <div class="sub-course-block" id="sub-teachers">
+                         <div class="sub-course-block-item">
+                              <div class="ui input sub-course-name">
+                                   <input placeholder="子课程名..." type="text">
+                              </div>
+                              <div class="ui input specialInput labelForm autoComplete total-teachers" >
+                                   <ul>
+                                        <li>
+                                             <input type='text' placeholder="老师..." id="autoC3" />
+                                        </li>
+                                   </ul>
+                              </div>
+                              <i class="icon collapse" ></i>
+                         </div>
+                         <i class="icon expand" id="add-sub-class"></i>
+                    </div>
+               </div>
+          </div>
+
+          <div id="new-service" class="tab-block" style="display:none" from="service">
+               <div class="left-part">
+                    <div class="select">
+                         <div class="ui selection dropdown" id="add-service-choose-institution">
+                              <div class="text">
+                                   选择机构...
+                              </div>
+                              <i class="dropdown icon"></i>
+                              <div class="menu">
+                                   <div class="item">
+                                        闵行校区
+                                   </div>
+                                   <div class="item">
+                                        徐汇校区肇嘉浜路分机构
+                                   </div>
+                              </div>
+                         </div>
+                         <i class="sitemap icon"></i>
+                    </div>
+                    <div class="ui left icon input">
+                         <input placeholder="服务名称..." name='name' type="text">
+                         <i class="browser icon"></i>
+                    </div>
+                    <div class="course-desc">
+                         <textarea placeholder="服务描述..." name='desc'></textarea>
+                         <i class="book icon"></i>
+                    </div>
+                    <div class="ui left icon input">
+                         <input placeholder="预计报名人数..." type="text" name='people'>
+                         <i class="users icon"></i>
+                    </div>
+                    <div class="ui left icon input calendar">
+                         <input placeholder="服务开始时间..." type="text" name='begin' readonly id="service-begin-date">
+                         <i class="calendar icon"></i>
+                    </div>
+                    <div class="ui left icon input calendar">
+                         <input placeholder="服务结束时间..." type="text" name='end' readonly id="service-end-date">
+                         <i class="calendar icon"></i>
+                    </div>
+               </div>
+               <div class="right-part">
+                    <div class="ui left icon input">
+                         <input placeholder="服务代号..." name='code' type="text">
+                         <i class="globe icon"></i>
+                    </div>
+                    <div class="ui left icon input specialInput labelForm autoComplete">
+                         <ul name='label'>
+                              <li>
+                                   <input type='text' placeholder="标签..." id="service-label" />
+                              </li>
+                         </ul>
+                         <i class="tag icon stop"></i>
+                    </div>
+                    <div class="ui buttons choose-teacher-delivery" id="choose-teacher-service-delivery" name="service">
+                         <div class="ui mini teal button active" for="total-service-teachers">
+                              以总服务安排老师
+                         </div>
+                         <div class="or"></div>
+                         <div class="ui mini button" for="sub-service-teachers">
+                              以子服务安排老师
+                         </div>
+                    </div>
+                    <div class="ui left icon input specialInput labelForm autoComplete total-teachers" id="total-service-teachers">
+                         <ul>
+                              <li>
+                                   <input type='text' placeholder="授课老师..." id="service-teachers"/>
+                              </li>
+                         </ul>
+                         <i class="male icon"></i>
+                    </div>
+                    <div class="sub-course-block" id="sub-service-teachers">
+                         <div class="sub-course-block-item">
+                              <div class="ui input sub-course-name">
+                                   <input placeholder="子服务名..." type="text">
+                              </div>
+                              <div class="ui input specialInput labelForm autoComplete total-teachers" >
+                                   <ul>
+                                        <li>
+                                             <input type='text' placeholder="老师..." id="sub-teacher-service-1" />
+                                        </li>
+                                   </ul>
+                              </div>
+                              <i class="icon collapse"></i>
+                         </div>
+                         <i class="icon expand" id="add-sub-service"></i>
+                    </div>
+               </div>
+          </div>
+          <div class="ui red button" id="add-class-item">
+               添加
+          </div>
+     </div>
+</section>

@@ -342,13 +342,11 @@ ActiveRecord::Schema.define(:version => 20131210042900) do
     t.string   "email"
     t.string   "image_url"
     t.integer  "logininfo_id"
-    t.integer  "tenant_id"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
     t.boolean  "is_teacher",   :default => false
   end
 
   add_index "users", ["logininfo_id"], :name => "index_users_on_logininfo_id"
-  add_index "users", ["tenant_id"], :name => "index_users_on_tenant_id"
 
 end
