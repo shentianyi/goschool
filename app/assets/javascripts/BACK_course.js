@@ -79,6 +79,26 @@ var BACKCOURSE=BACKCOURSE || {};
         $(this).before(render);
         BACKCOURSE.sub_teacher.count++;
     });
+    $("body").on("click","#add-class-item",function(){
+       var $target=$(".back-index-add[name='course'] .tab-block:visible")
+       var name= $.trim($target.find("[name='name']").val()),
+           desc=$.trim($target.find("[name='desc']").val()),
+           long=$target.find("[name='long']").length==0?"-":$.trim($target.find("[name='long']").val()),
+           people=$.trim($target.find("[name='people']").val()),
+           begin=$.trim($target.find("[name='begin']").val()),
+           end=$.trim($target.find("[name='end']").val()),
+           code=$.trim($target.find("[name='code']").val());
+       if(name.length>0&&desc.length>0&&long.length>0&&people.length>0&&begin.length>0&&end.length>0&&code.length>0){
+           var label_length=$target.find("[name='label']").children().length,label_array=[],label_text;
+           for(var i=0;i<label_length-1;i++){
+               label_text=$target.find("[name='label']>li").eq(i).find("div").text();
+               label_array.push(label_text);
+           }
+       }
+       else{
+           MessageBox("信息填写不完整","top","warning");
+       }
+    });
 })();
 BACKCOURSE.sub_teacher={};
 BACKCOURSE.sub_teacher.count=0;
