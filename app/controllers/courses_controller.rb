@@ -32,8 +32,8 @@ class CoursesController < ApplicationController
 
   def create
     @course = current_tenant.courses.build(params[:course].except(:subs).except(:tags).except(:teachers))
-    @course.subs=params[:course].slice(:subs)
-    @course.tags=params[:course].slice(:tags)
+    @course.subs=params[:course].slice(:subs) if params[:course].has_key?(:subs)
+    @course.tags=params[:course].slice(:tags) if params[:course].has_key?(:tags)
     @course.teachs=params[:course].slice(:teachers) if params[:course].has_key?(:teachers)
     unless @msg.result=@course.save
     @msg.content=@course.errors.messages
