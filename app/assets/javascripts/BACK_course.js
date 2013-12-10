@@ -119,6 +119,7 @@ var BACKCOURSE=BACKCOURSE || {};
                            lesson:long,
                            institution_id:institution,
                            name:  name,
+                           code:code,
                            start_date:begin,
                            type: type,
                            teachers:teacher_id_array
@@ -150,6 +151,7 @@ var BACKCOURSE=BACKCOURSE || {};
                        expect_number: people,
                        lesson:long,
                        name:  name,
+                       code:code,
                        start_date:begin,
                        type: type,
                        subs:sub_teacher_array
@@ -205,6 +207,7 @@ BACKCOURSE.post_add_class=function(option){
             course:option 
     },function(data){
          if(data.result){
+             $(".back-index-add .remove").click();
              MessageBox("添加成功","top","success");
          }
         else{

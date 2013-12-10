@@ -401,6 +401,20 @@ GLOBAL.autoComplete.count=0;
            var text=$("#autoComplete-call ul").find(".active>p:first-of-type").text();
            $("#"+target).focus().val(text);
        }
+        if($("#"+target).attr("use")!==undefined){
+            var $this=$("#"+target);
+            var value=$.trim($this.val());
+            var id=$("#autoComplete-call").find(".active").attr("id");
+            var length=$this.parents("ul").children().length-1;
+            if(value.length>0){
+                $this.parent().before($("<li />")
+                    .append($("<div />").addClass("ui label").attr("id",id).text(value)
+                        .append($("<i />").addClass("delete icon")))
+                );
+            }
+            e.preventDefault();
+            $this.val("");
+        }
     });
 })();
 //labelForm
