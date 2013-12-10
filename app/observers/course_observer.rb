@@ -7,8 +7,9 @@ class CourseObserver<ActiveRecord::Observer
 
   def before_create course
     course.subs.each do |sub|
-      sub_course=SubCourse.new(:name=>sub[:name],:parent_name=>course.name,:institution_id=>course.institution_id)
-      sub_course.assign_teachers(sub[:teachers]) if sub[:teachers]
+      puts "---------------------#{sub}"
+      sub_course=SubCourse.new(:name=>sub[:name],:parent_name=>course.name,:institution_id=>course.institution_id,:is_default=>false)
+      sub_course.assign_teachers(sub[:teachers].values) if sub.has_key?(:teachers)
       course.sub_courses<<sub_course
     end if course.subs
     course.has_sub=true if course.subs
