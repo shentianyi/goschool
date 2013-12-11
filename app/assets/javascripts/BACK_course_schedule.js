@@ -196,9 +196,6 @@ SCHEDULE.widget.init=function(){
                 }
             })
         }
-
-
-        }
     };
     scheduler.init('schedule-here', new Date(),"month");
     SCHEDULE.calendar.have_load.institution=$("#schedule-select-institution .item.active").attr("value");
