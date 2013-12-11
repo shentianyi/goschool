@@ -53,13 +53,18 @@ Goschool::Application.routes.draw do
 
   resources :teacher_courses
 
-  resources :sub_courses
+  resources :sub_courses do
+    collection do
+      get :teachers
+    end
+  end
 
   resources :courses do
     collection do
       get ':id/:part/:ajax'=>:show
       get :fast_search
       get :list_search
+      get :subs
     end
   end
 

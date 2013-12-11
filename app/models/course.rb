@@ -23,7 +23,7 @@ class Course < ActiveRecord::Base
                      :condition_fields => [:tenant_id,:institution_id])
   def create_default_sub_course
     unless self.has_sub
-      sub_course= self.sub_courses.create(:parent_name=>self.name,:is_default=>true)
+      sub_course= self.sub_courses.create(parent_name:self.name,is_default:true,institution_id:self.institution_id)
     sub_course.assign_teachers(self.teachs) if self.teachs
     end
   end

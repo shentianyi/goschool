@@ -1,8 +1,8 @@
 #encoding: utf-8
 class SubCoursesController < ApplicationController
   before_filter :init_message ,:only=>[:create,:update,:destroy,:teachers]
-  before_filter :get_sub_course,:only=>[:update,:edit,:destroy,:teacher]
-  before_filter :render_nil_msg , :only=>[:update,:destroy,:teacher]
+  before_filter :get_sub_course,:only=>[:update,:edit,:destroy,:teachers]
+  before_filter :render_nil_msg , :only=>[:update,:destroy,:teachers]
   def create
     if @course=Course.find_by_id(params[:course_id].strip)
       @sub_course = @course.sub_courses.build(params[:sub_course].strip)
@@ -27,7 +27,9 @@ class SubCoursesController < ApplicationController
   end
 
  def teachers
-  render json: @sub_course.teacher_names
+   @msg.result=true
+   @msg.content=@sub_course.teacher_names
+  render json: @msg
  end
   private
 

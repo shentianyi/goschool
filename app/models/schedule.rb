@@ -41,12 +41,16 @@ class Schedule < ActiveRecord::Base
   
   private
   def validate_save
+    if self.start_time>=self.end_time
+      errors.add(:start_time,'开始时间应小于结束时间')
+    else
     teachers=self.sub_course.teachers
     condi=[self.start_time,self.end_time,self.start_time,self.end_time]
     teachers.each do |teacher|
       new_record_where=teacher.schedules.where('(schedules.start_time between ? and ?) or schedules.end_time between ? and ?',*condi)
       ex= new_record? ? new_record_where.first : new_record_where.where("schedules.id<>?",self.id).first
       errors.add(:start_time,"冲突：老师#{teacher.name}在此时间段已经有排课") if ex
+    end
     end
   end
   
