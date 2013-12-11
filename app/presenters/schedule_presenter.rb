@@ -39,7 +39,7 @@ class SchedulePresenter<Presenter
       id:self.id,
       teachers:self.teacher_names,
       start_date:self.start_time,
-      end_date:self.end_date,
+      end_date:self.end_time,
       color: '#D95C5C',
       sub_courses:{value:self.id,text:self.name,is_default:self.is_default}
     }
