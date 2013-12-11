@@ -1,0 +1,36 @@
+<div class="column">
+  <div class="ui raised segment">
+    <div class="ui red ribbon label">搜索结果: <div class="ui red label">1</div></div>
+    <a><i class="icon up"></i> 根据相关性排序</a>
+    <a><i class="icon up"></i> 根据最新活动排序</a>
+  </div>
+</div>
+<ul class="search-result" id="search-result">
+  <!--template-->
+
+  <% @student_presenters.each do |presenter|%>
+  <li>
+    <table class="ul table segment">
+      <tr>
+	<td class="two wide">
+	  <img class="circular ui image mini portrait" src="<%= presenter.student.image_url %>"/>
+	  <p class="name"><%= presenter.student.name %></p>
+	</td>
+	<td class="two wide">
+	  <p class="type"><%= presenter.status_display%></p>
+	  <p><%= presenter.student.school %></p>
+	  <p><%= presenter.age%></p>
+	</td>
+	<td class="five wide">
+	  <div class="ui blue labels small">
+	   
+	  </div>
+	  <p class="parent"><span>监护人:</span><span><%= presenter.student.guardian_phone %>(<%= presenter.student.guardian%>)</span></p>
+          <p class="phone"><span>联系电话:</span><span><%= presenter.student.phone %></span></p>
+	</td>
+      </tr>
+    </table>
+  </li>
+  <% end%>
+  <!--template-->
+</ul>

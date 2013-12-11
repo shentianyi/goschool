@@ -6,7 +6,8 @@ class StudentsController < ApplicationController
   def index
     @active_left_aside='students'
     @students = Student.all
-
+    @student_presenters = StudentPresenter.init_presenters(@students)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @students }
@@ -48,7 +49,7 @@ class StudentsController < ApplicationController
     @referrer = Logininfo.find_by_id(student.referrer_id)
     @students = []
     relations = []
-    relations = Recommendation.get_potential_relation(current_tenant.id,student.id)
+    relations = Recommendation.new.get_potential_relation(student.tenant_id,student.id)
     relations.each do |relation|
       s = Student.find_by_id(relation['id'])
       if s
