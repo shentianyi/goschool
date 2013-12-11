@@ -172,13 +172,16 @@ SCHEDULE.widget.init=function(){
         for(var i=0;i<length;i++){
             base_time+=$(".dhx_section_time>label").eq(i).text();
         }
-        var start=$(".dhx_section_time>select").eq(1).find(":selected").text();
-        var end=$(".dhx_section_time>select").eq(2).find(":selected").text();
+        var start=$(".dhx_section_time>select:visible").eq(0).find(":selected").text();
+        var end=$(".dhx_section_time>select:visible").eq(1).find(":selected").text();
         if($("#schedule-sub-courses :selected").attr("id")=="wzx"){
             $.post("/schedules",{
-                course_id:$("#schedule-course").attr("course_id"),
-                start_time:base_time+" "+start,
-                end_time:base_time+" "+end
+                schedule:{
+                    course_id:$("#schedule-course").attr("course_id"),
+                    start_time:base_time+" "+start,
+                    end_time:base_time+" "+end
+                }
+
             },function(data){
                  if(data.result){
                      scheduler.changeEventId(scheduler._lightbox_id, data.content)
@@ -191,9 +194,11 @@ SCHEDULE.widget.init=function(){
         }
         else{
             $.post("/schedules",{
-                sub_course_id:$("#schedule-sub-courses :selected").attr("id"),
-                start_time:base_time+" "+start,
-                end_time:base_time+" "+end
+                schedule:{
+                    sub_course_id:$("#schedule-sub-courses :selected").attr("id"),
+                    start_time:base_time+" "+start,
+                    end_time:base_time+" "+end
+                }
             },function(data){
                 if(data.result){
                     scheduler.changeEventId(scheduler._lightbox_id, data.content)
