@@ -241,7 +241,7 @@ GLOBAL.autoComplete.count=0;
         var $input=$(this);
         var auto_complete=$input.attr("autocomplete");
         if(auto_complete!="tags"){
-            $input.attr("use","entity");
+            $input.attr("ishould","BeSelected");
         }
         //down
         if(e.keyCode==40){
@@ -307,8 +307,8 @@ GLOBAL.autoComplete.count=0;
             }
         }
         //除去left and right
-        else if(e.keyCode!=37 && e.keyCode!=39){
-//            $("#autoComplete-call>ul").empty();
+        else if(e.keyCode!=37 && e.keyCode!=39 && e.keyCode!=32 && e.keyCode!=13){
+            $("#autoComplete-call>ul").empty();
             GLOBAL.autoComplete.count++;
             var $this=$(adapt_event(event).target).parents(".autoComplete").eq(0);
             var $my=$(adapt_event(event).target);
@@ -323,13 +323,13 @@ GLOBAL.autoComplete.count=0;
                         $("#autoComplete-call").css("left","-999em").attr("target","");
                     }
                     else{
-//                        if($this.hasClass("customAutoHeight")){
-//                            var max_height=$this.attr("autoMaxHeight");
-//                            $("#autoComplete-call").css("maxHeight",max_height)
-//                        }
-//                        else{
-//                            $("#autoComplete-call").css("maxHeight","110px")
-//                        }
+                        if($this.hasClass("customAutoHeight")){
+                            var max_height=$this.attr("autoMaxHeight");
+                            $("#autoComplete-call").css("maxHeight",max_height)
+                        }
+                        else{
+                            $("#autoComplete-call").css("maxHeight","110px")
+                        }
                         $("#autoComplete-call").css("maxHeight","110px");
                         var width=parseInt($this.css("width")),
                             left=$this[0].getBoundingClientRect().left,
@@ -341,25 +341,13 @@ GLOBAL.autoComplete.count=0;
                             var $target=$("#autoComplete-call>ul");
                             if(data.length>0){
                                 $("#autoComplete-call>ul").empty();
-                                if(auto_complete=="tags"){
-                                    for(var i=0;i<data.length;i++){
-                                        var data={label:data[i]};
-                                        var render=Mustache.render("{{#label}}<li>" +
-                                            "<p>{{name}}</p>"+
-                                            "</li>{{/label}}",data);
-                                        $target.append(render);
-                                    }
-                                }
-                                else{
-                                    $("#autoComplete-call>ul").empty();
-                                    for(var i=0;i<data.length;i++){
-                                        var data={entity:data[i]};
-                                        var render=Mustache.render("{{#entity}}<li id='{{id}}'>" +
-                                            "<p>{{name}}</p>"+
-                                            "<p>{{info}}</p>"+
-                                            "</li>{{/entity}}",data);
-                                        $target.append(render);
-                                    }
+                                for(var i=0;i<data.length;i++){
+                                    var data={data:data[i]};
+                                    var render=Mustache.render("{{#data}}<li id='{{id}}'>" +
+                                        "<p>{{name}}</p>"+
+                                        "<p>{{info}}</p>"+
+                                        "</li>{{/data}}",data);
+                                    $target.append(render);
                                 }
                             }
                             else{
@@ -394,37 +382,21 @@ GLOBAL.autoComplete.count=0;
        if(!$(this).hasClass("active")){
            $(this).siblings().removeClass("active");
            $(this).addClass("active");
-           var text=$("#autoComplete-call ul").find(".active>p:first-of-type").text();
-           $("#"+target).focus().val(text);
-           if($("#"+target).attr("use")!==undefined){
-               var $this=$("#"+target);
-               var value=$.trim($this.val());
-               var id=$("#autoComplete-call").find(".active").attr("id");
-               if(value.length>0){
-                   $this.parent().before($("<li />")
-                       .append($("<div />").addClass("ui label").attr("id",id).text(value)
-                           .append($("<i />").addClass("delete icon")))
-                   );
-               }
-               $this.val("");
-           }
        }
-        else{
-           var text=$("#autoComplete-call ul").find(".active>p:first-of-type").text();
-           $("#"+target).focus().val(text);
-           if($("#"+target).attr("use")!==undefined){
-               var $this=$("#"+target);
-               var value=$.trim($this.val());
-               var id=$("#autoComplete-call").find(".active").attr("id");
-               if(value.length>0){
-                   $this.parent().before($("<li />")
-                       .append($("<div />").addClass("ui label").attr("id",id).text(value)
-                           .append($("<i />").addClass("delete icon")))
-                   );
-               }
-               $this.val("");
-           }
-       }
+       var text=$("#autoComplete-call ul").find(".active>p:first-of-type").text();
+       $("#"+target).focus().val(text);
+       if($("#"+target).attr("im")=="label"){
+          var $this=$("#"+target);
+          var value=$.trim($this.val());
+          var id=$("#autoComplete-call").find(".active").attr("id");
+          var data={data:{
+              id:id,
+              value:value
+          }};
+          var render=Mustache.render("{{#data}}<li><div class='ui label' id={{id}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}",data);
+          $this.parent().before(render);
+          $this.val("");
+        }
     });
 })();
 //labelForm
@@ -441,39 +413,74 @@ GLOBAL.autoComplete.count=0;
         $(this).find("input").val(value);
     });
     $("body").on("keydown",".labelForm input",function(event){
-        var $parent=$(adapt_event(event).target).parents(".labelForm").eq(0);
-        var $this=$(adapt_event(event).target),e=adapt_event(event).event;
-        if(e.keyCode==32 || e.keyCode==13){
-            //entity 并且选择了一个下拉框选项
-            if($(this).attr("use")!==undefined&&$("#autoComplete-call").find(".active").length>0){
-                var value=$.trim($this.val());
-                var id=$("#autoComplete-call").find(".active").attr("id");
-                if(value.length>0){
-                    $this.parent().before($("<li />")
-                        .append($("<div />").addClass("ui label").attr("id",id).text(value)
-                            .append($("<i />").addClass("delete icon")))
-                    );
-                }
-                $this.val("");
-            }
-            //tags
-            else if($(this).attr("use")===undefined){
-                var value=$.trim($this.val());
-                if(value.length>0){
-                    $this.parent().before($("<li />")
-                        .append($("<div />").addClass("ui label").text(value)
-                            .append($("<i />").addClass("delete icon")))
-                    );
-                }
-                e.preventDefault();
-                $this.val("");
-            }
-            else{
-                $(this).val("");
-            }
-        }
+        $(this).attr("im","label");
     });
+
     $("body").on("click",".labelForm .delete.icon",function(){
         $(this).parents("li").eq(0).remove();
     });
 })();
+//针对所有input一个检测
+(function(){
+    $("body").on("keyup","input[type='text']",function(event){
+        var e=adapt_event(event).event,
+            $input=$(this);
+        if(e.keyCode==32){
+            if($input.val().length==0){
+                e.preventDefault();
+                $input.val("");
+            }
+            if($input.attr("im")=="label" && $input.attr("ishould")=="BeSelected"){
+                if($("#autoComplete-call").find(".active").length>0){
+                    var value=$.trim($input.val());
+                    var id=$("#autoComplete-call").find(".active").attr("id");
+                    var type=$("#autoComplete-call").find(".active").attr("type");
+                    var data={data:{
+                        id:id,
+                        value:value,
+                        type:type
+                    }};
+                    var render=Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id={{id}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}",data);
+                    $input.parent().before(render);
+                }
+                $input.val("");
+            }
+            else if($input.attr("im")=="label"){
+                var value=$.trim($input.val());
+                $input.parent().before($("<li />")
+                    .append($("<div />").addClass("ui label").text(value)
+                        .append($("<i />").addClass("delete icon")))
+                );
+                $input.val("");
+            }
+        }
+        else if(e.keyCode==13){
+            if($input.attr("im")=="label" && $input.attr("ishould")=="BeSelected"){
+                if($("#autoComplete-call").find(".active").length>0){
+                    var value=$.trim($input.val());
+                    var id=$("#autoComplete-call").find(".active").attr("id");
+                    var type=$("#autoComplete-call").find(".active").attr("type");
+                    var data={data:{
+                        id:id,
+                        value:value,
+                        type:type
+                    }};
+                    var render=Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id={{id}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}",data);
+                    $input.parent().before(render);
+                }
+                $input.val("");
+            }
+            else if($input.attr("im")=="label"){
+                var value=$.trim($input.val());
+                $input.parent().before($("<li />")
+                    .append($("<div />").addClass("ui label").text(value)
+                        .append($("<i />").addClass("delete icon")))
+                );
+                $input.val("");
+            }
+            else if($input.attr("ishould")=="BeSelected"){
+                $input.val("");
+            }
+        }
+    });
+})()
