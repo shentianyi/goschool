@@ -54,7 +54,7 @@ class Schedule < ActiveRecord::Base
     if institution_id
      return  joins(:sub_course).where(sub_courses:{institution_id:institution_id,status:CourseStatus::UNLOCK}).select('*,sub_courses.*')
      else
-        return joins(:sub_course).where({status:CourseStatus::UNLOCK}).select('*,sub_courses.*')
+        return joins(:sub_course).where(sub_courses:{status:CourseStatus::UNLOCK}).select('*,sub_courses.*')
      end
   end
 end
