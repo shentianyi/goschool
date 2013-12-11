@@ -16,13 +16,20 @@ class HomeworkTeacherMenuType
       TYPES.include?(type)
     }
   end
+  
  def self.condition type
    case type
    when ONGOING
        {status:HomeworkStatus::ONGOING}
+   when OTHER
+       ['created_at>=?',Time.now.ago(OTHER.days)]
    else
         generate_time_condition
    end
+ end
+ 
+ def self.generate_menu
+   
  end
 
 
