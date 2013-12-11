@@ -36,7 +36,7 @@ var SCHEDULE=SCHEDULE || {};
                             $("#schedule-sub-courses").append($("<option />").attr("id",item.id).text(item.name))
                         }
                     }
-                    var teachers=data.content.teachers.split(",");
+                    var teachers=data.content.teachers.join(",");
                     $("#new-schedule-teachers").text(teachers);
                 }
                 else{
