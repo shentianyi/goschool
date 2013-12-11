@@ -53,10 +53,11 @@ BACKSTUDENT.post_add_student = function(option){
 	is_active_account:option.is_active_account
     },function(data){
 	if(data.result){
-	    console.log("添加学生成功！");
+	    $(".back-index-add .remove").click();
+	    MessageBox("添加成功","top","success");
 	}
 	else{
-	    console.log("添加学生失败！");
+	    MessageBox_content(data.content);
 	}
     })
 }
