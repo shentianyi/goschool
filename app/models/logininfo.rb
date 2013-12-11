@@ -26,6 +26,16 @@ class Logininfo < ActiveRecord::Base
     return false
   end
 
+  #get role
+  def role_ids
+    roles = []
+    self.logininfo_roles.each do |logininfo_role|
+      role = logininfo_role.role_id
+      roles << role
+    end
+    return roles
+  end
+
   #confirmed?
   def confirmed?
     return true
@@ -68,5 +78,25 @@ class Logininfo < ActiveRecord::Base
     rescue ActiveRecord::RecordInvalid => invalid
       raise invalid
     end
+  end
+
+  def is_teacher?
+    Role.teacher?(self.role_ids)
+  end
+
+  def is_admin?
+    Role.admin?(self.role_ids)
+  end
+  
+  def is_sale?
+    Role.sale?(self.role_ids)
+  end
+
+  def is_student?
+    Role.student?(self.role_ids)
+  end
+
+  def is_manager?
+    Role.manager?(self.role_ids)
   end
 end
