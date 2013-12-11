@@ -6,9 +6,16 @@ class HomeworkTeacherMenuType
   LAST_30_DAYS=30
   LAST_40_DAYS=40
   Last_50_DAYS=50
-  OTHER=60
-
-
+  OTHER=60 
+  
+  class<<self
+    define_method(:include?){|type|
+       unless self.const_defined?(:TYPES)
+         self.const_set(:TYPES, self.constants.map{|c| self.const_get(c.to_s)})
+       end
+      TYPES.include?(type)
+    }
+  end
  def self.condition type
    case type
    when ONGOING
@@ -18,10 +25,7 @@ class HomeworkTeacherMenuType
    end
  end
 
- def self.contains?(type)
- 
- end
- 
+
  private 
  def self.generate_time_condition type
        {created_at:[Time.now.ago((type-10).days)..Time.now.ago(type.days)]}
