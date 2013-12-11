@@ -51,8 +51,10 @@ BACKINDEX.init=(function(){
                 for(i=0;i<length_service-1;i++){
                     $("#sub-service-teachers>.sub-course-block-item").eq(1).remove();
                 }
-                $("#add-class-choose-institution,#add-service-choose-institution").find(".text").text("选择机构...");
+                var text=$("#add-class-choose-institution .item").eq(0).text();
+                $("#add-class-choose-institution,#add-service-choose-institution").find(".text").text(text);
                 $("#add-class-choose-institution,#add-service-choose-institution").find(".item").removeClass("active");
+                $("#add-class-choose-institution,#add-service-choose-institution").find(".item").eq(0).addClass("active");
             }
             BACKINDEX.addItem.clear();
             $(this).parents(".back-index-add").css("left","-999em").css("right","auto");

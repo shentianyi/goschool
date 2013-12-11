@@ -176,9 +176,10 @@ var BACKCOURSE=BACKCOURSE || {};
        }
     });
     $(document).ready(function(){
-//       $("#new-class-label,#service-label").autoComplete("/tags/fast_search","label");
-//       $("#autoC5,#autoC3,#service-teachers,#sub-teacher-service-1").autoComplete("/teachers/fast_search");
         $("#add-class-choose-institution,#add-service-choose-institution").dropdown();
+        $("#add-class-choose-institution .item").eq(0).addClass("active");
+        $("#add-service-choose-institution .item").eq(0).addClass("active");
+
     });
 })();
 BACKCOURSE.sub_teacher={};
