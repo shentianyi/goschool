@@ -3388,10 +3388,19 @@ scheduler.deleteEvent = function(id, silent) {
 		return;
 	if (ev) {
         //post
-        alert("find me js")
-		delete this._events[id];
-		this.unselect(id);
-		this.event_updated(ev);
+        if(ev.text!="新建课程"){
+            var validate=SCHEDULE.calendar.delete_item(id);
+            if(validate){
+                delete this._events[id];
+                this.unselect(id);
+                this.event_updated(ev);
+            }
+        }
+        else{
+            delete this._events[id];
+            this.unselect(id);
+            this.event_updated(ev);
+        }
 	}
 	this.callEvent("onEventDeleted", [id, ev]);
     SCHEDULE.calendar.delete_item(id);

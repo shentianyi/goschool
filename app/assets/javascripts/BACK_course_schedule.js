@@ -8,22 +8,21 @@
 //init
 var SCHEDULE=SCHEDULE || {};
 (function(){
+    //lighbox中的输入
     $("body").on("keyup","#schedule-course",function(event){
         var e=adapt_event(event).event;
-        if(e.keyCode==32 && $("#autoComplete-call").find(".active").length>0){
-            $this=$(this);
-            window.setTimeout(function(){
-                  $this.blur();
-            },210);
+        if((e.keyCode==32 || e.keyCode==13) && $("#autoComplete-call").find(".active").length>0){
+            var $this=$(this);
+            $this.blur();
         }
     }).on("blur","#schedule-course",function(){
+        $("#schedule-course").attr("course_id",$("#autoComplete-call").find(".active").attr("id"));
         //post(判断是否有subclass两种情况)
         if($("#autoComplete-call").find(".active").length>0){
             $.get("courses/subs",{
                 id:$("#autoComplete-call").find(".active").attr("id")
             },function(data){
                 if(data.result){
-                    $("#schedule-course").attr("course_id",$("#autoComplete-call").find(".active").attr("id"));
                     $("#new-schedule-teachers").empty();
                     $("#schedule-sub-courses").empty();
                     if(data.content.sub_courses.length==0){
@@ -59,23 +58,42 @@ var SCHEDULE=SCHEDULE || {};
                 }
             })
     });
+    //选择机构
     $("body").on("click","#schedule-select-institution .menu>div",function(){
         SCHEDULE.institution.choose();
     });
+    //在右边删除课程
     $("body").on("click","#search-list .search-class-schedule i",function(){
         if(confirm("是否删除课程？")){
             var id=$(this).attr('affect');
-            $("#search-list .search-class-schedule").find("#"+id).remove();
-            //post
-            if( scheduler.getEvent(id)!==undefined){
-                scheduler.deleteEvent(id);
+            var validate=SCHEDULE.calendar.delete_item(id);
+            if(validate){
+                $("#search-list .search-class-schedule").find("#"+id).remove();
+                if( scheduler.getEvent(id)!==undefined){
+                    scheduler.deleteEvent(id);
+                }
             }
         }
     });
+    //选择颜色
     $("body").on("click","#schedule-color li",function(){
         if(!$(this).hasClass("active")){
             $(this).addClass("active").siblings().removeClass("active");
         }
+    });
+    //右边的搜索框回车事件
+    $("body").on("keyup","#search-courses",function(event){
+       var e=adapt_event(event).event;
+       if(e.keyCode==13 && $("#autoComplete-call .active").length>0){
+           var value= $.trim($(this).val());
+           var institution_id=$("#schedule-select-institution .item.active").attr("value");
+           $.get("",{
+               q:value,
+               institution_id:institution_id
+           },function(data){
+
+           })
+       }
     });
     $(document).ready(function(){
         $('#schedule-select-institution').dropdown();
@@ -90,7 +108,8 @@ SCHEDULE.widget.init=function(){
     scheduler.locale.labels.section_teachers = '老师:';
     scheduler.locale.labels.section_colors = '显示颜色:';
     scheduler.locale.labels.section_time = '上课时间:';
-    scheduler.config.event_duration = 60;
+    scheduler.config.first_hour = 8;
+    scheduler.config.event_duration = 120;
     scheduler.config.auto_end_date = true;
     scheduler.config.details_on_create=true;
     //scheduler.config.buttons_left = ["dhx_delete_btn"];
@@ -129,7 +148,7 @@ SCHEDULE.widget.init=function(){
     });
     //模板的信息
     scheduler.config.lightbox.sections = [
-        {name:"courses", height:40, type:"template", map_to:"my_courses"},
+        {name:"courses", height:31, type:"template", map_to:"my_courses"},
         {name:"sub_courses", height:25, type:"template",map_to:"my_sub_courses" },
         {name:"teachers", height: 21, type:"template", map_to:"my_teachers"},
         {name:"colors", height: 25, type:"template", map_to:"my_colors"},
@@ -137,43 +156,30 @@ SCHEDULE.widget.init=function(){
     ];
     //点击保存按钮
     scheduler.save_lightbox=function(){
-//        var teacher_length=$("#schedule-teachers li").length- 1,
-//            i,teacher_name,sub_course_length=$("#schedule-sub-courses option").length;
-//        data=scheduler.formSection('time').getValue();
-//        data.text= $.trim($("#schedule-course").val());
-//        data.sub_courses=[];
-//        for(i=0;i<sub_course_length;i++){
-//            var sub_item={};
-//            sub_item.value=$("#schedule-sub-courses option").eq(i).attr("value");
-//            sub_item.text=$("#schedule-sub-courses option").eq(i).text();
-//            if($("#schedule-sub-courses option").eq(i).prop("selected")){
-//                sub_item.selected=true
-//            }
-//            data.sub_courses.push(sub_item);
-//        }
-//        data.sub_courses={value:$("#schedule-sub-courses :selected").attr("value"),text:$("#schedule-sub-courses :selected").text()}
-//        data.color=$("#schedule-color .active").attr("color");
-//        if(teacher_length==0){
-//           MessageBox("请至少安排一位老师","top","warning");
-//        }
-//        else{
-//            data.teachers=[];
-//            for(i=0;i<teacher_length;i++){
-//                teacher_name=$.trim($("#schedule-teachers li").eq(i).text());
-//                data.teachers.unshift(teacher_name);
-//            }
-
-            //post
-//            var id=Math.floor(Math.random()*100);
-//            this._empty_lightbox(data);
-//            scheduler.changeEventId(scheduler._lightbox_id, id)
-//            this.hide_lightbox();
+        var i,sub_course_length=$("#schedule-sub-courses option").length;
+        var w_data=scheduler.formSection('time').getValue();
+        w_data.text= $.trim($("#schedule-course").val());
+        w_data.sub_courses=[];
+        for(i=0;i<sub_course_length;i++){
+            var sub_item={};
+            sub_item.value=$("#schedule-sub-courses option").eq(i).attr("value");
+            sub_item.text=$("#schedule-sub-courses option").eq(i).text();
+            if($("#schedule-sub-courses option").eq(i).prop("selected")){
+                sub_item.selected=true
+            }
+            w_data.sub_courses.push(sub_item);
+        }
+        w_data.sub_courses={value:$("#schedule-sub-courses :selected").attr("value"),text:$("#schedule-sub-courses :selected").text()}
+        w_data.color=$("#schedule-color .active").attr("color");
+        w_data.teachers=$("#new-schedule-teachers").text();
+        //post
         var length=$(".dhx_section_time>label").length,base_time="";
         for(var i=0;i<length;i++){
             base_time+=$(".dhx_section_time>label").eq(i).text();
         }
         var start=$(".dhx_section_time>select:visible").eq(0).find(":selected").text();
         var end=$(".dhx_section_time>select:visible").eq(1).find(":selected").text();
+        var lightbox=this;
         if($("#schedule-sub-courses :selected").attr("id")=="wzx"){
             $.post("/schedules",{
                 schedule:{
@@ -184,8 +190,9 @@ SCHEDULE.widget.init=function(){
 
             },function(data){
                  if(data.result){
-                     scheduler.changeEventId(scheduler._lightbox_id, data.content)
-                     this.hide_lightbox();
+                     lightbox._empty_lightbox(w_data);
+                     scheduler.changeEventId(scheduler._lightbox_id, data.content);
+                     lightbox.hide_lightbox(data.content);
                  }
                 else{
                      MessageBox_content(data.content);
@@ -201,8 +208,9 @@ SCHEDULE.widget.init=function(){
                 }
             },function(data){
                 if(data.result){
-                    scheduler.changeEventId(scheduler._lightbox_id, data.content)
-                    this.hide_lightbox();
+                    lightbox._empty_lightbox(w_data);
+                    scheduler.changeEventId(scheduler._lightbox_id, data.content);
+                    lightbox.hide_lightbox(data.content);
                 }
                 else{
                     MessageBox_content(data.content);
@@ -260,7 +268,17 @@ SCHEDULE.calendar.getData=function(){
 };
 SCHEDULE.calendar.have_load={max:Date.parse(new Date()),min:Date.parse(new Date())};
 SCHEDULE.calendar.delete_item=function(id){
-    //post delete(已经删除掉了，可能要去核心代码里面写json)
+    //post delete(已经删除掉了，可能要去核心代码里面写ajax)
+    var validate;
+    $.ajax({
+        url:"",
+        data:{id:id},
+        type:"DELETE",
+        success:function(data){
+              validate=data.result;
+        }
+    })
+    return validate;
 }
 //SCHEDULE.calendar.edit_item=function(ev){
 //    $("#schedule-course").val(ev.text);

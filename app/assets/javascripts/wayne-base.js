@@ -308,7 +308,7 @@ GLOBAL.autoComplete.count=0;
         }
         //除去left and right
         else if(e.keyCode!=37 && e.keyCode!=39 && e.keyCode!=13){
-            $("#autoComplete-call>ul").empty();
+//            $("#autoComplete-call>ul").empty();
             GLOBAL.autoComplete.count++;
             var $this=$(adapt_event(event).target).parents(".autoComplete").eq(0);
             var $my=$(adapt_event(event).target);
@@ -506,8 +506,12 @@ GLOBAL.autoComplete.count=0;
                 $input.val("");
             }
             else if($input.attr("ishould")=="BeSelected"){
+                if($("#autoComplete-call").find(".active").length>0){
 
-                $input.val("");
+                }
+                else{
+                    MessageBox("请在下拉菜单中选择一条","top","warning");
+                }
             }
         }
     });

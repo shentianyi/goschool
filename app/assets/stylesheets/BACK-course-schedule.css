@@ -166,6 +166,9 @@
     font-size:13px;
     line-height:9px;
 }
+.dhx_wrap_section .ui.input input[type='text']{
+    padding:5px 10px;
+}
 /********************************************************************************* 右侧*/
 /*选择机构的*/
 .schedule-search{
