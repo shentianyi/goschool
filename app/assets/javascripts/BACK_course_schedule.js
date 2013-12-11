@@ -20,7 +20,7 @@ var SCHEDULE=SCHEDULE || {};
         //post(判断是否有subclass两种情况)
         if($("#autoComplete-call").find(".active").length>0){
             $.get("courses/subs",{
-                course_id:$("#autoComplete-call").find(".active").attr("id")
+                id:$("#autoComplete-call").find(".active").attr("id")
             },function(data){
                 if(data.result){
                     $("#schedule-course").attr("course_id",$("#autoComplete-call").find(".active").attr("id"));
@@ -44,7 +44,6 @@ var SCHEDULE=SCHEDULE || {};
                 }
             })
         }
-        $("#schedule-course").val("");
     }).on("change","#schedule-sub-courses",function(){
             var id=$("#schedule-sub-courses :selected").attr("id")
             $.get("/sub_courses/teachers",{
