@@ -4,10 +4,6 @@ class SchedulePresenter<Presenter
   def initialize(schedule)
     @schedule=schedule
   end
-
-  def teachers
-    self.teachers
-  end
   
   def start_hour
    '%02d' % self.start_time.hour
@@ -27,7 +23,7 @@ class SchedulePresenter<Presenter
   end
   
   def time
-    "#{start_date}  #{start_time}-#{end_time}"
+    "#{start_date}  #{start_hour}-#{end_hour}"
   end
   
   def teacher_names

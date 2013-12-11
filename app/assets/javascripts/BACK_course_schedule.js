@@ -47,11 +47,11 @@ var SCHEDULE=SCHEDULE || {};
     }).on("change","#schedule-sub-courses",function(){
             var id=$("#schedule-sub-courses :selected").attr("id")
             $.get("/sub_courses/teachers",{
-                sub_course_id:id
+                id:id
             },function(data){
                 if(data.result){
                     $("#new-schedule-teachers").empty();
-                    var teachers=data.content.teachers.split(",");
+                    var teachers=data.content.join(",");
                     $("#new-schedule-teachers").text(teachers);
                 }
                 else{

@@ -53,7 +53,11 @@ Goschool::Application.routes.draw do
 
   resources :teacher_courses
 
-  resources :sub_courses
+  resources :sub_courses do
+    collection do
+      get :teachers
+    end
+  end
 
   resources :courses do
     collection do

@@ -99,7 +99,7 @@ class CoursesController < ApplicationController
       @subs.each do |s|
         sub<<{id:s.id,name:s.name}
       end
-       @msg.content={sub_courses:sub,teachers:@sub.first.teacher_names}  
+       @msg.content={sub_courses:sub,teachers:@subs.first.teacher_names}  
     else
       @msg.content={sub_courses:[],teachers:@course.teacher_names}  
     end
