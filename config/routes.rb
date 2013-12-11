@@ -47,7 +47,7 @@ Goschool::Application.routes.draw do
   end
   resources :students do
     collection do
-      get :list_search
+      get :fast_search
     end
   end
 
