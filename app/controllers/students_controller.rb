@@ -138,9 +138,9 @@ class StudentsController < ApplicationController
   end
 
   # List Search Result
-  def list_search
+  def fast_search
     results = []
-    results = Redis::Search.query('Student',params[:query],:conditions =>{:tenant_id=>current_tenant.id})
+    results = Redis::Search.complete('Student',params[:query],:conditions =>{:tenant_id=>current_tenant.id})
     students = []
     results.slice(0,10).each do |student|
       students<<{:name=>student['name'],:school=>student['school'],:address=>student['address'],:guardian=>student['guardian']}
