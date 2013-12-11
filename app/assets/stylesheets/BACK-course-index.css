@@ -95,8 +95,8 @@
 .back-index-add[name='course']>.inner .right-part{
     float:left;
     width:50%;
-    height:410px;
-    margin-top:50px;
+    height:420px;
+    margin-top:40px;
     overflow-y:auto;
     position:relative;
 }

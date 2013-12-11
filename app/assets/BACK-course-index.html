@@ -97,7 +97,7 @@
         </a>
     </header>
     <div class="search-list" id="search-list">
-        <div class="ui big fluid icon input search-input autoComplete customAutoHeight" load="course" autoMaxHeight="210px">
+        <div class="ui big fluid icon input search-input autoComplete customAutoHeight" autoMaxHeight="210px">
             <input placeholder="在此输入搜素条件..." type="text" id="autoC1">
             <i class="search icon"></i>
         </div>
@@ -241,7 +241,7 @@
                 </div>
                 <div class="ui left icon input specialInput labelForm autoComplete" >
                     <ul name="label">
-                        <li><input type='text' placeholder="标签..." id="new-class-label" /></li>
+                        <li><input type='text' placeholder="标签..." id="new-class-label" autocomplete="tags"/></li>
                     </ul>
                     <i class="tag icon stop"></i>
                 </div>
@@ -253,7 +253,7 @@
 
                 <div class="ui left icon input specialInput labelForm autoComplete total-teachers" id="total-teachers">
                     <ul>
-                        <li><input type='text' placeholder="授课老师..." id="autoC5" /></li>
+                        <li><input type='text' placeholder="授课老师..." id="autoC5" autocomplete="teachers"/></li>
                     </ul>
                     <i class="male icon"></i>
                 </div>
@@ -265,7 +265,7 @@
                         </div>
                         <div class="ui input specialInput labelForm autoComplete total-teachers" >
                             <ul>
-                                <li><input type='text' placeholder="老师..." id="autoC3" /></li>
+                                <li><input type='text' placeholder="老师..." id="autoC3" autocomplete="teachers"/></li>
                             </ul>
                         </div>
                         <i class="icon collapse" ></i>
@@ -317,7 +317,7 @@
                 </div>
                 <div class="ui left icon input specialInput labelForm autoComplete" >
                     <ul name='label'>
-                        <li><input type='text' placeholder="标签..." id="service-label" /></li>
+                        <li><input type='text' placeholder="标签..." id="service-label" autocomplete="tags"/></li>
                     </ul>
                     <i class="tag icon stop"></i>
                 </div>
@@ -328,7 +328,7 @@
                 </div>
                 <div class="ui left icon input specialInput labelForm autoComplete total-teachers" id="total-service-teachers">
                     <ul>
-                        <li><input type='text' placeholder="授课老师..." id="service-teachers"/></li>
+                        <li><input type='text' placeholder="授课老师..." id="service-teachers" autocomplete="teachers"/></li>
                     </ul>
                     <i class="male icon"></i>
                 </div>
@@ -339,7 +339,7 @@
                         </div>
                         <div class="ui input specialInput labelForm autoComplete total-teachers" >
                             <ul>
-                                <li><input type='text' placeholder="老师..." id="sub-teacher-service-1" /></li>
+                                <li><input type='text' placeholder="老师..." id="sub-teacher-service-1" autocomplete="teachers" /></li>
                             </ul>
                         </div>
                         <i class="icon collapse"></i>
@@ -360,15 +360,15 @@
             <p>托福夏季班</p>
             <p>www.sina.com</p>
         </li>
-        <li>
+        <li id="2">
             <p>2</p>
             <p>托福的夏季版</p>
         </li>
-        <li>
+        <li id="3">
             <p>3</p>
             <p>托福的夏季版</p>
         </li>
-        <li>
+        <li id="4">
             <p>4</p>
             <p>托福的夏季版</p>
         </li>

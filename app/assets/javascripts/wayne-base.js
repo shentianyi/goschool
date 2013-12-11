@@ -234,161 +234,307 @@ $('.ui.checkbox').checkbox();
 //(add class 'autoComplete' to the outer div wrapping input,you need #autoComplete-call)
 GLOBAL.autoComplete={};
 GLOBAL.autoComplete.count=0;
+//(function(){
+//    $.fn.extend({
+//        autoComplete:function(href){
+//            var arguments_length=arguments.length;
+//            if(arguments.length==1){
+//                $(this).attr("use","entity");
+//            }
+//            $(this).on("keyup",function(event){
+//                var e=adapt_event(event).event,validate=false;
+//                if(e.keyCode==40){
+//                    if($.trim($(adapt_event(event).target).val()).length>0){
+//                        if($("#autoComplete-call ul").find(".active").length==0){
+//                            $("#autoComplete-call ul li").eq(0).addClass("active");
+//                        }
+//                        else{
+//                            if($("#autoComplete-call ul").find(".active").next().length==0){
+//                                $("#autoComplete-call ul").find(".active").removeClass("active");
+//                                $("#autoComplete-call ul li").eq(0).addClass("active");
+//                            }
+//                            else{
+//                                $("#autoComplete-call ul").find(".active").removeClass("active").next().addClass("active")
+//                            }
+//                            var activeTop=parseInt($("#autoComplete-call ul li.active").offset().top),
+//                                outerTop=parseInt($("#autoComplete-call").offset().top),
+//                                maxHeight=parseInt($("#autoComplete-call").css("maxHeight"));
+//                            if(activeTop-outerTop+8>=maxHeight){
+//                                var origin_top=$("#autoComplete-call").scrollTop()
+//                                $("#autoComplete-call").scrollTop(origin_top+18);
+//                            }
+//                            else if(activeTop<outerTop){
+//                                $("#autoComplete-call").scrollTop(0);
+//                            }
+//                        }
+//
+//                        validate=true;
+//                    }
+//
+//                }
+//                else if(e.keyCode==38){
+//                    if($.trim($(adapt_event(event).target).val()).length>0){
+//                        if($("#autoComplete-call ul").find(".active").length==0){
+//                            var count=$("#autoComplete-call ul li").length;
+//                            $("#autoComplete-call ul li").eq(count-1).addClass("active");
+//                        }
+//                        else{
+//                            if($("#autoComplete-call ul").find(".active").prev().length==0){
+//                                $("#autoComplete-call ul").find(".active").removeClass("active");
+//                                var count=$("#autoComplete-call ul li").length;
+//                                $("#autoComplete-call ul li").eq(count-1).addClass("active");
+//                            }
+//                            else{
+//                                $("#autoComplete-call ul").find(".active").removeClass("active").prev().addClass("active")
+//                            }
+//                            var activeTop=parseInt($("#autoComplete-call ul li.active").offset().top),
+//                                outerTop=parseInt($("#autoComplete-call").offset().top),
+//                                maxHeight=parseInt($("#autoComplete-call").css("maxHeight")),
+//                                realHeight=$("#autoComplete-call").prop("scrollHeight"),
+//                                itemHeight=parseInt($("#autoComplete-call ul li").eq(0).height());
+//                            if(activeTop<=outerTop){
+//                                var origin_top=$("#autoComplete-call").scrollTop()
+//                                $("#autoComplete-call").scrollTop(origin_top-18);
+//                            }
+//                            else if(realHeight-(activeTop-outerTop)-itemHeight<=3){
+//                                $("#autoComplete-call").scrollTop("999");
+//                            }
+//
+//                        }
+//                        validate=true;
+//                    }
+//                }
+//                else if(e.keyCode!=37 && e.keyCode!=39){
+//                    $("#autoComplete-call>ul").empty();
+//                    GLOBAL.autoComplete.count++;
+//                    var $this=$(adapt_event(event).target).parents(".autoComplete").eq(0);
+//                    var $my=$(adapt_event(event).target);
+//                    window.setTimeout(function(){
+//                        if(GLOBAL.autoComplete.count>1){
+//                            GLOBAL.autoComplete.count--;
+//                            return ;
+//                        }
+//                        else{
+//                            GLOBAL.autoComplete.count--;
+//                            if($.trim($my.val()).length==0){
+//                                $("#autoComplete-call").css("left","-999em").attr("target","");
+//                            }
+//                            else{
+//                                if($this.hasClass("customAutoHeight")){
+//                                    var max_height=$this.attr("autoMaxHeight");
+//                                    $("#autoComplete-call").css("maxHeight",max_height)
+//                                }
+//                                else{
+//                                    $("#autoComplete-call").css("maxHeight","110px")
+//                                }
+//                                var width=parseInt($this.css("width")),
+//                                    left=$this[0].getBoundingClientRect().left,
+//                                    top=$this[0].getBoundingClientRect().bottom,
+//                                    target=$my.attr("id");
+//                                //post
+//                                var value= $.trim($my.val());
+//                                $.get(href,{q:value},function(data){
+//
+//                                    var $target=$("#autoComplete-call>ul");
+//                                    if(data.length>0){
+//                                        if(arguments_length>1){
+//                                            for(var i=0;i<data.length;i++){
+//                                                var data={label:data[i]};
+//                                                var render=Mustache.render("{{#label}}<li>" +
+//                                                    "<p>{{name}}</p>"+
+//                                                    "</li>{{/label}}",data);
+//                                                $target.append(render);
+//                                            }
+//                                        }
+//                                        else{
+//
+//                                            for(var i=0;i<data.length;i++){
+//                                                var data={entity:data[i]};
+//                                                var render=Mustache.render("{{#entity}}<li id='{{id}}'>" +
+//                                                    "<p>{{name}}</p>"+
+//                                                    "<p>{{info}}</p>"+
+//                                                    "</li>{{/entity}}",data);
+//                                                $target.append(render);
+//                                            }
+//                                        }
+//                                    }
+//                                    else{
+//                                       $target.append($("<p />").addClass("no_match").text("没有匹配内容..."))
+//                                    }
+//                                });
+//                                $("#autoComplete-call").css("width",width-2).css("left",left).css("top",top).attr("target",target);
+//                                $(window).resize(function(){
+//                                    var width=parseInt($this.css("width")),
+//                                        left=$this[0].getBoundingClientRect().left,
+//                                        top=$this[0].getBoundingClientRect().bottom;
+//                                    $("#autoComplete-call").css("width",width-2).css("left",left).css("top",top);
+//                                });
+//                            }
+//                        }
+//                    },100)
+//                }
+//                if(validate){
+//                    var text=$("#autoComplete-call ul").find(".active>p:first-of-type").text();
+//                    $(document.activeElement).val(text);
+//                }
+//            });
+//        }
+//    })
+//})(jQuery);
+
 (function(){
-    $.fn.extend({
-        autoComplete:function(href){
-            var arguments_length=arguments.length;
-            if(arguments.length==1){
-                $(this).attr("use","entity");
+    $("body").on("keyup",".autoComplete input",function(event){
+        var e=adapt_event(event).event,validate=false;
+        var $input=$(this);
+        var auto_complete=$input.attr("autocomplete");
+        if(auto_complete!="tags"){
+            $input.attr("use","entity");
+        }
+        //down
+        if(e.keyCode==40){
+            if($.trim($(adapt_event(event).target).val()).length>0){
+                if($("#autoComplete-call ul").find(".active").length==0){
+                    $("#autoComplete-call ul li").eq(0).addClass("active");
+                }
+                else{
+                    if($("#autoComplete-call ul").find(".active").next().length==0){
+                        $("#autoComplete-call ul").find(".active").removeClass("active");
+                        $("#autoComplete-call ul li").eq(0).addClass("active");
+                    }
+                    else{
+                        $("#autoComplete-call ul").find(".active").removeClass("active").next().addClass("active")
+                    }
+                    var activeTop=parseInt($("#autoComplete-call ul li.active").offset().top),
+                        outerTop=parseInt($("#autoComplete-call").offset().top),
+                        maxHeight=parseInt($("#autoComplete-call").css("maxHeight"));
+                    if(activeTop-outerTop+8>=maxHeight){
+                        var origin_top=$("#autoComplete-call").scrollTop()
+                        $("#autoComplete-call").scrollTop(origin_top+18);
+                    }
+                    else if(activeTop<outerTop){
+                        $("#autoComplete-call").scrollTop(0);
+                    }
+                }
+
+                validate=true;
             }
-            $(this).on("keyup",function(event){
-                var e=adapt_event(event).event,validate=false;
-                if(e.keyCode==40){
-                    if($.trim($(adapt_event(event).target).val()).length>0){
-                        if($("#autoComplete-call ul").find(".active").length==0){
-                            $("#autoComplete-call ul li").eq(0).addClass("active");
-                        }
-                        else{
-                            if($("#autoComplete-call ul").find(".active").next().length==0){
-                                $("#autoComplete-call ul").find(".active").removeClass("active");
-                                $("#autoComplete-call ul li").eq(0).addClass("active");
-                            }
-                            else{
-                                $("#autoComplete-call ul").find(".active").removeClass("active").next().addClass("active")
-                            }
-                            var activeTop=parseInt($("#autoComplete-call ul li.active").offset().top),
-                                outerTop=parseInt($("#autoComplete-call").offset().top),
-                                maxHeight=parseInt($("#autoComplete-call").css("maxHeight"));
-                            if(activeTop-outerTop+8>=maxHeight){
-                                var origin_top=$("#autoComplete-call").scrollTop()
-                                $("#autoComplete-call").scrollTop(origin_top+18);
-                            }
-                            else if(activeTop<outerTop){
-                                $("#autoComplete-call").scrollTop(0);
-                            }
-                        }
 
-                        validate=true;
+        }
+        //up
+        else if(e.keyCode==38){
+            if($.trim($(adapt_event(event).target).val()).length>0){
+                if($("#autoComplete-call ul").find(".active").length==0){
+                    var count=$("#autoComplete-call ul li").length;
+                    $("#autoComplete-call ul li").eq(count-1).addClass("active");
+                }
+                else{
+                    if($("#autoComplete-call ul").find(".active").prev().length==0){
+                        $("#autoComplete-call ul").find(".active").removeClass("active");
+                        var count=$("#autoComplete-call ul li").length;
+                        $("#autoComplete-call ul li").eq(count-1).addClass("active");
+                    }
+                    else{
+                        $("#autoComplete-call ul").find(".active").removeClass("active").prev().addClass("active")
+                    }
+                    var activeTop=parseInt($("#autoComplete-call ul li.active").offset().top),
+                        outerTop=parseInt($("#autoComplete-call").offset().top),
+                        maxHeight=parseInt($("#autoComplete-call").css("maxHeight")),
+                        realHeight=$("#autoComplete-call").prop("scrollHeight"),
+                        itemHeight=parseInt($("#autoComplete-call ul li").eq(0).height());
+                    if(activeTop<=outerTop){
+                        var origin_top=$("#autoComplete-call").scrollTop()
+                        $("#autoComplete-call").scrollTop(origin_top-18);
+                    }
+                    else if(realHeight-(activeTop-outerTop)-itemHeight<=3){
+                        $("#autoComplete-call").scrollTop("999");
                     }
 
                 }
-                else if(e.keyCode==38){
-                    if($.trim($(adapt_event(event).target).val()).length>0){
-                        if($("#autoComplete-call ul").find(".active").length==0){
-                            var count=$("#autoComplete-call ul li").length;
-                            $("#autoComplete-call ul li").eq(count-1).addClass("active");
-                        }
-                        else{
-                            if($("#autoComplete-call ul").find(".active").prev().length==0){
-                                $("#autoComplete-call ul").find(".active").removeClass("active");
-                                var count=$("#autoComplete-call ul li").length;
-                                $("#autoComplete-call ul li").eq(count-1).addClass("active");
-                            }
-                            else{
-                                $("#autoComplete-call ul").find(".active").removeClass("active").prev().addClass("active")
-                            }
-                            var activeTop=parseInt($("#autoComplete-call ul li.active").offset().top),
-                                outerTop=parseInt($("#autoComplete-call").offset().top),
-                                maxHeight=parseInt($("#autoComplete-call").css("maxHeight")),
-                                realHeight=$("#autoComplete-call").prop("scrollHeight"),
-                                itemHeight=parseInt($("#autoComplete-call ul li").eq(0).height());
-                            if(activeTop<=outerTop){
-                                var origin_top=$("#autoComplete-call").scrollTop()
-                                $("#autoComplete-call").scrollTop(origin_top-18);
-                            }
-                            else if(realHeight-(activeTop-outerTop)-itemHeight<=3){
-                                $("#autoComplete-call").scrollTop("999");
-                            }
-
-                        }
-                        validate=true;
-                    }
+                validate=true;
+            }
+        }
+        //除去left and right
+        else if(e.keyCode!=37 && e.keyCode!=39){
+//            $("#autoComplete-call>ul").empty();
+            GLOBAL.autoComplete.count++;
+            var $this=$(adapt_event(event).target).parents(".autoComplete").eq(0);
+            var $my=$(adapt_event(event).target);
+            window.setTimeout(function(){
+                if(GLOBAL.autoComplete.count>1){
+                    GLOBAL.autoComplete.count--;
+                    return ;
                 }
-                else if(e.keyCode!=37 && e.keyCode!=39){
-                    $("#autoComplete-call>ul").empty();
-                    GLOBAL.autoComplete.count++;
-                    var $this=$(adapt_event(event).target).parents(".autoComplete").eq(0);
-                    var $my=$(adapt_event(event).target);
-                    window.setTimeout(function(){
-                        if(GLOBAL.autoComplete.count>1){
-                            GLOBAL.autoComplete.count--;
-                            return ;
-                        }
-                        else{
-                            GLOBAL.autoComplete.count--;
-                            if($.trim($my.val()).length==0){
-                                $("#autoComplete-call").css("left","-999em").attr("target","");
-                            }
-                            else{
-                                if($this.hasClass("customAutoHeight")){
-                                    var max_height=$this.attr("autoMaxHeight");
-                                    $("#autoComplete-call").css("maxHeight",max_height)
+                else{
+                    GLOBAL.autoComplete.count--;
+                    if($.trim($my.val()).length==0){
+                        $("#autoComplete-call").css("left","-999em").attr("target","");
+                    }
+                    else{
+//                        if($this.hasClass("customAutoHeight")){
+//                            var max_height=$this.attr("autoMaxHeight");
+//                            $("#autoComplete-call").css("maxHeight",max_height)
+//                        }
+//                        else{
+//                            $("#autoComplete-call").css("maxHeight","110px")
+//                        }
+                        $("#autoComplete-call").css("maxHeight","110px");
+                        var width=parseInt($this.css("width")),
+                            left=$this[0].getBoundingClientRect().left,
+                            top=$this[0].getBoundingClientRect().bottom,
+                            target=$my.attr("id");
+                        //post
+                        var value= $.trim($my.val());
+                        $.get("/"+auto_complete+"/fast_search",{q:value},function(data){
+                            var $target=$("#autoComplete-call>ul");
+                            if(data.length>0){
+                                $("#autoComplete-call>ul").empty();
+                                if(auto_complete=="tags"){
+                                    for(var i=0;i<data.length;i++){
+                                        var data={label:data[i]};
+                                        var render=Mustache.render("{{#label}}<li>" +
+                                            "<p>{{name}}</p>"+
+                                            "</li>{{/label}}",data);
+                                        $target.append(render);
+                                    }
                                 }
                                 else{
-                                    $("#autoComplete-call").css("maxHeight","110px")
+                                    $("#autoComplete-call>ul").empty();
+                                    for(var i=0;i<data.length;i++){
+                                        var data={entity:data[i]};
+                                        var render=Mustache.render("{{#entity}}<li id='{{id}}'>" +
+                                            "<p>{{name}}</p>"+
+                                            "<p>{{info}}</p>"+
+                                            "</li>{{/entity}}",data);
+                                        $target.append(render);
+                                    }
                                 }
-                                var width=parseInt($this.css("width")),
-                                    left=$this[0].getBoundingClientRect().left,
-                                    top=$this[0].getBoundingClientRect().bottom,
-                                    target=$my.attr("id");
-                                //post
-                                var value= $.trim($my.val());
-                                $.get(href,{q:value},function(data){
-
-                                    var $target=$("#autoComplete-call>ul");
-                                    if(data.length>0){
-                                        if(arguments_length>1){
-                                            for(var i=0;i<data.length;i++){
-                                                var data={label:data[i]};
-                                                var render=Mustache.render("{{#label}}<li>" +
-                                                    "<p>{{name}}</p>"+
-                                                    "</li>{{/label}}",data);
-                                                $target.append(render);
-                                            }
-                                        }
-                                        else{
-
-                                            for(var i=0;i<data.length;i++){
-                                                var data={entity:data[i]};
-                                                var render=Mustache.render("{{#entity}}<li id='{{id}}'>" +
-                                                    "<p>{{name}}</p>"+
-                                                    "<p>{{info}}</p>"+
-                                                    "</li>{{/entity}}",data);
-                                                $target.append(render);
-                                            }
-                                        }
-                                    }
-                                    else{
-                                       $target.append($("<p />").addClass("no_match").text("没有匹配内容..."))
-                                    }
-                                });
-                                $("#autoComplete-call").css("width",width-2).css("left",left).css("top",top).attr("target",target);
-                                $(window).resize(function(){
-                                    var width=parseInt($this.css("width")),
-                                        left=$this[0].getBoundingClientRect().left,
-                                        top=$this[0].getBoundingClientRect().bottom;
-                                    $("#autoComplete-call").css("width",width-2).css("left",left).css("top",top);
-                                });
                             }
-                        }
-                    },100)
+                            else{
+                                $("#autoComplete-call>ul").empty();
+                                $target.append($("<p />").addClass("no_match").text("没有匹配内容..."))
+                            }
+                        });
+                        $("#autoComplete-call").css("width",width-2).css("left",left).css("top",top).attr("target",target);
+                        $(window).resize(function(){
+                            var width=parseInt($this.css("width")),
+                                left=$this[0].getBoundingClientRect().left,
+                                top=$this[0].getBoundingClientRect().bottom;
+                            $("#autoComplete-call").css("width",width-2).css("left",left).css("top",top);
+                        });
+                    }
                 }
-                if(validate){
-                    var text=$("#autoComplete-call ul").find(".active>p:first-of-type").text();
-                    $(document.activeElement).val(text);
-                }
-            });
+            },100)
         }
-    })
-})(jQuery);
-
-(function(){
+        if(validate){
+            var text=$("#autoComplete-call ul").find(".active>p:first-of-type").text();
+            $(document.activeElement).val(text);
+        }
+    });
     $("body").on("blur",".autoComplete input",function(){
         var $this=$(this);
         window.setTimeout(function(){
             $("#autoComplete-call").css("left","-999em").attr("target","")
-        },100);
-
+        },200);
     });
     $("body").on("click","#autoComplete-call li",function(){
        var target=$("#autoComplete-call").attr("target");
@@ -426,8 +572,6 @@ GLOBAL.autoComplete.count=0;
                $this.val("");
            }
        }
-
-
     });
 })();
 //labelForm
@@ -447,10 +591,10 @@ GLOBAL.autoComplete.count=0;
         var $parent=$(adapt_event(event).target).parents(".labelForm").eq(0);
         var $this=$(adapt_event(event).target),e=adapt_event(event).event;
         if(e.keyCode==32 || e.keyCode==13){
+            //entity 并且选择了一个下拉框选项
             if($(this).attr("use")!==undefined&&$("#autoComplete-call").find(".active").length>0){
                 var value=$.trim($this.val());
                 var id=$("#autoComplete-call").find(".active").attr("id");
-                var length=$this.parents("ul").children().length-1;
                 if(value.length>0){
                     $this.parent().before($("<li />")
                         .append($("<div />").addClass("ui label").attr("id",id).text(value)
@@ -459,6 +603,7 @@ GLOBAL.autoComplete.count=0;
                 }
                 $this.val("");
             }
+            //tags
             else if($(this).attr("use")===undefined){
                 var value=$.trim($this.val());
                 if(value.length>0){

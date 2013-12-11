@@ -71,14 +71,12 @@ var BACKCOURSE=BACKCOURSE || {};
         var data={counts:{count:BACKCOURSE.sub_teacher.count}};
         var render=Mustache.render(BACKCOURSE.sub_teacher.class.template,data);
         $(this).before(render);
-        $("#"+BACKCOURSE.sub_teacher.count).autoComplete("/teachers/fast_search");
         BACKCOURSE.sub_teacher.count++;
     });
     $("body").on("click","#add-sub-service",function(){
         var data={counts:{count:BACKCOURSE.sub_teacher.count}};
         var render=Mustache.render(BACKCOURSE.sub_teacher.service.template,data);
         $(this).before(render);
-        $("#"+BACKCOURSE.sub_teacher.count).autoComplete("/teachers/fast_search");
         BACKCOURSE.sub_teacher.count++;
     });
     $("body").on("keyup","input[name='long'],input[name='people']",function(event){
@@ -134,12 +132,17 @@ var BACKCOURSE=BACKCOURSE || {};
                }
                //按分课程来
                else{
-                   $teacher_target=$(".choose-teacher-delivery").next().next(),i,sub_teacher_array=[],sub_teacher_array_item={};
-                   for(i=0;i<$teacher_target.find(".sub-course-block-item").length;i++){
+                   $teacher_target=$(".choose-teacher-delivery:visible").next().next(),i,sub_teacher_array=[];
+                   var item_length=$teacher_target.find(".sub-course-block-item").length;
+                   for(var i=0;i<item_length;i++){
+                       var sub_teacher_array_item={};
                        sub_teacher_array_item.name=$teacher_target.find(".sub-course-block-item").eq(i).find(".sub-course-name input").val();
                        var length=$teacher_target.find(".sub-course-block-item").eq(i).find(".total-teachers ul").children().length,teacher_ids=[];
-                       for(i=0;i<length-1;i++){
-                           var teacher_id=$teacher_target.find(".sub-course-block-item").eq(i).find(".total-teachers ul li").eq(i).find(".label").attr("id");
+                       if(length>1){
+                           var $teachers_target=$teacher_target.find(".sub-course-block-item").eq(i).find(".total-teachers ul li")
+                       }
+                       for(var j=0;j<length-1;j++){
+                           var teacher_id=$teachers_target.eq(j).find(".label").attr("id");
                            var teacher_ids_item={id:teacher_id}
                            teacher_ids.push(teacher_ids_item);
                        }
@@ -170,8 +173,8 @@ var BACKCOURSE=BACKCOURSE || {};
        }
     });
     $(document).ready(function(){
-       $("#new-class-label,#service-label").autoComplete("/tags/fast_search","label");
-       $("#autoC5,#autoC3,#service-teachers,#sub-teacher-service-1").autoComplete("/teachers/fast_search");
+//       $("#new-class-label,#service-label").autoComplete("/tags/fast_search","label");
+//       $("#autoC5,#autoC3,#service-teachers,#sub-teacher-service-1").autoComplete("/teachers/fast_search");
         $("#add-class-choose-institution,#add-service-choose-institution").dropdown();
     });
 })();
@@ -186,7 +189,7 @@ BACKCOURSE.sub_teacher.class.template=
          </div>\
          <div class="ui input specialInput labelForm autoComplete total-teachers" >\
             <ul>\
-                <li><input type="text" placeholder="老师..." id="sub{{count}}" /></li>\
+                <li><input type="text" placeholder="老师..." id="sub{{count}}" autocomplete="labels"/></li>\
             </ul>\
          </div>\
          <i class="icon collapse"></i>\
@@ -199,12 +202,13 @@ BACKCOURSE.sub_teacher.service.template=
      </div>\
      <div class="ui input specialInput labelForm autoComplete total-teachers" >\
         <ul>\
-            <li><input type="text" placeholder="老师..." id="sub{{count}}" /></li>\
+            <li><input type="text" placeholder="老师..." id="sub{{count}}" autocomplete="teachers"/></li>\
             </ul>\
          </div>\
          <i class="icon collapse" ></i>\
     </div>{{/counts}}';
 BACKCOURSE.post_add_class=function(option){
+    console.log(option);
     $.post("/courses",{ 
             course:option 
     },function(data){
