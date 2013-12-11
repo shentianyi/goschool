@@ -18,6 +18,7 @@ var SCHEDULE=SCHEDULE || {};
         }
     }).on("blur","#schedule-course",function(){
             //post(判断是否有subclass两种情况)
+
             $("#schedule-sub-courses").empty();
             for(var i=0;i<4;i++){
                 $("#schedule-sub-courses").append($("<option />").attr("value",i).text(i));
@@ -43,8 +44,9 @@ var SCHEDULE=SCHEDULE || {};
         }
     });
     $(document).ready(function(){
-        SCHEDULE.widget.init();
         $('#schedule-select-institution').dropdown();
+        $("#schedule-select-institution .item").eq(0).addClass("active");
+        SCHEDULE.widget.init();
     })
 })();
 SCHEDULE.widget={};
@@ -88,14 +90,14 @@ SCHEDULE.widget.init=function(){
             "<li color='#63A69F'></li>"+
             "<li color='#D95C5C'></li>"+
             "</ul>";
-        ev.my_teachers = "<p></p>";
+        ev.my_teachers = "<p id='new-schedule-teachers'></p>";
         return true
     });
     //模板的信息
     scheduler.config.lightbox.sections = [
         {name:"courses", height:40, type:"template", map_to:"my_courses"},
         {name:"sub_courses", height:25, type:"template",map_to:"my_sub_courses" },
-        {name:"teachers", height: 45, type:"template", map_to:"my_teachers"},
+        {name:"teachers", height: 25, type:"template", map_to:"my_teachers"},
         {name:"colors", height: 25, type:"template", map_to:"my_colors"},
         {name: "time", height: 72, type: "time",time_format:["%Y","%m","%d","%H:%i"] , map_to: "auto"}
     ];
