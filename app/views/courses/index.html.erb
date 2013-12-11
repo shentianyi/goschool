@@ -37,54 +37,7 @@
                     <a><i class="icon up"></i> 根据最新活动排序</a>
                </div>
           </div>
-          <ul class="search-result" id="search-result" name="course">
-               <!--template-->
-               <li>
-                    <table class="ui table segment">
-                         <tr>
-                              <td colspan="3" class="fourteen wide">
-                              <p class="course-name">
-                                   托福秋季班
-                              </p>
-                              <div class="ui blue labels small">
-                                   <a class="ui label"> 托福 </a>
-                                   <a class="ui label"> 雅思 </a>
-                                   <a class="ui label"> SAT </a>
-                                   <a class="ui label"> 听力 </a>
-                                   <a class="ui label"> 口语 </a>
-                                   <a class="ui label"> 写作 </a>
-                              </div></td>
-                              <td rowspan="2" class="course-status">
-                              <p>
-                                   状态
-                              </p>
-                              <p>
-                                   正在进行
-                              </p></td>
-                         </tr>
-                         <tr>
-                              <td>
-                              <p >
-                                   授课时间:<span>2013年10月13日-2013年12月31日</span>
-                              </p>
-                              <p class="course-teachers">
-                                   授课老师:<span>Mary</span><span>Laura</span><span>Frank</span></span>
-                              </p>
-                              <p>
-                                   已报班: <span class="class-size">21</span> 人
-                              </p></td>
-                              <td class="course-desc">
-                              <p >
-                                   <span>简介:</span><span>秋季班为一月份托福考试冲刺，强化听力冲刺，还有很多乱七八糟的</span>
-                              </p></td>
-                              <td class="three wide"><a class="ui mini button teal" href="BACK-course-detail.html"> 详情 </a></td>
-
-                         </tr>
-                    </table>
-               </li>
-               <!--template-->
-
-          </ul>
+          <%=render 'search_result'%>
      </div>
 </article>
 <%= render partial:'form'%>
