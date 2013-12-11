@@ -3,11 +3,10 @@ class SchedulesController < ApplicationController
   before_filter :init_message ,:only=>[:show,:create,:update,:destroy,:dates,:courses,:teachers]
   before_filter :get_schedule,:only=>[:update,:destroy]
   before_filter :render_nil_msg , :only=>[:update,:destroy]
-  
   def index
     @institutions=current_tenant.institutions
   end
-  
+
   def show
     if @schedule=Schedule.by_id(params[:id])
       @msg.result=true
@@ -19,7 +18,11 @@ class SchedulesController < ApplicationController
   end
 
   def create
-    @schedule=Schedule.new(params[:schedule].strip)
+    if params.has_key?(:course_id)
+      @course=Course.find_by_id(params[:course_id])
+      params[:sub_course_id]=@course.sub_courses.first.id
+    end
+    @schedule=Schedule.new(params[:schedule].except(:course_id))
     @msg.content=(@msg.result=@schedule.save) ? @schedule.id :  @schedule.errors.messages
     render :json=>@msg
   end

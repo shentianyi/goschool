@@ -4,13 +4,13 @@
 </p>
 <p class='search-class-teachers'>
      <span>讲师：</span>
-     <span> <%=course.teacher_names%></span>
+     <span> <%=course.teacher_names_string%></span>
 </p>
 <ul class="search-class-schedule">
      <%@schedules.each do |schedule|%>
           <li id="<%=schedule.id%>">
           <span><%=schedule.time%></span>
-          <span><%=schedule.teacher_names%></span>
+          <span><%=schedule.teacher_names_string%></span>
           <i class="trash icon" affect="<%=schedule.id%>"></i>
      </li>
      <%end%>

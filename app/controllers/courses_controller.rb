@@ -1,8 +1,8 @@
 #encoding: utf-8
 class CoursesController < ApplicationController
-  before_filter :init_message ,:only=>[:edit,:create,:update,:destroy]
-  before_filter :get_course,:only=>[:show,:update,:edit,:destroy]
-  before_filter :render_nil_msg , :only=>[:edit,:update,:destroy]
+  before_filter :init_message ,:only=>[:edit,:create,:update,:destroy,:subs]
+  before_filter :get_course,:only=>[:show,:update,:edit,:destroy,:subs]
+  before_filter :render_nil_msg , :only=>[:edit,:update,:destroy,:subs]
   
   def index
     @active_left_aside='courses'
@@ -81,6 +81,29 @@ class CoursesController < ApplicationController
       items<<{:name=>item['title'],:content=>item['name'],:type=>item['type'],:id=>item['id']} if(item['is_default']=='false' || item['is_default'].nil?)
     end
     render :json=>items
+  end
+  
+  
+  def fast_search
+    items=[]
+     Redis::Search.complete('Course', params[:q], :conditions => {:tenant_id => current_tenant.id,:institution_id=>params[:institution_id]}).each do
+       items<<{id:item['id'],name:item['name']}
+     end
+     render json:items
+  end
+  
+  def subs
+    @subs=@course.sub_courses.where(is_default:false).all
+    if @subs.count>0
+       sub=[]
+      @sub.each do |s|
+        sub<<{id:s.id,name:s.name,teachers:s.teacher_names}
+      end
+       @msg.content=sub
+    else
+      @msg.content={teachers:@course.teacher_names}  
+    end
+    render json:@msg
   end
 
   private

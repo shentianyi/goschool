@@ -36,6 +36,10 @@ class Course < ActiveRecord::Base
     self.teachers.select('users.*,sub_courses.id as sub_course_id,sub_courses.name as sub_courses_name,sub_courses.parent_name as course_name').all
   end
 
+  def teacher_names
+    teachers.map{|t| t.name}
+  end
+
   private
 
   def validate_save

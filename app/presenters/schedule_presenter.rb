@@ -31,8 +31,12 @@ class SchedulePresenter<Presenter
   end
   
   def teacher_names
-    teachers.map{|t| t.name}.join(', ')
-  end
+      teachers.map{|t| t.name}
+    end
+    
+    def teacher_names_string
+      teacher_names.join(', ')
+    end
 
   def to_json
     {course_name:self.parent_name,

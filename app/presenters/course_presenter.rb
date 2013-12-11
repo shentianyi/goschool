@@ -19,6 +19,10 @@ class CoursePresenter<Presenter
     end
     
     def teacher_names
-      teachers.map{|t| t.name}.join(', ')
+      teachers.map{|t| t.name}
+    end
+    
+    def teacher_names_string
+      teacher_names.join(', ')
     end
 end

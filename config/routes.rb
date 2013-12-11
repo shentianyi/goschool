@@ -6,7 +6,7 @@ Goschool::Application.routes.draw do
     get 'teachers/schedules'
     get 'teachers/fast_search'
   end
-  
+
   controller :tags do
     get 'tags/fast_search'
   end
@@ -58,6 +58,7 @@ Goschool::Application.routes.draw do
   resources :courses do
     collection do
       get ':id/:part/:ajax'=>:show
+      get :fast_search
       get :list_search
     end
   end

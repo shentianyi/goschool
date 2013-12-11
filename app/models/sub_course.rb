@@ -9,9 +9,8 @@ class SubCourse < ActiveRecord::Base
   has_many :teachers,:through=>:teacher_courses,:class_name=>'User'
   has_many :homeworks,:through=>:teacher_courses
   attr_accessible :name, :parent_name,:course_id,:is_default,:institution_id
-  
-  acts_as_tenant(:tenant)
 
+  acts_as_tenant(:tenant)
 
   redis_search_index(:title_field => :parent_name,
                      :prefix_index_enable => true,
@@ -20,13 +19,16 @@ class SubCourse < ActiveRecord::Base
   # notice name blank validate !! default sub course
   #
   validate :validate_save
-
   def assign_teachers teachers
     teachers.uniq.each do |teacher|
       self.teacher_courses<<TeacherCourse.new(:user_id=>teacher[:id]) unless teacher[:id].blank?
     end
   end
-   
+
+  def teacher_names
+    self.teachers.map{|t| t.name}
+  end
+
   private
 
   def del_default_sub_course
@@ -38,10 +40,10 @@ class SubCourse < ActiveRecord::Base
   end
 
   def validate_save
-   unless self.is_default
-     errors.add(:name,'子课程名称不可为空') if self.name.blank?
-     errors.add(:name,'子课程名称不可重复') if self.class.where(name:self.name,course_id:self.course_id).first if new_record?
-     errors.add(:code,'子课程代码不可重复') if self.class.where('id<>? and name=? and course_id=?',self.id,self.name,self.course_id).first unless new_record?
-   end
+    unless self.is_default
+      errors.add(:name,'子课程名称不可为空') if self.name.blank?
+      errors.add(:name,'子课程名称不可重复') if self.class.where(name:self.name,course_id:self.course_id).first if new_record?
+      errors.add(:code,'子课程代码不可重复') if self.class.where('id<>? and name=? and course_id=?',self.id,self.name,self.course_id).first unless new_record?
+    end
   end
 end
