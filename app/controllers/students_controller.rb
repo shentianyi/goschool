@@ -21,13 +21,13 @@ class StudentsController < ApplicationController
     
     case params[:part]
     when 'courses'
-      courses()
+      courses(@student)
     when 'achievements'
-      achievements()
+      achievements(@student)
     when 'relation'
-      relation()
+      relation(@student)
     when 'consultingrecord'
-      consultation()
+      consultation(@student)
     end
 
     respond_to do |format|
@@ -36,19 +36,28 @@ class StudentsController < ApplicationController
     end
   end
 
-  def courses()
+  def courses(student)
     
   end
 
-  def achievements()
+  def achievements(student)
     
   end
 
-  def relation()
-    
+  def relation(student)
+    @referrer = Logininfo.find_by_id(student.referrer_id)
+    @students = []
+    relations = []
+    relations = Recommendation.get_potential_relation(current_tenant.id,student.id)
+    relations.each do |relation|
+      s = Student.find_by_id(relation['id'])
+      if s
+        @students<<s
+      end
+    end
   end
 
-  def consultation()
+  def consultation(student)
     @consultations = StudentConsultingrecordPresenter.new(@studnet.consultations)
   end
 

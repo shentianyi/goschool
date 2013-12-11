@@ -25,7 +25,7 @@ class Student < ActiveRecord::Base
 
   redis_search_index(:title_field =>:name,
                      :condition_field => [:tenant_id],
-                     # :prefix_index_enable => true,
+                     :prefix_index_enable => true,
                      :alias_field=>:email,
                      :ext_fields=>[:email,:address,:school,:guardian])
 

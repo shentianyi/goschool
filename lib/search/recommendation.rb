@@ -15,8 +15,6 @@ class Recommendation
   def get_potential_relation(tenant_id,student_id,limit=20,cache_expire_time=30.minutes)
     entity_type_id = Student.name
     get_recommendations(tenant_id,entity_type_id,student_id,cache_expire_time,limit)
-  end
-
 
   # @param [String] course_id    the target couse which need recommend students
   # @param [String] tenant_id
