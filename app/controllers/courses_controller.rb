@@ -96,8 +96,12 @@ class CoursesController < ApplicationController
     @subs=@course.sub_courses.where(is_default:false).all
     if @subs.count>0
        sub=[]
-      @sub.each do |s|
-        sub<<{id:s.id,name:s.name,teachers:s.teacher_names}
+      @sub.each_with_index do |s,i|
+        if i==0
+        sub<<{id:s.id,name:s.name,teachers:s.teacher_names} 
+        else
+        sub<<{id:s.id,name:s.name}
+        end
       end
        @msg.content=sub
     else
