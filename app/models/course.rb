@@ -37,7 +37,7 @@ class Course < ActiveRecord::Base
   end
 
   def teacher_names
-    teachers.map{|t| t.name}
+    self.teachers.map{|t| t.name}
   end
 
   private
