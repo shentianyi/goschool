@@ -110,7 +110,7 @@ var BACKCOURSE=BACKCOURSE || {};
                        var length=$teacher_target.length;
                        for(i=0;i<length-1;i++){
                            teacher_id=$teacher_target.eq(i).find("div").attr("id");
-                           var teacher_id_array_item={id:teacher_id}
+                           var teacher_id_array_item={id:teacher_id};
                            teacher_id_array.push(teacher_id_array_item);
                        }
                        var option={
