@@ -506,6 +506,7 @@ GLOBAL.autoComplete.count=0;
                 $input.val("");
             }
             else if($input.attr("ishould")=="BeSelected"){
+
                 $input.val("");
             }
         }
