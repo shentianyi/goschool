@@ -63,6 +63,18 @@ p{
     color:#333;
     margin:5px 0;
 }
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:  black;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:  black;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:  black;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:   black;
+}
 select{
     width:120px;
     border-radius:1px;

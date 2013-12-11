@@ -23,7 +23,7 @@ var SCHEDULE=SCHEDULE || {};
                 $("#schedule-sub-courses").append($("<option />").attr("value",i).text(i));
             }
     });
-    $('#schedule-select-institution').dropdown();
+
     $("body").on("click","#schedule-select-institution .menu>div",function(){
         SCHEDULE.institution.choose();
     });
@@ -44,6 +44,7 @@ var SCHEDULE=SCHEDULE || {};
     });
     $(document).ready(function(){
         SCHEDULE.widget.init();
+        $('#schedule-select-institution').dropdown();
     })
 })();
 SCHEDULE.widget={};
