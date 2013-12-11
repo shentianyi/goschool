@@ -337,24 +337,48 @@ GLOBAL.autoComplete.count=0;
                             target=$my.attr("id");
                         //post
                         var value= $.trim($my.val());
-                        $.get("/"+auto_complete+"/fast_search",{q:value},function(data){
-                            var $target=$("#autoComplete-call>ul");
-                            if(data.length>0){
-                                $("#autoComplete-call>ul").empty();
-                                for(var i=0;i<data.length;i++){
-                                    var data={data:data[i]};
-                                    var render=Mustache.render("{{#data}}<li id='{{id}}'>" +
-                                        "<p>{{name}}</p>"+
-                                        "<p>{{info}}</p>"+
-                                        "</li>{{/data}}",data);
-                                    $target.append(render);
+                        if(auto_complete.split(",")[0]=="courses"){
+                            var courses=auto_complete.split(",");
+                            var institution_id=$(".select-institution:visible .item.active").attr("value");
+                            $.get("/"+courses[0]+"/"+courses[1]+"_search",{q:value,institution_id:institution_id},function(data){
+                                var $target=$("#autoComplete-call>ul");
+                                if(data.length>0){
+                                    $("#autoComplete-call>ul").empty();
+                                    for(var i=0;i<data.length;i++){
+                                        var data={data:data[i]};
+                                        var render=Mustache.render("{{#data}}<li id='{{id}}' type='{{type}}'>" +
+                                            "<p>{{name}}</p>"+
+                                            "<p>{{info}}</p>"+
+                                            "</li>{{/data}}",data);
+                                        $target.append(render);
+                                    }
                                 }
-                            }
-                            else{
-                                $("#autoComplete-call>ul").empty();
-                                $target.append($("<p />").addClass("no_match").text("没有匹配内容..."))
-                            }
-                        });
+                                else{
+                                    $("#autoComplete-call>ul").empty();
+                                    $target.append($("<p />").addClass("no_match").text("没有匹配内容..."))
+                                }
+                            });
+                        }
+                        else{
+                            $.get("/"+auto_complete+"/fast_search",{q:value},function(data){
+                                var $target=$("#autoComplete-call>ul");
+                                if(data.length>0){
+                                    $("#autoComplete-call>ul").empty();
+                                    for(var i=0;i<data.length;i++){
+                                        var data={data:data[i]};
+                                        var render=Mustache.render("{{#data}}<li id='{{id}}' type='{{type}}'>" +
+                                            "<p>{{name}}</p>"+
+                                            "<p>{{info}}</p>"+
+                                            "</li>{{/data}}",data);
+                                        $target.append(render);
+                                    }
+                                }
+                                else{
+                                    $("#autoComplete-call>ul").empty();
+                                    $target.append($("<p />").addClass("no_match").text("没有匹配内容..."))
+                                }
+                            });
+                        }
                         $("#autoComplete-call").css("width",width-2).css("left",left).css("top",top).attr("target",target);
                         $(window).resize(function(){
                             var width=parseInt($this.css("width")),

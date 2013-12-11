@@ -1756,7 +1756,8 @@ div.dhx_menu_head, div.dhx_menu_icon {
 }
 .dhx_cal_prev_button {
     right: 61px;
-    background: url(../images/arrow_left.png) no-repeat center center;
+    /*background: url(../images/arrow_left.png) no-repeat center center;*/
+    background: url(/assets/arrow_left.png) no-repeat center center;
     -webkit-border-top-left-radius:5px;
     -webkit-border-bottom-left-radius:5px;
     -moz-border-radius-topleft:5px;
@@ -1766,7 +1767,8 @@ div.dhx_menu_head, div.dhx_menu_icon {
 }
 .dhx_cal_next_button {
     right: 14px;
-    background: url(../images/arrow_right.png) no-repeat center center;
+    /*background: url(../images/arrow_right.png) no-repeat center center;*/
+    background: url(/assets/arrow_right.png) no-repeat center center;
     -webkit-border-top-right-radius:5px;
     -webkit-border-bottom-right-radius:5px;
     -moz-border-radius-topright:5px;

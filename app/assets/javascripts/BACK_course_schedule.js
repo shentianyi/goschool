@@ -76,7 +76,7 @@ SCHEDULE.widget.init=function(){
     scheduler.attachEvent("onBeforeLightbox", function(id) {
         var ev = scheduler.getEvent(id);
         ev.my_courses ="<div class='ui input autoComplete'>\
-                <input type='text' id='schedule-course'>\
+                <input type='text' id='schedule-course' autocomplete='courses,fast'>\
             </div>";
         ev.my_sub_courses ="<select id='schedule-sub-courses'>" +
             "<option value='0'>不指定</option>" +
@@ -88,10 +88,7 @@ SCHEDULE.widget.init=function(){
             "<li color='#63A69F'></li>"+
             "<li color='#D95C5C'></li>"+
             "</ul>";
-        ev.my_teachers = "<div class='ui input specialInput labelForm autoComplete total-teachers'><ul id='schedule-teachers'>\
-                    <li><input type='text' id='schedule-teacher-input' autocomplete='teachers'/></li>\
-                </ul>\
-            </div>";
+        ev.my_teachers = "<p></p>";
         return true
     });
     //模板的信息
