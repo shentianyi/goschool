@@ -9,6 +9,9 @@ class ApplicationController < ActionController::Base
   before_filter :find_current_user_tenant
 
   set_current_tenant_through_filter
+  
+  authorize_resource
+
   def find_current_user_tenant
     current_tenant=Tenant.find_by_id(current_user.tenant_id)
     set_current_tenant(current_tenant)
@@ -20,11 +23,22 @@ class ApplicationController < ActionController::Base
 
   # must be teacher
   def require_user_as_teacher
-    unless current_user.user.is_teacher
-      respond_to do |format|
-        format.html {render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false}
-        format.json { render json: {access:false} ,status: 403 }
-      end
+    unless current_user.is_teacher?
+      error_page_403
+    end
+  end
+  
+  #must be manager
+  def require_user_as_manager
+    unless current_user.is_manager?
+      error_page_403
+    end
+  end
+  
+  def error_page_403
+    respond_to do |format|
+      format.html {render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false}
+      format.json { render json: {access:false} ,status: 403 }
     end
   end
 
