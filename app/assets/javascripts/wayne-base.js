@@ -455,7 +455,7 @@ GLOBAL.autoComplete.count=0;
         }
         //除去left and right
         else if(e.keyCode!=37 && e.keyCode!=39){
-            $("#autoComplete-call>ul").empty();
+//            $("#autoComplete-call>ul").empty();
             GLOBAL.autoComplete.count++;
             var $this=$(adapt_event(event).target).parents(".autoComplete").eq(0);
             var $my=$(adapt_event(event).target);
