@@ -17,6 +17,7 @@ class HomeworksController < ApplicationController
 
   # homeworks/teacher?course=1&cate=100&sub=1
   def teacher
+    
   end
 
   def update
