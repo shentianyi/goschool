@@ -7,7 +7,7 @@ class CoursesController < ApplicationController
   def index
     @active_left_aside='courses'
     @institutions=current_tenant.institutions
-    @courses=CoursePresenter.init_presenters(Course.all)
+    @courses=CoursePresenter.init_presenters(Course.joins(:institution).select('courses.*,institutions.name as institution_name').all)
   end
 
   def show
@@ -86,8 +86,8 @@ class CoursesController < ApplicationController
   
   def fast_search
     items=[]
-     Redis::Search.complete('Course', params[:q], :conditions => {:tenant_id => current_tenant.id,:institution_id=>params[:institution_id]}).each do
-       items<<{id:item['id'],name:item['name']}
+     Redis::Search.complete('Course', params[:q], :conditions => {:tenant_id => current_tenant.id,:institution_id=>params[:institution_id]}).each do |item|
+       items<<{id:item['id'],name:item['title']}
      end
      render json:items
   end
