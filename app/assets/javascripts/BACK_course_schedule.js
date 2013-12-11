@@ -23,7 +23,7 @@ var SCHEDULE=SCHEDULE || {};
                 $("#schedule-sub-courses").append($("<option />").attr("value",i).text(i));
             }
     });
-    $('#schedule-select-institution').dropdown();
+
     $("body").on("click","#schedule-select-institution .menu>div",function(){
         SCHEDULE.institution.choose();
     });
@@ -44,6 +44,7 @@ var SCHEDULE=SCHEDULE || {};
     });
     $(document).ready(function(){
         SCHEDULE.widget.init();
+        $('#schedule-select-institution').dropdown();
     })
 })();
 SCHEDULE.widget={};
@@ -56,7 +57,8 @@ SCHEDULE.widget.init=function(){
     scheduler.config.event_duration = 60;
     scheduler.config.auto_end_date = true;
     scheduler.config.details_on_create=true;
-    scheduler.config.buttons_left = ["dhx_delete_btn"];
+    //scheduler.config.buttons_left = ["dhx_delete_btn"];
+    scheduler.config.buttons_left = [];
     scheduler.config.buttons_right = ["dhx_cancel_btn","dhx_save_btn"];
     scheduler.config.icons_select = [
         "icon_delete"
@@ -64,7 +66,7 @@ SCHEDULE.widget.init=function(){
     scheduler.templates.quick_info_title = function(start, end, ev){
         var teachers=ev.teachers.join(",");
         if(ev.sub_courses.value=="default"){
-            return ev.text.substr(0,50)+'<span>'+teachers+'</span>';
+            return ev.text.substr(0,50)+'<span></span>'+'<span>'+teachers+'</span>';
         }
         else{
             return ev.text.substr(0,50)+'<span>'+ev.sub_courses.text.substr(0,50)+'</span><span>'+teachers+'</span>';

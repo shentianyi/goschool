@@ -2,7 +2,7 @@
 class FilesController < ApplicationController
   # add attach
   def attach
-    msg=Message.new(:result=>true)
+    msg=Msg.new(:result=>true)
     begin
       msg.object=[]
       params[:files].each do |file|

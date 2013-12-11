@@ -4,6 +4,7 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
+    @active_left_aside='students'
     @students = Student.all
 
     respond_to do |format|
@@ -36,11 +37,11 @@ class StudentsController < ApplicationController
   end
 
   def courses()
-    @courses = StudentCoursePresenter.new(@student.course_student)
+    
   end
 
   def achievements()
-    #@achievements = StudentAchievementsPresenter.new(@student.achievements)
+    
   end
 
   def relation()
@@ -137,9 +138,9 @@ class StudentsController < ApplicationController
   end
 
   # List Search Result
-  def list_search
+  def fast_search
     results = []
-    results = Redis::Search.query('Student',params[:query],:conditions =>{:tenant_id=>current_tenant.id})
+    results = Redis::Search.complete('Student',params[:query],:conditions =>{:tenant_id=>current_tenant.id})
     students = []
     results.slice(0,10).each do |student|
       students<<{:name=>student['name'],:school=>student['school'],:address=>student['address'],:guardian=>student['guardian']}
