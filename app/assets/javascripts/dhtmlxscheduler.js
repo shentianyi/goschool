@@ -3388,6 +3388,7 @@ scheduler.deleteEvent = function(id, silent) {
 		return;
 	if (ev) {
         //post
+        alert("find me js")
 		delete this._events[id];
 		this.unselect(id);
 		this.event_updated(ev);

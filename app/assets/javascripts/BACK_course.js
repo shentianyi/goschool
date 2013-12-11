@@ -105,10 +105,11 @@ var BACKCOURSE=BACKCOURSE || {};
                var $teacher_target, i,teacher_id_array=[],teacher_id;
                //总选课程
                if(teacher_type!=-1){
-                   $teacher_target=$(".choose-teacher-delivery").next().find("ul");
+                   $teacher_target=$(".choose-teacher-delivery:visible").next().find("ul").children();
                    if($teacher_target.length>1){
-                       for(i=0;i<$teacher_target.length;i++){
-                           teacher_id=$teacher_target.find("li").eq(i).find("div").attr("id");
+                       var length=$teacher_target.length;
+                       for(i=0;i<length-1;i++){
+                           teacher_id=$teacher_target.eq(i).find("div").attr("id");
                            var teacher_id_array_item={id:teacher_id}
                            teacher_id_array.push(teacher_id_array_item);
                        }
@@ -119,6 +120,7 @@ var BACKCOURSE=BACKCOURSE || {};
                            lesson:long,
                            institution_id:institution,
                            name:  name,
+                           tags:label_array,
                            code:code,
                            start_date:begin,
                            type: type,
@@ -156,6 +158,7 @@ var BACKCOURSE=BACKCOURSE || {};
                        expect_number: people,
                        lesson:long,
                        name:  name,
+                       tags:label_array,
                        code:code,
                        start_date:begin,
                        type: type,
@@ -189,7 +192,7 @@ BACKCOURSE.sub_teacher.class.template=
          </div>\
          <div class="ui input specialInput labelForm autoComplete total-teachers" >\
             <ul>\
-                <li><input type="text" placeholder="老师..." id="sub{{count}}" autocomplete="labels"/></li>\
+                <li><input type="text" placeholder="老师..." id="sub{{count}}" autocomplete="teachers"/></li>\
             </ul>\
          </div>\
          <i class="icon collapse"></i>\

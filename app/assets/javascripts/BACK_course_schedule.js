@@ -87,7 +87,7 @@ SCHEDULE.widget.init=function(){
             "<li color='#D95C5C'></li>"+
             "</ul>";
         ev.my_teachers = "<div class='ui input specialInput labelForm autoComplete total-teachers'><ul id='schedule-teachers'>\
-                    <li><input type='text' id='schedule-teacher-input' /></li>\
+                    <li><input type='text' id='schedule-teacher-input' autocomplete='teachers'/></li>\
                 </ul>\
             </div>";
         return true
@@ -136,6 +136,7 @@ SCHEDULE.widget.init=function(){
         }
     };
     scheduler.init('schedule-here', new Date(),"month");
+    SCHEDULE.calendar.have_load.institution=$("#schedule-select-institution .item.active").attr("value");
     SCHEDULE.calendar.getData();
     $("body").on("click",".dhx_cal_tab,.dhx_cal_prev_button,.dhx_cal_next_button",function(){
         SCHEDULE.calendar.getData();
@@ -153,10 +154,25 @@ SCHEDULE.calendar.getData=function(){
     validate_institution=SCHEDULE.calendar.have_load.institution==institution?false:true;
     if(validate_max || validate_min || validate_institution){
         //post
+
+        if(validate_institution){
+            var events=scheduler.getEvents();
+            for(var i=0;i<events.length;i++){
+                scheduler.deleteEvent(events[i].id);
+            }
+            SCHEDULE.calendar.have_load.institution=institution;
+            SCHEDULE.calendar.have_load.max=maxDate
+            SCHEDULE.calendar.have_load.min=minDate;
+        }
+        else{
+            SCHEDULE.calendar.have_load.max=maxDate>SCHEDULE.calendar.have_load.max?maxDate:SCHEDULE.calendar.have_load.max;
+            SCHEDULE.calendar.have_load.min=maxDate>SCHEDULE.calendar.have_load.min?minDate:SCHEDULE.calendar.have_load.min;
+        }
+        var time_begin=scheduler.getState().min_date;
+        var time_end=scheduler.getState().max_date;
+        var id=institution;
         //(institution.id start_date end_date)
-        SCHEDULE.calendar.have_load.max=maxDate>SCHEDULE.calendar.have_load.max?maxDate:SCHEDULE.calendar.have_load.max;
-        SCHEDULE.calendar.have_load.min=maxDate>SCHEDULE.calendar.have_load.min?minDate:SCHEDULE.calendar.have_load.min;
-        SCHEDULE.calendar.have_load.institution=institution;
+
         var experiment=[
             {id:"1",text:"儿童秋季班",teachers:["Wayne","王子骁"],start_date:new Date(2013,11,1,12,0),end_date:new Date(2013,11,1,12,30),color:'#FFA500',sub_courses:{value:"default",text:"没指定"}},
             {id:"2",text:"SAT秋季冲刺班",teachers:["Kobe","Bryant"],start_date:new Date(2013,11,4,0,0),end_date:new Date(2013,11,4,0,30),color:'#63A69F',sub_courses:{value:"0",text:"听力"}},
@@ -165,7 +181,7 @@ SCHEDULE.calendar.getData=function(){
         scheduler.parse(experiment ,"json")
     }
 };
-SCHEDULE.calendar.have_load={max:Date.parse(new Date()),min:Date.parse(new Date()),institution:"default"};
+SCHEDULE.calendar.have_load={max:Date.parse(new Date()),min:Date.parse(new Date())};
 SCHEDULE.calendar.delete_item=function(id){
     //post delete(已经删除掉了，可能要去核心代码里面写json)
 }
