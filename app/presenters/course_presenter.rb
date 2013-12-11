@@ -7,10 +7,18 @@ class CoursePresenter<Presenter
     end
     
     def tags
-      TagUtility.new.get_tags(self.tenant_id,self.class.name,self.id)
+      TagUtility.new.get_tags(self.tenant_id,@course.class.name,self.id)
     end
     
+    def status_display
+      CourseStatus.display self.status
+    end
+     
     def teachers
-      @course.teachers
+      @course.teachers.uniq
+    end
+    
+    def teacher_names
+      teachers.map{|t| t.name}.join(', ')
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131210171759) do
+ActiveRecord::Schema.define(:version => 20131211065112) do
 
   create_table "achievements", :force => true do |t|
     t.integer  "type"
@@ -201,6 +201,7 @@ ActiveRecord::Schema.define(:version => 20131210171759) do
     t.integer  "sub_course_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.datetime "date"
   end
 
   add_index "schedules", ["sub_course_id"], :name => "index_schedules_on_sub_course_id"

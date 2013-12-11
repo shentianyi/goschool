@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     render json:{access:false},status:403
   end
 
-  # must be teacher
+  # user must be teacher
   def require_user_as_teacher
     unless current_user.user.is_teacher
       respond_to do |format|
@@ -26,6 +26,16 @@ class ApplicationController < ActionController::Base
         format.json { render json: {access:false} ,status: 403 }
       end
     end
+  end
+
+  # user must be manager
+  def require_user_as_manager
+    # unless Role.manager?(current_user.loginingfo_roles)
+      # respond_to do |format|
+        # format.html {render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false}
+        # format.json { render json: {access:false} ,status: 403 }
+      # end
+    # end
   end
 
   private

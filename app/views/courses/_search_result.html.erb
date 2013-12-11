@@ -17,7 +17,7 @@
                          状态
                     </p>
                     <p>
-                         <%=course.status%>
+                         <%=course.status_display%>
                     </p></td>
                </tr>
                <tr>
@@ -26,10 +26,7 @@
                          授课时间:<span><%=course.start_date%>-<%=course.end_date%></span>
                     </p>
                     <p class="course-teachers">
-                         授课老师:
-                         <%course.teachers.each do |teacher|%>
-                           <%=teacher.name%>
-                         <%end%>
+                         授课老师:<%=course.teacher_names%>
                     </p>
                     <p>
                          已报班: <span class="class-size"><%=course.actual_number%></span> 人
