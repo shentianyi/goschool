@@ -162,6 +162,10 @@
     display:block;
     font-size:14px;
 }
+.dhx_wrap_section .new-schedule-teachers{
+    font-size:13px;
+    line-height:9px;
+}
 /********************************************************************************* 右侧*/
 /*选择机构的*/
 .schedule-search{
