@@ -18,9 +18,9 @@ class SchedulesController < ApplicationController
   end
 
   def create
-    if params.has_key?(:course_id)
-      @course=Course.find_by_id(params[:course_id])
-      params[:sub_course_id]=@course.sub_courses.first.id
+    if params[:schedule].has_key?(:course_id)
+      @course=Course.find_by_id(params[:schedule][:course_id])
+      params[:schedule][:sub_course_id]=@course.sub_courses.first.id
     end
     @schedule=Schedule.new(params[:schedule].except(:course_id))
     @msg.content=(@msg.result=@schedule.save) ? @schedule.id :  @schedule.errors.messages
