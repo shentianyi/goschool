@@ -60,6 +60,7 @@ Goschool::Application.routes.draw do
       get ':id/:part/:ajax'=>:show
       get :fast_search
       get :list_search
+      get :subs
     end
   end
 
