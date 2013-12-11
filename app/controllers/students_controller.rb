@@ -4,6 +4,7 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
+    @active_left_aside='students'
     @students = Student.all
 
     respond_to do |format|
@@ -36,11 +37,11 @@ class StudentsController < ApplicationController
   end
 
   def courses()
-    @courses = StudentCoursePresenter.new(@student.course_student)
+    
   end
 
   def achievements()
-    #@achievements = StudentAchievementsPresenter.new(@student.achievements)
+    
   end
 
   def relation()

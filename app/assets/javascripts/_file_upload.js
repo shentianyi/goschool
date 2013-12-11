@@ -39,7 +39,3 @@ function attach_upload() {
         }
     });
 }
-
-(function(){
-    attach_upload();
-})();
