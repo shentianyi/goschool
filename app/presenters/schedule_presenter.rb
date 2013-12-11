@@ -5,17 +5,41 @@ class SchedulePresenter<Presenter
     @schedule=schedule
   end
 
-  def teacher_infos
-    self.teachers.all
+  def teachers
+    self.teachers
   end
   
+  def start_hour
+   '%02d' % self.start_time.hour
+  end
+  
+  def end_hour
+     '%02d' % self.end_time.hour
+  end
+  
+  def start_date
+    self.start_time.strftime('%Y%m%d')
+  end
+  
+  
+  def end_date
+    self.end_time.strftime('%Y%m%d')
+  end
+  
+  def time
+    "#{start_date}  #{start_time}-#{end_time}"
+  end
+  
+  def teacher_names
+    teachers.map{|t| t.name}.join(', ')
+  end
 
   def to_json
     {course_name:self.parent_name,
       sub_course_name:self.name,
       start_time:self.start_time,
       end_time:self.end_time,
-      teachers:self.teacher_infos.collect{|teacher| {id:teacher.id,name:teacher.name}}
+      teachers:self.teachers.collect{|teacher| {id:teacher.id,name:teacher.name}}
     }
   end
 

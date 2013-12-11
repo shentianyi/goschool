@@ -426,33 +426,36 @@ GLOBAL.autoComplete.count=0;
         var e=adapt_event(event).event,
             $input=$(this);
         if(e.keyCode==32){
-            if($input.val().length==0){
+            if($.trim($input.val()).length==0){
                 e.preventDefault();
                 $input.val("");
             }
-            if($input.attr("im")=="label" && $input.attr("ishould")=="BeSelected"){
-                if($("#autoComplete-call").find(".active").length>0){
-                    var value=$.trim($input.val());
-                    var id=$("#autoComplete-call").find(".active").attr("id");
-                    var type=$("#autoComplete-call").find(".active").attr("type");
-                    var data={data:{
-                        id:id,
-                        value:value,
-                        type:type
-                    }};
-                    var render=Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id={{id}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}",data);
-                    $input.parent().before(render);
+            else{
+                if($input.attr("im")=="label" && $input.attr("ishould")=="BeSelected"){
+                    if($("#autoComplete-call").find(".active").length>0){
+                        var value=$.trim($input.val());
+                        var id=$("#autoComplete-call").find(".active").attr("id");
+                        var type=$("#autoComplete-call").find(".active").attr("type");
+                        var data={data:{
+                            id:id,
+                            value:value,
+                            type:type
+                        }};
+                        var render=Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id={{id}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}",data);
+                        $input.parent().before(render);
+                    }
+                    $input.val("");
                 }
-                $input.val("");
+                else if($input.attr("im")=="label"){
+                    var value=$.trim($input.val());
+                    $input.parent().before($("<li />")
+                        .append($("<div />").addClass("ui label").text(value)
+                            .append($("<i />").addClass("delete icon")))
+                    );
+                    $input.val("");
+                }
             }
-            else if($input.attr("im")=="label"){
-                var value=$.trim($input.val());
-                $input.parent().before($("<li />")
-                    .append($("<div />").addClass("ui label").text(value)
-                        .append($("<i />").addClass("delete icon")))
-                );
-                $input.val("");
-            }
+
         }
         else if(e.keyCode==13){
             if($input.attr("im")=="label" && $input.attr("ishould")=="BeSelected"){

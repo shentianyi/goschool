@@ -4867,8 +4867,8 @@ scheduler.form_blocks={
 				s[i+map[3]].value=d.getFullYear();
                 if(i==0){
                     $(s[i+map[1]]).before($("<label />").text(d.getDate()));
-                    $(s[i+map[2]]).before($("<label />").text(d.getMonth()+1+"."));
-                    $(s[i+map[3]]).before($("<label />").text(d.getFullYear()+"."));
+                    $(s[i+map[2]]).before($("<label />").text(d.getMonth()+1+"-"));
+                    $(s[i+map[3]]).before($("<label />").text(d.getFullYear()+"-"));
                 }
 			}
             $(".dhx_section_time label").remove();

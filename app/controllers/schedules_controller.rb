@@ -3,6 +3,11 @@ class SchedulesController < ApplicationController
   before_filter :init_message ,:only=>[:show,:create,:update,:destroy,:dates,:courses,:teachers]
   before_filter :get_schedule,:only=>[:update,:destroy]
   before_filter :render_nil_msg , :only=>[:update,:destroy]
+  
+  def index
+    @institutions=current_tenant.institutions
+  end
+  
   def show
     if @schedule=Schedule.by_id(params[:id])
       @msg.result=true

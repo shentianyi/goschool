@@ -1,0 +1,18 @@
+<%if @course%>
+<p class="search-class-name">
+     <span>课程：</span><span><%= @course.name%></span>
+</p>
+<p class='search-class-teachers'>
+     <span>讲师：</span>
+     <span> <%=course.teacher_names%></span>
+</p>
+<ul class="search-class-schedule">
+     <%@schedules.each do |schedule|%>
+          <li id="<%=schedule.id%>">
+          <span><%=schedule.time%></span>
+          <span><%=schedule.teacher_names%></span>
+          <i class="trash icon" affect="<%=schedule.id%>"></i>
+     </li>
+     <%end%>
+</ul>
+<%end%>
