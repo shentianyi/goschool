@@ -4,6 +4,7 @@ class SchedulesController < ApplicationController
   before_filter :get_schedule,:only=>[:update,:destroy]
   before_filter :render_nil_msg , :only=>[:update,:destroy]
   def index
+    @active_left_aside='courses'
     @institutions=current_tenant.institutions
   end
 
@@ -54,7 +55,7 @@ class SchedulesController < ApplicationController
   def courses
     @msg.result=true
     @msg.content=SchedulePresenter.init_json_presenters( Schedule.by_course_id(params).all)
-    render :json=>@msg
+      render :json=>@msg 
   end
 
   def send_email

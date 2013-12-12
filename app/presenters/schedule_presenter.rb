@@ -5,25 +5,25 @@ class SchedulePresenter<Presenter
     @schedule=schedule
   end
   
+  
   def start_hour
-   '%02d' % self.start_time.hour
+   '%02d:%02d' % [self.start_time..hour,self.start_time.min]
   end
   
   def end_hour
-     '%02d' % self.end_time.hour
+    '%02d:%02d' % [self.end_time.hour,self.end_time.min]
   end
   
   def start_date
-    Time.now.to_i
-    self.start_time.strftime('%Y%m%d')
+    self.start_time.strftime('%Y-%m-%d')
   end
   
   
   def end_date
-    self.end_time.strftime('%Y%m%d')
+    self.end_time.strftime('%Y-%m-%d')
   end
   
-  def time
+  def time_string
     "#{start_date}  #{start_hour}-#{end_hour}"
   end
   
