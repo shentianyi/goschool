@@ -282,8 +282,7 @@ SCHEDULE.calendar.delete_item=function(id){
     //post delete(已经删除掉了，可能要去核心代码里面写ajax)
     var validate;
     $.ajax({
-        url:"/schedules",
-        data:{id:id},
+        url:"/schedules/"+id,
         type:"DELETE",
         async:false,
         success:function(data){
