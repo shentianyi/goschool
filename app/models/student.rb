@@ -24,7 +24,7 @@ class Student < ActiveRecord::Base
   validate :validate_save
 
   redis_search_index(:title_field =>:name,
-                     :condition_field => [:tenant_id],
+                     :condition_fields => [:tenant_id],
                      :prefix_index_enable => true,
                      :alias_field=>:email,
                      :ext_fields=>[:email,:address,:school,:guardian])

@@ -13,9 +13,9 @@ class CoursesController < ApplicationController
   def show
     @course_presenter=CoursePresenter.new(@course)
     case params[:part]
-     when 'teachers'
+    when 'teachers'
        teachers()
-     when 'recommendations'
+    when 'recommendations'
 	 # recommendations()
     else
 	students()

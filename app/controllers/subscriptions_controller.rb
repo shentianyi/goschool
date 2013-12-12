@@ -3,7 +3,7 @@ class SubscriptionsController < ApplicationController
   skip_before_filter :require_user,:only=>[:new,:create]
   skip_before_filter :require_active_user,:only => [:new,:create]
   skip_before_filter :find_current_user_tenant,:only=>[:new,:create]
-  #skip_authorize_resource :only=>[:new,:create]
+  skip_load_and_authorize_resource
   before_filter :require_no_user, :only=>[:new,:create]
   #before_filter :is_sign_up_allowed, :only=>[:new,:create]
   
