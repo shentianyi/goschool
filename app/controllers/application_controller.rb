@@ -9,9 +9,8 @@ class ApplicationController < ActionController::Base
   before_filter :find_current_user_tenant
 
   set_current_tenant_through_filter
-  
-  authorize_resource
 
+  authorize_resource
   def find_current_user_tenant
     current_tenant=Tenant.find_by_id(current_user.tenant_id)
     set_current_tenant(current_tenant)
@@ -27,14 +26,14 @@ class ApplicationController < ActionController::Base
       error_page_403
     end
   end
-  
+
   #must be manager
   def require_user_as_manager
     unless current_user.is_manager?
       error_page_403
     end
   end
-  
+
   #must be admin
   def require_user_as_admin
     unless current_user.is_admin?
@@ -56,13 +55,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def error_page_404
+    respond_to do |format|
+      format.html {render :file => File.join(Rails.root, 'public/404.html'), :status => 404, :layout => false}
+      format.json { render json: {access:false} ,status: 404 }
+    end
+  end
+
   # user must be manager
   def require_user_as_manager
     # unless Role.manager?(current_user.loginingfo_roles)
-      # respond_to do |format|
-        # format.html {render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false}
-        # format.json { render json: {access:false} ,status: 403 }
-      # end
+    # respond_to do |format|
+    # format.html {render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false}
+    # format.json { render json: {access:false} ,status: 403 }
+    # end
     # end
   end
 
