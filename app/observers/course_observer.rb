@@ -23,5 +23,8 @@ class CourseObserver<ActiveRecord::Observer
    if course.status_changed?
      course.sub_courses.update_all(:status=>course.status)
    end
+    if course.name_changed?
+     course.sub_courses.update_all(:parent_name=>course.name)
+   end
   end
 end
