@@ -85,12 +85,10 @@ var SCHEDULE=SCHEDULE || {};
     $("body").on("keyup","#search-courses",function(event){
        var e=adapt_event(event).event;
        if(e.keyCode==13 && $("#autoComplete-call .active").length>0){
-           var value= $.trim($(this).val());
-           var institution_id=$("#schedule-select-institution .item.active").attr("value");
+           var id=$("#autoComplete-call .active").attr("id");
            var type=$("#autoComplete-call .active").attr("type");
            $.get("/schedules/courses",{
-               q:value,
-               institution_id:institution_id,
+               id:id,
                type:type
            },function(data){
                if(data.result){
