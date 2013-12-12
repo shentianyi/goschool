@@ -1,0 +1,16 @@
+<table class="ui celled table segment">
+     <thead>
+          <tr>
+               <th class="wide five">姓名</th>
+               <th class="wide eleven">授课内容</th>
+          </tr>
+     </thead>
+     <tbody>
+          <%@teachers.each do |teacher|%>
+            <tr id="teacher_id">
+               <td><%=teacher.name%></td>
+               <td><%=teacher.sub_course_name || teacher.course_name%></td>
+          </tr>
+          <%end%>
+     </tbody>
+</table>

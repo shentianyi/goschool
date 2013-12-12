@@ -72,12 +72,22 @@ var BACKCOURSE=BACKCOURSE || {};
         var render=Mustache.render(BACKCOURSE.sub_teacher.class.template,data);
         $(this).before(render);
         BACKCOURSE.sub_teacher.count++;
+        $(".labelForm").each(function(){
+            var $input=$(this).find("input");
+            var max_width=parseInt($(this).css("width"))*0.45;
+            $input.css("width",max_width).css("maxWidth","999em");
+        });
     });
     $("body").on("click","#add-sub-service",function(){
         var data={counts:{count:BACKCOURSE.sub_teacher.count}};
         var render=Mustache.render(BACKCOURSE.sub_teacher.service.template,data);
         $(this).before(render);
         BACKCOURSE.sub_teacher.count++;
+        $(".labelForm").each(function(){
+            var $input=$(this).find("input");
+            var max_width=parseInt($(this).css("width"))*0.45;
+            $input.css("width",max_width).css("maxWidth","999em");
+        });
     });
     $("body").on("keyup","input[name='long'],input[name='people']",function(event){
         var obj=adapt_event(event).target;

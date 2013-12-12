@@ -14,6 +14,10 @@ class CourseStudentPresenter<Presenter
     @student.paid ? '是' : '否'
   end
   
+  def enrol_time_display
+    @student.enrol_time.strftime('%Y-%m-%d')
+  end
+  
   def to_json
     {
         name:self.name,
