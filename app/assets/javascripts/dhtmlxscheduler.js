@@ -2317,7 +2317,7 @@ scheduler._correct_shift=function(start, back){
 	return start-=((new Date(scheduler._min_date)).getTimezoneOffset()-(new Date(start)).getTimezoneOffset())*60000*(back?-1:1);	
 };
 scheduler._on_mouse_move=function(e){
-    console.log(this._drag_mode)
+
 	if (this._drag_mode){
 		var pos=this._mouse_coords(e);
 		if (!this._drag_pos || pos.force_redraw || this._drag_pos.x!=pos.x || this._drag_pos.y!=pos.y ){
@@ -4390,6 +4390,7 @@ scheduler._process_loading = function(evs) {
 };
 scheduler._init_event = function(event) {
 	event.text = (event.text || event._tagvalue) || "";
+
 	event.start_date = scheduler._init_date(event.start_date);
 	event.end_date = scheduler._init_date(event.end_date);
 };
@@ -4397,9 +4398,13 @@ scheduler._init_event = function(event) {
 scheduler._init_date = function(date){
 	if(!date)
 		return null;
-	if(typeof date == "string")
-		return scheduler.templates.xml_date(date);
-	else return new Date(date);
+	if(typeof date == "string"){
+        var date=parseInt(date);
+        return new Date(date);
+    }
+	else{
+        return new Date(date);
+    }
 };
 
 scheduler.json = {};

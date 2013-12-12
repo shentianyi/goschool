@@ -120,7 +120,7 @@ SCHEDULE.widget.init=function(){
     ];
     scheduler.templates.quick_info_title = function(start, end, ev){
         var teachers=ev.teachers.join(",");
-        if(ev.sub_courses.value=="default"){
+        if(ev.sub_courses.is_default==0){
             return ev.text.substr(0,50)+'<span></span>'+'<span>'+teachers+'</span>';
         }
         else{
@@ -264,7 +264,7 @@ SCHEDULE.calendar.getData=function(){
             }
         });
 //        var experiment=[
-//            {id:"1",text:"儿童秋季班",teachers:["Wayne","王子骁"],start_date:new Date(2013,11,1,12,0),end_date:new Date(2013,11,1,12,30),color:'#FFA500',sub_courses:{value:"default",text:"没指定"}},
+//            {id:"1",text:"儿童秋季班",teachers:["Wayne","王子骁"],start_date:"1385870400000",end_date:"1385872200000",color:'#FFA500',sub_courses:{value:"default",text:"没指定"}},
 //            {id:"2",text:"SAT秋季冲刺班",teachers:["Kobe","Bryant"],start_date:new Date(2013,11,4,0,0),end_date:new Date(2013,11,4,0,30),color:'#63A69F',sub_courses:{value:"0",text:"听力"}},
 //            {id:"3",text:"托福秋季班",teachers:["Wayne","王子骁"],start_date:new Date(2013,11,5,18,0),end_date:new Date(2013,11,5,18,30),color:'#D95C5C',sub_courses:{value:"0",text:"口语强化"}}
 //        ];
