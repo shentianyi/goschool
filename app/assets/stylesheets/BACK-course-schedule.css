@@ -251,7 +251,7 @@
 }
 .search-list>.search-class-schedule>li>span:nth-of-type(2){
     color:rgba(0,0,0,1);
-    width:39px;
+    width:76px;
     display:inline-block;
     vertical-align:top;
     margin-right:2px;
@@ -263,8 +263,8 @@
     vertical-align:top;
     color:#4092CC;
     font-size:12px;
-    max-width:50px;
-    display:inline-block;
+    width:210px;
+    display:block;
 }
 .search-list>.search-class-schedule>li>i{
     float:right;
