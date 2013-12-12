@@ -1,8 +1,8 @@
 #encoding: utf-8
 class CourseObserver<ActiveRecord::Observer
   observe :course
-  def after_save course
-    TagService.add_tags(course)  if course.tags
+  def after_create course
+    course.add_tags
   end
 
   # def before_create course

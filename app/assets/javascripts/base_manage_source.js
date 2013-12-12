@@ -1,4 +1,4 @@
-var stopEvent = function(e) {//同时阻止事件默认行为和冒泡
+var stopEvent = function(e) {
 	e.stopPropagation();
 	e.preventDefault();
 }
@@ -7,6 +7,18 @@ var manager = {
 		$.get('/' + source + '/' + id + '/edit', function(data) {
 			if (callback)
 				callback(data);
+		});
+	},
+	update : function(source, id,data, callback) {
+		$.ajax({
+			url : '/' + source+'/'+id,
+			data : data,
+			type : 'PUT',
+			datType : 'json',
+			success : function(data) {
+				if (callback)
+					callback(data);
+			}
 		});
 	},
 	destroy : function(source, id, callback) {

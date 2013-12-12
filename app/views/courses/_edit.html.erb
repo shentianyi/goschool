@@ -6,37 +6,37 @@
 	<div id="new-class" class="tab-block" from="course">
 		<div class="left-part">
 			<div class="ui left icon input">
-				<input placeholder="<%= @course.type_display%>名称..." type="text" value="<%= @course.name%>">
+				<input placeholder="<%= @course.type_display%>名称..." type="text" value="<%= @course.name%>" class="update-input" name="name">
 				<i class="browser icon"></i>
 			</div>
 			<div class="course-desc">
-				<textarea placeholder="<%= @course.type_display%>描述..."><%= @course.description%></textarea>
+				<textarea placeholder="<%= @course.type_display%>描述..." class="update-input" name="description"><%= @course.description%></textarea>
 				<i class="book icon"></i>
 			</div>
 			<div class="ui left icon input">
-				<input placeholder="预计课时数..." type="text"  name="lesson"  value="<%= @course.lesson%>">
+				<input placeholder="预计课时数..." type="text"  value="<%= @course.lesson%>"  class="update-input" name="lesson"/>
 				<i class="time icon"></i>
 			</div>
 			<div class="ui left icon input">
-				<input placeholder="预计报名人数..." type="text" name="expect_number" value="<%= @course.expect_number%>">
+				<input placeholder="预计报名人数..." type="text"value="<%= @course.expect_number%>" class="update-input" name="expect_number"/>
 				<i class="users icon"></i>
 			</div>
 			<div class="ui left icon input calendar">
-				<input placeholder="<%= @course.type_display%>开始时间..." type="text" readonly id="course-begin-date" value="<%= @course.start_date%>">
+				<input placeholder="<%= @course.type_display%>开始时间..." type="text" readonly id="course-begin-date" value="<%= @course.start_date%>"  class="update-input" name="start_date">
 				<i class="calendar icon"></i>
 			</div>
 			<div class="ui left icon input calendar">
-				<input placeholder="<%= @course.type_display%>结束时间..." type="text" readonly id="course-end-date"  value="<%= @course.end_date%>">
+				<input placeholder="<%= @course.type_display%>结束时间..." type="text" readonly id="course-end-date"  value="<%= @course.end_date%>"  class="update-input" name="end_date">
 				<i class="calendar icon"></i>
 			</div>
 		</div>
 		<div class="right-part">
 			<div class="ui left icon input">
-				<input placeholder="<%= @course.type_display%>代号..." name='code' type="text" value="<%= @course.code%>">
+				<input placeholder="<%= @course.type_display%>代号..." type="text" value="<%= @course.code%>"  class="update-input" name="code">
 				<i class="globe icon"></i>
 			</div>
 			<div class="ui left icon input specialInput labelForm autoComplete" >
-				<ul name='label'>
+				<ul name='label' class="tags-items">
 					<%@course.tags.each do |tag|%>
 					<li>
 						<div class="ui label">
@@ -45,7 +45,7 @@
 					</li>
 					<%end%>
 					<li>
-						<input type='text' placeholder="标签..." id="course-label" autocomplete="tags"/>
+						<input type='text' placeholder="标签..." id="course-label" autocomplete="tags" class="tag-input-blur"/>
 					</li>
 				</ul>
 				<i class="tag icon stop"></i>
@@ -61,15 +61,13 @@
 			</div>
 			<div class="ui left icon input specialInput labelForm autoComplete total-teachers teachers" id="total-course-teachers" style="<%= 'display:none' if @course.has_sub%>">
 				<ul>
-					<%unless @course.has_sub%>
 					<%@course.teacher_details.each do |teacher|%>
-					<li total_sub_couse_id="<%=teacher.sub_course_id%>">
+					<li total_sub_couse_id="<%= teacher.sub_course_id%>">
 						<div class="ui label" id="<%= teacher.teacher_course_id%>">
 							<%= teacher.name%><i class="del  ete icon"></i>
 						</div>
 					</li>
-					<%end%>
-					<%end%>
+					<%end unless @course.has_sub%>
 					<li>
 						<input type='text' placeholder="老师..." id="course-teachers" autocomplete="teachers"/>
 					</li>
@@ -77,9 +75,11 @@
 				<i class="male icon"></i>
 			</div>
 			<div class="sub-course-block teachers" id="sub-course-teachers" style="<%= 'display:block' if @course.has_sub%>">
+				<% subs=[]
+				@course.teacher_details.each do |teacher|%>
 				<div class="sub-course-block-item">
 					<div class="ui input sub-course-name">
-						<input placeholder="子<%= @course.type_display%>名..." type="text">
+						<input placeholder="子<%= @course.type_display%>名..." type="text" value="<%=teacher.sub_course_name%>">
 					</div>
 					<div class="ui input specialInput labelForm autoComplete total-teachers" >
 						<ul>
@@ -90,6 +90,8 @@
 					</div>
 					<i class="icon collapse"></i>
 				</div>
+				<%
+				end if @course.has_sub%>
 				<i class="icon expand" id="add-sub-course"></i>
 			</div>
 		</div>
@@ -120,6 +122,21 @@
 				$("#course-begin-date").datepicker("option", "maxDate", selectedDate);
 			}
 		});
+		$("body").on("click", "#add-sub-course", function() {
+			var data = {
+				counts : {
+					count : BACKCOURSE.sub_teacher.count
+				}
+			};
+			var render = Mustache.render(BACKCOURSE.sub_teacher.class.template, data);
+			$(this).before(render);
+			BACKCOURSE.sub_teacher.count++;
+			$(".labelForm").each(function() {
+				var $input = $(this).find("input");
+				var max_width = parseInt($(this).css("width")) * 0.45;
+				$input.css("width", max_width).css("maxWidth", "999em");
+			});
+		});
 		$("body").on("keyup", "input[name='expect_number'],input[name='lesson']", function(event) {
 			var obj = adapt_event(event).target;
 			integerOnly(obj)
@@ -136,6 +153,25 @@
 				}
 				$("#" + id).css("display", "block");
 			}
+		});
+		$(".update-input").change(function() {
+			var data = {
+				course : {}
+			};
+			data['course'][$(this).attr('name')] = $(this).val();
+			course_manager.update($("#course-detail-info").attr('course'), data);
+		});
+
+		$(".tag-input-blur").blur(function() {
+			var data = {
+				course : {}
+			};
+			var tags = []
+			$.each($('.tags-items>li>div'), function() {
+				tags.push($.trim($(this).text()));
+			});
+			data['course']['tags'] = tags;
+			course_manager.update($("#course-detail-info").attr('course'), data);
 		});
 
 		$("body").off("click", ".labelForm .delete.icon");
