@@ -71,7 +71,7 @@
     width:90%;
     left:29px;
     height:90%;
-    top:4%;
+    margin-top:4%;
     box-shadow:2px 3px 9px rgba(0, 0, 0, 0.6);
     -moz-box-shadow:2px 3px 9px rgba(0, 0, 0, 0.6);
     -webkit-box-shadow:2px 3px 9px rgba(0, 0, 0, 0.6);
@@ -174,7 +174,7 @@
 .schedule-search{
     position:absolute;
     right:0px;
-    top:55px;
+    top:65px;
     bottom:0px;
     width:25%;
 }
