@@ -35,6 +35,20 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  #must be admin
+  def require_user_as_admin
+    unless current_user.is_admin?
+      error_page_403
+    end
+  end
+
+  #must be student
+  def require_user_as_student
+    unless current_user.is_student?
+      error_page_403
+    end
+  end
+
   def error_page_403
     respond_to do |format|
       format.html {render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false}

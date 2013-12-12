@@ -14,6 +14,7 @@ class SchedulePresenter<Presenter
   end
   
   def start_date
+    Time.now.to_i
     self.start_time.strftime('%Y%m%d')
   end
   
@@ -38,8 +39,8 @@ class SchedulePresenter<Presenter
     { text:self.parent_name,
       id:self.id,
       teachers:self.teacher_names,
-      start_date:self.start_time.to_i,
-      end_date:self.end_time.to_i,
+      start_date:self.start_time.to_milli,
+      end_date:self.end_time.to_milli,
       color: '#D95C5C',
       sub_courses:{value:self.id,text:self.name,is_default:self.is_default}
     }
