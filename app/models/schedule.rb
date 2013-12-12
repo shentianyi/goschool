@@ -21,7 +21,7 @@ class Schedule < ActiveRecord::Base
    end
    
   def self.between_date params
-    base_query(params[:institution_id]).joins(:teachers).where(start_time:params[:start_date]..params[:end_date])
+    base_query(params[:institution_id]).where(start_time:params[:start_date]..params[:end_date])
   end
   
   def self.by_teacher_date params
@@ -56,9 +56,9 @@ class Schedule < ActiveRecord::Base
   
   def self.base_query institution_id=nil
     if institution_id
-     return  joins(:sub_course).where(sub_courses:{institution_id:institution_id,status:CourseStatus::UNLOCK}).select('*,sub_courses.*')
+     return  joins(:sub_course).where(sub_courses:{institution_id:institution_id,status:CourseStatus::UNLOCK}).select('sub_courses.*,schedules.*')
      else
-        return joins(:sub_course).where(sub_courses:{status:CourseStatus::UNLOCK}).select('*,sub_courses.*')
+        return joins(:sub_course).where(sub_courses:{status:CourseStatus::UNLOCK}).select('sub_courses.*,schedules.*')
      end
   end
 end

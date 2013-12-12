@@ -120,7 +120,7 @@ SCHEDULE.widget.init=function(){
     ];
     scheduler.templates.quick_info_title = function(start, end, ev){
         var teachers=ev.teachers.join(",");
-        if(ev.sub_courses.is_default==0){
+        if(ev.sub_courses.is_default==1){
             return ev.text.substr(0,50)+'<span></span>'+'<span>'+teachers+'</span>';
         }
         else{
