@@ -1,6 +1,6 @@
 #encoding: utf-8
 class CoursePresenter<Presenter
-    def_delegators :@course,:id,:name,:description,:actual_number,:expect_number,:lesson,:type,:start_date,:end_date,:tenant_id,:status,:institution_name
+    def_delegators :@course,:id,:name,:description,:actual_number,:expect_number,:lesson,:type,:start_date,:end_date,:tenant_id,:status,:teachers,:institution_name,:course_teachers,:course_students
 
     def initialize(course)
      @course=course
@@ -14,10 +14,7 @@ class CoursePresenter<Presenter
       CourseStatus.display self.status
     end
      
-    def teachers
-      @course.teachers.uniq
-    end
-    
+
     def teacher_names
       teachers.map{|t| t.name}
     end

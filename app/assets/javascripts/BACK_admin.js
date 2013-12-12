@@ -199,7 +199,7 @@ BACKINDEX.admin.operate.init=function(){
                     },
                     success:function(data){
                         if(data.result){
-                            MessageBox("角色修改成功","top","warning");
+                            MessageBox("角色修改成功","top","success");
                         }
                         else{
                             MessageBox_content(data.content);

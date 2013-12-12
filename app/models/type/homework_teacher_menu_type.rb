@@ -22,12 +22,32 @@ class HomeworkTeacherMenuType<StatusBase
  end
  
  def self.generate_menu
-   
+  menus=[] 
+  self.constants.each do |c|
+    value=self.const_get(c.to_s)
+    menus<< Menu.new({value:value,dispaly: genenerate_menu_item(self.const_get(c.to_s))})
+  end
+  return menus
  end
 
 
  private 
  def self.generate_time_condition type
        {created_at:[Time.now.ago((type-10).days)..Time.now.ago(type.days)]}
+ end
+
+ def self.genenerate_menu_item type
+    case type
+    when ONGOING
+	'未完成批改'
+    when OTHER
+	'更多'
+    else
+
+    end
+ end
+
+ def self.genenerate_time_menu type
+   
  end
 end

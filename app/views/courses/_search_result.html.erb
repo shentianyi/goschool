@@ -21,7 +21,7 @@
                     </p></td>
                </tr>
                <tr>
-                    <td>
+                    <td class="five wide">
                     <p >
                          授课时间:<span><%=course.start_date%>-<%=course.end_date%></span>
                     </p>
@@ -29,16 +29,19 @@
                          授课老师:<%=course.teacher_names_string%>
                     </p>
                     <p>
+                         所属机构:<span><%=course.institution_name%></span>
+                    </p>
+                    <p>
                          已报班: <span class="class-size"><%=course.actual_number%></span> 人
-                         <span><%=course.institution_name%></span>
+
                     </p></td>
-                    <td class="course-desc">
-                    <p >
+                    <td class="course-desc six wide">
+                    <p>
                          <span>简介:</span><span>
                         <%=course.description%>
                     </span>
                     </p></td>
-                    <td class="three wide"><a class="ui mini button teal" href="BACK-course-detail.html"> 详情 </a></td>
+                    <td class="three wide"><a class="ui mini button teal" href="/courses/<%=course.id%>"> 详情 </a></td>
 
                </tr>
           </table>

@@ -96,7 +96,9 @@ DETAIL.course={};
             $target.remove();
     });
     $(document).ready(function(){
-
+        $("#add-class-choose-institution,#add-service-choose-institution").dropdown();
+        $("#add-class-choose-institution .item").eq(0).addClass("active");
+        $("#add-service-choose-institution .item").eq(0).addClass("active");
     });
 })();
 DETAIL.course.student={};

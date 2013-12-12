@@ -118,9 +118,9 @@
 	display: block;
 	position: absolute;
 	left: 50%;
-	margin-left: -8px;
+	margin-left: -8px !important;
 	top: 50%;
-	margin-top: -6px;
+	margin-top: -6px !important;
 }
 .ui-datepicker .ui-datepicker-title {
 	margin: 0 2em;
@@ -327,8 +327,7 @@
 .ui-state-active,
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
-
-	background: #096ac8;
+	background: #096ac8 !important;
 
 }
 .ui-state-active a,
@@ -343,8 +342,7 @@
 .ui-state-highlight,
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
-	/*border: 1px solid #052f57;*/
-	/*background: #0b58a2 url(images/ui-bg_dots-medium_30_0b58a2_4x4.png) 50% 50% repeat;*/
+	background: #D95C5C ;
 	color: #ffffff;
 }
 .ui-state-highlight a,
