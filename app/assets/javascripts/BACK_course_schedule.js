@@ -256,7 +256,12 @@ SCHEDULE.calendar.getData=function(){
             end_date:scheduler.getState().max_date.toWayneString().day,
             institution_id:institution
         },function(data){
-            scheduler.parse(data ,"json");
+            if(data.result){
+                scheduler.parse(data.content,"json");
+            }
+            else{
+                MessageBox_content(data.content);
+            }
         });
 //        var experiment=[
 //            {id:"1",text:"儿童秋季班",teachers:["Wayne","王子骁"],start_date:new Date(2013,11,1,12,0),end_date:new Date(2013,11,1,12,30),color:'#FFA500',sub_courses:{value:"default",text:"没指定"}},
