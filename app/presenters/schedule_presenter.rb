@@ -41,7 +41,7 @@ class SchedulePresenter<Presenter
       teachers:self.teacher_names,
       start_date:self.start_time.to_milli,
       end_date:self.end_time.to_milli,
-      color: '#D95C5C',
+      color: '#FFA500',
       sub_courses:{value:self.id,text:self.name,is_default:self.is_default}
     }
   end
