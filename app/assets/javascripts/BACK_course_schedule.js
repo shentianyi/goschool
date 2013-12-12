@@ -163,7 +163,7 @@ SCHEDULE.widget.init=function(){
     //点击保存按钮
     scheduler.save_lightbox=function(){
         var i,sub_course_length=$("#schedule-sub-courses option").length;
-        var w_data=scheduler.formSection('time').getValue();
+        var w_data={};
         w_data.text= $.trim($("#schedule-course").val());
         w_data.sub_courses=[];
         for(i=0;i<sub_course_length;i++){
@@ -186,6 +186,8 @@ SCHEDULE.widget.init=function(){
         var start=$(".dhx_section_time>select:visible").eq(0).find(":selected").text();
         var end=$(".dhx_section_time>select:visible").eq(1).find(":selected").text();
         var lightbox=this;
+        w_data.start_date=standardParse(base_time+" "+start).date;
+        w_data.end_date=standardParse(base_time+" "+end).date;
         if($("#schedule-sub-courses :selected").attr("id")=="wzx"){
             $.post("/schedules",{
                 schedule:{
@@ -246,7 +248,7 @@ SCHEDULE.calendar.getData=function(){
         if(validate_institution){
             var events=scheduler.getEvents();
             for(var i=0;i<events.length;i++){
-                scheduler.deleteEvent(events[i].id);
+                scheduler.deleteEvent(events[i].id,"clear");
             }
             SCHEDULE.calendar.have_load.institution=institution;
             SCHEDULE.calendar.have_load.max=maxDate
@@ -268,27 +270,33 @@ SCHEDULE.calendar.getData=function(){
                 MessageBox_content(data.content);
             }
         });
-//        var experiment=[
-//            {id:"1",text:"儿童秋季班",teachers:["Wayne","王子骁"],start_date:"1385870400000",end_date:"1385872200000",color:'#FFA500',sub_courses:{value:"default",text:"没指定"}},
-//            {id:"2",text:"SAT秋季冲刺班",teachers:["Kobe","Bryant"],start_date:new Date(2013,11,4,0,0),end_date:new Date(2013,11,4,0,30),color:'#63A69F',sub_courses:{value:"0",text:"听力"}},
-//            {id:"3",text:"托福秋季班",teachers:["Wayne","王子骁"],start_date:new Date(2013,11,5,18,0),end_date:new Date(2013,11,5,18,30),color:'#D95C5C',sub_courses:{value:"0",text:"口语强化"}}
-//        ];
-//        scheduler.parse(experiment ,"json")
+        var experiment=[
+            {id:"1",text:"儿童秋季班",teachers:["Wayne","王子骁"],start_date:"1385870400000",end_date:"1385872200000",color:'#FFA500',sub_courses:{value:"default",text:"没指定"}},
+            {id:"2",text:"SAT秋季冲刺班",teachers:["Kobe","Bryant"],start_date:new Date(2013,11,4,0,0),end_date:new Date(2013,11,4,0,30),color:'#63A69F',sub_courses:{value:"0",text:"听力"}},
+            {id:"3",text:"托福秋季班",teachers:["Wayne","王子骁"],start_date:new Date(2013,11,5,18,0),end_date:new Date(2013,11,5,18,30),color:'#D95C5C',sub_courses:{value:"0",text:"口语强化"}}
+        ];
+        scheduler.parse(experiment ,"json")
     }
 };
 SCHEDULE.calendar.have_load={max:Date.parse(new Date()),min:Date.parse(new Date())};
 SCHEDULE.calendar.delete_item=function(id){
     //post delete(已经删除掉了，可能要去核心代码里面写ajax)
     var validate;
-    $.ajax({
-        url:"/schedules/"+id,
-        type:"DELETE",
-        async:false,
-        success:function(data){
-              validate=data.result;
-        }
-    })
-    return validate;
+    if(arguments[1]!="clear"){
+        $.ajax({
+            url:"/schedules/"+id,
+            type:"DELETE",
+            async:false,
+            success:function(data){
+                validate=data.result;
+            }
+        })
+        return validate;
+    }
+    else{
+        return true;
+    }
+
 }
 //SCHEDULE.calendar.edit_item=function(ev){
 //    $("#schedule-course").val(ev.text);
@@ -318,7 +326,7 @@ SCHEDULE.institution.choose=function(){
     SCHEDULE.calendar.getData();
 };
 SCHEDULE.generate_search_result=function(content){
-    var course_name=content[0],i,length=content.length;
+    var course_name=content[0].text,i,length=content.length;
     $("#search-list").append($("<p />").addClass("search-class-name")
         .append("<span />").text("课程：")
         .append("<span />").text(course_name)
@@ -328,13 +336,14 @@ SCHEDULE.generate_search_result=function(content){
         var data={};
         data.template=content[i];
         data.template.start_date=new Date(parseInt(content[i].start_date)).toWayneString().minute;
+        data.template.end_date=(new Date(parseInt(content[i].end_date)).toWayneString().minute).split(" ")[1];
         data.template.teachers=content[i].teachers.join(",");
-        data.template.sub_courses=content[i].sub_courses.is_default==0?content[i].sub_courses.text:false;
+        data.template.sub_courses=content[i].sub_courses.is_default==0?content[i].sub_courses.text:"";
         var render=Mustache.render("{{#template}}<li id='{{id}}'>"+
-            "<span>{{start_date}}</span>"+
+            "<span>{{start_date}}-{{end_date}}</span>"+
             "<span>{{teachers}}</span>"+
-            "<span>{{sub_courses}}</span>"+
             "<i class='trash icon' affect='{{id}}'></i>"+
+            "<span>{{sub_courses}}</span>"+
         "</li>{{/template}}",data);
         ul+=render;
     }
