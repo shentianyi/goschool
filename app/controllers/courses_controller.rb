@@ -78,7 +78,9 @@ class CoursesController < ApplicationController
     l[1]=total-l[0]
     
     (c[0].slice(0,l[0])+c[1].slice(0,l[1])).each do |item|
-      items<<{:name=>item['title'],:content=>item['name'],:type=>item['type'],:id=>item['id']} if(item['is_default']=='false' || item['is_default'].nil?)
+      h={name:item['title'],type:item['type'],id:item['id']} 
+      h['name']=item['title']+'-'+item['name'] if !item['is_default'].nil? && !item['is_default']
+      items<<h if item['is_default'].nil? || !item['is_default']
     end
     render :json=>items
   end

@@ -241,8 +241,8 @@
     <div class="inner">
         <i class="remove icon detail-add-close"></i>
         <p>为新生报班</p>
-        <div class="ui mini icon input">
-            <input placeholder="学生姓名..." type="text">
+        <div class="ui mini icon input autoComplete">
+            <input placeholder="学生姓名..." type="text" autocomplete="students">
             <i class="search icon"></i>
         </div>
         <div class="table-wrap">
@@ -306,8 +306,8 @@
     <div class="inner">
         <i class="remove icon detail-add-close"></i>
         <p>添加老师</p>
-        <div class="ui mini icon input">
-            <input placeholder="老师姓名..." type="text">
+        <div class="ui mini icon input autoComplete">
+            <input placeholder="老师姓名..." type="text" autocomplete="teachers">
             <i class="search icon"></i>
         </div>
         <div class="table-wrap">
@@ -390,7 +390,7 @@
                 </div>
                 <div class="ui left icon input specialInput labelForm autoComplete">
                     <ul>
-                        <li><input type='text' placeholder="标签..." id="new-class-label" /></li>
+                        <li><input type='text' placeholder="标签..." id="new-class-label" autocomplete="tags"/></li>
                     </ul>
                     <i class="tag icon"></i>
                 </div>
@@ -463,12 +463,12 @@
             </div>
             <div class="ui left icon input specialInput labelForm autoComplete">
                 <ul>
-                    <li><input type='text' placeholder="标签..." id="autoC2"/></li>
+                    <li><input type='text' placeholder="标签..." id="autoC2" autocomplete='tags'/></li>
                 </ul>
                 <i class="tag icon stop"></i>
             </div>
             <div class="ui left icon input autoComplete">
-                <input placeholder="推荐人..." id="autoC3" type="text">
+                <input placeholder="推荐人..." id="autoC3" type="text" autocomplete='students'>
                 <i class="smile icon"></i>
             </div>
             <div class="ui checkbox stop">

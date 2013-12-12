@@ -19,7 +19,7 @@ var SCHEDULE=SCHEDULE || {};
         $("#schedule-course").attr("course_id",$("#autoComplete-call").find(".active").attr("id"));
         //post(判断是否有subclass两种情况)
         if($("#autoComplete-call").find(".active").length>0){
-            $.get("courses/subs",{
+            $.get("/courses/subs",{
                 id:$("#autoComplete-call").find(".active").attr("id")
             },function(data){
                 if(data.result){
@@ -85,13 +85,18 @@ var SCHEDULE=SCHEDULE || {};
     $("body").on("keyup","#search-courses",function(event){
        var e=adapt_event(event).event;
        if(e.keyCode==13 && $("#autoComplete-call .active").length>0){
-           var value= $.trim($(this).val());
-           var institution_id=$("#schedule-select-institution .item.active").attr("value");
-           $.get("",{
-               q:value,
-               institution_id:institution_id
+           var id=$("#autoComplete-call .active").attr("id");
+           var type=$("#autoComplete-call .active").attr("type");
+           $.get("/schedules/courses",{
+               id:id,
+               type:type
            },function(data){
-
+               if(data.result){
+                   $("#search-list").html(data.content);
+               }
+               else{
+                   MessageBox_content(data.content);
+               }
            })
        }
     });
@@ -120,7 +125,7 @@ SCHEDULE.widget.init=function(){
     ];
     scheduler.templates.quick_info_title = function(start, end, ev){
         var teachers=ev.teachers.join(",");
-        if(ev.sub_courses.is_default==0){
+        if(ev.sub_courses.is_default==1){
             return ev.text.substr(0,50)+'<span></span>'+'<span>'+teachers+'</span>';
         }
         else{
@@ -171,7 +176,7 @@ SCHEDULE.widget.init=function(){
         }
         w_data.sub_courses={value:$("#schedule-sub-courses :selected").attr("value"),text:$("#schedule-sub-courses :selected").text()}
         w_data.color=$("#schedule-color .active").attr("color");
-        w_data.teachers=$("#new-schedule-teachers").text();
+        w_data.teachers=$("#new-schedule-teachers").text().split(",");
         //post
         var length=$(".dhx_section_time>label").length,base_time="";
         for(var i=0;i<length;i++){
@@ -184,8 +189,8 @@ SCHEDULE.widget.init=function(){
             $.post("/schedules",{
                 schedule:{
                     course_id:$("#schedule-course").attr("course_id"),
-                    start_time:base_time+" "+start,
-                    end_time:base_time+" "+end
+                    start_time:standardParse(base_time+" "+start).date,
+                    end_time:standardParse(base_time+" "+end).date
                 }
 
             },function(data){
@@ -203,8 +208,8 @@ SCHEDULE.widget.init=function(){
             $.post("/schedules",{
                 schedule:{
                     sub_course_id:$("#schedule-sub-courses :selected").attr("id"),
-                    start_time:base_time+" "+start,
-                    end_time:base_time+" "+end
+                    start_time:standardParse(base_time+" "+start).date,
+                    end_time:standardParse(base_time+" "+end).date
                 }
             },function(data){
                 if(data.result){
@@ -237,7 +242,6 @@ SCHEDULE.calendar.getData=function(){
     validate_institution=SCHEDULE.calendar.have_load.institution==institution?false:true;
     if(validate_max || validate_min || validate_institution){
         //post
-
         if(validate_institution){
             var events=scheduler.getEvents();
             for(var i=0;i<events.length;i++){
@@ -276,9 +280,9 @@ SCHEDULE.calendar.delete_item=function(id){
     //post delete(已经删除掉了，可能要去核心代码里面写ajax)
     var validate;
     $.ajax({
-        url:"",
-        data:{id:id},
+        url:"/schedules/"+id,
         type:"DELETE",
+        async:false,
         success:function(data){
               validate=data.result;
         }

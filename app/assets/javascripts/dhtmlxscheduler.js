@@ -3403,7 +3403,6 @@ scheduler.deleteEvent = function(id, silent) {
         }
 	}
 	this.callEvent("onEventDeleted", [id, ev]);
-    SCHEDULE.calendar.delete_item(id);
 };
 scheduler.getEvent = function(id) {
 	return this._events[id];
