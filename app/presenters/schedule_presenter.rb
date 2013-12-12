@@ -5,8 +5,9 @@ class SchedulePresenter<Presenter
     @schedule=schedule
   end
   
+  
   def start_hour
-   '%02d:%02d' % [self.start_time.hour,self.start_time.min]
+   '%02d:%02d' % [self.start_time..hour,self.start_time.min]
   end
   
   def end_hour
@@ -14,7 +15,6 @@ class SchedulePresenter<Presenter
   end
   
   def start_date
-    Time.now.to_i
     self.start_time.strftime('%Y-%m-%d')
   end
   

@@ -1,6 +1,6 @@
 #encoding: utf-8
 class SchedulesController < ApplicationController
-  before_filter :init_message ,:only=>[:show,:create,:update,:destroy,:dates,:teachers]
+  before_filter :init_message ,:only=>[:show,:create,:update,:destroy,:dates,:courses,:teachers]
   before_filter :get_schedule,:only=>[:update,:destroy]
   before_filter :render_nil_msg , :only=>[:update,:destroy]
   def index
@@ -52,9 +52,10 @@ class SchedulesController < ApplicationController
     render :json=>@msg
   end
 
-  def courses 
-    @schedules=SchedulePresenter.init_presenters( Schedule.by_course_id(params).all)
-    render partial:'search_result'
+  def courses
+    @msg.result=true
+    @msg.content=SchedulePresenter.init_json_presenters( Schedule.by_course_id(params).all)
+      render :json=>@msg 
   end
 
   def send_email
