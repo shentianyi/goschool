@@ -92,7 +92,8 @@ var SCHEDULE=SCHEDULE || {};
                type:type
            },function(data){
                if(data.result){
-                   $("#search-list").html(data.content);
+                   $("#search-list").empty();
+                   SCHEDULE.generate_search_result(data.content);
                }
                else{
                    MessageBox_content(data.content);
@@ -315,4 +316,28 @@ SCHEDULE.calendar.delete_item=function(id){
 SCHEDULE.institution={};
 SCHEDULE.institution.choose=function(){
     SCHEDULE.calendar.getData();
+};
+SCHEDULE.generate_search_result=function(content){
+    var course_name=content[0],i,length=content.length;
+    $("#search-list").append($("<p />").addClass("search-class-name")
+        .append("<span />").text("课程：")
+        .append("<span />").text(course_name)
+    );
+    var ul="<ul class='search-class-schedule'>";
+    for(i=0;i<length;i++){
+        var data={};
+        data.template=content[i];
+        data.template.start_date=new Date(parseInt(content[i].start_date)).toWayneString().minute;
+        data.template.teachers=content[i].teachers.join(",");
+        data.template.sub_courses=content[i].sub_courses.is_default==0?content[i].sub_courses.text:false;
+        var render=Mustache.render("{{#template}}<li id='{{id}}'>"+
+            "<span>{{start_date}}</span>"+
+            "<span>{{teachers}}</span>"+
+            "<span>{{sub_courses}}</span>"+
+            "<i class='trash icon' affect='{{id}}'></i>"+
+        "</li>{{/template}}",data);
+        ul+=render;
+    }
+    ul+="</ul>";
+    $("#search-list").append(ul);
 };

@@ -174,12 +174,12 @@
 .schedule-search{
     position:absolute;
     right:0px;
-    top:65px;
+    top:55px;
     bottom:0px;
     width:25%;
 }
 .schedule-search>.ui.button.dropdown{
-    position:absolute;
+    position:absolute !important;
     top:4%;
     width:86%;
     min-width:230px;
