@@ -94,6 +94,7 @@ var SCHEDULE=SCHEDULE || {};
                if(data.result){
                    $("#search-list").empty();
                    SCHEDULE.generate_search_result(data.content);
+
                }
                else{
                    MessageBox_content(data.content);
@@ -130,7 +131,7 @@ SCHEDULE.widget.init=function(){
             return ev.text.substr(0,50)+'<span></span>'+'<span>'+teachers+'</span>';
         }
         else{
-            return ev.text.substr(0,50)+'<span>'+ev.sub_courses.text.substr(0,50)+'</span><span>'+teachers+'</span>';
+            return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>'+teachers+'</span>';
         }
     };
     //绑定模板

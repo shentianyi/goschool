@@ -507,7 +507,7 @@ GLOBAL.autoComplete.count=0;
             }
             else if($input.attr("ishould")=="BeSelected"){
                 if($("#autoComplete-call").find(".active").length>0){
-
+                    $("#autoComplete-call").css("left","-999em").attr("target","")
                 }
                 else{
                     MessageBox("请在下拉菜单中选择一条","top","warning");
