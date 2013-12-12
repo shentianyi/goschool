@@ -3388,6 +3388,7 @@ scheduler.deleteEvent = function(id, silent) {
 		return;
 	if (ev) {
         //post
+        alert(id)
         if(ev.text!="新建课程"){
             var validate=SCHEDULE.calendar.delete_item(id);
             if(validate){
@@ -3403,7 +3404,6 @@ scheduler.deleteEvent = function(id, silent) {
         }
 	}
 	this.callEvent("onEventDeleted", [id, ev]);
-    SCHEDULE.calendar.delete_item(id);
 };
 scheduler.getEvent = function(id) {
 	return this._events[id];
