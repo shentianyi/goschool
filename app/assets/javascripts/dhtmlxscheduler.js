@@ -3388,7 +3388,6 @@ scheduler.deleteEvent = function(id, silent) {
 		return;
 	if (ev) {
         //post
-        alert(id)
         if(ev.text!="新建课程"){
             var validate=SCHEDULE.calendar.delete_item(id);
             if(validate){
