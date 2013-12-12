@@ -33,6 +33,6 @@
                          <a class="ui blue label"> <%= tag%> </a>
                          <%end%>
      </p>
-     <a class="ui red button detail-button">删除课程</a>
-     <a class="ui teal button detail-button" id="course-detail-edit">编辑课程信息</a>
+     <a class="ui red button detail-button"  course="<%=@course.id%>">删除<%=@course.type_display%></a>
+     <a class="ui teal button detail-button" id="course-detail-edit" course="<%=@course.id%>">编辑<%=@course.type_display%>信息</a>
 </div>

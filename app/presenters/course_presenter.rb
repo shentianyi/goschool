@@ -14,6 +14,9 @@ class CoursePresenter<Presenter
       CourseStatus.display self.status
     end
      
+     def type_display
+       CourseType.display self.type
+     end
 
     def teacher_names
       teachers.uniq.map{|t| t.name}
