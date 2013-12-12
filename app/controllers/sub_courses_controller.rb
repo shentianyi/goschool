@@ -1,6 +1,6 @@
 #encoding: utf-8
 class SubCoursesController < ApplicationController
-  skip_and_
+ 
   before_filter :init_message ,:only=>[:create,:update,:destroy,:teachers]
   before_filter :get_sub_course,:only=>[:update,:edit,:destroy,:teachers]
   before_filter :render_nil_msg , :only=>[:update,:destroy,:teachers]

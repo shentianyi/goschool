@@ -16,13 +16,13 @@ class CoursesController < ApplicationController
     @active_left_aside='courses'
     @course=CoursePresenter.new(@course)
     case params[:part]
-    when 'teachers'
+    when 'teacher'
        teachers()
-    when 'recommendations'
+    when 'recommend'
 	 # recommendations()
     else
 	students()
-	@partal='students'
+	@partial='student'
     end	
     @partial||=params[:part]
     render :partial=>@partial if params[:ajax] 
