@@ -344,14 +344,13 @@ GLOBAL.autoComplete.count=0;
                                 var $target=$("#autoComplete-call>ul");
                                 if(data.length>0){
                                     $("#autoComplete-call>ul").empty();
-                                    for(var i=0;i<data.length;i++){
-                                        var data={data:data[i]};
+                                        var data={data:data};
                                         var render=Mustache.render("{{#data}}<li id='{{id}}' type='{{type}}'>" +
                                             "<p>{{name}}</p>"+
                                             "<p>{{info}}</p>"+
                                             "</li>{{/data}}",data);
                                         $target.append(render);
-                                    }
+
                                 }
                                 else{
                                     $("#autoComplete-call>ul").empty();
