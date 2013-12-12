@@ -71,3 +71,11 @@
     </div>
   </div>
 </article>
+
+<%= render partial:'shares/log_footer'%>
+<% content_for :javascript_includes do%>
+    <%= javascript_include_tag "BACK_student.js"%>
+    <%= javascript_include_tag "BACK_detail.js"%>
+    <%= javascript_include_tag "BACK_student_detail.js"%>
+
+<%end%>
