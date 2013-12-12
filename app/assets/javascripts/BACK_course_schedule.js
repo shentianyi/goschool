@@ -69,9 +69,7 @@ var SCHEDULE=SCHEDULE || {};
             var validate=SCHEDULE.calendar.delete_item(id);
             if(validate){
                 $("#search-list .search-class-schedule").find("#"+id).remove();
-                if( scheduler.getEvent(id)!==undefined){
-                    scheduler.deleteEvent(id);
-                }
+                scheduler.deleteEvent(id,"static");
             }
         }
     });
@@ -294,6 +292,9 @@ SCHEDULE.calendar.delete_item=function(id){
         })
         return validate;
     }
+    else if(arguments[1]!="static"){
+        return false;
+    }
     else{
         return true;
     }
@@ -329,8 +330,8 @@ SCHEDULE.institution.choose=function(){
 SCHEDULE.generate_search_result=function(content){
     var course_name=content[0].text,i,length=content.length;
     $("#search-list").append($("<p />").addClass("search-class-name")
-        .append("<span />").text("课程：")
-        .append("<span />").text(course_name)
+        .append($("<span />").text("课程："))
+        .append($("<span />").text(course_name))
     );
     var ul="<ul class='search-class-schedule'>";
     for(i=0;i<length;i++){
