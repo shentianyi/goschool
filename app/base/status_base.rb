@@ -1,8 +1,11 @@
 #encoding: utf-8
+require 'base_class'
 class StatusBase
   class<<self
-   define_method(:include?){|s|
-    self.constants.map { |c| self.const_get(c.to_s)}.include?(s)
-   }
+   define_method(:include?){|s| self.constants.map { |c| self.const_get(c.to_s)}.include?(s)}
+  end
+  
+  class Menu<CZ::BaseClass
+    attr_accessor :dispaly,:value
   end
 end
