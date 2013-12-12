@@ -341,7 +341,7 @@ GLOBAL.autoComplete.count=0;
                             var courses=auto_complete.split(",");
                             var institution_id=$(".select-institution:visible .item.active").attr("value");
                             var type=$("#autoComplete-call .active").attr("type");
-                            $.get("/"+courses[0]+"/"+courses[1]+"_search",{q:value,institution_id:institution_id,type:type},function(data){
+                            $.get("/"+courses[0]+"/"+courses[1]+"_search",{q:value,institution_id:institution_id},function(data){
                                 var $target=$("#autoComplete-call>ul");
                                 if(data.length>0){
                                     $("#autoComplete-call>ul").empty();
