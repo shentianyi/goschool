@@ -171,7 +171,7 @@ SCHEDULE.widget.init=function(){
         }
         w_data.sub_courses={value:$("#schedule-sub-courses :selected").attr("value"),text:$("#schedule-sub-courses :selected").text()}
         w_data.color=$("#schedule-color .active").attr("color");
-        w_data.teachers=$("#new-schedule-teachers").text();
+        w_data.teachers=$("#new-schedule-teachers").text().split(",");
         //post
         var length=$(".dhx_section_time>label").length,base_time="";
         for(var i=0;i<length;i++){
@@ -237,7 +237,6 @@ SCHEDULE.calendar.getData=function(){
     validate_institution=SCHEDULE.calendar.have_load.institution==institution?false:true;
     if(validate_max || validate_min || validate_institution){
         //post
-
         if(validate_institution){
             var events=scheduler.getEvents();
             for(var i=0;i<events.length;i++){

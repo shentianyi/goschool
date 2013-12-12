@@ -1329,7 +1329,7 @@ div.icon_delete{
 	border:none !important;
 	top: 5px;
 	background-repeat:no-repeat;
-	background-image: url(./imgs/images.png);
+	background-image: url(/assets/images.png);
 }
 /* end grid */
 
@@ -1611,7 +1611,7 @@ input.dhx_repeat_checkbox {
 	height: 5px;
 	border: 0;
 	margin-top: -6px;
-	background: url(../images/resizing.png) no-repeat center center;
+	background: url(/assets/resizing.png) no-repeat center center;
 }
 
 .dhx_cal_event .dhx_header, .dhx_cal_event .dhx_footer, .dhx_cal_event .dhx_body, .dhx_cal_event .dhx_title {
@@ -1631,7 +1631,7 @@ div.dhx_cal_editor {
 }
 
 div.dhx_menu_head, div.dhx_menu_icon {
-	background-image: url(../images/controls.png);
+	background-image: url(/assets/controls.png);
 }
 
 .dhx_cal_event_line {
