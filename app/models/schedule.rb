@@ -35,7 +35,7 @@ class Schedule < ActiveRecord::Base
     elsif params[:type]=='Course'
        bq.where(sub_courses:{course_id:params[:id]})
     else
-      []
+      raise ActionController::RoutingError.new('Not Found')
     end 
   end
   
