@@ -285,6 +285,7 @@ SCHEDULE.calendar.delete_item=function(id){
         url:"/schedules",
         data:{id:id},
         type:"DELETE",
+        async:false,
         success:function(data){
               validate=data.result;
         }
