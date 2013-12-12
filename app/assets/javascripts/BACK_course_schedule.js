@@ -191,8 +191,8 @@ SCHEDULE.widget.init=function(){
             $.post("/schedules",{
                 schedule:{
                     course_id:$("#schedule-course").attr("course_id"),
-                    start_time:base_time+" "+start,
-                    end_time:base_time+" "+end
+                    start_time:standardParse(base_time+" "+start).date,
+                    end_time:standardParse(base_time+" "+end).date
                 }
 
             },function(data){
@@ -210,8 +210,8 @@ SCHEDULE.widget.init=function(){
             $.post("/schedules",{
                 schedule:{
                     sub_course_id:$("#schedule-sub-courses :selected").attr("id"),
-                    start_time:base_time+" "+start,
-                    end_time:base_time+" "+end
+                    start_time:standardParse(base_time+" "+start).date,
+                    end_time:standardParse(base_time+" "+end).date
                 }
             },function(data){
                 if(data.result){
