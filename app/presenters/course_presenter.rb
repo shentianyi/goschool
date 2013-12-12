@@ -16,7 +16,7 @@ class CoursePresenter<Presenter
      
 
     def teacher_names
-      teachers.map{|t| t.name}
+      teachers.uniq.map{|t| t.name}
     end
     
     def teacher_names_string
