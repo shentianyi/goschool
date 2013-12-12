@@ -45,9 +45,11 @@ Goschool::Application.routes.draw do
       post :send_email
     end
   end
+
   resources :students do
     collection do
       get :fast_search
+      get ':id/:part/:ajax'=>:show
     end
   end
 

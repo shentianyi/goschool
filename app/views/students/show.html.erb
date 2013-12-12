@@ -64,18 +64,47 @@
       <a class="ui teal button detail-student-button" id="add-item" type="student">编辑学生信息</a>
     </div>
     <div class="ui fluid accordion" id="accordion" name="student">
-      <%= render partial:'courses' %>
-      <%= render partial:'achievements' %>
-      <%= render partial:'relations' %>
-      <%= render partial:'consultations' %>
+      <div class="item" id="class-and-service">
+        <div class="active title">
+          <i class="dropdown icon"></i>课程及服务
+        </div>
+        <div class="active content class-and-service">
+	  <%= render partial:'courses' %>
+	</div>
+      </div>
+      <div class="item achievement" id="achieve">
+        <div class="title">
+          <i class="dropdown icon"></i>所获成就
+        </div>
+        <div class="content">
+	  <%= render partial:'achievements' %>
+	</div>
+      </div>
+      <div class="item friendship" id="friendship">
+        <div class="title">
+          <i class="dropdown icon"></i>人际
+        </div>
+        <div class="content">
+	  <%= render partial:'relations' %>
+	</div>
+      </div>
+      <div class="item consult-record" id="consult-record">
+        <div class="title">
+          <i class="dropdown icon"></i>咨询记录
+        </div>
+        <div class="content">
+	  <%= render partial:'consultations' if @consultations %>
+	</div>
+	<div class="ui mini button" for="detail-add" type="consult-record"><i class="add icon"></i> 添加咨询记录</div>
+      </div>
     </div>
   </div>
 </article>
 
 <%= render partial:'shares/log_footer'%>
 <% content_for :javascript_includes do%>
-    <%= javascript_include_tag "BACK_student.js"%>
-    <%= javascript_include_tag "BACK_detail.js"%>
-    <%= javascript_include_tag "BACK_student_detail.js"%>
+<%= javascript_include_tag "BACK_student.js"%>
+<%= javascript_include_tag "BACK_detail.js"%>
+<%= javascript_include_tag "BACK_student_detail.js"%>
 
 <%end%>
