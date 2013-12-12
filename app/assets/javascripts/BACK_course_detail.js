@@ -20,6 +20,7 @@ DETAIL.course={};
     });
     $("body").on("click","#course-detail-edit",function(){
         $(".back-index-add[name='course']").css("left","0px").css("right","0px");
+        //post(get edit course/service template)
     });
     $("body").on("click",".out-class",function(){
           if(confirm("确认为该学生退班吗？")){
@@ -102,13 +103,13 @@ DETAIL.course.student={};
 DETAIL.course.teacher={};
 //<img class="ui avatar image" src="/assets/portrait/{{img}}"/>\
 DETAIL.course.student.template='\
-    {{#student}}<tr id="{{id}}" class="{{#checked}}positive{{/checked}}">\
+    {{#student}}<tr id="{{id}}">\
         <td>\
         <img class="ui avatar image" src="images/portrait/{{img}}"/>\
         </td>\
         <td>{{name}}</td>\
         <td>{{time}}</td>\
-        <td><div class="ui checkbox" name="join-pay">\
+        <td class="{{#checked}}positive{{/checked}}"><div class="ui checkbox" name="join-pay">\
             <input type="checkbox" {{#checked}}checked{{/checked}}>\
             <label>已经支付</label>\
         </div></td>\
@@ -124,4 +125,3 @@ DETAIL.course.teacher.template='\
             <div class="red button ui mini out-teacher" affect="{{id}}">删除</div>\
         </td>\
     </tr>{{/teacher}}';
-

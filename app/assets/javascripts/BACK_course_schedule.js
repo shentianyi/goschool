@@ -19,7 +19,7 @@ var SCHEDULE=SCHEDULE || {};
         $("#schedule-course").attr("course_id",$("#autoComplete-call").find(".active").attr("id"));
         //post(判断是否有subclass两种情况)
         if($("#autoComplete-call").find(".active").length>0){
-            $.get("courses/subs",{
+            $.get("/courses/subs",{
                 id:$("#autoComplete-call").find(".active").attr("id")
             },function(data){
                 if(data.result){
@@ -87,11 +87,18 @@ var SCHEDULE=SCHEDULE || {};
        if(e.keyCode==13 && $("#autoComplete-call .active").length>0){
            var value= $.trim($(this).val());
            var institution_id=$("#schedule-select-institution .item.active").attr("value");
-           $.get("",{
+           var type=$("#schedule-select-institution .item.active").attr("type");
+           $.get("/schedules/courses",{
                q:value,
-               institution_id:institution_id
+               institution_id:institution_id,
+               type:type
            },function(data){
-
+               if(data.result){
+                   $("#search-list").html(data.content);
+               }
+               else{
+                   MessageBox_content(data.content);
+               }
            })
        }
     });
@@ -275,7 +282,7 @@ SCHEDULE.calendar.delete_item=function(id){
     //post delete(已经删除掉了，可能要去核心代码里面写ajax)
     var validate;
     $.ajax({
-        url:"",
+        url:"/schedules",
         data:{id:id},
         type:"DELETE",
         success:function(data){
