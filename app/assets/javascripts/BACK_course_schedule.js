@@ -87,7 +87,7 @@ var SCHEDULE=SCHEDULE || {};
        if(e.keyCode==13 && $("#autoComplete-call .active").length>0){
            var value= $.trim($(this).val());
            var institution_id=$("#schedule-select-institution .item.active").attr("value");
-           var type=$("#schedule-select-institution .item.active").attr("type");
+           var type=$("#autoComplete-call .item.active").attr("type");
            $.get("/schedules/courses",{
                q:value,
                institution_id:institution_id,
