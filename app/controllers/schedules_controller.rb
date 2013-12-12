@@ -40,20 +40,20 @@ class SchedulesController < ApplicationController
 
   def dates
     @msg.result=true
-    @msg.object=SchedulePresenter.init_json_presenters( Schedule.between_date(params).all)
+    @msg.content=SchedulePresenter.init_json_presenters( Schedule.between_date(params).all)
     render :json=>@msg
   end
 
   def teachers
     @msg.result=true
     params[:teacher_id]=session[:teacher_id] || params[:teacher_id]
-    @msg.object=SchedulePresenter.init_json_presenters( Schedule.by_teacher_date(params).all)
+    @msg.content=SchedulePresenter.init_json_presenters( Schedule.by_teacher_date(params).all)
     render :json=>@msg
   end
 
   def courses
     @msg.result=true
-    @msg.object=SchedulePresenter.init_json_presenters( Schedule.by_course_id(params).all)
+    @msg.content=SchedulePresenter.init_json_presenters( Schedule.by_course_id(params).all)
     render :json=>@msg
   end
 
