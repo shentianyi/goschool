@@ -1,5 +1,5 @@
 #encoding: utf-8
-class StudnetObserver<ActiveRecord::Observer
+class StudentObserver<ActiveRecord::Observer
   observe :student
   
   def after_save student

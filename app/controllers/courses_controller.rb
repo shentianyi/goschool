@@ -16,9 +16,9 @@ class CoursesController < ApplicationController
     @active_left_aside='courses'
     @course=CoursePresenter.new(@course)
     case params[:part]
-     when 'teachers'
+    when 'teachers'
        teachers()
-     when 'recommendations'
+    when 'recommendations'
 	 # recommendations()
     else
 	students()

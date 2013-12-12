@@ -482,35 +482,41 @@ GLOBAL.autoComplete.count=0;
 
         }
         else if(e.keyCode==13){
-            if($input.attr("im")=="label" && $input.attr("ishould")=="BeSelected"){
-                if($("#autoComplete-call").find(".active").length>0){
+            if($.trim($input.val()).length==0){
+                e.preventDefault();
+                $input.val("");
+            }
+            else{
+                if($input.attr("im")=="label" && $input.attr("ishould")=="BeSelected"){
+                    if($("#autoComplete-call").find(".active").length>0){
+                        var value=$.trim($input.val());
+                        var id=$("#autoComplete-call").find(".active").attr("id");
+                        var type=$("#autoComplete-call").find(".active").attr("type");
+                        var data={data:{
+                            id:id,
+                            value:value,
+                            type:type
+                        }};
+                        var render=Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id={{id}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}",data);
+                        $input.parent().before(render);
+                    }
+                    $input.val("");
+                }
+                else if($input.attr("im")=="label"){
                     var value=$.trim($input.val());
-                    var id=$("#autoComplete-call").find(".active").attr("id");
-                    var type=$("#autoComplete-call").find(".active").attr("type");
-                    var data={data:{
-                        id:id,
-                        value:value,
-                        type:type
-                    }};
-                    var render=Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id={{id}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}",data);
-                    $input.parent().before(render);
+                    $input.parent().before($("<li />")
+                        .append($("<div />").addClass("ui label").text(value)
+                            .append($("<i />").addClass("delete icon")))
+                    );
+                    $input.val("");
                 }
-                $input.val("");
-            }
-            else if($input.attr("im")=="label"){
-                var value=$.trim($input.val());
-                $input.parent().before($("<li />")
-                    .append($("<div />").addClass("ui label").text(value)
-                        .append($("<i />").addClass("delete icon")))
-                );
-                $input.val("");
-            }
-            else if($input.attr("ishould")=="BeSelected"){
-                if($("#autoComplete-call").find(".active").length>0){
-                    $("#autoComplete-call").css("left","-999em").attr("target","")
-                }
-                else{
-                    MessageBox("请在下拉菜单中选择一条","top","warning");
+                else if($input.attr("ishould")=="BeSelected"){
+                    if($("#autoComplete-call").find(".active").length>0){
+                        $("#autoComplete-call").css("left","-999em").attr("target","")
+                    }
+                    else{
+                        MessageBox("请在下拉菜单中选择一条","top","warning");
+                    }
                 }
             }
         }

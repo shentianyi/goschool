@@ -18,7 +18,7 @@ class StudentsController < ApplicationController
   # GET /students/1.json
   def show
     @student = Student.find(params[:id])
-    @student_presenter=StudentPresenter.new(@student)
+    @presenter=StudentPresenter.new(@student)
     
     case params[:part]
     when 'courses'
@@ -59,7 +59,7 @@ class StudentsController < ApplicationController
   end
 
   def consultation(student)
-    @consultations = StudentConsultingrecordPresenter.new(@studnet.consultations)
+    @consultations = StudentConsultingrecordPresenter.init_presenters(@studnet.consultations)
   end
 
   # GET /students/new
@@ -99,7 +99,7 @@ class StudentsController < ApplicationController
           @logininfo.status = UserStatus::LOCKED
         end
         @logininfo.save!
-        @student.logininfo = @loginnfo
+        @student.logininfo = @logininfo
         @student.tenant = current_tenant
         @student.save!
         msg.result = true
@@ -153,7 +153,7 @@ class StudentsController < ApplicationController
     results = Redis::Search.complete('Student',params[:q],:conditions =>{:tenant_id=>current_tenant.id})
     students = []
     results.slice(0,10).each do |student|
-      students<<{:name=>student['name'],:school=>student['school'],:address=>student['address'],:guardian=>student['guardian']}
+      students<<{:name=>student['title'],:school=>student['school'],:address=>student['address'],:guardian=>student['guardian']}
     end
     render :json=>students
   end
