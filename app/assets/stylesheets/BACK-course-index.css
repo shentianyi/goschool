@@ -43,9 +43,9 @@
     margin-right:6px;
 }
 .back-index-main > .search-list > .search-result[name="course"] > li table tr:nth-child(2) td:first-of-type{
-    width:280px;
-    min-width:280px;
-    max-width:280px;
+    /*width:280px;*/
+    /*min-width:280px;*/
+    /*max-width:280px;*/
 }
 .back-index-main > .search-list > .search-result[name="course"] > li table tr:nth-child(2n){
     background-color:white;
