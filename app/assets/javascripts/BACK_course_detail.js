@@ -21,6 +21,7 @@ DETAIL.course={};
     $("body").on("click","#course-detail-edit",function(){
         $(".back-index-add[name='course']").css("left","0px").css("right","0px");
         //post(get edit course/service template)
+        course_manager.edit();
     });
     $("body").on("click",".out-class",function(){
           if(confirm("确认为该学生退班吗？")){

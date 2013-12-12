@@ -1,18 +1,17 @@
 #encoding: utf-8
 class CoursesController < ApplicationController
   before_filter :init_message ,:only=>[:edit,:create,:update,:destroy,:subs]
-  before_filter :get_course,:only=>[:show,:update,:edit,:destroy,:subs]
+  before_filter :get_course,:only=>[:edit,:show,:update,:edit,:destroy,:subs]
   before_filter :render_nil_msg , :only=>[:edit,:update,:destroy,:subs]
- 
+  before_filter :render_404,:only=>[:edit,:show]
   
   def index
     @active_left_aside='courses'
     @institutions=current_tenant.institutions
     @courses=CoursePresenter.init_presenters(Course.joins(:institution).select('courses.*,institutions.name as institution_name').all)
   end
-
-  def show
-   if  @course
+   
+  def show 
     @active_left_aside='courses'
     @course=CoursePresenter.new(@course)
     case params[:part]
@@ -25,16 +24,12 @@ class CoursesController < ApplicationController
 	@partial='student'
     end	
     @partial||=params[:part]
-    render :partial=>@partial if params[:ajax] 
-    else
-        error_page_404
-    end
+    render partial:@partial if params[:ajax] 
   end
 
   def edit
-    @msg.result=true
-    @msg.object={:course=>@course,:sub_courses=>@course.sub_courses}
-    render :json=>@msg
+    @course=CoursePresenter.new(@course)
+    render partial:'edit'
   end
 
   def create
@@ -133,6 +128,11 @@ class CoursesController < ApplicationController
     unless @course
       @msg.content='不存在此课程'
       render :json=>msg
+    end
+  end
+  def render_404
+    unless @course
+      error_page_404
     end
   end
   

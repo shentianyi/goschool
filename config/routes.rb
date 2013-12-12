@@ -63,6 +63,7 @@ Goschool::Application.routes.draw do
 
   resources :courses do
     collection do
+      get ':id/edit'=>:edit
       get ':id/:part'=>:show
       get ':id/:part/:ajax'=>:show
       get :fast_search
