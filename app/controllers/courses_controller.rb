@@ -122,7 +122,7 @@ class CoursesController < ApplicationController
   end
   
   def students
-    @teachers=CourseStudentPresenter.init_presenters(@course.course_students)
+    @students=CourseStudentPresenter.init_presenters(@course.course_students)
   end
 
   def get_course
