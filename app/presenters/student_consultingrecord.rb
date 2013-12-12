@@ -1,5 +1,5 @@
 #encoding: utf-8
-class StudentConsultingrecordPresenter<Presenter
+class StudentConsultationPresenter<Presenter
   def_delegators :@consultation, :id,:consultants,:consult_time,:content,:comment,:comment_time,:commenter,:logininfo_id
   
   def initialize(consultation)

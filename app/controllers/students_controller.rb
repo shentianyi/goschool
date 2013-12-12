@@ -27,14 +27,17 @@ class StudentsController < ApplicationController
       achievements(@student)
     when 'relation'
       relation(@student)
-    when 'consultingrecord'
+    when 'consultations'
       consultation(@student)
     end
+    
+    @partia ||= params[:part]
+    render :partial=>@partial if params[:ajax]
 
-    respond_to do |format|
-      format.html # show.html.erb 
-      format.json { render json: @student }
-    end
+    #respond_to do |formxat|
+    #  format.html # show.html.erb 
+    #  format.json { render json: @student }
+    #end
   end
 
   def courses(student)
@@ -59,7 +62,7 @@ class StudentsController < ApplicationController
   end
 
   def consultation(student)
-    @consultations = StudentConsultingrecordPresenter.init_presenters(@studnet.consultations)
+    @consultations = StudentConsultationPresenter.init_presenters(@studnet.consultations)
   end
 
   # GET /students/new
@@ -153,7 +156,7 @@ class StudentsController < ApplicationController
     results = Redis::Search.complete('Student',params[:q],:conditions =>{:tenant_id=>current_tenant.id})
     students = []
     results.slice(0,10).each do |student|
-      students<<{:name=>student['title'],:school=>student['school'],:address=>student['address'],:guardian=>student['guardian']}
+      students<<{:name=>student['title'],:school=>student['school'],:address=>student['address'],:guardian=>student['guardian'],:id=>student['id']}
     end
     render :json=>students
   end

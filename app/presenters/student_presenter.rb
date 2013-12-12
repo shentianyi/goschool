@@ -8,7 +8,7 @@ class StudentPresenter<Presenter
   end
   
   def gender_
-    self.gender==0 ? '男' : '女'
+    self.gender==1 ? '男' : '女'
   end
   
   def birth_

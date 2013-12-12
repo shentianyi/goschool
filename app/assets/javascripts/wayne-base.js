@@ -467,8 +467,12 @@ GLOBAL.autoComplete.count=0;
                         }};
                         var render=Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id={{id}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}",data);
                         $input.parent().before(render);
+                        $input.val("");
                     }
-                    $input.val("");
+                    else{
+                        MessageBox("请在下拉菜单中选择一条","top","warning");
+                    }
+
                 }
                 else if($input.attr("im")=="label"){
                     var value=$.trim($input.val());
@@ -499,6 +503,7 @@ GLOBAL.autoComplete.count=0;
                         }};
                         var render=Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id={{id}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}",data);
                         $input.parent().before(render);
+                        $("#autoComplete-call").css("left","-999em").attr("target","");
                     }
                     $input.val("");
                 }
@@ -509,6 +514,7 @@ GLOBAL.autoComplete.count=0;
                             .append($("<i />").addClass("delete icon")))
                     );
                     $input.val("");
+                    $("#autoComplete-call").css("left","-999em").attr("target","")
                 }
                 else if($input.attr("ishould")=="BeSelected"){
                     if($("#autoComplete-call").find(".active").length>0){
