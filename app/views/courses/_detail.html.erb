@@ -10,7 +10,7 @@
      </p>
 <p class='detail-teachers'><span>授课老师:</span><span><%=@course.teacher_names_string%></span></p>
      <p class="detail-time">
-          <span>授课时间:</span><span>2013年10月10日 - 2013年12月12日</span>
+          <span>授课时间:</span><span><%=@course.start_date%> -- <%=@course.end_date%></span>
      </p>
      <p class="detail-count">
           <span>课时数:</span><span><%=@course.lesson%>课时</span>

@@ -21,7 +21,8 @@ class Course < ActiveRecord::Base
   redis_search_index(:title_field => :name,
                      :prefix_index_enable => true,
                      :alias_field=>:code,
-                     :condition_fields => [:tenant_id,:institution_id])
+                     :condition_fields => [:tenant_id,:institution_id],
+                     :ext_fields=>[:has_sub])
   def create_default_sub_course
     unless self.has_sub
       sub_course= self.sub_courses.create(parent_name:self.name,is_default:true,institution_id:self.institution_id)
@@ -37,8 +38,8 @@ class Course < ActiveRecord::Base
     self.teachers.select('users.*,sub_courses.id as sub_course_id,sub_courses.name as sub_course_name,sub_courses.parent_name as course_name').all
   end
 
-  def teacher_names
-    self.teachers.map{|t| t.name}
+  def teacher_details
+    self.teachers.select('sub_courses.id as sub_course_id,sub_courses.name as sub_course_name,teacher_courses.id as teacher_course_id,users.*')
   end
 
   private

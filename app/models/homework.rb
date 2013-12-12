@@ -2,7 +2,7 @@
 class Homework < ActiveRecord::Base
   belongs_to :teacher_course
   delegate :sub_course,:to=>:teacher_course
-  has_many :attachments,:as=>:attachable
+  has_many :attachments,:as=>:attachable,:dependent=>:destroy
   has_one :student_homework,:dependent=>:destroy
   attr_accessible :content, :deadline, :title, :unmark_number
     acts_as_tenant(:tenant)
