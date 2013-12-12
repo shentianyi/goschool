@@ -181,7 +181,7 @@
 .schedule-search>.ui.button.dropdown{
     position:absolute;
     top:4%;
-    width:80%;
+    width:86%;
     min-width:230px;
 }
 .schedule-search>.ui.button.dropdown .menu{
@@ -192,7 +192,7 @@
 .schedule-search>.search-block{
     position:absolute;
     top:110px;
-    width:80%;
+    width:86%;
     min-width:230px;
     border-radius:5px;
     -moz-border-radius:5px;
@@ -234,10 +234,11 @@
     font-size:0;
 }
 .search-list>.search-class-schedule>li{
-    font-size:13px;
+    font-size:0px;
     padding:4px 10px;
     word-break:break-all;
     word-wrap:break-word;
+
 }
 .search-list>.search-class-schedule>li:nth-child(odd){
     background:rgba(220,220,220,0.5);
@@ -245,14 +246,31 @@
 .search-list>.search-class-schedule>li>span:nth-of-type(1){
     width:147px;
     display:inline-block;
+    vertical-align:top;
+    font-size:13px;
 }
 .search-list>.search-class-schedule>li>span:nth-of-type(2){
-    color:rgba(0,0,0,0.6);
+    color:rgba(0,0,0,1);
+    width:39px;
+    display:inline-block;
+    vertical-align:top;
+    margin-right:2px;
+    font-size:12px;
+}
+.search-list>.search-class-schedule>li>span:nth-of-type(3){
+    color:rgba(0,0,0,0.9);
+    font-weight:bold;
+    vertical-align:top;
+    color:#4092CC;
+    font-size:12px;
+    max-width:50px;
+    display:inline-block;
 }
 .search-list>.search-class-schedule>li>i{
     float:right;
     color:#D95C5C;
     cursor:pointer;
+    font-size:13px;
 }
 /*按钮*/
 .schedule-search>.save-schedule{
