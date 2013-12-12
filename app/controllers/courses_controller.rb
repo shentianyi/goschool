@@ -3,6 +3,7 @@ class CoursesController < ApplicationController
   before_filter :init_message ,:only=>[:edit,:create,:update,:destroy,:subs]
   before_filter :get_course,:only=>[:show,:update,:edit,:destroy,:subs]
   before_filter :render_nil_msg , :only=>[:edit,:update,:destroy,:subs]
+ 
   
   def index
     @active_left_aside='courses'
@@ -11,7 +12,9 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course_presenter=CoursePresenter.new(@course)
+   if  @course
+    @active_left_aside='courses'
+    @course=CoursePresenter.new(@course)
     case params[:part]
      when 'teachers'
        teachers()
@@ -23,6 +26,9 @@ class CoursesController < ApplicationController
     end	
     @partial||=params[:part]
     render :partial=>@partial if params[:ajax] 
+    else
+        error_page_404
+    end
   end
 
   def edit
@@ -129,4 +135,6 @@ class CoursesController < ApplicationController
       render :json=>msg
     end
   end
+  
+  
 end
