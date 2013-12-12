@@ -122,11 +122,11 @@ class CoursesController < ApplicationController
   end
   
   def students
-    @teachers=CourseStudentPresenter.init_presenters(@course.course_students)
+    @students=CourseStudentPresenter.init_presenters(@course.course_students)
   end
 
   def get_course
-    @course=Course.find_by_id(params[:id])
+    @course=Course.joins(:institution).where(id:params[:id]).select('courses.*,institutions.name as institution_name').first
   end
 
   def render_nil_msg
