@@ -106,6 +106,9 @@ DETAIL.course={};
                             })
                         }
                     });
+                    var number=parseInt($("#autual-student").text())+1;
+                    $("#autual-student").text(number);
+                    MessageBox(object_item.name+"报班成功","top","success");
                 }
                 else{
                     MessageBox_content(data.content);
