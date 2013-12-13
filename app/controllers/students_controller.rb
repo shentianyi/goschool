@@ -49,7 +49,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @student }
+       format.json { render json: @student }
     end
   end
 
@@ -77,17 +77,11 @@ class StudentsController < ApplicationController
         else
           @logininfo.status = UserStatus::LOCKED
         end
-        puts "========================================"
         @logininfo.save!
-        puts @logininfo.as_json
-        puts "========================================"
         @student.logininfo = @logininfo
-        puts "========================================"
         @student.tenant = current_tenant
-        puts "========================================"
         puts @student.as_json
         @student.save!
-        puts "========================================"
         msg.result = true
       end
     rescue ActiveRecord::RecordInvalid=>invalid
@@ -139,7 +133,7 @@ class StudentsController < ApplicationController
     results = Redis::Search.complete('Student',params[:q],:conditions =>{:tenant_id=>current_tenant.id})
     students = []
     results.slice(0,10).each do |student|
-      students<<{:name=>student['title'],:school=>student['school'],:address=>student['address'],:guardian=>student['guardian'],:id=>student['id'],:logininfo_id=>['logininfo_id']}
+      students<<{:name=>student['title'],:school=>student['school'],:info=>student['email'],:guardian=>student['guardian'],:id=>student['id'],:logininfo_id=>student['logininfo_id']}
     end
     render :json=>students
   end
