@@ -55,7 +55,12 @@
             });
         }
         else{
-            $("#"+target).children().removeClass("active");
+            if($("#"+target).find(".title").hasClass("active")){
+                $("#"+target).children().removeClass("active");
+            }
+            else{
+                $("#"+target).children().addClass("active");
+            }
         }
     });
     $("body").on("click","[for='detail-add']",function(){

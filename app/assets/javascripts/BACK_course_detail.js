@@ -59,39 +59,45 @@ DETAIL.course={};
     })
     $("body").on("click","#join-student",function(){
         if($("#autoComplete-call").find(".active").length>0){
-           var id=$("#autoComplete-call").find(".active").attr("id");
-            $.post("",{id:id},function(data){
+            var id=$("#autoComplete-call").find(".active").attr("id");
+            var course_id=$("#course-detail-info").attr('course');
+            $.post("/student_courses",{student_course:{student_id:id,course_id:course_id}},function(data){
+                if(data.result){
                     var object_item={};
-                    object_item.id=id;
+                    object_item.id=data.content;
                     object_item.name= $.trim($("#join-for-student").val());
                     object_item.img=Math.floor(Math.random()*9)+".jpg";
                     object_item.time=new Date().toWayneString().day;
-                var data={student:object_item};
-                var render=Mustache.render(DETAIL.course.student.template,data);
-                $("#student tbody").append(render);
-                $(".ui.checkbox[name='join-pay']").checkbox({
-                    onChange:function(){
-                        var $this=$(this);
-                        $(this).parent().parent().toggleClass("positive");
-                        //post
-                        var id=$(this).parents("tr").eq(0).attr("id");
-                        var state=$(this).parent().parent().hasClass("positive")?'pay':"unpay";
-                        $.ajax({
-                            url:"",
-                            data:{id:id},
-                            type:'PUT',
-                            success:function(data){
-                                if(data.result){
-                                    MessageBox("操作成功","top","success");
+                    var data={student:object_item};
+                    var render=Mustache.render(DETAIL.course.student.template,data);
+                    $("#student tbody").append(render);
+                    $(".ui.checkbox[name='join-pay']").checkbox({
+                        onChange:function(){
+                            var $this=$(this);
+                            $(this).parent().parent().toggleClass("positive");
+                            //post
+                            var id=$(this).parents("tr").eq(0).attr("id");
+                            var state=$(this).parent().parent().hasClass("positive")?'pay':"unpay";
+                            $.ajax({
+                                url:"",
+                                data:{id:id},
+                                type:'PUT',
+                                success:function(data){
+                                    if(data.result){
+                                        MessageBox("操作成功","top","success");
+                                    }
+                                    else{
+                                        $this.checkbox('toggle');
+                                        MessageBox_content(data.content);
+                                    }
                                 }
-                                else{
-                                    $this.checkbox('toggle');
-                                    MessageBox_content(data.content);
-                                }
-                            }
-                        })
-                    }
-                });
+                            })
+                        }
+                    });
+                }
+                else{
+                    MessageBox_content(data.content);
+                }
             });
         }
         else{
@@ -177,7 +183,7 @@ DETAIL.course.teacher={};
 DETAIL.course.student.template='\
     {{#student}}<tr id="{{id}}">\
         <td>\
-        <img class="ui avatar image" src="images/portrait/{{img}}"/>\
+        <img class="ui avatar image" src="/assets/portrait/{{img}}"/>\
         </td>\
         <td>{{name}}</td>\
         <td>{{time}}</td>\
