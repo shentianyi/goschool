@@ -33,17 +33,18 @@
     $("body").on("click","#detail-navigation .item",function(event){
         if(!$(this).hasClass("active")){
             var target= $.trim($(this).attr("href").replace(/#/,""));
-            var now_href=window.location.href;
-            console.log( now_href)
+            var now_href=window.location.href.split("/");
+            var length=now_href.length;
+            now_href=now_href.slice(0,length-1).join("/")+'/';
             $.ajax({
-                url:"/courses/1/"+target+"/ajax",
+                url:now_href+target+"/ajax",
                 dataType:"html",
                 success:function(data){
-                    var new_href=
-                    window.history.pushState({},"","/courses/1/"+target+"#"+target);
+                    window.history.pushState({},"",now_href+target+"#"+target);
                     $(this).siblings().removeClass("active");
                     $(this).addClass("active");
                     $("#"+target).children().addClass("active");
+                    $("#"+target).find(".content").html(data);
                 }
             });
         }
