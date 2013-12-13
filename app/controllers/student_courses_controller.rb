@@ -55,7 +55,7 @@ class StudentCoursesController < ApplicationController
   def render_nil_msg
     unless @student_course
       @msg.content='不存在此学生选课'
-      render :json=>msg
+      render :json=>@msg
     end
   end
 end
