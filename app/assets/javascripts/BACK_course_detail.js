@@ -49,7 +49,6 @@ DETAIL.course={};
               //post
               $.ajax({
                   url:"/student_courses/"+id,
-                  data:{student_course:{paid:paid}},
                   type:'DELETE',
                   success:function(data){
                       if(data.result){
