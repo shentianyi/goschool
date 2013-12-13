@@ -12,11 +12,15 @@ class StudentPresenter<Presenter
   end
   
   def birth_
-    self.birthday.year.to_s + '-' + self.birthday.month.to_s + '-' +self.birthday.day.to_s
+    if self.birthday
+      self.birthday.year.to_s + '-' + self.birthday.month.to_s + '-' +self.birthday.day.to_s
+    end
   end
 
   def graduate_
-    self.graduation.year.to_s + '-' + self.graduation.month.to_s
+    if self.graduation
+      self.graduation.year.to_s + '-' + self.graduation.month.to_s
+    end
   end
 
   def courses_
@@ -24,7 +28,9 @@ class StudentPresenter<Presenter
   end
 
   def age_
-    ((Time.now.to_i - self.birthday.to_i)/3600/24/365 + 1).to_s+'岁'
+    if self.birthday
+      ((Time.now.to_i - self.birthday.to_i)/3600/24/365 + 1).to_s+'岁'
+    end
   end
   
   def tags_
