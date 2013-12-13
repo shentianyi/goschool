@@ -54,7 +54,7 @@ DETAIL.course={};
                       if(data.result){
                           $("#student").find("#"+id).remove();
                           var number=parseInt($("#actual-student").text())-1;
-                          $("#autual-student").text(number);
+                          $("#actual-student").text(number);
                       }
                       else{
                           MessageBox_content(data.content);
@@ -109,7 +109,7 @@ DETAIL.course={};
                         }
                     });
                     var number=parseInt($("#actual-student").text())+1;
-                    $("#autual-student").text(number);
+                    $("#actual-student").text(number);
                     MessageBox(object_item.name+"报班成功","top","success");
                 }
                 else{
