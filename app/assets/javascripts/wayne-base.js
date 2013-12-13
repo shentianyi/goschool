@@ -364,7 +364,7 @@ GLOBAL.autoComplete.count = 0;
                                                   var data = {
                                                        data : data[i]
                                                   };
-                                                  var render = Mustache.render("{{#data}}<li id='{{id}}' type='{{type}}' logininfo_id={{logininfo_id}}>" + "<p>{{name}}</p>" + "<p>{{info}}</p>" + "</li>{{/data}}", data);
+                                                  var render = Mustache.render("{{#data}}<li id='{{id}}' type='{{type}}' logininfo_id='{{logininfo_id}}'>" + "<p>{{name}}</p>" + "<p>{{info}}</p>" + "</li>{{/data}}", data);
                                                   $target.append(render);
                                              }
                                         } else {
@@ -405,13 +405,17 @@ GLOBAL.autoComplete.count = 0;
                var $this = $("#" + target);
                var value = $.trim($this.val());
                var id = $("#autoComplete-call").find(".active").attr("id");
+               var type = $("#autoComplete-call").find(".active").attr("type");
+               var logininfo_id = $("#autoComplete-call").find(".active").attr("logininfo_id");
                var data = {
-                    data : {
-                         id : id,
-                         value : value
-                    }
+                  data : {
+                      id : id,
+                      value : value,
+                      type : type,
+                      logininfo_id:logininfo_id
+                  }
                };
-               var render = Mustache.render("{{#data}}<li><div class='ui label' id={{id}}  logininfo={{logininfo}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
+               var render = Mustache.render("{{#data}}<li><div class='ui label' id='{{id}}' type='{{type}}'  logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
                $this.parent().before(render);
                $this.val("");
           }
@@ -461,14 +465,16 @@ GLOBAL.autoComplete.count = 0;
                               var value = $.trim($input.val());
                               var id = $("#autoComplete-call").find(".active").attr("id");
                               var type = $("#autoComplete-call").find(".active").attr("type");
+                              var logininfo_id = $("#autoComplete-call").find(".active").attr("logininfo_id");
                               var data = {
-                                   data : {
-                                        id : id,
-                                        value : value,
-                                        type : type
-                                   }
+                                 data : {
+                                     id : id,
+                                     value : value,
+                                     type : type,
+                                     logininfo_id:logininfo_id
+                                 }
                               };
-                              var render = Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id={{id}} logininfo={{logininfo}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
+                              var render = Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id='{{id}}' logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
                               $input.parent().before(render);
                               $input.val("");
                          } else {
@@ -492,14 +498,16 @@ GLOBAL.autoComplete.count = 0;
                               var value = $.trim($input.val());
                               var id = $("#autoComplete-call").find(".active").attr("id");
                               var type = $("#autoComplete-call").find(".active").attr("type");
+                              var logininfo_id = $("#autoComplete-call").find(".active").attr("logininfo_id");
                               var data = {
                                    data : {
                                         id : id,
                                         value : value,
-                                        type : type
+                                        type : type,
+                                        logininfo_id:logininfo_id
                                    }
                               };
-                              var render = Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id={{id}}  logininfo={{logininfo}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
+                              var render = Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id='{{id}}'  logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
                               $input.parent().before(render);
                               $("#autoComplete-call").css("left", "-999em").attr("target", "");
                          }
