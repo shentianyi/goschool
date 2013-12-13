@@ -3,15 +3,15 @@ var stopEvent = function(e) {
 	e.preventDefault();
 }
 var manager = {
-	edit : function(source, id, callback) {
-		$.get('/' + source + '/' + id + '/edit', function(data) {
+	edit : function(  id, callback) {
+		$.get('/' +this.source + '/' + id + '/edit', function(data) {
 			if (callback)
 				callback(data);
 		});
 	},
-	update : function(source, id,data, callback) {
+	update : function( id,data, callback) {
 		$.ajax({
-			url : '/' + source+'/'+id,
+			url : '/' +  this.source +'/'+id,
 			data : data,
 			type : 'PUT',
 			datType : 'json',
@@ -21,9 +21,9 @@ var manager = {
 			}
 		});
 	},
-	destroy : function(source, id, callback) {
+	destroy : function( id, callback) {
 		$.ajax({
-			url : '/' + source + '/' + id,
+			url : '/' +  this.source  + '/' + id,
 			type : 'DELETE',
 			success : function(data) {
 				if (callback)

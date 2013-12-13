@@ -21,13 +21,13 @@
         else{
             $("#detail-navigation").css("position","static");
         }
-        $("#accordion>div").each(function(){
-            if(($(this)[0].getBoundingClientRect().top<10 && $(this)[0].getBoundingClientRect().top>-10) || ($(this)[0].getBoundingClientRect().top<0 && $(this)[0].getBoundingClientRect().bottom>$(window).height())){
-                var href=$(this).attr("id");
-                $("#detail-navigation-menu a").removeClass("active");
-                $("#detail-navigation-menu").find("[href='#"+href+"']").addClass("active");
-            }
-        })
+//        $("#accordion>div").each(function(){
+//            if(($(this)[0].getBoundingClientRect().top<10 && $(this)[0].getBoundingClientRect().top>-10) || ($(this)[0].getBoundingClientRect().top<0 && $(this)[0].getBoundingClientRect().bottom>$(window).height())){
+//                var href=$(this).attr("id");
+//                $("#detail-navigation-menu a").removeClass("active");
+//                $("#detail-navigation-menu").find("[href='#"+href+"']").addClass("active");
+//            }
+//        })
     });
     $('#accordion').accordion();
     $("body").on("click","#detail-navigation .item",function(event){
