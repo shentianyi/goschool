@@ -63,7 +63,7 @@
 				<ul>
 					<%@course.teacher_details.each do |teacher|%>
 					<li total_sub_couse_id="<%= teacher.sub_course_id%>">
-						<div class="ui label" id="<%= teacher.teacher_course_id%>">
+						<div class="ui label" id="<%=  teacher.teacher_course_id%>">
 							<%= teacher.name%><i class="delete icon"></i>
 						</div>
 					</li>
@@ -174,17 +174,19 @@
 			course_manager.update($("#course-detail-info").attr('course'), data);
 		});
 
-		$("body").off("click", ".teachers .delete.icon");
-		$("body").on("click", ".teachers .delete.icon", function() {
+		// $("body").off("click", ".teachers .delete.icon");
+	 
+		$("body").on("click_remove", ".teachers .delete.icon", function(event,msg) {
 			var item = $(this);
 			teacher_course_manager.destroy(item.parent().attr('id'), function(data) {
+			     msg.result=data.result;
 				if (data.result) {
 					item.parents("li").eq(0).remove();
 				} else {
 					MessageBox(data.content, "top", "warning");
 					stopEvent(event);
 				}
-			});
+			},false);
 		});
 	}); 
 </script>

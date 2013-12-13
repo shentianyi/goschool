@@ -43,6 +43,8 @@ class Course < ActiveRecord::Base
   end
 
   def add_tags
+    puts '---------------------------------'
+    puts self.tags
     TagService.add_tags(self)  if self.tags
   end
 
