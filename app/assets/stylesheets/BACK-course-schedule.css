@@ -286,9 +286,9 @@
     position:absolute;
     min-height:768px;
     top:0px;
-    right:0;
+    right:auto;
     bottom:0px;
-    left:0;
+    left:-999em;
     background:rgba(0,0,0,0.9);
     z-index:99;
 }
@@ -325,4 +325,35 @@
     text-shadow:2px 2px 4px rgba(0,0,0,0.4);
     -moz-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
     -webkit-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
+}
+.send-schedule>.inner>label{
+    display:block;
+    font-size:15px;
+    color:#63A69F;
+    padding:4px 8px;
+    margin:35px 10px 8px;
+    border-bottom:1px solid rgba(0,0,0,0.2);
+
+}
+.send-schedule>.inner>.send-buttons{
+    margin-left:18px;
+}
+.send-schedule>.inner>.send-buttons .button{
+    margin-right:15px;
+}
+.send-schedule>.inner .button{
+    font-weight:lighter !important;
+}
+.send-schedule>.inner>.input{
+    margin-left:18px;
+    margin-bottom:15px;
+    width:210px;
+}
+.send-schedule>.inner>.ui.icon.input>i.icon{
+    background-color:#4092CC;
+    opacity:1;
+    cursor:pointer;
+}
+.send-schedule>.inner>.ui.icon.input>i.icon:hover{
+    opacity:0.75;
 }
