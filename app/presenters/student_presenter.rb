@@ -46,7 +46,7 @@ class StudentPresenter<Presenter
     return @relations
   end
 
-  def last_consulation_
+  def last_consultation_
     @last = Consultation.find_by_student_id(@student.id)
     if @last
       return @last

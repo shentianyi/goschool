@@ -21,13 +21,13 @@ class StudentsController < ApplicationController
     @presenter=StudentPresenter.new(@student)
     
     case params[:part]
-    when 'courses'
+    when 'class-and-service'
       courses(@student)
-    when 'achievements'
+    when 'achieve'
       achievements(@student)
-    when 'relation'
+    when 'friendship'
       relation(@student)
-    when 'consultations'
+    when 'consult-record'
       consultation(@student)
     end
     
@@ -147,7 +147,11 @@ class StudentsController < ApplicationController
   end
 
   private
-  
+
+  def consultation(student)
+    @consultations = StudentConsultationPresenter.init_presenters(student.consultations)
+  end
+
   def courses(student)
     
   end
@@ -167,9 +171,5 @@ class StudentsController < ApplicationController
         @students<<s
       end
     end
-  end
-
-  def consultation(student)
-    @consultations = StudentConsultationPresenter.new.init_presenters(@studnet.consultations)
   end
 end
