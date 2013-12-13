@@ -28,7 +28,7 @@ var BACKSTUDENT=BACKSTUDENT||{};
 	    student.address = $("#address").val();
 	    student.guardian = $("#guardian").val();
 	    student.guardian_phone = $("#guardian_phone").val();
-	    student.referrer_id = $("#referrer").val();
+	    student.referrer_id = $("#referrer>li").eq(0).find("div").attr("id");
 	    
 	    var is_active_account = $("#is_active_account input[type='checkbox']").prop("checked")
 

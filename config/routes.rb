@@ -49,6 +49,7 @@ Goschool::Application.routes.draw do
   resources :students do
     collection do
       get :fast_search
+      get ':id/:part'=>:show
       get ':id/:part/:ajax'=>:show
     end
   end
@@ -91,6 +92,11 @@ Goschool::Application.routes.draw do
   resources :logininfos
   resource :subscriptions
   resource :logininfo_sessions
+  resources :consultations do
+    collection do
+      put :comment
+    end 
+  end
 
   controller :logininfo_sessions do
     match 'logininfo_sessions/create' => :create
