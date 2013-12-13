@@ -14,10 +14,11 @@
                <td><img class="ui avatar image" src="<%=student.image_url%>"/></td>
                <td><%=student.name%></td>
                <td><%=student.enrol_time_display%></td>
-               <td>
+               <td <%= "class='positive'" if student.paid==1%>>
                <div class="ui checkbox" name="join-pay">
-                    <input type="checkbox">
-                    <label><%=student.paid_display%></label>
+                   
+                    <input type="checkbox" <%= ' checked' if student.paid==1%>>
+                    <label>是否支付</label>
                </div></td>
                <td>
                <div class="red button ui mini out-class" affect='<%=student.id%>'>
