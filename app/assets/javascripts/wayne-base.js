@@ -411,7 +411,7 @@ GLOBAL.autoComplete.count = 0;
                          value : value
                     }
                };
-               var render = Mustache.render("{{#data}}<li><div class='ui label' id={{id}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
+               var render = Mustache.render("{{#data}}<li><div class='ui label' id={{id}}  logininfo={{logininfo}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
                $this.parent().before(render);
                $this.val("");
           }
@@ -499,7 +499,7 @@ GLOBAL.autoComplete.count = 0;
                                         type : type
                                    }
                               };
-                              var render = Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id={{id}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
+                              var render = Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id={{id}}  logininfo={{logininfo}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
                               $input.parent().before(render);
                               $("#autoComplete-call").css("left", "-999em").attr("target", "");
                          }
