@@ -296,18 +296,18 @@
     position:absolute;
     width:700px;
     height:460px;
-    top:50%;
+    top:40%;
     left:50%;
-    margin-top:-350px;
-    margin-left:-230px;
+    margin-top:-230px;
+    margin-left:-350px;
     background-color:white;
 }
 .send-schedule>.inner>.remove.icon{
     color:white;
     font-size:28px;
     position:absolute;
-    right:-35px;
-    top:-40px;
+    right: -27px;
+    top: -34px;
     cursor:pointer;
     transition:color 0.25s ease-out;
 }
