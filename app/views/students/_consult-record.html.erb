@@ -1,0 +1,18 @@
+<!--partial-->
+
+<% @consultations.each do |consultation| %>
+<div class="item" id="<%= consultation.id%>">
+  <p><%= consultation.time%> <%= consultation.consultants%></p>
+  <p><%= consultation.content%></p>
+  <p>接线人:<%= consultation.recorder%></p>
+  <dl>
+    <dt>评论：</dt>
+    <dd><span><%= consultation.comment%></span><span><%= consultation.comment_time%></span><i class="icon remove"></i></dd>
+  </dl>
+  <div class="comment-block">
+    <input type="text"/>
+    <div class="ui button tiny">评论</div>
+  </div>
+</div>
+<% end %>
+<!--partial-->

@@ -46,10 +46,11 @@ class StudentPresenter<Presenter
     return @relations
   end
 
-  def last_consulation_
-    @last = Consultation.find_by_student_id(@student.id)
-    if @last
-      return @last
+  def last_consultation_
+    @lasts = Consultation.where("student_id = ?",self.id).order(:consult_time)
+    if @lasts.first
+      @presenter = StudentConsultationPresenter.new(@lasts.first)
+      return @presenter.time
     end
     return nil
   end

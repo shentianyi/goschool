@@ -111,7 +111,7 @@ var BACKCOURSE=BACKCOURSE || {};
                    label_text=$target.find("[name='label']>li").eq(i).find("div").text();
                    label_array.push(label_text);
                }
-               var teacher_type=$(".choose-teacher-delivery .active").attr("for").indexOf("total");
+               var teacher_type=$(".choose-teacher-delivery:visible .active").attr("for").indexOf("total");
                var $teacher_target, i,teacher_id_array=[],teacher_id;
                //总选课程
                if(teacher_type!=-1){

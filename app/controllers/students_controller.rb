@@ -21,13 +21,13 @@ class StudentsController < ApplicationController
     @presenter=StudentPresenter.new(@student)
     
     case params[:part]
-    when 'courses'
+    when 'class-and-service'
       courses(@student)
-    when 'achievements'
+    when 'achieve'
       achievements(@student)
-    when 'relation'
+    when 'friendship'
       relation(@student)
-    when 'consultations'
+    when 'consult-record'
       consultation(@student)
     end
     
@@ -65,9 +65,8 @@ class StudentsController < ApplicationController
     msg.result = false
     begin 
       ActiveRecord::Base.transaction do
-        tags = params[:student].slice(:tags).strip
         @student = Student.new(params[:student].except(:tags))
-        @student.tags = tags
+        @student.tags = params[:student].slice(:tags)[:tags] if params[:student].has_key?(:tags)
         @default_pwd = current_tenant.setting.default_pwd
         @logininfo = Logininfo.new(:email=>params[:student][:email],:password=>@default_pwd,:password_confirmation=>@default_pwd)
         @new_role = LogininfoRole.new(:role_id=>'300')
@@ -147,7 +146,11 @@ class StudentsController < ApplicationController
   end
 
   private
-  
+
+  def consultation(student)
+    @consultations = StudentConsultationPresenter.init_presenters(student.consultations)
+  end
+
   def courses(student)
     
   end
@@ -160,16 +163,12 @@ class StudentsController < ApplicationController
     if student.referrer_id
       @referrer = Logininfo.find(student.referrer_id).student
     end
-    @students = []
+    @relations = []
     Recommendation.new.get_potential_relation(student.tenant_id,student.id).each do |relation|
       s = Student.find_by_id(relation['id'])
       if s
-        @students<<s
+        @relations<<s
       end
     end
-  end
-
-  def consultation(student)
-    @consultations = StudentConsultationPresenter.new.init_presenters(@studnet.consultations)
   end
 end

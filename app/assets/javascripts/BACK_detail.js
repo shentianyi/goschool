@@ -21,18 +21,18 @@
         else{
             $("#detail-navigation").css("position","static");
         }
-        $("#accordion>div").each(function(){
-            if(($(this)[0].getBoundingClientRect().top<10 && $(this)[0].getBoundingClientRect().top>-10) || ($(this)[0].getBoundingClientRect().top<0 && $(this)[0].getBoundingClientRect().bottom>$(window).height())){
-                var href=$(this).attr("id");
-                $("#detail-navigation-menu a").removeClass("active");
-                $("#detail-navigation-menu").find("[href='#"+href+"']").addClass("active");
-            }
-        })
+//        $("#accordion>div").each(function(){
+//            if(($(this).offset().top<10 && $(this).offset().top>-10)){
+//                var href=$(this).attr("id");
+//                $("#detail-navigation-menu a").removeClass("active");
+//                $("#detail-navigation-menu").find("[href='#"+href+"']").addClass("active");
+//            }
+//        })
     });
     $('#accordion').accordion();
     $("body").on("click","#detail-navigation .item",function(event){
+        var target= $.trim($(this).attr("href").replace(/#/,""));
         if(!$(this).hasClass("active")){
-            var target= $.trim($(this).attr("href").replace(/#/,""));
             var now_href=window.location.href.split("/");
             var length=now_href.length;
             if(now_href[length-1].indexOf("#")==-1){
@@ -41,18 +41,21 @@
             else{
                 now_href=now_href.slice(0,length-1).join("/")+'/';
             }
-
+            $this=$(this);
             $.ajax({
                 url:now_href+target+"/ajax",
                 dataType:"html",
                 success:function(data){
                     window.history.pushState({},"",now_href+target+"#"+target);
-                    $(this).siblings().removeClass("active");
-                    $(this).addClass("active");
+                    $this.siblings().removeClass("active");
+                    $this.addClass("active");
                     $("#"+target).children().addClass("active");
                     $("#"+target).find(".content").html(data);
                 }
             });
+        }
+        else{
+            $("#"+target).children().removeClass("active");
         }
     });
     $("body").on("click","[for='detail-add']",function(){
