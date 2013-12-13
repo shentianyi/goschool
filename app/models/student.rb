@@ -33,6 +33,10 @@ class Student < ActiveRecord::Base
     @logininfo = self.logininfo
     @logininfo.destroy
   end
+  
+  def is_male?
+    self.gender == 1 ? true : false
+  end
 
   def validate_save
     errors.add(:name,'名字不能为空') if self.name.blank?
