@@ -65,9 +65,8 @@ class StudentsController < ApplicationController
     msg.result = false
     begin 
       ActiveRecord::Base.transaction do
-        tags = params[:student].slice(:tags).strip
         @student = Student.new(params[:student].except(:tags))
-        @student.tags = tags
+        @student.tags = params[:student].slice(:tags)[:tags] if params[:student].has_key?(:tags)
         @default_pwd = current_tenant.setting.default_pwd
         @logininfo = Logininfo.new(:email=>params[:student][:email],:password=>@default_pwd,:password_confirmation=>@default_pwd)
         @new_role = LogininfoRole.new(:role_id=>'300')
