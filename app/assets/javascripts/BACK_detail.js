@@ -36,7 +36,7 @@
             var now_href=window.location.href.split("/");
             var length=now_href.length;
             if(now_href[length-1].indexOf("#")==-1){
-                now_href=now_href+'/';
+                now_href=now_href.join("/")+'/';
             }
             else{
                 now_href=now_href.slice(0,length-1).join("/")+'/';
