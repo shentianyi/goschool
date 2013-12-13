@@ -102,7 +102,7 @@ var SCHEDULE=SCHEDULE || {};
     });
     //发送课表
     $("body").on("click","#send-schedule-button",function(){
-           $("#send-schedule").css("left","0").css("right",0);
+        $("#send-schedule").css("left","0").css("right",0);
     });
     $(document).ready(function(){
         $('#schedule-select-institution').dropdown();

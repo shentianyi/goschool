@@ -286,20 +286,20 @@
     position:absolute;
     min-height:768px;
     top:0px;
-    right:auto;
+    right:0;
     bottom:0px;
-    left:-999em;
+    left:0;
     background:rgba(0,0,0,0.9);
     z-index:99;
 }
 .send-schedule>.inner{
     position:absolute;
     width:700px;
-    height:600px;
+    height:460px;
     top:50%;
     left:50%;
-    margin-top:-300px;
-    margin-left:-350px;
+    margin-top:-350px;
+    margin-left:-230px;
     background-color:white;
 }
 .send-schedule>.inner>.remove.icon{
@@ -318,7 +318,7 @@
     text-align:center;
     height:35px;
     font-size:16px;
-    background:#D95C5C;
+    background:#63A69F;
     color:white;
     line-height:35px;
     margin:0px;

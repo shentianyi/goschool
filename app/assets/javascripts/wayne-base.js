@@ -468,7 +468,7 @@ GLOBAL.autoComplete.count = 0;
                                         type : type
                                    }
                               };
-                              var render = Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id={{id}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
+                              var render = Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id={{id}} logininfo={{logininfo}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
                               $input.parent().before(render);
                               $input.val("");
                          } else {
