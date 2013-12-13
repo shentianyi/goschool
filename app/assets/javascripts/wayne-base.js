@@ -445,14 +445,7 @@ GLOBAL.autoComplete.count = 0;
      });
 })();
 //针对所有input一个检测
-<<<<<<< HEAD
-(function() {
-     $("body").on("keyup", "input[type='text']", function(event) {
-          var e = adapt_event(event).event, $input = $(this);
-          if(e.keyCode == 32) {
-               if($.trim($input.val()).length == 0) {
-                    e.preventDefault();
-=======
+
 (function(){
     $("body").on("keyup","input[type='text']",function(event){
         var e=adapt_event(event).event,
@@ -462,35 +455,7 @@ GLOBAL.autoComplete.count = 0;
                 e.preventDefault();
                 $input.val("");
             }
-            else{
-                if($input.attr("im")=="label" && $input.attr("ishould")=="BeSelected"){
-                    if($("#autoComplete-call").find(".active").length>0){
-                        var value=$.trim($input.val());
-                        var id=$("#autoComplete-call").find(".active").attr("id");
-                        var type=$("#autoComplete-call").find(".active").attr("type");
-                        var data={data:{
-                            id:id,
-                            value:value,
-                            type:type
-                        }};
-                        var render=Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id={{id}}>{{value}}<i class='delete icon'></i></div></li>{{/data}}",data);
-                        $input.parent().before(render);
-                        $input.val("");
-                    }
-                    else{
-//                        MessageBox("请在下拉提示菜单中选择一条","top","warning");
-                    }
-
-                }
-                else if($input.attr("im")=="label"){
-                    var value=$.trim($input.val());
-                    $input.parent().before($("<li />")
-                        .append($("<div />").addClass("ui label").text(value)
-                            .append($("<i />").addClass("delete icon")))
-                    );
->>>>>>> 5292cb87393cdfb70d4864e63b43e3996addb145
-                    $input.val("");
-               } else {
+            else {
                     if($input.attr("im") == "label" && $input.attr("ishould") == "BeSelected") {
                          if($("#autoComplete-call").find(".active").length > 0) {
                               var value = $.trim($input.val());
