@@ -1,10 +1,6 @@
 #encoding: utf-8
 class CourseObserver<ActiveRecord::Observer
-  observe :course
-  def after_create course
-    course.add_tags
-  end
-
+  observe :course 
   # def before_create course
     # course.subs.each do |sub|
       # puts "---------------------#{sub}"
@@ -17,6 +13,7 @@ class CourseObserver<ActiveRecord::Observer
 
   def after_create course
     course.create_default_sub_course
+    course.add_tags
   end
 
   def after_update course

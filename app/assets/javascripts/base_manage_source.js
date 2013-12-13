@@ -21,10 +21,13 @@ var manager = {
 			}
 		});
 	},
-	destroy : function( id, callback) {
+	destroy : function( id, callback,async) {
+	     if(async==null)
+	      async=true;
 		$.ajax({
 			url : '/' +  this.source  + '/' + id,
 			type : 'DELETE',
+			async : async,
 			success : function(data) {
 				if (callback)
 					callback(data);
