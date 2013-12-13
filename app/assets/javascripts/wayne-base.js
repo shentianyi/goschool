@@ -364,7 +364,7 @@ GLOBAL.autoComplete.count = 0;
                                                   var data = {
                                                        data : data[i]
                                                   };
-                                                  var render = Mustache.render("{{#data}}<li id='{{id}}' type='{{type}}'>" + "<p>{{name}}</p>" + "<p>{{info}}</p>" + "</li>{{/data}}", data);
+                                                  var render = Mustache.render("{{#data}}<li id='{{id}}' type='{{type}}' logininfo_id={{logininfo_id}}>" + "<p>{{name}}</p>" + "<p>{{info}}</p>" + "</li>{{/data}}", data);
                                                   $target.append(render);
                                              }
                                         } else {
