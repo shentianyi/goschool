@@ -34,7 +34,7 @@
 	  <p class="parent"><span>监护人:</span><span><%= presenter.student.guardian_phone %>(<%= presenter.student.guardian%>)</span></p>
           <p class="phone"><span>联系电话:</span><span><%= presenter.phone %></span></p>
 	  <% if presenter.last_consultation_ %>
-	  <p class="consult-time"><span>上次咨询:</span><span><%= presenter.last_consultation_.updated_at %></span>/p>
+	  <p class="consult-time"><span>上次咨询:</span><span><%= presenter.last_consultation_ %></span></p>
 	  <% end %>
 	</td>
 	<% if presenter.referrer_ %>

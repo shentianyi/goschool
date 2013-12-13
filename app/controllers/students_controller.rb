@@ -164,11 +164,11 @@ class StudentsController < ApplicationController
     if student.referrer_id
       @referrer = Logininfo.find(student.referrer_id).student
     end
-    @students = []
+    @relations = []
     Recommendation.new.get_potential_relation(student.tenant_id,student.id).each do |relation|
       s = Student.find_by_id(relation['id'])
       if s
-        @students<<s
+        @relations<<s
       end
     end
   end
