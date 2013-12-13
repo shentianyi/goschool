@@ -1,8 +1,8 @@
 #encoding: utf-8
 class StudentCoursesController < ApplicationController
-  before_filter :init_message ,:only=>[:create,:pay,:destroy,:creates,:pays,:destroies]
-  before_filter :get_student_course , :only=>[:pay,:show,:destroy]
-  before_filter :render_nil_msg , :only=>[:pay,:destroy]
+  before_filter :init_message ,:only=>[:create,:update,:destroy,:creates,:pays,:destroies]
+  before_filter :get_student_course , :only=>[:update,:show,:destroy]
+  before_filter :render_nil_msg , :only=>[:update,:destroy]
   def create
     @student_course = StudentCourse.new(params[:student_course].strip)
     @msg.content=(@msg.result=@student_course.save) ? @student_course.id :  @student_course.errors.messages
@@ -10,8 +10,8 @@ class StudentCoursesController < ApplicationController
   end
 
   # just for update paid
-  def pay
-    @msg.content=@student_course.errors.messages unless @msg.result=@student_course.update_attributes(:paid=>params[:paid])
+  def update
+    @msg.content=@student_course.errors.messages unless @msg.result=@student_course.update_attributes(:paid=>params[:student_course][:paid])
     render :json=>@msg
   end
 
