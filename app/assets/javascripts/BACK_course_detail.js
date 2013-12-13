@@ -19,10 +19,10 @@ DETAIL.course={};
             $(this).parent().parent().toggleClass("positive");
             //post
             var id=$(this).parents("tr").eq(0).attr("id");
-            var state=$(this).parent().parent().hasClass("positive")?'pay':"unpay";
+            var paid=$(this).parent().parent().hasClass("positive");
             $.ajax({
-                url:"",
-                data:{id:id},
+                url:"/student_courses/"+id,
+                data:{student_course:{paid:paid}},
                 type:'PUT',
                 success:function(data){
                     if(data.result){
@@ -175,6 +175,7 @@ DETAIL.course={};
         $("#add-class-choose-institution,#add-service-choose-institution").dropdown();
         $("#add-class-choose-institution .item").eq(0).addClass("active");
         $("#add-service-choose-institution .item").eq(0).addClass("active");
+
     });
 })();
 DETAIL.course.student={};
