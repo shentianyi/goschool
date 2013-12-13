@@ -30,12 +30,22 @@
         })
     });
     $('#accordion').accordion();
-    $("body").on("click","#detail-navigation .item",function(){
+    $("body").on("click","#detail-navigation .item",function(event){
         if(!$(this).hasClass("active")){
-            $(this).siblings().removeClass("active");
-            $(this).addClass("active");
-            var target=$(this).attr("href");
-            $(target).children().addClass("active");
+            var target= $.trim($(this).attr("href").replace(/#/,""));
+            var now_href=window.location.href;
+            console.log( now_href)
+            $.ajax({
+                url:"/courses/1/"+target+"/ajax",
+                dataType:"html",
+                success:function(data){
+                    var new_href=
+                    window.history.pushState({},"","/courses/1/"+target+"#"+target);
+                    $(this).siblings().removeClass("active");
+                    $(this).addClass("active");
+                    $("#"+target).children().addClass("active");
+                }
+            });
         }
     });
     $("body").on("click","[for='detail-add']",function(){
