@@ -47,7 +47,20 @@ DETAIL.course={};
           if(confirm("确认为该学生退班吗？")){
               var id=$(this).attr("affect");
               //post
-              $("#student").find("#"+id).remove();
+              $.ajax({
+                  url:"/student_courses/"+id,
+                  data:{student_course:{paid:paid}},
+                  type:'DELETE',
+                  success:function(data){
+                      if(data.result){
+                          $("#student").find("#"+id).remove();
+                      }
+                      else{
+                          MessageBox_content(data.content);
+                      }
+                  }
+              })
+
           }
     });
     //为学生报班
