@@ -56,8 +56,8 @@ class StudentPresenter<Presenter
   end
 
   def referrer_
-    if @student.referrer_id
-      return Logininfo.find_by_id(self.referrer_id).student
+    if self.referrer_id
+      return Logininfo.find(self.referrer_id).student
     end
     return nil
   end

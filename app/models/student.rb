@@ -8,14 +8,14 @@ class Student < ActiveRecord::Base
   attr_accessor :tags
 
   belongs_to :logininfo
+  belongs_to :referrer, :foreign_key => :referrer_id, :class_name => "Logininfo"
   belongs_to :tenant
 
   has_one :logininfo_role, :through=>:logininfo
   has_many :consultations, :dependent=>:destroy
   has_many :student_courses
   has_many :courses,:through=>:student_courses
-  has_many :achievements, :dependent=>:destroy
-  belongs_to :referrer, :foreign_key => :referrer_id, :class_name => "Logininfo"
+  has_many :achievements, :dependent=>:destroy 
   
   after_destroy :delete_related
 
@@ -27,7 +27,7 @@ class Student < ActiveRecord::Base
                      :condition_fields => [:tenant_id],
                      :prefix_index_enable => true,
                      :alias_field=>:email,
-                     :ext_fields=>[:email,:address,:school,:guardian])
+                     :ext_fields=>[:email,:address,:school,:guardian,:logininfo_id])
 
   def delete_related
     @logininfo = self.logininfo

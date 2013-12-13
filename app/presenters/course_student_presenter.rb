@@ -1,6 +1,6 @@
 #encoding: utf-8
 class CourseStudentPresenter<Presenter
-  def_delegators :@student,:name,:id,:email,:gender,:phone,:paid,:image_url,:enrol_time
+  def_delegators :@student,:name,:id,:email,:gender,:phone,:image_url,:enrol_time
 
   def initialize(student)
     @student=student
@@ -11,7 +11,11 @@ class CourseStudentPresenter<Presenter
   end
   
   def paid_display
-    @student.paid ? '是' : '否'
+    @student.paid==0 ?  '否' : '是'
+  end
+  
+  def paid
+    @student.paid==1
   end
   
   def enrol_time_display
