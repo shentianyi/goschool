@@ -12126,8 +12126,8 @@ a.ui.teal.label:hover:before {
 
 .ui.checkbox input {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: -4px;
+  left: -4px;
   opacity: 0;
   outline: none;
 }

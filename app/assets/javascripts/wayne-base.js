@@ -470,7 +470,7 @@ GLOBAL.autoComplete.count=0;
                         $input.val("");
                     }
                     else{
-                        MessageBox("请在下拉菜单中选择一条","top","warning");
+                        MessageBox("请在下拉提示菜单中选择一条","top","warning");
                     }
 
                 }
@@ -521,7 +521,7 @@ GLOBAL.autoComplete.count=0;
                         $("#autoComplete-call").css("left","-999em").attr("target","")
                     }
                     else{
-                        MessageBox("请在下拉菜单中选择一条","top","warning");
+                        MessageBox("请在下拉提示菜单中选择一条","top","warning");
                     }
                 }
             }

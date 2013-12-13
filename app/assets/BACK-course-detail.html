@@ -236,60 +236,61 @@
     <div class="inner">
         <i class="remove icon detail-add-close"></i>
         <p>为新生报班</p>
-        <div class="ui mini icon input autoComplete">
-            <input placeholder="学生姓名..." type="text" autocomplete="students">
+        <div class="ui mini left icon input autoComplete">
+            <input placeholder="学生姓名..." type="text" autocomplete="students" id="join-for-student">
             <i class="search icon"></i>
         </div>
-        <div class="table-wrap">
-            <table class="ui celled table small segment">
-            <thead>
-                <tr>
-                    <th class="wide four">名字</th>
-                    <th class="wide six">支付情况</th>
-                    <th class="wide six">是否报班</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="wzx">
-                    <td>王子骁</td>
-                    <td><div class="ui checkbox" name="pay">
-                        <input type="checkbox"><label>已经支付</label>
-                    </div></td>
-                    <td><div class="ui checkbox" name="join">
-                        <input type="checkbox" ><label>为他/她报班</label>
-                    </div></td>
-                </tr>
-                <tr id="wzx1">
-                    <td>王子骁</td>
-                    <td><div class="ui checkbox" name="pay">
-                        <input type="checkbox"><label>已经支付</label>
-                    </div></td>
-                    <td><div class="ui checkbox" name="join">
-                        <input type="checkbox" ><label>为他/她报班</label>
-                    </div></td>
-                </tr>
-                <tr id="wzx2">
-                    <td>王子骁</td>
-                    <td><div class="ui checkbox" name="pay">
-                        <input type="checkbox"><label>已经支付</label>
-                    </div></td>
-                    <td><div class="ui checkbox" name="join">
-                        <input type="checkbox" ><label>为他/她报班</label>
-                    </div></td>
-                </tr>
-                <tr id="wzx3">
-                    <td>王子骁</td>
-                    <td><div class="ui checkbox" name="pay">
-                        <input type="checkbox"><label>已经支付</label>
-                    </div></td>
-                    <td><div class="ui checkbox" name="join">
-                        <input type="checkbox" ><label>为他/她报班</label>
-                    </div></td>
-                </tr>
-            </tbody>
-            </table>
-        </div>
-        <div class="ui button teal ok" for="student">完成报班</div>
+        <br />
+        <!--<div class="table-wrap">-->
+            <!--<table class="ui celled table small segment">-->
+            <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th class="wide four">名字</th>-->
+                    <!--<th class="wide six">支付情况</th>-->
+                    <!--<th class="wide six">是否报班</th>-->
+                <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody id="put-join-list">-->
+                <!--<tr id="wzx">-->
+                    <!--<td>王子骁</td>-->
+                    <!--<td><div class="ui checkbox " name="pay">-->
+                        <!--<input type="checkbox" checked='checked'><label>已经支付</label>-->
+                    <!--</div></td>-->
+                    <!--<td><div class="ui checkbox" name="join">-->
+                        <!--<input type="checkbox" ><label>为他/她报班</label>-->
+                    <!--</div></td>-->
+                <!--</tr>-->
+                <!--<tr id="wzx1">-->
+                    <!--<td>王子骁</td>-->
+                    <!--<td><div class="ui checkbox" name="pay">-->
+                        <!--<input type="checkbox"><label>已经支付</label>-->
+                    <!--</div></td>-->
+                    <!--<td><div class="ui checkbox" name="join">-->
+                        <!--<input type="checkbox" ><label>为他/她报班</label>-->
+                    <!--</div></td>-->
+                <!--</tr>-->
+                <!--<tr id="wzx2">-->
+                    <!--<td>王子骁</td>-->
+                    <!--<td><div class="ui checkbox" name="pay">-->
+                        <!--<input type="checkbox"><label>已经支付</label>-->
+                    <!--</div></td>-->
+                    <!--<td><div class="ui checkbox" name="join">-->
+                        <!--<input type="checkbox" ><label>为他/她报班</label>-->
+                    <!--</div></td>-->
+                <!--</tr>-->
+                <!--<tr id="wzx3">-->
+                    <!--<td>王子骁</td>-->
+                    <!--<td><div class="ui checkbox" name="pay">-->
+                        <!--<input type="checkbox"><label>已经支付</label>-->
+                    <!--</div></td>-->
+                    <!--<td><div class="ui checkbox" name="join">-->
+                        <!--<input type="checkbox" ><label>为他/她报班</label>-->
+                    <!--</div></td>-->
+                <!--</tr>-->
+            <!--</tbody>-->
+            <!--</table>-->
+        <!--</div>-->
+        <div class="ui button teal ok" id="join-student">为他/她报班</div>
         <a class="add-item" type="student">没有找到他/她？<span>新建学生</span></a>
     </div>
 </section>

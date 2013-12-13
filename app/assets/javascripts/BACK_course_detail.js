@@ -15,7 +15,25 @@ DETAIL.course={};
     });
     $(".ui.checkbox[name='join-pay']").checkbox({
         onChange:function(){
+            var $this=$(this);
             $(this).parent().parent().toggleClass("positive");
+            //post
+            var id=$(this).parents("tr").eq(0).attr("id");
+            var state=$(this).parent().parent().hasClass("positive")?'pay':"unpay";
+            $.ajax({
+                url:"",
+                data:{id:id},
+                type:'PUT',
+                success:function(data){
+                    if(data.result){
+                        MessageBox("操作成功","top","success");
+                    }
+                    else{
+                        $this.checkbox('toggle');
+                        MessageBox_content(data.content);
+                    }
+                }
+            })
         }
     });
     $("body").on("click","#course-detail-edit",function(){
@@ -32,6 +50,55 @@ DETAIL.course={};
               $("#student").find("#"+id).remove();
           }
     });
+    //为学生报班
+    $("body").on("keyup","#join-for-student",function(event){
+        var e=adapt_event(event).event;
+        if(e.keyCode==13){
+             $("#join-student").click();
+        }
+    })
+    $("body").on("click","#join-student",function(){
+        if($("#autoComplete-call").find(".active").length>0){
+           var id=$("#autoComplete-call").find(".active").attr("id");
+            $.post("",{id:id},function(data){
+                    var object_item={};
+                    object_item.id=id;
+                    object_item.name= $.trim($("#join-for-student").val());
+                    object_item.img=Math.floor(Math.random()*9)+".jpg";
+                    object_item.time=new Date().toWayneString().day;
+                var data={student:object_item};
+                var render=Mustache.render(DETAIL.course.student.template,data);
+                $("#student tbody").append(render);
+                $(".ui.checkbox[name='join-pay']").checkbox({
+                    onChange:function(){
+                        var $this=$(this);
+                        $(this).parent().parent().toggleClass("positive");
+                        //post
+                        var id=$(this).parents("tr").eq(0).attr("id");
+                        var state=$(this).parent().parent().hasClass("positive")?'pay':"unpay";
+                        $.ajax({
+                            url:"",
+                            data:{id:id},
+                            type:'PUT',
+                            success:function(data){
+                                if(data.result){
+                                    MessageBox("操作成功","top","success");
+                                }
+                                else{
+                                    $this.checkbox('toggle');
+                                    MessageBox_content(data.content);
+                                }
+                            }
+                        })
+                    }
+                });
+            });
+        }
+        else{
+            MessageBox("您输入的学生不存在","top","warning");
+        }
+    });
+
     $("body").on("click",".out-teacher",function(){
         if(confirm("确认删除该老师吗？")){
             var id=$(this).attr("affect");
@@ -114,8 +181,8 @@ DETAIL.course.student.template='\
         </td>\
         <td>{{name}}</td>\
         <td>{{time}}</td>\
-        <td class="{{#checked}}positive{{/checked}}"><div class="ui checkbox" name="join-pay">\
-            <input type="checkbox" {{#checked}}checked{{/checked}}>\
+        <td ><div class="ui checkbox" name="join-pay">\
+            <input type="checkbox">\
             <label>已经支付</label>\
         </div></td>\
         <td>\

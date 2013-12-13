@@ -30,12 +30,23 @@
         })
     });
     $('#accordion').accordion();
-    $("body").on("click","#detail-navigation .item",function(){
+    $("body").on("click","#detail-navigation .item",function(event){
         if(!$(this).hasClass("active")){
-            $(this).siblings().removeClass("active");
-            $(this).addClass("active");
-            var target=$(this).attr("href");
-            $(target).children().addClass("active");
+            var target= $.trim($(this).attr("href").replace(/#/,""));
+            var now_href=window.location.href.split("/");
+            var length=now_href.length;
+            now_href=now_href.slice(0,length-1).join("/")+'/';
+            $.ajax({
+                url:now_href+target+"/ajax",
+                dataType:"html",
+                success:function(data){
+                    window.history.pushState({},"",now_href+target+"#"+target);
+                    $(this).siblings().removeClass("active");
+                    $(this).addClass("active");
+                    $("#"+target).children().addClass("active");
+                    $("#"+target).find(".content").html(data);
+                }
+            });
         }
     });
     $("body").on("click","[for='detail-add']",function(){
