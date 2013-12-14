@@ -11,7 +11,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     $("body").on("click","#student-detail-edit",function(){
         $(".back-index-add[name='student']").css("left","0px").css("right","0px");
         //post(get edit course/service template)
-        course_manager.edit($("#course-detail-info").attr('course'), function(data) {
+        student_manager.edit($("#course-detail-info").attr('course'), function(data) {
             $("#course-edit-section").html(data);
         });
     });
