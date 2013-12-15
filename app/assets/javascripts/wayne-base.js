@@ -419,12 +419,18 @@ GLOBAL.autoComplete.count = 0;
                };
                var msg = {
                     result : true,
-                    id:data.data.id
+                    id:data.data.id,
+                    callback:null
                };
                $(this).trigger('click_add', [msg]);
-               if(msg.result)
+               alert(msg.result);
+               if(msg.result){
+                    if(msg.callback){
+                         msg.callback();
+                    }
                     var render = Mustache.render("{{#data}}<li><div class='ui label' id='{{id}}' type='{{type}}'  logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
-               $this.parent().before(render);
+                       $this.parent().before(render);
+               }
                $this.val("");
           }
      });

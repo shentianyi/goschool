@@ -1,8 +1,8 @@
 #encoding: utf-8
 class CoursesController < ApplicationController
-  before_filter :init_message ,:only=>[:edit,:create,:update,:destroy,:subs,:add_teachers]
-  before_filter :get_course,:only=>[:edit,:show,:update,:edit,:destroy,:subs,:add_teachers]
-  before_filter :render_nil_msg , :only=>[:edit,:update,:destroy,:subs,:add_teachers]
+  before_filter :init_message ,:only=>[:edit,:create,:update,:destroy,:subs,:add_teacher]
+  before_filter :get_course,:only=>[:edit,:show,:update,:edit,:destroy,:subs,:add_teacher]
+  before_filter :render_nil_msg , :only=>[:edit,:update,:destroy,:subs,:add_teacher]
   before_filter :render_404,:only=>[:edit,:show]
   
   def index
@@ -107,7 +107,7 @@ class CoursesController < ApplicationController
     render json:@msg
   end
 
- def add_teachers
+ def add_teacher
    unless @course.has_sub
       @teacher_course = TeacherCourse.new(sub_course_id:@course.sub_courses.first.id,user_id:params[:teacher_id])
    @msg.content=(@msg.result=@teacher_course.save) ? @teacher_course.id :  @teacher_course.errors.messages
