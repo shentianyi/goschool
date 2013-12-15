@@ -1,35 +1,3 @@
-var course_manager = $.extend({
-	source : 'courses',
-	add_teacher : function(params, callback, async) {
-		if (async == null)
-			async = true;
-		$.ajax({
-			url : '/courses/add_teacher',
-			data : {
-				id : params.id,
-				teacher_id : params.teacher_id
-			},
-			type : 'POST',
-			async : async,
-			dataType : 'json',
-			success : function(data) {
-				if (callback) {
-					callback(data);
-				}
-			}
-		});
-
-	}
-}, manager);
-
-var sub_course_manager = $.extend({
-	source : 'sub_courses'
-}, manager);
-
-var teacher_course_manager = $.extend({
-	source : 'teacher_courses'
-}, manager);
-
 function init_course_edit() {
 	$(function() {
 		$("#course-begin-date").datepicker({
@@ -64,12 +32,21 @@ function init_course_edit() {
 			$(".labelForm").each(function() {
 				var $input = $(this).find("input");
 				var max_width = parseInt($(this).css("width")) * 0.45;
-				$input.css("width", max_width).css("maxWidth", "999em");
+				$input.css("width", max_width).css("maxWidth", "999em").addClass('sub-course-teachers-input-complete');
 			});
 		});
 		$("body").on("keyup", "input[name='expect_number'],input[name='lesson']", function(event) {
 			var obj = adapt_event(event).target;
 			integerOnly(obj)
+		});
+		$("body").on("click", ".sub-course-block-item>i", function() {
+			var msg = {
+				result : true
+			};
+			$(this).trigger('click_remove', [msg]);
+			if (msg.result) {
+				$(this).parent().remove();
+			}
 		});
 		$("body").on("click", "#choose-teacher-delivery div,#choose-teacher-course-delivery div", function() {
 			if (!$(this).hasClass('active') && !$(this).hasClass('or')) {
@@ -94,6 +71,7 @@ function init_course_edit() {
 
 		$("body").on("change", ".sub-course-name-input", function() {
 			var id = $(this).parent().nextAll("i").attr("id");
+			var sub = $(this).parent().parent();
 			var i = $(this).parent().nextAll("i");
 			if (id == null) {
 				sub_course_manager.create({
@@ -104,6 +82,8 @@ function init_course_edit() {
 				}, function(data) {
 					if (data.result) {
 						i.attr("id", data.content);
+						sub.attr('sub-course', data.content);
+						sub.find('.sub-course-teachers-input-complete').removeAttr('disabled');
 					} else {
 						MessageBox(data.content, "top", "warning");
 					}
@@ -135,7 +115,7 @@ function init_course_edit() {
 
 		$("body").on("click_add", "#autoComplete-call li", function(event, msg) {
 			if (msg.id) {
-				var callback = function(data, msg) {
+				var callback = function(data) {
 					msg.result = data.result;
 					if (data.result) {
 						msg.callback = function(label) {
@@ -151,9 +131,16 @@ function init_course_edit() {
 						id : $("#course-detail-info").attr('course'),
 						teacher_id : msg.id
 					};
-					course_manager.add_teacher(params, callback(data, msg), false);
-				}else{
-					
+					course_manager.add_teacher(params, callback, false);
+				} else {
+					var params = {
+						teacher_course : {
+							sub_course_id : $("#selected-sub-course").val(),
+							user_id : msg.id
+						}
+					};
+					if (params.teacher_course.sub_course_id != "")
+						teacher_course_manager.create(params, callback, false);
 				}
 			}
 		});
@@ -169,6 +156,10 @@ function init_course_edit() {
 					stopEvent(event);
 				}
 			}, false);
+		});
+
+		$("body").on('focus', ".sub-course-teachers-input-complete", function() {
+			$("#selected-sub-course").val($(this).parents(".sub-course-block-item").attr('sub-course'));
 		});
 
 		$("body").on("click_remove", ".icon.collapse", function(event, msg) {

@@ -76,7 +76,7 @@
                </div>
                <div class="sub-course-block teachers" id="sub-course-teachers" style="<%= 'display:block' if @course.has_sub%>">
                     <%@course.sub_courses.each do |sub_course|%>
-                    <div class="sub-course-block-item">
+                    <div class="sub-course-block-item" sub-course="<%=sub_course.id%>">
                          <div class="ui input sub-course-name">
                               <input placeholder="子<%= @course.type_display%>名..." type="text" value="<%= sub_course.name%>" class="sub-course-name-input"/>
                          </div>
@@ -90,7 +90,7 @@
                                    </li>
                                    <%end%>
                                    <li>
-                                        <input type='text' placeholder="老师..." id="sub-teacher-course-1" autocomplete="teachers" />
+                                        <input type='text' placeholder="老师..." id="sub-teacher-course-1" autocomplete="teachers" class="sub-course-teachers-input-complete"/>
                                    </li>
                               </ul>
                          </div>
@@ -98,6 +98,7 @@
                     </div>
                     <%end%>
                     <i class="icon expand" id="add-sub-course"></i>
+                    <input type="hidden" id="selected-sub-course" />
                </div>
           </div>
      </div>

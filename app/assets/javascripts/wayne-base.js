@@ -454,7 +454,7 @@ GLOBAL.autoComplete.count = 0;
      $("body").on("click", ".labelForm .delete.icon", function() {
           var msg = {
                result : true
-          };
+          };  
           $(this).trigger('click_remove', [msg]);
           if(msg.result) {
                $(this).parents("li").eq(0).remove();
