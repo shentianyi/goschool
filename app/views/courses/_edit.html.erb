@@ -75,10 +75,10 @@
                     <i class="male icon"></i>
                </div>
                <div class="sub-course-block teachers" id="sub-course-teachers" style="<%= 'display:block' if @course.has_sub%>">
-                         <%@course.sub_courses.each do |sub_course|%>
-                         <div class="sub-course-block-item">
+                    <%@course.sub_courses.each do |sub_course|%>
+                    <div class="sub-course-block-item">
                          <div class="ui input sub-course-name">
-                              <input placeholder="子<%= @course.type_display%>名..." type="text" value="<%= sub_course.name%>">
+                              <input placeholder="子<%= @course.type_display%>名..." type="text" value="<%= sub_course.name%>" class="sub-course-name-input"/>
                          </div>
                          <div class="ui input specialInput labelForm autoComplete total-teachers" >
                               <ul>
@@ -96,7 +96,7 @@
                          </div>
                          <i class="icon collapse" id="<%= sub_course.id%>"></i>
                     </div>
-                         <%end%>
+                    <%end%>
                     <i class="icon expand" id="add-sub-course"></i>
                </div>
           </div>
@@ -167,6 +167,35 @@
                course_manager.update($("#course-detail-info").attr('course'), data);
           });
 
+          $("body").on("change", ".sub-course-name-input", function() {
+               var id = $(this).parent().nextAll("i").attr("id");
+               var i=$(this).parent().nextAll("i");
+               if(id == null) { 
+                    sub_course_manager.create({
+                         course_id: $("#course-detail-info").attr('course'),
+                         sub_course : {
+                              name : $(this).val()
+                         }
+                    },function(data){
+                         if(data.result){
+                              i.attr("id",data.content);
+                         }else {
+                              MessageBox(data.content, "top", "warning");
+                         }
+                    });
+               } else {
+                    sub_course_manager.update(id, {
+                         sub_course : {
+                              name : $(this).val()
+                         }
+                    },function(data){
+                         if(!data.result){
+                               MessageBox(data.content, "top", "warning");
+                         }
+                    });
+               }
+          });
+
           $(".tag-input-blur").blur(function() {
                var data = {
                     course : {}
@@ -214,6 +243,7 @@
 
           $("body").on("click_remove", ".icon.collapse", function(event, msg) {
                var item = $(this);
+               if(item.attr('id')!=null)
                if(confirm('确认删除子课程？')) {
                     sub_course_manager.destroy(item.attr('id'), function(data) {
                          msg.result = data.result;
@@ -223,7 +253,7 @@
                          }
                     }, false);
                } else {
-                    msg.result=false;
+                    msg.result = false;
                }
           });
      }); 

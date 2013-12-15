@@ -207,7 +207,7 @@ BACKCOURSE.sub_teacher.service={};
 BACKCOURSE.sub_teacher.class.template=
     '{{#counts}}<div class="sub-course-block-item">\
         <div class="ui input sub-course-name">\
-            <input placeholder="子课程名..." type="text">\
+            <input placeholder="子课程名..." type="text" class="sub-course-name-input">\
          </div>\
          <div class="ui input specialInput labelForm autoComplete total-teachers" >\
             <ul>\
