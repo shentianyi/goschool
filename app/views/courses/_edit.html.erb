@@ -178,8 +178,14 @@
                data['course']['tags'] = tags;
                course_manager.update($("#course-detail-info").attr('course'), data);
           });
-
-          // $("body").off("click", ".teachers .delete.icon");
+          
+          $("body").on("click_add","#autoComplete-call li",function(event,msg){
+               if(mgs.id){
+                    var teacher_id=msg.id;
+                    var course_id=$("#course-detail-info").attr('course');
+                    
+               }
+          });
 
           $("body").on("click_remove", ".teachers .delete.icon", function(event, msg) {
                var item = $(this);

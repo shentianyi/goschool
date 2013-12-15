@@ -46,6 +46,9 @@ class Course < ActiveRecord::Base
     TagService.add_tags(self)  if self.tags
   end
 
+  def teacher_names
+    teachers.uniq.map{|t| t.name}
+  end
   private
 
   def validate_save

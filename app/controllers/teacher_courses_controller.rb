@@ -20,6 +20,7 @@ class TeacherCoursesController < ApplicationController
     @msg.result=true
     render :json=>@msg
   end
+  
 
   private
 
