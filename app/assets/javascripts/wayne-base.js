@@ -419,17 +419,16 @@ GLOBAL.autoComplete.count = 0;
                };
                var msg = {
                     result : true,
-                    id:data.data.id,
-                    callback:null
+                    id : data.data.id,
+                    callback : null
                };
                $(this).trigger('click_add', [msg]);
-               alert(msg.result);
-               if(msg.result){
-                    if(msg.callback){
-                         msg.callback();
+               if(msg.result) {
+                    if(msg.callback) {
+                         msg.callback(data);
                     }
                     var render = Mustache.render("{{#data}}<li><div class='ui label' id='{{id}}' type='{{type}}'  logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
-                       $this.parent().before(render);
+                    $this.parent().before(render);
                }
                $this.val("");
           }
@@ -486,9 +485,25 @@ GLOBAL.autoComplete.count = 0;
                                         logininfo_id : logininfo_id
                                    }
                               };
-                              var render = Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id='{{id}}' logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
-                              $input.parent().before(render);
-                              $input.val("");
+                              // var render = Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id='{{id}}' logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
+                              // $input.parent().before(render);
+                              //
+                              $("#autoComplete-call").css("left", "-999em").attr("target", "");
+                              var msg = {
+                                   result : true,
+                                   id : data.data.id,
+                                   callback : null
+                              };
+                              $("#autoComplete-call").find(".active").trigger('click_add', [msg]);
+                              if(msg.result) {
+                                   if(msg.callback) {
+                                        msg.callback(data);
+                                   }
+                                   var render = Mustache.render("{{#data}}<li><div class='ui label' id='{{id}}' type='{{type}}'  logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
+                                   $input.parent().before(render);
+                                   $input.val("");
+                              }
+
                          } else {
                               MessageBox("请在下拉提示菜单中选择一条", "top", "warning");
                          }
@@ -519,9 +534,24 @@ GLOBAL.autoComplete.count = 0;
                                         logininfo_id : logininfo_id
                                    }
                               };
-                              var render = Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id='{{id}}'  logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
-                              $input.parent().before(render);
+                              // var render = Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id='{{id}}'  logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
+                              // $input.parent().before(render);
+                              // $("#autoComplete-call").css("left", "-999em").attr("target", "");
                               $("#autoComplete-call").css("left", "-999em").attr("target", "");
+                              var msg = {
+                                   result : true,
+                                   id : data.data.id,
+                                   callback : null
+                              };
+                              $("#autoComplete-call").find(".active").trigger('click_add', [msg]);
+                              if(msg.result) {
+                                   if(msg.callback) {
+                                        msg.callback(data);
+                                   }
+                                   var render = Mustache.render("{{#data}}<li><div class='ui label' id='{{id}}' type='{{type}}'  logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
+                                   $input.parent().before(render);
+                                   $("#autoComplete-call").css("left", "-999em").attr("target", "");
+                              }
                          }
                          $input.val("");
                     } else if($input.attr("im") == "label") {

@@ -188,8 +188,8 @@
                     course_manager.add_teacher(params, function(data) {
                          msg.result = data.result;
                          if(data.result) {
-                              msg.callback = function() {
-                                   alert(data.content);
+                              msg.callback = function(label) {
+                                   label.data.id=data.content;
                               }
                          } else {
                               MessageBox(data.content, "top", "warning");
