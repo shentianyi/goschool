@@ -1,71 +1,135 @@
 <!--编辑学生信息-->
 <div class="inner">
   <i class="remove icon"></i>
-  <p>新建学生</p>
+  <p>编辑学生</p>
   <div class="left-part">
     <div class="portrait">
-      <img class="ui circular image " src="images/portrait/1.jpg">
+      <img id="image-url" class="ui circular image " src="<%= @presenter.image_url%>">
     </div>
     <div class="ui left icon input">
-      <input placeholder="姓名..." type="text">
+      <input id="name" placeholder="姓名..." type="text" value="<%= @presenter.name %>">
       <i class="user icon"></i>
     </div>
-    <div class="sex stop">
+    <divid="gender" class="sex stop">
       <div class="ui radio checkbox">
-        <input name="sex" checked="checked" type="radio">
+        <input name="sex" <% if @presenter.student.is_male? %>checked="checked" <% end %> type="radio">
         <label>男</label>
       </div>
       <div class="ui radio checkbox">
-        <input name="sex" type="radio">
+        <input name="sex" <%if !@presenter.student.is_male?%> checked="checked"<% end %>  type="radio">
         <label>女</label>
       </div>
     </div>
     <div class="ui left icon input calendar">
-      <input placeholder="出生年月..." type="text" readonly id="born-date">
+      <input id="born-date" placeholder="出生年月..." type="text" readonly id="born-date" value="<%= @presenter.birth_ %>">
       <i class="calendar icon"></i>
     </div>
     <div class="ui left icon input">
-      <input placeholder="就读学校..." type="text">
+      <input id="school" placeholder="就读学校..." type="text" value="<%= @presenter.school %>">
       <i class="building icon"></i>
     </div>
     <div class="ui left icon input calendar">
-      <input placeholder="毕业年限..." type="text" readonly id="graduation-date">
+      <input id="graduation-date" placeholder="毕业年限..." type="text" readonly id="graduation-date" value="<%= @presenter.graduate_ %>">
       <i class="empty bookmark icon"></i>
     </div>
   </div>
   <div class="right-part">
     <div class="ui left icon input">
-      <input placeholder="邮件地址..." type="text">
+      <input id="email" placeholder="邮件地址..." type="text" value="<%= @presenter.email %>">
       <i class="mail outline icon"></i>
     </div>
     <div class="ui left icon input">
-      <input placeholder="联系电话..." type="text">
+      <input id="phone" placeholder="联系电话..." type="text" value="<%= @presenter.phone %>">
       <i class="phone icon"></i>
     </div>
     <div class="ui left icon input">
-      <input placeholder="联系地址..." type="text">
+      <input id="address" placeholder="联系地址..." type="text" value="<%=  @presenter.address %>">
       <i class="home icon"></i>
     </div>
     <div class="ui left icon input">
-      <input placeholder="监护人..." type="text">
+      <input id="guardian" placeholder="监护人..." type="text" value="<%=  @presenter.guardian %>">
       <i class="male icon"></i>
     </div>
     <div class="ui left icon input">
-      <input placeholder="监护人电话..." type="text">
+      <input id="guardian_phone" placeholder="监护人电话..." type="text" value="<%=  @presenter.guardian_phone %>">
       <i class="mobile icon"></i>
     </div>
     <div class="ui left icon input specialInput labelForm autoComplete">
-      <ul>
+      <ul id="tags">
+	<% @presenter.tags_.each do |tag|%>
+	<li><div class="ui label"><%= tag %><i class="delete icon"></i></div></li>
+	<% end %>
         <li><input type='text' placeholder="标签..." id="autoC2"/></li>
       </ul>
       <i class="tag icon stop"></i>
     </div>
     <div class="ui left icon input autoComplete">
-      <input placeholder="推荐人..." id="autoC3" type="text">
+      <% if @presenter.referrer_ %>
+      <li>
+	<div class="ui label" id="<%= @presenter.referrer_.id %>" type="" logininfo_id="<%= @presenter.referrer_.logininfo_id%>">
+	  <%= @presenter.name %><i class="delete icon"></i>
+	</div>	
+      </li>
+      <% end %>
+      <li><input placeholder="推荐人..." id="autoC3" type="text">
       <i class="smile icon"></i>
     </div>
-    <div class="ui red button">
-      添加
+    <div id="edit-student" class="ui red button">
+      编辑
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+    $(function(){
+    $("#born-date,#graduation-date").datepicker({
+    showOtherMonths: true,
+    selectOtherMonths: true,
+    changeMonth: true,
+    changeYear: true,
+    showMonthAfterYear:true,
+    yearRange: "-30:+10",
+    dateFormat:'yy-mm-dd'
+    });
+    
+    $(document).ready(function(){
+    $("body").on("click","#edit-student",function({
+    //write your post code here
+    var student = {};
+    student.image_url = $("#image_url").attr("src");
+    student.name = $("#name").val();
+    student.gender = $("#gender input[type=radio]:checked").val();
+    student.birthday = $("#born-date").val();
+    student.school = $("#school").val();
+    student.graduation = $("#graduation-date").val();
+    student.email = $("#email").val();
+    student.phone = $("#phone").val();
+    student.address = $("#address").val();
+    student.guardian = $("#guardian").val();
+    student.guardian_phone = $("#guardian_phone").val();
+    student.referrer_id = $("#referrer>li").eq(0).find("div").attr("logininfo_id");
+	    
+    var is_active_account = $("#is_active_account input[type='checkbox']").prop("checked")
+
+    student.tags = [];
+    var $target = $(".back-index-add[name='student']");
+    var length = $target.find("[id='tags']").children().length,tag,tags=[];
+    for(var i =0;i<length-1;i++)
+		     {
+		     tag = $target.find("[id='tags']>li").eq(i).find("div").text();
+		     tags.push(tag);
+		     }
+		     student.tags = tags;
+    student_manager.update($("#student-detail-info").attr('student'),student,function(data){
+		     if(data.result){
+		     alert("success");
+		     }
+		     else{
+		     alert("failed");
+		     }
+		     })
+    })
+    });
+		     
+    });
+</script>

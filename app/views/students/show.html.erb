@@ -29,7 +29,7 @@
   
   <div class="detail-content" id="detail-content">
     <div class="content-info">内容主页</div>
-    <div class="info" id="<%= @presenter.id %>">
+    <div class="info" id="student-detail-info" student="<%= @presenter.id%>">
       <div class="left">
         <img class="circular ui image" src="<%= @presenter.student.image_url %>"/>
         <p class="name"><%= @presenter.name %></p>
@@ -133,16 +133,18 @@
 
 
 <!--编辑学生信息-->
-<section class="back-index-add"  name="student">
+<section class="back-index-add"  name="student" id="student-edit-section">
   
 </section>
 
 
 <%= render partial:'shares/log_footer'%>
 <% content_for :javascript_includes do%>
+<%= javascript_include_tag "base_manage_source.js"%>
 <%= javascript_include_tag "BACK_index.js"%>
 <%= javascript_include_tag "BACK_student.js"%>
 <%= javascript_include_tag "BACK_detail.js"%>
 <%= javascript_include_tag "BACK_student_detail.js"%>
+<%= javascript_include_tag "BACK_student_edit.js"%>
 
 <%end%>
