@@ -94,7 +94,7 @@
                                    </li>
                               </ul>
                          </div>
-                         <i class="icon collapse" id="<%=sub_course.id%>"></i>
+                         <i class="icon collapse" id="<%= sub_course.id%>"></i>
                          <%end%>
                     </div>
                     <i class="icon expand" id="add-sub-course"></i>
@@ -179,7 +179,25 @@
                course_manager.update($("#course-detail-info").attr('course'), data);
           });
 
-          // $("body").off("click", ".teachers .delete.icon");
+          $("body").on("click_add", "#autoComplete-call li", function(event, msg) {
+               if(msg.id) {
+                    var params = {
+                         id : $("#course-detail-info").attr('course'),
+                         teacher_id : msg.id
+                    };
+                    course_manager.add_teacher(params, function(data) {
+                         msg.result = data.result;
+                         if(data.result) {
+                              msg.callback = function() {
+                                   alert(data.content);
+                              }
+                         } else {
+                              MessageBox(data.content, "top", "warning");
+                              stopEvent(event);
+                         }
+                    },false);
+               }
+          });
 
           $("body").on("click_remove", ".teachers .delete.icon", function(event, msg) {
                var item = $(this);

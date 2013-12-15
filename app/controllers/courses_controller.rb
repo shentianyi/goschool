@@ -1,8 +1,8 @@
 #encoding: utf-8
 class CoursesController < ApplicationController
-  before_filter :init_message ,:only=>[:edit,:create,:update,:destroy,:subs]
-  before_filter :get_course,:only=>[:edit,:show,:update,:edit,:destroy,:subs]
-  before_filter :render_nil_msg , :only=>[:edit,:update,:destroy,:subs]
+  before_filter :init_message ,:only=>[:edit,:create,:update,:destroy,:subs,:add_teacher]
+  before_filter :get_course,:only=>[:edit,:show,:update,:edit,:destroy,:subs,:add_teacher]
+  before_filter :render_nil_msg , :only=>[:edit,:update,:destroy,:subs,:add_teacher]
   before_filter :render_404,:only=>[:edit,:show]
   
   def index
@@ -97,13 +97,9 @@ class CoursesController < ApplicationController
   end
   
   def subs
-    @subs=@course.sub_courses.where(is_default:false).all
-    if @subs.count>0
-       sub=[]
-      @subs.each do |s|
-        sub<<{id:s.id,name:s.name}
-      end
-       @msg.content={sub_courses:sub,teachers:@subs.first.teacher_names}  
+    if @course.has_sub
+       @subs=@course.sub_courses.where(is_default:false).all
+       @msg.content={sub_courses:@subs.map{|s| {id:s.id,name:s.name}},teachers:@subs.first.teacher_names}  
     else
       @msg.content={sub_courses:[],teachers:@course.teacher_names}  
     end
@@ -111,6 +107,15 @@ class CoursesController < ApplicationController
     render json:@msg
   end
 
+ def add_teacher
+   unless @course.has_sub
+      @teacher_course = TeacherCourse.new(sub_course_id:@course.sub_courses.first.id,user_id:params[:teacher_id])
+   @msg.content=(@msg.result=@teacher_course.save) ? @teacher_course.id :  @teacher_course.errors.messages
+   else
+     @msg.content='课程包含子课程，请先删除子课程'
+   end
+   render :json=>@msg
+ end
   private
 
   def teachers

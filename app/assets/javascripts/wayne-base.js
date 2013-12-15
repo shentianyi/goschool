@@ -394,6 +394,8 @@ GLOBAL.autoComplete.count = 0;
           }, 200);
      });
      $("body").on("click", "#autoComplete-call li", function() {
+          // item added
+
           var target = $("#autoComplete-call").attr("target");
           if(!$(this).hasClass("active")) {
                $(this).siblings().removeClass("active");
@@ -408,15 +410,27 @@ GLOBAL.autoComplete.count = 0;
                var type = $("#autoComplete-call").find(".active").attr("type");
                var logininfo_id = $("#autoComplete-call").find(".active").attr("logininfo_id");
                var data = {
-                  data : {
-                      id : id,
-                      value : value,
-                      type : type,
-                      logininfo_id:logininfo_id
-                  }
+                    data : {
+                         id : id,
+                         value : value,
+                         type : type,
+                         logininfo_id : logininfo_id
+                    }
                };
-               var render = Mustache.render("{{#data}}<li><div class='ui label' id='{{id}}' type='{{type}}'  logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
-               $this.parent().before(render);
+               var msg = {
+                    result : true,
+                    id:data.data.id,
+                    callback:null
+               };
+               $(this).trigger('click_add', [msg]);
+               alert(msg.result);
+               if(msg.result){
+                    if(msg.callback){
+                         msg.callback();
+                    }
+                    var render = Mustache.render("{{#data}}<li><div class='ui label' id='{{id}}' type='{{type}}'  logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
+                       $this.parent().before(render);
+               }
                $this.val("");
           }
      });
@@ -450,16 +464,14 @@ GLOBAL.autoComplete.count = 0;
 })();
 //针对所有input一个检测
 
-(function(){
-    $("body").on("keyup","input[type='text']",function(event){
-        var e=adapt_event(event).event,
-            $input=$(this);
-        if(e.keyCode==32){
-            if($.trim($input.val()).length==0){
-                e.preventDefault();
-                $input.val("");
-            }
-            else {
+(function() {
+     $("body").on("keyup", "input[type='text']", function(event) {
+          var e = adapt_event(event).event, $input = $(this);
+          if(e.keyCode == 32) {
+               if($.trim($input.val()).length == 0) {
+                    e.preventDefault();
+                    $input.val("");
+               } else {
                     if($input.attr("im") == "label" && $input.attr("ishould") == "BeSelected") {
                          if($("#autoComplete-call").find(".active").length > 0) {
                               var value = $.trim($input.val());
@@ -467,12 +479,12 @@ GLOBAL.autoComplete.count = 0;
                               var type = $("#autoComplete-call").find(".active").attr("type");
                               var logininfo_id = $("#autoComplete-call").find(".active").attr("logininfo_id");
                               var data = {
-                                 data : {
-                                     id : id,
-                                     value : value,
-                                     type : type,
-                                     logininfo_id:logininfo_id
-                                 }
+                                   data : {
+                                        id : id,
+                                        value : value,
+                                        type : type,
+                                        logininfo_id : logininfo_id
+                                   }
                               };
                               var render = Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id='{{id}}' logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
                               $input.parent().before(render);
@@ -504,7 +516,7 @@ GLOBAL.autoComplete.count = 0;
                                         id : id,
                                         value : value,
                                         type : type,
-                                        logininfo_id:logininfo_id
+                                        logininfo_id : logininfo_id
                                    }
                               };
                               var render = Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id='{{id}}'  logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
