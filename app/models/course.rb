@@ -39,7 +39,7 @@ class Course < ActiveRecord::Base
   end
 
   def teacher_details
-    self.teachers.select('sub_courses.id as sub_course_id,sub_courses.name as sub_course_name,teacher_courses.id as teacher_course_id,users.*')
+    self.teachers.select('sub_courses.id as sub_course_id,sub_courses.name as sub_course_name,teacher_courses.id as teacher_course_id,users.*').group('sub_course_id')
   end
 
   def add_tags
