@@ -8,6 +8,7 @@ class SubCoursesController < ApplicationController
     if @course=Course.find_by_id(params[:course_id])
       @sub_course = @course.sub_courses.build(params[:sub_course])
       @sub_course.parent_name=@course.name
+      @sub_course.institution_id=@course.institution_id
      @sub_course.assign_teachers(params[:teachers]) if params.has_key?(:teachers)
      @msg.content=(@msg.result=@sub_course.save) ? @sub_course.id :  @sub_course.errors.messages
     else

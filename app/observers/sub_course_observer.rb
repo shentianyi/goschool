@@ -2,11 +2,8 @@
 class SubCourseObserver<ActiveRecord::Observer
   observe :sub_course
 
-  def before_create sub_course
-    sub_course.course.sub_courses.where(:is_default=>true).destroy_all
-  end
-
   def after_create sub_course
+     sub_course.course.sub_courses.where(:is_default=>true).destroy_all unless sub_course.is_default
      sub_course.course.update_attributes(:has_sub=>true) unless sub_course.is_default
   end
 
