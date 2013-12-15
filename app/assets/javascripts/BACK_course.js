@@ -64,9 +64,17 @@ var BACKCOURSE=BACKCOURSE || {};
             $("#"+id).css("display","block");
         }
     });
-    $("body").on("click",".sub-course-block-item>i",function(){
-        $(this).parent().remove();
-    });
+
+     $("body").on("click", ".sub-course-block-item>i", function() {
+          var msg = {
+               result : true
+          };
+          $(this).trigger('click_remove', [msg]);
+          if(msg.result) {
+               $(this).parent().remove();
+          }
+     }); 
+
     $("body").on("click","#add-sub-class",function(){
         var data={counts:{count:BACKCOURSE.sub_teacher.count}};
         var render=Mustache.render(BACKCOURSE.sub_teacher.class.template,data);

@@ -133,7 +133,7 @@ class CoursesController < ApplicationController
   def render_nil_msg
     unless @course
       @msg.content='不存在此课程'
-      render :json=>msg
+      render :json=>@msg
     end
   end
   def render_404

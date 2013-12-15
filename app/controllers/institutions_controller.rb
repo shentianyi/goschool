@@ -27,7 +27,7 @@ class InstitutionsController < ApplicationController
   def render_nil_msg
     unless @instance
       @msg.content='不存在此机构'
-      render :json=>msg
+      render :json=>@msg
     end
   end
 end
