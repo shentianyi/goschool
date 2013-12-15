@@ -75,8 +75,8 @@
                     <i class="male icon"></i>
                </div>
                <div class="sub-course-block teachers" id="sub-course-teachers" style="<%= 'display:block' if @course.has_sub%>">
-                    <div class="sub-course-block-item">
                          <%@course.sub_courses.each do |sub_course|%>
+                         <div class="sub-course-block-item">
                          <div class="ui input sub-course-name">
                               <input placeholder="子<%= @course.type_display%>名..." type="text" value="<%= sub_course.name%>">
                          </div>
@@ -95,8 +95,8 @@
                               </ul>
                          </div>
                          <i class="icon collapse" id="<%= sub_course.id%>"></i>
-                         <%end%>
                     </div>
+                         <%end%>
                     <i class="icon expand" id="add-sub-course"></i>
                </div>
           </div>
@@ -189,13 +189,13 @@
                          msg.result = data.result;
                          if(data.result) {
                               msg.callback = function(label) {
-                                   label.data.id=data.content;
+                                   label.data.id = data.content;
                               }
                          } else {
                               MessageBox(data.content, "top", "warning");
                               stopEvent(event);
                          }
-                    },false);
+                    }, false);
                }
           });
 
@@ -210,6 +210,21 @@
                          stopEvent(event);
                     }
                }, false);
+          });
+
+          $("body").on("click_remove", ".icon.collapse", function(event, msg) {
+               var item = $(this);
+               if(confirm('确认删除子课程？')) {
+                    sub_course_manager.destroy(item.attr('id'), function(data) {
+                         msg.result = data.result;
+                         if(!data.result) {
+                              MessageBox(data.content, "top", "warning");
+                              stopEvent(event);
+                         }
+                    }, false);
+               } else {
+                    msg.result=false;
+               }
           });
      }); 
 </script>

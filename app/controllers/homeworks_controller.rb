@@ -40,7 +40,7 @@ class HomeworksController < ApplicationController
   def render_nil_msg
     unless @homework
       @msg.content='不存在此作业'
-      render :json=>msg
+      render :json=>@msg
     end
   end
 

@@ -22,6 +22,11 @@ var course_manager = $.extend({
      }
 }, manager);
 
+
+var sub_course_manager = $.extend({
+     source : 'sub_courses'
+}, manager);
+
 var teacher_course_manager = $.extend({
      source : 'teacher_courses'
 }, manager);

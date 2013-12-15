@@ -41,7 +41,7 @@ class SubCoursesController < ApplicationController
   def render_nil_msg
     unless @sub_course
       @msg.content='不存在此课程/服务内容'
-      render json:msg
+      render json:@msg
     end
   end
 end
