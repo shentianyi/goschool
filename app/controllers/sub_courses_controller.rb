@@ -5,8 +5,11 @@ class SubCoursesController < ApplicationController
   before_filter :get_sub_course,:only=>[:update,:edit,:destroy,:teachers]
   before_filter :render_nil_msg , :only=>[:update,:destroy,:teachers]
   def create
-    if @course=Course.find_by_id(params[:course_id].strip)
-      @sub_course = @course.sub_courses.build(params[:sub_course].strip)
+    if @course=Course.find_by_id(params[:course_id])
+      @sub_course = @course.sub_courses.build(params[:sub_course])
+      @sub_course.parent_name=@course.name
+      @sub_course.institution_id=@course.institution_id
+     @sub_course.assign_teachers(params[:teachers]) if params.has_key?(:teachers)
      @msg.content=(@msg.result=@sub_course.save) ? @sub_course.id :  @sub_course.errors.messages
     else
       @msg.content='课程不存在，无法添加内容'
@@ -15,7 +18,7 @@ class SubCoursesController < ApplicationController
   end
  
   def update
-    unless @msg.result=@sub_course.update_attributes(params[:sub_course].strip)
+    unless @msg.result=@sub_course.update_attributes(params[:sub_course])
      @msg.content=@sub_course.errors.messages
     end
     render json:@msg    

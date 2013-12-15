@@ -75,10 +75,10 @@
                     <i class="male icon"></i>
                </div>
                <div class="sub-course-block teachers" id="sub-course-teachers" style="<%= 'display:block' if @course.has_sub%>">
-                         <%@course.sub_courses.each do |sub_course|%>
-                         <div class="sub-course-block-item">
+                    <%@course.sub_courses.each do |sub_course|%>
+                    <div class="sub-course-block-item" sub-course="<%=sub_course.id%>">
                          <div class="ui input sub-course-name">
-                              <input placeholder="子<%= @course.type_display%>名..." type="text" value="<%= sub_course.name%>">
+                              <input placeholder="子<%= @course.type_display%>名..." type="text" value="<%= sub_course.name%>" class="sub-course-name-input"/>
                          </div>
                          <div class="ui input specialInput labelForm autoComplete total-teachers" >
                               <ul>
@@ -90,14 +90,15 @@
                                    </li>
                                    <%end%>
                                    <li>
-                                        <input type='text' placeholder="老师..." id="sub-teacher-course-1" autocomplete="teachers" />
+                                        <input type='text' placeholder="老师..." id="sub-teacher-course-1" autocomplete="teachers" class="sub-course-teachers-input-complete"/>
                                    </li>
                               </ul>
                          </div>
                          <i class="icon collapse" id="<%= sub_course.id%>"></i>
                     </div>
-                         <%end%>
+                    <%end%>
                     <i class="icon expand" id="add-sub-course"></i>
+                    <input type="hidden" id="selected-sub-course" />
                </div>
           </div>
      </div>
@@ -106,125 +107,5 @@
      </div>
 </div>
 <script type="text/javascript">
-     $(function() {
-          $("#course-begin-date").datepicker({
-               showOtherMonths : true,
-               selectOtherMonths : true,
-               changeMonth : true,
-               changeYear : true,
-               dateFormat : 'yy-mm-dd',
-               onClose : function(selectedDate) {
-                    $("#course-end-date").datepicker("option", "minDate", selectedDate);
-               }
-          });
-          $("#course-end-date").datepicker({
-               showOtherMonths : true,
-               selectOtherMonths : true,
-               changeMonth : true,
-               changeYear : true,
-               dateFormat : 'yy-mm-dd',
-               onClose : function(selectedDate) {
-                    $("#course-begin-date").datepicker("option", "maxDate", selectedDate);
-               }
-          });
-          $("body").on("click", "#add-sub-course", function() {
-               var data = {
-                    counts : {
-                         count : BACKCOURSE.sub_teacher.count
-                    }
-               };
-               var render = Mustache.render(BACKCOURSE.sub_teacher.class.template, data);
-               $(this).before(render);
-               BACKCOURSE.sub_teacher.count++;
-               $(".labelForm").each(function() {
-                    var $input = $(this).find("input");
-                    var max_width = parseInt($(this).css("width")) * 0.45;
-                    $input.css("width", max_width).css("maxWidth", "999em");
-               });
-          });
-          $("body").on("keyup", "input[name='expect_number'],input[name='lesson']", function(event) {
-               var obj = adapt_event(event).target;
-               integerOnly(obj)
-          });
-          $("body").on("click", "#choose-teacher-delivery div,#choose-teacher-course-delivery div", function() {
-               if(!$(this).hasClass('active') && !$(this).hasClass('or')) {
-                    $(this).siblings().removeClass("teal active");
-                    $(this).addClass("teal active");
-                    var id = $(this).attr("for");
-                    if($(this).parent().attr("name") == "class") {
-                         $("#choose-teacher-delivery").nextAll().css("display", "none");
-                    } else {
-                         $("#choose-teacher-course-delivery").nextAll().css("display", "none");
-                    }
-                    $("#" + id).css("display", "block");
-               }
-          });
-          $(".update-input").change(function() {
-               var data = {
-                    course : {}
-               };
-               data['course'][$(this).attr('name')] = $(this).val();
-               course_manager.update($("#course-detail-info").attr('course'), data);
-          });
-
-          $(".tag-input-blur").blur(function() {
-               var data = {
-                    course : {}
-               };
-               var tags = []
-               $.each($('.tags-items>li>div'), function() {
-                    tags.push($.trim($(this).text()));
-               });
-               data['course']['tags'] = tags;
-               course_manager.update($("#course-detail-info").attr('course'), data);
-          });
-
-          $("body").on("click_add", "#autoComplete-call li", function(event, msg) {
-               if(msg.id) {
-                    var params = {
-                         id : $("#course-detail-info").attr('course'),
-                         teacher_id : msg.id
-                    };
-                    course_manager.add_teacher(params, function(data) {
-                         msg.result = data.result;
-                         if(data.result) {
-                              msg.callback = function(label) {
-                                   label.data.id = data.content;
-                              }
-                         } else {
-                              MessageBox(data.content, "top", "warning");
-                              stopEvent(event);
-                         }
-                    }, false);
-               }
-          });
-
-          $("body").on("click_remove", ".teachers .delete.icon", function(event, msg) {
-               var item = $(this);
-               teacher_course_manager.destroy(item.parent().attr('id'), function(data) {
-                    msg.result = data.result;
-                    if(data.result) {
-                         item.parents("li").eq(0).remove();
-                    } else {
-                         MessageBox(data.content, "top", "warning");
-                         stopEvent(event);
-                    }
-               }, false);
-          });
-
-          $("body").on("click_remove", ".icon.collapse", function(event, msg) {
-               var item = $(this);
-               if(confirm('确认删除子课程？')) {
-                    sub_course_manager.destroy(item.attr('id'), function(data) {
-                         msg.result = data.result;
-                         if(!data.result) {
-                              MessageBox(data.content, "top", "warning");
-                              stopEvent(event);
-                         }
-                    }, false);
-               } else {
-                    msg.result=false;
-               }
-          });
-     }); 
+     init_course_edit();
 </script>
