@@ -20,22 +20,35 @@ class Course < ActiveRecord::Base
 
   redis_search_index(:title_field => :name,
                      :prefix_index_enable => true,
-                     :condition_fields => [:tenant_id,:institution_id])
+                     :alias_field=>:code,
+                     :condition_fields => [:tenant_id,:institution_id],
+                     :ext_fields=>[:has_sub])
   def create_default_sub_course
     unless self.has_sub
-      sub_course= self.sub_courses.create(:parent_name=>self.name,:is_default=>true)
+      sub_course= self.sub_courses.create(parent_name:self.name,is_default:true,institution_id:self.institution_id)
     sub_course.assign_teachers(self.teachs) if self.teachs
     end
   end
 
   def course_students
-    self.students.select('student_courses.*,student_courses.created_at as enrol_time,students.*').all
+    self.students.select('student_courses.*,student_courses.id as student_course_id,student_courses.created_at as enrol_time,students.*').all
   end
 
   def course_teachers
-    self.teachers.select('users.*,sub_courses.id as sub_course_id,sub_courses.name as sub_courses_name,sub_courses.parent_name as course_name').all
+    self.teachers.select('users.*,sub_courses.id as sub_course_id,sub_courses.name as sub_course_name,sub_courses.parent_name as course_name').all
   end
 
+  def teacher_details
+    self.teachers.select('sub_courses.id as sub_course_id,sub_courses.name as sub_course_name,teacher_courses.id as teacher_course_id,users.*')
+  end
+
+  def add_tags
+    TagService.add_tags(self)  if self.tags
+  end
+
+  def teacher_names
+    teachers.uniq.map{|t| t.name}
+  end
   private
 
   def validate_save

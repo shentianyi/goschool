@@ -2317,7 +2317,7 @@ scheduler._correct_shift=function(start, back){
 	return start-=((new Date(scheduler._min_date)).getTimezoneOffset()-(new Date(start)).getTimezoneOffset())*60000*(back?-1:1);	
 };
 scheduler._on_mouse_move=function(e){
-    console.log(this._drag_mode)
+
 	if (this._drag_mode){
 		var pos=this._mouse_coords(e);
 		if (!this._drag_pos || pos.force_redraw || this._drag_pos.x!=pos.x || this._drag_pos.y!=pos.y ){
@@ -3388,12 +3388,21 @@ scheduler.deleteEvent = function(id, silent) {
 		return;
 	if (ev) {
         //post
-		delete this._events[id];
-		this.unselect(id);
-		this.event_updated(ev);
+        if(ev.text!="新建课程"){
+            var validate=SCHEDULE.calendar.delete_item(id,arguments[1]);
+            if(validate){
+                delete this._events[id];
+                this.unselect(id);
+                this.event_updated(ev);
+            }
+        }
+        else{
+            delete this._events[id];
+            this.unselect(id);
+            this.event_updated(ev);
+        }
 	}
 	this.callEvent("onEventDeleted", [id, ev]);
-    SCHEDULE.calendar.delete_item(id);
 };
 scheduler.getEvent = function(id) {
 	return this._events[id];
@@ -4380,6 +4389,7 @@ scheduler._process_loading = function(evs) {
 };
 scheduler._init_event = function(event) {
 	event.text = (event.text || event._tagvalue) || "";
+
 	event.start_date = scheduler._init_date(event.start_date);
 	event.end_date = scheduler._init_date(event.end_date);
 };
@@ -4387,9 +4397,13 @@ scheduler._init_event = function(event) {
 scheduler._init_date = function(date){
 	if(!date)
 		return null;
-	if(typeof date == "string")
-		return scheduler.templates.xml_date(date);
-	else return new Date(date);
+	if(typeof date == "string"){
+        var date=parseInt(date);
+        return new Date(date);
+    }
+	else{
+        return new Date(date);
+    }
 };
 
 scheduler.json = {};
@@ -4866,8 +4880,8 @@ scheduler.form_blocks={
 				s[i+map[3]].value=d.getFullYear();
                 if(i==0){
                     $(s[i+map[1]]).before($("<label />").text(d.getDate()));
-                    $(s[i+map[2]]).before($("<label />").text(d.getMonth()+1+"."));
-                    $(s[i+map[3]]).before($("<label />").text(d.getFullYear()+"."));
+                    $(s[i+map[2]]).before($("<label />").text(d.getMonth()+1+"-"));
+                    $(s[i+map[3]]).before($("<label />").text(d.getFullYear()+"-"));
                 }
 			}
             $(".dhx_section_time label").remove();

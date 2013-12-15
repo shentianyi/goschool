@@ -9,16 +9,71 @@ class ApplicationController < ActionController::Base
   before_filter :find_current_user_tenant
 
   set_current_tenant_through_filter
+
+  authorize_resource
   def find_current_user_tenant
     current_tenant=Tenant.find_by_id(current_user.tenant_id)
     set_current_tenant(current_tenant)
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    render :json=>{:access=>false},:status => 403
+    render json:{access:false},status:403
+  end
+
+  # user must be teacher
+  def require_user_as_teacher
+    unless current_user.is_teacher?
+      error_page_403
+    end
+  end
+
+  #must be manager
+  def require_user_as_manager
+    unless current_user.is_manager?
+      error_page_403
+    end
+  end
+
+  #must be admin
+  def require_user_as_admin
+    unless current_user.is_admin?
+      error_page_403
+    end
+  end
+
+  #must be student
+  def require_user_as_student
+    unless current_user.is_student?
+      error_page_403
+    end
+  end
+
+  def error_page_403
+    respond_to do |format|
+      format.html {render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false}
+      format.json { render json: {access:false} ,status: 403 }
+    end
+  end
+
+  def error_page_404
+    respond_to do |format|
+      format.html {render :file => File.join(Rails.root, 'public/404.html'), :status => 404, :layout => false}
+      format.json { render json: {access:false} ,status: 404 }
+    end
+  end
+
+  # user must be manager
+  def require_user_as_manager
+    # unless Role.manager?(current_user.loginingfo_roles)
+    # respond_to do |format|
+    # format.html {render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false}
+    # format.json { render json: {access:false} ,status: 403 }
+    # end
+    # end
   end
 
   private
+
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = LogininfoSession.find
@@ -45,7 +100,7 @@ class ApplicationController < ActionController::Base
     unless current_user
       store_location
       redirect_to new_logininfo_sessions_url
-      return false
+    return false
     end
   end
 
@@ -54,7 +109,7 @@ class ApplicationController < ActionController::Base
     if current_user
       store_location
       redirect_to root_url
-      return false
+    return false
     end
   end
 
@@ -64,7 +119,7 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "帐号被锁定，请联系管理员！"
       current_user_session.destroy
       redirect_to new_logininfo_sessions_url
-      return false
+    return false
     end
   end
 end

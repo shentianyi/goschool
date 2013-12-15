@@ -20,6 +20,7 @@ class TeacherCoursesController < ApplicationController
     @msg.result=true
     render :json=>@msg
   end
+  
 
   private
 
@@ -29,8 +30,8 @@ class TeacherCoursesController < ApplicationController
 
   def render_nil_msg
     unless @teacher_course
-      @msg.content='不存在此课程'
-      render :json=>msg
+      @msg.content='不存在此老师排课'
+      render :json=>@msg
     end
   end
 end

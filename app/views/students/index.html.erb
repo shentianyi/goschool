@@ -18,62 +18,9 @@
       <p>所在高中：七宝中学</p>
       <p>年龄：大于 18岁</p>
     </div>
-    <div class="column">
-      <div class="ui raised segment">
-        <div class="ui red ribbon label">搜索结果: <div class="ui red label">1</div></div>
-        <a><i class="icon up"></i> 根据相关性排序</a>
-        <a><i class="icon up"></i> 根据最新活动排序</a>
-      </div>
-    </div>
-    <ul class="search-result" id="search-result">
-      <!--template-->
-      <li>
-        <table class="ui table segment">
-          <tr>
-            <td class="two wide">
-              <img class="circular ui image mini portrait" src="images/portrait/0.jpg" />
-              <p class="name">王子骁</p>
-            </td>
-            <td class="two wide">
-              <p class="type">潜在客户</p>
-              <p>七宝中学</p>
-              <p>高二</p>
-              <p>17岁</p>
-            </td>
-            <td class="five wide">
-              <div class="ui blue labels small">
-                <a class="ui label">
-                  托福
-                </a>
-                <a class="ui label">
-                  雅思
-                </a>
-                <a class="ui label">
-                  SAT
-                </a>
-              </div>
-              <p class="parent"><span>监护人:</span><span>13901111123(王先生)</span></p>
-              <p class="phone"><span>联系电话:</span><span>13918502286</span></p>
-              <p class="consult-time"><span>上次咨询:</span><span>2013-11-11 16:00</span></p>
-            </td>
-            <td class="two wide">
-              <p class="maybe-know">推荐人</p>
-              <p><span>张三</span></p>
-            </td>
-            <td class="three wide">
-              <p class="recommend">可能认识</p>
-              <p><span>李四</span><span>王八</span><span>白一</span></p>
-            </td>
-            <td class="three wide">
-              <a class="ui mini button teal" href="BACK-student-detail.html">
-                详情
-              </a>
-            </td>
-          </tr>
-        </table>
-      </li>
-      <!--template-->
-    </ul>
+    
+    <%= render partial:'search_results'%>
+
   </div>
 </article>
 
@@ -84,19 +31,19 @@
     <p>新建学生</p>
     <div class="left-part">
       <div class="portrait">
-        <img class="ui circular image " src="images/portrait/1.jpg">
+        <img id="image_url" class="ui circular image " src="/assets/portrait/1.jpg">
       </div>
       <div class="ui left icon input">
-        <input placeholder="姓名..." type="text">
+        <input id="name" placeholder="姓名..." type="text">
         <i class="user icon"></i>
       </div>
-      <div class="sex stop">
+      <div id="gender" class="sex stop">
         <div class="ui radio checkbox">
-          <input name="sex" checked="checked" type="radio">
+          <input name="sex" checked="checked" type="radio" value="1">
           <label>男</label>
         </div>
         <div class="ui radio checkbox">
-          <input name="sex" type="radio">
+          <input name="sex" type="radio" value="0">
           <label>女</label>
         </div>
       </div>
@@ -105,7 +52,7 @@
         <i class="calendar icon"></i>
       </div>
       <div class="ui left icon input">
-        <input placeholder="就读学校..." type="text">
+        <input id="school" placeholder="就读学校..." type="text">
         <i class="building icon"></i>
       </div>
       <div class="ui left icon input calendar">
@@ -115,42 +62,48 @@
     </div>
     <div class="right-part">
       <div class="ui left icon input">
-        <input placeholder="邮件地址..." type="text">
+        <input id="email" placeholder="邮件地址..." type="text">
         <i class="mail outline icon"></i>
       </div>
       <div class="ui left icon input">
-        <input placeholder="联系电话..." type="text">
+        <input id="phone" placeholder="联系电话..." type="text">
         <i class="phone icon"></i>
       </div>
       <div class="ui left icon input">
-        <input placeholder="联系地址..." type="text">
+        <input id="address" placeholder="联系地址..." type="text">
         <i class="home icon"></i>
       </div>
       <div class="ui left icon input">
-        <input placeholder="监护人..." type="text">
+        <input id="guardian" placeholder="监护人..." type="text">
         <i class="male icon"></i>
       </div>
       <div class="ui left icon input">
-        <input placeholder="监护人电话..." type="text">
+        <input id="guardian_phone" placeholder="监护人电话..." type="text">
         <i class="mobile icon"></i>
       </div>
       <div class="ui left icon input specialInput labelForm autoComplete">
-        <ul>
-          <li><input type='text' placeholder="标签..." id="autoC2"/></li>
+        <ul id="tags">
+          <li><input type='text' placeholder="标签..." id="autoC2" autocomplete="tags"/></li>
         </ul>
         <i class="tag icon stop"></i>
       </div>
-      <div class="ui left icon input autoComplete">
-        <input placeholder="推荐人..." id="autoC3" type="text">
+      <div class="ui left icon input autoComplete specialInput labelForm ">
+        <ul id="referrer">
+        <li><input placeholder="推荐人..." id="autoC3" type="text" autocomplete="students"></li>
+        </ul>
         <i class="smile icon"></i>
       </div>
-      <div class="ui checkbox stop">
+      <div id="is_active_account" class="ui checkbox stop">
         <input name="fun" type="checkbox" checked>
         <label>同时开设学生账号</label>
       </div>
-      <div class="ui red button">
+      <div id="add-student" class="ui red button">
         添加
       </div>
     </div>
   </div>
 </section>
+<% content_for :javascript_includes do%>
+    <%= javascript_include_tag "BACK_index.js"%>
+    <%= javascript_include_tag "BACK_student.js"%>
+<%end%>

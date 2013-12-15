@@ -1,27 +1,91 @@
-<h1>Listing schedules</h1>
+<article class="back-index-main" id="back-index-main" name="2column">
+    <header class="back-index-side-header">
+        <a class="ui down button teal mini" href="<%=courses_path%>">
+            <i class="left icon"></i>
+            返回上层
+        </a>
+        <p>安排课程</p>
+    </header>
+    <div class="schedule-calendar">
+        <div class="schedule-calendar-inner">
+            <div id="schedule-here" class="dhx_cal_container" style='width:100%; height:100%;'>
+                <div class="dhx_cal_navline">
+                    <div class="dhx_cal_prev_button">&nbsp;</div>
+                    <div class="dhx_cal_next_button">&nbsp;</div>
+                    <div class="dhx_cal_today_button"></div>
+                    <div class="dhx_cal_date"></div>
+                    <div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
+                    <div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
+                    <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
+                </div>
+                <div class="dhx_cal_header"></div>
+                <div class="dhx_cal_data"></div>
+            </div>
+        </div>
+    </div>
+    <div class="schedule-search ">
+        <div class="ui red labeled icon top right pointing dropdown button select-institution" id="schedule-select-institution">
+             <%=render 'institutions/select'%>
+        </div>
+        <div class="search-block">
+            <div class="ui icon search-input input autoComplete customAutoHeight" autoMaxHeight="210px">
+                <input placeholder="搜索课程安排..." type="text" id="search-courses"  autocomplete="courses,list">
+                <i class="search icon"></i>
+            </div>
+            <div class="search-list" id="search-list">
+                
+            </div>
+        </div>
+        <div class="ui button teal save-schedule" id='send-schedule-button'>发送课表</div>
+    </div>
+</article>
 
-<table>
-  <tr>
-    <th>Start time</th>
-    <th>End time</th>
-    <th>Sub courses</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div id="send-schedule" class="send-schedule">
+  <div class="inner">
+    <i class="remove icon"></i>
+    <p>发送课表</p>
+    <label>快捷发送</label>
+    <div class="send-buttons">
+      <div class="ui animated fade button small twitter">
+        <div class="visible content">给所有人</div>
+        <div class="hidden content">
+          现在发送
+        </div>
+      </div>
+      <div class="ui animated fade button small twitter">
+        <div class="visible content">给所有的老师</div>
+        <div class="hidden content">
+          现在发送
+        </div>
+      </div>
+      <div class="ui animated fade button small twitter">
+        <div class="visible content">给所有的学生</div>
+        <div class="hidden content">
+          现在发送
+        </div>
+      </div>
+    </div>
+    <label>指定条件发送</label>
+    <div class="ui icon input">
+      <input placeholder="按课程..." type="text">
+      <i class="inverted mail icon "></i>
+    </div>
+    <br/>
+    <div class="ui icon input">
+      <input placeholder="按老师..." type="text">
+      <i class="inverted mail icon"></i>
+    </div>
+    <br/>
+    <div class="ui icon input">
+      <input placeholder="按学生..." type="text">
+      <i class="inverted mail icon"></i>
+    </div>
+  </div>
+</div>
 
-<% @schedules.each do |schedule| %>
-  <tr>
-    <td><%= schedule.start_time %></td>
-    <td><%= schedule.end_time %></td>
-    <td><%= schedule.sub_courses %></td>
-    <td><%= link_to 'Show', schedule %></td>
-    <td><%= link_to 'Edit', edit_schedule_path(schedule) %></td>
-    <td><%= link_to 'Destroy', schedule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Schedule', new_schedule_path %>
+<% content_for :javascript_includes do%>
+<%= javascript_include_tag "dhtmlxscheduler.js"%>
+<%= javascript_include_tag "dhtmlxscheduler_quick_info.js"%>
+<%= javascript_include_tag "locale_cn.js"%>
+<%= javascript_include_tag "BACK_course_schedule.js"%>
+<%end%>

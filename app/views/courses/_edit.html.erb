@@ -1,0 +1,215 @@
+<div class="inner">
+     <i class="remove icon"></i>
+     <p>
+          编辑<%= @course.type_display%>信息
+     </p>
+     <div id="new-class" class="tab-block" from="course">
+          <div class="left-part">
+               <div class="ui left icon input">
+                    <input placeholder="<%= @course.type_display%>名称..." type="text" value="<%= @course.name%>" class="update-input" name="name">
+                    <i class="browser icon"></i>
+               </div>
+               <div class="course-desc">
+                    <textarea placeholder="<%= @course.type_display%>描述..." class="update-input" name="description"><%= @course.description%></textarea>
+                    <i class="book icon"></i>
+               </div>
+               <div class="ui left icon input">
+                    <input placeholder="预计课时数..." type="text"  value="<%= @course.lesson%>"  class="update-input" name="lesson"/>
+                    <i class="time icon"></i>
+               </div>
+               <div class="ui left icon input">
+                    <input placeholder="预计报名人数..." type="text"value="<%= @course.expect_number%>" class="update-input" name="expect_number"/>
+                    <i class="users icon"></i>
+               </div>
+               <div class="ui left icon input calendar">
+                    <input placeholder="<%= @course.type_display%>开始时间..." type="text" readonly id="course-begin-date" value="<%= @course.start_date%>"  class="update-input" name="start_date">
+                    <i class="calendar icon"></i>
+               </div>
+               <div class="ui left icon input calendar">
+                    <input placeholder="<%= @course.type_display%>结束时间..." type="text" readonly id="course-end-date"  value="<%= @course.end_date%>"  class="update-input" name="end_date">
+                    <i class="calendar icon"></i>
+               </div>
+          </div>
+          <div class="right-part">
+               <div class="ui left icon input">
+                    <input placeholder="<%= @course.type_display%>代号..." type="text" value="<%= @course.code%>"  class="update-input" name="code">
+                    <i class="globe icon"></i>
+               </div>
+               <div class="ui left icon input specialInput labelForm autoComplete" >
+                    <ul name='label' class="tags-items">
+                         <%@course.tags.each do |tag|%>
+                         <li>
+                              <div class="ui label">
+                                   <%= tag%><i class="delete icon"></i>
+                              </div>
+                         </li>
+                         <%end%>
+                         <li>
+                              <input type='text' placeholder="标签..." id="course-label" autocomplete="tags" class="tag-input-blur"/>
+                         </li>
+                    </ul>
+                    <i class="tag icon stop"></i>
+               </div>
+               <div class="ui buttons choose-teacher-delivery" id="choose-teacher-course-delivery" name="course">
+                    <div class="ui mini button<%= ' teal active' unless @course.has_sub%>" for="total-course-teachers">
+                         以总<%= @course.type_display%>安排老师
+                    </div>
+                    <div class="or"></div>
+                    <div class="ui mini button<%= ' teal active' if @course.has_sub%>" for="sub-course-teachers">
+                         以子<%= @course.type_display%>安排老师
+                    </div>
+               </div>
+               <div class="ui left icon input specialInput labelForm autoComplete total-teachers teachers" id="total-course-teachers" style="<%= 'display:none' if @course.has_sub%>">
+                    <ul>
+                         <%@course.teacher_details.each do |teacher|%>
+                         <li total_sub_couse_id="<%= teacher.sub_course_id%>">
+                              <div class="ui label" id="<%= teacher.teacher_course_id%>">
+                                   <%= teacher.name%><i class="delete icon"></i>
+                              </div>
+                         </li>
+                         <%end unless @course.has_sub%>
+                         <li>
+                              <input type='text' placeholder="老师..." id="course-teachers" autocomplete="teachers"/>
+                         </li>
+                    </ul>
+                    <i class="male icon"></i>
+               </div>
+               <div class="sub-course-block teachers" id="sub-course-teachers" style="<%= 'display:block' if @course.has_sub%>">
+                    <div class="sub-course-block-item">
+                         <%@course.sub_courses.each do |sub_course|%>
+                         <div class="ui input sub-course-name">
+                              <input placeholder="子<%= @course.type_display%>名..." type="text" value="<%= sub_course.name%>">
+                         </div>
+                         <div class="ui input specialInput labelForm autoComplete total-teachers" >
+                              <ul>
+                                   <%sub_course.teacher_details.each do |teacher|%>
+                                   <li>
+                                        <div class="ui label" type="" id="<%= teacher.teacher_course_id%>">
+                                             <%= teacher.name%><i class="delete icon"></i>
+                                        </div>
+                                   </li>
+                                   <%end%>
+                                   <li>
+                                        <input type='text' placeholder="老师..." id="sub-teacher-course-1" autocomplete="teachers" />
+                                   </li>
+                              </ul>
+                         </div>
+                         <i class="icon collapse" id="<%= sub_course.id%>"></i>
+                         <%end%>
+                    </div>
+                    <i class="icon expand" id="add-sub-course"></i>
+               </div>
+          </div>
+     </div>
+     <div class="ui red button">
+          完 成
+     </div>
+</div>
+<script type="text/javascript">
+     $(function() {
+          $("#course-begin-date").datepicker({
+               showOtherMonths : true,
+               selectOtherMonths : true,
+               changeMonth : true,
+               changeYear : true,
+               dateFormat : 'yy-mm-dd',
+               onClose : function(selectedDate) {
+                    $("#course-end-date").datepicker("option", "minDate", selectedDate);
+               }
+          });
+          $("#course-end-date").datepicker({
+               showOtherMonths : true,
+               selectOtherMonths : true,
+               changeMonth : true,
+               changeYear : true,
+               dateFormat : 'yy-mm-dd',
+               onClose : function(selectedDate) {
+                    $("#course-begin-date").datepicker("option", "maxDate", selectedDate);
+               }
+          });
+          $("body").on("click", "#add-sub-course", function() {
+               var data = {
+                    counts : {
+                         count : BACKCOURSE.sub_teacher.count
+                    }
+               };
+               var render = Mustache.render(BACKCOURSE.sub_teacher.class.template, data);
+               $(this).before(render);
+               BACKCOURSE.sub_teacher.count++;
+               $(".labelForm").each(function() {
+                    var $input = $(this).find("input");
+                    var max_width = parseInt($(this).css("width")) * 0.45;
+                    $input.css("width", max_width).css("maxWidth", "999em");
+               });
+          });
+          $("body").on("keyup", "input[name='expect_number'],input[name='lesson']", function(event) {
+               var obj = adapt_event(event).target;
+               integerOnly(obj)
+          });
+          $("body").on("click", "#choose-teacher-delivery div,#choose-teacher-course-delivery div", function() {
+               if(!$(this).hasClass('active') && !$(this).hasClass('or')) {
+                    $(this).siblings().removeClass("teal active");
+                    $(this).addClass("teal active");
+                    var id = $(this).attr("for");
+                    if($(this).parent().attr("name") == "class") {
+                         $("#choose-teacher-delivery").nextAll().css("display", "none");
+                    } else {
+                         $("#choose-teacher-course-delivery").nextAll().css("display", "none");
+                    }
+                    $("#" + id).css("display", "block");
+               }
+          });
+          $(".update-input").change(function() {
+               var data = {
+                    course : {}
+               };
+               data['course'][$(this).attr('name')] = $(this).val();
+               course_manager.update($("#course-detail-info").attr('course'), data);
+          });
+
+          $(".tag-input-blur").blur(function() {
+               var data = {
+                    course : {}
+               };
+               var tags = []
+               $.each($('.tags-items>li>div'), function() {
+                    tags.push($.trim($(this).text()));
+               });
+               data['course']['tags'] = tags;
+               course_manager.update($("#course-detail-info").attr('course'), data);
+          });
+
+          $("body").on("click_add", "#autoComplete-call li", function(event, msg) {
+               if(msg.id) {
+                    var params = {
+                         id : $("#course-detail-info").attr('course'),
+                         teacher_id : msg.id
+                    };
+                    course_manager.add_teacher(params, function(data) {
+                         msg.result = data.result;
+                         if(data.result) {
+                              msg.callback = function(label) {
+                                   label.data.id=data.content;
+                              }
+                         } else {
+                              MessageBox(data.content, "top", "warning");
+                              stopEvent(event);
+                         }
+                    },false);
+               }
+          });
+
+          $("body").on("click_remove", ".teachers .delete.icon", function(event, msg) {
+               var item = $(this);
+               teacher_course_manager.destroy(item.parent().attr('id'), function(data) {
+                    msg.result = data.result;
+                    if(data.result) {
+                         item.parents("li").eq(0).remove();
+                    } else {
+                         MessageBox(data.content, "top", "warning");
+                         stopEvent(event);
+                    }
+               }, false);
+          });
+     }); 
+</script>

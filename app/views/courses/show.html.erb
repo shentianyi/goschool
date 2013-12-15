@@ -1,0 +1,263 @@
+<article class="back-index-main" id="back-index-main" name="2column">
+    <header class="back-index-side-header">
+        <a class="ui down button teal mini" href="<%=courses_path%>">
+            <i class="left icon"></i>
+            返回上层
+        </a>
+        <p>课程详细信息</p>
+    </header>
+    <div class="detail-navigation" id="detail-navigation" origin_top=56>
+        <div class="ui vertical pointing menu" id="detail-navigation-menu">
+            <div class="header item">
+                内容菜单
+            </div>
+            <a class="item active" href="#student">
+                <i class="user icon"></i> 已报班学生
+            </a>
+            <a class="item" href="#teacher">
+                <i class="male icon"></i> 授课老师
+            </a>
+            <a class="item" href="#recommend">
+                <i class="heart icon"></i> 推荐报班
+            </a>
+        </div>
+    </div>
+    <div class="detail-content" id="detail-content">
+         <%=render 'detail'%>
+        <div class="ui fluid accordion" id="accordion" name="course">
+
+            <!--partial-->
+            <div class="item student" id="student">
+                <div class="title  <%= 'active' if @partial=='student' %>">
+                    <i class="dropdown icon"></i>已报班学生
+                </div>
+                <div class="active content">
+                    <%=render 'student' if @partial=='student'%>
+                </div>
+                <div class="ui mini button" id="course-detail-new-student" for="detail-add" type="student"><i class="browser icon"></i> 报班新生</div>
+            </div>
+            <!--partial-->
+
+            <!--partial-->
+            <div class="item teacher" id="teacher">
+                <div class="title <%= 'active' if @partial=='teacher'%>">
+                    <i class="dropdown icon"></i>授课老师
+                </div>
+                <div class="content">
+                   <%=render 'teacher' if @partial=='teacher'%>
+                </div>
+            </div>
+            <!--partial-->
+
+            <!--template-->
+            <div class="item recommend" id="recommend">
+                <div class="title  <%= 'active' if @partial=='recommend'%>">
+                    <i class="dropdown icon"></i>推荐报班
+                </div>
+                <div class="content">
+                   <%=render 'recommend' if @partial=='recommend'%>
+                </div>
+            </div>
+            <!--template-->
+
+        </div>
+    </div>
+</article>
+
+<footer class="control-log" id="control-log" state="close">
+    <i class="icon double angle right"></i>
+    操作记录
+</footer>
+
+<footer class="back-index-log" id="back-index-log" >
+    <ul>
+       <li>2013-10-13 13:00 开始课程 1</li>
+       <li>2013-10-13 12:00 开始课程 21</li>
+    </ul>
+</footer>
+
+<!--new partial-->
+<!--报班-->
+<section class="detail-add" type="student">
+    <div class="inner">
+        <i class="remove icon detail-add-close"></i>
+        <p>为新生报班</p>
+        <div class="ui mini left icon input autoComplete">
+            <input placeholder="学生姓名..." type="text" autocomplete="students" id="join-for-student">
+            <i class="search icon"></i>
+        </div>
+      <br />
+        <div class="ui button teal ok" id="join-student">为他/她报班</div>
+        <a class="add-item" type="student">没有找到他/她？<span>新建学生</span></a>
+    </div>
+</section>
+
+
+<!--new partial-->
+<!--为课程添加老师-->
+<section class="detail-add" type="teacher">
+    <div class="inner">
+        <i class="remove icon detail-add-close"></i>
+        <p>添加老师</p>
+        <div class="ui mini icon input autoComplete">
+            <input placeholder="老师姓名..." type="text" autocomplete="teachers">
+            <i class="search icon"></i>
+        </div>
+        <div class="table-wrap">
+            <table class="ui celled table small segment">
+                <thead>
+                <tr>
+                    <th class="wide four">名字</th>
+                    <th class="wide six">所教课程</th>
+                    <th class="wide six">选择</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="teacher-id">
+                    <td>Mary</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                    <td><div class="ui checkbox" name="choose">
+                        <input type="checkbox" ><label>选择该老师</label>
+                    </div></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ui button teal ok" for="teacher">完成添加</div>
+        <a class="add-item" type="teacher">没有找到他/她？<span>新建老师</span></a>
+    </div>
+</section>
+
+<!--old partial-->
+<!--编辑课程信息-->
+<section class="back-index-add" name="course" id="course-edit-section">
+    
+</section>
+
+<!--old partial-->
+<!--add student-->
+<section class="back-index-add" name="student">
+    <div class="inner">
+        <i class="remove icon"></i>
+        <p>新建学生</p>
+        <div class="left-part">
+            <div class="portrait">
+                <img class="ui circular image " src="images/portrait/1.jpg">
+            </div>
+            <div class="ui left icon input">
+                <input placeholder="姓名..." type="text">
+                <i class="user icon"></i>
+            </div>
+            <div class="sex stop">
+                <div class="ui radio checkbox">
+                    <input name="sex" checked="checked" type="radio">
+                    <label>男</label>
+                </div>
+                <div class="ui radio checkbox">
+                    <input name="sex" type="radio">
+                    <label>女</label>
+                </div>
+            </div>
+            <div class="ui left icon input calendar">
+                <input placeholder="出生年月..." type="text" readonly id="born-date">
+                <i class="calendar icon"></i>
+            </div>
+            <div class="ui left icon input">
+                <input placeholder="就读学校..." type="text">
+                <i class="building icon"></i>
+            </div>
+            <div class="ui left icon input calendar">
+                <input placeholder="毕业年限..." type="text" readonly id="graduation-date">
+                <i class="empty bookmark icon"></i>
+            </div>
+        </div>
+        <div class="right-part">
+            <div class="ui left icon input">
+                <input placeholder="邮件地址..." type="text">
+                <i class="mail outline icon"></i>
+            </div>
+            <div class="ui left icon input">
+                <input placeholder="联系电话..." type="text">
+                <i class="phone icon"></i>
+            </div>
+            <div class="ui left icon input">
+                <input placeholder="联系地址..." type="text">
+                <i class="home icon"></i>
+            </div>
+            <div class="ui left icon input">
+                <input placeholder="监护人..." type="text">
+                <i class="male icon"></i>
+            </div>
+            <div class="ui left icon input">
+                <input placeholder="监护人电话..." type="text">
+                <i class="mobile icon"></i>
+            </div>
+            <div class="ui left icon input specialInput labelForm autoComplete">
+                <ul>
+                    <li><input type='text' placeholder="标签..." id="autoC2" autocomplete='tags'/></li>
+                </ul>
+                <i class="tag icon stop"></i>
+            </div>
+            <div class="ui left icon input autoComplete">
+                <input placeholder="推荐人..." id="autoC3" type="text" autocomplete='students'>
+                <i class="smile icon"></i>
+            </div>
+            <div class="ui checkbox stop">
+                <input name="fun" type="checkbox" checked>
+                <label>同时开设学生账号</label>
+            </div>
+            <div class="ui red button">
+                添加
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--old partial-->
+<!--新建老师-->
+<section class="back-index-add" name="teacher">
+    <div class="inner">
+        <i class="remove icon"></i>
+        <p>新建老师</p>
+        <div class='whole-block'>
+            <div class="ui left icon input">
+                <input placeholder="姓名..." type="text">
+                <i class="user icon"></i>
+            </div>
+            <div class="sex">
+                <div class="ui radio checkbox">
+                    <input name="sex" checked="checked" type="radio">
+                    <label>男</label>
+                </div>
+                <div class="ui radio checkbox">
+                    <input name="sex" type="radio">
+                    <label>女</label>
+                </div>
+            </div>
+            <div class="ui left icon input">
+                <input placeholder="联系电话..." type="text">
+                <i class="phone icon"></i>
+            </div>
+            <div class="ui left icon input">
+                <input placeholder="邮件地址..." type="text">
+                <i class="mail outline icon"></i>
+            </div>
+            <div class="ui red button">
+                添加
+            </div>
+        </div>
+    </div>
+</section>
+
+<%= render partial:'shares/log_footer'%>
+<% content_for :javascript_includes do%>
+<%= javascript_include_tag "base_manage_source.js"%>
+<%= javascript_include_tag "BACK_index.js"%>
+<%= javascript_include_tag "BACK_detail.js"%>
+<%= javascript_include_tag "BACK_course_detail.js"%>
+<%= javascript_include_tag "BACK_course.js"%>
+<%= javascript_include_tag "BACK_course_edit.js"%>
+<%= javascript_include_tag "BACK_student.js"%>
+<%end%>

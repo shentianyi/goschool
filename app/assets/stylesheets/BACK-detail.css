@@ -122,8 +122,8 @@
 }
 .info .detail-button{
     float:right;
-    margin-top:-33px;
-    margin-left:8px;
+    margin-top:-33px !important;
+    margin-left:8px !important;
     font-size:14px;
 }
 /********************  accordion*/

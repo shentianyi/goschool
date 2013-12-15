@@ -14,10 +14,7 @@
 //= require jquery-datepicker
 //= require mustache
 //= require semantic.min
-//= require locale_cn
 //= require Chart.min
-//= require dhtmlxscheduler
-//= require dhtmlxscheduler_quick_info
 //= require wayne-base
 
 

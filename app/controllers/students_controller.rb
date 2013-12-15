@@ -4,8 +4,10 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
+    @active_left_aside='students'
     @students = Student.all
-
+    @student_presenters = StudentPresenter.init_presenters(@students)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @students }
@@ -16,40 +18,29 @@ class StudentsController < ApplicationController
   # GET /students/1.json
   def show
     @student = Student.find(params[:id])
-    @student_presenter=StudentPresenter.new(@student)
+    @presenter=StudentPresenter.new(@student)
     
     case params[:part]
-    when 'courses'
-      courses()
-    when 'achievements'
-      achievements()
-    when 'relation'
-      relation()
-    when 'consultingrecord'
-      consultation()
+    when 'class-and-service'
+      courses(@student)
+    when 'achieve'
+      achievements(@student)
+    when 'friendship'
+      relation(@student)
+    when 'consult-record'
+      consultation(@student)
     end
-
-    respond_to do |format|
-      format.html # show.html.erb 
-      format.json { render json: @student }
-    end
-  end
-
-  def courses()
-    @courses = StudentCoursePresenter.new(@student.course_student)
-  end
-
-  def achievements()
-    #@achievements = StudentAchievementsPresenter.new(@student.achievements)
-  end
-
-  def relation()
     
+    @partial ||= params[:part]
+    render :partial=>@partial if params[:ajax]
+
+    #respond_to do |formxat|
+    #  format.html # show.html.erb 
+    #  format.json { render json: @student }
+    #end
   end
 
-  def consultation()
-    @consultations = StudentConsultingrecordPresenter.new(@studnet.consultations)
-  end
+  
 
   # GET /students/new
   # GET /students/new.json
@@ -58,13 +49,14 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @student }
+       format.json { render json: @student }
     end
   end
 
   # GET /students/1/edit
   def edit
     @student = Student.find(params[:id])
+    render partial:'edit'
   end
 
   # POST /students
@@ -74,9 +66,8 @@ class StudentsController < ApplicationController
     msg.result = false
     begin 
       ActiveRecord::Base.transaction do
-        tags = params[:student].slice(:tags).strip
         @student = Student.new(params[:student].except(:tags))
-        @student.tags = tags
+        @student.tags = params[:student].slice(:tags)[:tags] if params[:student].has_key?(:tags)
         @default_pwd = current_tenant.setting.default_pwd
         @logininfo = Logininfo.new(:email=>params[:student][:email],:password=>@default_pwd,:password_confirmation=>@default_pwd)
         @new_role = LogininfoRole.new(:role_id=>'300')
@@ -88,8 +79,9 @@ class StudentsController < ApplicationController
           @logininfo.status = UserStatus::LOCKED
         end
         @logininfo.save!
-        @student.logininfo = @loginnfo
+        @student.logininfo = @logininfo
         @student.tenant = current_tenant
+        puts @student.as_json
         @student.save!
         msg.result = true
       end
@@ -137,19 +129,14 @@ class StudentsController < ApplicationController
   end
 
   # List Search Result
-  def list_search
+  def fast_search
     results = []
-    results = Redis::Search.complete('Student',params[:query],:conditions =>{:tenant_id=>current_tenant.id})
+    results = Redis::Search.complete('Student',params[:q],:conditions =>{:tenant_id=>current_tenant.id})
     students = []
     results.slice(0,10).each do |student|
-      students<<{:name=>student['name'],:school=>student['school'],:address=>student['address'],:guardian=>student['guardian']}
+      students<<{:name=>student['title'],:school=>student['school'],:info=>student['email'],:guardian=>student['guardian'],:id=>student['id'],:logininfo_id=>student['logininfo_id']}
     end
     render :json=>students
-  end
-
-  #get student
-  def get_student
-    @student=Student.find_by_id(params[:id])
   end
   
   #nil msg
@@ -160,29 +147,30 @@ class StudentsController < ApplicationController
     end
   end
 
-  #create consulting record
-  def add_consultation
-    msg = Msg.new
-    msg.result = false
-    @student = Student.find_by_id(params[:id])
-    if @student
-      @consultation = Consultation.new(params[:consultation])
-      @consultation.logininfo = current_user
-      student.consultations<<@consultation
-      student.save!
-      msg.result = true
-    else
-      msg.content = '学生不存在'
-    end
+  private
+
+  def consultation(student)
+    @consultations = StudentConsultationPresenter.init_presenters(student.consultations)
   end
 
-  #search
-  def search
-    msg = Msg.new
-    msg.result = false
-    @results = SearchEngine.search(params[:query_string])
-    msg.result = false
-    msg.content = @results
-    render :json=>msg
+  def courses(student)
+    
+  end
+  
+  def achievements(student)
+    
+  end
+
+  def relation(student)
+    if student.referrer_id
+      @referrer = Logininfo.find(student.referrer_id).student
+    end
+    @relations = []
+    Recommendation.new.get_potential_relation(student.tenant_id,student.id).each do |relation|
+      s = Student.find_by_id(relation['id'])
+      if s
+        @relations<<s
+      end
+    end
   end
 end

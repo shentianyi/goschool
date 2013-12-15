@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131210042900) do
+ActiveRecord::Schema.define(:version => 20131210171759) do
 
   create_table "achievements", :force => true do |t|
     t.integer  "type"
@@ -222,6 +222,7 @@ ActiveRecord::Schema.define(:version => 20131210042900) do
     t.integer  "status"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.string   "progress"
   end
 
   add_index "student_courses", ["course_id"], :name => "index_student_courses_on_course_id"

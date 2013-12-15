@@ -6,23 +6,23 @@
 /*#4092CC*/
 @font-face {
     font-family:'maven';
-    src:url("../fonts/mavenprolight300.ttf"),
-    url("../fonts/mavenprolight300.eot");
-    /*src:url("/assets/mavenprolight300.ttf"),*/
-    /*url("/assets/mavenprolight300.eot");*/
+    /*src:url("../fonts/mavenprolight300.ttf"),*/
+    /*url("../fonts/mavenprolight300.eot");*/
+    src:url("/assets/mavenprolight300.ttf"),
+    url("/assets/mavenprolight300.eot");
 }
 @font-face {
     font-family: 'Icons';
-    src: url(../fonts/icons.eot);
-    src: url(../fonts/icons.eot?#iefix) format('embedded-opentype'),
-    url(../fonts/icons.woff) format('woff'),
-    url(../fonts/icons.ttf) format('truetype'),
-    url(../fonts/icons.svg#icons) format('svg');
-    /*src: url(/assets/icons.eot);*/
-    /*src: url(/assets/icons.eot?#iefix) format('embedded-opentype'),*/
-    /*url(/assets/icons.woff) format('woff'),*/
-    /*url(/assets/icons.ttf) format('truetype'),*/
-    /*url(/assets/icons.svg#icons) format('svg');*/
+    /*src: url(../fonts/icons.eot);*/
+    /*src: url(../fonts/icons.eot?#iefix) format('embedded-opentype'),*/
+    /*url(../fonts/icons.woff) format('woff'),*/
+    /*url(../fonts/icons.ttf) format('truetype'),*/
+    /*url(../fonts/icons.svg#icons) format('svg');*/
+    src: url(/assets/icons.eot);
+    src: url(/assets/icons.eot?#iefix) format('embedded-opentype'),
+    url(/assets/icons.woff) format('woff'),
+    url(/assets/icons.ttf) format('truetype'),
+    url(/assets/icons.svg#icons) format('svg');
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -62,6 +62,18 @@ a{
 p{
     color:#333;
     margin:5px 0;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:  black;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:  black;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:  black;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:   black;
 }
 select{
     width:120px;

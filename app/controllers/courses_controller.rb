@@ -1,39 +1,41 @@
 #encoding: utf-8
 class CoursesController < ApplicationController
-  before_filter :init_message ,:only=>[:edit,:create,:update,:destroy]
-  before_filter :get_course,:only=>[:show,:update,:edit,:destroy]
-  before_filter :render_nil_msg , :only=>[:edit,:update,:destroy]
+  before_filter :init_message ,:only=>[:edit,:create,:update,:destroy,:subs,:add_teacher]
+  before_filter :get_course,:only=>[:edit,:show,:update,:edit,:destroy,:subs,:add_teacher]
+  before_filter :render_nil_msg , :only=>[:edit,:update,:destroy,:subs,:add_teacher]
+  before_filter :render_404,:only=>[:edit,:show]
   
   def index
     @active_left_aside='courses'
     @institutions=current_tenant.institutions
+    @courses=CoursePresenter.init_presenters(Course.joins(:institution).select('courses.*,institutions.name as institution_name').all)
   end
-
-  def show
-    @course_presenter=CoursePresenter.new(@course)
+   
+  def show 
+    @active_left_aside='courses'
+    @course=CoursePresenter.new(@course)
     case params[:part]
-     when 'teachers'
+    when 'teacher'
        teachers()
-     when 'recommendations'
+    when 'recommend'
 	 # recommendations()
     else
 	students()
-	@partal='students'
+	@partial='student'
     end	
     @partial||=params[:part]
-    render :partial=>@partial if params[:ajax] 
+    render partial:@partial if params[:ajax] 
   end
 
   def edit
-    @msg.result=true
-    @msg.object={:course=>@course,:sub_courses=>@course.sub_courses}
-    render :json=>@msg
+    @course=CoursePresenter.new(@course)
+    render partial:'edit'
   end
 
   def create
     @course = current_tenant.courses.build(params[:course].except(:subs).except(:tags).except(:teachers))
     @course.subs=params[:course].slice(:subs)[:subs].values if params[:course].has_key?(:subs)
-    @course.tags=params[:course].slice(:tags)[:tags].values if params[:course].has_key?(:tags)
+    @course.tags=params[:course].slice(:tags)[:tags] if params[:course].has_key?(:tags)
     @course.teachs=params[:course].slice(:teachers)[:teachers].values if params[:course].has_key?(:teachers)
       
     @course.subs.each do |sub|
@@ -50,9 +52,10 @@ class CoursesController < ApplicationController
     render :json=>@msg
   end
 
-  def update
-    @course.tags=params[:course].slice(:tags).strip
-    unless @msg.result=@course.update_attributes(params[:course].strip)
+  def update 
+    @course.tags=params[:course].slice(:tags)[:tags] if params[:course].has_key?(:tags)
+    @course.add_tags
+    unless @msg.result=@course.update_attributes(params[:course].except(:tags))
     @msg.content=@course.errors.messages
     end
     render :json=>@msg
@@ -77,11 +80,42 @@ class CoursesController < ApplicationController
     l[1]=total-l[0]
     
     (c[0].slice(0,l[0])+c[1].slice(0,l[1])).each do |item|
-      items<<{:name=>item['title'],:content=>item['name'],:type=>item['type'],:id=>item['id']} if(item['is_default']=='false' || item['is_default'].nil?)
+      h={name:item['title'],type:item['type'],id:item['id']} 
+      h['name']=item['title']+'-'+item['name'] if !item['is_default'].nil? && !item['is_default']
+      items<<h if item['is_default'].nil? || !item['is_default']
     end
     render :json=>items
   end
+  
+  
+  def fast_search
+    items=[]
+     Redis::Search.complete('Course', params[:q], :conditions => {:tenant_id => current_tenant.id,:institution_id=>params[:institution_id]}).each do |item|
+       items<<{id:item['id'],name:item['title']}
+     end
+     render json:items
+  end
+  
+  def subs
+    if @course.has_sub
+       @subs=@course.sub_courses.where(is_default:false).all
+       @msg.content={sub_courses:@subs.map{|s| {id:s.id,name:s.name}},teachers:@subs.first.teacher_names}  
+    else
+      @msg.content={sub_courses:[],teachers:@course.teacher_names}  
+    end
+    @msg.result=true
+    render json:@msg
+  end
 
+ def add_teacher
+   unless @course.has_sub
+      @teacher_course = TeacherCourse.new(sub_course_id:@course.sub_courses.first.id,user_id:params[:teacher_id])
+   @msg.content=(@msg.result=@teacher_course.save) ? @teacher_course.id :  @teacher_course.errors.messages
+   else
+     @msg.content='课程包含子课程，请先删除子课程'
+   end
+   render :json=>@msg
+ end
   private
 
   def teachers
@@ -89,11 +123,11 @@ class CoursesController < ApplicationController
   end
   
   def students
-    @teachers=CourseStudentPresenter.init_presenters(@course.course_students)
+    @students=CourseStudentPresenter.init_presenters(@course.course_students)
   end
 
   def get_course
-    @course=Course.find_by_id(params[:id])
+    @course=Course.joins(:institution).where(id:params[:id]).select('courses.*,institutions.name as institution_name').first
   end
 
   def render_nil_msg
@@ -102,4 +136,11 @@ class CoursesController < ApplicationController
       render :json=>msg
     end
   end
+  def render_404
+    unless @course
+      error_page_404
+    end
+  end
+  
+  
 end

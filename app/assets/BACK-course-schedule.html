@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title></title>
     <link rel="stylesheet" href="stylesheets/semantic.css" type="text/css" />
-    <link rel="stylesheet" href="stylesheets/base.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/base_wayne.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/BACK-index.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/BACK-student-index.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/BACK-course-index.css" type="text/css" />
@@ -81,7 +81,7 @@
         </div>
     </div>
     <div class="schedule-search ">
-        <div class="ui red labeled icon top right pointing dropdown button" id="schedule-select-institution">
+        <div class="ui red labeled icon top right pointing dropdown button select-institution" id="schedule-select-institution">
             <i class="sitemap icon"></i>
             <span class="text">闵行漕河泾学区1</span>
             <div class="menu">
@@ -94,7 +94,7 @@
         </div>
         <div class="search-block">
             <div class="ui icon search-input input autoComplete customAutoHeight" autoMaxHeight="210px">
-                <input placeholder="在此搜索课程..." type="text" id="autoC1">
+                <input placeholder="在此搜索课程..." type="text" id="search-courses" autocomplete="courses,list"/>
                 <i class="search icon"></i>
             </div>
             <div class="search-list" id="search-list">
@@ -104,41 +104,93 @@
                     <li id="1">
                         <span>2013-10-01 18:00-20:00</span>
                         <span>May</span>
+
+
                         <i class="trash icon" affect="1"></i>
+                        <span>口语强化</span>
                     </li>
                     <li id="2">
                         <span>2013-10-02 18:00-20:00</span>
                         <span>May</span>
+
+
                         <i class="trash icon" affect="2"></i>
+                        <span>听力</span>
                     </li>
                     <li id="3">
                         <span>2013-10-12 18:00-20:00</span>
                         <span>May</span>
+
+
                         <i class="trash icon" affect="3"></i>
+                        <span></span>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="ui button teal save-schedule">发送课表</div>
+        <div class="ui button teal save-schedule" id='send-schedule-button'>发送课表</div>
     </div>
 </article>
 <!--list-->
 
+<div id="send-schedule" class="send-schedule">
+    <div class="inner">
+        <i class="remove icon"></i>
+        <p>发送课表</p>
+        <label>快捷发送</label>
+        <div class="send-buttons">
+            <div class="ui animated fade button small twitter">
+                <div class="visible content">给所有人</div>
+                <div class="hidden content">
+                    现在发送
+                </div>
+            </div>
+            <div class="ui animated fade button small twitter">
+                <div class="visible content">给所有的老师</div>
+                <div class="hidden content">
+                    现在发送
+                </div>
+            </div>
+            <div class="ui animated fade button small twitter">
+                <div class="visible content">给所有的学生</div>
+                <div class="hidden content">
+                    现在发送
+                </div>
+            </div>
+        </div>
+        <label>指定条件发送</label>
+        <div class="ui icon input">
+            <input placeholder="按课程..." type="text">
+            <i class="inverted mail icon "></i>
+        </div>
+        <br/>
+        <div class="ui icon input">
+            <input placeholder="按老师..." type="text">
+            <i class="inverted mail icon"></i>
+        </div>
+        <br/>
+        <div class="ui icon input">
+            <input placeholder="按学生..." type="text">
+            <i class="inverted mail icon"></i>
+        </div>
+    </div>
+</div>
+
 <div id="autoComplete-call" class="autoComplete-call">
     <ul>
-        <li>
+        <li id="v1">
             <p>托福夏季班</p>
             <p>www.sina.com</p>
         </li>
-        <li>
+        <li id="v2">
             <p>2</p>
             <p>托福的夏季版</p>
         </li>
-        <li>
+        <li id="v3">
             <p>3</p>
             <p>托福的夏季版</p>
         </li>
-        <li>
+        <li id="v4">
             <p>4</p>
             <p>托福的夏季版</p>
         </li>
@@ -150,10 +202,7 @@
 <script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="javascripts/jquery-datepicker.js"></script>
 <script type='text/javascript' src="javascripts/semantic.min.js" ></script>
-<script type='text/javascript' src="javascripts/BACK_index.js" ></script>
 <script type='text/javascript' src="javascripts/wayne-base.js" ></script>
-<script type='text/javascript' src="javascripts/BACK_rightList.js" ></script>
-<script type='text/javascript' src="javascripts/BACK_course.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_course_schedule.js" ></script>
 <script type='text/javascript' src="javascripts/mustache.js" ></script>
 <script type='text/javascript' src="javascripts/dhtmlxscheduler.js" ></script>

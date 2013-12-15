@@ -43,9 +43,9 @@
     margin-right:6px;
 }
 .back-index-main > .search-list > .search-result[name="course"] > li table tr:nth-child(2) td:first-of-type{
-    width:280px;
-    min-width:280px;
-    max-width:280px;
+    /*width:280px;*/
+    /*min-width:280px;*/
+    /*max-width:280px;*/
 }
 .back-index-main > .search-list > .search-result[name="course"] > li table tr:nth-child(2n){
     background-color:white;
@@ -95,10 +95,11 @@
 .back-index-add[name='course']>.inner .right-part{
     float:left;
     width:50%;
-    height:410px;
-    margin-top:50px;
+    height:420px;
+    margin-top:40px;
     overflow-y:auto;
     position:relative;
+    border-bottom:1px solid rgba(0,0,0,0.1);
 }
 .back-index-add[name='course']>.inner .left-part>div.input,
 .back-index-add[name='course']>.inner .right-part>div.input{
@@ -113,40 +114,43 @@
     left:36px;
     top:19px;
 }
-.back-index-add[name="course"]>.inner .left-part  .ui.selection.dropdown{
+.back-index-add[name="course"]>.inner .left-part  .ui.dropdown{
     top:auto;
-    width:249px;
+    width:300px;
     margin:5px 0px 6px 25px;
-    padding:12px 10px 6px 39px;
+    padding:12px 10px 11px 39px;
     box-shadow:0 0 0 0 rgba(0, 0, 0, 0.3) inset;
     -moz-box-shadow:0 0 0 0 rgba(0, 0, 0, 0.3) inset;
     -webkit-box-shadow:0 0 0 0 rgba(0, 0, 0, 0.3) inset;
     border:1px solid rgba(0, 0, 0, 0.15);
     font-size:0.875em;
 }
-.back-index-add[name="course"]>.inner .left-part  .ui.selection.dropdown:hover{
+.back-index-add[name="course"]>.inner .left-part  .ui.dropdown:hover{
     box-shadow:none;
     -moz-box-shadow:none;
     -webkit-box-shadow:none;
 }
-.back-index-add[name="course"]>.inner .left-part  .ui.selection.dropdown>.dropdown{
+.back-index-add[name="course"]>.inner .left-part  .ui.dropdown>.dropdown{
     position:absolute;
     right:11px;
 }
-.back-index-add[name="course"]>.inner .left-part  .ui.selection.dropdown .menu{
+.back-index-add[name="course"]>.inner .left-part  .ui.dropdown .menu{
     max-width:100%;
     width:100%;
     max-height:198px;
     overflow-y:auto;
 }
-.back-index-add[name="course"]>.inner .left-part  .ui.selection.dropdown .text
+.back-index-add[name="course"]>.inner .left-part  .ui.dropdown .text
 {
     max-width:94%;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
 }
-.back-index-add[name="course"]>.inner .left-part  .ui.selection.dropdown .item{
+.back-index-add[name="course"]>.inner .left-part  .ui.dropdown i{
+    padding-top:12px;
+}
+.back-index-add[name="course"]>.inner .left-part  .ui.dropdown .item{
     max-width:100%;
     word-break:break-all;
     word-wrap:break-word;
@@ -248,7 +252,7 @@
     font-size:29px;
     color:#63A69F;
     position:absolute;
-    left:299px;
+    left:298px;
     margin-top:10px;
     cursor:pointer
 }

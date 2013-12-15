@@ -3,7 +3,7 @@ class StudentCourse < ActiveRecord::Base
   belongs_to :student
   belongs_to :course
   belongs_to :tenant
-  attr_accessible :paid, :status
+  attr_accessible :paid, :status,:progress
   attr_accessible :student_id,:course_id
   validate :validate_save
   acts_as_tenant(:tenant)

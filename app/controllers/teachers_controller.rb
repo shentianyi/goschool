@@ -1,5 +1,6 @@
 #encoding: utf-8
 class TeachersController < ApplicationController
+  skip_load_and_authorize_resource
   # teacher index
   def index
     # teacher=current_user.user -- at last use this

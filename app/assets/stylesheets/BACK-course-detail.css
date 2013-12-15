@@ -60,3 +60,14 @@
 .recommend .recommend+p>span:hover{
     color:#855520;
 }
+/*报班弹出来的界面*/
+.detail-add[type="student"]> .inner > .input{
+    margin-top:160px;
+}
+.detail-add[type="student"]> .inner > a{
+    margin-top:54px;
+}
+.detail-add[type="student"]> .inner > .button.ok{
+    margin-right:140px;
+    margin-top:30px;
+}

@@ -1,0 +1,15 @@
+<%if @course=@schedules.first%>
+<p class="search-class-name">
+     <span>课程：</span><span><%= @course.parent_name%></span>
+</p>
+<ul class="search-class-schedule">
+     <%@schedules.each do |schedule|%>
+          <li id="<%=schedule.id%>">
+          <span><%=schedule.time_string%></span>
+          <span><%=schedule.teacher_names_string%></span>
+           <span><%=schedule.name%></span>
+          <i class="trash icon" affect="<%=schedule.id%>"></i>
+     </li>
+     <%end%>
+</ul>
+<%end%>

@@ -1,0 +1,67 @@
+<div class="column">
+  <div class="ui raised segment">
+    <div class="ui red ribbon label">搜索结果: <div class="ui red label">1</div></div>
+    <a><i class="icon up"></i> 根据相关性排序</a>
+    <a><i class="icon up"></i> 根据最新活动排序</a>
+  </div>
+</div>
+<ul class="search-result" id="search-result">
+  <!--template-->
+
+  <% @student_presenters.each do |presenter|%>
+  <li>
+    <table class="ui table segment">
+      <tr>
+	<td class="two wide">
+	  <img class="circular ui image mini portrait" src="<%= presenter.student.image_url %>"/>
+	  <p class="name"><%= presenter.name %></p>
+	</td>
+	<td class="two wide">
+	  <p class="type"><%= presenter.status_%></p>
+	  <p><%= presenter.school %></p>
+	  <p><%= presenter.age_%></p>
+	</td>
+	<td class="five wide">
+	  <div class="ui blue labels small">
+	   <% if presenter.tags_.length > 0%>
+	   <% presenter.tags_.each do |tag| %>
+	   <a class="ui label">
+	     <%= tag %>
+	   </a>
+	   <% end %>
+	   <% end%>
+	  </div>
+	  <p class="parent"><span>监护人:</span><span><%= presenter.student.guardian_phone %>(<%= presenter.student.guardian%>)</span></p>
+          <p class="phone"><span>联系电话:</span><span><%= presenter.phone %></span></p>
+	  <% if presenter.last_consultation_ %>
+	  <p class="consult-time"><span>上次咨询:</span><span><%= presenter.last_consultation_ %></span></p>
+	  <% end %>
+	</td>
+	<% if presenter.referrer_ %>
+	<td class="two wide">
+          <p class="maybe-know">推荐人</p>
+          <p><span><%= presenter.referrer_.name %></span></p>
+        </td>
+	<% end %>
+	<% if presenter.relation_.length > 0 %>
+        <td class="three wide">
+          <p class="recommend">可能认识</p>
+          <p>
+	    <span>李四</span><span>王八</span><span>白一</span>
+	    <% presenter.relation_.each do |relation|%>
+	    <span><%= relation.name%></span>
+	    <% end %>
+	  </p>
+        </td>
+	<% end %>
+        <td class="three wide">
+          <a class="ui mini button teal" href="/students/<%=presenter.id%>">
+            详情
+          </a>
+        </td>
+      </tr>
+    </table>
+  </li>
+  <% end%>
+  <!--template-->
+</ul>

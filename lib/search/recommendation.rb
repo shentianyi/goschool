@@ -16,8 +16,6 @@ class Recommendation
     entity_type_id = Student.name
     get_recommendations(tenant_id,entity_type_id,student_id,cache_expire_time,limit)
   end
-
-
   # @param [String] course_id    the target couse which need recommend students
   # @param [String] tenant_id
   # @param [Integer] limit the amount of result to return, the obj will be order by score desc before that

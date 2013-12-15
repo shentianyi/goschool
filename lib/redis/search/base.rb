@@ -106,7 +106,6 @@ class Redis
                 next
               end
               if instance_eval(field_method)
-                puts '---------------------------------------'
                 index_fields_changed = true
               end
             end

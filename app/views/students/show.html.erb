@@ -1,55 +1,148 @@
-<p id="notice"><%= notice %></p>
+<article class="back-index-main" id="back-index-main" name="2column">
+  <header class="back-index-side-header">
+    <a class="ui down button teal mini" href="/students/">
+      <i class="left icon"></i>
+      返回上层
+    </a>
+    <p>学生详细信息</p>
+  </header>
+  
+  <div class="detail-navigation" id="detail-navigation" origin_top=56>
+    <div class="ui vertical pointing menu" id="detail-navigation-menu">
+      <div class="header item">
+        内容菜单
+      </div>
+      <a class="item active" href="#class-and-service">
+        <i class="browser icon"></i> 课程及服务
+      </a>
+      <a class="item" href="#achieve">
+        <i class="trophy icon"></i> 所获成就
+      </a>
+      <a class="item" href="#friendship">
+        <i class="meh icon"></i> 人际
+      </a>
+      <a class="item" href="#consult-record">
+        <i class="chat outline icon"></i> 咨询记录
+      </a>
+    </div>
+  </div>
+  
+  <div class="detail-content" id="detail-content">
+    <div class="content-info">内容主页</div>
+    <div class="info" id="<%= @presenter.id %>">
+      <div class="left">
+        <img class="circular ui image" src="<%= @presenter.student.image_url %>"/>
+        <p class="name"><%= @presenter.name %></p>
+        <P class="type"><%= @presenter.status_%></P>
+      </div>
+      <div class="middle">
+	<p><span>性别:</span><span><%= @presenter.gender_ %></span></p>
+        <p><span>出生年月:</span><span><%= @presenter.birth_ %></span></p>
+        <p><span>联系电话:</span><span><%= @presenter.phone%></span></p>
+        <p><span>联系邮件:</span><span><%= @presenter.email%></span></p>
+        <p><span>居住地址:</span><span><%= @presenter.address%></span></p>
+	<% if @presenter.tags_.length > 0 %>
+	<p class="labels"><span>标签:</span>
+          <span>
+	    <% @presenter.tags_.each do |tag| %>
+	    <a class="ui blue label"><%= tag%></a>
+	    <% end %>
+          </span>
+        </p>
+	<% end %>
+      </div>
+      <div class="right">
+        <p><span>就读学校：</span><span><%= @presenter.school %></span></p>
+        <p><span>毕业年限：</span><span><%= @presenter.graduate_ %></span></p>
+        <p><span>监护人：</span><span><%= @presenter.guardian %></span></p>
+        <p><span>监护人电话：</span><span><%= @presenter.guardian_phone %></span></p>
+	<% if @presenter.referrer_ %>
+        <p><span>推荐人：</span><span><%= @presenter.referrer_.name %></span></p>
+	<% end %>
+      </div>
+      <a class="ui red button detail-student-button">删除学生</a>
+      <a class="ui teal button detail-student-button" id="student-detail-edit" type="student">编辑学生信息</a>
+    </div>
+    <div class="ui fluid accordion" id="accordion" name="student">
+      <div class="item" id="class-and-service">
+        <div class="active title">
+          <i class="dropdown icon"></i>课程及服务
+        </div>
+        <div class="active content class-and-service">
+	  <%= render partial:'class-and-service'%>
+	</div>
+      </div>
+      <div class="item achievement" id="achieve">
+        <div class="title">
+          <i class="dropdown icon"></i>所获成就
+        </div>
+        <div class="content">
+	  <%= render partial:'achieve' %>
+	</div>
+      </div>
+      <div class="item friendship" id="friendship">
+        <div class="title">
+          <i class="dropdown icon"></i>人际
+        </div>
+        <div class="content">
+	  <%= render partial:'friendship' if @referrer || @relations%>
+	</div>
+      </div>
+      <div class="item consult-record" id="consult-record">
+        <div class="title">
+          <i class="dropdown icon"></i>咨询记录
+        </div>
+        <div class="content">
+	  <%= render partial:'consult-record' if @consultations %>
+	</div>
+	<div class="ui mini button" for="detail-add" type="consult-record"><i class="add icon"></i> 添加咨询记录</div>
+      </div>
+    </div>
+  </div>
+</article>
 
-<p>
-  <b>Name:</b>
-  <%= @student.name %>
-</p>
+<!--new partial-->
+<!--新建咨询记录-->
+<section class="detail-add" type="consult-record">
+  <div class="inner">
+    <i class="remove icon detail-add-close"></i>
+    <p>添加咨询记录</p>
+    <div class="ui form segment">
+      <div class="field">
+        <label>咨询时间</label>
+        <input name="time" type="text" readonly id="consult-record-time"/>
+        <select state="unload" id="consult-record-hour"></select>
+      </div>
+      <div class="field">
+        <label>咨询人</label>
+        <input name="customer" type="text" id="consult-record-customer" />
+      </div>
+      <div class="field">
+        <label>咨询内容</label>
+        <textarea name="content" id="consult-record-content"></textarea>
+      </div>
+      <div class="field">
+        <label>接线人</label>
+        <input name="service" type="text" id="consult-record-service" />
+      </div>
+      <div class="ui submit button teal ok" for="consult-record">完成添加</div>
+    </div>
 
-<p>
-  <b>Gender:</b>
-  <%= @student.gender %>
-</p>
-
-<p>
-  <b>Birthday:</b>
-  <%= @student.birthday %>
-</p>
-
-<p>
-  <b>School:</b>
-  <%= @student.school %>
-</p>
-
-<p>
-  <b>Graduation:</b>
-  <%= @student.graduation %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @student.email %>
-</p>
-
-<p>
-  <b>Phone:</b>
-  <%= @student.phone %>
-</p>
-
-<p>
-  <b>Address:</b>
-  <%= @student.address %>
-</p>
-
-<p>
-  <b>Guardian:</b>
-  <%= @student.guardian %>
-</p>
-
-<p>
-  <b>Guardian phone:</b>
-  <%= @student.guardian_phone %>
-</p>
+  </div>
+</section>
 
 
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+<!--编辑学生信息-->
+<section class="back-index-add"  name="student">
+  
+</section>
+
+
+<%= render partial:'shares/log_footer'%>
+<% content_for :javascript_includes do%>
+<%= javascript_include_tag "BACK_index.js"%>
+<%= javascript_include_tag "BACK_student.js"%>
+<%= javascript_include_tag "BACK_detail.js"%>
+<%= javascript_include_tag "BACK_student_detail.js"%>
+
+<%end%>

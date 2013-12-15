@@ -16,20 +16,9 @@
           <div id="new-class" class="tab-block" from="course">
                <div class="left-part ">
                     <div class="select">
-                         <div class="ui selection dropdown" id="add-class-choose-institution">
-                              <div class="text">
-                                   选择机构...
-                              </div>
-                              <i class="dropdown icon"></i>
-                              <div class="menu">
-                                   <%@institutions.each do |ins|%>
-                                   <div class="item" value="<%=ins.id%>">
-                                        <%= ins.name%>
-                                   </div>
-                                   <%end%>
-                              </div>
-                         </div>
-                         <i class="sitemap icon"></i>
+                         <div  class="ui red labeled icon top right pointing dropdown button" id="add-class-choose-institution">
+                              <%=render 'institutions/select'%>
+                         </div> 
                     </div>
                     <div class="ui left icon input">
                          <input placeholder="课程名称..." name='name' type="text">
@@ -64,7 +53,7 @@
                     <div class="ui left icon input specialInput labelForm autoComplete">
                          <ul name="label">
                               <li>
-                                   <input type='text' placeholder="标签..." id="new-class-label" />
+                                   <input type='text' placeholder="标签..." id="new-class-label" autocomplete="tags"/>
                               </li>
                          </ul>
                          <i class="tag icon stop"></i>
@@ -82,7 +71,7 @@
                     <div class="ui left icon input specialInput labelForm autoComplete total-teachers" id="total-teachers" >
                          <ul>
                               <li>
-                                   <input type='text' placeholder="授课老师..." id="autoC5" />
+                                   <input type='text' placeholder="授课老师..." id="autoC5" autocomplete="teachers"/>
                               </li>
                          </ul>
                          <i class="male icon"></i>
@@ -96,7 +85,7 @@
                               <div class="ui input specialInput labelForm autoComplete total-teachers" >
                                    <ul>
                                         <li>
-                                             <input type='text' placeholder="老师..." id="autoC3" />
+                                             <input type='text' placeholder="老师..." id="autoC3" autocomplete="teachers"/>
                                         </li>
                                    </ul>
                               </div>
@@ -110,20 +99,9 @@
           <div id="new-service" class="tab-block" style="display:none" from="service">
                <div class="left-part">
                     <div class="select">
-                         <div class="ui selection dropdown" id="add-service-choose-institution">
-                              <div class="text">
-                                   选择机构...
-                              </div>
-                              <i class="dropdown icon"></i>
-                              <div class="menu">
-                                   <%@institutions.each do |ins|%>
-                                   <div class="item" value="<%=ins.id%>">
-                                        <%= ins.name%>
-                                   </div>
-                                   <%end%>
-                              </div>
+                         <div   class="ui red labeled icon top right pointing dropdown button" id="add-service-choose-institution">
+                               <%=render 'institutions/select'%>
                          </div>
-                         <i class="sitemap icon"></i>
                     </div>
                     <div class="ui left icon input">
                          <input placeholder="服务名称..." name='name' type="text">
@@ -154,7 +132,7 @@
                     <div class="ui left icon input specialInput labelForm autoComplete">
                          <ul name='label'>
                               <li>
-                                   <input type='text' placeholder="标签..." id="service-label" />
+                                   <input type='text' placeholder="标签..." id="service-label" autocomplete="tags"/>
                               </li>
                          </ul>
                          <i class="tag icon stop"></i>
@@ -171,7 +149,7 @@
                     <div class="ui left icon input specialInput labelForm autoComplete total-teachers" id="total-service-teachers">
                          <ul>
                               <li>
-                                   <input type='text' placeholder="授课老师..." id="service-teachers"/>
+                                   <input type='text' placeholder="授课老师..." id="service-teachers" autocomplete="teachers"/>
                               </li>
                          </ul>
                          <i class="male icon"></i>
@@ -184,7 +162,7 @@
                               <div class="ui input specialInput labelForm autoComplete total-teachers" >
                                    <ul>
                                         <li>
-                                             <input type='text' placeholder="老师..." id="sub-teacher-service-1" />
+                                             <input type='text' placeholder="老师..." id="sub-teacher-service-1" autocomplete="teachers"/>
                                         </li>
                                    </ul>
                               </div>

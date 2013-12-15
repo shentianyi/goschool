@@ -21,7 +21,7 @@ class Schedule < ActiveRecord::Base
    end
    
   def self.between_date params
-    base_query(params[:institution_id]).joins(:teachers).where(start_time:params[:start_date]..params[:end_date])
+    base_query(params[:institution_id]).where(start_time:params[:start_date]..params[:end_date])
   end
   
   def self.by_teacher_date params
@@ -35,12 +35,15 @@ class Schedule < ActiveRecord::Base
     elsif params[:type]=='Course'
        bq.where(sub_courses:{course_id:params[:id]})
     else
-      []
+      raise ActionController::RoutingError.new('Not Found')
     end 
   end
   
   private
   def validate_save
+    if self.start_time>=self.end_time
+      errors.add(:start_time,'开始时间应小于结束时间')
+    else
     teachers=self.sub_course.teachers
     condi=[self.start_time,self.end_time,self.start_time,self.end_time]
     teachers.each do |teacher|
@@ -48,13 +51,14 @@ class Schedule < ActiveRecord::Base
       ex= new_record? ? new_record_where.first : new_record_where.where("schedules.id<>?",self.id).first
       errors.add(:start_time,"冲突：老师#{teacher.name}在此时间段已经有排课") if ex
     end
+    end
   end
   
   def self.base_query institution_id=nil
     if institution_id
-     return  joins(:sub_course).where(sub_courses:{institution_id:institution_id,status:CourseStatus::UNLOCK}).select('*,sub_courses.*')
+     return  joins(:sub_course).where(sub_courses:{institution_id:institution_id,status:CourseStatus::UNLOCK}).select('sub_courses.*,schedules.*')
      else
-        return joins(:sub_course).where({status:CourseStatus::UNLOCK}).select('*,sub_courses.*')
+        return joins(:sub_course).where(sub_courses:{status:CourseStatus::UNLOCK}).select('sub_courses.*,schedules.*')
      end
   end
 end

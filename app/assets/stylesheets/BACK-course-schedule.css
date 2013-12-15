@@ -162,6 +162,13 @@
     display:block;
     font-size:14px;
 }
+.dhx_wrap_section .new-schedule-teachers{
+    font-size:13px;
+    line-height:9px;
+}
+.dhx_wrap_section .ui.input input[type='text']{
+    padding:5px 10px;
+}
 /********************************************************************************* 右侧*/
 /*选择机构的*/
 .schedule-search{
@@ -172,9 +179,9 @@
     width:25%;
 }
 .schedule-search>.ui.button.dropdown{
-    position:absolute;
+    position:absolute !important;
     top:4%;
-    width:80%;
+    width:86%;
     min-width:230px;
 }
 .schedule-search>.ui.button.dropdown .menu{
@@ -185,7 +192,7 @@
 .schedule-search>.search-block{
     position:absolute;
     top:110px;
-    width:80%;
+    width:86%;
     min-width:230px;
     border-radius:5px;
     -moz-border-radius:5px;
@@ -227,10 +234,11 @@
     font-size:0;
 }
 .search-list>.search-class-schedule>li{
-    font-size:13px;
+    font-size:0px;
     padding:4px 10px;
     word-break:break-all;
     word-wrap:break-word;
+
 }
 .search-list>.search-class-schedule>li:nth-child(odd){
     background:rgba(220,220,220,0.5);
@@ -238,14 +246,31 @@
 .search-list>.search-class-schedule>li>span:nth-of-type(1){
     width:147px;
     display:inline-block;
+    vertical-align:top;
+    font-size:13px;
 }
 .search-list>.search-class-schedule>li>span:nth-of-type(2){
-    color:rgba(0,0,0,0.6);
+    color:rgba(0,0,0,1);
+    width:76px;
+    display:inline-block;
+    vertical-align:top;
+    margin-right:2px;
+    font-size:12px;
+}
+.search-list>.search-class-schedule>li>span:nth-of-type(3){
+    color:rgba(0,0,0,0.9);
+    font-weight:bold;
+    vertical-align:top;
+    color:#4092CC;
+    font-size:12px;
+    width:210px;
+    display:block;
 }
 .search-list>.search-class-schedule>li>i{
     float:right;
     color:#D95C5C;
     cursor:pointer;
+    font-size:13px;
 }
 /*按钮*/
 .schedule-search>.save-schedule{
@@ -254,5 +279,81 @@
     min-width:170px;
     left:50%;
     width:46%;
-    margin-left:-35%;
+    margin-left:-32% !important;
+}
+/********************************************************************************* 发送课表*/
+.send-schedule{
+    position:absolute;
+    min-height:768px;
+    top:0px;
+    right:auto;
+    bottom:0px;
+    left:-999em;
+    background:rgba(0,0,0,0.9);
+    z-index:99;
+}
+.send-schedule>.inner{
+    position:absolute;
+    width:700px;
+    height:460px;
+    top:40%;
+    left:50%;
+    margin-top:-230px;
+    margin-left:-350px;
+    background-color:white;
+}
+.send-schedule>.inner>.remove.icon{
+    color:white;
+    font-size:28px;
+    position:absolute;
+    right: -27px;
+    top: -34px;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+}
+.send-schedule>.inner>.remove.icon:hover{
+    color:rgba(255,255,255,0.5);
+}
+.send-schedule>.inner>p{
+    text-align:center;
+    height:35px;
+    font-size:16px;
+    background:#63A69F;
+    color:white;
+    line-height:35px;
+    margin:0px;
+    text-shadow:2px 2px 4px rgba(0,0,0,0.4);
+    -moz-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
+    -webkit-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
+}
+.send-schedule>.inner>label{
+    display:block;
+    font-size:15px;
+    color:#63A69F;
+    padding:4px 8px;
+    margin:35px 10px 8px;
+    border-bottom:1px solid rgba(0,0,0,0.2);
+
+}
+.send-schedule>.inner>.send-buttons{
+    margin-left:18px;
+}
+.send-schedule>.inner>.send-buttons .button{
+    margin-right:15px;
+}
+.send-schedule>.inner .button{
+    font-weight:lighter !important;
+}
+.send-schedule>.inner>.input{
+    margin-left:18px;
+    margin-bottom:15px;
+    width:210px;
+}
+.send-schedule>.inner>.ui.icon.input>i.icon{
+    background-color:#4092CC;
+    opacity:1;
+    cursor:pointer;
+}
+.send-schedule>.inner>.ui.icon.input>i.icon:hover{
+    opacity:0.75;
 }

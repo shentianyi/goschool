@@ -3,6 +3,11 @@ class SchedulesController < ApplicationController
   before_filter :init_message ,:only=>[:show,:create,:update,:destroy,:dates,:courses,:teachers]
   before_filter :get_schedule,:only=>[:update,:destroy]
   before_filter :render_nil_msg , :only=>[:update,:destroy]
+  def index
+    @active_left_aside='courses'
+    @institutions=current_tenant.institutions
+  end
+
   def show
     if @schedule=Schedule.by_id(params[:id])
       @msg.result=true
@@ -14,7 +19,11 @@ class SchedulesController < ApplicationController
   end
 
   def create
-    @schedule=Schedule.new(params[:schedule].strip)
+    if params[:schedule].has_key?(:course_id)
+      @course=Course.find_by_id(params[:schedule][:course_id])
+      params[:schedule][:sub_course_id]=@course.sub_courses.first.id
+    end
+    @schedule=Schedule.new(params[:schedule].except(:course_id))
     @msg.content=(@msg.result=@schedule.save) ? @schedule.id :  @schedule.errors.messages
     render :json=>@msg
   end
@@ -32,21 +41,21 @@ class SchedulesController < ApplicationController
 
   def dates
     @msg.result=true
-    @msg.object=SchedulePresenter.init_json_presenters( Schedule.between_date(params).all)
+    @msg.content=SchedulePresenter.init_json_presenters( Schedule.between_date(params).all)
     render :json=>@msg
   end
 
   def teachers
     @msg.result=true
     params[:teacher_id]=session[:teacher_id] || params[:teacher_id]
-    @msg.object=SchedulePresenter.init_json_presenters( Schedule.by_teacher_date(params).all)
+    @msg.content=SchedulePresenter.init_json_presenters( Schedule.by_teacher_date(params).all)
     render :json=>@msg
   end
 
   def courses
     @msg.result=true
-    @msg.object=SchedulePresenter.init_json_presenters( Schedule.by_course_id(params).all)
-    render :json=>@msg
+    @msg.content=SchedulePresenter.init_json_presenters( Schedule.by_course_id(params).all)
+      render :json=>@msg 
   end
 
   def send_email

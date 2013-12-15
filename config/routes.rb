@@ -6,7 +6,7 @@ Goschool::Application.routes.draw do
     get 'teachers/schedules'
     get 'teachers/fast_search'
   end
-  
+
   controller :tags do
     get 'tags/fast_search'
   end
@@ -45,20 +45,32 @@ Goschool::Application.routes.draw do
       post :send_email
     end
   end
+
   resources :students do
     collection do
-      get :list_search
+      get :fast_search
+      get ':id/:part'=>:show
+      get ':id/:part/:ajax'=>:show
     end
   end
 
   resources :teacher_courses
 
-  resources :sub_courses
+  resources :sub_courses do
+    collection do
+      get :teachers
+    end
+  end
 
   resources :courses do
     collection do
+      get ':id/edit'=>:edit
+      get ':id/:part'=>:show
       get ':id/:part/:ajax'=>:show
+      get :fast_search
       get :list_search
+      get :subs
+      post :add_teacher
     end
   end
 
@@ -81,6 +93,11 @@ Goschool::Application.routes.draw do
   resources :logininfos
   resource :subscriptions
   resource :logininfo_sessions
+  resources :consultations do
+    collection do
+      put :comment
+    end 
+  end
 
   controller :logininfo_sessions do
     match 'logininfo_sessions/create' => :create

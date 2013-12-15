@@ -1,28 +1,27 @@
 <aside class="back-index-aside">
-     <a class="logo" ></a>
-     <ul class="first-ul">
-          <li>
-               <a href='<%= students_path%>'>学生信息</a>
-          </li>
-          <li>
-               <a>老师信息</a>
-          </li>
-          <li>
-               <a class="<%= @active_left_aside=='courses' ? 'active' : ''%>"  href='<%= courses_path%>'>课程信息</a>
-          </li>
+  <a class="logo" ></a>
+  <ul class="first-ul">
+    <li>
+      <a class="<%= @active_left_aside=='students' ? 'active' : ''%>" href='<%= students_path%>'>学生信息</a>
+    </li>
+    <li>
+      <a class="<%= @active_left_aside=='courses' ? 'active' : ''%>"  href='<%= courses_path%>'>课程信息</a>
+    </li>
      </ul>
-     <ul class="second-ul" id="main-navigator-bottom">
-          <li>
-               <a href='<%= settings_path%>'> <i class="settings icon" data-content="全局配置"></i></a>
-          </li>
-          <li>
-             <a>  <i class="smile icon" data-content="我的账户"></i></a>
-          </li>
-          <li>
-             <a>   <i class="mail outline icon" data-content="发送信息"></i></a>
-          </li>
-          <li>
-              <a href="/logininfo_sessions/destroy"> <i class="sign out icon" data-content="退出账户"></i></a>
-          </li>
-     </ul>
+  <ul class="second-ul" id="main-navigator-bottom">
+    <% if Role.admin?(current_user.role_ids)%>
+    <li>
+      <a href='<%= settings_path%>'> <i class="settings icon" data-content="全局配置"></i></a>
+    </li>
+    <% end %>
+    <li>
+      <a>  <i class="smile icon" data-content="我的账户"></i></a>
+    </li>
+    <li>
+      <a>   <i class="mail outline icon" data-content="发送信息"></i></a>
+    </li>
+    <li>
+      <a href="/logininfo_sessions/destroy"> <i class="sign out icon" data-content="退出账户"></i></a>
+    </li>
+  </ul>
 </aside>
