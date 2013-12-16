@@ -53,11 +53,13 @@ class CoursesController < ApplicationController
   end
 
   def update 
+    if params.has_key?(:course)
     @course.tags=params[:course].slice(:tags)[:tags] if params[:course].has_key?(:tags)
-    @course.add_tags
-    unless @msg.result=@course.update_attributes(params[:course].except(:tags))
-    @msg.content=@course.errors.messages
+     @msg.content=@course.errors.messages unless @msg.result=@course.update_attributes(params[:course].except(:tags)) 
+    else
+      @course.tags=[]
     end
+    @course.add_tags
     render :json=>@msg
   end
 
