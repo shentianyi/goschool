@@ -360,13 +360,11 @@ GLOBAL.autoComplete.count = 0;
                                         var $target = $("#autoComplete-call>ul");
                                         if(data.length > 0) {
                                              $("#autoComplete-call>ul").empty();
-                                             for(var i = 0; i < data.length; i++) {
-                                                  var data = {
-                                                       data : data[i]
-                                                  };
-                                                  var render = Mustache.render("{{#data}}<li id='{{id}}' type='{{type}}' logininfo_id='{{logininfo_id}}'>" + "<p>{{name}}</p>" + "<p>{{info}}</p>" + "</li>{{/data}}", data);
-                                                  $target.append(render);
-                                             }
+                                             var data_template={my_data:data}
+                                            var render = Mustache.render("{{#my_data}}<li id='{{id}}' type='{{type}}' logininfo_id='{{logininfo_id}}'>" +
+                                                "<p>{{name}}</p>" + "<p>{{info}}</p>" +
+                                                "</li>{{/my_data}}", data_template );
+                                            $target.append(render);
                                         } else {
                                              $("#autoComplete-call>ul").empty();
                                              $target.append($("<p />").addClass("no_match").text("没有匹配内容..."))
@@ -504,9 +502,10 @@ GLOBAL.autoComplete.count = 0;
                                    $input.val("");
                               }
 
-                         } else {
-                              MessageBox("请在下拉提示菜单中选择一条", "top", "warning");
                          }
+//                         else {
+//                              MessageBox("请在下拉提示菜单中选择一条", "top", "warning");
+//                         }
 
                     } else if($input.attr("im") == "label") {
                          var value = $.trim($input.val());
