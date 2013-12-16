@@ -11,4 +11,8 @@
           </td>
      </tr>
 </table>
-
+<%= render partial:'shares/log_footer'%>
+<% content_for :javascript_includes do%>
+<%= javascript_include_tag "base_manage_source.js"%> 
+<%= javascript_include_tag "homework.base.js"%> 
+<%end%>
