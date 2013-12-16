@@ -201,6 +201,129 @@ DETAIL.course={};
             MessageBox(object.name+" 报班成功","top","success");
             $target.remove();
     });
+    //课程编辑
+    $("body").on("change",".update-input",function() {
+        var data = {
+            course : {}
+        };
+        data['course'][$(this).attr('name')] = $(this).val();
+        course_manager.update($("#course-detail-info").attr('course'), data);
+    });
+    $("body").on("change", ".sub-course-name-input", function() {
+        var id = $(this).parent().nextAll("i").attr("id");
+        var sub = $(this).parent().parent();
+        var i = $(this).parent().nextAll("i");
+        if(id == null) {
+            sub_course_manager.create({
+                course_id : $("#course-detail-info").attr('course'),
+                sub_course : {
+                    name : $(this).val()
+                }
+            }, function(data) {
+                if(data.result) {
+                    i.attr("id", data.content);
+                    sub.attr('sub-course', data.content);
+                    sub.find('.sub-course-teachers-input-complete').removeAttr('disabled');
+                } else {
+                    MessageBox(data.content, "top", "warning");
+                }
+            });
+        } else {
+            sub_course_manager.update(id, {
+                sub_course : {
+                    name : $(this).val()
+                }
+            }, function(data) {
+                if(!data.result) {
+                    MessageBox(data.content, "top", "warning");
+                }
+            });
+        }
+    });
+    $("body").on("blur",".tag-input-blur",function() {
+        var data = {
+            course : {}
+        };
+        var tags = [];
+        $.each($('.tags-items>li>div'), function() {
+            tags.push($.trim($(this).text()));
+        });
+        data['course']['tags'] = tags;
+        console.log(data);
+        course_manager.update($("#course-detail-info").attr('course'), data);
+    });
+    $("body").on("click_add", "#autoComplete-call li", function(event, msg) {
+        if(msg.id) {
+            var callback = function(data) {
+                msg.result = data.result;
+                if(data.result) {
+                    msg.callback = function(label) {
+                        label.data.id = data.content;
+                    }
+                } else {
+                    MessageBox(data.content, "top", "warning");
+                    stopEvent(event);
+                }
+            }
+            if($(".ui.mini.button.teal.active").attr('for') == 'total-course-teachers') {
+                var params = {
+                    id : $("#course-detail-info").attr('course'),
+                    teacher_id : msg.id
+                };
+                course_manager.add_teacher(params, callback, false);
+            } else {
+                var params = {
+                    teacher_course : {
+                        sub_course_id : $("#selected-sub-course").val(),
+                        user_id : msg.id
+                    }
+                };
+                if(params.teacher_course.sub_course_id != "")
+                    teacher_course_manager.create(params, callback, false);
+            }
+        }
+    });
+
+    $("body").on("click_remove", ".teachers .delete.icon", function(event, msg) {
+        var item = $(this);
+        teacher_course_manager.destroy(item.parent().attr('id'), function(data) {
+            msg.result = data.result;
+            if(data.result) {
+                item.parents("li").eq(0).remove();
+            } else {
+                MessageBox(data.content, "top", "warning");
+                stopEvent(event);
+            }
+        }, false);
+    });
+    $("body").on('focus', ".sub-course-teachers-input-complete", function() {
+        $("#selected-sub-course").val($(this).parents(".sub-course-block-item").attr('sub-course'));
+    });
+
+    $("body").on("click_remove", ".icon.collapse", function(event, msg) {
+        var item = $(this);
+        if(item.attr('id') != null)
+            if(confirm('确认删除子课程？')) {
+                sub_course_manager.destroy(item.attr('id'), function(data) {
+                    msg.result = data.result;
+                    if(!data.result) {
+                        MessageBox(data.content, "top", "warning");
+                        stopEvent(event);
+                    }
+                }, false);
+            } else {
+                msg.result = false;
+            }
+    });
+    $("body").on('click',"#finish-edit-course-button,#close-edit-course-icon", function() {
+        course_manager.detail($("#course-detail-info").attr('course'), function(data) {
+            $("#course-detail-content").html(data);
+            if($(this).attr("id")=="finish-edit-course-button"){
+               $("#course-edit-section").css("left","-999em").css("right","auto");
+            }
+        });
+    });
+
     $(document).ready(function(){
         $("#add-class-choose-institution,#add-service-choose-institution").dropdown();
         $("#add-class-choose-institution .item").eq(0).addClass("active");

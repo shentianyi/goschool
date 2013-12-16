@@ -41,6 +41,10 @@ class Student < ActiveRecord::Base
   def is_actived?
     self.logininfo.status == UserStatus::ACTIVE ? true : false
   end
+  
+  def self.course_detail id
+    joins(:courses).where(:id=>id).select('student_courses.id as student_course_id,student_courses.progress,student_courses.paid,courses.*')
+  end
 
   def validate_save
     errors.add(:name,'名字不能为空') if self.name.blank?

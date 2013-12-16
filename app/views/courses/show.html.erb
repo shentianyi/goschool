@@ -33,7 +33,7 @@
                 <div class="title  <%= 'active' if @partial=='student' %>">
                     <i class="dropdown icon"></i>已报班学生
                 </div>
-                <div class="active content">
+                <div class="content  <%= 'active' if @partial=='student' %>">
                     <%=render 'student' if @partial=='student'%>
                 </div>
                 <div class="ui mini button" id="course-detail-new-student" for="detail-add" type="student"><i class="browser icon"></i> 报班新生</div>
@@ -45,7 +45,7 @@
                 <div class="title <%= 'active' if @partial=='teacher'%>">
                     <i class="dropdown icon"></i>授课老师
                 </div>
-                <div class="content">
+                <div class="content <%= 'active' if @partial=='teacher'%>">
                    <%=render 'teacher' if @partial=='teacher'%>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                 <div class="title  <%= 'active' if @partial=='recommend'%>">
                     <i class="dropdown icon"></i>推荐报班
                 </div>
-                <div class="content">
+                <div class="content  <%= 'active' if @partial=='recommend'%>">
                    <%=render 'recommend' if @partial=='recommend'%>
                 </div>
             </div>
@@ -263,3 +263,6 @@
 <%= javascript_include_tag "BACK_course_edit.js"%>
 <%= javascript_include_tag "BACK_student.js"%>
 <%end%>
+<script type="text/javascript">
+     init_course_edit();
+</script>
