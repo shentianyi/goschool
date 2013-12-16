@@ -44,7 +44,7 @@
         else{
             now_href=now_href.slice(0,length-1).join("/")+'/';
         }
-        if(!$("#"+target).find(".title").hasClass("active")){
+        if(!$("#"+target).find(".content").hasClass("active")){
             $.ajax({
                 url:now_href+target+"/ajax",
                 dataType:"html",
@@ -97,6 +97,12 @@
         $(".back-index-add[name='"+name+"']").css("left","0").css("right","0");
     });
     $(document).ready(function(){
-
+        var now_href=window.location.href.split("/");
+        var length=now_href.length;
+        if(now_href[length-1].indexOf("#")!=-1){
+            now_href=now_href[length-1].split("#");
+            var target=now_href[0];
+            $("#detail-navigation-menu").find("[href='#"+target+"]").click();
+        }
     });
 })()
