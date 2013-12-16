@@ -105,11 +105,12 @@ function init_course_edit() {
                var data = {
                     course : {}
                };
-               var tags = []
+               var tags = [];
                $.each($('.tags-items>li>div'), function() {
                     tags.push($.trim($(this).text()));
                });
                data['course']['tags'] = tags;
+               console.log(data);
                course_manager.update($("#course-detail-info").attr('course'), data);
           });
 
