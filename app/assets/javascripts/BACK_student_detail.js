@@ -466,7 +466,7 @@ STUDENTDETAIL.add_consult_record=function(){
     content=$("#consult-record-content").val(),
     service=$("#consult-record-service").val();
 
-    var student_id = $("div#detail-content div.info").attr("id");
+    var student_id = $("div#detail-content div.info").attr("student");
     var consultation = {};
     consultation.student_id = student_id;
     consultation.consultants = customer;
