@@ -43,8 +43,8 @@ class UsersController < ApplicationController
         msg.content = @user
       end
     rescue ActiveRecord::RecordInvalid => invalid
-    msg.result = false
-    msg.content = invalid.record.errors
+      msg.result = false
+      msg.content = invalid.record.errors
     end
     render :json=>msg
   end
@@ -60,8 +60,8 @@ class UsersController < ApplicationController
     elsif @logininfo.id == current_user.id
       msg.content = "不能删除自己"
     else
-    @user.destroy
-    msg.result = true
+      @user.destroy
+      msg.result = true
     end
     render :json=>msg
   end
@@ -78,37 +78,42 @@ class UsersController < ApplicationController
     @logininfo = @user.logininfo
     begin
       ActiveRecord::Base.transaction do
-      #update user
+        #update user
         if params[:user]
           if @user.update_attributes(params[:user])
             if params[:user][:email]
               @logininfo.update_attributes!(:email=>params[:user][:email])
             end
-          msg.result = true
+            msg.result = true
           end
         end
 
         #update role
+        
         if params[:logininfo_roles]
-          @logininfo.logininfo_roles.destroy_all
-          @roles = params[:logininfo_roles]
-          @roles.each {| role |
-            @new_role = LogininfoRole.new(:role_id=>role)
-            @logininfo.logininfo_roles<<@new_role
-          }
-          @logininfo.save
-          if @logininfo.check_role(400)
-            @user.update_attributes!(:is_teacher=>true)
+          if @logininfo.role_change?(params[:logininfo_roles].to_ary)
+            @logininfo.logininfo_roles.destroy_all
+            @roles = params[:logininfo_roles]
+            @roles.each {| role |
+              @new_role = LogininfoRole.new(:role_id=>role)
+              @logininfo.logininfo_roles<<@new_role
+            }
+            @logininfo.save
+            if @logininfo.check_role(400)
+              @user.update_attributes!(:is_teacher=>true)
+            else
+              @user.update_attributes!(:is_teacher=>false)
+            end
+            msg.result = true
           else
-            @user.update_attributes!(:is_teacher=>false)
+            msg.result = false
+            msg.content = '角色没有改变'
           end
-          
-        msg.result = true
         end
       end
     rescue ActiveRecord::RecordInvalid=>invalid
-    msg.result = false
-    msg.content = invalid.record.errors
+      msg.result = false
+      msg.content = invalid.record.errors
     end
     render :json=>msg
   end
