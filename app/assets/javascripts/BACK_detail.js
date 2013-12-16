@@ -44,7 +44,7 @@
         else{
             now_href=now_href.slice(0,length-1).join("/")+'/';
         }
-        if(!$("#"+target).find(".content").hasClass("active")){
+        if(!$("#"+target).find(".title").hasClass("active")){
             $.ajax({
                 url:now_href+target+"/ajax",
                 dataType:"html",
@@ -102,7 +102,8 @@
         if(now_href[length-1].indexOf("#")!=-1){
             now_href=now_href[length-1].split("#");
             var target=now_href[0];
-            $("#detail-navigation-menu").find("[href='#"+target+"]").click();
+            $("#detail-navigation-menu").find("item").removeClass("active");
+            $("#detail-navigation-menu").find("[href='#"+target+"]").addClass("active");
         }
     });
 })()

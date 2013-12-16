@@ -20,21 +20,21 @@ function init_course_edit() {
                     $("#course-begin-date").datepicker("option", "maxDate", selectedDate);
                }
           });
-          $("body").on("click", "#add-sub-course", function() {
-               var data = {
-                    counts : {
-                         count : BACKCOURSE.sub_teacher.count
-                    }
-               };
-               var render = Mustache.render(BACKCOURSE.sub_teacher.class.template, data);
-               $(this).before(render);
-               BACKCOURSE.sub_teacher.count++;
-               $(".labelForm").each(function() {
-                    var $input = $(this).find("input");
-                    var max_width = parseInt($(this).css("width")) * 0.45;
-                    $input.css("width", max_width).css("maxWidth", "999em").addClass('sub-course-teachers-input-complete');
-               });
-          });
+//          $("body").on("click", "#add-sub-course", function() {
+//               var data = {
+//                    counts : {
+//                         count : BACKCOURSE.sub_teacher.count
+//                    }
+//               };
+//               var render = Mustache.render(BACKCOURSE.sub_teacher.class.template, data);
+//               $(this).before(render);
+//               BACKCOURSE.sub_teacher.count++;
+//               $(".labelForm").each(function() {
+//                    var $input = $(this).find("input");
+//                    var max_width = parseInt($(this).css("width")) * 0.45;
+//                    $input.css("width", max_width).css("maxWidth", "999em").addClass('sub-course-teachers-input-complete');
+//               });
+//          });
           $("body").on("keyup", "input[name='expect_number'],input[name='lesson']", function(event) {
                var obj = adapt_event(event).target;
                integerOnly(obj)

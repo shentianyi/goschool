@@ -201,6 +201,9 @@ DETAIL.course={};
             MessageBox(object.name+" 报班成功","top","success");
             $target.remove();
     });
+    $("body").on("click","#finish-edit-course-button",function(){
+          $("#close-edit-course-icon").click();
+    });
     $(document).ready(function(){
         $("#add-class-choose-institution,#add-service-choose-institution").dropdown();
         $("#add-class-choose-institution .item").eq(0).addClass("active");
