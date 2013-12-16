@@ -12,6 +12,11 @@ BACKINDEX.init=(function(){
     $("#add-item").on("click",function(){
         var name=$(this).attr("type")
         $(".back-index-add[name='"+name+"']").css("left","0").css("right","0");
+        if(name=="student"){
+            var number=Math.floor(Math.random()*9);
+            $("#image_url").attr("src","/assets/portrait/"+number+".jpg")
+//            $("#image_url").attr("src","images/portrait/"+number+".jpg")
+        }
     });
     $("body").on("click","#control-log",function(){
         if($(this).attr("state")=="close"){

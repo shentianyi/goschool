@@ -94,7 +94,14 @@ function clearNoNumZero(obj) {
      //保证.只出现一次，而不能出现两次以上
      obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
 }
+//电话验证
+function phoneValidate(obj) {
+    //先把非数字的都替换掉，除了数字和.
+    obj.value = obj.value.replace(/[^\d-]/g, "");
+    //必须保证第一个为数字而不是-
+    obj.value = obj.value.replace(/^-/g, "");
 
+}
 //只能输入正整数
 function integerOnly(obj) {
      obj.value = obj.value.replace(/\D/g, "");
@@ -506,9 +513,11 @@ GLOBAL.autoComplete.count = 0;
                               }
 
                          }
-//                         else {
-//                              MessageBox("请在下拉提示菜单中选择一条", "top", "warning");
-//                         }
+                         else if($.trim($input.val()).length!=$input.val().length){
+                             MessageBox("请在下拉提示菜单中选择一条", "top", "warning");
+                             $input.val($.trim( $input.val()));
+                         }
+
                     } else if($input.attr("im") == "label") {
                          var value = $.trim($input.val());
                          $input.parent().before($("<li />").append($("<div />").addClass("ui label").text(value).append($("<i />").addClass("delete icon"))));

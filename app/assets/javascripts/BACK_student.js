@@ -11,7 +11,13 @@ var BACKSTUDENT=BACKSTUDENT||{};
         yearRange: "-30:+10",
         dateFormat:'yy-mm-dd'
     });
-    
+    $("body").on("keyup","#phone",function(event){
+        var obj=adapt_event(event).target;
+        phoneValidate(obj);
+    }).on("keyup","#guardian_phone",function(event){
+        var obj=adapt_event(event).target;
+        phoneValidate(obj);
+    });
     $(document).ready(function(){
 	//        //add student
 	$("body").on("click","#add-student",function(){
@@ -29,7 +35,6 @@ var BACKSTUDENT=BACKSTUDENT||{};
 	    student.guardian = $("#guardian").val();
 	    student.guardian_phone = $("#guardian_phone").val();
 	    student.referrer_id = $("#referrer>li").eq(0).find("div").attr("logininfo_id");
-	    
 	    var is_active_account = $("#is_active_account input[type='checkbox']").prop("checked")
 
 	    student.tags = [];
@@ -40,26 +45,44 @@ var BACKSTUDENT=BACKSTUDENT||{};
 		tags.push(tag);
 	    }
 	    student.tags = tags;
-	    
+
 	    BACKSTUDENT.post_add_student({student:student,is_active_account:is_active_account})
         });
     })
 })();
 
 BACKSTUDENT.post_add_student = function(option){
-    console.log(option)
-    $.post("/students",{
-	student:option.student,
-	is_active_account:option.is_active_account
-    },function(data){
-	if(data.result){
-	    $(".back-index-add .remove").click();
-	    MessageBox("添加成功","top","success");
-	}
-	else{
-	    MessageBox_content(data.content);
-	}
-    })
+    if(option.student.name.length>0){
+        if(BACKSTUDENT.easy_email_validate(option.student.email)){
+            $.post("/students",{
+                student:option.student,
+                is_active_account:option.is_active_account
+            },function(data){
+                if(data.result){
+                    $(".back-index-add .remove").click();
+                    MessageBox("添加成功","top","success");
+                }
+                else{
+                    MessageBox_content(data.content);
+                }
+            })
+        }
+        else{
+            MessageBox("请填写正确的邮件地址","top","warning");
+        }
+    }
+    else{
+       MessageBox("请填写学生的姓名","top","warning");
+    }
+
+}
+BACKSTUDENT.easy_email_validate=function(email){
+    if(email.indexOf("@")!=-1 && email.length>0 && email.indexOf(".")!=-1 && email.indexOf(".")>email.indexOf("@")){
+        return true
+    }
+    else{
+        return false
+    }
 }
 
 BACKSTUDENT.check = new Object();
