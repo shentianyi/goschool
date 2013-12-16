@@ -25,13 +25,18 @@ class Logininfo < ActiveRecord::Base
     end
     return false
   end
+  
+  #role change
+  def role_change? roles
+    self.role_ids == roles ? false : true
+  end
 
   #get role
   def role_ids
     roles = []
     self.logininfo_roles.each do |logininfo_role|
       role = logininfo_role.role_id
-      roles << role
+      roles << role.to_s
     end
     return roles
   end
