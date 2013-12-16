@@ -30,9 +30,37 @@
 //        })
     });
     $('#accordion').accordion();
-    $("body").on("click","#detail-navigation .item",function(event){
+    $("body").on("click","#detail-navigation .item",function(){
         var target= $.trim($(this).attr("href").replace(/#/,""));
         if(!$(this).hasClass("active")){
+            $(this).siblings().removeClass("active");
+            $(this).addClass("active");
+        }
+        var now_href=window.location.href.split("/");
+        var length=now_href.length;
+        if(now_href[length-1].indexOf("#")==-1){
+            now_href=now_href.join("/")+'/';
+        }
+        else{
+            now_href=now_href.slice(0,length-1).join("/")+'/';
+        }
+        if(!$("#"+target).find(".title").hasClass("active")){
+            $.ajax({
+                url:now_href+target+"/ajax",
+                dataType:"html",
+                success:function(data){
+                    window.history.pushState({},"",now_href+target+"#"+target);
+                    $("#"+target).children().addClass("active");
+                    $("#"+target).find(".content").html(data);
+                }
+            });
+        }
+        else{
+            window.history.pushState({},"",now_href+target+"#"+target);
+        }
+    }).on("click","#accordion .item .title",function(){
+        if($(this).hasClass("active")){
+            var target=$(this).parent().attr("id");
             var now_href=window.location.href.split("/");
             var length=now_href.length;
             if(now_href[length-1].indexOf("#")==-1){
@@ -41,26 +69,14 @@
             else{
                 now_href=now_href.slice(0,length-1).join("/")+'/';
             }
-            $this=$(this);
             $.ajax({
                 url:now_href+target+"/ajax",
                 dataType:"html",
                 success:function(data){
                     window.history.pushState({},"",now_href+target+"#"+target);
-                    $this.siblings().removeClass("active");
-                    $this.addClass("active");
-                    $("#"+target).children().addClass("active");
                     $("#"+target).find(".content").html(data);
                 }
             });
-        }
-        else{
-            if($("#"+target).find(".title").hasClass("active")){
-                $("#"+target).children().removeClass("active");
-            }
-            else{
-                $("#"+target).children().addClass("active");
-            }
         }
     });
     $("body").on("click","[for='detail-add']",function(){

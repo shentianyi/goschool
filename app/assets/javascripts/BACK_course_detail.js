@@ -37,11 +37,24 @@ DETAIL.course={};
         }
     });
     $("body").on("click","#course-detail-edit",function(){
+        $("#teacher").children().removeClass("active");
         $(".back-index-add[name='course']").css("left","0px").css("right","0px");
         //post(get edit course/service template)
         course_manager.edit($("#course-detail-info").attr('course'), function(data) {
 			$("#course-edit-section").html(data);
 		});
+    });
+    $("#delete-course-button").click(function(){
+         if(confirm('确定删除？')){
+              course_manager.destroy($("#course-detail-info").attr('course'),function(data){
+                   if(data.result){
+                        alert('删除成功');
+                         window.location="/courses";
+                        }else{
+                          MessageBox(data.content,"top","warning");
+                   }
+              });
+         }
     });
     $("body").on("click",".out-class",function(){
           if(confirm("确认为该学生退班吗？")){
@@ -91,10 +104,10 @@ DETAIL.course={};
                             $(this).parent().parent().toggleClass("positive");
                             //post
                             var id=$(this).parents("tr").eq(0).attr("id");
-                            var state=$(this).parent().parent().hasClass("positive")?'pay':"unpay";
+                            var paid=$(this).parent().parent().hasClass("positive");
                             $.ajax({
-                                url:"",
-                                data:{id:id},
+                                url:"/student_courses/"+id,
+                                data:{student_course:{paid:paid}},
                                 type:'PUT',
                                 success:function(data){
                                     if(data.result){
