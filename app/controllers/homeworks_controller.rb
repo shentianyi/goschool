@@ -18,9 +18,14 @@ class HomeworksController < ApplicationController
   end
 
   # homeworks/teacher?course=1&cate=100&sub=1
-  def teacher 
+  def teacher
     if @teacher_course=TeacherCourse.where(id:params[:id],user_id:current_user.id).first
-      @menus=  HomeworkTeacherMenuType.generate_menu
+      if params[:ajax]
+        @homework_titles=@teacher_course.homework.where(HomeworkTeacherMenuType.condition(params[:type].to_i)).all
+        render partial:'menu_item'
+      else
+        @menus=  HomeworkTeacherMenuType.generate_menu
+      end
     else
       error_page_404
     end

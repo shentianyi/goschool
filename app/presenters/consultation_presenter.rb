@@ -13,7 +13,10 @@ class ConsultationPresenter<Presenter
 
   def recorder
     if self.logininfo_id
-      Logininfo.find(self.logininfo_id).user.name
+      @user = User.find_by_logininfo_id(self.logininfo_id)
+      if @user
+        @user.name
+      end
     end
   end
 
