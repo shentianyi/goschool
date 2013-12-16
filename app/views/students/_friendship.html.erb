@@ -13,9 +13,10 @@
 <br />
 <% end %>
 
+<% if @relations.length > 0%>
 <label>可能认识：</label>
 <div class="ui horizontal list">
-<% @relations.each do |relation| %>
+  <% @relations.each do |relation| %>
   <div class="item">
     <img class="ui avatar image" src="<%= relation.image_url %>">
     <div class="content">
@@ -23,6 +24,7 @@
       <%= relation.school %>
     </div>
   </div>
-<% end %>
+  <% end %>
+  <% end %>
 </div>
 <!--partial-->
