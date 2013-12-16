@@ -49,6 +49,7 @@ Goschool::Application.routes.draw do
   resources :students do
     collection do
       get :fast_search
+      get ':id/edit'=>:edit
       get ':id/:part'=>:show
       get ':id/:part/:ajax'=>:show
     end

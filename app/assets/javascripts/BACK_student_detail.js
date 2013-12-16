@@ -11,8 +11,8 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     $("body").on("click","#student-detail-edit",function(){
         $(".back-index-add[name='student']").css("left","0px").css("right","0px");
         //post(get edit course/service template)
-        student_manager.edit($("#course-detail-info").attr('course'), function(data) {
-            $("#course-edit-section").html(data);
+        student_manager.edit($("#student-detail-info").attr('student'), function(data) {
+            $("#student-edit-section").html(data);
         });
     });
     ////////////////////////////////////////////////////////最终成绩

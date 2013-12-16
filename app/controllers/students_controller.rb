@@ -56,6 +56,7 @@ class StudentsController < ApplicationController
   # GET /students/1/edit
   def edit
     @student = Student.find(params[:id])
+    @presenter = StudentPresenter.new(@student)
     render partial:'edit'
   end
 

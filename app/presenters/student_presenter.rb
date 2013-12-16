@@ -1,6 +1,6 @@
 #encoding: utf-8
 class StudentPresenter<Presenter
-  def_delegators :@student, :id,:name,:gender,:age,:school,:guardian,:guardian_phone,:phone,:referrer_id,:birthday,:student_status,:tenant_id,:graduation,:email,:address
+  def_delegators :@student, :id,:name,:gender,:age,:school,:guardian,:guardian_phone,:phone,:referrer_id,:birthday,:student_status,:tenant_id,:graduation,:email,:address,:image_url
   attr_accessor :student
 
   def initialize(student)
@@ -19,7 +19,7 @@ class StudentPresenter<Presenter
 
   def graduate_
     if self.graduation
-      self.graduation.year.to_s + '-' + self.graduation.month.to_s
+      self.graduation.year.to_s + '-' + self.graduation.month.to_s + '-' + self.graduation.day.to_s
     end
   end
 
