@@ -37,14 +37,14 @@
 	  <p class="consult-time"><span>上次咨询:</span><span><%= presenter.last_consultation_ %></span></p>
 	  <% end %>
 	</td>
-	<% if presenter.referrer_ %>
 	<td class="two wide">
+	<% if presenter.referrer_ %>
           <p class="maybe-know">推荐人</p>
           <p><span><%= presenter.referrer_.name %></span></p>
-        </td>
 	<% end %>
+	</td>
+	<td class="three wide">
 	<% if presenter.relation_.length > 0 %>
-        <td class="three wide">
           <p class="recommend">可能认识</p>
           <p>
 	    <span>李四</span><span>王八</span><span>白一</span>
@@ -52,8 +52,8 @@
 	    <span><%= relation.name%></span>
 	    <% end %>
 	  </p>
-        </td>
 	<% end %>
+	</td>
         <td class="three wide">
           <a class="ui mini button teal" href="/students/<%=presenter.id%>">
             详情
