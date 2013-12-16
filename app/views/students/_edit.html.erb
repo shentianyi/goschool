@@ -68,8 +68,9 @@
 	<% if @presenter.referrer_ %>
 	<li><div class="ui label" id="<%= @presenter.referrer_.id %>" type="" logininfo_id="<%= @presenter.referrer_.logininfo_id%>"><%= @presenter.referrer_.name %><i class="delete icon"></i></div></li>
 	<% end %>
-	<li><input placeholder="推荐人..." id="autoC3" type="text"><i class="smile icon"></i></li>
+	<li><input placeholder="推荐人..." id="autoC3" type="text" autocomplete="students"></li>
       </ul>
+      <i class="smile icon"></i>
     </div>
     <div id="is_active_account" class="ui checkbox stop">
       <input name="fun" type="checkbox" <% if @presenter.student.is_actived? %> checked <% end %> class="update-input">
