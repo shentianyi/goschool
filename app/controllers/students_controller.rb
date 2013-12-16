@@ -159,7 +159,7 @@ class StudentsController < ApplicationController
   end
   
   def achievements(student)
-    
+    @achievements = student.achievements;
   end
 
   def relation(student)
