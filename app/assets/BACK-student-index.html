@@ -237,13 +237,13 @@
         <p>新建学生</p>
         <div class="left-part">
             <div class="portrait">
-                <img class="ui circular image " src="images/portrait/1.jpg">
+                <img class="ui circular image " id="image_url" src="images/portrait/1.jpg">
             </div>
             <div class="ui left icon input">
-                <input placeholder="姓名..." type="text">
+                <input id="name" placeholder="姓名..." type="text">
                 <i class="user icon"></i>
             </div>
-            <div class="sex stop">
+            <div class="sex stop" id="gender">
                 <div class="ui radio checkbox">
                     <input name="sex" checked="checked" type="radio">
                     <label>男</label>
@@ -258,7 +258,7 @@
                 <i class="calendar icon"></i>
             </div>
             <div class="ui left icon input">
-                <input placeholder="就读学校..." type="text">
+                <input placeholder="就读学校..." type="text" id="school">
                 <i class="building icon"></i>
             </div>
             <div class="ui left icon input calendar">
@@ -268,23 +268,23 @@
         </div>
         <div class="right-part">
             <div class="ui left icon input">
-                <input placeholder="邮件地址..." type="text">
+                <input placeholder="邮件地址..." type="text" id="email">
                 <i class="mail outline icon"></i>
             </div>
             <div class="ui left icon input">
-                <input placeholder="联系电话..." type="text">
+                <input placeholder="联系电话..." type="text" id="phone"/>
                 <i class="phone icon"></i>
             </div>
             <div class="ui left icon input">
-                <input placeholder="联系地址..." type="text">
+                <input placeholder="联系地址..." type="text" id="address">
                 <i class="home icon"></i>
             </div>
             <div class="ui left icon input">
-                <input placeholder="监护人..." type="text">
+                <input placeholder="监护人..." type="text" id="guardian">
                 <i class="male icon"></i>
             </div>
             <div class="ui left icon input">
-                <input placeholder="监护人电话..." type="text">
+                <input placeholder="监护人电话..." type="text" id="guardian_phone">
                 <i class="mobile icon"></i>
             </div>
             <div class="ui left icon input specialInput labelForm autoComplete">
@@ -303,7 +303,7 @@
                 <input name="fun" type="checkbox" checked>
                 <label>同时开设学生账号</label>
             </div>
-            <div class="ui red button">
+            <div class="ui red button" id="add-student">
                 添加
             </div>
         </div>
@@ -330,7 +330,9 @@
         </li>
     </ul>
 </div>
-
+<div class="message-box" id="MessageBox">
+    <p></p>
+</div>
 <script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>
 <script type='text/javascript' src="javascripts/jquery-datepicker.js" ></script>
 <script type='text/javascript' src="javascripts/semantic.min.js" ></script>
