@@ -50,8 +50,9 @@ class Course < ActiveRecord::Base
     teachers.uniq.map{|t| t.name}
   end
 
-  def recommendations
-    Student.where(:id=> Recommendation.new.get_potential_student_for_course(self.tenant_id,self.id).map{|res| res.id})
+  def recommendations 
+    # puts Recommendation.new.get_potential_student_for_course(self.tenant_id,self.id).map{|res| res.id}.class
+    Student.where(:id=>Recommendation.new.get_potential_student_for_course(self.tenant_id,self.id).map{|res| res.id}).all
   end
 
   private

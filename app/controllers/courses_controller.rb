@@ -134,7 +134,7 @@ class CoursesController < ApplicationController
   end
   
   def recommendations
-    @students=StudentPresenter.init_json_presenters(@course.recommendations)
+    @student_presenters=StudentPresenter.init_presenters(@course.recommendations)
   end
 
   def get_course

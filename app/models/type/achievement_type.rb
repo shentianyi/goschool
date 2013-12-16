@@ -4,7 +4,7 @@ class AchievementType
   ADMITTED = 200
   FINAL_GRADE = 300
 
-  def sekf.display type
+  def self.display type
     case type
     when FINAL
       '最终成就'

@@ -1,6 +1,6 @@
 #encoding: utf-8
 class CoursePresenter<Presenter
-  def_delegators :@course,:id,:name,:description,:actual_number,:expect_number,:lesson,:type,:code,:start_date,:end_date,:has_sub,:tenant_id,:status,:institution_name,:course_teachers,:course_students
+  def_delegators :@course,:id,:name,:description,:actual_number,:expect_number,:lesson,:type,:code,:start_date,:end_date,:has_sub,:tenant_id,:status,:institution_name,:course_teachers,:course_students,:recommendations
   def initialize(course)
     @course=course
   end
