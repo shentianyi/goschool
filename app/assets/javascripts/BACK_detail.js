@@ -103,7 +103,7 @@
             now_href=now_href[length-1].split("#");
             var target=now_href[0];
             $("#detail-navigation-menu").find(".item").removeClass("active");
-            $("#detail-navigation-menu").find(".item[href='#"+target+"]").addClass("active");
+            $("#detail-navigation-menu").find(".item[href='#"+target+"']").addClass("active");
         }
     });
 })()
