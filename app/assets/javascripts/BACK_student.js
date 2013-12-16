@@ -73,7 +73,7 @@ BACKSTUDENT.check.test = function(str,type){
 	return true;
     }
     else{
-	console.log('格式不正确！请输入正确的格式');
+	MessageBox_content('格式不正确！请输入正确的格式');
 	return false;
     }
 }
