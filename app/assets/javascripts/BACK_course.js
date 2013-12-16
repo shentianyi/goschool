@@ -87,7 +87,7 @@ var BACKCOURSE=BACKCOURSE || {};
         $(".labelForm").each(function(){
             var $input=$(this).find("input");
             var max_width=parseInt($(this).css("width"))*0.45;
-            $input.css("width",max_width).css("maxWidth","999em");
+            $input.css("width",max_width).css("maxWidth","999em").addClass('sub-course-teachers-input-complete');
         });
     });
     $("body").on("click","#add-sub-service",function(){
@@ -98,7 +98,7 @@ var BACKCOURSE=BACKCOURSE || {};
         $(".labelForm").each(function(){
             var $input=$(this).find("input");
             var max_width=parseInt($(this).css("width"))*0.45;
-            $input.css("width",max_width).css("maxWidth","999em");
+            $input.css("width",max_width).css("maxWidth","999em").addClass('sub-course-teachers-input-complete');
         });
     });
     $("body").on("keyup","input[name='long'],input[name='people']",function(event){

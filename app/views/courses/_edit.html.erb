@@ -50,7 +50,7 @@
                     </ul>
                     <i class="tag icon stop"></i>
                </div>
-               <div class="ui buttons choose-teacher-delivery" id="choose-teacher-course-delivery" name="course">
+               <div class="ui buttons choose-teacher-delivery" id="choose-teacher-delivery" name="class">
                     <div class="ui mini button<%= ' teal active' unless @course.has_sub%>" for="total-course-teachers">
                          以总<%= @course.type_display%>安排老师
                     </div>
@@ -97,7 +97,7 @@
                          <i class="icon collapse" id="<%= sub_course.id%>"></i>
                     </div>
                     <%end%>
-                    <i class="icon expand" id="add-sub-course"></i>
+                    <i class="icon expand" id="add-sub-class"></i>
                     <input type="hidden" id="selected-sub-course" />
                </div>
           </div>
