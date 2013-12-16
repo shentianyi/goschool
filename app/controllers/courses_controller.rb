@@ -18,7 +18,7 @@ class CoursesController < ApplicationController
     when 'teacher'
        teachers()
     when 'recommend'
-	 # recommendations()
+	 recommendations()
     else
 	students()
 	@partial='student'
@@ -131,6 +131,10 @@ class CoursesController < ApplicationController
   
   def students
     @students=CourseStudentPresenter.init_presenters(@course.course_students)
+  end
+  
+  def recommendations
+    @students=StudentPresenter.init_json_presenters(@course.recommendations)
   end
 
   def get_course
