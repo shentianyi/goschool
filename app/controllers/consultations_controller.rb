@@ -15,6 +15,7 @@ class ConsultationsController < ApplicationController
       if @consultation.save
         msg.result = true
         msg.object = ConsultationPresenter.new(@consultation).to_json
+        puts msg.object.to_json
       end
     else
       msg.content = '学生不存在！'

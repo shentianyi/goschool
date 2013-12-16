@@ -15,7 +15,7 @@ class StudentCoursePresenter<Presenter
   end
 
   def lesson_display
-    self.lesson.to_s + '课时'
+    self.lesson.to_s
   end
 
   def period_display
