@@ -20,15 +20,6 @@ function init_course_edit() {
                     $("#course-begin-date").datepicker("option", "maxDate", selectedDate);
                }
           });
-          // $("body").on("click", ".sub-course-block-item>i", function() {
-               // var msg = {
-                    // result : true
-               // };
-               // $(this).trigger('click_remove', [msg]);
-               // if(msg.result) {
-                    // $(this).parent().remove();
-               // }
-          // });
           $("body").on("click", "#add-sub-course", function() {
                var data = {
                     counts : {
