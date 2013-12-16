@@ -27,11 +27,10 @@
           <span>所属机构:</span><span><%= @course.institution_name%></span>
      </p>
      <p class="detail-code">
-          <span>课程代号:</span><span><%= @course.code%></span>
+          <span><%= @course.type_display%>代号:</span><span><%= @course.code%></span>
      </p>
      <p class="detail-labels">
           <span>标签:</span>
-
           <span> <%@course.tags.each do |tag|%> <a class="ui blue label"> <%= tag%> </a> <%end%>
      </p>
      <a class="ui red button detail-button"  course="<%= @course.id%>" id="delete-course-button">删除<%= @course.type_display%></a>
