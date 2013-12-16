@@ -44,7 +44,7 @@ DETAIL.course={};
 			$("#course-edit-section").html(data);
 		});
     });
-    $("#delete-course-button").click(function(){
+    $("body").on("click","#delete-course-button",function(){
          if(confirm('确定删除？')){
               course_manager.destroy($("#course-detail-info").attr('course'),function(data){
                    if(data.result){
@@ -318,9 +318,7 @@ DETAIL.course={};
     $("body").on('click',"#finish-edit-course-button,#close-edit-course-icon", function() {
         course_manager.detail($("#course-detail-info").attr('course'), function(data) {
             $("#course-detail-content").html(data);
-            if($(this).attr("id")=="finish-edit-course-button"){
-               $("#course-edit-section").css("left","-999em").css("right","auto");
-            }
+            $("#course-edit-section").css("left","-999em").css("right","auto");
         });
     });
 
