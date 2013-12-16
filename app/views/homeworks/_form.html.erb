@@ -1,37 +1,7 @@
-<%= form_for(@homework) do |f| %>
-  <% if @homework.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@homework.errors.count, "error") %> prohibited this homework from being saved:</h2>
-
-      <ul>
-      <% @homework.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :deadline %><br />
-    <%= f.datetime_select :deadline %>
-  </div>
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_field :content %>
-  </div>
-  <div class="field">
-    <%= f.label :teacher_course %><br />
-    <%= f.text_field :teacher_course %>
-  </div>
-  <div class="field">
-    <%= f.label :unmark_number %><br />
-    <%= f.number_field :unmark_number %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<div>
+     <h3>Create Homework</h3>
+     title:<input type="text" name="title" placeholder="作业标题..." class="homework-input" /> 
+     content:  <textarea placeholder="作业描述..." name='content' class="homework-input" ></textarea> 
+     deadline: <input placeholder="截止日期..." type="text" name="deadline" readonly id="homework-deadline" class="homework-input" > 
+     <input type="button" value="CREATE" id="create-homework-button"/>
+</div>

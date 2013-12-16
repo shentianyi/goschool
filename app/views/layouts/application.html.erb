@@ -8,10 +8,10 @@
      <body>
           <%= render 'shares/left_aside'%>
           <%= yield %>
-          <div id="autoComplete-call" class="autoComplete-call"><ul></ul></div>
-          <div class="message-box" id="MessageBox">
-               <p></p>
+          <div id="autoComplete-call" class="autoComplete-call">
+               <ul></ul>
           </div>
+          <%= render 'shares/message_box'%>
      </body>
      <%= javascript_include_tag "application" %>
      <%= yield :javascript_includes%>
