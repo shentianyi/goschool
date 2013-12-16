@@ -155,7 +155,7 @@ class StudentsController < ApplicationController
   end
 
   def courses(student)
-    
+    @courses = StudentCoursePresenter.init_presenters(Student.course_detail(student.id).all)
   end
   
   def achievements(student)

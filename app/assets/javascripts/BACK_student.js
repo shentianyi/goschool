@@ -61,3 +61,19 @@ BACKSTUDENT.post_add_student = function(option){
 	}
     })
 }
+
+BACKSTUDENT.check = new Object();
+
+BACKSTUDENT.check.email = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+
+BACKSTUDENT.check.phone = /^0*(13|15)\d{9}$/;
+
+BACKSTUDENT.check.test = function(str,type){
+    if(BACKSTUDENT.check[type].test(str)){
+	return true;
+    }
+    else{
+	MessageBox_content('格式不正确！请输入正确的格式');
+	return false;
+    }
+}

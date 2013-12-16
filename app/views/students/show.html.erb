@@ -69,7 +69,7 @@
           <i class="dropdown icon"></i>课程及服务
         </div>
         <div class="active content class-and-service">
-	  <%= render partial:'class-and-service'%>
+	  <%= render partial:'class-and-service' if @courses%>
 	</div>
       </div>
       <div class="item achievement" id="achieve">
