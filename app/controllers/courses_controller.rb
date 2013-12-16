@@ -1,9 +1,9 @@
 #encoding: utf-8
 class CoursesController < ApplicationController
   before_filter :init_message ,:only=>[:edit,:create,:update,:destroy,:subs,:add_teacher]
-  before_filter :get_course,:only=>[:edit,:show,:update,:edit,:destroy,:subs,:add_teacher]
+  before_filter :get_course,:only=>[:edit,:show,:update,:edit,:destroy,:subs,:add_teacher,:detail]
   before_filter :render_nil_msg , :only=>[:edit,:update,:destroy,:subs,:add_teacher]
-  before_filter :render_404,:only=>[:edit,:show]
+  before_filter :render_404,:only=>[:edit,:show,:detail]
   
   def index
     @active_left_aside='courses'
@@ -115,6 +115,11 @@ class CoursesController < ApplicationController
      @msg.content='课程包含子课程，请先删除子课程'
    end
    render :json=>@msg
+ end
+ 
+ def detail
+   @course=CoursePresenter.new(@course)
+   render partial:'detail'
  end
   private
 

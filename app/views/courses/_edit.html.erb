@@ -1,5 +1,5 @@
 <div class="inner">
-     <i class="remove icon"></i>
+     <i class="remove icon" id="close-edit-course-icon"></i>
      <p>
           编辑<%= @course.type_display%>信息
      </p>
@@ -75,7 +75,7 @@
                     <i class="male icon"></i>
                </div>
                <div class="sub-course-block teachers" id="sub-course-teachers" style="<%= 'display:block' if @course.has_sub%>">
-                    <%@course.sub_courses.each do |sub_course|%>
+                    <%@course.sub_courses.each_with_index do |sub_course,i|%>
                     <div class="sub-course-block-item" sub-course="<%=sub_course.id%>">
                          <div class="ui input sub-course-name">
                               <input placeholder="子<%= @course.type_display%>名..." type="text" value="<%= sub_course.name%>" class="sub-course-name-input"/>
@@ -90,7 +90,7 @@
                                    </li>
                                    <%end%>
                                    <li>
-                                        <input type='text' placeholder="老师..." id="sub-teacher-course-1" autocomplete="teachers" class="sub-course-teachers-input-complete"/>
+                                        <input type='text' placeholder="老师..." id="sub-teacher-course-<%=i%>" autocomplete="teachers" class="sub-course-teachers-input-complete"/>
                                    </li>
                               </ul>
                          </div>
@@ -102,7 +102,7 @@
                </div>
           </div>
      </div>
-     <div class="ui red button">
+     <div class="ui red button" id="finish-edit-course-button">
           完 成
      </div>
 </div>

@@ -71,6 +71,7 @@ Goschool::Application.routes.draw do
       get :list_search
       get :subs
       post :add_teacher
+      get :detail
     end
   end
 

@@ -177,5 +177,10 @@ function init_course_edit() {
 					msg.result = false;
 				}
 		});
+		$("#finish-edit-course-button,#close-edit-course-icon").bind('click',function(){
+		     course_manager.detail($("#course-detail-info").attr('course'),function(data){
+		          $("#course-detail-content").html(data);
+		     });
+		});
 	});
 }
