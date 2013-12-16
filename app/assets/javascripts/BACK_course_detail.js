@@ -37,6 +37,7 @@ DETAIL.course={};
         }
     });
     $("body").on("click","#course-detail-edit",function(){
+        $("#teacher").children().removeClass("active");
         $(".back-index-add[name='course']").css("left","0px").css("right","0px");
         //post(get edit course/service template)
         course_manager.edit($("#course-detail-info").attr('course'), function(data) {
@@ -91,10 +92,10 @@ DETAIL.course={};
                             $(this).parent().parent().toggleClass("positive");
                             //post
                             var id=$(this).parents("tr").eq(0).attr("id");
-                            var state=$(this).parent().parent().hasClass("positive")?'pay':"unpay";
+                            var paid=$(this).parent().parent().hasClass("positive");
                             $.ajax({
-                                url:"",
-                                data:{id:id},
+                                url:"/student_courses/"+id,
+                                data:{student_course:{paid:paid}},
                                 type:'PUT',
                                 success:function(data){
                                     if(data.result){

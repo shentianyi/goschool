@@ -32,7 +32,7 @@
     $('#accordion').accordion();
     $("body").on("click","#detail-navigation .item",function(event){
         var target= $.trim($(this).attr("href").replace(/#/,""));
-        if(!$(this).hasClass("active")){
+        if(!$("#"+target).find(".title").hasClass("active")){
             var now_href=window.location.href.split("/");
             var length=now_href.length;
             if(now_href[length-1].indexOf("#")==-1){
@@ -54,13 +54,25 @@
                 }
             });
         }
-        else{
-            if($("#"+target).find(".title").hasClass("active")){
-                $("#"+target).children().removeClass("active");
+    }).on("click","#accordion .item .title",function(){
+        if($(this).hasClass("active")){
+            var target=$(this).parent().attr("id");
+            var now_href=window.location.href.split("/");
+            var length=now_href.length;
+            if(now_href[length-1].indexOf("#")==-1){
+                now_href=now_href.join("/")+'/';
             }
             else{
-                $("#"+target).children().addClass("active");
+                now_href=now_href.slice(0,length-1).join("/")+'/';
             }
+            $.ajax({
+                url:now_href+target+"/ajax",
+                dataType:"html",
+                success:function(data){
+                    window.history.pushState({},"",now_href+target+"#"+target);
+                    $("#"+target).find(".content").html(data);
+                }
+            });
         }
     });
     $("body").on("click","[for='detail-add']",function(){
