@@ -254,18 +254,28 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     }).on("click","#consult-record .comment-block .button",function(){
         var value=$(this).prev().val();
         var date=new Date().toWayneString().day;
-	data = {};
+	data = {
+	    id:'',
+	    consultation:{}
+	}
 	
-	consultation_manager.update()
-	
+	data.id = $(this).attr("id");
+	data.consultation.comment = value;
+	data.consultation.comment_time = date;
+	var target = $(this);
         if($.trim(value).length>0){
-            $(this).prev().val("");
-            $(this).parents(".comment-block").prev("dl")
-                .append($("<dd />")
-                        .append($("<span />").text(value))
-                        .append($("<span />").text(date))
-                        .append($("<i />").addClass("icon remove"))
-                       )
+	    consultation_manager.comment(data,function(data){
+		if(data.result){
+		    var res = data.object;
+		    target.prev().val("");
+		    target.parents(".comment-block").prev("dl")
+			.append($("<dd />")
+				.append($("<span />").text(res.consultation.comment))
+				.append($("<span />").text(res.consultation.comment_time_display))
+				.append($("<i />").addClass("icon remove"))
+			       )
+		}
+	    });
         }
         else{
             MessageBox("请输入内容","top","warning");
@@ -497,11 +507,11 @@ STUDENTDETAIL.add_consult_record=function(){
 	consultation:consultation
     },function(data){
 	if(data.result){
-	    var data={consult_record:{time:time,customer:customer,content:content,service:service}};
-	    var render=Mustache.render("{{#consult_record}}<div class='item'>"+
-				       "<p>{{time}}"+" "+"{{customer}}</p>"+
+	    var res = data.object;
+	    var render=Mustache.render("{{#consultation}}<div class='item'>"+
+				       "<p>{{consult_time_display}}"+" "+"{{consultants}}</p>"+
 				       "<p>{{content}}</p>"+
-				       "<p>接线人:{{service}}</p>"+
+				       "<p>接线人:{{recorder}}</p>"+
 				       "<dl>"+
 				       "<dt>评论：</dt>"+
 				       "</dl>"+
@@ -509,7 +519,7 @@ STUDENTDETAIL.add_consult_record=function(){
 				       "<input type='text'/>"+
 				       "<div class='ui button tiny'>评论</div>"+
 				       "</div>"+
-				       "</div>{{/consult_record}}",data);
+				       "</div>{{/consultation}}",res);
 	    $("#consult-record .content").append(render);
 	    $(".detail-add[type='consult-record'] .icon.remove").click();
 	}else

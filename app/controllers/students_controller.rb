@@ -151,7 +151,7 @@ class StudentsController < ApplicationController
   private
 
   def consultation(student)
-    @consultations = StudentConsultationPresenter.init_presenters(student.consultations)
+    @consultations = ConsultationPresenter.init_presenters(student.consultations)
   end
 
   def courses(student)

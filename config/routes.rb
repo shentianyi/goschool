@@ -101,7 +101,7 @@ Goschool::Application.routes.draw do
   resource :logininfo_sessions
   resources :consultations do
     collection do
-      put :comment
+      post :comment
     end
   end
 

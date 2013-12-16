@@ -14,6 +14,7 @@ class ConsultationsController < ApplicationController
       @consultation.logininfo_id = current_user.id
       if @consultation.save
         msg.result = true
+        msg.object = ConsultationPresenter.new(@consultation).to_json
       end
     else
       msg.content = '学生不存在！'
@@ -29,6 +30,7 @@ class ConsultationsController < ApplicationController
     @consultation = Consultation.find(params[:id])
     @consultation.update_attributes(params[:consultation])
     msg.result = true
+    msg.object = ConsultationPresenter.new(@consultation).to_json
     render :json=>msg
   end
 end
