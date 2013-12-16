@@ -15,6 +15,19 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
             $("#student-edit-section").html(data);
         });
     });
+    //删除学生
+    $("body").on("click","#delete-student-button",function(){
+        if(confirm('确定删除？')){
+            student_manager.destroy($("#student-detail-info").attr('student'),function(data){
+                if(data.result){
+                    alert("删除成功！");
+                    window.location="/students";
+                }else{
+                    MessageBox(data.content,"top","warning");
+                }
+            });
+        }
+    });
     ////////////////////////////////////////////////////////最终成绩
     //最终成就
     $("body").on("click","#achieve .icon.plus",function(){
@@ -313,16 +326,18 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
                     prompt : '请填写咨询内容'
                 }
             ]
-        },
-        service:{
-            identifier : 'service',
-            rules: [
-                {
-                    type   : 'empty',
-                    prompt : '请填写接线人姓名'
-                }
-            ]
         }
+        /*
+	  service:{
+          identifier : 'service',
+          rules: [
+          {
+          type   : 'empty',
+          prompt : '请填写接线人姓名'
+          }
+          ]
+          }
+	*/
     },{
         inline : true,
         onSuccess:function(){

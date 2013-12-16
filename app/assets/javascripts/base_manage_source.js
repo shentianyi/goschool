@@ -93,6 +93,10 @@ var student_manager = $.extend({
     source : 'students'
 },manager);
 
+var consultation_manager = $.extern({
+    source : 'consultations'
+},manager);
+
 var sub_course_manager = $.extend({
      source : 'sub_courses'
 }, manager);
