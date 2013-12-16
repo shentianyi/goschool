@@ -66,6 +66,7 @@ var BACKCOURSE=BACKCOURSE || {};
     });
 
      $("body").on("click", ".sub-course-block-item>i", function() {
+          alert('');
           var msg = {
                result : true
           };
