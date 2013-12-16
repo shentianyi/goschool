@@ -141,5 +141,5 @@ var schedule_manager = $.extend({
 }, manager);
 
 var homework_manager = $.extend({
-     source : 'homeworks'
+     source : 'homeworks'     
 }, manager);

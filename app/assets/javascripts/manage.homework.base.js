@@ -19,6 +19,7 @@ function init_teacher_homework() {
 
 function bind_menu_event() {
 	$(".home-work-menu-a").click(function() {
-		alert($(this).attr('type'));
+		// alert(window.location.href);
+		// alert($(this).attr('type'));
 	});
 }
