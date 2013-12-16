@@ -4,6 +4,8 @@ class HomeworksController < ApplicationController
   before_filter :get_homework,:only=>[:show,:update,:destroy]
   before_filter :render_nil_msg , :only=>[:edit,:update,:destroy]
   before_filter :require_user_as_teacher, :only=>[:index,:create,:teacher,:update,:destroy]
+  
+  layout 'homework'
   def index
     @homeworks=Homework.all
   end
@@ -17,7 +19,7 @@ class HomeworksController < ApplicationController
 
   # homeworks/teacher?course=1&cate=100&sub=1
   def teacher
-    
+  @menus=  HomeworkTeacherMenuType.generate_menu
   end
 
   def update

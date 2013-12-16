@@ -13,7 +13,11 @@ Goschool::Application.routes.draw do
 
   resources :student_homeworks
 
-  resources :homeworks
+  resources :homeworks do
+    collection do
+      get :teacher
+    end
+  end
 
   resources :achievements
 
@@ -98,7 +102,7 @@ Goschool::Application.routes.draw do
   resources :consultations do
     collection do
       put :comment
-    end 
+    end
   end
 
   controller :logininfo_sessions do
