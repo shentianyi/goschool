@@ -51,7 +51,6 @@ class Course < ActiveRecord::Base
   end
 
   def recommendations 
-    # puts Recommendation.new.get_potential_student_for_course(self.tenant_id,self.id).map{|res| res.id}.class
     Student.where(:id=>Recommendation.new.get_potential_student_for_course(self.tenant_id,self.id).map{|res| res.id}).all
   end
 

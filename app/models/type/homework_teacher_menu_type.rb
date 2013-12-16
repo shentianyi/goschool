@@ -33,7 +33,7 @@ class HomeworkTeacherMenuType<StatusBase
 
  private 
  def self.generate_time_condition type
-       {created_at:[Time.now.ago((type-10).days)..Time.now.ago(type.days)]}
+       {created_at:[Time.now.ago((type-base_peroid).days)..Time.now.ago(type.days)]}
  end
 
  def self.genenerate_menu_item type
@@ -43,11 +43,15 @@ class HomeworkTeacherMenuType<StatusBase
     when OTHER
 	'更多'
     else
-
+       genenerate_time_menu type
     end
  end
 
  def self.genenerate_time_menu type
-   
+  "#{Time.now.ago((type-base_peroid).days).strftime('%m/%d')}~#{Time.now.ago(type.days).strftime('%m/%d')}"
+ end
+
+ def self.base_period
+   10
  end
 end
