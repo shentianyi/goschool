@@ -1,6 +1,7 @@
 var BACKCOURSE=BACKCOURSE || {};
 //init
 (function(){
+    //添加课程
     $("#course-begin-date").datepicker({
         showOtherMonths: true,
         selectOtherMonths: true,
@@ -41,7 +42,10 @@ var BACKCOURSE=BACKCOURSE || {};
             $( "#service-begin-date" ).datepicker( "option", "maxDate", selectedDate );
         }
     });
-
+    $("body").on("keyup", "input[name='expect_number'],input[name='lesson']", function(event) {
+        var obj = adapt_event(event).target;
+        integerOnly(obj)
+    });
     $("body").on("click","#add-course-tab>.tab-item",function(){
         if(!$(this).hasClass("active")){
             $(this).siblings().removeClass("active");
