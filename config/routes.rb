@@ -15,7 +15,8 @@ Goschool::Application.routes.draw do
 
   resources :homeworks do
     collection do
-      get :teacher
+      get  :teacher
+      get 'teacher/:id'=>:teacher
     end
   end
 

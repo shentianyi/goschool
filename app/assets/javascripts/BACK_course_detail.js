@@ -207,7 +207,11 @@ DETAIL.course={};
             course : {}
         };
         data['course'][$(this).attr('name')] = $(this).val();
-        course_manager.update($("#course-detail-info").attr('course'), data);
+        course_manager.update($("#course-detail-info").attr('course'), data,function(data){
+             if(!data.result){
+                  MessageBox_content(data.content);
+             }
+        });
     });
     $("body").on("change", ".sub-course-name-input", function() {
         var id = $(this).parent().nextAll("i").attr("id");

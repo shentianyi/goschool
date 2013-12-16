@@ -2,6 +2,16 @@ var stopEvent = function(e) {
     e.stopPropagation();
     e.preventDefault();
 }
+function init_date_picker(ele) {
+     $(ele).datepicker({
+          showOtherMonths : true,
+          selectOtherMonths : true,
+          changeMonth : true,
+          changeYear : true,
+          dateFormat : 'yy-mm-dd'
+     });
+}
+
 var manager = {
     create : function(data, callback, async) {
         if(async == null)
@@ -121,11 +131,15 @@ var teacher_course_manager = $.extend({
 }, manager);
 
 var schedule_manager = $.extend({
-    source : 'schedules',
-    send_email : function(params, callback) {
-        $.post('/schedules/send_email', params, function(data) {
-            if(callback)
-                callback(data);
-        }, 'json');
-    }
-}, manager); 
+     source : 'schedules',
+     send_email : function(params, callback) {
+          $.post('/schedules/send_email', params, function(data) {
+               if(callback)
+                    callback(data);
+          }, 'json');
+     }
+}, manager);
+
+var homework_manager = $.extend({
+     source : 'homeworks'
+}, manager);

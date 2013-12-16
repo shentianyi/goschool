@@ -4,10 +4,11 @@
           <title>Goschool</title>
           <%= stylesheet_link_tag    "application", :media => "all" %>
           <%= csrf_meta_tags %>
+          <%= javascript_include_tag "application" %>
+          <%= yield :javascript_includes%>
      </head>
      <body>
           <%= yield %>
+          <%=render 'shares/message_box'%>
      </body>
-     <%= javascript_include_tag "application" %>
-     <%= yield :javascript_includes%>
 </html>
