@@ -1,0 +1,9 @@
+LEFT MENU:
+<ul>
+     <%@menus.each do |menu|%>
+     <li>
+          <a href="#" type="<%= menu.value%>"><%= menu.display%></a>
+     </li>
+     <% end %>
+</ul>
+

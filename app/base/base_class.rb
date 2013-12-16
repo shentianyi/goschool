@@ -1,4 +1,5 @@
 #encoding: utf-8
+require 'base_class'
 module CZ
   class BaseClass
     attr_accessor :key,:created_at
