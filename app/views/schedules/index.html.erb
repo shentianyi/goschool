@@ -46,19 +46,19 @@
     <p>发送课表</p>
     <label>快捷发送</label>
     <div class="send-buttons">
-      <div class="ui animated fade button small twitter">
+      <div class="ui animated fade button small twitter schedule-sender-button" sender="<%=ScheduleType::ALL%>">
         <div class="visible content">给所有人</div>
         <div class="hidden content">
           现在发送
         </div>
       </div>
-      <div class="ui animated fade button small twitter">
+      <div class="ui animated fade button small twitter schedule-sender-button" sender="<%=ScheduleType::TEACHER%>">
         <div class="visible content">给所有的老师</div>
         <div class="hidden content">
           现在发送
         </div>
       </div>
-      <div class="ui animated fade button small twitter">
+      <div class="ui animated fade button small twitter schedule-sender-button" sender="<%=ScheduleType::STUDENT%>">
         <div class="visible content">给所有的学生</div>
         <div class="hidden content">
           现在发送
@@ -87,5 +87,6 @@
 <%= javascript_include_tag "dhtmlxscheduler.js"%>
 <%= javascript_include_tag "dhtmlxscheduler_quick_info.js"%>
 <%= javascript_include_tag "locale_cn.js"%>
+<%= javascript_include_tag "base_manage_source.js"%>
 <%= javascript_include_tag "BACK_course_schedule.js"%>
 <%end%>

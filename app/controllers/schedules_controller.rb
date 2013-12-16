@@ -59,8 +59,14 @@ class SchedulesController < ApplicationController
   end
 
   def send_email
-    EmailService.send_schedule_email(params[:type].to_i,params[:institution_id])
-    render :json=>1
+    @msg=Msg.new({result:true,content:'课表已发送'})
+    begin
+    EmailService.send_schedule_job(params[:type],params[:institution_id])
+    rescue Exception=>e
+      @msg.result=false
+      @msg.content='课表发送失败，请联系服务商'
+    end
+    render :json=>@msg
   end
 
   private
