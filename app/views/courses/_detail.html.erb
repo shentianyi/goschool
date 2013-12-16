@@ -1,41 +1,39 @@
 <div class="content-info">
      内容主页
 </div>
-<div class="info" course="<%=@course.id%>" id="course-detail-info">
+<div class="info" course="<%= @course.id%>" id="course-detail-info">
      <p class="detail-name">
-          <%=@course.name%>
+          <%= @course.name%>
      </p>
      <p class='detail-desc'>
-          <%=@course.description%>
+          <%= @course.description%>
      </p>
-<p class='detail-teachers'><span>授课老师:</span><span><%=@course.teacher_names_string%></span></p>
+     <p class='detail-teachers'>
+          <span>授课老师:</span><span><%= @course.teacher_names_string%></span>
+     </p>
      <p class="detail-time">
-          <span>授课时间:</span><span><%=@course.start_date%> -- <%=@course.end_date%></span>
+          <span>授课时间:</span><span><%= @course.start_date%> -- <%= @course.end_date%></span>
      </p>
      <p class="detail-count">
-          <span>课时数:</span><span><%=@course.lesson%>课时</span>
+          <span>课时数:</span><span><%= @course.lesson%>课时</span>
      </p>
      <p class="detail-people">
-          <span>预计人数:</span><span><%=@course.expect_number%></span>
+          <span>预计人数:</span><span><%= @course.expect_number%></span>
      </p>
      <p class="detail-people">
-          <span>实际人数:</span><span id="actual-student"><%=@course.actual_number%></span>
+          <span>实际人数:</span><span id="actual-student"><%= @course.actual_number%></span>
      </p>
      <p class="detail-institution">
-          <span>所属机构:</span><span><%=@course.institution_name%></span>
+          <span>所属机构:</span><span><%= @course.institution_name%></span>
      </p>
      <p class="detail-code">
-          <span>课程代号:</span><span><%=@course.code%></span>
+          <span>课程代号:</span><span><%= @course.code%></span>
      </p>
      <p class="detail-labels">
           <span>标签:</span>
-          
-          <span>
-               
-                 <%@course.tags.each do |tag|%>
-                         <a class="ui blue label"> <%= tag%> </a>
-                         <%end%>
+
+          <span> <%@course.tags.each do |tag|%> <a class="ui blue label"> <%= tag%> </a> <%end%>
      </p>
-     <a class="ui red button detail-button"  course="<%=@course.id%>">删除<%=@course.type_display%></a>
-     <a class="ui teal button detail-button" id="course-detail-edit" course="<%=@course.id%>">编辑<%=@course.type_display%>信息</a>
+     <a class="ui red button detail-button"  course="<%= @course.id%>" id="delete-course-button">删除<%= @course.type_display%></a>
+     <a class="ui teal button detail-button" id="course-detail-edit" course="<%= @course.id%>">编辑<%= @course.type_display%>信息</a>
 </div>

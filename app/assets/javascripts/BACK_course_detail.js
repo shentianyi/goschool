@@ -44,6 +44,18 @@ DETAIL.course={};
 			$("#course-edit-section").html(data);
 		});
     });
+    $("#delete-course-button").click(function(){
+         if(confirm('确定删除？')){
+              course_manager.destroy($("#course-detail-info").attr('course'),function(data){
+                   if(data.result){
+                        alert('删除成功');
+                         window.location="/courses";
+                        }else{
+                          MessageBox(data.content,"top","warning");
+                   }
+              });
+         }
+    });
     $("body").on("click",".out-class",function(){
           if(confirm("确认为该学生退班吗？")){
               var id=$(this).attr("affect");
