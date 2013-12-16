@@ -308,7 +308,9 @@ GLOBAL.autoComplete.count = 0;
           }
           //除去left and right
           else if(e.keyCode != 37 && e.keyCode != 39 && e.keyCode != 13) {
-               $("#autoComplete-call>ul").empty();
+               window.setTimeout(function(){
+                  $("#autoComplete-call>ul").empty();
+               },100);
                GLOBAL.autoComplete.count++;
                var $this = $(adapt_event(event).target).parents(".autoComplete").eq(0);
                var $my = $(adapt_event(event).target);
@@ -471,7 +473,6 @@ GLOBAL.autoComplete.count = 0;
                } else {
                     if($input.attr("im") == "label" && $input.attr("ishould") == "BeSelected") {
                          if($("#autoComplete-call").find(".active").length > 0) {
-                             alert($("#autoComplete-call").find(".active").length)
                               var value = $.trim($input.val());
                               var id = $("#autoComplete-call").find(".active").attr("id");
                               var type = $("#autoComplete-call").find(".active").attr("type");
@@ -505,10 +506,9 @@ GLOBAL.autoComplete.count = 0;
                               }
 
                          }
-                         else {
-                             alert($("#autoComplete-call").find(".active").length)
-                              MessageBox("请在下拉提示菜单中选择一条", "top", "warning");
-                         }
+//                         else {
+//                              MessageBox("请在下拉提示菜单中选择一条", "top", "warning");
+//                         }
                     } else if($input.attr("im") == "label") {
                          var value = $.trim($input.val());
                          $input.parent().before($("<li />").append($("<div />").addClass("ui label").text(value).append($("<i />").addClass("delete icon"))));
