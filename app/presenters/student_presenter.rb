@@ -55,8 +55,8 @@ class StudentPresenter<Presenter
   def last_consultation_
     @lasts = Consultation.where("student_id = ?",self.id).order(:consult_time)
     if @lasts.first
-      @presenter = StudentConsultationPresenter.new(@lasts.first)
-      return @presenter.time
+      @presenter = ConsultationPresenter.new(@lasts.first)
+      return @presenter.consult_time_display
     end
     return nil
   end
