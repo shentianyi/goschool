@@ -38,6 +38,10 @@ class Student < ActiveRecord::Base
     self.gender == 1 ? true : false
   end
 
+  def is_actived?
+    self.logininfo.status == UserStatus::ACTIVE ? true : false
+  end
+
   def validate_save
     errors.add(:name,'名字不能为空') if self.name.blank?
     errors.add(:phone, '电话不能为空') if self.phone.blank?

@@ -7,51 +7,51 @@
       <img id="image-url" class="ui circular image " src="<%= @presenter.image_url%>">
     </div>
     <div class="ui left icon input">
-      <input id="name" placeholder="姓名..." type="text" value="<%= @presenter.name %>">
+      <input id="name" placeholder="姓名..." type="text" value="<%= @presenter.name %>" class="update-input">
       <i class="user icon"></i>
     </div>
-    <divid="gender" class="sex stop">
+    <div id="gender" class="sex stop">
       <div class="ui radio checkbox">
-        <input name="sex" <% if @presenter.student.is_male? %>checked="checked" <% end %> type="radio">
+        <input name="sex" <% if @presenter.student.is_male? %> checked="checked" <% end %> type="radio">
         <label>男</label>
       </div>
       <div class="ui radio checkbox">
-        <input name="sex" <%if !@presenter.student.is_male?%> checked="checked"<% end %>  type="radio">
+        <input name="sex" <% if !@presenter.student.is_male?%> checked="checked"<% end %>  type="radio">
         <label>女</label>
       </div>
     </div>
     <div class="ui left icon input calendar">
-      <input id="born-date" placeholder="出生年月..." type="text" readonly id="born-date" value="<%= @presenter.birth_ %>">
+      <input placeholder="出生年月..." type="text" readonly id="birthday" value="<%= @presenter.birth_ %>" class="update-input">
       <i class="calendar icon"></i>
     </div>
     <div class="ui left icon input">
-      <input id="school" placeholder="就读学校..." type="text" value="<%= @presenter.school %>">
+      <input id="school" placeholder="就读学校..." type="text" value="<%= @presenter.school %>" class="update-input">
       <i class="building icon"></i>
     </div>
     <div class="ui left icon input calendar">
-      <input id="graduation-date" placeholder="毕业年限..." type="text" readonly id="graduation-date" value="<%= @presenter.graduate_ %>">
+      <input placeholder="毕业年限..." type="text" readonly id="graduation" value="<%= @presenter.graduate_ %>" class="update-input">
       <i class="empty bookmark icon"></i>
     </div>
   </div>
   <div class="right-part">
     <div class="ui left icon input">
-      <input id="email" placeholder="邮件地址..." type="text" value="<%= @presenter.email %>">
+      <input id="email" placeholder="邮件地址..." type="text" value="<%= @presenter.email %>" class="update-input">
       <i class="mail outline icon"></i>
     </div>
     <div class="ui left icon input">
-      <input id="phone" placeholder="联系电话..." type="text" value="<%= @presenter.phone %>">
+      <input id="phone" placeholder="联系电话..." type="text" value="<%= @presenter.phone %>" class="update-input">
       <i class="phone icon"></i>
     </div>
     <div class="ui left icon input">
-      <input id="address" placeholder="联系地址..." type="text" value="<%=  @presenter.address %>">
+      <input id="address" placeholder="联系地址..." type="text" value="<%=  @presenter.address %>" class="update-input">
       <i class="home icon"></i>
     </div>
     <div class="ui left icon input">
-      <input id="guardian" placeholder="监护人..." type="text" value="<%=  @presenter.guardian %>">
+      <input id="guardian" placeholder="监护人..." type="text" value="<%=  @presenter.guardian %>" class="update-input">
       <i class="male icon"></i>
     </div>
     <div class="ui left icon input">
-      <input id="guardian_phone" placeholder="监护人电话..." type="text" value="<%=  @presenter.guardian_phone %>">
+      <input id="guardian_phone" placeholder="监护人电话..." type="text" value="<%=  @presenter.guardian_phone %>" class="update-input">
       <i class="mobile icon"></i>
     </div>
     <div class="ui left icon input specialInput labelForm autoComplete">
@@ -64,15 +64,16 @@
       <i class="tag icon stop"></i>
     </div>
     <div class="ui left icon input autoComplete">
-      <% if @presenter.referrer_ %>
-      <li>
-	<div class="ui label" id="<%= @presenter.referrer_.id %>" type="" logininfo_id="<%= @presenter.referrer_.logininfo_id%>">
-	  <%= @presenter.name %><i class="delete icon"></i>
-	</div>	
-      </li>
-      <% end %>
-      <li><input placeholder="推荐人..." id="autoC3" type="text">
-      <i class="smile icon"></i>
+      <ul id="referrer">
+	<% if @presenter.referrer_ %>
+	<li><div class="ui label" id="<%= @presenter.referrer_.id %>" type="" logininfo_id="<%= @presenter.referrer_.logininfo_id%>"><%= @presenter.referrer_.name %><i class="delete icon"></i></div></li>
+	<% end %>
+	<li><input placeholder="推荐人..." id="autoC3" type="text"><i class="smile icon"></i></li>
+      </ul>
+    </div>
+    <div id="is_active_account" class="ui checkbox stop">
+      <input name="fun" type="checkbox" <% if @presenter.student.is_actived? %> checked <% end %> class="update-input">
+      <label>同时开设学生账号</label>
     </div>
     <div id="edit-student" class="ui red button">
       编辑
@@ -81,55 +82,6 @@
 </div>
 
 <script type="text/javascript">
-    $(function(){
-    $("#born-date,#graduation-date").datepicker({
-    showOtherMonths: true,
-    selectOtherMonths: true,
-    changeMonth: true,
-    changeYear: true,
-    showMonthAfterYear:true,
-    yearRange: "-30:+10",
-    dateFormat:'yy-mm-dd'
-    });
-    
-    $(document).ready(function(){
-    $("body").on("click","#edit-student",function({
-    //write your post code here
-    var student = {};
-    student.image_url = $("#image_url").attr("src");
-    student.name = $("#name").val();
-    student.gender = $("#gender input[type=radio]:checked").val();
-    student.birthday = $("#born-date").val();
-    student.school = $("#school").val();
-    student.graduation = $("#graduation-date").val();
-    student.email = $("#email").val();
-    student.phone = $("#phone").val();
-    student.address = $("#address").val();
-    student.guardian = $("#guardian").val();
-    student.guardian_phone = $("#guardian_phone").val();
-    student.referrer_id = $("#referrer>li").eq(0).find("div").attr("logininfo_id");
-	    
-    var is_active_account = $("#is_active_account input[type='checkbox']").prop("checked")
+  init_student_edit();
 
-    student.tags = [];
-    var $target = $(".back-index-add[name='student']");
-    var length = $target.find("[id='tags']").children().length,tag,tags=[];
-    for(var i =0;i<length-1;i++)
-		     {
-		     tag = $target.find("[id='tags']>li").eq(i).find("div").text();
-		     tags.push(tag);
-		     }
-		     student.tags = tags;
-    student_manager.update($("#student-detail-info").attr('student'),student,function(data){
-		     if(data.result){
-		     alert("success");
-		     }
-		     else{
-		     alert("failed");
-		     }
-		     })
-    })
-    });
-		     
-    });
 </script>
