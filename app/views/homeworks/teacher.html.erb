@@ -8,6 +8,7 @@
           <td style="background: grey;width: 70%"> 33 </td>
      </tr>
 </table>
+<input type="hidden" value="<%=@teacher_course.id%>" id="teacher-course-hidden" />
 <script type="text/javascript"> init_teacher_homework();</script>
 <% content_for :javascript_includes do%>
 <%= javascript_include_tag "manage.source.base.js"%>

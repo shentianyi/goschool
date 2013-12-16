@@ -4,11 +4,11 @@ class HomeworksController < ApplicationController
   before_filter :get_homework,:only=>[:show,:update,:destroy]
   before_filter :render_nil_msg , :only=>[:edit,:update,:destroy]
   before_filter :require_user_as_teacher, :only=>[:index,:create,:teacher,:update,:destroy]
-  
+
   layout 'homework'
-  def index
-    @homeworks=Homework.all
-  end
+  # def index
+  # @homeworks=Homework.all
+  # end
   def create
     attach=params[:homework].slice(:attach)[:attach] if params[:homework].has_key?(:attach)
     @homework = Homework.new(params[:homework].except(:attach))
@@ -18,8 +18,12 @@ class HomeworksController < ApplicationController
   end
 
   # homeworks/teacher?course=1&cate=100&sub=1
-  def teacher
-  @menus=  HomeworkTeacherMenuType.generate_menu
+  def teacher 
+    if @teacher_course=TeacherCourse.where(id:params[:id],user_id:current_user.id).first
+      @menus=  HomeworkTeacherMenuType.generate_menu
+    else
+      error_page_404
+    end
   end
 
   def update
