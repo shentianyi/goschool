@@ -10,47 +10,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr id="id">
-      <td>托福秋季班</td>
-      <td>96</td>
-      <td>2013.10.11-2013.12.13</td>
-      <td class="pay-lack">没有支付</td>
+    <% @courses.each do |course|%>
+    <tr id="<%= course.id_display%>">
+      <td><%= course.name %></td>
+      <td><%= course.lesson_display%></td>
+      <td><%= course.period_display%></td>
+      <td class="pay-lack"><%= course.paid_display%></td>
       <td>
         <input type="text" />
       </td>
-      <!--<td>-->
-      <!--<div class="ui striped progress">-->
-      <!--<div class="bar" style="width: 30%;"></div>-->
-      <!--</div>-->
-      <!--</td>-->
     </tr>
-    <tr id="id_another_0">
-      <td>托福秋季班</td>
-      <td>96</td>
-      <td>2013.9.11-2013.10.13</td>
-      <td>已经支付</td>
-      <td>
-        <input type="text" />
-      </td>
-      <!--<td>-->
-      <!--<div class="ui striped progress">-->
-      <!--<div class="bar" style="width: 90%;"></div>-->
-      <!--</div>-->
-      <!--</td>-->
-    </tr>
-    <tr id="id_another">
-      <td>托福夏季班</td>
-      <td>96</td>
-      <td>2013.7.11-2013.8.13</td>
-      <td >已经支付</td>
-      <td>
-        <input type="text" />
-      </td>
-      <!--<td>-->
-      <!--<div class="ui striped progress complete">-->
-      <!--<div class="bar" style="width: 100%;"></div>-->
-      <!--</div>-->
-      <!--</td>-->
-    </tr>
+    <% end %>
   </tbody>
 </table>

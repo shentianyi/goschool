@@ -2,7 +2,7 @@
 var BACKSTUDENT=BACKSTUDENT||{};
 //student init
 (function(){
-    $("#born-date,#graduation-date").datepicker({
+    $("#birthday,#graduation").datepicker({
         showOtherMonths: true,
         selectOtherMonths: true,
         changeMonth: true,
@@ -26,9 +26,9 @@ var BACKSTUDENT=BACKSTUDENT||{};
 	    student.image_url = $("#image_url").attr("src");
 	    student.name = $("#name").val();
 	    student.gender = $("#gender input[type=radio]:checked").val();
-	    student.birthday = $("#born-date").val();
+	    student.birthday = $("#birthday").val();
 	    student.school = $("#school").val();
-	    student.graduation = $("#graduation-date").val();
+	    student.graduation = $("#graduation").val();
 	    student.email = $("#email").val();
 	    student.phone = $("#phone").val();
 	    student.address = $("#address").val();
@@ -82,5 +82,23 @@ BACKSTUDENT.easy_email_validate=function(email){
     }
     else{
         return false
+    }
+}
+
+BACKSTUDENT.check = new Object();
+
+BACKSTUDENT.check.email = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+
+BACKSTUDENT.check.phone = /^0*(13|15|18)\d{9}$/;
+
+BACKSTUDENT.check.guardian_phone = /^0*(13|15|18)\d{9}$/;
+
+BACKSTUDENT.check.test = function(str,type){
+    if(BACKSTUDENT.check[type].test(str)){
+	return true;
+    }
+    else{
+	MessageBox_content('格式不正确！请输入正确的格式');
+	return false;
     }
 }

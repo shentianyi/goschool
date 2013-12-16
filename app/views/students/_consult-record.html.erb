@@ -7,7 +7,9 @@
   <p>接线人:<%= consultation.recorder%></p>
   <dl>
     <dt>评论：</dt>
+    <% if !consultation.comment.blank? %>
     <dd><span><%= consultation.comment%></span><span><%= consultation.comment_time%></span><i class="icon remove"></i></dd>
+    <% end %>
   </dl>
   <div class="comment-block">
     <input type="text"/>

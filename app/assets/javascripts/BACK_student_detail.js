@@ -15,6 +15,19 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
             $("#student-edit-section").html(data);
         });
     });
+    //删除学生
+    $("body").on("click","#delete-student-button",function(){
+        if(confirm('确定删除？')){
+            student_manager.destroy($("#student-detail-info").attr('student'),function(data){
+                if(data.result){
+                    alert("删除成功！");
+                    window.location="/students";
+                }else{
+                    MessageBox(data.content,"top","warning");
+                }
+            });
+        }
+    });
     ////////////////////////////////////////////////////////最终成绩
     //最终成就
     $("body").on("click","#achieve .icon.plus",function(){
@@ -241,6 +254,10 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     }).on("click","#consult-record .comment-block .button",function(){
         var value=$(this).prev().val();
         var date=new Date().toWayneString().day;
+	data = {};
+	
+	consultation_manager.update()
+	
         if($.trim(value).length>0){
             $(this).prev().val("");
             $(this).parents(".comment-block").prev("dl")
@@ -313,16 +330,18 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
                     prompt : '请填写咨询内容'
                 }
             ]
-        },
-        service:{
-            identifier : 'service',
-            rules: [
-                {
-                    type   : 'empty',
-                    prompt : '请填写接线人姓名'
-                }
-            ]
         }
+        /*
+	  service:{
+          identifier : 'service',
+          rules: [
+          {
+          type   : 'empty',
+          prompt : '请填写接线人姓名'
+          }
+          ]
+          }
+	*/
     },{
         inline : true,
         onSuccess:function(){
@@ -466,7 +485,7 @@ STUDENTDETAIL.add_consult_record=function(){
     content=$("#consult-record-content").val(),
     service=$("#consult-record-service").val();
 
-    var student_id = $("div#detail-content div.info").attr("id");
+    var student_id = $("div#detail-content div.info").attr("student");
     var consultation = {};
     consultation.student_id = student_id;
     consultation.consultants = customer;

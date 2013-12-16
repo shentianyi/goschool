@@ -12,7 +12,7 @@ class Schedule < ActiveRecord::Base
     joins(:sub_course).where(:id=>id).select('*,sub_courses.*').first
   end
   
-  def self.by_insititution_id institution_id
+  def self.by_institution_id institution_id
    base_query(institution_id)
   end
    

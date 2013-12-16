@@ -8,4 +8,6 @@ class Tenant < ActiveRecord::Base
   has_many :users, :through=>:logininfos
   has_many :students, :dependent=>:destroy
   attr_accessible :access_key, :company_name, :edition, :subscription_status,:domain,:logininfo_id
+
+  validates :company_name, :presence => true
 end

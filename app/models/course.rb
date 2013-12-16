@@ -49,6 +49,11 @@ class Course < ActiveRecord::Base
   def teacher_names
     teachers.uniq.map{|t| t.name}
   end
+
+  def recommendations 
+    Student.where(:id=>Recommendation.new.get_potential_student_for_course(self.tenant_id,self.id).map{|res| res.id}).all
+  end
+
   private
 
   def validate_save

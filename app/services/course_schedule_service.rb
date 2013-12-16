@@ -26,7 +26,7 @@ class CourseScheduleService
 
   def generate_employee_schedule institution_id
     if Schedule.by_institution_id(institution_id).count>0
-      return Schedule.by_insititution_id(institution_id).all
+      return Schedule.by_institution_id(institution_id).all
     end
   end
 

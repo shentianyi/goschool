@@ -25,7 +25,7 @@ class HomeworkTeacherMenuType<StatusBase
   menus=[] 
   self.constants.each do |c|
     value=self.const_get(c.to_s)
-    menus<< Menu.new({value:value,dispaly: genenerate_menu_item(self.const_get(c.to_s))})
+    menus<< Menu.new({value:value,display: genenerate_menu_item(self.const_get(c.to_s))})
   end
   return menus
  end
@@ -33,7 +33,7 @@ class HomeworkTeacherMenuType<StatusBase
 
  private 
  def self.generate_time_condition type
-       {created_at:[Time.now.ago((type-10).days)..Time.now.ago(type.days)]}
+       {created_at:[Time.now.ago((type-base_period).days)..Time.now.ago(type.days)]}
  end
 
  def self.genenerate_menu_item type
@@ -41,13 +41,17 @@ class HomeworkTeacherMenuType<StatusBase
     when ONGOING
 	'未完成批改'
     when OTHER
-	'更多'
+	'更多>>'
     else
-
+       genenerate_time_menu type
     end
  end
 
  def self.genenerate_time_menu type
-   
+  Time.now.ago(type.days).strftime('%m/%d')+"~"+Time.now.ago((type-base_period).days).strftime('%m/%d')
+ end
+
+ def self.base_period
+   10
  end
 end

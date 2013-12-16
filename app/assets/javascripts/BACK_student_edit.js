@@ -55,15 +55,15 @@ function init_student_edit() {
                 is_active_account : false
             };
             data.id =  $("#student-detail-info").attr('student');
-            data['student'][$(this).attr('id')] = $(this).val();
-
-            student_manager.update($("#student-detail-info").attr('student'),data),function(){
-                if(data.result){
-                }
-                else{
-                }
-            };
-
+	    if(BACKSTUDENT.check.test($(this).val(),$(this).attr('id'))){
+		data['student'][$(this).attr('id')] = $(this).val();
+		student_manager.update($("#student-detail-info").attr('student'),data),function(){
+                    if(data.result){
+                    }
+                    else{
+                    }
+		};
+	    }
         });
     });
 }

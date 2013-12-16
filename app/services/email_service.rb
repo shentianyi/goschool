@@ -1,5 +1,8 @@
 #encoding: utf-8
 class EmailService
+  def self. send_schedule_job  type,institution_id
+    Resque.enqueue(CourseEmailSender,type,institution_id)
+  end
   def self.send_schedule_email type,institution_id
     case type
     when ScheduleType::ALL
@@ -27,9 +30,11 @@ class EmailService
 
   def self.send_teacher_schedule_email type,institution_id
     teachers=User.get_teachers(institution_id)
+    puts "teachers:#{teachers.to_json}"
     teachers.each do |teacher|
       css=CourseScheduleService.new({type:type,institution_id:institution_id,user_id:teacher.id})
       if schedules=css.generate_schedule
+         puts "schedules:#{schedules.to_json}"
         send_schedule schedules,teacher.email
       end
     end

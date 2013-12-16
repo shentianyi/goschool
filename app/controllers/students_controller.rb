@@ -17,6 +17,7 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
+    @active_left_aside='students'
     @student = Student.find(params[:id])
     @presenter=StudentPresenter.new(@student)
     
@@ -82,7 +83,6 @@ class StudentsController < ApplicationController
         @logininfo.save!
         @student.logininfo = @logininfo
         @student.tenant = current_tenant
-        puts @student.as_json
         @student.save!
         msg.result = true
       end
@@ -155,7 +155,7 @@ class StudentsController < ApplicationController
   end
 
   def courses(student)
-    
+    @courses = StudentCoursePresenter.init_presenters(Student.course_detail(student.id).all)
   end
   
   def achievements(student)

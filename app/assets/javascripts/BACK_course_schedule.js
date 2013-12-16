@@ -107,6 +107,19 @@ var SCHEDULE=SCHEDULE || {};
         $("#send-schedule").css("left","-999em").css("right","auto");
         $("#send-schedule").find("input").val("");
     });
+    
+    $(".schedule-sender-button").click(function(){
+         // alert($(this).attr('sender'))
+         var institution=$("#schedule-select-institution .menu>div.active").attr("value");
+         schedule_manager.send_email({type:$(this).attr('sender'),institution_id:$("#schedule-select-institution .menu>div.active").attr("value")},function(data){
+              if(data.result){
+                   MessageBox(data.content,'top','success');
+              }else{
+                   MessageBox_content(data.content);
+              }
+         });
+    });
+    
     $(document).ready(function(){
         $('#schedule-select-institution').dropdown();
         $("#schedule-select-institution .item").eq(0).addClass("active");

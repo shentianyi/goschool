@@ -3,4 +3,8 @@ class Achievement < ActiveRecord::Base
   attr_accessible :achievementstring, :type, :student_id
   
   belongs_to :student
+
+  def type? type
+    self.type == type ? true : false
+  end
 end

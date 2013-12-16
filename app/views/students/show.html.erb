@@ -60,7 +60,7 @@
         <p><span>推荐人：</span><span><%= @presenter.referrer_.name %></span></p>
 	<% end %>
       </div>
-      <a class="ui red button detail-student-button">删除学生</a>
+      <a class="ui red button detail-student-button" id="delete-student-button">删除学生</a>
       <a class="ui teal button detail-student-button" id="student-detail-edit" type="student">编辑学生信息</a>
     </div>
     <div class="ui fluid accordion" id="accordion" name="student">
@@ -69,7 +69,7 @@
           <i class="dropdown icon"></i>课程及服务
         </div>
         <div class="active content class-and-service">
-	  <%= render partial:'class-and-service'%>
+	  <%= render partial:'class-and-service' if @courses%>
 	</div>
       </div>
       <div class="item achievement" id="achieve">
@@ -121,10 +121,12 @@
         <label>咨询内容</label>
         <textarea name="content" id="consult-record-content"></textarea>
       </div>
-      <div class="field">
-        <label>接线人</label>
-        <input name="service" type="text" id="consult-record-service" />
-      </div>
+      <!--
+	  <div class="field">
+            <label>接线人</label>
+            <input name="service" type="text" id="consult-record-service" />
+	  </div>
+	  -->
       <div class="ui submit button teal ok" for="consult-record">完成添加</div>
     </div>
 
