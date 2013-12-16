@@ -2,7 +2,7 @@
 var BACKSTUDENT=BACKSTUDENT||{};
 //student init
 (function(){
-    $("#born-date,#graduation-date").datepicker({
+    $("#birthday,#graduation").datepicker({
         showOtherMonths: true,
         selectOtherMonths: true,
         changeMonth: true,
@@ -20,9 +20,9 @@ var BACKSTUDENT=BACKSTUDENT||{};
 	    student.image_url = $("#image_url").attr("src");
 	    student.name = $("#name").val();
 	    student.gender = $("#gender input[type=radio]:checked").val();
-	    student.birthday = $("#born-date").val();
+	    student.birthday = $("#birthday").val();
 	    student.school = $("#school").val();
-	    student.graduation = $("#graduation-date").val();
+	    student.graduation = $("#graduation").val();
 	    student.email = $("#email").val();
 	    student.phone = $("#phone").val();
 	    student.address = $("#address").val();

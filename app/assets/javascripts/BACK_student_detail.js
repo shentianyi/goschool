@@ -254,6 +254,10 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     }).on("click","#consult-record .comment-block .button",function(){
         var value=$(this).prev().val();
         var date=new Date().toWayneString().day;
+	data = {};
+	
+	consultation_manager.update()
+	
         if($.trim(value).length>0){
             $(this).prev().val("");
             $(this).parents(".comment-block").prev("dl")
