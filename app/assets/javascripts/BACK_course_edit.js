@@ -61,6 +61,7 @@ function init_course_edit() {
 				$("#" + id).css("display", "block");
 			}
 		});
+
 		$(".update-input").change(function() {
 			var data = {
 				course : {}
