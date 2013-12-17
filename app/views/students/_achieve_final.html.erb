@@ -1,5 +1,5 @@
 <% if @finals %>
 <% @finals.each do |final| %>
-<dd><%= final.final[:abbreviation]%>,<%= final.final[:full_name]%>，<%= final.final[:date]%><i final="<%= final.id %>" class="icon remove"></i></dd>
+<dd><%= final.valuestring %><i final="<%= final.id %>" class="icon remove"></i></dd>
 <% end %>
 <% end %>

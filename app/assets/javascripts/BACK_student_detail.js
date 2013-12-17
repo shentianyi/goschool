@@ -44,11 +44,28 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
             var text=$("#achieve-template input[type='text']").val();
             if(text.length>0){
                 //post
-                $("#achieve .list").append($("<dd/>")
-					   .text(text).
-					   append($("<i />").addClass("icon remove"))
-					  );
-                $("#achieve-template .template-remove").click();
+		var data = {
+		    id:'',
+		    achievementresult:{}
+		}
+	 	data.id = $("#achieve .list").parent().attr("achieve");
+		data.achievementresult.student_id = $("div#detail-content div.info").attr("student");
+		data.achievementresult.valuestring = text;
+		data.achievementresult.achievement_id = data.id;
+		
+		achievementres_manager.create(data,function(data){
+		    if(data.result){
+			var res = data.object;
+			$("#achieve .list").append($("<dd/>")
+						   .text(res.valuestring).
+						   append($("<i />").addClass("icon remove").attr("final",res.id))
+						  );
+			$("#achieve-template .template-remove").click();
+		    }
+		    else{
+			MessageBox_content(data.content);
+		    }
+		});
             }
             else{
                 MessageBox("请填写成就内容","top","warning");
@@ -63,7 +80,17 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         }
         else{
             //post
-            $(this).parents("dd").eq(0).remove();
+	    var target = $(this)
+	    var id = target.attr("final")
+	    achievementres_manager.destroy(id,function(data){
+		if(data.result){
+		    target.parents("dd").eq(0).remove();
+		}else{
+		    MessageBox_content(data.content);
+		}
+	    });
+	    //
+            
         }
     });
     //所有录取

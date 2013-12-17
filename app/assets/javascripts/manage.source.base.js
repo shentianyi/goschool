@@ -115,6 +115,10 @@ var student_manager = $.extend({
      source : 'students'
 }, manager);
 
+var achievementres_manager = $.extend({
+    source : 'achievementresults'
+},manager);
+
 var consultation_manager = $.extend({
      source : 'consultations',
      comment : function(data, callback, async) {
