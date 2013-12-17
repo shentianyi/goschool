@@ -54,14 +54,14 @@
       姓名:
     </dt>
     <dd>
-      <input type="text" id="name"/>
+      <input type="text" id="name" name="name"/>
     </dd>
     <br />
     <dt>
       邮箱:
     </dt>
     <dd>
-      <input type="text" id="email" />
+      <input type="text" id="email" name="email"/>
     </dd>
     <br />
     <dt>
@@ -88,7 +88,7 @@
   <br />
   <a id="sign-up-btn" class="login-btn log-btn" onclick="document.forms[0].submit();">Ok</a>
 </form>
-<form action="/user_sessions/"  method="post" class="signIn-block signShow-block clearfix" id="signIn-block" style="display:none">
+<form action="/logininfo_sessions/"  method="post" class="signIn-block signShow-block clearfix" id="signIn-block" style="display:none">
   <h3 class="text-center">登录</h3>
   <dl>
     <dt>
