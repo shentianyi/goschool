@@ -4,7 +4,7 @@
           <td> <%= course.course_name%> </td>
      </tr>
      <tr>
-          <td> <%= course.sub_course_name%> </td>
+          <td> *<%= course.sub_course_name%> </td>
      </tr>
      <tr>
           <td> <%= course.description%> </td>
@@ -16,8 +16,9 @@
           <td> <%= course.course_name%> </td>
      </tr>
      <tr>
-          <td>有 <%= course.unmark_number%> 个未批改作业</td>
+          <td><a href="/homeworks/index/<%=course.id%>"> <%= course.unmark_number%> 个未批改作业</a></td>
      </tr>
 </table>
+<hr />
 <%end%>
 
