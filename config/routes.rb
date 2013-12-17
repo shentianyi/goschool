@@ -17,8 +17,8 @@ Goschool::Application.routes.draw do
     collection do
       get  :teacher
       get 'teacher/:id'=>:teacher
-      get 'teacher/:id/:homework_type/:menu_type'=>:teacher
-      get 'teacher/:id/:homework_type/:menu_type/:ajax'=>:teacher
+      get 'teacher/:id/:menu_type'=>:teacher
+      get 'teacher/:id/:menu_type/:ajax'=>:teacher
     end
   end
 

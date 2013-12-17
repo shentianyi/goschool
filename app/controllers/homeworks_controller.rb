@@ -18,9 +18,9 @@ class HomeworksController < ApplicationController
   def teacher
     if @teacher_course=TeacherCourse.where(id:params[:id],user_id:current_user.id).first
       @homework_type=HomeworkType::TEACHER
-      if params.has_key?(:homework_type) && params.has_key?(:menu_type)
+      if params.has_key?(:menu_type)
         @menu_type=params[:menu_type].to_i
-        @homeworks=get_homeworks_by_type(params[:homework_type].to_i,@menu_type) 
+        @homeworks=get_homeworks_by_type(@homework_type,@menu_type) 
       end
       if params[:ajax]
         render partial:'menu_item'

@@ -151,12 +151,12 @@ var homework_manager = $.extend({
                     url = 'student';
                     break;
           }
-          $.get('/homeworks/' + url + '/' + teacher_course_id + '/' + homework_type + '/' + menu_type + '/ajax', function(data) {
+          $.get('/homeworks/' + url + '/' + teacher_course_id + '/' + menu_type + '/ajax', function(data) {
                if(callback)
                     callback(data);
           }, 'html');
      },
-     push_homework_state : function(homework_type, menu_type) {
-          window.history.pushState({},homework_type + '/' + menu_type);
+     push_homework_state : function(menu_type) {
+          window.history.pushState({}, "",menu_type);
      }
 }, manager);
