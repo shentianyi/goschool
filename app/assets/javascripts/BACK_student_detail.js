@@ -250,10 +250,22 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     //////////////////////////////////////////////////////// 咨询记录
     $("body").on("click","#consult-record .item .icon.remove",function(){
         //post
-        $(this).parent().remove();
-
+        //$(this).parent().remove();
+	var target = $(this)
 	//
-	
+	var data = {
+	    id : '',
+	    consultation:{}
+	}
+
+	data.id = target.attr("student");
+	data.consultation.comment = "";
+
+	consultation_manager.comment(data,function(data){
+	    if(data.result){
+		target.parent().remove();
+	    }
+	});
     }).on("click","#consult-record .comment-block .button",function(){
         var value=$(this).prev().val();
         var date=new Date().toWayneString().second;
@@ -276,7 +288,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 			.append($("<dd />")
 				.append($("<span />").text(res.consultation.comment))
 				.append($("<span />").text(res.consultation.comment_time_display))
-				.append($("<i />").addClass("icon remove"))
+				.append($("<i />").addClass("icon remove").attr("student",res.consultation.id))
 			       )
 		}
 	    });
