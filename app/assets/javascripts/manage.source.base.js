@@ -13,6 +13,18 @@ function init_date_picker(ele) {
 }
 
 var manager = {
+     show : function(id, callback, async) {
+          if(async == null)
+               async = true;
+          $.ajax({
+               url : '/' + this.source + '/' + id,
+               async : async,
+               success : function(data) {
+                    if(callback)
+                         callback(data);
+               }
+          });
+     },
      create : function(data, callback, async) {
           if(async == null)
                async = true;
@@ -141,21 +153,8 @@ var schedule_manager = $.extend({
 
 var homework_manager = $.extend({
      source : 'homeworks',
-     get_url : function(homework_type) {
-          var url = '';
-          switch(parseInt( homework_type)) {
-               case 100:
-                    url = 'teacher';
-                    break;
-               case 200:
-                    url = 'student';
-                    break;
-          }
-          return url;
-     },
-     homeworks : function(teacher_course_id, homework_type, menu_type, callback) {
-          var url = this.get_url(homework_type);
-          $.get('/homeworks/' + url + '/' + teacher_course_id + '/' + menu_type + '/ajax', function(data) {
+     list : function(teacher_course_id, menu_type, callback) {
+          $.get('/homeworks/list/' + teacher_course_id + '/' + menu_type, function(data) {
                if(callback)
                     callback(data);
           }, 'html');

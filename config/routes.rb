@@ -15,10 +15,10 @@ Goschool::Application.routes.draw do
 
   resources :homeworks do
     collection do
-      get  :teacher
-      get 'teacher/:id'=>:teacher
-      get 'teacher/:id/:menu_type'=>:teacher
-      get 'teacher/:id/:menu_type/:ajax'=>:teacher
+      get  'index/:id'=>:index
+      get 'list/:id/:type'=>:list
+    # get 'teacher/:id'=>:teacher
+    # get 'teacher/:id/:menu_type'=>:teacher
     end
   end
 

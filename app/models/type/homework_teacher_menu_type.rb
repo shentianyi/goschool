@@ -6,7 +6,7 @@ class HomeworkTeacherMenuType<StatusBase
   LAST_30_DAYS=33
   LAST_40_DAYS=44
   Last_50_DAYS=55
-  OTHER=60 
+  OTHER=66
   
 
   
@@ -15,7 +15,7 @@ class HomeworkTeacherMenuType<StatusBase
    when ONGOING
        {status:HomeworkStatus::ONGOING}
    when OTHER
-       ['created_at>=?',Time.now.ago(OTHER.days)]
+       ['created_at<=?',Date.current.ago((type-base_period).days)]
    else
         generate_time_condition type
    end
