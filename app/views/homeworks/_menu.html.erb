@@ -1,9 +1,14 @@
 LEFT MENU:
 <ul>
-	<%@menus.each do |menu|%>
-	<li>
-		<a href="#" type="<%= menu.value%>"><%= menu.display%></a>
-	</li>
-	<% end %>
+     <%@menus.each do |menu|%>
+     <li>
+          <a href="#" type="<%= menu.value%>"  homework_type="<%= @homework_type%>" class="homework-menu-a"><%= menu.display%></a>
+          <div class="homework-list">
+               <%if @menu_type==menu.value%>
+               <%= render 'menu_item'%>
+               <%end%>
+          </div>
+     </li>
+     <% end %>
 </ul>
 
