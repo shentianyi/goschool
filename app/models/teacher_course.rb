@@ -10,6 +10,9 @@ class TeacherCourse < ActiveRecord::Base
   acts_as_tenant(:tenant)
   after_create :set_teacher_institution
 
+  def self.by_teacher id,teacher_id
+    where(id:id,user_id:teacher_id).first
+  end
   private
   def validate_save
     errors.add(:user_id,'老师已登记此课程') if self.class.where(:user_id=>self.user_id,:sub_course_id=>self.sub_course_id).first if new_record?
