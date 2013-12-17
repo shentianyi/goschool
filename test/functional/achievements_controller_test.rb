@@ -18,7 +18,7 @@ class AchievementsControllerTest < ActionController::TestCase
 
   test "should create achievement" do
     assert_difference('Achievement.count') do
-      post :create, achievement: { achievementstring: @achievement.achievementstring, type: @achievement.type }
+      post :create, achievement: { name: @achievement.name, type: @achievement.type }
     end
 
     assert_redirected_to achievement_path(assigns(:achievement))
@@ -35,7 +35,7 @@ class AchievementsControllerTest < ActionController::TestCase
   end
 
   test "should update achievement" do
-    put :update, id: @achievement, achievement: { achievementstring: @achievement.achievementstring, type: @achievement.type }
+    put :update, id: @achievement, achievement: { name: @achievement.name, type: @achievement.type }
     assert_redirected_to achievement_path(assigns(:achievement))
   end
 

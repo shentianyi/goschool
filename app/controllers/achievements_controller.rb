@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class AchievementsController < ApplicationController
   # GET /achievements
   # GET /achievements.json
@@ -40,17 +41,27 @@ class AchievementsController < ApplicationController
   # POST /achievements
   # POST /achievements.json
   def create
-    @achievement = Achievement.new(params[:achievement])
-
-    respond_to do |format|
-      if @achievement.save
-        format.html { redirect_to @achievement, notice: 'Achievement was successfully created.' }
-        format.json { render json: @achievement, status: :created, location: @achievement }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @achievement.errors, status: :unprocessable_entity }
-      end
+    msg = Msg.new
+    msg.result = false;
+    msg.content = '创建成就失败'
+    @achievement = Achievement.find(params[:achievement])
+    msg.result = @achievement.save
+    render :json => msg
+  end
+  
+  def create_sub
+    msg = Msg.new
+    msg.result = false;
+    msg.content = '创建失败'
+    @achievement = Achievement.find(params[:id])
+    if AchievementType.can_have_sub? @achievement.type
+      @new_achieve = Achievement.new(params[:achievement])
+      msg.result = @new_achieve.save
+    else
+      msg.content = '该成就类型不支持创建'
     end
+
+    render :json => msg
   end
 
   # PUT /achievements/1
