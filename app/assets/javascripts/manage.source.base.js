@@ -141,7 +141,7 @@ var schedule_manager = $.extend({
 
 var homework_manager = $.extend({
      source : 'homeworks',
-     homeworks : function(teacher_course_id, homework_type, menu_type, callback) {
+     get_url : function(homework_type) {
           var url = '';
           switch(parseInt( homework_type)) {
                case 100:
@@ -151,12 +151,16 @@ var homework_manager = $.extend({
                     url = 'student';
                     break;
           }
+          return url;
+     },
+     homeworks : function(teacher_course_id, homework_type, menu_type, callback) {
+          var url = this.get_url(homework_type);
           $.get('/homeworks/' + url + '/' + teacher_course_id + '/' + menu_type + '/ajax', function(data) {
                if(callback)
                     callback(data);
           }, 'html');
      },
      push_homework_state : function(menu_type) {
-          window.history.pushState({}, "",menu_type);
+          window.history.pushState({}, "", menu_type);
      }
 }, manager);
