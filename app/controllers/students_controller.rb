@@ -30,6 +30,8 @@ class StudentsController < ApplicationController
       relation(@student)
     when 'consult-record'
       consultation(@student)
+    else
+      courses(@student)
     end
     
     @partial ||= params[:part]
