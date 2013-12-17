@@ -5,11 +5,11 @@ module ApplicationHelper
     # render :json=>@msg
   # end
 # 
-  # private
-# 
-  # def init_message
-    # @msg=Msg.new
-  # end
+  private
+
+  def init_message
+    @msg=Msg.new
+  end
 # 
   # def model_name
     # @model_name=self.class.name.gsub(/Controller/,'').tableize.singularize.downcase

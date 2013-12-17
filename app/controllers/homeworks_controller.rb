@@ -25,7 +25,7 @@ class HomeworksController < ApplicationController
   def show
     if   @homework=Homework.find_by_id(params[:id])
       if current_user.is_teacher?
-        @homework=TeacherHomeworkPresenter.new()
+        @homework=TeacherHomeworkPresenter.new(@homework)
         render partial:'teacher_homework'
       elsif current_user.is_student?
         @homework=StudentHomeworkPresenter.new(Homework.find_by_id(params[:id]))
