@@ -54,14 +54,14 @@
       姓名:
     </dt>
     <dd>
-      <input type="text" id="name"/>
+      <input type="text" id="name" name="name"/>
     </dd>
     <br />
     <dt>
       邮箱:
     </dt>
     <dd>
-      <input type="text" id="email" />
+      <input type="text" id="email" name="email"/>
     </dd>
     <br />
     <dt>
@@ -88,7 +88,7 @@
   <br />
   <a id="sign-up-btn" class="login-btn log-btn" onclick="document.forms[0].submit();">Ok</a>
 </form>
-<form action="/user_sessions/"  method="post" class="signIn-block signShow-block clearfix" id="signIn-block" style="display:none">
+<form action="/logininfo_sessions/"  method="post" class="signIn-block signShow-block clearfix" id="signIn-block" style="display:none">
   <h3 class="text-center">登录</h3>
   <dl>
     <dt>
@@ -110,40 +110,8 @@
 </form>
 
 
+<% content_for :javascript_includes do%>
+    <%= javascript_include_tag "Log.js"%>
+<%end%>
 
 
-
-<script type="text/javascript">
-  function signup(){
-      var name = $("#name").val();
-      var email = $("#email").val();
-      var password = $("#password").val();
-      var password_confirmation = $("#password_confirmation").val();
-      var company_name = $("#company_name").val();
-      var role = $("#role").val();
-
-      $.ajax({
-          url:'/subscriptions',
-          data: {
-              user : {
-                  name: name,
-                  email:email,
-              },
-              email: email,
-              password: password,
-              password_confirmation: password_confirmation,
-              company_name: company_name,
-              role: role
-          },
-          type: 'POST',
-          dataType: 'json',
-          success: function(data){
-
-          }
-      });
-  }
-
-  function login() {
-
-  }
-</script>

@@ -250,10 +250,25 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     //////////////////////////////////////////////////////// 咨询记录
     $("body").on("click","#consult-record .item .icon.remove",function(){
         //post
-        $(this).parent().remove();
+        //$(this).parent().remove();
+	var target = $(this)
+	//
+	var data = {
+	    id : '',
+	    consultation:{}
+	}
+
+	data.id = target.attr("student");
+	data.consultation.comment = "";
+
+	consultation_manager.comment(data,function(data){
+	    if(data.result){
+		target.parent().remove();
+	    }
+	});
     }).on("click","#consult-record .comment-block .button",function(){
         var value=$(this).prev().val();
-        var date=new Date().toWayneString().day;
+        var date=new Date().toWayneString().second;
 	data = {
 	    id:'',
 	    consultation:{}
@@ -267,12 +282,13 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 	    consultation_manager.comment(data,function(data){
 		if(data.result){
 		    var res = data.object;
+		    target.parent().parent().find("dd").remove();
 		    target.prev().val("");
 		    target.parents(".comment-block").prev("dl")
 			.append($("<dd />")
 				.append($("<span />").text(res.consultation.comment))
 				.append($("<span />").text(res.consultation.comment_time_display))
-				.append($("<i />").addClass("icon remove"))
+				.append($("<i />").addClass("icon remove").attr("student",res.consultation.id))
 			       )
 		}
 	    });
@@ -380,6 +396,26 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         $(".detail-add select").find("option").eq(0).prop("selected",true);
         $(".detail-add .field").removeClass("error");
         $(".prompt.label").remove()
+    });
+    //编辑学生信息
+    $("body").on("change",".update-input",function(){
+        var data = {
+            id: '',
+            student : {},
+            is_active_account : false
+        };
+        data.id =  $("#student-detail-info").attr('student');
+        if(BACKSTUDENT.check.test($(this).val(),$(this).attr('id'))){
+            data['student'][$(this).attr('id')] = $(this).val();
+            student_manager.update($("#student-detail-info").attr('student'),data),function(){
+                if(data.result){
+
+                }
+                else{
+
+                }
+            };
+        }
     });
     $(document).ready(function(){
         STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
