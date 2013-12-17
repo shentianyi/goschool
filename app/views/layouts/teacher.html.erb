@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+     <head>
+          <title>Goschool</title>
+          <%= stylesheet_link_tag    "semantic.css", :media => "all" %>
+          <%= stylesheet_link_tag    "base.css", :media => "all" %>
+          <%= stylesheet_link_tag    "FRONT-index.css", :media => "all" %>
+          <%= stylesheet_link_tag    "FRONT-teacher.css", :media => "all" %>
+          <%= csrf_meta_tags %>
+     </head>
+     <body>
+
+          <article class="front-people-detail">
+               <header class="front-header">
+                    <div class="logo"></div>
+                    <ul>
+                         <li class="active">
+                              <a>我的主页</a>
+                         </li>
+                         <li>
+                              <a>课堂</a>
+                         </li>
+                    </ul>
+                    <ul id="main-navigator-bottom">
+                         <li>
+                              <a> <i class="smile icon" data-content="我的账户"></i> </a>
+                         </li>
+                         <li>
+                              <a> <i class="sign out icon" data-content="退出"></i> </a>
+                         </li>
+                    </ul>
+               </header>
+               <div class="front-people-inner">
+                    <%= yield %>
+               </div>
+          </article>
+
+          <%= render 'shares/message_box'%>
+     </body>
+     <%= javascript_include_tag "application" %>
+     <%= yield :javascript_includes%>
+</html>
