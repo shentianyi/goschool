@@ -110,83 +110,8 @@
 </form>
 
 
+<% content_for :javascript_includes do%>
+    <%= javascript_include_tag "Log.js"%>
+<%end%>
 
 
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $("#sign-in").on("click",function(){
-            if($(this).attr('state')=="close"){
-                if($("#sign-up").attr("state")=="open"){
-                    $('#signUp-block').slideUp('500');
-                    $("#sign-up").attr('state','close');
-                }
-                $('#signIn-block').slideDown('500');
-                $(this).attr('state','open');
-            }
-            else{
-                $('#signIn-block').slideUp('500');
-                $(this).attr('state','close');
-            }
-
-        });
-        $("#sign-up,#sign-up-now").on("click",function(){
-            if($("#sign-up").attr('state')=="close"){
-                if($("#sign-in").attr("state")=="open"){
-                    $('#signIn-block').slideUp('500');
-                    $("#sign-in").attr('state','close');
-                }
-                $('#signUp-block').slideDown('500');
-                $("#sign-up").attr('state','open');
-
-            }
-            else{
-                $('#signUp-block').slideUp('500');
-                $("#sign-up").attr('state','close');
-            }
-        });
-        $("body").on("keyup","input[type='text'],input[type='password']",function(event){
-            var e=adapt_event(event).event;
-            if(e.keyCode==13){
-                if($("#sign-in").attr("state")=="open"){
-                    $("#sign-in-btn").click();
-                }
-                else if($("#sign-up").attr("state")=="open"){
-                    $("#sign-up-btn").click();
-                }
-            }
-        });
-    })
-  function signup(){
-      var name = $("#name").val();
-      var email = $("#email").val();
-      var password = $("#password").val();
-      var password_confirmation = $("#password_confirmation").val();
-      var company_name = $("#company_name").val();
-      var role = $("#role").val();
-
-      $.ajax({
-          url:'/subscriptions',
-          data: {
-              user : {
-                  name: name,
-                  email:email
-              },
-              email: email,
-              password: password,
-              password_confirmation: password_confirmation,
-              company_name: company_name,
-              role: role
-          },
-          type: 'POST',
-          dataType: 'json',
-          success: function(data){
-
-          }
-      });
-  }
-
-  function login() {
-
-  }
-</script>

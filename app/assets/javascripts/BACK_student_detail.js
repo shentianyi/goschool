@@ -385,6 +385,26 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         $(".detail-add .field").removeClass("error");
         $(".prompt.label").remove()
     });
+    //编辑学生信息
+    $("body").on("change",".update-input",function(){
+        var data = {
+            id: '',
+            student : {},
+            is_active_account : false
+        };
+        data.id =  $("#student-detail-info").attr('student');
+        if(BACKSTUDENT.check.test($(this).val(),$(this).attr('id'))){
+            data['student'][$(this).attr('id')] = $(this).val();
+            student_manager.update($("#student-detail-info").attr('student'),data),function(){
+                if(data.result){
+
+                }
+                else{
+
+                }
+            };
+        }
+    });
     $(document).ready(function(){
         STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
     });

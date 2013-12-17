@@ -7,7 +7,6 @@
  */
 
 function init_student_edit() {
-    $(function() {
         $("#birthday,#graduation").datepicker({
             showOtherMonths: true,
             selectOtherMonths: true,
@@ -48,22 +47,23 @@ function init_student_edit() {
             console.log(student);
         });
 
-        $(".update-input").change(function(){
-            var data = {
-                id: '',
-                student : {},
-                is_active_account : false
-            };
-            data.id =  $("#student-detail-info").attr('student');
-	    if(BACKSTUDENT.check.test($(this).val(),$(this).attr('id'))){
-		data['student'][$(this).attr('id')] = $(this).val();
-		student_manager.update($("#student-detail-info").attr('student'),data),function(){
-                    if(data.result){
-                    }
-                    else{
-                    }
-		};
-	    }
-        });
-    });
+//        $(".update-input").change(function(){
+//            var data = {
+//                id: '',
+//                student : {},
+//                is_active_account : false
+//            };
+//            data.id =  $("#student-detail-info").attr('student');
+//	        if(BACKSTUDENT.check.test($(this).val(),$(this).attr('id'))){
+//		        data['student'][$(this).attr('id')] = $(this).val();
+//		        student_manager.update($("#student-detail-info").attr('student'),data),function(){
+//                     if(data.result){
+//
+//                     }
+//                     else{
+//
+//                     }
+//		        };
+//	        }
+//        });
 }
