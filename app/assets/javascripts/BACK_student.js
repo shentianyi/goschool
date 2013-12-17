@@ -18,6 +18,18 @@ var BACKSTUDENT=BACKSTUDENT||{};
         var obj=adapt_event(event).target;
         phoneValidate(obj);
     });
+    $("body").on("click_add", "#autoComplete-call li", function(event, msg) {
+        if(msg.id) {
+            if($("#edit_referrer").parent().prevAll().length==1){
+                msg.callback=function(data){
+                    return false;
+                }
+                MessageBox("抱歉,只能添加一个推荐人","top","warning");
+                $("#edit_referrer").val("");
+            }
+        }
+    });
+
     $(document).ready(function(){
 	//        //add student
 	$("body").on("click","#add-student",function(){

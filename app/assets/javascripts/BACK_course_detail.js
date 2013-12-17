@@ -83,7 +83,7 @@ DETAIL.course={};
         if(e.keyCode==13){
              $("#join-student").click();
         }
-    })
+    });
     $("body").on("click","#join-student",function(){
         if($("#autoComplete-call").find(".active").length>0){
             var id=$("#autoComplete-call").find(".active").attr("id");
@@ -256,6 +256,7 @@ DETAIL.course={};
         console.log(data);
         course_manager.update($("#course-detail-info").attr('course'), data);
     });
+
     $("body").on("click_add", "#autoComplete-call li", function(event, msg) {
         if(msg.id) {
             var callback = function(data) {
@@ -265,7 +266,7 @@ DETAIL.course={};
                         label.data.id = data.content;
                     }
                 } else {
-                    MessageBox(data.content, "top", "warning");
+                    MessageBox_content(data.content);
                     stopEvent(event);
                 }
             }
@@ -303,7 +304,6 @@ DETAIL.course={};
     $("body").on('focus', ".sub-course-teachers-input-complete", function() {
         $("#selected-sub-course").val($(this).parents(".sub-course-block-item").attr('sub-course'));
     });
-
     $("body").on("click_remove", ".icon.collapse", function(event, msg) {
         var item = $(this);
         if(item.attr('id') != null)

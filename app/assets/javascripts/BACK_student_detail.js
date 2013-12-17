@@ -9,8 +9,8 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 (function(){
     //编辑学生信息
     $("body").on("click","#student-detail-edit",function(){
-        $(".back-index-add[name='student']").css("left","0px").css("right","0px");
-        //post(get edit course/service template)
+        $("#student-edit-section").css("left","0px").css("right","0px");
+//        post(get edit course/service template)
         student_manager.edit($("#student-detail-info").attr('student'), function(data) {
             $("#student-edit-section").html(data);
         });
@@ -247,7 +247,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
             $(this).focus();
         }
     });
-    //////////////////////////////////////////////////////// 咨询记录
+//////////////////////////////////////////////////////// 咨询记录
     $("body").on("click","#consult-record .item .icon.remove",function(){
         //post
         //$(this).parent().remove();
@@ -397,30 +397,121 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         $(".detail-add .field").removeClass("error");
         $(".prompt.label").remove()
     });
-    //编辑学生信息
-    $("body").on("change",".update-input",function(){
-        var data = {
-            id: '',
-            student : {},
-            is_active_account : false
-        };
-        data.id =  $("#student-detail-info").attr('student');
-        if(BACKSTUDENT.check.test($(this).val(),$(this).attr('id'))){
-            data['student'][$(this).attr('id')] = $(this).val();
-            student_manager.update($("#student-detail-info").attr('student'),data),function(){
-                if(data.result){
+/////////////////////////////////////////////////////// 编辑学生信息
+    $("body").on("blur",".update-input",function(){
+        if($(this).attr("id")=="name" && $(this).val().length==0){
+            MessageBox("抱歉，名字不能为空","top","warning");
+            window.setTimeout(function(){
+                $("#name").focus();
+            },100)
+            STUDENTDETAIL.errors[0]="errors";
+        }
+        else{
+            if($(this).attr("id")=="email" && ($(this).val().length==0 || !easy_email_validate($(this).val()))){
+                MessageBox("抱歉，请填写正确的邮箱","top","warning");
+                window.setTimeout(function(){
+                    $("#email").focus();
+                },100)
+                STUDENTDETAIL.errors[1]="errors";
+            }
+            else{
+                var data = {
+                    id: '',
+                    student : {},
+                    is_active_account : false
+                };
+                data.id =  $("#student-detail-info").attr('student');
+                if(BACKSTUDENT.check.test($(this).val(),$(this).attr('id'))){
+                    data['student'][$(this).attr('id')] = $(this).val();
+                    student_manager.update($("#student-detail-info").attr('student'),data),function(){
+                        if(data.result){
 
+                        }
+                        else{
+
+                        }
+                    };
+                }
+            }
+        }
+    }).on("click","#close-student-detail-edit",function(){
+            if(STUDENTDETAIL.errors[0]===undefined&&STUDENTDETAIL.errors[1]===undefined){
+                $("#student-edit-section").css("left","-999em").css("right","auto");
+            }
+            else{
+                if(STUDENTDETAIL.errors[0]!==undefined && $("#name").val().length==0){
+                    MessageBox("抱歉，名字不能为空","top","warning");
+                    window.setTimeout(function(){
+                        $("#name").focus();
+                    },100)
+                }
+                else if(STUDENTDETAIL.errors[1]!==undefined && ( $("#email").val().length==0 || !easy_email_validate($("#email").val() ))){
+                    MessageBox("抱歉，请填写正确的邮箱","top","warning");
+                    window.setTimeout(function(){
+                        $("#email").focus();
+                    },100)
                 }
                 else{
-
+                    $("#student-edit-section").css("left","-999em").css("right","auto");
+                    STUDENTDETAIL.errors=new Array(2);
                 }
-            };
-        }
+            }
+    }).on("click","#edit-student",function(){
+           $("#close-student-detail-edit").click();
+    });
+    $("body").on("click_remove", "#referrer .delete.icon", function(event, msg) {
+        var item = $(this);
+        student_manager.update($("#student-detail-info").attr('student'),{student:{referrer_id:null}},function(data) {
+            msg.result = data.result;
+            if(!data.result) {
+                MessageBox(data.content, "top", "warning");
+                stopEvent(event);
+            }
+        });
+    });
+    $("body").on("blur",".tag-input-blur",function() {
+        var data = {
+            student : {}
+        };
+        var tags = [];
+        $.each($('.tags-items>li>div'), function() {
+            tags.push($.trim($(this).text()));
+        });
+        data['student']['tags'] = tags;
+        console.log(data);
+        student_manager.update($("#student-detail-info").attr('student'), data);
     });
     $(document).ready(function(){
         STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
     });
+    $("body").on("click_add", "#autoComplete-call li", function(event, msg) {
+        if(msg.id) {
+            if($("#autoComplete-call").attr("target")=="edit_referrer"){
+                if($("#edit_referrer").parent().prevAll().length==1){
+                    msg.callback=function(data){
+                        return false;
+                    }
+                    MessageBox("抱歉,只能添加一个推荐人","top","warning");
+                    $("#edit_referrer").val("");
+                }
+                else{
+                    student_manager.update($("#student-detail-info").attr('student'), {student:{referrer_id:msg.id}}, function(data){
+                        if(data.result){
+
+                        }
+                        else{
+                            msg.callback=function(data){
+                                return false;
+                            }
+                            MessageBox_content(data.content);
+                        }
+                    })
+                }
+            }
+        }
+    });
 })();
+STUDENTDETAIL.errors=new Array(2);
 STUDENTDETAIL.labels;
 STUDENTDETAIL.data;
 STUDENTDETAIL.check=0;
