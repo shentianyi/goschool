@@ -7,12 +7,16 @@
       <th>操作</th>
   </tr></thead>
   <tbody>
+    <% if @admitted %>
+    <% @admitted.each do |admit|%>
     <tr>
-      <td>MIT</td>
-      <td>建筑</td>
-      <td>2013-10</td>
-      <td>否</td>
-      <td><span class="remove">删除</span></td>
+      <td><%= admit.admitted[:school] %></td>
+      <td><%= admit.admitted[:specialty] %></td>
+      <td><%= admit.admitted[:date] %></td>
+      <td><%= admit.admitted[:scholarship] %></td>
+      <td><span admit="<%= admit.id%>" class="remove">删除</span></td>
     </tr>
+    <% end %>
+    <% end %>
   </tbody>
 </table>

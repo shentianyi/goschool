@@ -1,11 +1,12 @@
 <div class="ui tabular menu">
+  <% if @sub_courses %>
+  <% @sub_course.each do |sub| %>
   <a class="active item">
-    <div class="floating ui label"><i class="icon remove"></i></div>
-    托福
+    <div class="floating ui label"><i sub="<%= sub.id %>" class="icon remove"></i></div>
+    <%= sub.name %>
   </a>
-  <a class="item">
-    SAT
-  </a>
+  <% end %>
+  <% end %>
 </div>
 <table class="ui small table segment celled">
   <thead>
@@ -18,24 +19,16 @@
     <tr><th colspan="4">添加记录</th>
   </tr></tfoot>
   <tbody>
+    <% if @final_grades %>
+    <% @final_grades.each do |grade|%>
     <tr>
-      <td>2013-01-28</td>
-      <td class="score">57</td>
-      <td>入校前</td>
+      <td><%= grade.final_grade[:date]%></td>
+      <td class="score"><%= grade.final_grade[:grade]%></td>
+      <td><%= grade.final_grade[:enter_school]%></td>
       <td><span class="remove">删除</span></td>
     </tr>
-    <tr>
-      <td>2013-01-29</td>
-      <td class="score">68</td>
-      <td>入校后</td>
-      <td><span class="remove">删除</span></td>
-    </tr>
-    <tr>
-      <td>2013-10-02</td>
-      <td class="score">89</td>
-      <td>入校后</td>
-      <td><span class="remove">删除</span></td>
-    </tr>
+    <% end %>
+    <% end %>
   </tbody>
 </table>
 <canvas id="myChart" ></canvas>

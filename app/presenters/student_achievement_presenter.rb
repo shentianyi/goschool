@@ -16,10 +16,23 @@ class StudentAchievementPresenter<Presenter
   end
 
   def final_grade
-    
+    ss = [] 
+    ss = valuestring.split(';')
+    {
+      date:ss[0],
+      grade:ss[1],
+      enter_school:ss[2],
+    }
   end
 
   def admitted
-    
+    ss = []
+    ss = valuestring.split(';')
+    {
+      school:ss[0],
+      specialty:ss[1],
+      date:ss[2],
+      scholarship:ss[3],
+    }
   end
 end
