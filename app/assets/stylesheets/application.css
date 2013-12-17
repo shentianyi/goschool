@@ -22,4 +22,5 @@
  *= require base
  *= require jquery-datepicker
  *= require semantic
+ *= require Log
  */
