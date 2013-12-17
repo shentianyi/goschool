@@ -8,7 +8,7 @@
   <dl>
     <dt>评论：</dt>
     <% if !consultation.comment.blank? %>
-    <dd><span><%= consultation.comment%></span><span><%= consultation.comment_time_display%></span><i class="icon remove"></i></dd>
+    <dd><span><%= consultation.comment%></span><span><%= consultation.comment_time_display%></span><i student="<%= consultation.id%>" class="icon remove"></i></dd>
     <% end %>
   </dl>
   <div class="comment-block">
