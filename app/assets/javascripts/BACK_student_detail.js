@@ -129,16 +129,34 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         var scholarship_value=$("#offer-template select :selected").attr("value");
         if(school.length>0&&major.length>0&&time.length>0){
             //post
-            var data={offer:{school:school,major:major,time:time,scholarship:scholarship}};
-            var tr=Mustache.render("{{#offer}}<tr>"+
-				   "<td>{{school}}</td>"+
-				   "<td>{{major}}</td>"+
-				   "<td>{{time}}</td>"+
-				   "<td>{{scholarship}}</td>"+
-				   "<td><span class='remove'>删除</span></td>"+
-				   "</tr>{{/offer}}",data);
-            $("#offer tbody").append(tr);
-            $("#offer-template-cancel").click();
+            var res={offer:{school:school,major:major,time:time,scholarship:scholarship}};
+	    var data = {
+		id:'',
+		achievementresult:{}
+	    }
+	    data.id = $("#offer").attr("achieve")
+	    data.achievementresult.student_id = $("div#detail-content div.info").attr("student");
+	    data.achievementresult.valuestring = school+";"+major+";"+time+";"+scholarship;
+	    data.achievementresult.achievement_id = data.id;
+
+	    achievementres_manager.create(data,function(data){
+		if(data.result){
+		    
+		    var tr=Mustache.render("{{#offer}}<tr>"+
+					   "<td>{{school}}</td>"+
+					   "<td>{{major}}</td>"+
+					   "<td>{{time}}</td>"+
+					   "<td>{{scholarship}}</td>"+
+					   "<td><span class='remove'>删除</span></td>"+
+					   "</tr>{{/offer}}",res);
+		    $("#offer tbody").append(tr);
+		    $("#offer-template-cancel").click();
+		}
+		else
+		{
+		    MessageBox_content(data.content)
+		}
+	    });
         }
         else{
             MessageBox("信息填写不完整","top","warning");
