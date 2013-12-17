@@ -20,10 +20,15 @@ class HomeworksController < ApplicationController
   # homeworks/teacher?course=1&cate=100&sub=1
   def teacher
     if @teacher_course=TeacherCourse.where(id:params[:id],user_id:current_user.id).first
+      @homework_type=HomeworkType::TEACHER
+      if params.has_key?(:homework_type) && params.has_key?(:menu_type)
+        @menu_type=params[:menu_type].to_i
+        @homeworks=get_homeworks_by_type(params[:homework_type].to_i,@menu_type) 
+      end
       if params[:ajax]
-        @homework_titles=@teacher_course.homework.where(HomeworkTeacherMenuType.condition(params[:type].to_i)).all
         render partial:'menu_item'
       else
+        @sub_course=@teacher_course.sub_course
         @menus=  HomeworkTeacherMenuType.generate_menu
       end
     else
@@ -52,6 +57,19 @@ class HomeworksController < ApplicationController
     unless @homework
       @msg.content='不存在此作业'
       render :json=>@msg
+    end
+  end
+
+  def get_homeworks_by_type homework_type,menu_type
+    if HomeworkType.include?(homework_type)
+      case homework_type
+      when HomeworkType::TEACHER
+        @teacher_course.homeworks.where(HomeworkTeacherMenuType.condition(menu_type)).all
+      when HomeworkType::Student
+        @teacher_course.homeworks.where(HomeworkTeacherMenuType.condition(menu_type)).all
+      end
+    else
+    []
     end
   end
 
