@@ -323,9 +323,9 @@ GLOBAL.autoComplete.count = 0;
           }
           //除去left and right
           else if(e.keyCode != 37 && e.keyCode != 39 && e.keyCode != 13) {
-    //               window.setTimeout(function(){
-    //                  $("#autoComplete-call>ul").empty();
-    //               },100);
+                   window.setTimeout(function(){
+                      $("#autoComplete-call>ul").empty();
+                   },100);
                GLOBAL.autoComplete.count++;
                var $this = $(adapt_event(event).target).parents(".autoComplete").eq(0);
                var $my = $(adapt_event(event).target);
@@ -560,7 +560,6 @@ GLOBAL.autoComplete.count = 0;
                               // var render = Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id='{{id}}'  logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
                               // $input.parent().before(render);
                               // $("#autoComplete-call").css("left", "-999em").attr("target", "");
-                              $("#autoComplete-call").css("left", "-999em").attr("target", "");
                               var msg = {
                                    result : true,
                                    id : data.data.id,
@@ -568,12 +567,12 @@ GLOBAL.autoComplete.count = 0;
                               };
                               $("#autoComplete-call").find(".active").trigger('click_add', [msg]);
                               if(msg.result) {
-                                   if(msg.callback) {
-                                       msg.callback(data);
-                                       if(! msg.callback(data) && msg.callback(data)!==undefined){
-                                           return false;
-                                       }
-                                   }
+                                  if(msg.callback) {
+                                      msg.callback(data);
+                                      if(! msg.callback(data) && msg.callback(data)!==undefined){
+                                          return false;
+                                      }
+                                  }
                                    var render = Mustache.render("{{#data}}<li><div class='ui label' id='{{id}}' type='{{type}}'  logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
                                    $input.parent().before(render);
                                    $("#autoComplete-call").css("left", "-999em").attr("target", "");

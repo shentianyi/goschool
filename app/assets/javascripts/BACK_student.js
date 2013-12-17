@@ -20,13 +20,16 @@ var BACKSTUDENT=BACKSTUDENT||{};
     });
     $("body").on("click_add", "#autoComplete-call li", function(event, msg) {
         if(msg.id) {
-            if($("#edit_referrer").parent().prevAll().length==1){
-                msg.callback=function(data){
-                    return false;
+            if($("#autoComplete-call").attr("target")=="edit_referrer"){
+                if($("#edit_referrer").parent().prevAll().length==1){
+                    msg.callback=function(data){
+                        return false;
+                    }
+                    MessageBox("抱歉,只能添加一个推荐人","top","warning");
+                    $("#edit_referrer").val("");
                 }
-                MessageBox("抱歉,只能添加一个推荐人","top","warning");
-                $("#edit_referrer").val("");
             }
+
         }
     });
 

@@ -198,6 +198,14 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
             $("#grade .label").remove();
             $(this).append($("<div />").addClass("floating ui label").append($("<i />").addClass("icon remove")));
             //post
+            $.get('',{},function(data){
+                if(data.result){
+
+                }
+                else{
+                    MessageBox_content(data.content);
+                }
+            })
         }
     }).on("click","#grade .tabular.menu a .label",function(){
         //post
@@ -526,9 +534,6 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         console.log(data);
         student_manager.update($("#student-detail-info").attr('student'), data);
     });
-    $(document).ready(function(){
-        STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
-    });
     $("body").on("click_add", "#autoComplete-call li", function(event, msg) {
         if(msg.id) {
             if($("#autoComplete-call").attr("target")=="edit_referrer"){
@@ -555,6 +560,19 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
             }
         }
     });
+
+    $(document).ready(function(){
+        var href=window.location.href.split("/");
+        var new_href=href[href.length-1].split("#")[0];
+        if( new_href=="achieve"){
+            if($("#achieve_final_tabular>a").length>=1){
+                $("#achieve_final_tabular>a").eq(0).click();
+            }
+
+        }
+//        STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
+    });
+
 })();
 STUDENTDETAIL.errors=new Array(2);
 STUDENTDETAIL.labels;
