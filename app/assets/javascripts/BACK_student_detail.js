@@ -251,9 +251,12 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     $("body").on("click","#consult-record .item .icon.remove",function(){
         //post
         $(this).parent().remove();
+
+	//
+	
     }).on("click","#consult-record .comment-block .button",function(){
         var value=$(this).prev().val();
-        var date=new Date().toWayneString().day;
+        var date=new Date().toWayneString().second;
 	data = {
 	    id:'',
 	    consultation:{}
@@ -267,6 +270,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 	    consultation_manager.comment(data,function(data){
 		if(data.result){
 		    var res = data.object;
+		    target.parent().parent().find("dd").remove();
 		    target.prev().val("");
 		    target.parents(".comment-block").prev("dl")
 			.append($("<dd />")
