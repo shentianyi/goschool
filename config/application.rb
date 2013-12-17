@@ -12,7 +12,7 @@ module Goschool
   class Application < Rails::Application
     # for loading different database conf
     self.paths['config/database']='config/sqlite_database.yml' if ENV['USER']=='tian_yi_shen'
-    
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -31,7 +31,7 @@ module Goschool
     config.autoload_paths += %W(#{config.root}/app/observers)
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
-    config.active_record.observers = :tenant_observer,:course_observer,:sub_course_observer,:student_course_observer,:student_observer
+    config.active_record.observers = :tenant_observer,:course_observer,:sub_course_observer,:student_course_observer,:student_observer,:student_homework_observer
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
