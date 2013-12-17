@@ -259,3 +259,20 @@
 .back-index-add[name='course']>.inner .right-part>.sub-course-block>i:hover{
     color:rgba(99,166,159,0.8);
 }
+/*readonly 的输入框*/
+.sub-course-teachers-input-complete[readonly=""]::-moz-placeholder{
+    color:rgba(0,0,0,0);
+    cursor:default;
+}
+.sub-course-teachers-input-complete[readonly=""]::-webkit-input-placeholder{
+    color:rgba(0,0,0,0);
+    cursor:default;
+}
+.sub-course-teachers-input-complete[readonly=""]:-moz-placeholder{
+    color:rgba(0,0,0,0);
+    cursor:default;
+}
+.sub-course-teachers-input-complete[readonly=""]:-ms-input-placeholder{
+    color:rgba(0,0,0,0);
+    cursor:default;
+}

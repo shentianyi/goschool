@@ -8,7 +8,7 @@
     </div>
     <div class="ui left icon input">
       <input id="name" placeholder="姓名..." type="text" value="<%= @presenter.name %>" class="update-input">
-      <i class="user icon"></i>
+      <i class="user icon" id="close-student-detail-edit"></i>
     </div>
     <div id="gender" class="sex stop">
       <div class="ui radio checkbox">
@@ -55,20 +55,20 @@
       <i class="mobile icon"></i>
     </div>
     <div class="ui left icon input specialInput labelForm autoComplete">
-      <ul id="tags">
+      <ul id="tags" class="tags-items">
 	<% @presenter.tags_.each do |tag|%>
 	<li><div class="ui label"><%= tag %><i class="delete icon"></i></div></li>
 	<% end %>
-        <li><input type='text' placeholder="标签..." id="autoC2"/></li>
+        <li><input type='text' class="tag-input-blur" placeholder="标签..." id="autoC2"/></li>
       </ul>
       <i class="tag icon stop"></i>
     </div>
-    <div class="ui left icon input autoComplete">
+    <div class="ui left icon input autoComplete specialInput labelForm ">
       <ul id="referrer">
 	<% if @presenter.referrer_ %>
 	<li><div class="ui label" id="<%= @presenter.referrer_.id %>" type="" logininfo_id="<%= @presenter.referrer_.logininfo_id%>"><%= @presenter.referrer_.name %><i class="delete icon"></i></div></li>
 	<% end %>
-	<li><input placeholder="推荐人..." id="autoC3" type="text" autocomplete="students"></li>
+	<li><input placeholder="推荐人..." id="edit_referrer" type="text" autocomplete="students"></li>
       </ul>
       <i class="smile icon"></i>
     </div>

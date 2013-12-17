@@ -124,7 +124,15 @@ function inner_size() {
           width : width
      }
 }
-
+//邮件的简单检查
+easy_email_validate=function(email){
+    if(email.indexOf("@")!=-1 && email.length>0 && email.indexOf(".")!=-1 && email.indexOf(".")>email.indexOf("@")){
+        return true
+    }
+    else{
+        return false
+    }
+}
 //得到日期，登出该日期所在周的最后一天的日期以及年份
 function last_date_of_week(date_value) {
      var date = new Date(date_value), endDate;
@@ -315,9 +323,9 @@ GLOBAL.autoComplete.count = 0;
           }
           //除去left and right
           else if(e.keyCode != 37 && e.keyCode != 39 && e.keyCode != 13) {
-               window.setTimeout(function(){
-                  $("#autoComplete-call>ul").empty();
-               },100);
+    //               window.setTimeout(function(){
+    //                  $("#autoComplete-call>ul").empty();
+    //               },100);
                GLOBAL.autoComplete.count++;
                var $this = $(adapt_event(event).target).parents(".autoComplete").eq(0);
                var $my = $(adapt_event(event).target);
@@ -432,7 +440,10 @@ GLOBAL.autoComplete.count = 0;
                $(this).trigger('click_add', [msg]);
                if(msg.result) {
                     if(msg.callback) {
-                         msg.callback(data);
+                        msg.callback(data);
+                        if(! msg.callback(data) && msg.callback(data)!==undefined){
+                            return false;
+                        }
                     }
                     var render = Mustache.render("{{#data}}<li><div class='ui label' id='{{id}}' type='{{type}}'  logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
                     $this.parent().before(render);
@@ -463,6 +474,7 @@ GLOBAL.autoComplete.count = 0;
                result : true
           };  
           $(this).trigger('click_remove', [msg]);
+
           if(msg.result) {
                $(this).parents("li").eq(0).remove();
           }
@@ -495,7 +507,6 @@ GLOBAL.autoComplete.count = 0;
                               // var render = Mustache.render("{{#data}}<li><div class='ui label' type='{{type}}' id='{{id}}' logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
                               // $input.parent().before(render);
                               //
-
                               var msg = {
                                    result : true,
                                    id : data.data.id,
@@ -505,13 +516,15 @@ GLOBAL.autoComplete.count = 0;
                               if(msg.result) {
                                    if(msg.callback) {
                                         msg.callback(data);
+                                        if(! msg.callback(data) && msg.callback(data)!==undefined){
+                                           return false;
+                                        }
                                    }
                                    var render = Mustache.render("{{#data}}<li><div class='ui label' id='{{id}}' type='{{type}}'  logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
                                    $input.parent().before(render);
                                    $input.val("");
                                    $("#autoComplete-call").css("left", "-999em").attr("target", "");
                               }
-
                          }
                          else if($.trim($input.val()).length!=$input.val().length){
                              MessageBox("请在下拉提示菜单中选择一条", "top", "warning");
@@ -556,7 +569,10 @@ GLOBAL.autoComplete.count = 0;
                               $("#autoComplete-call").find(".active").trigger('click_add', [msg]);
                               if(msg.result) {
                                    if(msg.callback) {
-                                        msg.callback(data);
+                                       msg.callback(data);
+                                       if(! msg.callback(data) && msg.callback(data)!==undefined){
+                                           return false;
+                                       }
                                    }
                                    var render = Mustache.render("{{#data}}<li><div class='ui label' id='{{id}}' type='{{type}}'  logininfo_id='{{logininfo_id}}'>{{value}}<i class='delete icon'></i></div></li>{{/data}}", data);
                                    $input.parent().before(render);

@@ -145,6 +145,7 @@ var teacher_course_manager = $.extend({
      source : 'teacher_courses'
 }, manager);
 
+
 var schedule_manager = $.extend({
      source : 'schedules',
      send_email : function(params, callback) {
