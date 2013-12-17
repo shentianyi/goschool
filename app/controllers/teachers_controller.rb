@@ -6,7 +6,7 @@ class TeachersController < ApplicationController
   def index
     @teacher=current_user.user
     # teacher=User.find(params[:id]) # for test
-    @courses=TeacherCoursePresenter.init_presenters(@teacher.sub_courses.all,@teacher.id)
+    @courses=TeacherCoursePresenter.init_presenters(TeacherCourse.detail_by_teacher(@teacher.id).all)
   end
 
   def schedules
