@@ -1,11 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  type: 1
-  achievementstring: MyString
-  student: one
-
+  type: 100
+  parent: one
+  name: '最终录取'
 two:
-  type: 1
-  achievementstring: MyString
-  student: two
+  type: 100
+  parent : one、
+  name: '最终录取'

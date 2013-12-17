@@ -11,17 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131210171759) do
+ActiveRecord::Schema.define(:version => 20131217030150) do
+
+  create_table "achievementresults", :force => true do |t|
+    t.string   "valuestring"
+    t.integer  "achievement_id"
+    t.integer  "student_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "achievementresults", ["achievement_id"], :name => "index_achievementresults_on_achievement_id"
+  add_index "achievementresults", ["student_id"], :name => "index_achievementresults_on_student_id"
 
   create_table "achievements", :force => true do |t|
     t.integer  "type"
-    t.string   "achievementstring"
-    t.integer  "student_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "parent_id",  :default => 0
+    t.string   "name"
   end
-
-  add_index "achievements", ["student_id"], :name => "index_achievements_on_student_id"
 
   create_table "attachments", :force => true do |t|
     t.string   "name"
