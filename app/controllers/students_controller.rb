@@ -161,7 +161,10 @@ class StudentsController < ApplicationController
   end
   
   def achievements(student)
-    
+    @finals = StudentAchievementPresenter.init_presenters(Achievement.achieves(Achievement.find_by_type(AchievementType::FINAL).id,student.id))
+    @admitted = StudentAchievementPresenter.init_presenters(Achievement.achieves(Achievement.find_by_type(AchievementType::ADMITTED).id,student.id))
+    #@sub_courses = Achievement.achieve_types(AchievementType::FINAL_GRADE,student.id)
+    #@final_grades =  StudentAchievementPresenter.init_presenters(Achievement.achieves(Achievement.find_by_type(AchievementType::FINAL_GRADE).id,student.id))
   end
 
   def relation(student)

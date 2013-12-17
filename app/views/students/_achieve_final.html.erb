@@ -1,1 +1,5 @@
-<dd>MIT,麻省理工大学，建筑系<i class="icon remove"></i></dd>
+<% if @finals %>
+<% @finals.each do |final| %>
+<dd><%= final.final[:abbreviation]%>,<%= final.final[:full_name]%>，<%= final.final[:date]%><i final="<%= final.id %>" class="icon remove"></i></dd>
+<% end %>
+<% end %>
