@@ -3,12 +3,17 @@ class HomeworksController < ApplicationController
   before_filter :init_message ,:only=>[:show,:create,:update,:destroy]
   before_filter :get_homework,:only=>[:show,:update,:destroy]
   before_filter :render_nil_msg , :only=>[:edit,:update,:destroy]
-  before_filter :require_user_as_teacher, :only=>[:index,:create,:teacher,:update,:destroy]
+  before_filter :require_user_as_teacher, :only=>[:index,:create,:update,:destroy]
 
   layout 'homework'
-  # def index
-  # @homeworks=Homework.all
-  # end
+  def index
+    if current_user.is_teacher?
+      teacher_index
+    elsif current_user.is_student?
+
+    end
+  end
+
   def create
     attach=params[:homework].slice(:attach)[:attach] if params[:homework].has_key?(:attach)
     @homework = Homework.new(params[:homework].except(:attach))
@@ -17,14 +22,14 @@ class HomeworksController < ApplicationController
     render :json=>@msg
   end
 
-  # homeworks/teacher?course=1&cate=100&sub=1
-  def teacher
-    if @teacher_course=TeacherCourse.where(id:params[:id],user_id:current_user.id).first
-      if params[:ajax]
-        @homework_titles=@teacher_course.homework.where(HomeworkTeacherMenuType.condition(params[:type].to_i)).all
-        render partial:'menu_item'
-      else
-        @menus=  HomeworkTeacherMenuType.generate_menu
+  def show
+    if   @homework=Homework.find_by_id(params[:id])
+      if current_user.is_teacher?
+        @homework=TeacherHomeworkPresenter.new()
+        render partial:'teacher_homework'
+      elsif current_user.is_student?
+        @homework=StudentHomeworkPresenter.new(Homework.find_by_id(params[:id]))
+        render partial:'stuent_homework'
       end
     else
       error_page_404
@@ -42,6 +47,12 @@ class HomeworksController < ApplicationController
     render :json=>@msg
   end
 
+  def list
+    @type=params[:type].to_i
+    get_homeworks(@type)
+    render partial:'menu_item'
+  end
+
   private
 
   def get_homework
@@ -52,6 +63,24 @@ class HomeworksController < ApplicationController
     unless @homework
       @msg.content='不存在此作业'
       render :json=>@msg
+    end
+  end
+
+  def get_homeworks menu_type
+    @homeworks =if current_user.is_teacher?
+      Homework.by_homework_type({id:params[:id],homework_type:HomeworkType::TEACHER,menu_type:menu_type})
+    elsif current_user.is_student?
+
+    end
+  end
+
+  def teacher_index
+    if @teacher_course=TeacherCourse.by_teacher(params[:id],current_user.id)
+      @sub_course=@teacher_course.sub_course
+      @menus=  HomeworkTeacherMenuType.generate_menu
+      render 'teacher_index'
+    else
+      error_page_404
     end
   end
 

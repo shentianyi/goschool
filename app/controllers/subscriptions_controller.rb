@@ -35,14 +35,14 @@ class SubscriptionsController < ApplicationController
         end
       else
         flash[:notice] = '注册失败！'
-        render 'new'
+        redirect_to new_logininfo_sessions_url
       end
     rescue ArgumentError=>invalid
       flash[:notice]= invalid.record.errors
-      render 'new'
+      redirect_to new_logininfo_sessions_url
     rescue ActiveRecord::RecordInvalid=> invalid
       flash[:notice]='注册失败！'
-      render 'new'
+      redirect_to new_logininfo_sessions_url
     end
   end
 end

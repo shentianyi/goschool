@@ -1,0 +1,7 @@
+<ul>
+     <%@homeworks.each do |homework|%>
+     <li>
+          <a href="#" id="<%= homework.id%>" status="<%= homework.status%>" class="homework-menu-item-a"> <%= homework.title%> </a>
+     </li>
+     <%end%>
+</ul>

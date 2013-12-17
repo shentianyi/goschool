@@ -1,12 +1,12 @@
 #encoding: utf-8
 class HomeworkTeacherMenuType<StatusBase
   ONGOING=100
-  LAST_10_DAYS=10
-  LAST_20_DAYS=20
-  LAST_30_DAYS=30
-  LAST_40_DAYS=40
-  Last_50_DAYS=50
-  OTHER=60 
+  LAST_10_DAYS=11
+  LAST_20_DAYS=22
+  LAST_30_DAYS=33
+  LAST_40_DAYS=44
+  Last_50_DAYS=55
+  OTHER=66
   
 
   
@@ -15,7 +15,7 @@ class HomeworkTeacherMenuType<StatusBase
    when ONGOING
        {status:HomeworkStatus::ONGOING}
    when OTHER
-       ['created_at>=?',Time.now.ago(OTHER.days)]
+       ['created_at<=?',Date.current.ago((type-base_period).days)]
    else
         generate_time_condition type
    end
@@ -32,8 +32,8 @@ class HomeworkTeacherMenuType<StatusBase
 
 
  private 
- def self.generate_time_condition type
-       {created_at:[Time.now.ago((type-base_period).days)..Time.now.ago(type.days)]}
+ def self.generate_time_condition type 
+       {created_at: Date.current.ago((type-1).days)..Date.current.ago((type-base_period-1).days)}
  end
 
  def self.genenerate_menu_item type
@@ -48,10 +48,10 @@ class HomeworkTeacherMenuType<StatusBase
  end
 
  def self.genenerate_time_menu type
-  Time.now.ago(type.days).strftime('%m/%d')+"~"+Time.now.ago((type-base_period).days).strftime('%m/%d')
+   Date.current.ago((type-1).days).strftime('%m/%d')+"~"+  Date.current.ago((type-base_period).days).strftime('%m/%d')
  end
 
  def self.base_period
-   10
+   11
  end
 end
