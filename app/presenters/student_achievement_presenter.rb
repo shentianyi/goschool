@@ -5,16 +5,6 @@ class StudentAchievementPresenter<Presenter
     @achieve = achieve
   end
 
-  def final
-    ss = []
-    ss = valuestring.split(';')
-    {
-      abbreviation: ss[0],
-      full_name: ss[1],
-      date: ss[2]
-    }
-  end
-
   def final_grade
     ss = [] 
     ss = valuestring.split(';')

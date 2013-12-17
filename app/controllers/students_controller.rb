@@ -52,7 +52,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-       format.json { render json: @student }
+      format.json { render json: @student }
     end
   end
 
@@ -161,10 +161,23 @@ class StudentsController < ApplicationController
   end
   
   def achievements(student)
-    @finals = StudentAchievementPresenter.init_presenters(Achievement.achieves(Achievement.find_by_type(AchievementType::FINAL).id,student.id))
-    @admitted = StudentAchievementPresenter.init_presenters(Achievement.achieves(Achievement.find_by_type(AchievementType::ADMITTED).id,student.id))
-    #@sub_courses = Achievement.achieve_types(AchievementType::FINAL_GRADE,student.id)
-    #@final_grades =  StudentAchievementPresenter.init_presenters(Achievement.achieves(Achievement.find_by_type(AchievementType::FINAL_GRADE).id,student.id))
+    # achievementtype id
+    @final = Achievement.find_by_type(AchievementType::FINAL)
+    @admit = Achievement.find_by_type(AchievementType::ADMITTED)
+    @final_grade = Achievement.find_by_type(AchievementType::FINAL_GRADE)
+    #
+    if @final 
+      @finals = StudentAchievementPresenter.init_presenters(Achievement.achieves(@final.id,student.id))
+    end
+    
+    if @admit
+      @admitted = StudentAchievementPresenter.init_presenters(Achievement.achieves(@admit.id,student.id))
+    end
+    
+    if @final_grade
+      @sub_courses = Achievement.achieve_types(AchievementType::FINAL_GRADE,student.id)
+      @final_grades =  StudentAchievementPresenter.init_presenters(Achievement.achieves(@final_grade.id,student.id))
+    end
   end
 
   def relation(student)

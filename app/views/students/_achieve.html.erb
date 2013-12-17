@@ -1,16 +1,16 @@
-<div class="content-item achieve">
+<div class="content-item achieve" <% if @final %>achieve="<%=@final.id%>"<% end %>>
   <p>最终成就<i class="icon plus"></i></p>
   <dl class=list>
     <%= render partial: 'achieve_final'%>
   </dl>
 </div>
 
-<div class="content-item offer" id="offer">
+<div class="content-item offer" id="offer" <% if @admit %>achieve="<%=@admit.id%>"<% end %>>
   <p>所有录取<i class="icon plus"></i></p>
   <%= render partial: 'achieve_admitted'%>
 </div>
 
-<div class="content-item grade" id="grade">
+<div class="content-item grade" id="grade" <% if @final_grade %>achieve="<%=@final_grade.id%>"<% end %>>
   <p>最终成绩<i class="icon plus"></i></p>
   <div id="grade-add" class="grade-add">
     <p>添加新课程名称</p>

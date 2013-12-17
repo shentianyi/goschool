@@ -1,6 +1,6 @@
 <div class="ui tabular menu">
   <% if @sub_courses %>
-  <% @sub_course.each do |sub| %>
+  <% @sub_courses.each do |sub| %>
   <a class="active item">
     <div class="floating ui label"><i sub="<%= sub.id %>" class="icon remove"></i></div>
     <%= sub.name %>
