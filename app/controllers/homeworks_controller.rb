@@ -6,9 +6,7 @@ class HomeworksController < ApplicationController
   before_filter :require_user_as_teacher, :only=>[:index,:create,:teacher,:update,:destroy]
 
   layout 'homework'
-  # def index
-  # @homeworks=Homework.all
-  # end
+ 
   def create
     attach=params[:homework].slice(:attach)[:attach] if params[:homework].has_key?(:attach)
     @homework = Homework.new(params[:homework].except(:attach))
@@ -17,7 +15,6 @@ class HomeworksController < ApplicationController
     render :json=>@msg
   end
 
-  # homeworks/teacher?course=1&cate=100&sub=1
   def teacher
     if @teacher_course=TeacherCourse.where(id:params[:id],user_id:current_user.id).first
       @homework_type=HomeworkType::TEACHER

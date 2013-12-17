@@ -20,7 +20,9 @@ function init_teacher_homework() {
 function bind_menu_event() {
      $(".homework-menu-a").click(function() {
           var homework_list = $(this).next('div');
-          homework_manager.homeworks($("#teacher-course-hidden").val(), $(this).attr('homework_type'), $(this).attr('type'), function(data) {
+       var homework_type= $(this).attr('homework_type');
+       var menu_type= $(this).attr('type');
+          homework_manager.homeworks($("#teacher-course-hidden").val(), homework_type, menu_type, function(data) {
                homework_list.html(data);
           });
      });

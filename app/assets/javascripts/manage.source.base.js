@@ -155,5 +155,8 @@ var homework_manager = $.extend({
                if(callback)
                     callback(data);
           }, 'html');
+     },
+     push_homework_state : function(homework_type, menu_type) {
+          window.history.pushState({},homework_type + '/' + menu_type);
      }
 }, manager);
