@@ -21,7 +21,7 @@ class AchievementType
   end
 
   def self.can_have_sub? type
-    type == FINAL_GRADE ? ture : false
+    type == FINAL_GRADE ? true : false
   end
 
   def self.valid_type? type

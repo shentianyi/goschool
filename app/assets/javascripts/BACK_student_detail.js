@@ -48,7 +48,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 		    id:'',
 		    achievementresult:{}
 		}
-	 	data.id = $("#final-achieve .list").parent().attr("achieve");
+	 	data.id = $("#final-achieve").attr("achieve");
 		data.achievementresult.student_id = $("div#detail-content div.info").attr("student");
 		data.achievementresult.valuestring = text;
 		data.achievementresult.achievement_id = data.id;
@@ -93,7 +93,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
             
         }
     });
-    //所有录取
+    ////////////////////////////////////////// 所有录取
     $("body").on("click","#offer .icon.plus",function(){
         if($("#offer-template").length!=1){
             var tr=Mustache.render("<tr id='offer-template'>"+
@@ -178,7 +178,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 	    });
         }
     });
-    //最终成就
+    ////////////////////////////////////////// 最终成就
     $("body").on("click","#grade .icon.plus",function(event){
         var left= $(this)[0].getBoundingClientRect().right,top=$(this)[0].getBoundingClientRect().bottom;
         $("#grade-add").css("left",left-10+"px").css("top",top+10+"px").find("input").focus();
@@ -186,102 +186,162 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         var e=adapt_event(event).event;
         if(e.keyCode==13){
             //post
+	    var data = {
+		id:'',
+		name:''
+	    }
+	    var target = $(this);
             if($.trim($(this).val()).length>0){
-                $("#grade .tabular.menu").append($("<a />").addClass("item").text($(this).val()));
-                $(this).blur();
-            }
-            else{
+		data.id = $("#grade").attr("achieve");
+		data.name = $.trim($(this).val());
+		achievement_manager.create_sub(data,function(data){
+		    
+		    if(data.result){
+			var res = data.object;
+			$("#grade .tabular.menu").append($("<a />").addClass("item").text(res.name).attr("sub",res.id));
+			target.blur();	
+		    }
+		    else
+		    {
+			MessageBox_content(data.content);
+		    }
+		});
+	    }
+	    else{
                 MessageBox("请输入名称","top","warning");
-            }
+	    }
         }
         else if(e.keyCode==27){
-            $(this).blur();
+	    $(this).blur();
         }
     }).on("blur","#grade-add input",function(){
         $(this).val("");
         $("#grade-add").css("left","-999em");
     }).on("click","#grade .tabular.menu a",function(){
         if(!$(this).hasClass("active")){
-            $(this).addClass("active").siblings().removeClass("active");
-            $("#grade .label").remove();
-            $(this).append($("<div />").addClass("floating ui label").append($("<i />").addClass("icon remove")));
-            //post
-            $.get('',{},function(data){
-                if(data.result){
+	    $(this).addClass("active").siblings().removeClass("active");
+	    $("#grade .label").remove();
+	    $(this).append($("<div />").addClass("floating ui label").append($("<i />").addClass("icon remove")));
+	    //post
+	    var data = {
+		id : '',
+		student_id: ''
+	    }
+	    data.id = $(this).attr("sub");
+	    data.student_id = $("div#detail-content div.info").attr("student");
 
+	    achievement_manager.sub_achievement(data,function(data){
+                if(data.result){
+		    
                 }
                 else{
-                    MessageBox_content(data.content);
+		    MessageBox_content(data.content);
                 }
-            })
+	    });
         }
-    }).on("click","#grade .tabular.menu a .label",function(){
+    }).on("click","#grade .tabular.menu a .label",function(event){
         //post
-        $(this).parents(".item").eq(0).remove();
-        if($("#grade .tabular.menu a").length>0){
-            $("#grade .tabular.menu a").eq(0).click();
-        }
+	var target = $(this)
+	var id = target.parent().attr("sub");
+	achievement_manager.destroy(id,function(data){
+	    if(data.result){
+		target.parents(".item").eq(0).remove();
+		if($("#grade .tabular.menu a").length>0){
+		    $("#grade .tabular.menu a").eq(0).click();
+		}	
+	    }
+	    else{
+		MessageBox_content(data.content)
+	    }
+	})
+	//
     }).on("click","#grade tfoot th",function(){
         if($("#grade-template").length!=1){
-            var tr=Mustache.render("<tr id='grade-template'>"+
+	    var tr=Mustache.render("<tr id='grade-template'>"+
 				   "<td><input type='text' id='grade-template-time'></td>"+
 				   "<td><input type='text' id='grade-template-score'></td>"+
 				   "<td><select><option value='0'>入校前</option><option value='1' selected>入校后</option></select></td>"+
 				   "<td class='grade-template-operate'><span id='grade-template-ok'>完成</span><span class='remove' id='grade-template-cancel'>删除</span></td>"+
 				   "</tr>",{});
-            $("#grade tbody").append(tr);
-            $("#grade-template-time").datepicker({
+	    $("#grade tbody").append(tr);
+	    $("#grade-template-time").datepicker({
                 showOtherMonths: true,
                 selectOtherMonths: true,
                 changeMonth: true,
                 changeYear: true,
                 dateFormat:'yy-mm-dd'
-            });
+	    });
         }
     }).on("keyup","#grade-template input",function(event){
         var e=adapt_event(event).event;
         if(e.keyCode==13){
-            $("#grade-template-ok").click();
+	    $("#grade-template-ok").click();
         }
         else if(e.keyCode==27){
-            $("#grade-template-cancel").click();
+	    $("#grade-template-cancel").click();
         }
         if($(this).attr("id")=="grade-template-score"){
-            var target=adapt_event(event).target;
-            clearNoNumZero(target);
+	    var target=adapt_event(event).target;
+	    clearNoNumZero(target);
         }
-
     }).on("click","#grade-template-ok",function(){
         var time=$("#grade-template input").eq(0).val();
         var score= $("#grade-template input").eq(1).val();
         var join_time=$("#grade-template select :selected").text();
         var join_time_value=$("#grade-template select :selected").attr("value");
         if(time.length>0&& $.trim(score).length>0){
-            //post
-            var data={grade:{time:time,score:score,join_time:join_time}};
-            var tr=Mustache.render("{{#grade}}<tr>"+
-				   "<td>{{time}}</td>"+
-				   "<td class='score'>{{score}}</td>"+
-				   "<td>{{join_time}}</td>"+
-				   "<td><span class='remove'>删除</span></td>"+
-				   "</tr>{{/grade}}",data);
-            $("#grade tbody").append(tr);
-            var index=$("#grade-template").prevAll().length;
-            STUDENTDETAIL.editCanvas(index,parseInt(score),time);
-            $("#grade-template-cancel").click();
+	    //post
+	    var data = {
+		id:'',
+		achievementresult:{}
+	    }
+	    data.id = $("#grade .menu .active").attr("sub");
+	    data.achievementresult.student_id = $("div#detail-content div.info").attr("student");
+	    data.achievementresult.valuestring = time+';'+score+';'+join_time;
+	    data.achievementresult.achievement_id = data.id;
+	    
+	    achievementres_manager.create(data,function(data){
+		if(data.result){
+		    var res=data.object;
+		    var tr=Mustache.render("{{#achieve}}<tr>"+
+					   "<td>{{time}}</td>"+
+					   "<td class='score'>{{score}}</td>"+
+					   "<td>{{join_time}}</td>"+
+					   "<td><span class='remove'>删除</span></td>"+
+					   "</tr>{{/achieve}}",data);
+		    $("#grade tbody").append(tr);
+		    var index=$("#grade-template").prevAll().length;
+		    STUDENTDETAIL.editCanvas(index,parseInt(score),time);
+		    $("#grade-template-cancel").click();
+		}
+		else{
+		    MessageBox_content(data.content);
+		}
+	    });
         }
         else{
-            MessageBox("信息没有填写完整")
+            MessageBox("信息没有填写完整","top","warning")
         }
-    }).on("click","#grade .remove",function(){
+    }).on("click","#grade table .remove",function(){
         if($(this).attr("id")=="grade-template-cancel"){
-            $("#grade-template").remove();
+	    $("#grade-template").remove();
         }
         else{
-            //post
-            var index=$(this).parents("tr").eq(0).prevAll().length;
-            $(this).parents("tr").eq(0).remove();
-            STUDENTDETAIL.deleteCanvas(index);
+	    //post
+	    var target = $(this);
+	    var id = target.attr("grade");
+	    achievementres_manager.destroy(id,function(data){
+		if(data.result){
+		    var index=target.parents("tr").eq(0).prevAll().length;
+		    target.parents("tr").eq(0).remove();
+		    STUDENTDETAIL.deleteCanvas(index);
+		}
+		else
+		{
+		    MessageBox_content(data.content)
+		}
+	    });
+	    
         }
     }).on("dblclick","#grade .score",function(){
         var text=$(this).text();
@@ -292,20 +352,20 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         clearNoNumZero(target);
         var e=adapt_event(event).event;
         if(e.keyCode==13){
-            $(this).blur();
+	    $(this).blur();
         }
     }).on("blur","#grade .score input",function(){
         if($.trim($(this).val()).length>0){
-            //post
-            var text=$(this).val();
-            var index=$(this).parents("tr").prevAll().length;
-            $(this).parent().text(text);
-            $(this).remove();
-            STUDENTDETAIL.editCanvas(index,parseInt(text))
+	    //post
+	    var text=$(this).val();
+	    var index=$(this).parents("tr").prevAll().length;
+	    $(this).parent().text(text);
+	    $(this).remove();
+	    STUDENTDETAIL.editCanvas(index,parseInt(text))
         }
         else{
-            MessageBox("请输入分数","top","warning");
-            $(this).focus();
+	    MessageBox("请输入分数","top","warning");
+	    $(this).focus();
         }
     });
     //////////////////////////////////////////////////////// 咨询记录
@@ -355,84 +415,84 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 	    });
         }
         else{
-            MessageBox("请输入内容","top","warning");
+	    MessageBox("请输入内容","top","warning");
         }
     });
     $(window).resize(function(){
         STUDENTDETAIL.check++;
         window.setTimeout(function(){
-            if(STUDENTDETAIL.check==1){
+	    if(STUDENTDETAIL.check==1){
                 var width=$("#accordion").width()-40;
                 $("#grade canvas").attr("height",400).attr("width",width);
                 var canvas = $('#myChart')[0];
                 canvas.width=canvas.width;
                 canvas.height=canvas.height;
                 var data = {
-                    labels : STUDENTDETAIL.labels,
-                    datasets : [
+		    labels : STUDENTDETAIL.labels,
+		    datasets : [
                         {
-                            fillColor : "rgba(151,187,205,0.5)",
-                            strokeColor : "rgba(151,187,205,1)",
-                            pointColor : "rgba(151,187,205,1)",
-                            pointStrokeColor : "#fff",
-                            data :STUDENTDETAIL.data
+			    fillColor : "rgba(151,187,205,0.5)",
+			    strokeColor : "rgba(151,187,205,1)",
+			    pointColor : "rgba(151,187,205,1)",
+			    pointStrokeColor : "#fff",
+			    data :STUDENTDETAIL.data
                         }
-                    ]
+		    ]
                 }
                 var ctx = $("#myChart").get(0).getContext("2d");
                 var myNewChart = new Chart(ctx);
                 new Chart(ctx).Line(data,STUDENTDETAIL.option);
                 STUDENTDETAIL.check--;
-            }
-            else{
+	    }
+	    else{
                 STUDENTDETAIL.check--;
-            }
+	    }
         },600);
     });
     //添加咨询记录验证
     $('.detail-add[type="consult-record"] .form').form({
         time: {
-            identifier:'time',
-            rules: [
+	    identifier:'time',
+	    rules: [
                 {
-                    type   : 'empty',
-                    prompt : '请选择时间'
+		    type   : 'empty',
+		    prompt : '请选择时间'
                 }
-            ]
+	    ]
         },
         customer: {
-            identifier  : 'customer',
-            rules: [
+	    identifier  : 'customer',
+	    rules: [
                 {
-                    type   : 'empty',
-                    prompt : '请填写咨询人姓名'
+		    type   : 'empty',
+		    prompt : '请填写咨询人姓名'
                 }
-            ]
+	    ]
         },
         content: {
-            identifier : 'content',
-            rules: [
+	    identifier : 'content',
+	    rules: [
                 {
-                    type   : 'empty',
-                    prompt : '请填写咨询内容'
+		    type   : 'empty',
+		    prompt : '请填写咨询内容'
                 }
-            ]
+	    ]
         }
         /*
 	  service:{
-          identifier : 'service',
-          rules: [
-          {
-          type   : 'empty',
-          prompt : '请填写接线人姓名'
-          }
-          ]
-          }
+	  identifier : 'service',
+	  rules: [
+	  {
+	  type   : 'empty',
+	  prompt : '请填写接线人姓名'
+	  }
+	  ]
+	  }
 	*/
     },{
         inline : true,
         onSuccess:function(){
-            STUDENTDETAIL.add_consult_record();
+	    STUDENTDETAIL.add_consult_record();
         }
     });
     $("#consult-record-time").datepicker({
@@ -442,16 +502,16 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         changeYear: true,
         dateFormat:'yy-mm-dd',
         onOpen: function( selectedDate ) {
-            $( "#consult-record-time" ).datepicker( "option", "maxDate", new Date() );
+	    $( "#consult-record-time" ).datepicker( "option", "maxDate", new Date() );
         }
     });
     $("body").on("click","div[for='detail-add'][type='consult-record']",function(){
 	if($(".detail-add[type='consult-record'] select").attr("state")=="unload"){
-            for(var i=0;i<=23;i++){
+	    for(var i=0;i<=23;i++){
 		var hour=i<10?"0"+i+":00":i+":00";
 		$(".detail-add[type='consult-record'] select").append($("<option />").text(hour))
-            }
-            $(".detail-add[type='consult-record'] select").attr("state","loaded");
+	    }
+	    $(".detail-add[type='consult-record'] select").attr("state","loaded");
 	}
     }).on("click",".detail-add-close",function(){
         $(".detail-add select").find("option").eq(0).prop("selected",true);
@@ -461,61 +521,61 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     /////////////////////////////////////////////////////// 编辑学生信息
     $("body").on("blur",".update-input",function(){
         if($(this).attr("id")=="name" && $(this).val().length==0){
-            MessageBox("抱歉，名字不能为空","top","warning");
-            window.setTimeout(function(){
+	    MessageBox("抱歉，名字不能为空","top","warning");
+	    window.setTimeout(function(){
                 $("#name").focus();
-            },100)
-            STUDENTDETAIL.errors[0]="errors";
+	    },100)
+	    STUDENTDETAIL.errors[0]="errors";
         }
         else{
-            if($(this).attr("id")=="email" && ($(this).val().length==0 || !easy_email_validate($(this).val()))){
+	    if($(this).attr("id")=="email" && ($(this).val().length==0 || !easy_email_validate($(this).val()))){
                 MessageBox("抱歉，请填写正确的邮箱","top","warning");
                 window.setTimeout(function(){
-                    $("#email").focus();
+		    $("#email").focus();
                 },100)
                 STUDENTDETAIL.errors[1]="errors";
-            }
-            else{
+	    }
+	    else{
                 var data = {
-                    id: '',
-                    student : {},
-                    is_active_account : false
+		    id: '',
+		    student : {},
+		    is_active_account : false
                 };
                 data.id =  $("#student-detail-info").attr('student');
                 if(BACKSTUDENT.check.test($(this).val(),$(this).attr('id'))){
-                    data['student'][$(this).attr('id')] = $(this).val();
-                    student_manager.update($("#student-detail-info").attr('student'),data),function(){
+		    data['student'][$(this).attr('id')] = $(this).val();
+		    student_manager.update($("#student-detail-info").attr('student'),data),function(){
                         if(data.result){
 
                         }
                         else{
 
                         }
-                    };
+		    };
                 }
-            }
+	    }
         }
     }).on("click","#close-student-detail-edit",function(){
         if(STUDENTDETAIL.errors[0]===undefined&&STUDENTDETAIL.errors[1]===undefined){
-            $("#student-edit-section").css("left","-999em").css("right","auto");
+	    $("#student-edit-section").css("left","-999em").css("right","auto");
         }
         else{
-            if(STUDENTDETAIL.errors[0]!==undefined && $("#name").val().length==0){
+	    if(STUDENTDETAIL.errors[0]!==undefined && $("#name").val().length==0){
                 MessageBox("抱歉，名字不能为空","top","warning");
                 window.setTimeout(function(){
-                    $("#name").focus();
+		    $("#name").focus();
                 },100)
-            }
-            else if(STUDENTDETAIL.errors[1]!==undefined && ( $("#email").val().length==0 || !easy_email_validate($("#email").val() ))){
+	    }
+	    else if(STUDENTDETAIL.errors[1]!==undefined && ( $("#email").val().length==0 || !easy_email_validate($("#email").val() ))){
                 MessageBox("抱歉，请填写正确的邮箱","top","warning");
                 window.setTimeout(function(){
-                    $("#email").focus();
+		    $("#email").focus();
                 },100)
-            }
-            else{
+	    }
+	    else{
                 $("#student-edit-section").css("left","-999em").css("right","auto");
                 STUDENTDETAIL.errors=new Array(2);
-            }
+	    }
         }
     }).on("click","#edit-student",function(){
         $("#close-student-detail-edit").click();
@@ -523,20 +583,20 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     $("body").on("click_remove", "#referrer .delete.icon", function(event, msg) {
         var item = $(this);
         student_manager.update($("#student-detail-info").attr('student'),{student:{referrer_id:null}},function(data) {
-            msg.result = data.result;
-            if(!data.result) {
+	    msg.result = data.result;
+	    if(!data.result) {
                 MessageBox(data.content, "top", "warning");
                 stopEvent(event);
-            }
+	    }
         });
     });
     $("body").on("blur",".tag-input-blur",function() {
         var data = {
-            student : {}
+	    student : {}
         };
         var tags = [];
         $.each($('.tags-items>li>div'), function() {
-            tags.push($.trim($(this).text()));
+	    tags.push($.trim($(this).text()));
         });
         data['student']['tags'] = tags;
         console.log(data);
@@ -544,28 +604,28 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     });
     $("body").on("click_add", "#autoComplete-call li", function(event, msg) {
         if(msg.id) {
-            if($("#autoComplete-call").attr("target")=="edit_referrer"){
+	    if($("#autoComplete-call").attr("target")=="edit_referrer"){
                 if($("#edit_referrer").parent().prevAll().length==1){
-                    msg.callback=function(data){
+		    msg.callback=function(data){
                         return false;
-                    }
-                    MessageBox("抱歉,只能添加一个推荐人","top","warning");
-                    $("#edit_referrer").val("");
+		    }
+		    MessageBox("抱歉,只能添加一个推荐人","top","warning");
+		    $("#edit_referrer").val("");
                 }
                 else{
-                    student_manager.update($("#student-detail-info").attr('student'), {student:{referrer_id:msg.id}}, function(data){
+		    student_manager.update($("#student-detail-info").attr('student'), {student:{referrer_id:msg.id}}, function(data){
                         if(data.result){
 
                         }
                         else{
-                            msg.callback=function(data){
+			    msg.callback=function(data){
                                 return false;
-                            }
-                            MessageBox_content(data.content);
+			    }
+			    MessageBox_content(data.content);
                         }
-                    })
+		    })
                 }
-            }
+	    }
         }
     });
 
@@ -573,12 +633,11 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         var href=window.location.href.split("/");
         var new_href=href[href.length-1].split("#")[0];
         if( new_href=="achieve"){
-            if($("#achieve_final_tabular>a").length>=1){
+	        if($("#achieve_final_tabular>a").length>=1){
                 $("#achieve_final_tabular>a").eq(0).click();
-            }
-
-        }
-	//        STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
+	        }
+         }
+//	STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
     });
 
 })();
@@ -587,7 +646,21 @@ STUDENTDETAIL.labels;
 STUDENTDETAIL.data;
 STUDENTDETAIL.check=0;
 STUDENTDETAIL.option={
+    scaleOverride : true,
+    scaleSteps : 20,
+    scaleStartValue :0,
     bezierCurve:false
+}
+function sortNumber(a, b)
+{
+    return b-a
+}
+STUDENTDETAIL.generate_option=function(){
+    var c=[];
+    var p=STUDENTDETAIL.data;
+    c=deepCopy(p,c);
+    c.sort(sortNumber);
+    STUDENTDETAIL.option.scaleStepWidth=Math.ceil(c[0]/STUDENTDETAIL.option.scaleSteps);
 }
 STUDENTDETAIL.generateCanvas=function(labels,scores){
     STUDENTDETAIL.labels=labels;
@@ -606,22 +679,19 @@ STUDENTDETAIL.generateCanvas=function(labels,scores){
         canvas.height=canvas.height;
         var data = {
             labels : labels,
-            datasets : [
-                {
+            datasets : [{
                     fillColor : "rgba(151,187,205,0.5)",
                     strokeColor : "rgba(151,187,205,1)",
                     pointColor : "rgba(151,187,205,1)",
                     pointStrokeColor : "#fff",
                     data :scores
-                }
-            ]
+            }]
         }
         var ctx = $("#myChart").get(0).getContext("2d");
         var myNewChart = new Chart(ctx);
+        STUDENTDETAIL.generate_option();
         new Chart(ctx).Line(data,STUDENTDETAIL.option);
     }
-
-
 };
 STUDENTDETAIL.editCanvas=function(index,score){
     if(arguments.length==3){
@@ -651,6 +721,7 @@ STUDENTDETAIL.editCanvas=function(index,score){
 	}
 	var ctx = $("#myChart").get(0).getContext("2d");
 	var myNewChart = new Chart(ctx);
+        STUDENTDETAIL.generate_option();
 	new Chart(ctx).Line(data,STUDENTDETAIL.option);
     }
 
@@ -671,19 +742,18 @@ STUDENTDETAIL.deleteCanvas=function(index){
         canvas.height=canvas.height;
         var data = {
             labels : STUDENTDETAIL.labels,
-            datasets : [
-                {
+            datasets : [{
                     fillColor : "rgba(151,187,205,0.5)",
                     strokeColor : "rgba(151,187,205,1)",
                     pointColor : "rgba(151,187,205,1)",
                     pointStrokeColor : "#fff",
                     data :STUDENTDETAIL.data
-                }
-            ]
+            }]
         }
     }
     var ctx = $("#myChart").get(0).getContext("2d");
     var myNewChart = new Chart(ctx);
+    STUDENTDETAIL.generate_option();
     new Chart(ctx).Line(data,STUDENTDETAIL.option);
 }
 STUDENTDETAIL.add_consult_record=function(){

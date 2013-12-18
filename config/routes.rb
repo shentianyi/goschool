@@ -23,6 +23,7 @@ Goschool::Application.routes.draw do
   resources :achievements do
     collection do
       post :create_sub
+      get :sub_achievement
     end
   end
   resources :achievementresults
