@@ -104,4 +104,9 @@ class Logininfo < ActiveRecord::Base
   def is_manager?
     Role.manager?(self.role_ids)
   end
+  
+  ## if true 
+  def is_employee?
+    Role.admin?(self.role_ids) || Role.sale?(role_ids) || Role.manager?(role_ids)
+  end
 end
