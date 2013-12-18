@@ -12,14 +12,22 @@
 </table>
 <hr />
 
-<%@homework.student_homeworks.each_with_index do |sh,i|%>
+<%@student_homeworks.each_with_index do |sh,i|%>
 <table style=" border: solid red 1px; width: 100%">
      <tr>
           <td><%= i+1%></td>
      </tr>
      <tr >
-
-          <td><%= sh.content%></td>
+          <td>content:<%= sh.content%></td>
+          <td>improved:<%= sh.improved%>
+          <input type="checkbox" name="improved"  homework="<%= sh.id%>"  class="student-homwork-input-checkbox" <%= 'checked' if sh.improved%>/>
+          </td>
+          <td>marked: <%= sh.marked%></td>
+          <td>score:
+          <input type="text" name="score" value="<%= sh.score_display%>" homework="<%= sh.id%>" class="student-homwork-input-text"/>
+          </td>
+          <td><%= sh.submited_time_display%></td>
+          <td><%= sh.marked_time_display%></td>
      </tr>
 </table>
 <%end%>
