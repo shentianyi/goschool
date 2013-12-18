@@ -175,8 +175,8 @@ class StudentsController < ApplicationController
     end
     
     if @final_grade
-      @sub_courses = Achievement.achieve_types(AchievementType::FINAL_GRADE,student.id)
-      @final_grades =  StudentAchievementPresenter.init_presenters(Achievement.achieves(@final_grade.id,student.id))
+      @sub_courses = Achievement.where("type"=>AchievementType::SUB_COURSE)
+      @final_grades =  StudentAchievementPresenter.init_presenters(Achievement.get_result_by_type(AchievementType::SUB_COURSE,student.id))
     end
   end
 

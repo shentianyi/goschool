@@ -29,6 +29,7 @@ class StudentAchievementPresenter<Presenter
   def get_formatted
     case self.type
     when AchievementType::FINAL_GRADE
+    when AchievementType::SUB_COURSE
       self.final_grade
     when AchievementType::ADMITTED
       self.admitted
