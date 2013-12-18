@@ -14,11 +14,13 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
+/log/*.pid
 /tmp
 /.idea/*
 /.project
 /export/pdf/schedule/*.pdf
-
+/config/*.sphinx.conf
+/db/sphinx/*
 *~
 *#
 .#*
