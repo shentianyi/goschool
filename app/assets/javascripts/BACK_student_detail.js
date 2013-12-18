@@ -93,7 +93,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
             
         }
     });
-    //所有录取
+    ////////////////////////////////////////// 所有录取
     $("body").on("click","#offer .icon.plus",function(){
         if($("#offer-template").length!=1){
             var tr=Mustache.render("<tr id='offer-template'>"+
@@ -170,7 +170,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
             $(this).parents("tr").eq(0).remove()
         }
     });
-    //最终成就
+    ////////////////////////////////////////// 最终成就
     $("body").on("click","#grade .icon.plus",function(event){
         var left= $(this)[0].getBoundingClientRect().right,top=$(this)[0].getBoundingClientRect().bottom;
         $("#grade-add").css("left",left-10+"px").css("top",top+10+"px").find("input").focus();
@@ -207,7 +207,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
                 }
             })
         }
-    }).on("click","#grade .tabular.menu a .label",function(){
+    }).on("click","#grade .tabular.menu a .label",function(event){
         //post
         $(this).parents(".item").eq(0).remove();
         if($("#grade .tabular.menu a").length>0){
@@ -242,7 +242,6 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
             var target=adapt_event(event).target;
             clearNoNumZero(target);
         }
-
     }).on("click","#grade-template-ok",function(){
         var time=$("#grade-template input").eq(0).val();
         var score= $("#grade-template input").eq(1).val();
@@ -263,9 +262,9 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
             $("#grade-template-cancel").click();
         }
         else{
-            MessageBox("信息没有填写完整")
+            MessageBox("信息没有填写完整","top","warning")
         }
-    }).on("click","#grade .remove",function(){
+    }).on("click","#grade table .remove",function(){
         if($(this).attr("id")=="grade-template-cancel"){
             $("#grade-template").remove();
         }
@@ -564,13 +563,13 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     $(document).ready(function(){
         var href=window.location.href.split("/");
         var new_href=href[href.length-1].split("#")[0];
-        if( new_href=="achieve"){
-            if($("#achieve_final_tabular>a").length>=1){
-                $("#achieve_final_tabular>a").eq(0).click();
-            }
-
-        }
-//        STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
+//        if( new_href=="achieve"){
+//            if($("#achieve_final_tabular>a").length>=1){
+//                $("#achieve_final_tabular>a").eq(0).click();
+//            }
+//
+//        }
+        STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
     });
 
 })();
@@ -579,7 +578,21 @@ STUDENTDETAIL.labels;
 STUDENTDETAIL.data;
 STUDENTDETAIL.check=0;
 STUDENTDETAIL.option={
+    scaleOverride : true,
+    scaleSteps : 20,
+    scaleStartValue :0,
     bezierCurve:false
+}
+function sortNumber(a, b)
+{
+    return b-a
+}
+STUDENTDETAIL.generate_option=function(){
+    var c=[];
+    var p=STUDENTDETAIL.data;
+    c=deepCopy(p,c);
+    c.sort(sortNumber);
+    STUDENTDETAIL.option.scaleStepWidth=Math.ceil(c[0]/STUDENTDETAIL.option.scaleSteps);
 }
 STUDENTDETAIL.generateCanvas=function(labels,scores){
     STUDENTDETAIL.labels=labels;
@@ -598,22 +611,19 @@ STUDENTDETAIL.generateCanvas=function(labels,scores){
         canvas.height=canvas.height;
         var data = {
             labels : labels,
-            datasets : [
-                {
+            datasets : [{
                     fillColor : "rgba(151,187,205,0.5)",
                     strokeColor : "rgba(151,187,205,1)",
                     pointColor : "rgba(151,187,205,1)",
                     pointStrokeColor : "#fff",
                     data :scores
-                }
-            ]
+            }]
         }
         var ctx = $("#myChart").get(0).getContext("2d");
         var myNewChart = new Chart(ctx);
+        STUDENTDETAIL.generate_option();
         new Chart(ctx).Line(data,STUDENTDETAIL.option);
     }
-
-
 };
 STUDENTDETAIL.editCanvas=function(index,score){
     if(arguments.length==3){
@@ -643,6 +653,7 @@ STUDENTDETAIL.editCanvas=function(index,score){
 	}
 	var ctx = $("#myChart").get(0).getContext("2d");
 	var myNewChart = new Chart(ctx);
+        STUDENTDETAIL.generate_option();
 	new Chart(ctx).Line(data,STUDENTDETAIL.option);
     }
 
@@ -663,19 +674,18 @@ STUDENTDETAIL.deleteCanvas=function(index){
         canvas.height=canvas.height;
         var data = {
             labels : STUDENTDETAIL.labels,
-            datasets : [
-                {
+            datasets : [{
                     fillColor : "rgba(151,187,205,0.5)",
                     strokeColor : "rgba(151,187,205,1)",
                     pointColor : "rgba(151,187,205,1)",
                     pointStrokeColor : "#fff",
                     data :STUDENTDETAIL.data
-                }
-            ]
+            }]
         }
     }
     var ctx = $("#myChart").get(0).getContext("2d");
     var myNewChart = new Chart(ctx);
+    STUDENTDETAIL.generate_option();
     new Chart(ctx).Line(data,STUDENTDETAIL.option);
 }
 STUDENTDETAIL.add_consult_record=function(){

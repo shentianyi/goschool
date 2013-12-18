@@ -297,6 +297,9 @@ SCHEDULE.calendar.getData=function(){
 //        scheduler.parse(experiment ,"json")
     }
 };
+SCHEDULE.calendar_init=function(){
+
+}
 SCHEDULE.calendar.have_load={max:Date.parse(new Date()),min:Date.parse(new Date())};
 SCHEDULE.calendar.delete_item=function(id){
     //post delete(已经删除掉了，可能要去核心代码里面写ajax)

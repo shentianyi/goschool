@@ -4,9 +4,10 @@
     <title></title>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="stylesheets/semantic.css" type="text/css" />
-    <link rel="stylesheet" href="stylesheets/base.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/base_wayne.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/FRONT-index.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/FRONT-teacher.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/dhtmlxscheduler.css" type="text/css" />
 </head>
 <body>
 <article class="front-people-detail">
@@ -30,18 +31,81 @@
        </ul>
     </header>
    <div class="front-people-inner">
-       <div class="teacher-info">
-           <p>王子骁</p>
-           <p><i class="icon mail"></i> may@hotmail.com</p>
-           <p><i class="icon phone"></i> 13918502286</p>
+
+       <div class="people-info">
+           <img class=" ui image" src="images/portrait/6.jpg">
+           <label class="label"><span>王子骁教授</span></label>
+           <p><i class="icon mail"></i> <span>superxiao21@sina.com</span></p>
        </div>
-       <p>我教授的课程</p>
+
+       <div class="ui piled segment teacher-class">
+           <h2>我教授的课程</h2>
+           <div class="item">
+               <h4>数学学前班</h4>
+               <p class="sub-class">代数</p>
+               <p>课程描述：<span>A button can animate to show hidden content</span></p>
+               <p>授课时间：<span>2013.10.1 - 2014.10.5</span></p>
+               <a class="mini ui teal button">
+                   进入课堂
+               </a>
+               <label>
+                   尚未批改作业：<span>21</span>
+               </label>
+           </div>
+           <div class="item">
+               <h4>数学学前班</h4>
+               <p class="sub-class">代数</p>
+               <p>课程描述：<span>A button can animate to show hidden content</span></p>
+               <p>授课时间：<span>2013.10.1 - 2014.10.5</span></p>
+               <a class="mini ui teal button">
+                   进入课堂
+               </a>
+               <label>
+                   尚未批改作业：<span>21</span>
+               </label>
+           </div>
+           <div class="item">
+               <h4>数学学前班</h4>
+               <p class="sub-class">代数</p>
+               <p>课程描述：<span>A button can animate to show hidden content</span></p>
+               <p>授课时间：<span>2013.10.1 - 2014.10.5</span></p>
+               <a class="mini ui teal button">
+                   进入课堂
+               </a>
+               <label>
+                   尚未批改作业：<span>21</span>
+               </label>
+           </div>
+       </div>
+
+       <div class="ui segment teacher-schedule">
+           <h2>我的排课</h2>
+           <div id="schedule-here" class="dhx_cal_container" style='width:100%; height:100%;'>
+               <div class="dhx_cal_navline">
+                   <div class="dhx_cal_prev_button">&nbsp;</div>
+                   <div class="dhx_cal_next_button">&nbsp;</div>
+                   <div class="dhx_cal_today_button"></div>
+                   <div class="dhx_cal_date"></div>
+                   <div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
+                   <div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
+                   <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
+               </div>
+               <div class="dhx_cal_header"></div>
+               <div class="dhx_cal_data"></div>
+           </div>
+       </div>
+
+
 
    </div>
 </article>
     <script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>
     <script type='text/javascript' src="javascripts/semantic.min.js" ></script>
     <script type='text/javascript' src="javascripts/wayne-base.js" ></script>
+    <script type='text/javascript' src="javascripts/dhtmlxscheduler.js" ></script>
+    <script type='text/javascript' src="javascripts/dhtmlxscheduler_quick_info.js" ></script>
+    <script type='text/javascript' src="javascripts/locale_cn.js" ></script>
+    <script type='text/javascript' src="javascripts/BACK_course_schedule.js" ></script>
     <script type='text/javascript' src="javascripts/mustache.js" ></script>
     <script src="javascripts/FRONT_index.js"></script>
 </body>

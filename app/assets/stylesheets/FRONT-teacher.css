@@ -1,33 +1,48 @@
-/*老师的信息*/
-.teacher-info{
-
-}
-.teacher-info>p:first-of-type{
-    color:#63A69F;
-    font-weight:bold;
-    font-size:30px;
-}
 /*老师的课程列表*/
-.teacher-class{
-    list-style-type: none;
-    background-color:rgba(0, 0, 0, 0.02);
+
+.teacher-class>.item{
     border-radius:5px;
-    -webkit-border-radius:5px;
     -moz-border-radius:5px;
-    box-shadow:0 1px 2px 1px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow:0 1px 2px 1px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow:0 1px 2px 1px rgba(0, 0, 0, 0.1);
-    padding:5px 0;
+    -webkit-border-radius:5px;
+    border:1px solid rgba(0,0,0,0.3);
+    padding:5px 10px;
+    margin-bottom:15px;
     position:relative;
 }
-.teacher-class>li{
-    padding:8px 15px
-}
-.teacher-class td{
+.teacher-class>.item>h4,
+.teacher-class>.item>p{
+    width:70%;
     word-break:break-all;
     word-wrap:break-word;
-}
-.teacher-class p{
     font-size:13px;
-    cursor:default;
+    color:rgba(0,0,0,0.6);
+}
+.teacher-class>.item>h4{
+    margin:5px 0 -5px 0;
+    font-size:17px;
+    color:#4092CC
+}
+.teacher-class>.item>.sub-class{
+    margin-bottom:8px;
+    font-size:13px;
+    color:#C69C6D;
+}
+.teacher-class>.item>.button{
+    position:absolute;
+    right:50px;
+    height:30px;
+    font-size:13px;
+    font-weight:lighter;
+    top:50%;
+    margin-top:-15px;
+}
+.teacher-class>.item>label{
+    position:absolute;
+    right:150px;
+    top:43px;
+    color:rgba(0,0,0,0.6);
+    font-size:14px;
+}
+.teacher-class>.item>label>span{
+    color:#D95C5C
 }
