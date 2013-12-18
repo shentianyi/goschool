@@ -2,7 +2,7 @@
 class TeachersController < ApplicationController
   skip_load_and_authorize_resource
    before_filter :require_user_as_teacher, :only=>[:index]
-  layout 'teacher'
+  layout 'homepage'
   def index
     @teacher=current_user.user
     # teacher=User.find(params[:id]) # for test
