@@ -10,7 +10,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     //编辑学生信息
     $("body").on("click","#student-detail-edit",function(){
         $("#student-edit-section").css("left","0px").css("right","0px");
-//        post(get edit course/service template)
+	//        post(get edit course/service template)
         student_manager.edit($("#student-detail-info").attr('student'), function(data) {
             $("#student-edit-section").html(data);
         });
@@ -33,9 +33,9 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     $("body").on("click","#final-achieve .icon.plus",function(){
         if($("#achieve-template").length!=1){
             $("#final-achieve .list").append($("<dd id='achieve-template'/>")
-				       .append($("<input type='text'/>")).
-				       append($("<i />").addClass("icon remove template-remove"))
-				      );
+					     .append($("<input type='text'/>")).
+					     append($("<i />").addClass("icon remove template-remove"))
+					    );
             $("#achieve-template input[type='text']").focus();
         }
     }).on("keyup","#final-achieve .list input[type='text']",function(event){
@@ -57,9 +57,9 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 		    if(data.result){
 			var res = data.object;
 			$("#final-achieve .list").append($("<dd/>")
-						   .text(res.valuestring).
-						   append($("<i />").addClass("icon remove").attr("final",res.id))
-						  );
+							 .text(res.achieve.object).
+							 append($("<i />").addClass("icon remove").attr("final",res.id))
+							);
 			$("#achieve-template .template-remove").click();
 		    }
 		    else{
@@ -129,7 +129,6 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         var scholarship_value=$("#offer-template select :selected").attr("value");
         if(school.length>0&&major.length>0&&time.length>0){
             //post
-            var res={offer:{school:school,major:major,time:time,scholarship:scholarship}};
 	    var data = {
 		id:'',
 		achievementresult:{}
@@ -141,14 +140,14 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 
 	    achievementres_manager.create(data,function(data){
 		if(data.result){
-		    
-		    var tr=Mustache.render("{{#offer}}<tr>"+
-					   "<td>{{school}}</td>"+
-					   "<td>{{major}}</td>"+
-					   "<td>{{time}}</td>"+
-					   "<td>{{scholarship}}</td>"+
-					   "<td><span class='remove'>删除</span></td>"+
-					   "</tr>{{/offer}}",res);
+		    var res = data.object
+		    var tr=Mustache.render("{{#achieve}}<tr>"+
+					   "<td>{{object.school}}</td>"+
+					   "<td>{{object.specialty}}</td>"+
+					   "<td>{{object.date}}</td>"+
+					   "<td>{{object.scholarship}}</td>"+
+					   "<td><span class='remove' admit='{{id}}'>删除</span></td>"+
+					   "</tr>{{/achieve}}",res);
 		    $("#offer tbody").append(tr);
 		    $("#offer-template-cancel").click();
 		}
@@ -167,7 +166,16 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         }
         else{
             //post
-            $(this).parents("tr").eq(0).remove()
+	    var target = $(this);
+	    var id = target.attr("admit");
+	    achievementres_manager.destroy(id,function(data){
+		if(data.result){
+		    target.parents("tr").eq(0).remove()
+		}else
+		{
+		    MessageBox_content(data.content)
+		}
+	    });
         }
     });
     //最终成就
@@ -300,7 +308,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
             $(this).focus();
         }
     });
-//////////////////////////////////////////////////////// 咨询记录
+    //////////////////////////////////////////////////////// 咨询记录
     $("body").on("click","#consult-record .item .icon.remove",function(){
         //post
         //$(this).parent().remove();
@@ -450,7 +458,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         $(".detail-add .field").removeClass("error");
         $(".prompt.label").remove()
     });
-/////////////////////////////////////////////////////// 编辑学生信息
+    /////////////////////////////////////////////////////// 编辑学生信息
     $("body").on("blur",".update-input",function(){
         if($(this).attr("id")=="name" && $(this).val().length==0){
             MessageBox("抱歉，名字不能为空","top","warning");
@@ -488,29 +496,29 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
             }
         }
     }).on("click","#close-student-detail-edit",function(){
-            if(STUDENTDETAIL.errors[0]===undefined&&STUDENTDETAIL.errors[1]===undefined){
-                $("#student-edit-section").css("left","-999em").css("right","auto");
+        if(STUDENTDETAIL.errors[0]===undefined&&STUDENTDETAIL.errors[1]===undefined){
+            $("#student-edit-section").css("left","-999em").css("right","auto");
+        }
+        else{
+            if(STUDENTDETAIL.errors[0]!==undefined && $("#name").val().length==0){
+                MessageBox("抱歉，名字不能为空","top","warning");
+                window.setTimeout(function(){
+                    $("#name").focus();
+                },100)
+            }
+            else if(STUDENTDETAIL.errors[1]!==undefined && ( $("#email").val().length==0 || !easy_email_validate($("#email").val() ))){
+                MessageBox("抱歉，请填写正确的邮箱","top","warning");
+                window.setTimeout(function(){
+                    $("#email").focus();
+                },100)
             }
             else{
-                if(STUDENTDETAIL.errors[0]!==undefined && $("#name").val().length==0){
-                    MessageBox("抱歉，名字不能为空","top","warning");
-                    window.setTimeout(function(){
-                        $("#name").focus();
-                    },100)
-                }
-                else if(STUDENTDETAIL.errors[1]!==undefined && ( $("#email").val().length==0 || !easy_email_validate($("#email").val() ))){
-                    MessageBox("抱歉，请填写正确的邮箱","top","warning");
-                    window.setTimeout(function(){
-                        $("#email").focus();
-                    },100)
-                }
-                else{
-                    $("#student-edit-section").css("left","-999em").css("right","auto");
-                    STUDENTDETAIL.errors=new Array(2);
-                }
+                $("#student-edit-section").css("left","-999em").css("right","auto");
+                STUDENTDETAIL.errors=new Array(2);
             }
+        }
     }).on("click","#edit-student",function(){
-           $("#close-student-detail-edit").click();
+        $("#close-student-detail-edit").click();
     });
     $("body").on("click_remove", "#referrer .delete.icon", function(event, msg) {
         var item = $(this);
@@ -570,7 +578,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
             }
 
         }
-//        STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
+	//        STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
     });
 
 })();

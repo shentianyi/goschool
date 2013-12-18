@@ -9,8 +9,10 @@ class AchievementresultsController < ApplicationController
     @achieve = Achievement.find(params[:id])
     if @achieve
       @achieveresult = Achievementresult.new(params[:achievementresult])
+
       msg.result = @achieveresult.save
-      msg.object = @achieveresult
+      @presenters = StudentAchievementPresenter.init_presenters(Achievement.get_result_by_id @achieveresult.id)
+      msg.object = @presenters[0].to_json
     else
       msg.content = '成就类型不存在'
     end
