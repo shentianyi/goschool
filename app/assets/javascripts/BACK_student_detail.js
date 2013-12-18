@@ -30,15 +30,15 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     });
     ////////////////////////////////////////////////////////最终成绩
     //最终成就
-    $("body").on("click","#achieve .icon.plus",function(){
+    $("body").on("click","#final-achieve .icon.plus",function(){
         if($("#achieve-template").length!=1){
-            $("#achieve .list").append($("<dd id='achieve-template'/>")
+            $("#final-achieve .list").append($("<dd id='achieve-template'/>")
 				       .append($("<input type='text'/>")).
 				       append($("<i />").addClass("icon remove template-remove"))
 				      );
             $("#achieve-template input[type='text']").focus();
         }
-    }).on("keyup","#achieve .list input[type='text']",function(event){
+    }).on("keyup","#final-achieve .list input[type='text']",function(event){
         var e=adapt_event(event).event;
         if(e.keyCode==13){
             var text=$("#achieve-template input[type='text']").val();
@@ -48,7 +48,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 		    id:'',
 		    achievementresult:{}
 		}
-	 	data.id = $("#achieve .list").parent().attr("achieve");
+	 	data.id = $("#final-achieve .list").parent().attr("achieve");
 		data.achievementresult.student_id = $("div#detail-content div.info").attr("student");
 		data.achievementresult.valuestring = text;
 		data.achievementresult.achievement_id = data.id;
@@ -56,7 +56,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 		achievementres_manager.create(data,function(data){
 		    if(data.result){
 			var res = data.object;
-			$("#achieve .list").append($("<dd/>")
+			$("#final-achieve .list").append($("<dd/>")
 						   .text(res.valuestring).
 						   append($("<i />").addClass("icon remove").attr("final",res.id))
 						  );
@@ -74,7 +74,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         else if(e.keyCode== 27){
             $("#achieve-template .template-remove").click();
         }
-    }).on("click","#achieve dd i",function(){
+    }).on("click","#final-achieve dd i",function(){
         if($(this).hasClass("template-remove")){
             $("#achieve-template").remove();
         }
