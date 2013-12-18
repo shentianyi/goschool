@@ -52,4 +52,7 @@ class Student < ActiveRecord::Base
     errors.add(:guardian, '监护人不能为空') if self.guardian.blank?
     errors.add(:guardian_phone, '监护人号码不能为空') if self.guardian_phone.blank?
   end
+
+
+  after_save ThinkingSphinx::RealTime.callback_for(:student)
 end

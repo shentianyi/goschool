@@ -62,4 +62,6 @@ class Course < ActiveRecord::Base
     errors.add(:code,'课程代码不可重复') if self.class.where('id<>? and code=?',self.id,self.code).first unless new_record?
   end
 
+  after_save ThinkingSphinx::RealTime.callback_for(:course)
+
 end
