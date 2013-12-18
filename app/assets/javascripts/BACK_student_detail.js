@@ -238,7 +238,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
                     var render=Mustache.render('{{#grade}}{{#achieve}}<tr>'+
                         '{{#object}}<td>{{date}}</td>'+
                         '<td class="score">{{grade}}</td>'+
-                        '<td>{{enter_school}}</td>{{#object}}'+
+                        '<td>{{enter_school}}</td>{{/object}}'+
                         '<td><span class="remove" grade="{{id}}">删除</span></td>'+
                         '</tr>{{/achieve}}{{/grade}}',mustache_template);
 		             $("#grade table tbody").append(render);
@@ -320,11 +320,11 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 		if(data.result){
 		    var res=data.object;
 		    var tr=Mustache.render("{{#achieve}}<tr>"+
-					   "<td>{{time}}</td>"+
-					   "<td class='score'>{{score}}</td>"+
-					   "<td>{{join_time}}</td>"+
-					   "<td><span class='remove'>删除</span></td>"+
-					   "</tr>{{/achieve}}",data);
+					   "<td>{{object.date}}</td>"+
+					   "<td class='score'>{{object.grade}}</td>"+
+					   "<td>{{object.enter_school}}</td>"+
+					   "<td><span grade='{{id}}'class='remove'>删除</span></td>"+
+					   "</tr>{{/achieve}}",res);
 		    $("#grade tbody").append(tr);
 		    var index=$("#grade-template").prevAll().length;
 		    STUDENTDETAIL.editCanvas(index,parseInt(score),time);
@@ -373,18 +373,27 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     }).on("blur","#grade .score input",function(){
         if($.trim($(this).val()).length>0){
 	    //post
-	    var data = {
-		id:'',
-		result:{}
-	    }
-	    
-	    
-	    
-	    var text=$(this).val();
-	    var index=$(this).parents("tr").prevAll().length;
-	    $(this).parent().text(text);
-	    $(this).remove();
-	    STUDENTDETAIL.editCanvas(index,parseInt(text));
+        var $this=$(this);
+        var $parent=$this.parents("tr").eq(0);
+        var $tds=$parent.find("td");
+        var data = {
+            id:$parent.find(".remove").attr("grade"),
+            result:{
+                valuestring:$tds.eq(0).text()+";"+$this.val()+";"+$tds.eq(2).text()
+            }
+        }
+        achievementres_manager.update(data,function(data){
+                if(data.result){
+                     var text=$this.val();
+                     var index=$this.parents("tr").prevAll().length;
+                     $this.parent().text(text);
+                     $this.remove();
+                     STUDENTDETAIL.editCanvas(index,parseInt(text));
+                }
+                else{
+                    MessageBox_content(data.content);
+                }
+        });
         }
         else{
 	    MessageBox("请输入分数","top","warning");

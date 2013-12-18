@@ -140,7 +140,7 @@ var achievement_manager = $.extend({
 	    if(callback){
 		callback(data)
 	    }
-	},'html')
+	},'json')
     }
 },manager);
 

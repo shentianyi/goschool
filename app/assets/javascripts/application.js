@@ -12,10 +12,12 @@
 //
 //= require jquery-1.8.2.min
 //= require jquery-datepicker
+//= require SCHEDULE
 //= require mustache
 //= require semantic.min
 //= require Chart.min
 //= require excanvas
+//= require search
 //= require wayne-base
 
 

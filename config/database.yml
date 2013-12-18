@@ -14,8 +14,8 @@ development:
  reconnect: false
  database: goschooldb
  pool: 5
- username: root
- password:
+ username: goer
+ password:  goer@
  socket: /var/run/mysqld/mysqld.sock
 
 # 
@@ -28,8 +28,8 @@ test:
  reconnect: false
  database: goschooldb_test
  pool: 5
- username: root
- password:
+ username: goer
+ password: goer@
  socket: /var/run/mysqld/mysqld.sock
 
 
