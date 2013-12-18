@@ -1,8 +1,8 @@
 <div class="ui tabular menu" id="achieve_final_tabular">
   <% if @sub_courses %>
   <% @sub_courses.each do |sub| %>
-  <a class="active item">
-    <div class="floating ui label"><i sub="<%= sub.id %>" class="icon remove"></i></div>
+  <a class="item" sub="<%= sub.id %>">
+    <div class="floating ui label"><i class="icon remove"></i></div>
     <%= sub.name %>
   </a>
   <% end %>
@@ -19,16 +19,21 @@
     <tr><th colspan="4">添加记录</th>
   </tr></tfoot>
   <tbody>
-    <% if @final_grades %>
-    <% @final_grades.each do |grade|%>
+    <!--
+	<% if @final_grades %>
+	<% @final_grades.each do |grade|%>
     <tr>
       <td><%= grade.final_grade[:date]%></td>
       <td class="score"><%= grade.final_grade[:grade]%></td>
       <td><%= grade.final_grade[:enter_school]%></td>
-      <td><span class="remove">删除</span></td>
+      <td><span class="remove" grade="<%= grade.id%>">删除</span></td>
     </tr>
     <% end %>
     <% end %>
+    -->
+    
+    
+    
   </tbody>
 </table>
 <canvas id="myChart" ></canvas>

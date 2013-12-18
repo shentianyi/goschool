@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131217030150) do
+ActiveRecord::Schema.define(:version => 20131218032113) do
 
   create_table "achievementresults", :force => true do |t|
     t.string   "valuestring"
@@ -210,6 +210,7 @@ ActiveRecord::Schema.define(:version => 20131217030150) do
     t.integer  "sub_course_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.datetime "date"
   end
 
   add_index "schedules", ["sub_course_id"], :name => "index_schedules_on_sub_course_id"
@@ -241,15 +242,15 @@ ActiveRecord::Schema.define(:version => 20131217030150) do
   create_table "student_homeworks", :force => true do |t|
     t.float    "score"
     t.string   "content"
-    t.boolean  "improved"
-    t.boolean  "marked"
+    t.boolean  "improved",      :default => true
+    t.boolean  "marked",        :default => false
     t.datetime "marked_time"
     t.datetime "submited_time"
     t.integer  "student_id"
     t.integer  "homework_id"
     t.integer  "tenant_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   add_index "student_homeworks", ["homework_id"], :name => "index_student_homeworks_on_homework_id"
