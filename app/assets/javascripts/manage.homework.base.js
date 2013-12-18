@@ -25,6 +25,7 @@ function init_teacher_homework() {
           } else {
                // 跟新失败
                // data.content 未消息
+               MessageBox_content(data.content);
           }
      });
 }
