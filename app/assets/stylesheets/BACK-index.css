@@ -450,7 +450,30 @@
     -moz-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
     -webkit-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
 }
-
+/*超级搜索框*/
+.query_list>div{
+    padding:6px 20px;
+}
+.query_list>div>span{
+    font-size:13px;
+}
+.query_list>div>span:last-of-type{
+    display:inline-block;
+    margin-right:15px;
+}
+.query_list>div>a{
+    color:#D95C5C;
+    transition:color 0.25s ease-out;
+    display:none;
+    margin-right:5px;
+}
+.query_list>div:hover a,
+.query_list>div>a:hover{
+    display:inline;
+}
+.query_list>div>a:hover{
+    color:rgba(228,75,61,0.6)
+}
 
 
 

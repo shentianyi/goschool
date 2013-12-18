@@ -1,5 +1,5 @@
 <!--partial-->
-
+<% if @consultations %>
 <% @consultations.each do |consultation| %>
 <div class="item" id="<%= consultation.id%>">
   <p><%= consultation.consult_time_display%> <%= consultation.consultants%></p>
@@ -16,5 +16,6 @@
     <div class="ui button tiny" id=<%= consultation.id%>>评论</div>
   </div>
 </div>
+<% end %>
 <% end %>
 <!--partial-->
