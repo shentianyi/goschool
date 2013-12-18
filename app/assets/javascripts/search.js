@@ -329,8 +329,6 @@ var Search = {
 
 
         search.bind_auto_complete = function(data,obj){
-            console.log(data);
-            console.log(obj);
             //when a item is selected, should give the query object to current_query object and switch mode
             //to conditions
 
@@ -355,7 +353,6 @@ var Search = {
             var obj=obj;
             var callback =  function(event){
                 event.stopPropagation();
-                console.log(event.data.obj);
                 var obj=event.data.obj;
                 var $target=$(this);
                 var data={
@@ -365,7 +362,6 @@ var Search = {
                     query_type:$target.attr("query_type"),
                     is_explicit:$target.attr("is_explicit")
                 };
-                console.log(data);
                 obj.current_query = data;
                 if(!obj.query_types[obj.current_query['query_type']]){
                     obj.query_types[obj.current_query['query_type']] = obj.current_query;
@@ -520,10 +516,14 @@ var Search = {
 
         search.template = {
             input:"<input type='text' name='fname' class='search_input_class'" +
-                "id='search_input'"+"autocomplete='experiment'"+
+                "id='search_input'"+
                 "placeholder='已经准备为您搜索一切,直接输入关键字开始搜索，或键入＃开始更为精确的搜索'/>",
-            query_list:"<div id='query_list'></div>",
-            query_item: "<div id='!id!'><span>!name!</span><span>!condition!</span><a href='#' onclick=Search.instance().delete_query('!id!')>delete</a><a href='#' onclick=Search.instance().edit('!id!')>edit</a></div>"
+            query_list:"<div id='query_list' class='query_list'></div>",
+            query_item: "<div id='!id!'>" +
+                "<span>!name!"+"："+"</span><span>!condition!</span>" +
+                "<a href='#' title='删除该条件' onclick=Search.instance().delete_query('!id!')><i class='icon"+" remove'></i></a>" +
+                "<a href='#' title='编辑该条件内容' onclick=Search.instance().edit('!id!')><i class='icon"+" pencil'></i></a>" +
+                "</div>"
         };
 
         return search;
@@ -533,17 +533,17 @@ var WAYNE=WAYNE ||{};
 WAYNE.change_mode=function(event,mode){
   switch(mode){
       case "full_text":
-          $(event.target).attr("autocomplete","").parent().removeClass("autoComplete").attr("ishould","");
+          $(event.target).attr("autocomplete","").attr("ishould","").parent().removeClass("autoComplete");
           break;
       case "select_query":
           $(event.target).attr("autocomplete","experiment").parent().addClass("autoComplete");
           break;
       case "conditions":
-          $(event.target).attr("autocomplete","").parent().removeClass("autoComplete").attr("ishould","");
+          $(event.target).attr("autocomplete","").attr("ishould","").parent().removeClass("autoComplete");
           break;
   }
 
 }
 WAYNE.change_to_condition=function(target){
-    $("#"+target).attr("autocomplete","").parent().removeClass("autoComplete").attr("ishould","");
+    $("#"+target).attr("autocomplete","").attr("ishould","").parent().removeClass("autoComplete");
 }
