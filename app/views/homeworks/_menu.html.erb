@@ -3,7 +3,7 @@ LEFT MENU:
      <%@menus.each do |menu|%>
      <li>
           <a href="#" type="<%= menu.value%>" class="homework-menu-a"><%= menu.display%></a>
-          <div class="homework-list">
+          <div class="homework-list"  style="background: brown">
                <%if @menu_type==menu.value%>
                <%= render 'menu_item'%>
                <%end%>

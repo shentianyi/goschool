@@ -1,3 +1,4 @@
+<h3> HOMEWORK DETAIL</h3>
 <%if @homework%>
 <table>
      <tr>
@@ -9,9 +10,12 @@
      <tr>
           <td>deadline: <%= @homework.deadline_display%></td>
      </tr>
+     <tr>
+          <td>status:<%= @homework.status_display%> </td>
+     </tr>
 </table>
 <hr />
-
+<div style="background: pink">
 <%@student_homeworks.each_with_index do |sh,i|%>
 <table style=" border: solid red 1px; width: 100%">
      <tr>
@@ -31,5 +35,5 @@
      </tr>
 </table>
 <%end%>
-
+</div>
 <%end%>
