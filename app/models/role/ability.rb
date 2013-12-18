@@ -15,6 +15,8 @@ class Ability
       can :manage,[LogininfoSession]
       can :manage,[Student],:student_id=>user.student.id
       can :manage,[Logininfo],:id=>user.id
+      can :read,[Homework]
+      can :manage,[StudentHomework]
     elsif Role.teacher?(user.role_ids)
       can :manage,[LogininfoSession]
     end

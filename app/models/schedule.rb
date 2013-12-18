@@ -25,7 +25,9 @@ class Schedule < ActiveRecord::Base
   end
   
   def self.by_teacher_date params
-    between_date(params).where(teacher_courses:{user_id:params[:teacher_id]})
+    joins( :sub_course=>[:institution,:teacher_courses])
+    .where(start_time:params[:start_date]..params[:end_date],sub_courses:{status:CourseStatus::UNLOCK},teacher_courses:{user_id:params[:teacher_id]})
+    .select('institutions.name as institution_name,sub_courses.*,schedules.*')
   end
   
   def self.by_course_id params
@@ -58,7 +60,7 @@ class Schedule < ActiveRecord::Base
     if institution_id
      return  joins(:sub_course).where(sub_courses:{institution_id:institution_id,status:CourseStatus::UNLOCK}).select('sub_courses.*,schedules.*')
      else
-        return joins(:sub_course).where(sub_courses:{status:CourseStatus::UNLOCK}).select('sub_courses.*,schedules.*')
+        return joins( :sub_course=>:institution).where(sub_courses:{status:CourseStatus::UNLOCK}).select('sub_courses.*,schedules.*')
      end
   end
 end

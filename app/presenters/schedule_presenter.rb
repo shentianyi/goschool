@@ -1,6 +1,6 @@
 #encoding: utf-8
 class SchedulePresenter<Presenter
-  def_delegators :@schedule,:name,:parent_name,:id,:start_time,:end_time,:is_default,:teachers
+  def_delegators :@schedule,:name,:parent_name,:id,:start_time,:end_time,:is_default,:institution_name,:teachers
   def initialize(schedule)
     @schedule=schedule
   end
@@ -35,6 +35,9 @@ class SchedulePresenter<Presenter
       teacher_names.join(', ')
     end
 
+# def institution
+  # @schedule.send :institution_name
+# end
   def to_json
     { text:self.parent_name,
       id:self.id,
@@ -42,6 +45,7 @@ class SchedulePresenter<Presenter
       start_date:self.start_time.to_milli,
       end_date:self.end_time.to_milli,
       color: '#FFA500',
+      # institution_name:self.institution,
       sub_courses:{value:self.id,text:self.name,is_default:self.is_default}
     }
   end
