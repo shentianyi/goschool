@@ -10,6 +10,7 @@ if defined?(PhusionPassenger)
   PhusionPassenger.on_event(:starting_worker_process) do |forked|
     if forked
       $redis.client.reconnect
+      $redis_query.client.reconnect
       #$redis_search_instance.client.reconnect
       # $redis=Redis.new(:host => "127.0.0.1",:port => "6379",:db=>7)
     end
