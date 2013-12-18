@@ -373,12 +373,27 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     }).on("blur","#grade .score input",function(){
         if($.trim($(this).val()).length>0){
 	    //post
-
-	    var text=$(this).val();
-	    var index=$(this).parents("tr").prevAll().length;
-	    $(this).parent().text(text);
-	    $(this).remove();
-	    STUDENTDETAIL.editCanvas(index,parseInt(text));
+        var $this=$(this);
+        var $parent=$this.parents("tr").eq(0);
+        var $tds=$parent.find("td");
+        var data = {
+            id:$parent.find(".remove").attr("grade"),
+            result:{
+                valuestring:$tds.eq(0).text()+";"+$this.val()+";"+$tds.eq(2).text()
+            }
+        }
+        achievementres_manager.update(data,function(data){
+                if(data.result){
+                     var text=$this.val();
+                     var index=$this.parents("tr").prevAll().length;
+                     $this.parent().text(text);
+                     $this.remove();
+                     STUDENTDETAIL.editCanvas(index,parseInt(text));
+                }
+                else{
+                    MessageBox_content(data.content);
+                }
+        });
         }
         else{
 	    MessageBox("请输入分数","top","warning");

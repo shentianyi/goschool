@@ -290,8 +290,9 @@ GLOBAL.autoComplete.count = 0;
                               $("#autoComplete-call").scrollTop(0);
                          }
                     }
-
-                    validate = true;
+                   if(auto_complete!="experiment"){
+                       validate = true;
+                   }
                }
 
           }
@@ -318,14 +319,18 @@ GLOBAL.autoComplete.count = 0;
                          }
 
                     }
-                    validate = true;
+                   if(auto_complete!="experiment"){
+                       validate = true;
+                   }
                }
           }
           //除去left and right
           else if(e.keyCode != 37 && e.keyCode != 39 && e.keyCode != 13) {
+               if(auto_complete!="experiment"){
                    window.setTimeout(function(){
-                      $("#autoComplete-call>ul").empty();
+                       $("#autoComplete-call>ul").empty();
                    },100);
+               }
                GLOBAL.autoComplete.count++;
                var $this = $(adapt_event(event).target).parents(".autoComplete").eq(0);
                var $my = $(adapt_event(event).target);
@@ -370,7 +375,11 @@ GLOBAL.autoComplete.count = 0;
                                              $target.append($("<p />").addClass("no_match").text("没有匹配内容..."))
                                         }
                                    });
-                              } else {
+                              }
+                              else if(auto_complete=="experiment"){
+
+                              }
+                              else {
                                    $.get("/" + auto_complete + "/fast_search", {
                                         q : value
                                    }, function(data) {
@@ -449,6 +458,9 @@ GLOBAL.autoComplete.count = 0;
                     $this.parent().before(render);
                }
                $this.val("");
+          }
+          else if($("#" + target).attr("autocomplete")=="experiment"){
+
           }
      });
 })();
@@ -586,6 +598,7 @@ GLOBAL.autoComplete.count = 0;
                          $("#autoComplete-call").css("left", "-999em").attr("target", "")
                     } else if($input.attr("ishould") == "BeSelected") {
                          if($("#autoComplete-call").find(".active").length > 0) {
+                             $("#autoComplete-call .active").click();
                               $("#autoComplete-call").css("left", "-999em").attr("target", "")
                          } else {
                               MessageBox("请在下拉提示菜单中选择一条", "top", "warning");
