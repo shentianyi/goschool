@@ -110,12 +110,13 @@ class AchievementsController < ApplicationController
   # DELETE /achievements/1
   # DELETE /achievements/1.json
   def destroy
+    msg = Msg.new
+    msg.result = false
+    msg.content = '删除子课程失败'
     @achievement = Achievement.find(params[:id])
     @achievement.destroy
-
-    respond_to do |format|
-      format.html { redirect_to achievements_url }
-      format.json { head :no_content }
-    end
+    msg.result = true
+    
+    render :json=>msg
   end
 end
