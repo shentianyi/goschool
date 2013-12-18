@@ -20,11 +20,11 @@
      <tr >
           <td>content:<%= sh.content%></td>
           <td>improved:<%= sh.improved%>
-          <input type="checkbox" name="improved"  homework="<%= sh.id%>"  class="student-homwork-input-checkbox" <%= 'checked' if sh.improved%>/>
+          <input type="checkbox" name="improved"  homework="<%= sh.id%>"  class="student-homwork-input" <%= 'checked' if sh.improved%>/>
           </td>
           <td>marked: <%= sh.marked%></td>
           <td>score:
-          <input type="text" name="score" value="<%= sh.score_display%>" homework="<%= sh.id%>" class="student-homwork-input-text"/>
+          <input type="text" name="score" value="<%= sh.score_display%>" homework="<%= sh.id%>" class="student-homwork-input"/>
           </td>
           <td><%= sh.submited_time_display%></td>
           <td><%= sh.marked_time_display%></td>
