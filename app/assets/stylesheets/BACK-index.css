@@ -171,7 +171,7 @@
 }
 /*搜索条件的记录*/
 .back-index-main>.search-list>.search-conditions{
-    padding:6px 20px;
+    padding:0;
     margin:0 0 15px;
 }
 .back-index-main>.search-list>.search-conditions p{

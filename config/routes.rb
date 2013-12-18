@@ -16,6 +16,7 @@ Goschool::Application.routes.draw do
   resources :homeworks do
     collection do
       get  'index/:id'=>:index
+      get  'index/:id/:sid'=>:index #sid is sub_course_id
       get 'list/:id/:type'=>:list
     end
   end

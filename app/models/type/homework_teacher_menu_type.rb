@@ -1,6 +1,6 @@
 #encoding: utf-8
 class HomeworkTeacherMenuType<StatusBase
-  ONGOING=100
+  UNMARK=100
   LAST_10_DAYS=11
   LAST_20_DAYS=22
   LAST_30_DAYS=33
@@ -12,8 +12,8 @@ class HomeworkTeacherMenuType<StatusBase
   
  def self.condition type
    case type
-   when ONGOING
-       {status:HomeworkStatus::ONGOING}
+   when UNMARK
+       {status:HomeworkStatus::UNMARK}
    when OTHER
        ['created_at<=?',Date.current.ago((type-base_period).days)]
    else
@@ -38,7 +38,7 @@ class HomeworkTeacherMenuType<StatusBase
 
  def self.genenerate_menu_item type
     case type
-    when ONGOING
+    when UNMARK
 	'未完成批改'
     when OTHER
 	'更多>>'

@@ -3,14 +3,16 @@ class HomeworksController < ApplicationController
   before_filter :init_message ,:only=>[:show,:create,:update,:destroy]
   before_filter :get_homework,:only=>[:show,:update,:destroy]
   before_filter :render_nil_msg , :only=>[:edit,:update,:destroy]
-  before_filter :require_user_as_teacher, :only=>[:index,:create,:update,:destroy]
+  before_filter :require_user_as_teacher, :only=>[:create,:update,:destroy]
 
   layout 'homework'
   def index
     if current_user.is_teacher?
       teacher_index
     elsif current_user.is_student?
-
+      student_index
+    else
+      error_page_404
     end
   end
 
@@ -83,6 +85,10 @@ class HomeworksController < ApplicationController
     else
       error_page_404
     end
+  end
+  
+  def student_index
+    
   end
 
 end
