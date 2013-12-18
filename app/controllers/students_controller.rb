@@ -20,10 +20,7 @@ class StudentsController < ApplicationController
     @active_left_aside='students'
     @student = Student.find(params[:id])
     @presenter=StudentPresenter.new(@student)
-    
     case params[:part]
-    when 'class-and-service'
-      courses(@student)
     when 'achieve'
       achievements(@student)
     when 'friendship'
@@ -31,6 +28,7 @@ class StudentsController < ApplicationController
     when 'consult-record'
       consultation(@student)
     else
+      @partial = 'class-and-service'
       courses(@student)
     end
     
@@ -123,11 +121,13 @@ class StudentsController < ApplicationController
   def destroy
     msg = Msg.new
     msg.result = false
-    @sutdent = Student.find_by_id(params[:id])
+    @sutdent = Student.find(params[:id])
     if @student
       @student.destroy
+      msg.result = true
+    else
+      msg.content = '未找到该学生或您没有权限删除Ta'
     end
-    msg.result = true
     render :json=>msg
   end
 
