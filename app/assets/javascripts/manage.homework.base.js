@@ -15,8 +15,17 @@ function init_teacher_homework() {
                }
           });
      });
-     bind_sh_input_text_update_event(function() {
-          // alert('marked!');
+     bind_sh_input_text_update_event(function(data) {
+          if(data.result) {
+               // 更新成功
+               if(data.content) {
+                    // 批改成功：即修改了分数
+                    console.log('批改成功');
+               }
+          } else {
+               // 跟新失败
+               // data.content 未消息
+          }
      });
 }
 
@@ -36,18 +45,31 @@ function bind_menu_event() {
 }
 
 function bind_sh_input_text_update_event(callback) {
-     $('body').on('change', ".student-homwork-input-text", function() {
+     $('body').on('change', ".student-homwork-input", function() {
           var data = {
                student_homework : {}
           };
-          data['student_homework'][ $(this).attr('name')] = $(this).val();
+          var value = "";
+          switch($(this).attr('type')) {
+               case 'text':
+                    value = $(this).val();
+                    break;
+               case 'checkbox':
+                    value = $(this).attr('checked') ? true : false;
+                    break;
+               default:
+                    value = null;
+                    break;
+          }
+          data['student_homework'][ $(this).attr('name')] = value;
           student_homework_manager.update($(this).attr('homework'), data, function(data) {
                if(data.result) {
                     if(callback)
-                         callback();
+                         callback(data);
                } else {
                     MessageBox_content(data.content);
                }
           });
      });
 }
+

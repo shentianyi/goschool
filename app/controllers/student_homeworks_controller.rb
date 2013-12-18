@@ -19,6 +19,9 @@ class StudentHomeworksController < ApplicationController
       params[:student_homework][:marked_time]=Time.now
     end
     @msg.content=@student_homework.errors.messages unless @msg.result=@student_homework.update_attributes(params[:student_homework])
+     if params[:student_homework].has_key?(:score) && @msg.result
+       @msg.content=true # if marked
+     end
     render :json=>@msg
   end
 

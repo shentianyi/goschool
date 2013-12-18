@@ -8,6 +8,7 @@ class StudentHomework < ActiveRecord::Base
   acts_as_tenant(:tenant)
 
   def self.detail_by_homework_id homework_id
-   joins(:student).where(homework_id:homework_id).select("students.name, students.id as student_id,student_homeworks.*")
+    joins(:student).where(homework_id:homework_id).select("students.name, students.id as student_id,student_homeworks.*")
   end
+
 end
