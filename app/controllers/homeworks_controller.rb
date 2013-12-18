@@ -1,6 +1,6 @@
 #encoding: utf-8
 class HomeworksController < ApplicationController
-  before_filter :init_message ,:only=>[:show,:create,:update,:destroy]
+  before_filter :init_message ,:only=>[:create,:update,:destroy]
   before_filter :get_homework,:only=>[:show,:update,:destroy]
   before_filter :render_nil_msg , :only=>[:edit,:update,:destroy]
   before_filter :require_user_as_teacher, :only=>[:create,:update,:destroy]
@@ -25,14 +25,11 @@ class HomeworksController < ApplicationController
   end
 
   def show
-    if   @homework=Homework.find_by_id(params[:id])
+    if   @homework
       if current_user.is_teacher?
-        @homework=TeacherHomeworkPresenter.new(@homework)
-	@student_homeworks=StudentHomeworkPresenter.init_presenters(StudentHomework.detail_by_homework_id(@homework.id).all)
-        render partial:'teacher_homework'
+        teacher_show
       elsif current_user.is_student?
-        @homework=StudentHomeworkPresenter.new(Homework.find_by_id(params[:id]))
-        render partial:'stuent_homework'
+        student_show
       end
     else
       error_page_404
@@ -86,9 +83,19 @@ class HomeworksController < ApplicationController
       error_page_404
     end
   end
-  
+
   def student_index
-    
+
   end
 
+  def teacher_show
+    @homework=TeacherHomeworkPresenter.new(@homework)
+    @student_homeworks=StudentHomeworkPresenter.init_presenters(StudentHomework.detail_by_homework_id(@homework.id).all)
+    render partial:'teacher_homework'
+  end
+
+  def student_show
+    @homework=StudentHomeworkPresenter.new(Homework.find_by_id(params[:id]))
+    render partial:'stuent_homework'
+  end
 end
