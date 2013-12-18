@@ -46,3 +46,76 @@
 .teacher-class>.item>label>span{
     color:#D95C5C
 }
+/*老师的课程表*/
+.teacher-schedule{
+    margin-top:45px !important;
+    margin-bottom:75px !important;
+    -webkit-box-shadow:  2px 2px 4px 1px rgba(0, 0, 0, 0.5) !important;
+    box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.5) !important;
+    background-color:rgba(0,0,0,0) !important;
+}
+.teacher-schedule>.schedule-block{
+    width:70%;
+    height:700px;
+}
+/*课程的样式*/
+.schedule-block .dhx_cal_event_clear{
+    font-size:10px;
+    color:#fff;
+    text-shadow:1px 1px 1px rgba(0, 0, 0, 0.6);
+    -moz-text-shadow:1px 1px 1px rgba(0, 0, 0, 0.6);
+    -webkit-text-shadow:1px 1px 1px rgba(0, 0, 0, 0.6);
+    padding:1px 0px 5px 2px;
+    border-radius:0px 4px 4px 0;
+    -moz-border-radius:0px 4px 4px 0;
+    -webkit-border-radius:0px 4px 4px 0;
+}
+.schedule-block .dhx_cal_event_clear b{
+    font-weight:lighter;
+}
+.schedule-block .dhx_cal_event>.dhx_title{
+    cursor:move;
+}
+.dhtmlx_popup_button.dhtmlx_ok_button div{
+    background:#D95C5C !important;
+    border:1px solid #D95C5C !important;
+}
+.dhtmlx_popup_button.dhtmlx_ok_button {
+    background-color: #D95C5C !important;
+    border: 1px solid #D95C5C !important;
+}
+
+/*单击跳出来来的info*/
+.dhx_cal_qi_content{
+    display:none
+}
+.dhx_cal_qi_controls .dhx_qi_big_icon{
+    background-color:#63A69F;
+}
+.dhx_cal_qi_controls .dhx_qi_big_icon.icon_delete{
+    background-color: #D95C5C
+}
+.dhx_cal_quick_info{
+    background: none repeat scroll 0 0 rgba(0,0,0,0.7) !important;
+    border: 1px solid rgba(0,0,0,0.7) !important;
+}
+.dhx_cal_qi_tcontent>span:nth-of-type(1){
+    font-size:13px;
+    display:block;
+    font-weight:lighter;
+    color:rgba(255,255,255,0.8);
+    margin: -3px 0 2px;
+}
+.dhx_cal_qi_tcontent>span:nth-of-type(2){
+    font-weight:lighter;
+    margin:3px 0 5px;
+    display:block;
+    font-size:14px;
+}
+.dhx_wrap_section .new-schedule-teachers{
+    font-size:13px;
+    line-height:9px;
+}
+.dhx_wrap_section .ui.input input[type='text']{
+    padding:5px 10px;
+}

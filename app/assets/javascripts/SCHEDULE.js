@@ -1,5 +1,8 @@
 var SCHEDULE=SCHEDULE || {};
 SCHEDULE.widget={};
+SCHEDULE.institution={};
+SCHEDULE.calendar={};
+//可以传readonly
 SCHEDULE.widget.init=function(){
     scheduler.locale.labels.section_courses = '课程:';
     scheduler.locale.labels.section_sub_courses = '子课程:';
@@ -118,13 +121,17 @@ SCHEDULE.widget.init=function(){
 };
 
 
+SCHEDULE.institution.choose=function(){
+    SCHEDULE.calendar.getData();
+};
+SCHEDULE.calendar.have_load={max:Date.parse(new Date()),min:Date.parse(new Date())};
 
-SCHEDULE.calendar={};
+//可以传readonly这个参数
 SCHEDULE.calendar.getData=function(){
     //变成毫秒的形式
     var minDate = Date.parse(scheduler.getState().min_date);
     var maxDate = Date.parse(scheduler.getState().max_date);
-    var institution=$("#schedule-select-institution .menu>div.active").attr("value");
+    var institution=arguments[0]!='readonly'?$("#schedule-select-institution .menu>div.active").attr("value"):SCHEDULE.calendar.have_load.institution;
     var validate_max,validate_min,validate_institution;
     validate_max=SCHEDULE.calendar.have_load.max>=maxDate?false:true;
     validate_min=SCHEDULE.calendar.have_load.min<=minDate?false:true;
@@ -144,27 +151,43 @@ SCHEDULE.calendar.getData=function(){
             SCHEDULE.calendar.have_load.max=maxDate>SCHEDULE.calendar.have_load.max?maxDate:SCHEDULE.calendar.have_load.max;
             SCHEDULE.calendar.have_load.min=maxDate>SCHEDULE.calendar.have_load.min?minDate:SCHEDULE.calendar.have_load.min;
         }
-        $.get("/schedules/dates",{
-            start_date:scheduler.getState().min_date.toWayneString().day,
-            end_date:scheduler.getState().max_date.toWayneString().day,
-            institution_id:institution
-        },function(data){
-            if(data.result){
-                scheduler.parse(data.content,"json");
-            }
-            else{
-                MessageBox_content(data.content);
-            }
-        });
-//        var experiment=[
-//            {id:"1",text:"儿童秋季班",teachers:["Wayne","王子骁"],start_date:"1385870400000",end_date:"1385872200000",color:'#FFA500',sub_courses:{value:"default",text:"没指定"}},
-//            {id:"2",text:"SAT秋季冲刺班",teachers:["Kobe","Bryant"],start_date:new Date(2013,11,4,0,0),end_date:new Date(2013,11,4,0,30),color:'#63A69F',sub_courses:{value:"0",text:"听力"}},
-//            {id:"3",text:"托福秋季班",teachers:["Wayne","王子骁"],start_date:new Date(2013,11,5,18,0),end_date:new Date(2013,11,5,18,30),color:'#D95C5C',sub_courses:{value:"0",text:"口语强化"}}
-//        ];
-//        scheduler.parse(experiment ,"json")
+        //post
+//        if(arguments[0]!='readonly'){
+//            $.get("/schedules/dates",{
+//                start_date:scheduler.getState().min_date.toWayneString().day,
+//                end_date:scheduler.getState().max_date.toWayneString().day,
+//                institution_id:institution
+//            },function(data){
+//                if(data.result){
+//                    scheduler.parse(data.content,"json");
+//                }
+//                else{
+//                    MessageBox_content(data.content);
+//                }
+//            });
+//        }
+//        else{
+//            $.get("/schedules/dates",{
+//                start_date:scheduler.getState().min_date.toWayneString().day,
+//                end_date:scheduler.getState().max_date.toWayneString().day
+//            },function(data){
+//                if(data.result){
+//                    scheduler.parse(data.content,"json");
+//                }
+//                else{
+//                    MessageBox_content(data.content);
+//                }
+//            });
+//        }
+        var experiment=[
+            {id:"1",text:"儿童秋季班",teachers:["Wayne","王子骁"],start_date:"1385870400000",end_date:"1385872200000",color:'#FFA500',sub_courses:{value:"default",text:"没指定"}},
+            {id:"2",text:"SAT秋季冲刺班",teachers:["Kobe","Bryant"],start_date:new Date(2013,11,4,0,0),end_date:new Date(2013,11,4,0,30),color:'#63A69F',sub_courses:{value:"0",text:"听力"}},
+            {id:"3",text:"托福秋季班",teachers:["Wayne","王子骁"],start_date:new Date(2013,11,5,18,0),end_date:new Date(2013,11,5,18,30),color:'#D95C5C',sub_courses:{value:"0",text:"口语强化"}}
+        ];
+        scheduler.parse(experiment ,"json")
     }
 };
-SCHEDULE.calendar.have_load={max:Date.parse(new Date()),min:Date.parse(new Date())};
+
 SCHEDULE.calendar.delete_item=function(id){
     //post delete(已经删除掉了，可能要去核心代码里面写ajax)
     var validate;
@@ -210,32 +233,3 @@ SCHEDULE.calendar.delete_item=function(id){
 //    $("#schedule-color").find("[color='"+ev.color+"']").addClass("active");
 //}
 
-SCHEDULE.institution={};
-SCHEDULE.institution.choose=function(){
-    SCHEDULE.calendar.getData();
-};
-SCHEDULE.generate_search_result=function(content){
-    var course_name=content[0].text,i,length=content.length;
-    $("#search-list").append($("<p />").addClass("search-class-name")
-        .append($("<span />").text("课程："))
-        .append($("<span />").text(course_name))
-    );
-    var ul="<ul class='search-class-schedule'>";
-    for(i=0;i<length;i++){
-        var data={};
-        data.template=content[i];
-        data.template.start_date=new Date(parseInt(content[i].start_date)).toWayneString().minute;
-        data.template.end_date=(new Date(parseInt(content[i].end_date)).toWayneString().minute).split(" ")[1];
-        data.template.teachers=content[i].teachers.join(",");
-        data.template.sub_courses=content[i].sub_courses.is_default==0?content[i].sub_courses.text:"";
-        var render=Mustache.render("{{#template}}<li id='{{id}}'>"+
-            "<span>{{start_date}}-{{end_date}}</span>"+
-            "<span>{{teachers}}</span>"+
-            "<i class='trash icon' affect='{{id}}'></i>"+
-            "<span>{{sub_courses}}</span>"+
-            "</li>{{/template}}",data);
-        ul+=render;
-    }
-    ul+="</ul>";
-    $("#search-list").append(ul);
-};

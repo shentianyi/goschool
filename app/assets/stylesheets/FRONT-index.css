@@ -84,10 +84,7 @@
     margin:-10px 0px 20px 13px;
     padding:15px 0px;
     width:300px;
-    border-bottom:2px solid rgba(0,0,0,0.1);
-    border-radius:4px;
-    -moz-border-radius:4px;
-    -webkit-border-radius:4px;
+    border-bottom:2px solid rgba(0,0,0,0.35);
 }
 .people-info:after{
     clear: both;

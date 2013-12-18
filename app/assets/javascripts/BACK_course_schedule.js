@@ -131,3 +131,30 @@
         });
     })
 })();
+
+var SCHEDULE=SCHEDULE||{};
+SCHEDULE.generate_search_result=function(content){
+    var course_name=content[0].text,i,length=content.length;
+    $("#search-list").append($("<p />").addClass("search-class-name")
+        .append($("<span />").text("课程："))
+        .append($("<span />").text(course_name))
+    );
+    var ul="<ul class='search-class-schedule'>";
+    for(i=0;i<length;i++){
+        var data={};
+        data.template=content[i];
+        data.template.start_date=new Date(parseInt(content[i].start_date)).toWayneString().minute;
+        data.template.end_date=(new Date(parseInt(content[i].end_date)).toWayneString().minute).split(" ")[1];
+        data.template.teachers=content[i].teachers.join(",");
+        data.template.sub_courses=content[i].sub_courses.is_default==0?content[i].sub_courses.text:"";
+        var render=Mustache.render("{{#template}}<li id='{{id}}'>"+
+            "<span>{{start_date}}-{{end_date}}</span>"+
+            "<span>{{teachers}}</span>"+
+            "<i class='trash icon' affect='{{id}}'></i>"+
+            "<span>{{sub_courses}}</span>"+
+            "</li>{{/template}}",data);
+        ul+=render;
+    }
+    ul+="</ul>";
+    $("#search-list").append(ul);
+};
