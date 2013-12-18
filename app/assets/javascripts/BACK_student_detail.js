@@ -373,7 +373,13 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     }).on("blur","#grade .score input",function(){
         if($.trim($(this).val()).length>0){
 	    //post
-
+	    var data = {
+		id:'',
+		result:{}
+	    }
+	    
+	    
+	    
 	    var text=$(this).val();
 	    var index=$(this).parents("tr").prevAll().length;
 	    $(this).parent().text(text);
