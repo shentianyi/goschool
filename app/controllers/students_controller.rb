@@ -121,7 +121,7 @@ class StudentsController < ApplicationController
   def destroy
     msg = Msg.new
     msg.result = false
-    @sutdent = Student.find(params[:id])
+    @student = Student.find(params[:id])
     if @student
       @student.destroy
       msg.result = true
