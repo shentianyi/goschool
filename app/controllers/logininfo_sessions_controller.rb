@@ -17,6 +17,8 @@ class LogininfoSessionsController < ApplicationController
     @user_session = LogininfoSession.new(:email=>params[:email],:password=>params[:password])
 
     if @user_session.save
+      puts "-==============================="
+      puts current_user.to_json
       flash[:notice] = "登录成功！"
       redirect_to root_url
     else

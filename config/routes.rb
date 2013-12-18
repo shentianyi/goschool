@@ -65,6 +65,8 @@ Goschool::Application.routes.draw do
       get ':id/:part/:ajax'=>:show
     end
   end
+  
+  resources :student
 
   resources :teacher_courses
 
