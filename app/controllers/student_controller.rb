@@ -1,5 +1,6 @@
 class StudentController < ApplicationController
-  #before_filter :require_user_as_student
+  skip_before_filter :require_user_as_employee
+  before_filter :require_user_as_student
   layout 'homepage'
   
   def index

@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
   before_filter :require_user
   before_filter :require_active_user
+  before_filter :require_user_as_employee
   before_filter :find_current_user_tenant
 
   set_current_tenant_through_filter
@@ -47,7 +48,14 @@ class ApplicationController < ActionController::Base
       error_page_403
     end
   end
-
+  
+  #must be employee
+  def require_user_as_employee
+    unless current_user.is_employee?
+      error_page_403
+    end
+  end
+  
   def error_page_403
     respond_to do |format|
       format.html {render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false}

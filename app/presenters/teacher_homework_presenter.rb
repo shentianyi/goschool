@@ -8,4 +8,8 @@ class TeacherHomeworkPresenter<Presenter
     def deadline_display
      self.deadline.strftime('%Y-%m-%d')
     end
+    
+    def status_display
+      HomeworkStatus.display self.status
+    end
 end

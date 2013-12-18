@@ -17,10 +17,9 @@ class LogininfoSessionsController < ApplicationController
     @user_session = LogininfoSession.new(:email=>params[:email],:password=>params[:password])
 
     if @user_session.save
-      puts "-==============================="
-      puts current_user.to_json
-      flash[:notice] = "登录成功！"
-      redirect_to root_url
+      switch @user_session.record
+      #flash[:notice] = "登录成功！"
+      #redirect_to root_url
     else
       flash[:notice] = "登录失败！"
       render :action => :new
@@ -33,10 +32,13 @@ class LogininfoSessionsController < ApplicationController
     redirect_to new_logininfo_sessions_url
   end
   
-  def switch
-    #if user
-    redirect_to root_url
-    #if teacher or student
-    #redirect_to front_end_url
+  def switch user
+    if user.is_employee?
+      redirect_to root_url
+    elsif user.is_student?
+      redirect_to student_index_url
+    elsif user.is_teacher?
+      
+    end
   end
 end
