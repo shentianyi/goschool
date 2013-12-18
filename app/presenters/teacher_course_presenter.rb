@@ -1,26 +1,20 @@
 #encoding: utf-8
 class TeacherCoursePresenter<Presenter
-  def_delegators :@sub_course,:course_id,:is_default,:institution_id
-  def_delegators :@course,:start_date,:end_date,:type,:description
-  def initialize(sub_course,teacher_id)
-    @sub_course=sub_course
-    @course=sub_course.course
-    @teacher_id=teacher_id
-  end
-
-  def course_name
-    @course.name
-  end
-
-  def sub_class_name
-    @sub_course.name
+  def_delegators :@teacher_course,:id,:course_id,:sub_course_id,:course_name,:sub_course_name,:is_default,:status,:type,:description,:start_date,:end_date,:user_id,:institution_id
+  def initialize(teacher_course)
+    @teacher_course=teacher_course
   end
 
   def unmark_number
-    Homework.sub_total_unmark(@sub_course.id,@teacher_id)
+    Homework.sub_total_unmark(self.sub_course_id,self.user_id)
   end
 
-  def self.init_presenters sub_courses,teacher_id
-    sub_courses.map{|sub_course| self.new(sub_course,teacher_id)}
+  def status_display
+    CourseStatus.display self.status
   end
+
+  def type_display
+    CourseType.display self.type
+  end
+
 end

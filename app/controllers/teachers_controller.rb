@@ -1,12 +1,12 @@
 #encoding: utf-8
 class TeachersController < ApplicationController
   skip_load_and_authorize_resource
-  # teacher index
+   before_filter :require_user_as_teacher, :only=>[:index]
+  layout 'homepage'
   def index
-    # teacher=current_user.user -- at last use this
-    teacher=User.find(params[:id]) # for test
-    @courses=TeacherCoursePresenter.init_presenters(teacher.sub_courses.all,teacher.id)
-    render :json=>@courses.map{|course| course.unmark_number }# for test
+    @teacher=current_user.user
+    # teacher=User.find(params[:id]) # for test
+    @courses=TeacherCoursePresenter.init_presenters(TeacherCourse.detail_by_teacher(@teacher.id).all)
   end
 
   def schedules

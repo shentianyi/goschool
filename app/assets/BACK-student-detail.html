@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title></title>
     <link rel="stylesheet" href="stylesheets/semantic.css" type="text/css" />
-    <link rel="stylesheet" href="stylesheets/base.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/base_wayne.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/BACK-index.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/BACK-student-detail.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/BACK-detail.css" type="text/css" />
@@ -185,7 +185,7 @@
                     <i class="dropdown icon"></i>所获成就
                 </div>
                 <div class="content">
-                    <div class="content-item achieve" >
+                    <div class="content-item achieve" id="final-achieve">
                         <p>最终成就<i class="icon plus"></i></p>
                         <dl class="list">
                             <dd>MIT,麻省理工大学，建筑系<i class="icon remove"></i></dd>
@@ -218,7 +218,7 @@
                             <p>添加新课程名称</p>
                             <input type='text'/>
                         </div>
-                        <div class="ui tabular menu">
+                        <div class="ui tabular menu" id="achieve_final_tabular">
                             <a class="active item">
                                 <div class="floating ui label"><i class="icon remove"></i></div>
                                 托福
@@ -409,16 +409,16 @@
 
 
 <!--编辑学生信息-->
-<section class="back-index-add"  name="student">
+<section class="student-detail-edit" id="student-edit-section">
     <div class="inner">
-        <i class="remove icon"></i>
+        <i class="remove icon" id="close-student-detail-edit"></i>
         <p>新建学生</p>
         <div class="left-part">
             <div class="portrait">
                 <img class="ui circular image " src="images/portrait/1.jpg">
             </div>
             <div class="ui left icon input">
-                <input placeholder="姓名..." type="text">
+                <input placeholder="姓名..." type="text" class="update-input" id="name">
                 <i class="user icon"></i>
             </div>
             <div class="sex stop">
@@ -446,7 +446,7 @@
         </div>
         <div class="right-part">
             <div class="ui left icon input">
-                <input placeholder="邮件地址..." type="text">
+                <input placeholder="邮件地址..." type="text" class="update-input" id="email">
                 <i class="mail outline icon"></i>
             </div>
             <div class="ui left icon input">
@@ -471,11 +471,17 @@
                 </ul>
                 <i class="tag icon stop"></i>
             </div>
-            <div class="ui left icon input autoComplete">
-                <input placeholder="推荐人..." id="autoC3" type="text">
+            <div class="ui left icon input autoComplete specialInput labelForm ">
+                <ul>
+                <li><input placeholder="推荐人..." id="edit_referrer" type="text" autocomplete="students"></li>
+                </ul>
                 <i class="smile icon"></i>
             </div>
-            <div class="ui red button">
+            <div class="ui checkbox stop">
+                <input name="fun" type="checkbox" checked>
+                <label>同时开设学生账号</label>
+            </div>
+            <div class="ui red button" id="edit-student">
                 添加
             </div>
         </div>
@@ -483,7 +489,26 @@
 </section>
 
 
-
+<div id="autoComplete-call" class="autoComplete-call">
+    <ul>
+        <li id="11">
+            <p>托福夏季班</p>
+            <p>www.sina.com</p>
+        </li>
+        <li id="22">
+            <p>2</p>
+            <p>托福的夏季版</p>
+        </li>
+        <li id="33">
+            <p>3</p>
+            <p>托福的夏季版</p>
+        </li>
+        <li id="44">
+            <p>4</p>
+            <p>托福的夏季版</p>
+        </li>
+    </ul>
+</div>
 
 
 

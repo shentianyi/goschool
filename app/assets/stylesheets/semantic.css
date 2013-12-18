@@ -11675,9 +11675,9 @@ a.ui.teal.label:hover:before {
   transition: background-color 0.2s ease-out;
 }
 
-.ui.accordion .title:first-child {
-  border-top: none;
-}
+/*.ui.accordion .title:first-child {*/
+  /*border-top: none;*/
+/*}*/
 
 /* Content */
 

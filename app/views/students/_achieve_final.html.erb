@@ -1,0 +1,5 @@
+<% if @finals %>
+<% @finals.each do |final| %>
+<dd><%= final.valuestring %><i final="<%= final.id %>" class="icon remove"></i></dd>
+<% end %>
+<% end %>

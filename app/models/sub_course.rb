@@ -28,12 +28,11 @@ class SubCourse < ActiveRecord::Base
   def teacher_names
     self.teachers.map{|t| t.name}
   end
-  
-    def  teacher_details
+
+  def  teacher_details
     self.teachers.select('teacher_courses.id as teacher_course_id,users.*')
   end
-
-
+  
   private
 
   def del_default_sub_course

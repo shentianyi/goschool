@@ -52,7 +52,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-       format.json { render json: @student }
+      format.json { render json: @student }
     end
   end
 
@@ -161,7 +161,23 @@ class StudentsController < ApplicationController
   end
   
   def achievements(student)
+    # achievementtype id
+    @final = Achievement.find_by_type(AchievementType::FINAL)
+    @admit = Achievement.find_by_type(AchievementType::ADMITTED)
+    @final_grade = Achievement.find_by_type(AchievementType::FINAL_GRADE)
+    #
+    if @final 
+      @finals = StudentAchievementPresenter.init_presenters(Achievement.achieves(@final.id,student.id))
+    end
     
+    if @admit
+      @admitted = StudentAchievementPresenter.init_presenters(Achievement.achieves(@admit.id,student.id))
+    end
+    
+    if @final_grade
+      @sub_courses = Achievement.where("type"=>AchievementType::SUB_COURSE)
+      @final_grades =  StudentAchievementPresenter.init_presenters(Achievement.get_result_by_type(AchievementType::SUB_COURSE,student.id))
+    end
   end
 
   def relation(student)

@@ -1,75 +1,99 @@
-<div class="content-item achieve" >
+<div class="content-item achieve" id="final-achieve" <% if @final %>achieve="<%=@final.id%>"<% end %>>
   <p>最终成就<i class="icon plus"></i></p>
-  <dl class="list">
-    <dd>MIT,麻省理工大学，建筑系<i class="icon remove"></i></dd>
+  <dl class=list>
+    <%= render partial: 'achieve_final'%>
   </dl>
 </div>
-<div class="content-item offer" id="offer">
+
+<div class="content-item offer" id="offer" <% if @admit %>achieve="<%=@admit.id%>"<% end %>>
   <p>所有录取<i class="icon plus"></i></p>
-  <table class="ui small table segment celled">
-    <thead>
-      <tr><th>学校</th>
-        <th>专业</th>
-        <th>时间</th>
-        <th>奖学金</th>
-        <th>操作</th>
-    </tr></thead>
-    <tbody>
-      <tr>
-        <td>MIT</td>
-        <td>建筑</td>
-        <td>2013-10</td>
-        <td>否</td>
-        <td><span class="remove">删除</span></td>
-      </tr>
-    </tbody>
-  </table>
+  <%= render partial: 'achieve_admitted'%>
 </div>
-<div class="content-item grade" id="grade">
+
+<div class="content-item grade" id="grade" <% if @final_grade %>achieve="<%=@final_grade.id%>"<% end %>>
   <p>最终成绩<i class="icon plus"></i></p>
   <div id="grade-add" class="grade-add">
     <p>添加新课程名称</p>
     <input type='text'/>
   </div>
-  <div class="ui tabular menu">
-    <a class="active item">
-      <div class="floating ui label"><i class="icon remove"></i></div>
-      托福
-    </a>
-    <a class="item">
-      SAT
-    </a>
-  </div>
-  <table class="ui small table segment celled">
-    <thead>
-      <tr><th class="five wide">时间</th>
-        <th class="four wide">成绩<span>(双击可编辑)</span></th>
-        <th>入校</th>
-        <th>操作</th>
-    </tr></thead>
-    <tfoot>
-      <tr><th colspan="4">添加记录</th>
-    </tr></tfoot>
-    <tbody>
-      <tr>
-        <td>2013-01-28</td>
-        <td class="score">57</td>
-        <td>入校前</td>
-        <td><span class="remove">删除</span></td>
-      </tr>
-      <tr>
-        <td>2013-01-29</td>
-        <td class="score">68</td>
-        <td>入校后</td>
-        <td><span class="remove">删除</span></td>
-      </tr>
-      <tr>
-        <td>2013-10-02</td>
-        <td class="score">89</td>
-        <td>入校后</td>
-        <td><span class="remove">删除</span></td>
-      </tr>
-    </tbody>
-  </table>
-  <canvas id="myChart" ></canvas>
+  <%= render partial: 'achieve_final_grade'%>
 </div>
+
+
+<!--
+    <div class="content-item achieve" >
+      <p>最终成就<i class="icon plus"></i></p>
+      <dl class="list">
+	<dd>MIT,麻省理工大学，建筑系<i class="icon remove"></i></dd>
+      </dl>
+    </div>
+    <div class="content-item offer" id="offer">
+      <p>所有录取<i class="icon plus"></i></p>
+      <table class="ui small table segment celled">
+	<thead>
+	  <tr><th>学校</th>
+            <th>专业</th>
+            <th>时间</th>
+            <th>奖学金</th>
+            <th>操作</th>
+	</tr></thead>
+	<tbody>
+	  <tr>
+            <td>MIT</td>
+            <td>建筑</td>
+            <td>2013-10</td>
+            <td>否</td>
+            <td><span class="remove">删除</span></td>
+	  </tr>
+	</tbody>
+      </table>
+    </div>
+    <div class="content-item grade" id="grade">
+      <p>最终成绩<i class="icon plus"></i></p>
+      <div id="grade-add" class="grade-add">
+	<p>添加新课程名称</p>
+	<input type='text'/>
+      </div>
+      <div class="ui tabular menu">
+	<a class="active item">
+	  <div class="floating ui label"><i class="icon remove"></i></div>
+	  托福
+	</a>
+	<a class="item">
+	  SAT
+	</a>
+      </div>
+      <table class="ui small table segment celled">
+	<thead>
+	  <tr><th class="five wide">时间</th>
+            <th class="four wide">成绩<span>(双击可编辑)</span></th>
+            <th>入校</th>
+            <th>操作</th>
+	</tr></thead>
+	<tfoot>
+	  <tr><th colspan="4">添加记录</th>
+	</tr></tfoot>
+	<tbody>
+	  <tr>
+            <td>2013-01-28</td>
+            <td class="score">57</td>
+            <td>入校前</td>
+            <td><span class="remove">删除</span></td>
+	  </tr>
+	  <tr>
+            <td>2013-01-29</td>
+            <td class="score">68</td>
+            <td>入校后</td>
+            <td><span class="remove">删除</span></td>
+	  </tr>
+	  <tr>
+            <td>2013-10-02</td>
+            <td class="score">89</td>
+            <td>入校后</td>
+            <td><span class="remove">删除</span></td>
+	  </tr>
+	</tbody>
+      </table>
+      <canvas id="myChart" ></canvas>
+    </div>
+    -->

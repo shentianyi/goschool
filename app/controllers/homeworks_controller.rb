@@ -3,10 +3,17 @@ class HomeworksController < ApplicationController
   before_filter :init_message ,:only=>[:show,:create,:update,:destroy]
   before_filter :get_homework,:only=>[:show,:update,:destroy]
   before_filter :render_nil_msg , :only=>[:edit,:update,:destroy]
-  before_filter :require_user_as_teacher, :only=>[:index,:create,:teacher,:update,:destroy]
+  before_filter :require_user_as_teacher, :only=>[:index,:create,:update,:destroy]
 
   layout 'homework'
- 
+  def index
+    if current_user.is_teacher?
+      teacher_index
+    elsif current_user.is_student?
+
+    end
+  end
+
   def create
     attach=params[:homework].slice(:attach)[:attach] if params[:homework].has_key?(:attach)
     @homework = Homework.new(params[:homework].except(:attach))
@@ -15,18 +22,15 @@ class HomeworksController < ApplicationController
     render :json=>@msg
   end
 
-  def teacher
-    if @teacher_course=TeacherCourse.where(id:params[:id],user_id:current_user.id).first
-      @homework_type=HomeworkType::TEACHER
-      if params.has_key?(:menu_type)
-        @menu_type=params[:menu_type].to_i
-        @homeworks=get_homeworks_by_type(@homework_type,@menu_type) 
-      end
-      if params[:ajax]
-        render partial:'menu_item'
-      else
-        @sub_course=@teacher_course.sub_course
-        @menus=  HomeworkTeacherMenuType.generate_menu
+  def show
+    if   @homework=Homework.find_by_id(params[:id])
+      if current_user.is_teacher?
+        @homework=TeacherHomeworkPresenter.new(@homework)
+	@student_homeworks=StudentHomeworkPresenter.init_presenters(StudentHomework.detail_by_homework_id(@homework.id).all)
+        render partial:'teacher_homework'
+      elsif current_user.is_student?
+        @homework=StudentHomeworkPresenter.new(Homework.find_by_id(params[:id]))
+        render partial:'stuent_homework'
       end
     else
       error_page_404
@@ -44,6 +48,12 @@ class HomeworksController < ApplicationController
     render :json=>@msg
   end
 
+  def list
+    @type=params[:type].to_i
+    get_homeworks(@type)
+    render partial:'menu_item'
+  end
+
   private
 
   def get_homework
@@ -57,16 +67,21 @@ class HomeworksController < ApplicationController
     end
   end
 
-  def get_homeworks_by_type homework_type,menu_type
-    if HomeworkType.include?(homework_type)
-      case homework_type
-      when HomeworkType::TEACHER
-        @teacher_course.homeworks.where(HomeworkTeacherMenuType.condition(menu_type)).all
-      when HomeworkType::Student
-        @teacher_course.homeworks.where(HomeworkTeacherMenuType.condition(menu_type)).all
-      end
+  def get_homeworks menu_type
+    @homeworks =if current_user.is_teacher?
+      Homework.by_homework_type({id:params[:id],homework_type:HomeworkType::TEACHER,menu_type:menu_type})
+    elsif current_user.is_student?
+
+    end
+  end
+
+  def teacher_index
+    if @teacher_course=TeacherCourse.by_teacher(params[:id],current_user.id)
+      @sub_course=@teacher_course.sub_course
+      @menus=  HomeworkTeacherMenuType.generate_menu
+      render 'teacher_index'
     else
-    []
+      error_page_404
     end
   end
 

@@ -16,36 +16,36 @@ function init_student_edit() {
             yearRange: "-30:+10",
             dateFormat:'yy-mm-dd'
         });
-
-        $("body").on("click","#edit-student",function(){
-            //write your post code here
-            var student = {};
-            student.image_url = $("#image-url").attr("src");
-            student.name = $("#name").val();
-            student.gender = $("#gender input[type=radio]:checked").val();
-            student.birthday = $("#birthday").val();
-            student.school = $("#school").val();
-            student.graduation = $("#graduation").val();
-            student.email = $("#email").val();
-            student.phone = $("#phone").val();
-            student.address = $("#address").val();
-            student.guardian = $("#guardian").val();
-            student.guardian_phone = $("#guardian_phone").val();
-            student.referrer_id = $("#referrer>li").eq(0).find("div").attr("logininfo_id");
-
-            var is_active_account = $("#is_active_account input[type='checkbox']").prop("checked")
-
-            student.tags = [];
-            var $target = $("#student-edit-section[name='student']")
-            var length = $target.find("[id='tags']").children().length,tag,tags=[]
-            for(var i =0;i<length-1;i++){
-                tag = $target.find("[id='tags']>li").eq(i).find("div").text();
-                tags.push(tag);
-            }
-            student.tags = tags;
-
-            console.log(student);
-        });
+        $('#gender>.checkbox,#is_active_account').checkbox();
+//        $("body").on("click","#edit-student",function(){
+//            //write your post code here
+//            var student = {};
+//            student.image_url = $("#image-url").attr("src");
+//            student.name = $("#name").val();
+//            student.gender = $("#gender input[type=radio]:checked").val();
+//            student.birthday = $("#birthday").val();
+//            student.school = $("#school").val();
+//            student.graduation = $("#graduation").val();
+//            student.email = $("#email").val();
+//            student.phone = $("#phone").val();
+//            student.address = $("#address").val();
+//            student.guardian = $("#guardian").val();
+//            student.guardian_phone = $("#guardian_phone").val();
+//            student.referrer_id = $("#referrer>li").eq(0).find("div").attr("logininfo_id");
+//
+//            var is_active_account = $("#is_active_account input[type='checkbox']").prop("checked")
+//
+//            student.tags = [];
+//            var $target = $("#student-edit-section[name='student']")
+//            var length = $target.find("[id='tags']").children().length,tag,tags=[]
+//            for(var i =0;i<length-1;i++){
+//                tag = $target.find("[id='tags']>li").eq(i).find("div").text();
+//                tags.push(tag);
+//            }
+//            student.tags = tags;
+//
+//            console.log(student);
+//        });
 
 //        $(".update-input").change(function(){
 //            var data = {

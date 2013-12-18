@@ -52,6 +52,11 @@
                     window.history.pushState({},"",now_href+target+"#"+target);
                     $("#"+target).children().addClass("active");
                     $("#"+target).find(".content").html(data);
+                    if(target=="achieve"){
+                        if($("#achieve_final_tabular>a").length>=1){
+                            $("#achieve_final_tabular>a").eq(0).click();
+                        }
+                    }
                 }
             });
         }
@@ -75,6 +80,11 @@
                 success:function(data){
                     window.history.pushState({},"",now_href+target+"#"+target);
                     $("#"+target).find(".content").html(data);
+                    if(target=="achieve"){
+                        if($("#achieve_final_tabular>a").length>=1){
+                            $("#achieve_final_tabular>a").eq(0).click();
+                        }
+                    }
                 }
             });
         }

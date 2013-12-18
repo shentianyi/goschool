@@ -1,7 +1,7 @@
 Goschool::Application.routes.draw do
 
   controller :teachers do
-    get 'teacher'=>:index
+    get 'teachers'=>:index
     get 'teachers/index'
     get 'teachers/schedules'
     get 'teachers/fast_search'
@@ -15,14 +15,18 @@ Goschool::Application.routes.draw do
 
   resources :homeworks do
     collection do
-      get  :teacher
-      get 'teacher/:id'=>:teacher
-      get 'teacher/:id/:menu_type'=>:teacher
-      get 'teacher/:id/:menu_type/:ajax'=>:teacher
+      get  'index/:id'=>:index
+      get 'list/:id/:type'=>:list
     end
   end
 
-  resources :achievements
+  resources :achievements do
+    collection do
+      post :create_sub
+      get :sub_achievement
+    end
+  end
+  resources :achievementresults
 
   root :to => 'students#index'
 
@@ -61,6 +65,8 @@ Goschool::Application.routes.draw do
       get ':id/:part/:ajax'=>:show
     end
   end
+  
+  resources :student
 
   resources :teacher_courses
 

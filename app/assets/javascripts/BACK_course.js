@@ -197,6 +197,16 @@ var BACKCOURSE=BACKCOURSE || {};
            MessageBox("信息填写不完整","top","warning");
        }
     });
+    //分课程的时候判断后面的disable
+    $("body").on("change",".sub-course-name-input",function(){
+        var $target=$(this).parent().next().find("input");
+        if($(this).val().length==0){
+            $target.prop("readonly",true);
+        }
+        else{
+            $target.prop("readonly",false);
+        }
+    });
     $(document).ready(function(){
         $("#add-class-choose-institution,#add-service-choose-institution").dropdown();
         $("#add-class-choose-institution .item").eq(0).addClass("active");
@@ -215,20 +225,20 @@ BACKCOURSE.sub_teacher.class.template=
          </div>\
          <div class="ui input specialInput labelForm autoComplete total-teachers" >\
             <ul>\
-                <li><input type="text" placeholder="老师..." id="sub{{count}}" autocomplete="teachers"/></li>\
+                <li><input type="text" placeholder="老师..." id="sub{{count}}" autocomplete="teachers" readonly="" /></li>\
             </ul>\
          </div>\
          <i class="icon collapse"></i>\
     </div>{{/counts}}';
 BACKCOURSE.sub_teacher.service={};
 BACKCOURSE.sub_teacher.service.template=
-    '{{#counts}}<div class="sub-course-block-item">\
+    '{{#counts}}<div class="sub-course-block-item" class="sub-course-name-input">\
     <div class="ui input sub-course-name">\
-        <input placeholder="子服务名..." type="text">\
+        <input placeholder="子服务名..." type="text"  class="sub-course-name-input">\
      </div>\
      <div class="ui input specialInput labelForm autoComplete total-teachers" >\
         <ul>\
-            <li><input type="text" placeholder="老师..." id="sub{{count}}" autocomplete="teachers"/></li>\
+            <li><input type="text" placeholder="老师..." id="sub{{count}}" autocomplete="teachers" readonly="" /></li>\
             </ul>\
          </div>\
          <i class="icon collapse" ></i>\

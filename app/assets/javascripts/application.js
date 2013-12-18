@@ -15,6 +15,7 @@
 //= require mustache
 //= require semantic.min
 //= require Chart.min
+//= require excanvas
 //= require wayne-base
 
 

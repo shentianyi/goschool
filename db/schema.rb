@@ -11,17 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131210171759) do
+ActiveRecord::Schema.define(:version => 20131218032113) do
+
+  create_table "achievementresults", :force => true do |t|
+    t.string   "valuestring"
+    t.integer  "achievement_id"
+    t.integer  "student_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "achievementresults", ["achievement_id"], :name => "index_achievementresults_on_achievement_id"
+  add_index "achievementresults", ["student_id"], :name => "index_achievementresults_on_student_id"
 
   create_table "achievements", :force => true do |t|
     t.integer  "type"
-    t.string   "achievementstring"
-    t.integer  "student_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "parent_id",  :default => 0
+    t.string   "name"
   end
-
-  add_index "achievements", ["student_id"], :name => "index_achievements_on_student_id"
 
   create_table "attachments", :force => true do |t|
     t.string   "name"
@@ -201,6 +210,7 @@ ActiveRecord::Schema.define(:version => 20131210171759) do
     t.integer  "sub_course_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.datetime "date"
   end
 
   add_index "schedules", ["sub_course_id"], :name => "index_schedules_on_sub_course_id"
@@ -232,15 +242,15 @@ ActiveRecord::Schema.define(:version => 20131210171759) do
   create_table "student_homeworks", :force => true do |t|
     t.float    "score"
     t.string   "content"
-    t.boolean  "improved"
-    t.boolean  "marked"
+    t.boolean  "improved",      :default => true
+    t.boolean  "marked",        :default => false
     t.datetime "marked_time"
     t.datetime "submited_time"
     t.integer  "student_id"
     t.integer  "homework_id"
     t.integer  "tenant_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   add_index "student_homeworks", ["homework_id"], :name => "index_student_homeworks_on_homework_id"
