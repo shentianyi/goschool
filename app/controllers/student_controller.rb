@@ -4,7 +4,5 @@ class StudentController < ApplicationController
   layout 'homepage'
   
   def index
-    @student = current_user.student
-    
   end
 end
