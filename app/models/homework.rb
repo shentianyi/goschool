@@ -23,6 +23,7 @@ class Homework < ActiveRecord::Base
       []
     end
   end
+
   private 
   def validate_save
     errors.add(:title,'标题不可为空') if self.title.blank?

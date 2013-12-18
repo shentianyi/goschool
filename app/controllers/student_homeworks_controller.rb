@@ -1,83 +1,46 @@
+#encoding: utf-8
 class StudentHomeworksController < ApplicationController
-  # GET /student_homeworks
-  # GET /student_homeworks.json
-  def index
-    @student_homeworks = StudentHomework.all
+ before_filter :init_message ,:only=>[:create,:update,:destroy]
+  before_filter :get_student_homework , :only=>[:update,:show,:destroy]
+  before_filter :render_nil_msg , :only=>[:update,:destroy]
+ 
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @student_homeworks }
-    end
-  end
-
-  # GET /student_homeworks/1
-  # GET /student_homeworks/1.json
-  def show
-    @student_homework = StudentHomework.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @student_homework }
-    end
-  end
-
-  # GET /student_homeworks/new
-  # GET /student_homeworks/new.json
-  def new
-    @student_homework = StudentHomework.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @student_homework }
-    end
-  end
-
-  # GET /student_homeworks/1/edit
-  def edit
-    @student_homework = StudentHomework.find(params[:id])
-  end
-
-  # POST /student_homeworks
-  # POST /student_homeworks.json
   def create
-    @student_homework = StudentHomework.new(params[:student_homework])
-
-    respond_to do |format|
-      if @student_homework.save
-        format.html { redirect_to @student_homework, notice: 'Student homework was successfully created.' }
-        format.json { render json: @student_homework, status: :created, location: @student_homework }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @student_homework.errors, status: :unprocessable_entity }
-      end
-    end
+    @student_homework=StudentHomework.new(params[:student_homework])
+    @msg.content=(@msg.result=@student_homework.save) ? @student_homework.id :  @student_homework.errors.messages
+    render :json=>@msg
   end
 
-  # PUT /student_homeworks/1
-  # PUT /student_homeworks/1.json
+  def show
+    render :json=>@student_homework
+  end
+
   def update
-    @student_homework = StudentHomework.find(params[:id])
-
-    respond_to do |format|
-      if @student_homework.update_attributes(params[:student_homework])
-        format.html { redirect_to @student_homework, notice: 'Student homework was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @student_homework.errors, status: :unprocessable_entity }
-      end
-    end
+    @msg.content=@student_homework.errors.messages unless @msg.result=@student_homework.update_attributes(params[:student_homework])
+    render :json=>@msg
   end
 
-  # DELETE /student_homeworks/1
-  # DELETE /student_homeworks/1.json
   def destroy
-    @student_homework = StudentHomework.find(params[:id])
     @student_homework.destroy
+    @msg.result=true
+    render :json=>@msg
+  end
 
-    respond_to do |format|
-      format.html { redirect_to student_homeworks_url }
-      format.json { head :no_content }
+  private
+
+  def init_message
+    @msg=Msg.new
+  end
+
+  def get_student_homework
+    @student_homework=StudentHomework.find_by_id(params[:id])
+  end
+
+  def render_nil_msg
+    unless @student_homework
+      @msg.content='不存在此学生作业'
+      render :json=>@msg
     end
   end
+
 end

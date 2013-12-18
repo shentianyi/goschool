@@ -116,8 +116,8 @@ var student_manager = $.extend({
 }, manager);
 
 var achievementres_manager = $.extend({
-    source : 'achievementresults'
-},manager);
+     source : 'achievementresults'
+}, manager);
 
 var consultation_manager = $.extend({
      source : 'consultations',
@@ -145,7 +145,6 @@ var teacher_course_manager = $.extend({
      source : 'teacher_courses'
 }, manager);
 
-
 var schedule_manager = $.extend({
      source : 'schedules',
      send_email : function(params, callback) {
@@ -167,4 +166,8 @@ var homework_manager = $.extend({
      push_homework_state : function(menu_type) {
           window.history.pushState({}, "", menu_type);
      }
+}, manager);
+
+var student_homework_manager = $.extend({
+     source : 'student_homeworks'
 }, manager);

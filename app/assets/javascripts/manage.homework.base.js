@@ -15,6 +15,9 @@ function init_teacher_homework() {
                }
           });
      });
+     bind_sh_input_text_update_event(function() {
+          // alert('marked!');
+     });
 }
 
 function bind_menu_event() {
@@ -28,6 +31,23 @@ function bind_menu_event() {
      $('body').on('click', ".homework-menu-item-a", function() {
           homework_manager.show($(this).attr('id'), function(data) {
                $("#homework-content").html(data);
+          });
+     });
+}
+
+function bind_sh_input_text_update_event(callback) {
+     $('body').on('change', ".student-homwork-input-text", function() {
+          var data = {
+               student_homework : {}
+          };
+          data['student_homework'][ $(this).attr('name')] = $(this).val();
+          student_homework_manager.update($(this).attr('homework'), data, function(data) {
+               if(data.result) {
+                    if(callback)
+                         callback();
+               } else {
+                    MessageBox_content(data.content);
+               }
           });
      });
 }
