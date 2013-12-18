@@ -16,7 +16,7 @@ development:
  pool: 5
  username: goer
  password:  goer@
- socket: /var/run/mysqld/mysqld.sock
+ socket: /var/run/mysqld/mysqld.socket
 
 # 
  # Warning: The database defined as "test" will be erased and

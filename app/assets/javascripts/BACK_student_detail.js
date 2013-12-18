@@ -382,7 +382,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
                 valuestring:$tds.eq(0).text()+";"+$this.val()+";"+$tds.eq(2).text()
             }
         }
-        achievementres_manager.update(data,function(data){
+        achievementres_manager.update(data.id,data,function(data){
                 if(data.result){
                      var text=$this.val();
                      var index=$this.parents("tr").prevAll().length;
