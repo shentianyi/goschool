@@ -10,4 +10,18 @@
           <td>deadline: <%= @homework.deadline_display%></td>
      </tr>
 </table>
+<hr />
+
+<%@homework.student_homeworks.each_with_index do |sh,i|%>
+<table style=" border: solid red 1px; width: 100%">
+     <tr>
+          <td><%= i+1%></td>
+     </tr>
+     <tr >
+
+          <td><%= sh.content%></td>
+     </tr>
+</table>
+<%end%>
+
 <%end%>
