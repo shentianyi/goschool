@@ -232,10 +232,26 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 
 	    achievement_manager.sub_achievement(data,function(data){
                 if(data.result){
-		    
+                    $("#grade table tbody").empty();
+                    $("#myChart").remove();
+                    var mustache_template={grade:data.object};
+                    var render=Mustache.render('{{#grade}}{{#achieve}}<tr>'+
+                        '{{#object}}<td>{{date}}</td>'+
+                        '<td class="score">{{grade}}</td>'+
+                        '<td>{{enter_school}}</td>{{#object}}'+
+                        '<td><span class="remove" grade="{{id}}">删除</span></td>'+
+                        '</tr>{{/achieve}}{{/grade}}',mustache_template);
+		             $("#grade table tbody").append(render);
+                    var labels=[],datas=[],item;
+                    for(var i=0;i<data.object.length;i++){
+                        item=data.object[i].achieve.object;
+                        labels.push(item.date);
+                        datas.push(item.grade);
+                    }
+                    STUDENTDETAIL.generateCanvas(labels,datas);
                 }
                 else{
-		    MessageBox_content(data.content);
+		            MessageBox_content(data.content);
                 }
 	    });
         }
@@ -357,11 +373,12 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     }).on("blur","#grade .score input",function(){
         if($.trim($(this).val()).length>0){
 	    //post
+
 	    var text=$(this).val();
 	    var index=$(this).parents("tr").prevAll().length;
 	    $(this).parent().text(text);
 	    $(this).remove();
-	    STUDENTDETAIL.editCanvas(index,parseInt(text))
+	    STUDENTDETAIL.editCanvas(index,parseInt(text));
         }
         else{
 	    MessageBox("请输入分数","top","warning");
