@@ -34,4 +34,21 @@ class AchievementresultsController < ApplicationController
 
     render :json=>msg
   end
+
+  def update
+    msg = Msg.new
+    msg.result = false;
+    msg.content = '更新成就失败'
+
+    begin 
+      @result = Achievementresult.files(params[:id])
+      @result.update_attributes(param[:result])
+      msg.result = true
+    rescue ActiveRecord::RecordInvalid => invalid 
+      msg.result = false
+      msg.content = invalid.record.errors
+    end
+    
+    render :json=>msg
+  end
 end
