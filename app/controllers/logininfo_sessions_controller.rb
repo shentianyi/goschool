@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class LogininfoSessionsController < ApplicationController
   before_filter :require_no_user,:only=>[:new,:create]
-  skip_before_filter :require_user_as_employee,:only=>[:new,:create]
+  skip_before_filter :require_user_as_employee,:only=>[:new,:create,:destroy]
   skip_before_filter :require_user,:only=>[:new,:create]
   skip_before_filter :require_active_user,:only=>[:new,:create]
   #skip_before_filter :check_tenant_status
@@ -35,9 +35,9 @@ class LogininfoSessionsController < ApplicationController
   
   def switch user
     if user.is_employee?
-      redirect_to root_url
+      redirect_to root_path
     elsif user.is_student?
-      redirect_to student_index_url
+      redirect_to student_index_path
     elsif user.is_teacher?
       redirect_to teachers_index_path
     end

@@ -4,5 +4,8 @@ class StudentController < ApplicationController
   layout 'homepage'
   
   def index
+    @student = current_user.student
+    puts '==================================='
+    puts @student.to_json
   end
 end
