@@ -12,10 +12,21 @@
             SCHEDULE.widget.init("readonly");
             scheduler.init('schedule-here', new Date(),"month");
             SCHEDULE.calendar.have_load.institution="wayne";
-            SCHEDULE.calendar.getData("readonly");
+            SCHEDULE.calendar.getData("readonly",GRONTTEACHER.generate_calendar_detail);
             $("body").on("click",".dhx_cal_tab,.dhx_cal_prev_button,.dhx_cal_next_button",function(){
-                SCHEDULE.calendar.getData("readonly");
+                SCHEDULE.calendar.getData("readonly",GRONTTEACHER.generate_calendar_detail);
             });
         })
     })
-})()
+})();
+
+var GRONTTEACHER=GRONTTEACHER || {};
+GRONTTEACHER.generate_calendar_detail=function(data){
+    var text,time,render="";
+    for(var i=0;i<data.length;i++){
+       text=data[i].text;
+       time=data[i].start_date.toWayneString().day+"-"+data[i].end_date.toWayneString().only_minute;
+       render+="<tr><td>"+text+"</td><td>"+time+"</td></tr>";
+    }
+    $("#teacher-schedule-detail tbody").append(render);
+}

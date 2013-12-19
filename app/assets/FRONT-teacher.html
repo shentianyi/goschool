@@ -49,8 +49,8 @@
 <!--view-->
 
 
-<article class="back-index-main font-index-main">
-    <header class="back-index-side-header">
+<article class="back-index-main front-index-main" id="front-index-main">
+    <header class="back-index-side-header" id="front-index-side-header">
         <label>工作板</label>
     </header>
     <div class="front-people-inner">
@@ -78,7 +78,7 @@
             </div>
         </div>
 
-        <div class="ui segment teacher-schedule">
+        <div class="ui segment teacher-schedule" id="teacher-schedule">
             <h2>我的排课</h2>
             <div class="schedule-block">
                 <div id="schedule-here" class="dhx_cal_container" style='width:100%; height:100%;'>
@@ -95,7 +95,10 @@
                     <div class="dhx_cal_data"></div>
                 </div>
             </div>
-            <table class="ui compact small celled inverted red table segment class-all teacher-schedule-detail">
+        </div>
+
+        <div class="teacher-schedule-detail" id="teacher-schedule-detail">
+            <table class="ui compact small celled inverted red table segment class-all ">
                 <thead>
                 <tr>
                     <th class="wide five">课程名</th>
@@ -111,9 +114,10 @@
                     <td>托福秋季班</td>
                     <td>2013-10-01 18：00-20：00</td>
                 </tr>
-                </tbody>
             </table>
         </div>
+
+
     </div>
 </article>
 
