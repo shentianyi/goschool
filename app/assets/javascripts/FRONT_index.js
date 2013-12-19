@@ -7,4 +7,5 @@
  */
 (function(){
     $("#main-navigator-bottom i").popup();
+    $("body").css("background-color","#fef9ee");
 })()

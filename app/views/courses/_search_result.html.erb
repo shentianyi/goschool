@@ -18,10 +18,15 @@
                     </p>
                     <p>
                          <%=course.status_display%>
-                    </p></td>
+                    </p>
+                      <div class="ui slider checkbox" id="<%=course.id%>">
+                        <input name="walk" type="checkbox" >
+                        <label> </label>
+                      </div>
+                    </td>
                </tr>
                <tr>
-                    <td class="five wide">
+                    <td class="six wide">
                     <p >
                          授课时间:<span><%=course.start_date%>-<%=course.end_date%></span>
                     </p>
@@ -41,7 +46,10 @@
                         <%=course.description%>
                     </span>
                     </p></td>
-                    <td class="three wide"><a class="ui mini button teal" href="/courses/<%=course.id%>"> 详情 </a></td>
+                    <td class="three wide">
+                      <a class="ui mini button teal" href="/courses/<%=course.id%>"> 详情 </a>
+
+                    </td>
 
                </tr>
           </table>
