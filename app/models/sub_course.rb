@@ -33,6 +33,10 @@ class SubCourse < ActiveRecord::Base
     self.teachers.select('teacher_courses.id as teacher_course_id,users.*')
   end
   
+  def self.status_neq status=CourseStatus::LOCK
+    SubCourse.arel_table[:status].not_eq(status)
+  end
+  
   private
 
   def del_default_sub_course
