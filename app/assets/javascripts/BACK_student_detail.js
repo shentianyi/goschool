@@ -22,7 +22,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 	    if(data.student_course.progress.length > 0){
 		student_course_manager.update(id,data,function(data){
 		    if(data.result){
-			console.log("sada");
+			MessageBox("修改成功","top","success");
 		    }
 		});
 	    }
