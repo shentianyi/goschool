@@ -33,6 +33,9 @@ Goschool::Application.routes.draw do
 
   resources :posts do
     resources :comments
+    collection do
+      get  'index/:id'=>:index
+    end
   end
 
   controller :files do
