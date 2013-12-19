@@ -18,9 +18,8 @@ class LogininfoSessionsController < ApplicationController
     @user_session = LogininfoSession.new(:email=>params[:email],:password=>params[:password])
 
     if @user_session.save
-      switch @user_session.record
-      #flash[:notice] = "登录成功！"
-      #redirect_to root_url
+      flash[:notice] = "登录成功！"
+      redirect_to root_url
     else
       flash[:notice] = "登录失败！"
       render :action => :new

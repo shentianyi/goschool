@@ -29,7 +29,8 @@ Goschool::Application.routes.draw do
   end
   resources :achievementresults
 
-  root :to => 'students#index'
+  resources :welcome
+  root :to => 'welcome#index'
 
   resources :posts do
     resources :comments
