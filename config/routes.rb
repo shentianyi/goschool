@@ -1,5 +1,7 @@
 Goschool::Application.routes.draw do
 
+  get "search_engine/search"
+
   controller :teachers do
     get 'teachers'=>:index
     get 'teachers/index'
@@ -29,7 +31,8 @@ Goschool::Application.routes.draw do
   end
   resources :achievementresults
 
-  root :to => 'students#index'
+  resources :welcome
+  root :to => 'welcome#index'
 
   resources :posts do
     resources :comments

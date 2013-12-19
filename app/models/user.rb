@@ -72,6 +72,11 @@ class User < ActiveRecord::Base
     #User.joins(:logininfo_institutions).joins(:logininfo_roles).where(logininfo_roles:{role_id:[100,200]},logininfo_institutions:{institution_id:institution_id}).all
   end
 
+
+  def self.by_course_id course_id
+    joins(:courses).where(courses:{id:course_id}).uniq
+  end
+  
   private
   
   def validate_save
