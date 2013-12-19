@@ -216,7 +216,7 @@ var BACKCOURSE=BACKCOURSE || {};
                var $target=$this.prev();
                $target.text(data.content);
                if(status){
-                  $target.attr("state","ongoing");
+                  $target.attr("state","2");
                }
                else{
                    $target.attr("state","");
@@ -232,6 +232,7 @@ var BACKCOURSE=BACKCOURSE || {};
         $("#add-class-choose-institution,#add-service-choose-institution").dropdown();
         $("#add-class-choose-institution .item").eq(0).addClass("active");
         $("#add-service-choose-institution .item").eq(0).addClass("active");
+        $('.ui.checkbox').checkbox();
 
     });
 })();

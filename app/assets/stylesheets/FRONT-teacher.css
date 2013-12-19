@@ -1,5 +1,4 @@
-/*老师的课程列表*/
-
+/*************************************************************************************   老师的课程列表*/
 .teacher-class>.item{
     border-radius:5px;
     -moz-border-radius:5px;
@@ -46,17 +45,21 @@
 .teacher-class>.item>label>span{
     color:#D95C5C
 }
-/*老师的课程表*/
+/*******************************************************************************************  老师的课程表*/
 .teacher-schedule{
     margin-top:45px !important;
     margin-bottom:75px !important;
-    -webkit-box-shadow:  2px 2px 4px 1px rgba(0, 0, 0, 0.5) !important;
-    box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.5) !important;
-    background-color:rgba(0,0,0,0) !important;
+    border:1px solid rgba(0,0,0,0.1);
+    box-shadow:3px 3px 3px rgba(0,0,0,0.5) !important;
+}
+.teacher-schedule>h2,
+.teacher-class>h2{
+    color:#63A69F !important;
 }
 .teacher-schedule>.schedule-block{
+    margin-top:-15px;
     width:70%;
-    height:700px;
+    height:360px;
 }
 /*课程的样式*/
 .schedule-block .dhx_cal_event_clear{
@@ -119,3 +122,4 @@
 .dhx_wrap_section .ui.input input[type='text']{
     padding:5px 10px;
 }
+
