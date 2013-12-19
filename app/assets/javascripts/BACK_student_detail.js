@@ -7,6 +7,13 @@
  */
 var STUDENTDETAIL=STUDENTDETAIL || {};
 (function(){
+    //课程及服务
+    $("body").on("keyup","#class-and-service tbpdy input",function(event){
+        var e=adapt_event(event).event;
+        if(e.keyCode==13){
+            //liqi xie post
+        }
+    });
     //编辑学生信息
     $("body").on("click","#student-detail-edit",function(){
         $("#student-edit-section").css("left","0px").css("right","0px");
