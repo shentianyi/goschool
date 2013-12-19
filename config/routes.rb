@@ -1,5 +1,7 @@
 Goschool::Application.routes.draw do
 
+  get "search_engine/search"
+
   controller :teachers do
     get 'teachers'=>:index
     get 'teachers/index'
