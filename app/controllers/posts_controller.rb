@@ -46,7 +46,7 @@ class PostsController < ApplicationController
     @post.logininfo = current_user
     @post.course = @current_course
 
-    get_attach params([:attachs],@post)
+    get_attach(params[:attachs],@post)
 
     msg.result = @post.save
     
