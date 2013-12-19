@@ -1,7 +1,8 @@
 #encoding: utf-8
 class TeachersController < ApplicationController
   skip_load_and_authorize_resource
-   before_filter :require_user_as_teacher, :only=>[:index]
+  before_filter :require_user_as_teacher, :only=>[:index]
+  skip_before_filter :require_user_as_employee
   layout 'homepage'
   def index
     @teacher=current_user.user

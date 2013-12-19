@@ -39,7 +39,7 @@ class LogininfoSessionsController < ApplicationController
     elsif user.is_student?
       redirect_to student_index_url
     elsif user.is_teacher?
-      
+      redirect_to teachers_index_path
     end
   end
 end

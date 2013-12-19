@@ -18,7 +18,7 @@ class Ability
       can :read,[Homework]
       can :manage,[StudentHomework]
     elsif Role.teacher?(user.role_ids)
-      can :manage,[LogininfoSession]
+      can :manage,[LogininfoSession,Homework,StudentHomework]
     end
   end
 end
