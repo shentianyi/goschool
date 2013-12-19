@@ -19,7 +19,7 @@ class Student < ActiveRecord::Base
   has_many :student_homeworks
   has_many :homeworks,:through=>:student_homeworks
   has_many :sub_courses,:through=>:courses
-  has_many :teacher_homeworks,:source=>'homeworks',:through=>:sub_courses
+  has_many :original_homeworks,:source=>'homeworks',:through=>:sub_courses
 
   after_destroy :delete_related
 

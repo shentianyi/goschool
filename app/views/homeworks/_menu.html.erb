@@ -1,8 +1,14 @@
 LEFT MENU:
+<style  type="text/css">
+.pin{
+     font-weight:bold;
+     font-size: 20px;
+}
+</style>
 <ul>
      <%@menus.each do |menu|%>
      <li>
-          <a href="#" type="<%= menu.value%>" class="homework-menu-a"><%= menu.display%></a>
+          <a href="#" type="<%= menu.value%>" class="homework-menu-a <%= 'pin' if menu.is_pin%>"><%= menu.display%><%= ':>>>>' if menu.is_pin%></a>
           <div class="homework-list"  style="background: brown">
                <%if @menu_type==menu.value%>
                <%= render 'menu_item'%>

@@ -1,0 +1,19 @@
+<table style="height: 600px; width:100%">
+     <tr style="height: 60px; background: yellow;"  colspan="2">
+          <td>HOME WORK OF: 
+               <%@sub_courses.each do |sub_course|%>
+               <span style="color:red;">
+               <%= sub_course.parent_name%>:<%= sub_course.name%></span>
+               <%end%></td>
+     </tr>
+     <tr>
+          <td style="background: green;width: 20%"> <%= render 'menu'%> </td>
+          <td style="background: grey;width: 60%"><div id="homework-content"></div></td>
+     </tr>
+</table>
+<input type="hidden" value="<%= @student_course.id%>" id="teacher-course-hidden" />
+<script type="text/javascript">init_teacher_homework();</script>
+<% content_for :javascript_includes do%>
+<%= javascript_include_tag "manage.source.base.js"%>
+<%= javascript_include_tag "manage.homework.base.js"%>
+<%end%>

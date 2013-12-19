@@ -71,7 +71,7 @@ class RecommendationScheduler
 
   def load_processors(type)
     @processors[type] = []
-    Dir[File.dirname(__FILE__) + "/recommendation/#{type.camelize}/*.rb"].each do |path|
+    Dir[File.dirname(__FILE__) + "/#{type.camelize}/*.rb"].each do |path|
       require path
       @processors[type].push(File.basename(path,'.*').camelize.constantize.new)
     end

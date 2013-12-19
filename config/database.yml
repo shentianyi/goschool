@@ -16,7 +16,7 @@ development:
  pool: 5
  username: goer
  password:  goer@
- socket: /var/run/mysqld/mysqld.sock
+ socket: /tmp/mysql.sock
 
 # 
  # Warning: The database defined as "test" will be erased and
@@ -30,7 +30,7 @@ test:
  pool: 5
  username: goer
  password: goer@
- socket: /var/run/mysqld/mysqld.sock
+ socket: /tmp/mysql.sock
 
 
 production:
@@ -41,7 +41,7 @@ production:
  pool: 5
  username: goer
  password:  goer@
- socket: /var/run/mysqld/mysqld.sock
+ socket: /tmp/mysql.sock
 
 
 # 
