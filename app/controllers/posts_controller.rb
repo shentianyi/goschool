@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
   skip_before_filter :require_user_as_employee
+  before_filter :get_course
   layout "non_authorized"
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.find_by_course_id(params[:id])
+    @posts = Post.where("course_id"=>params[:id])
   end
 
   # GET /posts/1
@@ -43,16 +44,13 @@ class PostsController < ApplicationController
     @post = Post.new(params[:post])
     @post.tenant = current_tenant
     @post.logininfo = current_user
+    @post.course = @current_course
+
+    get_attach params([:attachs],@post)
+
+    msg.result = @post.save
     
-    respond_to do |format|
-      if @post.save
-        msg.result = true
-        render :partial => ""
-        format.json { render :json=> msg }
-      else
-        format.json { render :json=> msg}
-      end
-    end
+    render :json=>msg
   end
 
   # PUT /posts/1
@@ -80,6 +78,25 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to posts_url }
       format.json { head :no_content }
+    end
+  end
+
+  def get_course
+    @current_course = Course.find(params[:id])
+  end
+
+  private
+
+  def get_attach attachs,target
+    unless attachs.blank?
+      attachs.each do |index,att|
+        path = File.join($AttachPath,att[:pathName])
+        #Get from tmp folder and upload to the Cloud Server
+        #Delete from tmp folder
+        FileUtils.mv(File.join($AttachTmpPath,att[:pathName]),path)
+        #
+        target.attachments<<Attachment.new(:name=>att[:oriName],:path=>path,:size=>FileData.get_size(path),:type=>FileData.get_type(path))
+      end
     end
   end
 end

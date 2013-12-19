@@ -106,9 +106,3 @@
     <%= javascript_include_tag "BACK_index.js"%>
     <%= javascript_include_tag "BACK_student.js"%>
 <%end%>
-<script>
-    $(document).ready(function(){
-        search_obj = Search.instance();
-        search_obj.init("full_text","Student",$("#container_for_input"),$("#container_for_list"));
-    });
-</script>

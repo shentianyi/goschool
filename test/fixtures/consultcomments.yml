@@ -5,17 +5,15 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  student: one
+  comment: 'adasd'
+  comment_time: '2103-12-23'
   logininfo: one
-  consultants: "张先生"
-  consult_time: 2103-12-1
-  content: "咨询了学费和课程的相关问题"
+  consultation: one
 # column: value
 #
 two:
-  student: one
+  comment: 'asdasd'
+  comment_time: '2013-12-3'
   logininfo: one
-  consultants: "刘女士"
-  consult_time: 2103-12-1
-  content: "咨询了学费和课程的相关问题，询问何时开学"
+  consultation: two
 #  column: value

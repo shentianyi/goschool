@@ -1,124 +1,37 @@
-/****************************************************总体*/
-.front-people-detail{
-    width:100%;
-    background-color:#fef9ee;
-    position:absolute;
-    z-index:0;
+/****************************************************中间部分*/
+.back-index-condition.front-index-condition{
+    width:180px;
 }
-/****************************************************头部*/
-.front-header{
-    background:#2F2F2F;
-    width:100%;
-    height:55px;
-    box-shadow:0px 2px 4px rgba(0,0,0,0.4);
+.back-index-condition.front-index-condition>header>label,
+.back-index-main.font-index-main>header>label{
+    font-size:15px;
+    top:15px;
+    color:rgba(0,0,0,0.6);
 }
-.front-header:after{
-    content:"";
-    display:block;
-    clear:both;
-}
-.front-header .logo{
-    height:55px;
-    float:left;
-    width:75px;
-    margin-right:20px;
-    border-right:1px solid rgba(255,255,255,0.4);
-}
-.front-header ul{
-    display:block;
-    list-style: none;
-    padding:20px 0 0;
-    margin:0px;
-}
-.front-header ul li{
-    display:inline-block;
-    position:relative;
-}
-.front-header ul li a{
-    transition:color 0.25s ease-out;
-}
-.front-header ul li a:hover{
-    color:#63A69F !important;
-}
-/*第一个UL*/
-.front-header ul:first-of-type{
-    float:left;
-}
-.front-header ul:first-of-type li {
-    margin-right:15px;
-}
-.front-header ul:first-of-type li a{
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 14px;
-    padding:5px 10px 8px;
-}
-.front-header ul:first-of-type li.active a:after{
-    content:"";
-    position:absolute;
-    left:0px;
-    right:0px;
-    height:4px;
-    background-color:#63A69F;
-    top:31px;
-}
-/*第二个UL*/
-.front-header ul:last-of-type{
-    float:right;
-    margin-right:25px;
-    padding:14px 0 0;
-}
-.front-header ul:last-of-type li{
-    margin-left:13px;
-}
-.front-header ul:last-of-type li a{
-    color: rgba(255, 255, 255, 0.8);
-    font-size:21px;
-}
-/*header下面的内容*/
-.front-people-inner{
-    padding:35px 25px 0 20px;
-}
-/**************************************************** 用户的信息*/
-.people-info{
-    margin:-10px 0px 20px 13px;
-    padding:15px 0px;
-    width:300px;
-    border-bottom:2px solid rgba(0,0,0,0.35);
-}
-.people-info:after{
-    clear: both;
-    content: "";
-    display: block;
-    height: 0;
-    visibility: hidden;
-}
-.people-info>img{
+.front-people-info>img{
     width:65px;
     height:65px;
     border-radius:65px;
     -moz-border-radius:65px;
     -webkit-border-radius:65px;
-    box-shadow:3px 4px 3px rgba(0,0,0,0.5);
-    float:left;
+    margin-left:61px;
+    margin-top:20px;
+    margin-bottom:5px;
 }
-.people-info>label{
+.front-people-info>label{
     font-size:18px;
     color:#63A69F;
-    float:left;
+    text-align:center;
     display:block;
+    margin-bottom:13px;
 }
-.people-info>.label>span{
-    padding-left:15px;
-}
-.people-info>p{
-    float:left;
+.front-people-info>p{
     position:relative;
     color:rgba(0,0,0,0.7);
     font-size:13px;
-    padding-left:21px;
-    width:70%;
+    text-align:center;
 }
-.people-info>p>i{
+.front-people-info>p>i{
     width:25px;
     color:rgba(0,0,0,0.3);
     font-size:13px;
@@ -127,9 +40,16 @@
     top:50%;
     margin-top:-6px;
 }
-/**************************************************** 用户要看的一些东西*/
+/****************************************************最右*/
+.front-people-inner{
+    position:absolute;
+    z-index:0;
+    width:100%;
+}
+.back-index-main.font-index-main{
+    left:280px;
+}
 .front-people-inner .segment{
-    margin-left:13px !important;
     padding-bottom:30px !important;
 }
 .front-people-inner .segment>h2{

@@ -146,21 +146,11 @@ var achievement_manager = $.extend({
 
 var consultation_manager = $.extend({
     source : 'consultations',
-    comment : function(data, callback, async) {
-        if(async == null)
-            async = true;
-        $.ajax({
-            url : '/' + this.source + '/comment',
-            data : data,
-            type : 'POST',
-            async : async,
-            success : function(data) {
-                if(callback)
-                    callback(data);
-            }
-        });
-    }
 }, manager);
+
+var consultcomment_managet = $.extend({
+    source : 'consultcomments'
+},manager);
 
 var sub_course_manager = $.extend({
     source : 'sub_courses'
@@ -196,3 +186,7 @@ var homework_manager = $.extend({
 var student_homework_manager = $.extend({
      source : 'student_homeworks'
 }, manager);
+
+var posts_manager = $.extend({
+    source : 'posts'
+},manager);

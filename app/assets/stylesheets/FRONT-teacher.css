@@ -1,4 +1,10 @@
 /*************************************************************************************   老师的课程列表*/
+.teacher-class{
+    margin-top:25px !important;
+    margin-left:20px !important;
+    width:42%;
+    float:left;
+}
 .teacher-class>.item{
     border-radius:5px;
     -moz-border-radius:5px;
@@ -15,6 +21,20 @@
     word-wrap:break-word;
     font-size:13px;
     color:rgba(0,0,0,0.6);
+
+}
+.teacher-class>.item>p>span:nth-of-type(1){
+    vertical-align:top;
+}
+.teacher-class>.item>p>span:nth-of-type(2){
+    word-break:break-all;
+    word-wrap:break-word;
+    display:inline-block;
+    max-width:100%;
+}
+.teacher-class>.item>p.homework-amount>span:nth-of-type(2){
+    color:#D95C5C;
+    font-weight:bolder;
 }
 .teacher-class>.item>h4{
     margin:5px 0 -5px 0;
@@ -28,28 +48,21 @@
 }
 .teacher-class>.item>.button{
     position:absolute;
-    right:50px;
+    right:15px;
     height:30px;
     font-size:13px;
     font-weight:lighter;
     top:50%;
     margin-top:-15px;
 }
-.teacher-class>.item>label{
-    position:absolute;
-    right:150px;
-    top:43px;
-    color:rgba(0,0,0,0.6);
-    font-size:14px;
-}
-.teacher-class>.item>label>span{
-    color:#D95C5C
-}
 /*******************************************************************************************  老师的课程表*/
 .teacher-schedule{
-    margin-top:45px !important;
-    margin-bottom:75px !important;
-    border:1px solid rgba(0,0,0,0.1);
+    width:53%;
+    margin-right:15px !important;
+    float:right;
+    margin-top:20px !important;
+    margin-bottom:20px !important;
+    border:1px solid rgba(0,0,0,0.25);
     box-shadow:3px 3px 3px rgba(0,0,0,0.5) !important;
 }
 .teacher-schedule>h2,
@@ -58,10 +71,19 @@
 }
 .teacher-schedule>.schedule-block{
     margin-top:-15px;
-    width:70%;
+    width:100%;
     height:360px;
 }
 /*课程的样式*/
+.dhx_cal_container  .dhx_cal_navline>div{
+    top:23px;
+}
+.dhx_cal_navline .dhx_cal_date{
+    position:relative !important;
+    top:-5px !important;
+    z-index:10 !important;
+    font-size:14px !important;
+}
 .schedule-block .dhx_cal_event_clear{
     font-size:10px;
     color:#fff;
@@ -121,5 +143,13 @@
 }
 .dhx_wrap_section .ui.input input[type='text']{
     padding:5px 10px;
+}
+.teacher-schedule-detail{
+    margin-top:30px !important;
+
+}
+.teacher-schedule-detail tbody{
+    max-height:100px;
+    overflow-y:auto;
 }
 

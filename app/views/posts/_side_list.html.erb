@@ -1,1 +1,8 @@
 <div>帖子列表</div>
+<% if @posts %>
+<ul>
+<% @posts.each do |post| %>
+<li post="<%= post.id%>"><%= post.title%></li>
+<% end %>
+</ul>
+<% end %>

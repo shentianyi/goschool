@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131218032113) do
+ActiveRecord::Schema.define(:version => 20131219084848) do
 
   create_table "achievementresults", :force => true do |t|
     t.string   "valuestring"
@@ -61,15 +61,24 @@ ActiveRecord::Schema.define(:version => 20131218032113) do
     t.string   "consultants"
     t.datetime "consult_time"
     t.string   "content"
-    t.string   "comment"
-    t.datetime "comment_time"
-    t.string   "commenter"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
 
   add_index "consultations", ["logininfo_id"], :name => "index_consultations_on_logininfo_id"
   add_index "consultations", ["student_id"], :name => "index_consultations_on_student_id"
+
+  create_table "consultcomments", :force => true do |t|
+    t.string   "comment"
+    t.datetime "comment_time"
+    t.integer  "logininfo_id"
+    t.integer  "consultation_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "consultcomments", ["consultation_id"], :name => "index_consultcomments_on_consultation_id"
+  add_index "consultcomments", ["logininfo_id"], :name => "index_consultcomments_on_logininfo_id"
 
   create_table "courses", :force => true do |t|
     t.integer  "type",           :default => 100
@@ -172,6 +181,7 @@ ActiveRecord::Schema.define(:version => 20131218032113) do
     t.string   "status"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.string   "title"
   end
 
   add_index "posts", ["course_id"], :name => "index_posts_on_course_id"
