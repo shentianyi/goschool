@@ -31,7 +31,7 @@ function init_teacher_homework() {
 }
 
 function bind_menu_event() {
-     $(".homework-menu-a").click(function() {
+     $(".homework-menu-a[pin=false]").click(function() {
           var homework_list = $(this).next('div');
           var menu_type = $(this).attr('type');
           homework_manager.list($("#teacher-course-hidden").val(), menu_type, function(data) {
