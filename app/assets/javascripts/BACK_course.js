@@ -233,6 +233,8 @@ var BACKCOURSE=BACKCOURSE || {};
         $("#add-class-choose-institution .item").eq(0).addClass("active");
         $("#add-service-choose-institution .item").eq(0).addClass("active");
         $('.ui.checkbox').checkbox();
+        search_obj = Search.instance();
+        search_obj.init("full_text","Course",$("#container_for_input"),$("#container_for_list"));
 
     });
 })();

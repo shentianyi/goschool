@@ -64,6 +64,8 @@ var BACKSTUDENT=BACKSTUDENT||{};
 	    BACKSTUDENT.post_add_student({student:student,is_active_account:is_active_account})
         });
     })
+    search_obj = Search.instance();
+    search_obj.init("full_text","Student",$("#container_for_input"),$("#container_for_list"));
 })();
 
 BACKSTUDENT.post_add_student = function(option){

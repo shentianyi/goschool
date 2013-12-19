@@ -1,21 +1,12 @@
 <%@courses.each do |course|%>
-<table style="background: grey;width:100%">
-     <tr>
-          <td> <%= course.course_name%> </td>
-     </tr>
-     <tr>
-          <td> *<%= course.sub_course_name%> </td>
-     </tr>
-     <tr>
-          <td> <%= course.description%> </td>
-     </tr>
-     <tr>
-          <td> 授课时间：<%= course.start_date%> -- <%= course.end_date%> </td>
-     </tr>
-     <tr>
-          <td><a href="/homeworks/index/<%=course.id%>"> <%= course.unmark_number%> 个未批改作业</a></td>
-     </tr>
-</table>
-<hr />
+<div class="item">
+  <h4><%= course.course_name%> </h4>
+  <p class="sub-class"><%= course.sub_course_name%></p>
+  <p><span>课程描述：</span><span><%= course.description%></span></p>
+  <p><span>授课时间：</span><span><%= course.start_date%> -- <%= course.end_date%></span></p>
+  <p class="homework-amount"><span>尚未批改作业：</span><span><%= course.unmark_number%></span></p>
+  <a class="mini ui teal button" href="/homeworks/index/<%=course.id%>">
+    进入课堂
+  </a>
+</div>
 <%end%>
-

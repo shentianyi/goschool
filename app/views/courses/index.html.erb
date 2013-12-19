@@ -50,9 +50,3 @@
 <%= javascript_include_tag "BACK_course.js"%>
 <%= javascript_include_tag "manage.source.base.js"%>
 <%end%>
-<script>
-    $(document).ready(function(){
-        search_obj = Search.instance();
-        search_obj.init("full_text","Course",$("#container_for_input"),$("#container_for_list"));
-    });
-</script>
