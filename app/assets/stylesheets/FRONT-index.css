@@ -3,10 +3,10 @@
     width:180px;
 }
 .back-index-condition.front-index-condition>header>label,
-.back-index-main.font-index-main>header>label{
+.back-index-main.front-index-main>header>label{
     font-size:15px;
     top:15px;
-    color:rgba(0,0,0,0.6);
+    color:rgba(0,0,0,0.7);
 }
 .front-people-info>img{
     width:65px;
@@ -15,7 +15,7 @@
     -moz-border-radius:65px;
     -webkit-border-radius:65px;
     margin-left:61px;
-    margin-top:20px;
+    margin-top:35px;
     margin-bottom:5px;
 }
 .front-people-info>label{
@@ -23,7 +23,7 @@
     color:#63A69F;
     text-align:center;
     display:block;
-    margin-bottom:13px;
+    margin-bottom:20px;
 }
 .front-people-info>p{
     position:relative;
@@ -46,7 +46,7 @@
     z-index:0;
     width:100%;
 }
-.back-index-main.font-index-main{
+.back-index-main.front-index-main{
     left:280px;
 }
 .front-people-inner .segment{

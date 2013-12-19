@@ -49,6 +49,7 @@ if(!Date.prototype.toWayneString) {
           var month = this.getMonth() + 1 < 10 ? "0" + (this.getMonth() + 1) : this.getMonth() + 1;
           var year = this.getFullYear();
           return {
+               only_minute:hour + ":" + minute,
                second : year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second,
                minute : year + "-" + month + "-" + day + " " + hour + ":" + minute,
                hour : year + "-" + month + "-" + day + " " + hour + ":00",

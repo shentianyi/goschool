@@ -1,8 +1,8 @@
 #encoding: utf-8
 class HomeworkStudentMenuType< HomeworkMenuType
   UNSUBMIT=100
-  SUBMITED=99
-  UNMARKED=98
+  SUBMITED=98
+  UNMARKED=99
   
  def self.condition type,student_id
    return nil if is_pin?(type)
@@ -31,6 +31,10 @@ end
     case type
     when UNSUBMIT
        '未提交'
+     when SUBMITED
+       '已提交'
+     when UNMARKED
+       '未批改'
     when OTHER
       	'更多>>'
     else

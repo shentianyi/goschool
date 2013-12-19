@@ -69,9 +69,11 @@ class HomeworksController < ApplicationController
 
   def get_homeworks menu_type
     @homeworks =if current_user.is_teacher?
-      Homework.by_homework_type({id:params[:id],homework_type:HomeworkType::TEACHER,menu_type:menu_type})
+      Homework.by_type({id:params[:id],menu_type:menu_type})
     elsif current_user.is_student?
-
+       StudentHomework.by_type({id:params[:id],menu_type:menu_type,student_id:current_student_id})
+      else
+          error_page_404
     end
   end
 
@@ -86,7 +88,13 @@ class HomeworksController < ApplicationController
   end
 
   def student_index
-
+    if @student_course=StudentCourse.by_student(params[:id],current_student_id)
+      @sub_courses=@student_course.sub_courses
+      @menus=  HomeworkStudentMenuType.generate_menu
+      render 'student_index'
+    else
+      error_page_404
+    end
   end
 
   def teacher_show

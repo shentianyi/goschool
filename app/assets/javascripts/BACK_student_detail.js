@@ -8,10 +8,27 @@
 var STUDENTDETAIL=STUDENTDETAIL || {};
 (function(){
     //课程及服务
-    $("body").on("keyup","#class-and-service tbpdy input",function(event){
+    $("body").on("keyup","#class-and-service tbody input",function(event){
         var e=adapt_event(event).event;
         if(e.keyCode==13){
             //liqi xie post
+	    var target = $(this);
+	    var id = target.parent().parent().attr("id");
+	    var data={
+		student_course:{
+		    progress:target.val()
+		}
+	    };
+	    if(data.student_course.progress.length > 0){
+		student_course_manager.update(id,data,function(data){
+		    if(data.result){
+			MessageBox("修改成功","top","success");
+		    }
+		});
+	    }
+	    else{
+		MessageBox_content("请输入内容");
+	    }
         }
     });
     //编辑学生信息
