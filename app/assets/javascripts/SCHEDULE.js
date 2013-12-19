@@ -121,9 +121,7 @@ SCHEDULE.widget.init=function(){
 };
 
 
-SCHEDULE.institution.choose=function(){
-    SCHEDULE.calendar.getData();
-};
+
 SCHEDULE.calendar.have_load={max:Date.parse(new Date()),min:Date.parse(new Date())};
 
 //可以传readonly这个参数
@@ -202,7 +200,7 @@ SCHEDULE.calendar.delete_item=function(id){
         })
         return validate;
     }
-    else if(arguments[1]!="static"){
+    else if(arguments[1]!="static" && arguments[1]!="clear"){
         return false;
     }
     else{

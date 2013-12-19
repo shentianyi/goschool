@@ -46,6 +46,7 @@ BACKINDEX.admin.generateHTML=function(){
             remove_loader()
             window.history.pushState({},"",href);
             $("#partial-content").html(data);
+            $(".checkbox").checkbox();
         }
     });
 };

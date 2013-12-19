@@ -158,3 +158,6 @@ SCHEDULE.generate_search_result=function(content){
     ul+="</ul>";
     $("#search-list").append(ul);
 };
+SCHEDULE.institution.choose=function(){
+    SCHEDULE.calendar.getData();
+};
