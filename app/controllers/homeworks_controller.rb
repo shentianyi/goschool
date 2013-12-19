@@ -3,6 +3,7 @@ class HomeworksController < ApplicationController
   before_filter :init_message ,:only=>[:create,:update,:destroy]
   before_filter :get_homework,:only=>[:show,:update,:destroy]
   before_filter :render_nil_msg , :only=>[:edit,:update,:destroy]
+  skip_before_filter :require_user_as_employee
   before_filter :require_user_as_teacher, :only=>[:create,:update,:destroy]
 
   layout 'homework'
