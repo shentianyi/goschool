@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 class LogininfoSessionsController < ApplicationController
   before_filter :require_no_user,:only=>[:new,:create]
+  skip_before_filter :require_user_as_employee,:only=>[:new,:create]
   skip_before_filter :require_user,:only=>[:new,:create]
   skip_before_filter :require_active_user,:only=>[:new,:create]
   #skip_before_filter :check_tenant_status
