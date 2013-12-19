@@ -39,3 +39,13 @@ function attach_upload() {
         }
     });
 }
+
+function attachment_remove(event) {
+     var e = event ? event : (window.event ? window.event : null);
+     var obj = e.srcElement || e.target;
+     e.stopPropagation();
+     $(".attachment-item[path-name='" + $(obj).attr("path-name") + "']").remove();
+    if($("#task-attach-uploader-preview").children().length==0){
+        $("#task-attach-uploader-preview").css("display","none");
+    }
+}

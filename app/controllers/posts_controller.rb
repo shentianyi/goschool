@@ -45,7 +45,8 @@ class PostsController < ApplicationController
     @post.tenant = current_tenant
     @post.logininfo = current_user
     @post.course = @current_course
-    
+
+    get_attach params([:attachs],@post)
 
     msg.result = @post.save
     
@@ -82,5 +83,20 @@ class PostsController < ApplicationController
 
   def get_course
     @current_course = Course.find(params[:id])
+  end
+
+  private
+
+  def get_attach attachs,target
+    unless attachs.blank?
+      attachs.each do |index,att|
+        path = File.join($AttachPath,att[:pathName])
+        #Get from tmp folder and upload to the Cloud Server
+        #Delete from tmp folder
+        FileUtils.mv(File.join($AttachTmpPath,att[:pathName]),path)
+        #
+        target.attachments<<Attachment.new(:name=>att[:oriName],:path=>path,:size=>FileData.get_size(path),:type=>FileData.get_type(path))
+      end
+    end
   end
 end
