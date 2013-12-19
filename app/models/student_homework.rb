@@ -12,6 +12,16 @@ class StudentHomework < ActiveRecord::Base
     joins(:student).where(homework_id:homework_id).select("students.name, students.id as student_id,student_homeworks.*")
   end
 
+  def self.by_type params
+    if type==HomeworkStudentMenuType::UNSUBMIT
+      student=Student.find_by_id(params[:student_id])
+       student.original_homeworks.where(student_courses:{student_id:1}).where("homeworks.id not in (?)",StudentHomework.where(student_id:student.id).pluck(:homework_id))
+    else
+	    joins(:homework).joins(:student=>:student_courses)
+	    .where(student_id:params[:student_id],student_courses:{course_id:params[:id]})
+	    .where(HomeworkStudentMenuType.condition(params[:menu_type]))
+    end
+  end
   private
 
   def validate_save

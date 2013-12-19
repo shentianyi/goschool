@@ -48,14 +48,14 @@ class ApplicationController < ActionController::Base
       error_page_403
     end
   end
-  
+
   #must be employee
   def require_user_as_employee
     unless current_user.is_employee?
       error_page_403
     end
   end
-  
+
   def error_page_403
     respond_to do |format|
       format.html {render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false}
@@ -80,6 +80,15 @@ class ApplicationController < ActionController::Base
   def current_user
     return @current_user if defined?(@current_user)
     @current_user = current_user_session && current_user_session.record
+  end
+
+  def current_student_id
+    return session[:current_student_id]  unless session[:current_student_id].nil?
+    if current_user.is_student?
+       session[:current_student_id] = Student.find_by_logininfo_id(current_user.id).id
+    else
+      error_page_404
+    end
   end
 
   # set cancan Ability
