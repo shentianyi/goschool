@@ -21,7 +21,7 @@ class HomeworkMenuType<StatusBase
    false
  end
  
- def self.generate_time_condition type
+ def self.generate_time_condition_base type
    Date.current.ago((type-1).days)..Date.current.ago((type-base_period-1).days)
  end
  def self.generate_time_menu type

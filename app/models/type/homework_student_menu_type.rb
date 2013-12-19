@@ -4,11 +4,9 @@ class HomeworkStudentMenuType< HomeworkMenuType
   SUBMITED=98
   UNMARKED=99
   
- def self.condition type,student_id
+ def self.condition type
    return nil if is_pin?(type)
    case type
-   when UNSUBMIT
-     ["homeworks.id not in (?)",StudentHomewrok.where(student_id:student_id).pluck(:homewrok_id)]
    when UNMARKED
      {marked:false}
    when OTHER
@@ -24,7 +22,7 @@ end
 
  private 
  def self.generate_time_condition type 
-       {updated_at: generate_time_condition(type)}
+       {updated_at: generate_time_condition_base(type)}
  end
 
  def self.generate_menu_item type

@@ -17,7 +17,7 @@ class HomeworkTeacherMenuType< HomeworkMenuType
 
  private 
  def self.generate_time_condition type 
-       {created_at: Date.current.ago((type-1).days)..Date.current.ago((type-base_period-1).days)}
+       {created_at: generate_time_condition_base(type)}
  end
 
  def self.generate_menu_item type

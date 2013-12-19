@@ -167,7 +167,24 @@ var Search = {
         search.handler = {
 
             full_text: function(event){
-                if(event.which==13){alert("还未完成,通讯服务器获得数据");}
+                if(event.which==13){
+               // #search_type: full_text
+                //    #{search_type:full_text,entity_type:"Student",page:1,per_page:20,search_queries:"a string"}
+
+               // #search_type: select_query
+               //     #{search_type:"select_query",entity_type:"Student",page:1,per_page:20,search_queries:[{query_type:"StudentName",parameters:[]}}
+
+               //
+                    var data_to_sent = {search_type:event.data.obj.current_mode,entity_type:event.data.obj.entity,page:1,per_page:20,search_queries:this.value};
+                    $.ajax(
+                        {   data:data_to_sent,
+                            success:function(data){Search.instance().show_result(data)}}
+                    );
+
+                    alert("还未完成,通讯服务器获得数据");
+
+
+                }
                 else if(event.which==51){
                     if(this.value.length==1){
                         event.data.obj.switch_mode("select_query");
@@ -328,6 +345,14 @@ var Search = {
         };
 
 
+
+        search.get_by_view = function(view_id){
+            $.ajax(
+                {success:function(data){Search.instance().show_result(data)}}
+            )
+        };
+
+
         search.bind_auto_complete = function(data,obj){
             //when a item is selected, should give the query object to current_query object and switch mode
             //to conditions
@@ -385,9 +410,7 @@ var Search = {
 
 
 
-        search.validate_condition = function(){
-          return {success:true,msg:""};
-        };
+
 
         search.get_buffer = function(key){
             if(!this.query_types_buffered) {this.query_types_buffered = {};}
@@ -405,10 +428,22 @@ var Search = {
             return "QUERY_BUFFER_" + entity_name + "|" + key;
         };
 
+        search.after_get_buffer = function(data,key,obj,callback){
+            this.query_types_buffered[this.make_buffer_storage_key(this.entity,key)]=data;
+            localStorage[this.make_buffer_storage_key(this.entity,key)] =JSON.stringify(data);
+            if (callback){
+                callback(data,obj);
+            }
+        };
+
         search.load_buffer = function(key,callback){
-           // $.ajax(
-             //   {success:function(){}} //write buffer, excute callback
-            //);
+            var obj =this;
+
+            $.ajax(
+                {
+                    success:function(data){Search.instance().after_get_buffer(data,key,obj,callback)}
+                }
+            );
 
 //            alert("load_buffer has not been finished")
 
@@ -418,12 +453,6 @@ var Search = {
                 {name:"按监护人查找",introduction:"输入学生的监护人名字",parameter_type:'string',query_type:"StudentParent",is_explicit:false},
                 {name:"按学校查询",introduction:"按学生的学校查找",parameter_type:'string',query_type:"StudentSchool",is_explicit:false}];
 
-
-            this.query_types_buffered[this.make_buffer_storage_key(this.entity,key)]=data;
-            localStorage[this.make_buffer_storage_key(this.entity,key)] =JSON.stringify(data);
-            if (callback){
-            callback(data,this);
-            }
         };
 
         //save the condition combination as a view
@@ -524,6 +553,10 @@ var Search = {
                 "<a href='#' title='删除该条件' onclick=Search.instance().delete_query('!id!')><i class='icon"+" remove'></i></a>" +
                 "<a href='#' title='编辑该条件内容' onclick=Search.instance().edit('!id!')><i class='icon"+" pencil'></i></a>" +
                 "</div>"
+        };
+
+        search.show_result = function(data){
+
         };
 
         return search;
