@@ -16,11 +16,11 @@
                     <p>
                          状态
                     </p>
-                    <p>
+                    <p state="<%=course.status%>">
                          <%=course.status_display%>
                     </p>
                       <div class="ui slider checkbox" id="<%=course.id%>">
-                        <input name="walk" type="checkbox" >
+                        <input name="walk" type="checkbox"  <%= 'checked' if course.ongoing?%>>
                         <label> </label>
                       </div>
                     </td>

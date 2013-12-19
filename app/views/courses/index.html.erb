@@ -11,12 +11,14 @@
                <i class="calendar icon"></i>
                安排课程
           </div> </a>
+          <%if @show_homepage_link%>
           <a class="ui red mini button" href="">
              <div class="visible content">
              <i class="home icon"></i>
              我的主页
              </div>
           </a>
+          <%end%>
      </header>
      <div class="search-list" id="search-list">
        <div class="ui big fluid icon input search-input customAutoHeight" id="container_for_input" autoMaxHeight="210px">

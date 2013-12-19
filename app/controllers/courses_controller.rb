@@ -8,6 +8,7 @@ class CoursesController < ApplicationController
   def index
     @active_left_aside='courses'
     @institutions=current_tenant.institutions
+    @show_homepage_link=current_user.is_teacher?
     @courses=CoursePresenter.init_presenters(Course.joins(:institution).select('courses.*,institutions.name as institution_name').all)
   end
    
@@ -54,8 +55,9 @@ class CoursesController < ApplicationController
 
   def update 
     if params.has_key?(:course)
-    @course.tags=params[:course].slice(:tags)[:tags] if params[:course].has_key?(:tags)
-     @msg.content=@course.errors.messages unless @msg.result=@course.update_attributes(params[:course].except(:tags)) 
+     @course.tags=params[:course].slice(:tags)[:tags] if params[:course].has_key?(:tags)
+     params[:course][:status]= CourseStatus.convert_status(@course.status,params[:course][:status]=='true')
+     @msg.content= ( @msg.result=@course.update_attributes(params[:course].except(:tags))) ? CourseStatus.display(@course.status)  : @course.errors.messages 
     else
       @course.tags=[]
     end

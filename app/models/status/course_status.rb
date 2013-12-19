@@ -5,6 +5,12 @@ class CourseStatus
  ONGOING=2
  FINISHED=3
  
+ def self.convert_status status,status_bool=nil
+   puts status_bool.class
+   return status if status_bool.nil?
+   status_bool ? ONGOING : FINISHED
+ end
+ 
  def self.display status
    case status
    when LOCK
