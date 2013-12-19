@@ -2,8 +2,6 @@
 class HomeworkTeacherMenuType< HomeworkMenuType
   UNMARK=100
   
-
-  
  def self.condition type
    case type
    when UNMARK
@@ -22,14 +20,14 @@ class HomeworkTeacherMenuType< HomeworkMenuType
        {created_at: Date.current.ago((type-1).days)..Date.current.ago((type-base_period-1).days)}
  end
 
- def self.genenerate_menu_item type
+ def self.generate_menu_item type
     case type
     when UNMARK
 	'未完成批改'
     when OTHER
 	'更多>>'
     else
-       genenerate_time_menu type
+       generate_time_menu type
     end
  end
 

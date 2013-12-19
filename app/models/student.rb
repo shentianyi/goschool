@@ -4,7 +4,7 @@ class Student < ActiveRecord::Base
 
   attr_accessible :address, :birthday, :email, :gender, :graduation, :guardian, :guardian_phone, :name, :phone, :school,:referrer_id,:logininfo_id,:image_url,:tenant_id
   attr_accessible :student_status,:course_number
-  
+
   attr_accessor :tags
 
   belongs_to :logininfo
@@ -15,9 +15,12 @@ class Student < ActiveRecord::Base
   has_many :consultations, :dependent=>:destroy
   has_many :student_courses
   has_many :courses,:through=>:student_courses
-  has_many :achievementresults, :dependent=>:destroy 
+  has_many :achievementresults, :dependent=>:destroy
   has_many :student_homeworks
-  
+  has_many :homeworks,:through=>:student_homeworks
+  has_many :sub_courses,:through=>:courses
+  has_many :teacher_homeworks,:source=>'homeworks',:through=>:sub_courses
+
   after_destroy :delete_related
 
   acts_as_tenant(:tenant)
@@ -29,12 +32,11 @@ class Student < ActiveRecord::Base
                      :prefix_index_enable => true,
                      :alias_field=>:email,
                      :ext_fields=>[:email,:address,:school,:guardian,:logininfo_id])
-
   def delete_related
     @logininfo = self.logininfo
     @logininfo.destroy
   end
-  
+
   def is_male?
     self.gender == 1 ? true : false
   end
@@ -42,7 +44,7 @@ class Student < ActiveRecord::Base
   def is_actived?
     self.logininfo.status == UserStatus::ACTIVE ? true : false
   end
-  
+
   def self.course_detail id
     joins(:courses).where(:id=>id).select('student_courses.id as student_course_id,student_courses.progress,student_courses.paid,courses.*')
   end
@@ -53,7 +55,6 @@ class Student < ActiveRecord::Base
     errors.add(:guardian, '监护人不能为空') if self.guardian.blank?
     errors.add(:guardian_phone, '监护人号码不能为空') if self.guardian_phone.blank?
   end
-
 
   after_save ThinkingSphinx::RealTime.callback_for(:student)
 end
