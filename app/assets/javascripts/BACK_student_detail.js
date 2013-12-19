@@ -243,12 +243,12 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
                     $("#myChart").remove();
                     var mustache_template={grade:data.object};
                     var render=Mustache.render('{{#grade}}{{#achieve}}<tr>'+
-                        '{{#object}}<td>{{date}}</td>'+
-                        '<td class="score">{{grade}}</td>'+
-                        '<td>{{enter_school}}</td>{{/object}}'+
-                        '<td><span class="remove" grade="{{id}}">删除</span></td>'+
-                        '</tr>{{/achieve}}{{/grade}}',mustache_template);
-		             $("#grade table tbody").append(render);
+					       '{{#object}}<td>{{date}}</td>'+
+					       '<td class="score">{{grade}}</td>'+
+					       '<td>{{enter_school}}</td>{{/object}}'+
+					       '<td><span class="remove" grade="{{id}}">删除</span></td>'+
+					       '</tr>{{/achieve}}{{/grade}}',mustache_template);
+		    $("#grade table tbody").append(render);
                     var labels=[],datas=[],item;
                     for(var i=0;i<data.object.length;i++){
                         item=data.object[i].achieve.object;
@@ -258,7 +258,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
                     STUDENTDETAIL.generateCanvas(labels,datas);
                 }
                 else{
-		            MessageBox_content(data.content);
+		    MessageBox_content(data.content);
                 }
 	    });
         }
@@ -380,27 +380,27 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     }).on("blur","#grade .score input",function(){
         if($.trim($(this).val()).length>0){
 	    //post
-        var $this=$(this);
-        var $parent=$this.parents("tr").eq(0);
-        var $tds=$parent.find("td");
-        var data = {
-            id:$parent.find(".remove").attr("grade"),
-            result:{
-                valuestring:$tds.eq(0).text()+";"+$this.val()+";"+$tds.eq(2).text()
+            var $this=$(this);
+            var $parent=$this.parents("tr").eq(0);
+            var $tds=$parent.find("td");
+            var data = {
+		id:$parent.find(".remove").attr("grade"),
+		result:{
+                    valuestring:$tds.eq(0).text()+";"+$this.val()+";"+$tds.eq(2).text()
+		}
             }
-        }
-        achievementres_manager.update(data.id,data,function(data){
+            achievementres_manager.update(data.id,data,function(data){
                 if(data.result){
-                     var text=$this.val();
-                     var index=$this.parents("tr").prevAll().length;
-                     $this.parent().text(text);
-                     $this.remove();
-                     STUDENTDETAIL.editCanvas(index,parseInt(text));
+                    var text=$this.val();
+                    var index=$this.parents("tr").prevAll().length;
+                    $this.parent().text(text);
+                    $this.remove();
+                    STUDENTDETAIL.editCanvas(index,parseInt(text));
                 }
                 else{
                     MessageBox_content(data.content);
                 }
-        });
+            });
         }
         else{
 	    MessageBox("请输入分数","top","warning");
@@ -413,42 +413,42 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         //$(this).parent().remove();
 	var target = $(this)
 	//
-	var data = {
-	    id : '',
-	    consultation:{}
-	}
 
-	data.id = target.attr("student");
-	data.consultation.comment = "";
-
-	consultation_manager.comment(data,function(data){
+	var id = target.attr("comment");
+	consultcomment_managet.destroy(id,function(data){
 	    if(data.result){
 		target.parent().remove();
 	    }
 	});
+	/*
+	  consultation_manager.comment(data,function(data){
+	  if(data.result){
+	  target.parent().remove();
+	  }
+	  });
+	*/
     }).on("click","#consult-record .comment-block .button",function(){
+	
         var value=$(this).prev().val();
         var date=new Date().toWayneString().second;
-	data = {
-	    id:'',
-	    consultation:{}
+	var data = {
+	    consultcomment:{
+		consultation_id:$(this).attr("id"),
+		comment:value,
+		comment_time: date
+	    }
 	}
-	
-	data.id = $(this).attr("id");
-	data.consultation.comment = value;
-	data.consultation.comment_time = date;
 	var target = $(this);
         if($.trim(value).length>0){
-	    consultation_manager.comment(data,function(data){
+	    consultcomment_managet.create(data,function(data){
 		if(data.result){
-		    var res = data.object;
-		    target.parent().parent().find("dd").remove();
+		    var res = data.object.consultcomment;
 		    target.prev().val("");
 		    target.parents(".comment-block").prev("dl")
 			.append($("<dd />")
-				.append($("<span />").text(res.consultation.comment))
-				.append($("<span />").text(res.consultation.comment_time_display))
-				.append($("<i />").addClass("icon remove").attr("student",res.consultation.id))
+				.append($("<span />").text(res.comment))
+				.append($("<span />").text(res.comment_time))
+				.append($("<i />").addClass("icon remove").attr("comment",res.id))
 			       )
 		}
 	    });
@@ -672,11 +672,11 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         var href=window.location.href.split("/");
         var new_href=href[href.length-1].split("#")[0];
         if( new_href=="achieve"){
-	        if($("#achieve_final_tabular>a").length>=1){
+	    if($("#achieve_final_tabular>a").length>=1){
                 $("#achieve_final_tabular>a").eq(0).click();
-	        }
-         }
-//	STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
+	    }
+        }
+	//	STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
     });
 
 })();
@@ -719,11 +719,11 @@ STUDENTDETAIL.generateCanvas=function(labels,scores){
         var data = {
             labels : labels,
             datasets : [{
-                    fillColor : "rgba(151,187,205,0.5)",
-                    strokeColor : "rgba(151,187,205,1)",
-                    pointColor : "rgba(151,187,205,1)",
-                    pointStrokeColor : "#fff",
-                    data :scores
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,1)",
+                pointColor : "rgba(151,187,205,1)",
+                pointStrokeColor : "#fff",
+                data :scores
             }]
         }
         var ctx = $("#myChart").get(0).getContext("2d");
@@ -782,11 +782,11 @@ STUDENTDETAIL.deleteCanvas=function(index){
         var data = {
             labels : STUDENTDETAIL.labels,
             datasets : [{
-                    fillColor : "rgba(151,187,205,0.5)",
-                    strokeColor : "rgba(151,187,205,1)",
-                    pointColor : "rgba(151,187,205,1)",
-                    pointStrokeColor : "#fff",
-                    data :STUDENTDETAIL.data
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,1)",
+                pointColor : "rgba(151,187,205,1)",
+                pointStrokeColor : "#fff",
+                data :STUDENTDETAIL.data
             }]
         }
     }
