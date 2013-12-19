@@ -11,7 +11,7 @@ class StudentCoursesController < ApplicationController
 
   # just for update paid
   def update
-    @msg.content=@student_course.errors.messages unless @msg.result=@student_course.update_attributes(:paid=>params[:student_course][:paid])
+    @msg.content=@student_course.errors.messages unless @msg.result=@student_course.update_attributes(params[:student_course])
     render :json=>@msg
   end
 
