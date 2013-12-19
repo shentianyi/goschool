@@ -207,6 +207,27 @@ var BACKCOURSE=BACKCOURSE || {};
             $target.prop("readonly",false);
         }
     });
+    $("body").on("click",".course-status .slider",function(){
+        var id=$(this).attr("id"),
+            status=$(this).find("input").prop("checked"),
+            $this=$(this);
+        course_manager.update(id,{course:{status:status}},function(data){
+           if(data.result){
+               var $target=$this.prev();
+               $target.text(data.content);
+               if(status){
+                  $target.attr("state","ongoing");
+               }
+               else{
+                   $target.attr("state","");
+               }
+           }
+            else{
+               MessageBox_content(data.content);
+               $this.checkbox("toggle");
+           }
+        });
+    })
     $(document).ready(function(){
         $("#add-class-choose-institution,#add-service-choose-institution").dropdown();
         $("#add-class-choose-institution .item").eq(0).addClass("active");

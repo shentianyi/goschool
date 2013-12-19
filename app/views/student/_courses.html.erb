@@ -1,0 +1,9 @@
+<div>
+  <% if @courses %>
+  <% @courses.each do | c |%>
+  <h2><%= c.name %></h2>
+  <p><%= c.description %></p>
+  <a href="<%= %>">进入课堂</a>
+  <% end %>
+  <% end %>
+</div>

@@ -32,5 +32,4 @@ class CoursePresenter<Presenter
   def teacher_names_string
     teacher_names.join(', ')
   end
-
 end

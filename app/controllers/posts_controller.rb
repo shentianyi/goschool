@@ -1,14 +1,10 @@
 class PostsController < ApplicationController
+  skip_before_filter :require_user_as_employee
   layout "non_authorized"
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
-
-    respond_to do |format|
-      format.html  #index.html.erb
-      format.json { render json: @posts }
-    end
+    @posts = Post.find_by_course_id(params[:id])
   end
 
   # GET /posts/1

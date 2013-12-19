@@ -5,7 +5,6 @@ class StudentController < ApplicationController
   
   def index
     @student = current_user.student
-    puts '==================================='
-    puts @student.to_json
+    @courses = CoursePresenter.init_presenters(Student.course_detail @student.id)
   end
 end
