@@ -11,6 +11,12 @@
                <i class="calendar icon"></i>
                安排课程
           </div> </a>
+          <a class="ui red mini button" href="">
+             <div class="visible content">
+             <i class="home icon"></i>
+             我的主页
+             </div>
+          </a>
      </header>
      <div class="search-list" id="search-list">
        <div class="ui big fluid icon input search-input customAutoHeight" id="container_for_input" autoMaxHeight="210px">
@@ -40,6 +46,7 @@
 <%= javascript_include_tag "BACK_index.js"%>
 <%= javascript_include_tag "BACK_rightList.js"%>
 <%= javascript_include_tag "BACK_course.js"%>
+<%= javascript_include_tag "manage.source.base.js"%>
 <%end%>
 <script>
     $(document).ready(function(){

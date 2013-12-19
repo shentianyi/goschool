@@ -1,12 +1,6 @@
 #encoding: utf-8
 class HomeworkTeacherMenuType< HomeworkMenuType
   UNMARK=100
-  LAST_10_DAYS=11
-  LAST_20_DAYS=22
-  LAST_30_DAYS=33
-  LAST_40_DAYS=44
-  Last_50_DAYS=55
-  OTHER=66
   
 
   

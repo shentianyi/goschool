@@ -1,6 +1,6 @@
 #encoding: utf-8
 class HomeworkMenuType<StatusBase
-     LAST_10_DAYS=11
+  LAST_10_DAYS=11
   LAST_20_DAYS=22
   LAST_30_DAYS=33
   LAST_40_DAYS=44

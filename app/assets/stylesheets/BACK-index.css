@@ -118,7 +118,12 @@
 }
 .back-index-side-header>.ui.button:nth-of-type(2){
     position:absolute;
-    right:140px;
+    right:135px;
+    top:17px;
+}
+.back-index-side-header>.ui.button:nth-of-type(3){
+    position:absolute;
+    right:234px;
     top:17px;
 }
 /*中间段*/
