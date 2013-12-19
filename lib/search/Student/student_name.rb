@@ -25,7 +25,7 @@ class StudentName
 
   def query(query_obj,parameters)
     if !query_obj
-      query_obj = Student.where(true==true)
+      query_obj = Student.where(true)
     end
     if parameters
       ids = SearchEngine.new.search_full_text_with_object_id(Student.name,parameters[0],1,20)

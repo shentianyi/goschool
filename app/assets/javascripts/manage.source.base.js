@@ -190,3 +190,7 @@ var student_homework_manager = $.extend({
 var posts_manager = $.extend({
     source : 'posts'
 },manager);
+
+var student_course_manager = $.extend({
+    source : 'student_courses'
+},manager)

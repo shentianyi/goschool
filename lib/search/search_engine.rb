@@ -58,7 +58,10 @@ class SearchEngine
 
 
   def prepare_search_string(search_queries)
-     return Riddle::Query.escape(search_queries.split(/[^A-Za-z0-9@\._\+-]+/).collect{|a| a="*#{a}*"}.join('|'))
+     if !search_queries.is_a?Array
+         search_queries= search_queries.split(/[^A-Za-z0-9@\._\+-]+/)
+     end
+     return Riddle::Query.escape(search_queries.collect{|a| a="*#{a}*"}.join('|'))
   end
 
 

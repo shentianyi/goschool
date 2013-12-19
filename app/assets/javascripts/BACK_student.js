@@ -111,11 +111,11 @@ BACKSTUDENT.check.phone = /^0*(13|15|18)\d{9}$/;
 BACKSTUDENT.check.guardian_phone = /^0*(13|15|18)\d{9}$/;
 
 BACKSTUDENT.check.test = function(str,type){
-    if(BACKSTUDENT.check[type].test(str)){
+    if(BACKSTUDENT.check[type] && BACKSTUDENT.check[type].test(str)){
 	return true;
     }
     else{
-	MessageBox_content('格式不正确！请输入正确的格式');
+	MessageBox("格式不正确！请输入正确的格式!","top","warning")
 	return false;
     }
 }
