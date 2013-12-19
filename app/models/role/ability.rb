@@ -8,18 +8,18 @@ class Ability
       can :manage,:all
       can :read,:all
     elsif Role.sale?(user.role_ids)
-      can :manage,[Cousultation,Student,LogininfoSession]
+      can :manage,[Cousultation,Student,LogininfoSession,Attachment,FileData]
       can :manage,[Logininfo],:id=>user.id
       can :read,:all
     elsif Role.student?(user.role_ids)
-      can :manage,[LogininfoSession]
+      can :manage,[LogininfoSession,Attachment,FileData]
       can :manage,[Student],:student_id=>user.student.id
       can :manage,[Logininfo],:id=>user.id
       can :read,:all
       can :manage,[StudentHomework]
       can :manage,[Post,Comment]
     elsif Role.teacher?(user.role_ids)
-      can :manage,[LogininfoSession,Homework,StudentHomework]
+      can :manage,[LogininfoSession,Homework,StudentHomework,Attachment,FileData]
     end
   end
 end

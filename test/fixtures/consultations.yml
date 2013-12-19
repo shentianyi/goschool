@@ -10,9 +10,6 @@ one:
   consultants: "张先生"
   consult_time: 2103-12-1
   content: "咨询了学费和课程的相关问题"
-  comment: "重要客户"
-  comment_time: 2013-12-2
-  commenter: "XXX"
 # column: value
 #
 two:
@@ -21,7 +18,4 @@ two:
   consultants: "刘女士"
   consult_time: 2103-12-1
   content: "咨询了学费和课程的相关问题，询问何时开学"
-  comment: "不重要客户"
-  comment_time: 2013-12-2
-  commenter: "XXX"
 #  column: value

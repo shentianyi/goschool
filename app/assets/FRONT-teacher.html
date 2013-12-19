@@ -5,119 +5,122 @@
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="stylesheets/semantic.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/base_wayne.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/BACK-index.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/FRONT-index.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/FRONT-teacher.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/dhtmlxscheduler.css" type="text/css" />
 </head>
 <body>
-<article class="front-people-detail">
-    <header class="front-header">
-       <div class="logo"></div>
-       <ul>
-           <li class="active"><a>我的主页</a></li>
-           <li><a>课堂</a></li>
-       </ul>
-       <ul id="main-navigator-bottom">
-           <li>
-               <a>
-                   <i class="smile icon" data-content="我的账户"></i>
-               </a>
-           </li>
-           <li>
-               <a>
-                   <i class="sign out icon" data-content="退出"></i>
-               </a>
-           </li>
-       </ul>
+
+<!--global partial-->
+<aside class="back-index-aside">
+    <a class="logo" ></a>
+    <ul class="first-ul">
+        <li>
+            <a class="active" href="#" >我的主页</a>
+        </li>
+    </ul>
+    <ul class="second-ul" id="main-navigator-bottom">
+        <li>
+            <a>
+                <i class="smile icon" data-content="我的账户"></i>
+            </a>
+        </li>
+        <li>
+            <a>
+                <i class="sign out icon" data-content="退出账户"></i>
+            </a>
+        </li>
+    </ul>
+</aside>
+<!--global partial-->
+
+<!--view-->
+<aside class="back-index-condition front-index-condition">
+    <header class="back-index-side-header">
+        <label>个人信息</label>
     </header>
-   <div class="front-people-inner">
-
-       <div class="people-info">
-           <img class=" ui image" src="images/portrait/6.jpg">
-           <label class="label"><span>王子骁教授</span></label>
-           <p><i class="icon mail"></i> <span>superxiao21@sina.com</span></p>
-       </div>
-
-       <div class="ui piled segment teacher-class">
-           <h2>我教授的课程</h2>
-           <div class="item">
-               <h4>数学学前班</h4>
-               <p class="sub-class">代数</p>
-               <p>课程描述：<span>A button can animate to show hidden content</span></p>
-               <p>授课时间：<span>2013.10.1 - 2014.10.5</span></p>
-               <a class="mini ui teal button">
-                   进入课堂
-               </a>
-               <label>
-                   尚未批改作业：<span>21</span>
-               </label>
-           </div>
-           <div class="item">
-               <h4>数学学前班</h4>
-               <p class="sub-class">代数</p>
-               <p>课程描述：<span>A button can animate to show hidden content</span></p>
-               <p>授课时间：<span>2013.10.1 - 2014.10.5</span></p>
-               <a class="mini ui teal button">
-                   进入课堂
-               </a>
-               <label>
-                   尚未批改作业：<span>21</span>
-               </label>
-           </div>
-       </div>
-
-       <div class="ui segment teacher-schedule">
-           <h2>我的排课</h2>
-           <div class="schedule-block">
-               <div id="schedule-here" class="dhx_cal_container" style='width:100%; height:100%;'>
-                   <div class="dhx_cal_navline">
-                       <div class="dhx_cal_prev_button">&nbsp;</div>
-                       <div class="dhx_cal_next_button">&nbsp;</div>
-                       <div class="dhx_cal_today_button"></div>
-                       <div class="dhx_cal_date"></div>
-                       <div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
-                       <div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
-                       <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
-                   </div>
-                   <div class="dhx_cal_header"></div>
-                   <div class="dhx_cal_data"></div>
-               </div>
-           </div>
-           <table class="ui inverted red table segment class-all">
-               <thead>
-               <tr><th>Name</th>
-                   <th>Status</th>
-                   <th>Notes</th>
-               </tr></thead>
-               <tbody>
-               <tr>
-                   <td>John</td>
-                   <td>Approved</td>
-                   <td>None</td>
-               </tr>
-               <tr>
-                   <td>Jamie</td>
-                   <td>Approved</td>
-                   <td>Requires call</td>
-               </tr>
-               <tr>
-                   <td>Jill</td>
-                   <td>Denied</td>
-                   <td>None</td>
-               </tr>
-               </tbody>
-               <tfoot>
-               <tr><th>3 People</th>
-                   <th>2 Approved</th>
-                   <th></th>
-               </tr></tfoot>
-           </table>
-       </div>
+    <div class="front-people-info">
+        <img class=" ui image" src="images/portrait/6.jpg">
+        <label class="label"><span>王子骁教授</span></label>
+        <p><i class="icon mail"></i> <span>superxiao21@sina.com</span></p>
+    </div>
+</aside>
+<!--view-->
 
 
+<article class="back-index-main front-index-main" id="front-index-main">
+    <header class="back-index-side-header" id="front-index-side-header">
+        <label>工作板</label>
+    </header>
+    <div class="front-people-inner">
+        <div class="ui piled segment teacher-class">
+            <h2>我教授的课程</h2>
+            <div class="item">
+                <h4>数学学前班</h4>
+                <p class="sub-class">代数</p>
+                <p><span>课程描述：</span><span>课程的描述</span></p>
+                <p><span>授课时间：</span><span>2013.10.1 - 2014.10.5</span></p>
+                <p class="homework-amount"><span>尚未批改作业：</span><span>21</span></p>
+                <a class="mini ui teal button">
+                    进入课堂
+                </a>
+            </div>
+            <div class="item">
+                <h4>数学学前班</h4>
+                <p class="sub-class">代数</p>
+                <p><span>课程描述：</span><span>课程的描述</span></p>
+                <p><span>授课时间：</span><span>2013.10.1 - 2014.10.5</span></p>
+                <p class="homework-amount"><span>尚未批改作业：</span><span>21</span></p>
+                <a class="mini ui teal button">
+                    进入课堂
+                </a>
+            </div>
+        </div>
 
-   </div>
+        <div class="ui segment teacher-schedule" id="teacher-schedule">
+            <h2>我的排课</h2>
+            <div class="schedule-block">
+                <div id="schedule-here" class="dhx_cal_container" style='width:100%; height:100%;'>
+                    <div class="dhx_cal_navline">
+                        <div class="dhx_cal_prev_button">&nbsp;</div>
+                        <div class="dhx_cal_next_button">&nbsp;</div>
+                        <div class="dhx_cal_today_button"></div>
+                        <div class="dhx_cal_date"></div>
+                        <div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
+                        <div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
+                        <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
+                    </div>
+                    <div class="dhx_cal_header"></div>
+                    <div class="dhx_cal_data"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="teacher-schedule-detail" id="teacher-schedule-detail">
+            <table class="ui compact small celled inverted red table segment class-all ">
+                <thead>
+                <tr>
+                    <th class="wide five">课程名</th>
+                    <th class="wide eleven">上课时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>托福秋季班</td>
+                    <td>2013-10-01 18：00-20：00</td>
+                </tr>
+                <tr>
+                    <td>托福秋季班</td>
+                    <td>2013-10-01 18：00-20：00</td>
+                </tr>
+            </table>
+        </div>
+
+
+    </div>
 </article>
+
     <script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>
     <script type='text/javascript' src="javascripts/semantic.min.js" ></script>
     <script type='text/javascript' src="javascripts/SCHEDULE.js" ></script>

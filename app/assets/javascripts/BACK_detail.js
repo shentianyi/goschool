@@ -57,6 +57,7 @@
                             $("#achieve_final_tabular>a").eq(0).click();
                         }
                     }
+                    $(".checkbox").checkbox();
                 }
             });
         }
@@ -85,6 +86,7 @@
                             $("#achieve_final_tabular>a").eq(0).click();
                         }
                     }
+                    $(".checkbox").checkbox();
                 }
             });
         }

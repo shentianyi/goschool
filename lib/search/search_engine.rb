@@ -4,14 +4,23 @@ class SearchEngine
 
   # @param [String] search_queries, a processed search conditions hash
   # @return [ACTIVERECORD::Relation] of the queried object (course, Student)
-  def search_return_relation(entity_type,search_queries,page=1,per_page=20)
+  def search_return_relation(entity_type,search_queries,page=1,per_page=20,only_id=false,tenant_id=nil)
     query = nil
     search_queries.each do |proc|
       query = get_query_type(entity_type, proc[:query_type]).query(query,proc[:parameters])
     end
+    if tenant_id
+      query.where('tenant_id=?',tenant_id)
+    end
 
     query = query.limit(per_page)
     query.offset(page*per_page)
+
+    if only_id
+      query = query.select(:id)
+    end
+
+    return query
   end
 
 
@@ -21,28 +30,60 @@ class SearchEngine
 # @param [Integer] page, the number of records to return
 # @param [Integer] per_page, the index of records to start. Start from 0
 # @return [Array] of the queried object (course, Student)
-  def search(search_type,entity_type,search_queries,page=1,per_page=20)
+  def search(search_type,entity_type,search_queries,page=1,per_page=20,tenant_id=nil)
     case search_type.to_s
       when 'full_text'
-        search_full_text(entity_type,search_queries,page,per_page)
-      when 'exact'
-        search_return_relation(entity_type,search_queries,page,per_page).all
+        search_full_text(entity_type,search_queries,page,per_page,tenant_id)
+      when 'select_query'
+        search_return_relation(entity_type,search_queries,page,per_page,tenant_id).all
       else
         return 'search type undefined'
     end
   end
 
+
+
+  def search_id(search_type,entity_type,search_queries,page=1,per_page=20,tenant_id=nil)
+    case search_type.to_s
+      when 'full_text'
+        search_full_text_with_object_id(entity_type,search_queries,page,per_page,tenant_id)
+      when 'select_query'
+        search_return_relation(entity_type,search_queries,page,per_page,tenant_id).select(:id).all
+      else
+        return 'search type undefined'
+    end
+  end
+
+
+
+
   def prepare_search_string(search_queries)
-     return search_queries.gsub(/[^A-Za-z0-9@\._\+-]+/,'|')
+     return Riddle::Query.escape(search_queries.split(/[^A-Za-z0-9@\._\+-]+/).collect{|a| a="*#{a}*"}.join('|'))
   end
 
 
-  def search_full_text(entity_type,search_queries,page,per_page)
-    entity_type.camelize.constantize.search search_queries,:page => page, :per_page => per_page
+  def search_full_text(entity_type,search_queries,page,per_page,tenant_id=nil)
+    search_queries=prepare_search_string(search_queries)
+    if tenant_id
+      entity_type.camelize.constantize.search \
+      search_queries,:page => page, :per_page => per_page,:star=>true,:conditions => {:tenant_id => tenant_id.to_s}
+
+    else
+      entity_type.camelize.constantize.search search_queries,:star=>true,:page => page, :per_page => per_page
+    end
   end
 
-  def search_full_text_with_object_id(entity_type,search_queries,page,per_page)
-    entity_type.camelize.constantize.search_for_ids search_queries,:page => page,:per_page => per_page
+
+
+  def search_full_text_with_object_id(entity_type,search_queries,page,per_page,tenant_id=nil)
+    search_queries=prepare_search_string(search_queries)
+    if tenant_id
+
+      entity_type.camelize.constantize.search_for_ids\
+       search_queries,:page => page,:per_page => per_page,:star=>true,:conditions => {:tenant_id => tenant_id.to_s}
+    else
+      entity_type.camelize.constantize.search_for_ids search_queries,:star=>true,:page => page,:per_page => per_page
+    end
   end
 
 

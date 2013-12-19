@@ -5,6 +5,6 @@ class StudentController < ApplicationController
   
   def index
     @student = current_user.student
-    @courses = CoursePresenter.init_presenters(Student.course_detail @student.id)
+    @courses = StudentCoursePresenter.init_presenters(Student.course_detail @student.id)
   end
 end
