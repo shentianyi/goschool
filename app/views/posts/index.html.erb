@@ -1,1 +1,10 @@
 <h1>Listing posts</h1>
+<p id="course" course="<%= @current_course.id%>"><%= @current_course.name%></p>
+<%= render partial:'header' %>
+<%= render partial:'side_list' %>
+<%= render partial:'post_detail' %>
+
+<% content_for :javascript_includes do%>
+<%= javascript_include_tag "manage.source.base.js"%>
+<%= javascript_include_tag "FRONT_student.js"%>
+<%end%>

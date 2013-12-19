@@ -44,7 +44,7 @@ class Student < ActiveRecord::Base
   end
   
   def self.course_detail id
-    joins(:courses).where(:id=>id).select('student_courses.id as student_course_id,student_courses.progress,student_courses.paid,courses.*')
+    joins(:courses).where(:id=>id).select('student_courses.id as student_course_id,student_courses.progress,student_courses.paid,courses.*,courses.id as course_id')
   end
 
   def validate_save

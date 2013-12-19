@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
   skip_before_filter :require_user_as_employee
+  before_filter :get_course
   layout "non_authorized"
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.find_by_course_id(params[:id])
+    @posts = Post.where("course_id"=>params[:id])
   end
 
   # GET /posts/1
@@ -43,16 +44,12 @@ class PostsController < ApplicationController
     @post = Post.new(params[:post])
     @post.tenant = current_tenant
     @post.logininfo = current_user
+    @post.course = @current_course
     
-    respond_to do |format|
-      if @post.save
-        msg.result = true
-        render :partial => ""
-        format.json { render :json=> msg }
-      else
-        format.json { render :json=> msg}
-      end
-    end
+
+    msg.result = @post.save
+    
+    render :json=>msg
   end
 
   # PUT /posts/1
@@ -81,5 +78,9 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url }
       format.json { head :no_content }
     end
+  end
+
+  def get_course
+    @current_course = Course.find(params[:id])
   end
 end
