@@ -8,5 +8,5 @@ class StatusBase
 end
 
 class Menu<CZ::BaseClass
-  attr_accessor :display,:value
+  attr_accessor :display,:value,:is_pin
 end 
