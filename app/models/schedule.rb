@@ -1,13 +1,14 @@
 #encoding: utf-8
 class Schedule < ActiveRecord::Base
   belongs_to :sub_course
+   belongs_to :tenant
   delegate :course,:to=>:sub_course
   has_many :teachers,:through=>:sub_course
   attr_accessible :end_time, :start_time
   attr_accessible :sub_course_id
 
   validate :validate_save
-  
+    acts_as_tenant(:tenant)
   def self.by_id id
     joins(:sub_course).where(:id=>id).select('*,sub_courses.*').first
   end
