@@ -15,14 +15,13 @@ class StudentHomework < ActiveRecord::Base
   end
 
   def self.by_type params
-   q= if params[:menu_type].to_i==HomeworkStudentMenuType::UNSUBMIT
+   if params[:menu_type].to_i==HomeworkStudentMenuType::UNSUBMIT
       student=Student.find_by_id(params[:student_id])
       ids=StudentHomework.where(student_id:student.id).pluck(:homework_id)
-      qq= student.original_homeworks.where(student_courses:{student_id:params[:student_id],course_id:params[:id]})
-       qq=qq.where("homeworks.id not in (?)",ids) if ids.count>0
-       qq
+      q= student.original_homeworks.where(student_courses:{student_id:params[:student_id],course_id:params[:id]})
+       q=q.where("homeworks.id not in (?)",ids) if ids.count>0
     else
-	    joins(:homework=>{:teacher_course=>:sub_course}).joins(:student)
+	   q=  joins(:homework=>{:teacher_course=>:sub_course}).joins(:student)
 	    .where(student_id:params[:student_id],sub_courses:{course_id:params[:id]})
 	    .where(HomeworkStudentMenuType.condition(params[:menu_type]))
 	    .select("homeworks.*")

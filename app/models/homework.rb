@@ -18,7 +18,7 @@ class Homework < ActiveRecord::Base
   end
   
    def can_submit?
-      self.status==HomeworkStatus::UNMARK && self.deadline>=Date.current
+      !self.status && self.deadline>=Date.current
    end
 
   private 
