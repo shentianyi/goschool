@@ -17,4 +17,10 @@ class SearchEngineController < ApplicationController
     render :nothing => true, :status => 200, :content_type => 'text/html'
     end
   end
+
+
+  def search_by_view
+    id = parameter[:id]
+
+  end
 end

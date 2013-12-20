@@ -1,0 +1,2 @@
+module CustomViewHelper
+end
