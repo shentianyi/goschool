@@ -5661,7 +5661,7 @@ i.massive.basic.icon {
 .ui.gigantic.buttons .loading.button:after,
 .ui.massive.loading.button:after,
 .ui.gigantic.loading.button:after {
-  background-image: url(../images/loader-medium.gif);
+  background-image: url(/assets/loader-medium.gif);
 }
 
 .ui.huge.loading.button:after,
@@ -5677,7 +5677,7 @@ i.massive.basic.icon {
 .ui.gigantic.buttons .loading.button.active:after,
 .ui.massive.loading.button.active:after,
 .ui.gigantic.loading.button.active:after {
-  background-image: url(../images/loader-medium.gif);
+  background-image: url(/assets/loader-medium.gif);
 }
 
 /*--------------
@@ -10309,7 +10309,7 @@ a.ui.teal.label:hover:before {
 
 .ui.dimmer .ui.loader,
 .ui.inverted.loader {
-  background-image: url(../images/loader-medium-inverted.gif);
+  background-image: url(/assets/loader-medium-inverted.gif);
 }
 
 /* Large Size */
@@ -10345,7 +10345,7 @@ a.ui.teal.label:hover:before {
 .ui.loader {
   width: 32px;
   height: 32px;
-  background: url(../images/loader-medium.gif) no-repeat;
+  background: url(/assets/loader-medium.gif) no-repeat;
   background-position: 48% 0px;
 }
 
