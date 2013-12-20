@@ -103,7 +103,7 @@ class StudentsController < ApplicationController
       @student.tags = params[:student].slice(:tags).strip
       if params[:is_active_account]
         @logininfo = @student.logininfo
-        @status = if(params[:is_active_account]) ? UserStatus::ACTIVE:UserStatus::LOCKED
+        @status = (params[:is_active_account]) ? UserStatus::ACTIVE : UserStatus::LOCKED
         @logininfo.update_attribute(:status=>@status);
       end
       ActiveRecord::Base.transaction do

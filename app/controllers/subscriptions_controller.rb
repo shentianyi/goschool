@@ -42,7 +42,6 @@ class SubscriptionsController < ApplicationController
     rescue ArgumentError=>invalid
       msg.content = invalid.record.errors
     rescue ActiveRecord::RecordInvalid=> invalid
-      puts invalid.record.errors[:email]
       msg.content = invalid.record.errors
     end
     render :json=>msg
