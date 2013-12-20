@@ -1,0 +1,7 @@
+<ul>
+  <%@posts.each do |post|%>
+  <li>
+    <a href="#" id="<%= post.id%>" class="post-menu-item-a"> <%= post.title%> </a>
+  </li>
+  <%end%>
+</ul>

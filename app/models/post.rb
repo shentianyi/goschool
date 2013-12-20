@@ -17,4 +17,8 @@ class Post < ActiveRecord::Base
   def validate_save
     errors.add(:content, '帖子内容不能为空') if self.content.blank?
   end
+
+  def self.by_type params
+    where(course_id:params[:id]).where(PostStudentMenuType.condition(params[:menu_type]))
+  end
 end
