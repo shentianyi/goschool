@@ -6,17 +6,17 @@ class StudentHomeworkPresenter<Presenter
     end
 
     def submited_time_display
-	if (diff=Date.current.day-self.submited_time.day)==0
-	    "今天"
+	if (diff=Date.current.mjd-self.submited_time.to_date.mjd)==0
+	  "今天"
 	elsif diff<4
 	    "#{diff}天前"
 	else
 	    "#{self.submited_time.strftime('%Y-%m-%d')}"
 	end + ",由#{self.name}提出"
-    end
+end
 
     def marked_time_display
-	if (diff=Date.current.day-self.marked_time.day)==0
+	if (diff=Date.current.mjd-self.marked_time.to_date.mjd)==0
 	    "今天"
 	elsif diff<4
 	    "#{diff}天前"
