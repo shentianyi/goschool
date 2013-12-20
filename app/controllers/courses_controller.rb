@@ -8,7 +8,6 @@ class CoursesController < ApplicationController
   def index
     @active_left_aside='courses'
     @institutions=current_tenant.institutions
-    @show_homepage_link=current_user.is_teacher?
     @courses=CoursePresenter.init_presenters(Course.joins(:institution).select('courses.*,institutions.name as institution_name').all)
   end
    

@@ -11,7 +11,7 @@
                <i class="calendar icon"></i>
                安排课程
           </div> </a>
-          <%if @show_homepage_link%>
+          <%if current_user.is_teacher?%>
           <a class="ui red mini button" href="<%=teachers_path%>">
              <div class="visible content">
              <i class="home icon"></i>
