@@ -27,7 +27,7 @@ class Logininfo < ActiveRecord::Base
     return false
   end
   
-  #role change
+  #role change2
   def role_change? roles
     self.role_ids == roles ? false : true
   end
