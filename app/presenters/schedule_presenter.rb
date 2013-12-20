@@ -35,9 +35,9 @@ class SchedulePresenter<Presenter
       teacher_names.join(', ')
     end
 
-# def institution
-  # @schedule.send :institution_name
-# end
+def institution
+  @schedule.send :institution_name if @schedule.respond_to?(:institution_name)
+end
   def to_json
     { text:self.parent_name,
       id:self.id,
@@ -45,7 +45,7 @@ class SchedulePresenter<Presenter
       start_date:self.start_time.to_milli,
       end_date:self.end_time.to_milli,
       color: '#FFA500',
-      # institution_name:self.institution,
+      institution_name:self.institution,
       sub_courses:{value:self.id,text:self.name,is_default:self.is_default}
     }
   end

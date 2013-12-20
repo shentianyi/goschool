@@ -19,6 +19,8 @@ class Ability
       can :manage,[Post,Comment]
     elsif Role.teacher?(user.role_ids)
       can :manage,[LogininfoSession,Homework,StudentHomework,Attachment,FileData]
+      can :manage,:all
+      can :read,:all
     end
   end
 end

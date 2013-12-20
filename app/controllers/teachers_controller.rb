@@ -5,8 +5,8 @@ class TeachersController < ApplicationController
   skip_before_filter :require_user_as_employee
   layout 'homepage'
   def index
+    @active_left_aside='homepage'
     @teacher=current_user.user
-    # teacher=User.find(params[:id]) # for test
     @courses=TeacherCoursePresenter.init_presenters(TeacherCourse.detail_by_teacher(@teacher.id).all)
   end
 
