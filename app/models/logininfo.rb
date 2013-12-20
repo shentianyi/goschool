@@ -15,6 +15,7 @@ class Logininfo < ActiveRecord::Base
   # authlogic
   acts_as_authentic do |c|
     c.login_field = :email
+    c.validate_email_field = false
   end
   
   #check role
