@@ -26,7 +26,7 @@ class CommentPresenter < Presenter
   def comment_time
     day = 3600*24
     if ((diff=Time.now.to_i - self.created_at.to_i) < day)
-      self.created_at.hour.to_s + ':'+self.created_at.min.to_s+':'+self.created_at.sec.to_s
+      self.created_at.getlocal.hour.to_s + ':'+self.created_at.getlocal.min.to_s+':'+self.created_at.getlocal.sec.to_s
     elsif diff < 7*day
       "#{(diff/day).to_i}天前"
     elsif diff < 30*day

@@ -19,7 +19,28 @@ function bind_menu_event(){
 
     $('body').on('click',".post-menu-item-a",function(){
 	post_manager.show($(this).attr('id'),function(data){
-	   $("#post-content").html(data); 
+	    $("#post-content").html(data); 
 	});
     });
+}
+
+function comment(){
+    var post_id = $("#post").attr("post")
+    var content = $("#comment").val();
+
+    var data = {
+	comment:{
+	    post_id:post_id,
+	    content:content
+	}
+    }
+
+    comment_manager.create(data,function(data){
+	if(data.result){
+	    
+	}else
+	{
+	    
+	}
+    })
 }
