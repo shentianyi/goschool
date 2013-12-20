@@ -49,6 +49,7 @@ BACKINDEX.right_list.loadData=function(){
         $.ajax({
             type:"GET",
             async:false,
+            url:'/search_engine/search',
             data:{
                 search_type:BACKINDEX.right_list.temp_object.search_type,
                 entity_type:BACKINDEX.right_list.temp_object.entity_type,
