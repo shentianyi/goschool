@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131219084848) do
+ActiveRecord::Schema.define(:version => 20131220021238) do
 
   create_table "achievementresults", :force => true do |t|
     t.string   "valuestring"
@@ -220,9 +220,12 @@ ActiveRecord::Schema.define(:version => 20131219084848) do
     t.integer  "sub_course_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.datetime "date"
+    t.integer  "tenant_id"
   end
 
   add_index "schedules", ["sub_course_id"], :name => "index_schedules_on_sub_course_id"
+  add_index "schedules", ["tenant_id"], :name => "index_schedules_on_tenant_id"
 
   create_table "settings", :force => true do |t|
     t.string   "default_pwd"

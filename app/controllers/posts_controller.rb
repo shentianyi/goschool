@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.where("course_id"=>params[:id])
+    @menus = PostStudentMenuType.generate_menu
   end
 
   # GET /posts/1
@@ -46,7 +47,7 @@ class PostsController < ApplicationController
     @post.logininfo = current_user
     @post.course = @current_course
 
-    get_attach params([:attachs],@post)
+    get_attach(params[:attachs],@post)
 
     msg.result = @post.save
     

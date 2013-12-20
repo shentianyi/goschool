@@ -19,9 +19,9 @@
 /.idea/*
 /.project
 /export/pdf/schedule/*.pdf
-/config/*.sphinx.conf
+/config/*.conf
 /db/sphinx/*
-!/uploadfiles/*/*.ignore
+!/uploadfiles/**/*.ignore
 *~
 *#
 .#*

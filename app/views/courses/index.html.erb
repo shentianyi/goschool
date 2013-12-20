@@ -6,27 +6,26 @@
                <i class="add icon"></i>
                新建课程/服务
           </div> </a>
-          <a class="ui teal mini button" href="<%=schedules_path%>">
+          <a class="ui teal mini button" href="<%= schedules_path%>">
           <div class="visible content">
                <i class="calendar icon"></i>
                安排课程
           </div> </a>
-          <%if @show_homepage_link%>
-          <a class="ui red mini button" href="<%=teachers_path%>">
-             <div class="visible content">
-             <i class="home icon"></i>
-             我的主页
-             </div>
-          </a>
+          <%if current_user.is_teacher?%>
+          <a class="ui red mini button" href="<%= teachers_path%>">
+          <div class="visible content">
+               <i class="home icon"></i>
+               我的主页
+          </div> </a>
           <%end%>
      </header>
      <div class="search-list" id="search-list">
-       <div class="ui big fluid icon input search-input customAutoHeight" id="container_for_input" autoMaxHeight="210px">
-         <i class="search icon"></i>
-       </div>
-       <div class="ui inverted segment search-conditions" id="container_for_list">
+          <div class="ui big fluid icon input search-input customAutoHeight" id="container_for_input" autoMaxHeight="210px">
+               <i class="search icon"></i>
+          </div>
+          <div class="ui inverted segment search-conditions" id="container_for_list">
 
-       </div>
+          </div>
           <div class="column">
                <div class="ui raised segment">
                     <div class="ui red ribbon label">
@@ -39,7 +38,9 @@
                     <a><i class="icon up"></i> 根据最新活动排序</a>
                </div>
           </div>
-          <%=render 'search_result'%>
+          <ul class="search-result" id="search-result" name="course">
+               <%= render 'search_result'%>
+          </ul>
      </div>
 </article>
 <%= render partial:'form'%>
