@@ -63,6 +63,7 @@ BACKINDEX.right_list.loadData=function(){
                         return
                     }
                     $("#search-result").append(data);
+                    $("#search-result .checkbox").checkbox();
                     BACKINDEX.right_list.temp_object.page++;
                     window.setTimeout(function(){
                         if($("#search-list").height()+parseInt($("#search-list>.search-input").css("margin-top"))<$(window).height()){
