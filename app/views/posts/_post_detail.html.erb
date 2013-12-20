@@ -1,1 +1,6 @@
-<div>帖子内容</div>
+<div style:"background-color:#gray">
+  <% if @post %>
+  <p>标题:</p><p><%= @post.title %></p>
+  <p>内容:</p><p><%= @post.content %></p>
+  <% end %>
+</div>
