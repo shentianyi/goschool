@@ -2,8 +2,20 @@
 .front-statistics{
     margin-top:80px;
 }
+.front-statistics>img{
+    background-size:contain;
+    width:56px;
+    height:56px;
+    border-radius:56px;
+    -moz-border-radius:56px;
+    -webkit-border-radius:56px;
+    margin-left:62px;
+}
 .front-statistics>p{
     text-align:center;
+    color:#63A69F;
+    font-size:16px;
+    margin-top:0px;
 }
 /**************************************************************  课程  */
 .front-class.student-class{
