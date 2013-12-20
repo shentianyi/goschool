@@ -36,7 +36,7 @@
     text-align:center;
 }
 .back-index-main>.search-list>.search-result>li .maybe-know+p>span,
-.back-index-main>.search-list>.search-result>li .recommend+p>span{
+.back-index-main>.search-list>.search-result>li .recommend+p>a{
     display:block;
     text-align:center;
     color:#C69C6D;
@@ -45,7 +45,7 @@
     margin-bottom:2px;
 }
 .back-index-main>.search-list>.search-result>li .maybe-know+p:hover,
-.back-index-main>.search-list>.search-result>li .recommend+p>span:hover{
+.back-index-main>.search-list>.search-result>li .recommend+p>a:hover{
     color:#855520;
 }
 /*新建学生*/
