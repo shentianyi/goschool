@@ -40,7 +40,7 @@ var BACKSTUDENT=BACKSTUDENT||{};
 	    var student = {};
 	    student.image_url = $("#image_url").attr("src");
 	    student.name = $("#name").val();
-	    student.gender = $("#gender input[type=radio]:checked").val();
+	    student.gender = $("#gender input[type=radio]:checked").attr("value");
 	    student.birthday = $("#birthday").val();
 	    student.school = $("#school").val();
 	    student.graduation = $("#graduation").val();

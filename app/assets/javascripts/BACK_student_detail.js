@@ -596,19 +596,15 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 		        id: '',
 		        student : {},
 		        is_active_account : false
+            };
+            data.id =  $("#student-detail-info").attr('student');
+            if(BACKSTUDENT.check.test($(this).val(),$(this).attr('id'))){
+                data['student'][$(this).attr('id')] = $(this).val();
+                student_manager.update($("#student-detail-info").attr('student'),data),function(){
+                    if(data.result){}
+                    else{}
                 };
-                data.id =  $("#student-detail-info").attr('student');
-                if(BACKSTUDENT.check.test($(this).val(),$(this).attr('id'))){
-		            data['student'][$(this).attr('id')] = $(this).val();
-		            student_manager.update($("#student-detail-info").attr('student'),data),function(){
-                        if(data.result){
-
-                        }
-                        else{
-
-                        }
-		    };
-                }
+            }
 	    }
         }
     }).on("click","#close-student-detail-edit",function(){
