@@ -16,9 +16,16 @@
     <div class="ui inverted segment search-conditions" id="container_for_list">
 
     </div>
-    
-    <%= render partial:'search_results'%>
-
+    <div class="column">
+      <div class="ui raised segment">
+	<div class="ui red ribbon label">搜索结果: <div class="ui red label">1</div></div>
+	<a><i class="icon up"></i> 根据相关性排序</a>
+	<a><i class="icon up"></i> 根据最新活动排序</a>
+      </div>
+    </div>
+    <ul class="search-result" id="search-result">
+      <%= render partial:'search_results'%>
+    </ul>
   </div>
 </article>
 
@@ -87,7 +94,7 @@
       </div>
       <div class="ui left icon input autoComplete specialInput labelForm ">
         <ul id="referrer">
-        <li><input placeholder="推荐人..." id="edit_referrer" type="text" autocomplete="students"></li>
+          <li><input placeholder="推荐人..." id="edit_referrer" type="text" autocomplete="students"></li>
         </ul>
         <i class="smile icon"></i>
       </div>
@@ -103,7 +110,7 @@
 </section>
 
 <% content_for :javascript_includes do%>
-    <%= javascript_include_tag "BACK_index.js"%>
-    <%= javascript_include_tag "BACK_student.js"%>
-    <%= javascript_include_tag "BACK_rightList.js"%>
+<%= javascript_include_tag "BACK_index.js"%>
+<%= javascript_include_tag "BACK_student.js"%>
+<%= javascript_include_tag "BACK_rightList.js"%>
 <%end%>

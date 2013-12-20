@@ -8,10 +8,10 @@ class StudentsController < ApplicationController
     @students = Student.all
     @student_presenters = StudentPresenter.init_presenters(@students)
     
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @students }
-    end
+    #respond_to do |format|
+    #  format.html # index.html.erb
+    #  format.json { render json: @students }
+    #end
   end
 
   # GET /students/1
