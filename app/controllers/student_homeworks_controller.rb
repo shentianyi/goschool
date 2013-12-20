@@ -3,9 +3,12 @@ class StudentHomeworksController < ApplicationController
   before_filter :init_message ,:only=>[:create,:update,:destroy]
   before_filter :get_student_homework , :only=>[:update,:show,:destroy]
   before_filter :render_nil_msg , :only=>[:update,:destroy]
+  before_filter :require_user_as_student,:only=>[:create]
   skip_before_filter :require_user_as_employee
   def create
     @student_homework=StudentHomework.new(params[:student_homework])
+    @student_homework.student=current_user.student
+    @student_homework.submited_time=Time.now
     @msg.content=(@msg.result=@student_homework.save) ? @student_homework.id :  @student_homework.errors.messages
     render :json=>@msg
   end
@@ -39,7 +42,7 @@ class StudentHomeworksController < ApplicationController
   end
 
   def get_student_homework
-    @student_homework=StudentHomework.find_by_id(params[:id])
+    @student_homework=StudentHomework.accessible_by(current_ability).find_by_id(params[:id])
   end
 
   def render_nil_msg

@@ -19,10 +19,10 @@ SCHEDULE.widget.init=function(){
     scheduler.templates.quick_info_title = function(start, end, ev){
         var teachers=ev.teachers.join(",");
         if(ev.sub_courses.is_default==1){
-            return ev.text.substr(0,50)+'<span></span>'+'<span>'+teachers+'</span>'+'<span>'+ev.institution_name+'</span>';
+            return ev.text.substr(0,50)+'<span></span>'+'<span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
         }
         else{
-            return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>'+teachers+'</span>'+'<span>'+ev.institution_name+'</span>';
+            return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
         }
     };
     //绑定模板

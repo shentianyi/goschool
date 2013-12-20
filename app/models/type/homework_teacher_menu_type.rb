@@ -1,11 +1,11 @@
 #encoding: utf-8
 class HomeworkTeacherMenuType< HomeworkMenuType
-  UNMARK=100
+  UNFINISHED=100
   
   def self.condition type
     case type
-    when UNMARK
-      {status:HomeworkStatus::UNMARK}
+    when UNFINISHED
+      {status:false}
     when OTHER
       ['created_at<=?',Date.current.ago((type-base_period).days)]
     else
@@ -22,7 +22,7 @@ class HomeworkTeacherMenuType< HomeworkMenuType
 
   def self.generate_menu_item type
     case type
-    when UNMARK
+    when UNFINISHED
       '未完成批改'
     when OTHER
       '更多>>'
