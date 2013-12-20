@@ -48,6 +48,10 @@ class Student < ActiveRecord::Base
   def self.course_detail id
     joins(:courses).where(:id=>id).select('student_courses.id as student_course_id,student_courses.progress,student_courses.paid,courses.*,courses.id as course_id')
   end
+  
+  def self.by_id id 
+    where(:id=>id)
+  end
 
   def validate_save
     errors.add(:name,'名字不能为空') if self.name.blank?

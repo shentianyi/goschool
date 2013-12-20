@@ -8,10 +8,10 @@ class StudentsController < ApplicationController
     @students = Student.all
     @student_presenters = StudentPresenter.init_presenters(@students)
     
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @students }
-    end
+    #respond_to do |format|
+    #  format.html # index.html.erb
+    #  format.json { render json: @students }
+    #end
   end
 
   # GET /students/1
@@ -186,7 +186,7 @@ class StudentsController < ApplicationController
     end
     @relations = []
     Recommendation.new.get_potential_relation(student.tenant_id,student.id).each do |relation|
-      s = Student.find_by_id(relation['id'])
+      s = Student.find_by_id(relation['reced_id'])
       if s
         @relations<<s
       end

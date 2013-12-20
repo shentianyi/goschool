@@ -13,6 +13,9 @@ class SearchEngineController < ApplicationController
     when 'Course'
       @courses=CoursePresenter.init_presenters(Course.detail_by_id(ids).all)
       render partial:'courses/search_result'
+    when 'Student'
+      @student_presenters = StudentPresenter.init_presenters(Student.where(:id=>ids))
+      render partial:'students/search_results'
     else
     render :nothing => true, :status => 200, :content_type => 'text/html'
     end

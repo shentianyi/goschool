@@ -1,1 +1,19 @@
-<div>帖子内容</div>
+<% if @post %>
+<div style:"background-color:#gray" id ="post" post="<%= @post.id%>">
+  
+  <p>标题:</p><p><%= @post.title %></p>
+  <p>内容:</p><p><%= @post.content %></p>
+  <p>时间:</p><p><%= @post.poster %></p>
+
+  <% @post.comments.each do |comment|%>
+  <p>回答</p>
+  <p><%= comment.who_answer%></p>
+  <p><%= comment.content%></p>
+  <p><%= comment.commenter%></p>
+  <% end %>
+
+
+  <input id="comment" type="textarea" placeholder="评论..."></input>
+  <input type="button" onclick="comment()" value="确定"></input>
+</div>
+<% end %>
