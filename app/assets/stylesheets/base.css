@@ -64,16 +64,16 @@ p{
     margin:5px 0;
 }
 ::-webkit-input-placeholder { /* WebKit browsers */
-    color:  black;
+    color: rgba(0,0,0,0.7) !important;
 }
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color:  black;
+    color: rgba(0,0,0,0.7) !important;
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color:  black;
+    color: rgba(0,0,0,0.1) !important;
 }
 :-ms-input-placeholder { /* Internet Explorer 10+ */
-    color:   black;
+    color: rgba(0,0,0,0.7) !important;
 }
 select{
     width:120px;
