@@ -30,11 +30,16 @@ function init_teacher_homework() {
      });
 }
 
+function init_student_homework() {
+     bind_menu_event();
+     bind_sh_submit_event();
+}
+
 function bind_menu_event() {
      $(".homework-menu-a[pin=false]").click(function() {
           var homework_list = $(this).next('div');
           var menu_type = $(this).attr('type');
-          homework_manager.list($("#teacher-course-hidden").val(), menu_type, function(data) {
+          homework_manager.list($("#teacher-course-hidden").val(), menu_type, $(this).attr('sid'), function(data) {
                homework_list.html(data);
           });
      });
@@ -71,6 +76,41 @@ function bind_sh_input_text_update_event(callback) {
                     MessageBox_content(data.content);
                }
           });
+     });
+}
+
+function bind_sh_submit_event() {
+     $('body').on('click', "#student-homework-submit-button", function() {
+          var submit = $(this);
+          var sh = submit.attr('student-homework');
+          if(sh && sh.length > 0) {
+               student_homework_manager.update(sh, {
+                    student_homework : {
+                         homework_id : submit.attr('homework'),
+                         content : $("#student-homework-content").val()
+                    }
+               }, function(data) {
+                    if(data.result) {
+                         alert('resumit success!');
+                    } else {
+                         MessageBox_content(data.content);
+                    }
+               });
+          } else {
+               student_homework_manager.create({
+                    student_homework : {
+                         homework_id : submit.attr('homework'),
+                         content : $("#student-homework-content").val()
+                    }
+               }, function(data) {
+                    if(data.result) {
+                         alert('sumit success!');
+                         submit.attr('student-homework', data.content);
+                    } else {
+                         MessageBox_content(data.content);
+                    }
+               });
+          }
      });
 }
 

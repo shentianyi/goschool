@@ -8,24 +8,36 @@ class StudentHomework < ActiveRecord::Base
   acts_as_tenant(:tenant)
 
   validate :validate_save
-  def self.detail_by_homework_id homework_id
-    joins(:student).where(homework_id:homework_id).select("students.name, students.id as student_id,student_homeworks.*")
+  def self.detail_by_homework_id homework_id,student_id=nil
+    q=joins(:student).where(homework_id:homework_id).select("students.name, students.id as student_id,student_homeworks.*")
+    q=q.where(student_id:student_id) if student_id
+    q
   end
 
   def self.by_type params
-    if params[:menu_type].to_i==HomeworkStudentMenuType::UNSUBMIT
+   q= if params[:menu_type].to_i==HomeworkStudentMenuType::UNSUBMIT
       student=Student.find_by_id(params[:student_id])
-       student.original_homeworks.where(student_courses:{student_id:params[:student_id]}).where("homeworks.id not in (?)",StudentHomework.where(student_id:student.id).pluck(:homework_id))
+      ids=StudentHomework.where(student_id:student.id).pluck(:homework_id)
+      qq= student.original_homeworks.where(student_courses:{student_id:params[:student_id],course_id:params[:id]})
+       qq=qq.where("homeworks.id not in (?)",ids) if ids.count>0
+       qq
     else
-	    joins(:homework).joins(:student=>:student_courses)
-	    .where(student_id:params[:student_id],student_courses:{course_id:params[:id]})
+	    joins(:homework=>{:teacher_course=>:sub_course}).joins(:student)
+	    .where(student_id:params[:student_id],sub_courses:{course_id:params[:id]})
 	    .where(HomeworkStudentMenuType.condition(params[:menu_type]))
 	    .select("homeworks.*")
-    end 
+    end
+     q=q.where(sub_courses:{id:params[:sub_course_id]}) if params[:sub_course_id]
+     q
   end
+  
+      def  can_resubmit?
+      !self.marked
+    end
+    
   private
 
   def validate_save
-    errors.add(:score,'作业分数不可为空') if self.score.blank?
+    errors.add(:score,'作业分数不可为空') if self.score.blank? unless self.new_record?
   end
 end

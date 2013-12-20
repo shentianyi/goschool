@@ -16,6 +16,10 @@ class Homework < ActiveRecord::Base
   def self.by_type params 
 	where(teacher_course_id:params[:id]).where(HomeworkTeacherMenuType.condition(params[:menu_type]))
   end
+  
+   def can_submit?
+      self.status==HomeworkStatus::UNMARK && self.deadline>=Date.current
+   end
 
   private 
   def validate_save

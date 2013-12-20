@@ -47,7 +47,7 @@
     </div>
   </div>
 </div>
-<form action="/subscriptions" method="post" class="signIn-block signShow-block clearfix" id="signUp-block" style="display:none" special="sign-up">
+<form  class="signIn-block signShow-block clearfix" id="signUp-block" style="display:none" special="sign-up">
   <h3 class="text-center">注册</h3>
   <dl>
     <dt>
@@ -86,27 +86,27 @@
     </dd>
   </dl>
   <br />
-  <a id="sign-up-btn" class="login-btn log-btn" onclick="document.forms[0].submit();">Ok</a>
+  <a id="sign-up-btn" class="login-btn log-btn" onclick="signup()">Ok</a>
 </form>
-<form action="/logininfo_sessions/"  method="post" class="signIn-block signShow-block clearfix" id="signIn-block" style="display:none">
+<form class="signIn-block signShow-block clearfix" id="signIn-block" style="display:none">
   <h3 class="text-center">登录</h3>
   <dl>
     <dt>
       邮箱:
     </dt>
     <dd>
-      <input type="text" id="email" name="email"/>
+      <input type="text" id="log_email" name="email"/>
     </dd>
     <br />
     <dt>
       密码:
     </dt>
     <dd>
-      <input type="password" id="password" name="password" />
+      <input type="password" id="log_password" name="password" />
     </dd>
   </dl>
   <br />
-  <a id="sign-in-btn" class="login-btn log-btn"  onclick="document.forms[1].submit();">Go</a>
+  <a id="sign-in-btn" class="login-btn log-btn"  onclick="loginin();">Go</a>
 </form>
 
 
