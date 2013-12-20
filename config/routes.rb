@@ -20,6 +20,7 @@ Goschool::Application.routes.draw do
       get  'index/:id'=>:index
       get  'index/:id/:sid'=>:index #sid is sub_course_id
       get 'list/:id/:type'=>:list
+      get 'list/:id/:type/:sid'=>:list
     end
   end
 
@@ -74,7 +75,7 @@ Goschool::Application.routes.draw do
       get ':id/:part/:ajax'=>:show
     end
   end
-  
+
   resources :student
 
   resources :teacher_courses
@@ -117,7 +118,7 @@ Goschool::Application.routes.draw do
   resources :logininfos
   resource :subscriptions
   resource :logininfo_sessions
-  resources :consultations 
+  resources :consultations
 
   controller :logininfo_sessions do
     match 'logininfo_sessions/create' => :create

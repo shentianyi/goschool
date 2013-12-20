@@ -15,7 +15,8 @@ class Ability
       can :manage,[LogininfoSession,Attachment,FileData]
       can :manage,[Student],:student_id=>user.student.id
       can :manage,[Logininfo],:id=>user.id
-      can :manage,[StudentHomework,Homework]
+      can :manage,StudentHomework,:student_id=>user.student.id
+      can :manage,Homework
       can :manage,[Post,Comment]
     elsif Role.teacher?(user.role_ids)
       can :manage,[LogininfoSession,Homework,StudentHomework,Attachment,FileData]

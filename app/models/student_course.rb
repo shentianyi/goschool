@@ -12,6 +12,10 @@ class StudentCourse < ActiveRecord::Base
   def self.by_student id,student_id
     joins(:course).where(courses:{id:id},student_id:student_id).first
   end
+  
+  def disfault_sub_cousres
+    sub_courses.where(sub_courses:{is_default:false})
+  end
 
   private
   def validate_save
