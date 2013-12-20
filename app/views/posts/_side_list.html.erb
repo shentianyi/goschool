@@ -1,8 +1,21 @@
+<style  type="text/css">
+  .pin{
+  font-weight:bold;
+  font-size: 20px;
+  }
+</style>
 <div>帖子列表</div>
 <% if @posts %>
 <ul>
-<% @posts.each do |post| %>
-<li post="<%= post.id%>"><%= post.title%></li>
-<% end %>
+  <%@menus.each do |menu|%>
+  <li>
+    <a href="#" type="<%= menu.value%>" class="homework-menu-a <%= 'pin' if menu.is_pin%>" pin="<%=menu.is_pin%>"><%= menu.display%><%= ':>>>>' if menu.is_pin%></a>
+    <div  style="background: brown">
+      <%if @menu_type==menu.value%>
+      <%= render 'menu_item'%>
+      <%end%>
+    </div>
+  </li>
+  <% end %>
 </ul>
 <% end %>
