@@ -269,6 +269,7 @@ var Search = {
         };
 
         search.bind_query = function(){
+
             if(this.queries){
                 this.queries = {};
             }
@@ -280,6 +281,7 @@ var Search = {
               .replace(/!id!/g,this.current_query["query_type"]));
 
             //context.queries[context.current_query["query_type"]]= this.get_conditions();
+            WAYNE.query_count_validate(WAYNE.query_count)
         };
 
         search.get_conditions = function(){
@@ -604,4 +606,10 @@ WAYNE.change_mode=function(event,mode){
 }
 WAYNE.change_to_condition=function(target){
     $("#"+target).attr("autocomplete","").attr("ishould","").parent().removeClass("autoComplete");
+}
+WAYNE.query_count=0;
+WAYNE.query_count_validate=function(count){
+    if(count==0){
+
+    }
 }
