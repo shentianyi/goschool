@@ -9069,6 +9069,9 @@ img.ui.image {
 .ui.input input-placeholder {
   color: #BBBBBB;
 }
+::-webkit-input-placeholder {
+    color:rgba(0,0,0,0.4) !important;
+}
 
 /*******************************
             States
