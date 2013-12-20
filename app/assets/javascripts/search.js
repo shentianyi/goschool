@@ -282,7 +282,7 @@ var Search = {
               .replace(/!id!/g,this.current_query["query_type"]));
 
             //context.queries[context.current_query["query_type"]]= this.get_conditions();
-            WAYNE.query_count_validate(WAYNE.query_count)
+            WAYNE.query_count_validate(WAYNE.query_count++)
         };
 
         search.get_conditions = function(){
