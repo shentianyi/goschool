@@ -165,7 +165,7 @@ var Search = {
 
         //change the event of the input controller on runtime. Three modes: select_query, conditions, full text
         search.handler = {
-
+             //obj
             full_text: function(event){
                 if(event.which==13){
                // #search_type: full_text
@@ -175,13 +175,28 @@ var Search = {
                //     #{search_type:"select_query",entity_type:"Student",page:1,per_page:20,search_queries:[{query_type:"StudentName",parameters:[]}}
 
                //
-                    var data_to_sent = {search_type:event.data.obj.current_mode,entity_type:event.data.obj.entity,page:1,per_page:20,search_queries:this.value};
-                    $.ajax(
-                        {   data:data_to_sent,
-                            success:function(data){Search.instance().show_result(data)}}
-                    );
+                    var target=adapt_event(event).target;
+                    if($.trim($(target).val()).length>0){
+                        var data_to_sent = {search_type:event.data.obj.current_mode,entity_type:event.data.obj.entity,page:1,per_page:20,search_queries:this.value};
+                        BACKINDEX.right_list.generateResult(data_to_sent);
+//                        $.get('/search_engine/search',{
+//                            search_type:data_to_sent.search_type,
+//                            entity_type:data_to_sent.entity_type,
+//                            q:$.trim(data_to_sent.search_queries),
+//                            page:data_to_sent.page
+//                        },function(data){
+//                            if(data.result){
+//                                Search.instance().show_result(data.content)
+//                            }
+//                            else{
+//                                MessageBox_content(data.content);
+//                            }
+//                        })
 
-                    alert("还未完成,通讯服务器获得数据");
+                    }
+                    else{
+                        MessageBox("请输入搜索内容","top","warning");
+                    }
 
 
                 }
@@ -243,6 +258,7 @@ var Search = {
                             context.current_query = null;
                             context.switch_mode("select_query");
                             WAYNE.change_mode(event,"select_query");
+                            return false;
                         }
                         else{
                             context.show_warning(result.msg,"ERROR");
@@ -273,6 +289,10 @@ var Search = {
                   return parsed.result;
               }
             }
+        };
+
+        search.validate_condition = function() {
+          return this.condition_validator[this.current_query["parameter_type"]](this.input.val());
         };
 
        // String_Array,Number_Array,Time_Span,DateTime,String,Number
@@ -517,6 +537,7 @@ var Search = {
             //delete the item from stored queries
 
             this.switch_mode("conditions",{notice:this.current_query["introduction"]});
+            console.log(this.current_query);
             WAYNE.change_to_condition(this.input.attr("id"));
 
             this.current_query = this.query_types[query_type];
@@ -556,6 +577,10 @@ var Search = {
         };
 
         search.show_result = function(data){
+             $("#search-result")
+        };
+
+        search.start_search = function(){
 
         };
 
