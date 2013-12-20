@@ -48,6 +48,11 @@
         <p><i class="icon building"></i> <span>七宝中学</span></p>
         <p><i class="icon home"></i> <span>闵行区XXX</span></p>
     </div>
+    <div class="front-statistics">
+        <p>技术统计</p>
+        <canvas id="grade-chart" width="160" height="100"></canvas>
+        <canvas id="delivery-chart" width="80" height="100"></canvas>
+    </div>
 </aside>
 <!--view-->
 
@@ -83,33 +88,64 @@
         </div>
 
         <div class="ui piled segment student-homework">
-            <h2>当前作业</h2>
+            <div class="ui ignored positive icon message">
+                <i class="lab icon"></i>
+                <div class="content">
+                    <h3 class="header">当前作业</h3>
+                    <p>请通过<i class="icon download disk"></i>下载相关附件，最终应该以老师要求的格式通过<i class="icon upload disk"></i>上传作业</p>
+                </div>
+            </div>
             <ul>
                 <li>
-                    <table class="ui table">
-                        <tbldy>
+                    <table class="ui table segment">
+                        <tbody>
                             <tr>
                                 <td class="wide four">
-                                    <p>作业名字</p>
-                                    <p>作业布置时间</p>
-                                    <p>作业课程名称</p>
-                                    <p>作业课程老师</p>
+                                    <p>听力作业</p>
+                                    <p>2013-04-15</p>
+                                    <p>托福秋季班</p>
                                 </td>
-                                <td class="wide six">
-                                    <p>作业要求</p>
+                                <td class="wide ten">
+                                    <p>作业描述:</p>
+                                    <p>上传MP4格式，并且要有配套的文字</p>
                                 </td>
-                                <td class="wide three">
+                                <td class="wide one">
                                     <i class="icon download disk"></i>
                                 </td>
-                                <td class="wide three">
+                                <td class="wide one">
                                     <i class="icon upload disk"></i>
                                 </td>
                             </tr>
-                        </tbldy>
+                        </tbody>
+                    </table>
+                </li>
+                <li>
+                    <table class="ui table segment">
+                        <tbody>
+                        <tr>
+                            <td class="wide four">
+                                <p>听力作业</p>
+                                <p>2013-04-15</p>
+                                <p>托福秋季班</p>
+                            </td>
+                            <td class="wide ten">
+                                <p>作业描述:</p>
+                                <p>上传MP4格式，并且要有配套的文字</p>
+                            </td>
+                            <td class="wide one">
+                                <i class="icon download disk"></i>
+                            </td>
+                            <td class="wide one">
+                                <i class="icon upload disk"></i>
+                            </td>
+                        </tr>
+                        </tbody>
                     </table>
                 </li>
             </ul>
         </div>
+
+
 
     </div>
 </article>

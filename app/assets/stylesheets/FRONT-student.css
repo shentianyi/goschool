@@ -1,3 +1,11 @@
+/**************************************************************  课程  */
+.front-statistics{
+    margin-top:80px;
+}
+.front-statistics>p{
+    text-align:center;
+}
+/**************************************************************  课程  */
 .front-class.student-class{
     width:40%;
     box-shadow:2px 2px 2px rgba(0,0,0,0.5);
@@ -10,8 +18,7 @@
 .front-class.student-class .class-state>span:nth-of-type(2){
     color:#D95C5C
 }
-.front-class.student-class>h2,
-.segment.student-homework>h2{
+.front-class.student-class>h2,{
     color:#63A69F
 }
 /**************************************************************  homework  */
@@ -19,13 +26,60 @@
     float:left;
     border:1px solid rgba(0,0,0,0.3);
     width:50%;
-    margin-top:35px !important;
     margin-left:30px !important;
-
 }
+.segment.student-homework>.ignored.ui.icon.message>i{
+    font-size:35px;
+}
+.segment.student-homework>.ignored.ui.icon.message>.content>h3{
+    font-size:14px;
+}
+.segment.student-homework>.ignored.ui.icon.message>.content>p{
+    color:#39a43c;
+    font-size:13px;
+}
+.segment.student-homework>.ignored.ui.icon.message>.content>p>i:first-of-type{
+    color:#C69C6D
+}
+.segment.student-homework>.ignored.ui.icon.message>.content>p>i:last-of-type{
+    color:#4092CC
+}
+
 .segment.student-homework ul{
     list-style-type: none;
     padding:10px 5px;
-    margin:0px;
-
+    margin:-10px 0 0;
+}
+.segment.student-homework ul li{
+    margin-bottom:15px;
+}
+.segment.student-homework ul table{
+   box-shadow:0 0 0 1px rgba(0, 0, 0, 0.6);
+   border-raidus:3px;
+   -moz-border-raidus:3px;
+    -webkit-border-raidus:3px;
+}
+.segment.student-homework ul table td:first-of-type>p,
+.segment.student-homework ul table td:nth-of-type(2)>p{
+   font-size:13px;
+   line-height:14px;
+   width:100%;
+   word-break:break-all;
+   word-wrap:break-word;
+}
+.segment.student-homework ul table td:nth-of-type(3)>i,
+.segment.student-homework ul table td:nth-of-type(4)>i{
+    font-size:15px;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+}
+.segment.student-homework ul table td:nth-of-type(3)>i:hover,
+.segment.student-homework ul table td:nth-of-type(4)>i:hover{
+    color:rgba(0,0,0,0.8);
+}
+.segment.student-homework ul table td:nth-of-type(3)>i{
+    color:#C69C6D;
+}
+.segment.student-homework ul table td:nth-of-type(4)>i{
+    color:#4092CC;
 }
