@@ -10,7 +10,7 @@ class HomeworkStudentMenuType< HomeworkMenuType
    when UNMARKED
      {marked:false}
    when OTHER
-     ['updated_at<=?',Date.current.ago((type-base_period).days)]
+     ['student_homeworks.updated_at<=?',Date.current.ago((type-base_period).days)]
    else
         generate_time_condition type
    end
