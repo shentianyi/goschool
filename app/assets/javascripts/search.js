@@ -95,15 +95,17 @@ var Search = {
                         }
                         break;
                     case 'conditions':
-                        this.current_query = null;
+
                         if(mode=="full_text"){
                             this.cast_queries();
+                            this.current_query = null;
                             result =  true;
                         }
                         else if(mode=="conditions"){
                             result = true;
                         }
                         else if(mode=="select_query"){
+                            this.current_query = null;
                             result=  true;
                         }
                         break;
@@ -175,13 +177,28 @@ var Search = {
                //     #{search_type:"select_query",entity_type:"Student",page:1,per_page:20,search_queries:[{query_type:"StudentName",parameters:[]}}
 
                //
-                    var data_to_sent = {search_type:event.data.obj.current_mode,entity_type:event.data.obj.entity,page:1,per_page:20,search_queries:this.value};
-                    $.ajax(
-                        {   data:data_to_sent,
-                            success:function(data){Search.instance().show_result(data)}}
-                    );
+                    var target=adapt_event(event).target;
+                    if($.trim($(target).val()).length>0){
+                        var data_to_sent = {search_type:event.data.obj.current_mode,entity_type:event.data.obj.entity,page:1,per_page:20,search_queries:this.value};
+                        BACKINDEX.right_list.generateResult(data_to_sent);
+//                        $.get('/search_engine/search',{
+//                            search_type:data_to_sent.search_type,
+//                            entity_type:data_to_sent.entity_type,
+//                            q:$.trim(data_to_sent.search_queries),
+//                            page:data_to_sent.page
+//                        },function(data){
+//                            if(data.result){
+//                                Search.instance().show_result(data.content)
+//                            }
+//                            else{
+//                                MessageBox_content(data.content);
+//                            }
+//                        })
 
-                    alert("还未完成,通讯服务器获得数据");
+                    }
+                    else{
+                        MessageBox("请输入搜索内容","top","warning");
+                    }
 
 
                 }
@@ -243,6 +260,7 @@ var Search = {
                             context.current_query = null;
                             context.switch_mode("select_query");
                             WAYNE.change_mode(event,"select_query");
+                            return false;
                         }
                         else{
                             context.show_warning(result.msg,"ERROR");
@@ -264,6 +282,7 @@ var Search = {
               .replace(/!id!/g,this.current_query["query_type"]));
 
             //context.queries[context.current_query["query_type"]]= this.get_conditions();
+            WAYNE.query_count_validate(WAYNE.query_count++)
         };
 
         search.get_conditions = function(){
@@ -273,6 +292,10 @@ var Search = {
                   return parsed.result;
               }
             }
+        };
+
+        search.validate_condition = function() {
+          return this.condition_validator[this.current_query["parameter_type"]](this.input.val());
         };
 
        // String_Array,Number_Array,Time_Span,DateTime,String,Number
@@ -411,7 +434,6 @@ var Search = {
 
 
 
-
         search.get_buffer = function(key){
             if(!this.query_types_buffered) {this.query_types_buffered = {};}
               var mk_key = this.make_buffer_storage_key(this.entity,key);
@@ -516,10 +538,13 @@ var Search = {
             //switch mode to conditions
             //delete the item from stored queries
 
+
+            this.current_query = this.query_types[query_type];
+
             this.switch_mode("conditions",{notice:this.current_query["introduction"]});
             WAYNE.change_to_condition(this.input.attr("id"));
 
-            this.current_query = this.query_types[query_type];
+
 
             this.input.val(this.queries[query_type]);
 
@@ -556,6 +581,10 @@ var Search = {
         };
 
         search.show_result = function(data){
+             $("#search-result")
+        };
+
+        search.start_search = function(){
 
         };
 
@@ -579,4 +608,10 @@ WAYNE.change_mode=function(event,mode){
 }
 WAYNE.change_to_condition=function(target){
     $("#"+target).attr("autocomplete","").attr("ishould","").parent().removeClass("autoComplete");
+}
+WAYNE.query_count=0;
+WAYNE.query_count_validate=function(count){
+    if(count==0){
+
+    }
 }

@@ -400,8 +400,11 @@ GLOBAL.autoComplete.count = 0;
                               }
                               $("#autoComplete-call").css("width", width - 2).css("left", left).css("top", top).attr("target", target);
                               $(window).resize(function() {
-                                   var width = parseInt($this.css("width")), left = $this[0].getBoundingClientRect().left, top = $this[0].getBoundingClientRect().bottom;
-                                   $("#autoComplete-call").css("width", width - 2).css("left", left).css("top", top);
+                                  if($("#autoComplete-call").attr("target")!=""){
+                                      var width = parseInt($this.css("width")), left = $this[0].getBoundingClientRect().left, top = $this[0].getBoundingClientRect().bottom;
+                                      $("#autoComplete-call").css("width", width - 2).css("left", left).css("top", top);
+                                  }
+
                               });
                          }
                     }
@@ -498,6 +501,7 @@ GLOBAL.autoComplete.count = 0;
 (function() {
      $("body").on("keyup", "input[type='text']", function(event) {
           var e = adapt_event(event).event, $input = $(this);
+          var autocomplete=$input.attr("autocomplete");
           if(e.keyCode == 32) {
                if($.trim($input.val()).length == 0) {
                     e.preventDefault();
@@ -555,6 +559,9 @@ GLOBAL.autoComplete.count = 0;
                if($.trim($input.val()).length == 0) {
                     e.preventDefault();
                     $input.val("");
+                   if(autocomplete=="experiment"){
+                       input_for_big_search();
+                   }
                } else {
                     if($input.attr("im") == "label" && $input.attr("ishould") == "BeSelected") {
                          if($("#autoComplete-call").find(".active").length > 0) {
@@ -602,10 +609,41 @@ GLOBAL.autoComplete.count = 0;
                              $("#autoComplete-call .active").click();
                               $("#autoComplete-call").css("left", "-999em").attr("target", "")
                          } else {
-                              MessageBox("请在下拉提示菜单中选择一条", "top", "warning");
+                             if(autocomplete=="experiment"){
+                                 input_for_big_search();
+                             }
+                             else{
+                                 MessageBox("请在下拉提示菜单中选择一条", "top", "warning");
+                             }
                          }
                     }
                }
           }
      });
 })()
+function input_for_big_search(){
+    var instance=Search.instance();
+    var data_to_sent = {search_type:instance.current_mode,entity_type:instance.entity,page:1,per_page:20,search_queries:instance.queries};
+    if(instance.current_mode=="full_text"){
+        if($.trim(instance.input.val()).length>0){
+            BACKINDEX.right_list.generateResult(data_to_sent);
+        }
+        else{
+            MessageBox("请输入搜索内容","top","warning");
+        }
+
+    }
+    else if(instance.current_mode=="select_query"){
+        var count=0;
+        for(var i in data_to_sent.search_queries){
+            count++;
+        }
+        if(count>0){
+            BACKINDEX.right_list.generateResult(data_to_sent);
+        }
+        else{
+            MessageBox("请按提示创造至少一个搜索条件","top","warning");
+        }
+    }
+
+}
