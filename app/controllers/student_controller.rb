@@ -1,7 +1,7 @@
 class StudentController < ApplicationController
   skip_before_filter :require_user_as_employee
   before_filter :require_user_as_student
-  layout 'homepage'
+  layout 'non_authorized'
   
   def index
     @student = current_user.student
