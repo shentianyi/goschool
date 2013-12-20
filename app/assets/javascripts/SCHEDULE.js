@@ -165,7 +165,7 @@ SCHEDULE.calendar.getData=function(){
             });
         }
         else{
-            $.get("/schedules/dates",{
+            $.get("/schedules/teachers",{
                 start_date:scheduler.getState().min_date.toWayneString().day,
                 end_date:scheduler.getState().max_date.toWayneString().day
             },function(data){
