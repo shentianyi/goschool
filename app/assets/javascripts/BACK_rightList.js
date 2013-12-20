@@ -16,10 +16,12 @@ BACKINDEX.right_list.teacher.info={
 BACKINDEX.right_list.course.info={
     href:""
 };
-BACKINDEX.right_list.initital=(function(){
+(function(){
     BACKINDEX.right_list.type=$("#back-index-main").attr("name");
     $(document).ready(function(){
-        $("#back-index-main").scroll(BACKINDEX.right_list.observeScroll)
+         $("#back-index-main").scroll(function(){
+             BACKINDEX.right_list.observeScroll();
+         })
     });
 })();
 //////////////////////////////////////////////////////////////////////////////////////////////////// 列表的呈现
@@ -27,12 +29,15 @@ BACKINDEX.right_list.currentPage;
 BACKINDEX.right_list.loadCheck=0;
 BACKINDEX.right_list.stillHave=false;
 BACKINDEX.right_list.threshold=50;
-BACKINDEX.right_list.id;
-BACKINDEX.right_list.generateResult=function(parameter){
-    BACKINDEX.right_list.id=parameter;
+BACKINDEX.right_list.temp_object;
+//BACKINDEX.right_list.id;
+BACKINDEX.right_list.generateResult=function(data_to_sent){
+//    BACKINDEX.right_list.id=parameter;
     BACKINDEX.right_list.currentPage=0;
     BACKINDEX.right_list.stillHave=true;
     $("#search-result").empty();
+    var p=data_to_sent,c={};
+    BACKINDEX.right_list.temp_object=deepCopy(p,c);
     BACKINDEX.right_list.loadData();
 }
 BACKINDEX.right_list.loadData=function(){
@@ -41,19 +46,46 @@ BACKINDEX.right_list.loadData=function(){
     loader("search-result","auto","auto","0","50%");
     window.setTimeout(function(){
         //post
-        $.getJSON(BACKINDEX.right_list.nextPage(),{},function(data){
-            remove_loader();
-            if(data.length==0){
-                BACKINDEX.right_list.stillHave=false;
-                return
+        $.ajax({
+            type:"GET",
+            async:false,
+            data:{
+                search_type:BACKINDEX.right_list.temp_object.search_type,
+                entity_type:BACKINDEX.right_list.temp_object.entity_type,
+                q:$.trim(BACKINDEX.right_list.temp_object.search_queries),
+                page:BACKINDEX.right_list.temp_object.page
+            },
+            success:function(data){
+                if(data.result){
+                    remove_loader();
+                    if(data.content.length==0){
+                        BACKINDEX.right_list.stillHave=false;
+                        return
+                    }
+                    $("#search-result").append(data.content);
+                    BACKINDEX.right_list.temp_object.page++;
+                }
+                else{
+                    MessageBox_content(data.content);
+                }
             }
-            var render_data={},type=BACKINDEX.right_list.type;
-            render_data[type]=data;
-            var render=Mustache.render(BACKINDEX.right_list[type].template,render_data);
-            $("#search-result").append(render);
         }).always(function(){
                 BACKINDEX.right_list.loadCheck--;
         });
+
+//        $.getJSON(BACKINDEX.right_list.nextPage(),{},function(data){
+//            remove_loader();
+//            if(data.length==0){
+//                BACKINDEX.right_list.stillHave=false;
+//                return
+//            }
+//            var render_data={},type=BACKINDEX.right_list.type;
+//            render_data[type]=data;
+//            var render=Mustache.render(BACKINDEX.right_list[type].template,render_data);
+//            $("#search-result").append(render);
+//        }).always(function(){
+//                BACKINDEX.right_list.loadCheck--;
+//        });
         window.setTimeout(function(){
             if($("#search-list").height()+parseInt($("#search-list>.search-input").css("margin-top"))<$(window).height()){
                 BACKINDEX.right_list.loadData();

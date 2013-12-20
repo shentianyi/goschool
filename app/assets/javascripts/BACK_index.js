@@ -28,6 +28,9 @@ BACKINDEX.init=(function(){
             $(this).attr("state","close").find("i").removeClass("left").addClass("right");
         }
     });
+    $("body").on("click","#back-index-main>.search-list>.search-input>i",function(){
+        input_for_big_search();
+    });
     $(document).ready(function(){
         $("body").on("click",".back-index-add .remove",function(){
             var name=$(this).parents(".back-index-add").attr("name");
