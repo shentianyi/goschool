@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   skip_before_filter :require_user_as_employee
-  before_filter :get_course
+  before_filter :get_course, :only=>[:index,:create]
   layout "non_authorized"
   # GET /posts
   # GET /posts.json
@@ -12,24 +12,17 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @post = Post.find(params[:id])
-
-    respond_to do |format|
-      format.html  #show.html.erb
-      format.json { render json: @post }
-    end
+    @post = PostPresenter.new(Post.find(params[:id]))
+    render partial:'post_detail'
   end
-
-  # GET /posts/new
-  # GET /posts/new.json
-  def new
-    @post = Post.new
-
-    respond_to do |format|
-      format.html  #new.html.erb
-      format.json { render json: @post }
-    end
+  
+  #list
+  def list
+    @type = params[:type].to_i
+    get_posts(@type)
+    render partial:'list_item'
   end
+  
 
   # GET /posts/1/edit
   def edit
@@ -54,21 +47,6 @@ class PostsController < ApplicationController
     render :json=>msg
   end
 
-  # PUT /posts/1
-  # PUT /posts/1.json
-  def update
-    @post = Post.find(params[:id])
-
-    respond_to do |format|
-      if @post.update_attributes(params[:post])
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # DELETE /posts/1
   # DELETE /posts/1.json
@@ -87,6 +65,10 @@ class PostsController < ApplicationController
   end
 
   private
+  
+  def get_posts menu_type
+    @posts = Post.by_type({id:params[:id],menu_type:menu_type})
+  end
 
   def get_attach attachs,target
     unless attachs.blank?

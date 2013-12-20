@@ -116,7 +116,7 @@ var student_manager = $.extend({
 }, manager);
 
 var achievementres_manager = $.extend({
-     source : 'achievementresults'
+    source : 'achievementresults'
 }, manager);
 
 var achievement_manager = $.extend({
@@ -170,6 +170,16 @@ var schedule_manager = $.extend({
      }
 }, manager);
 
+var post_manager = $.extend({
+    source : 'posts',
+    list : function(course_id,menu_type,callback){
+	$.get('/posts/list/' + course_id + '/' + menu_type,function(data){
+	    if(callback)
+		callback(data)
+	},'html');
+    }
+},manager);
+
 var homework_manager = $.extend({
      source : 'homeworks',
      list : function(teacher_course_id, menu_type, sid, callback) {
@@ -185,7 +195,7 @@ var homework_manager = $.extend({
 }, manager);
 
 var student_homework_manager = $.extend({
-     source : 'student_homeworks'
+    source : 'student_homeworks'
 }, manager);
 
 var posts_manager = $.extend({
@@ -194,4 +204,8 @@ var posts_manager = $.extend({
 
 var student_course_manager = $.extend({
      source : 'student_courses'
-}, manager)
+},manager);
+
+var comment_manager = $.extend({
+    source : 'comments' 
+},manager);

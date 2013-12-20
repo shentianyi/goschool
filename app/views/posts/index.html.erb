@@ -2,9 +2,14 @@
 <h2>当前课堂:</h2><p id="course" course="<%= @current_course.id%>"><%= @current_course.name%></p>
 <%= render partial:'header' %>
 <%= render partial:'side_list' %>
-<%= render partial:'post_detail' %>
+
+<p>帖子内容</p>
+<div id="post-content" style="float: left">
+  
+</div>
 
 <% content_for :javascript_includes do%>
 <%= javascript_include_tag "manage.source.base.js"%>
+<%= javascript_include_tag "manage.post.base.js"%>
 <%= javascript_include_tag "FRONT_student.js"%>
 <%end%>

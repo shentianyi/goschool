@@ -29,16 +29,33 @@
     position:relative;
     color:rgba(0,0,0,0.7);
     font-size:13px;
-    text-align:center;
+    margin-bottom:12px;
+    width:100%;
+}
+.front-people-info>p:after{
+    content:"";
+    display:block;
+    clear:both;
 }
 .front-people-info>p>i{
-    width:25px;
+    width:28px;
+    margin-right:5px;
+    text-align:right;
     color:rgba(0,0,0,0.3);
     font-size:13px;
-    height:12px;
-    position:relative;
-    top:50%;
-    margin-top:-6px;
+    margin-top:2px;
+    float:left;
+    color:#63A69F
+}
+.front-people-info>p>i.building{
+    padding-right:1px;
+}
+.front-people-info>p>span{
+    float:left;
+    width:80%;
+    word-break:break-all;
+    word-wrap:break-word;
+    display:inline-block;
 }
 /****************************************************最右*/
 .front-people-inner{
@@ -55,4 +72,65 @@
 .front-people-inner .segment>h2{
     font-size:19px;
     color:rgba(0,0,0,0.7);
+}
+/*class*/
+.front-class{
+    margin-top:30px !important;
+    width:95%;
+    margin-left:25px !important;
+}
+.front-class>.item{
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border:1px solid rgba(0,0,0,0.3);
+    padding:5px 10px;
+    margin-bottom:15px;
+    position:relative;
+    background:rgba(0,0,0,0.03);;
+}
+.front-class>.item>h4,
+.front-class>.item>p{
+    width:75%;
+    word-break:break-all;
+    word-wrap:break-word;
+    font-size:13px;
+    color:rgba(0,0,0,0.6);
+
+}
+.front-class>.item>p>span:nth-of-type(1){
+    vertical-align:top;
+}
+.front-class>.item>p>span:nth-of-type(2){
+    word-break:break-all;
+    word-wrap:break-word;
+    display:inline-block;
+    max-width:100%;
+}
+.front-class>.item>.homework-amount{
+    font-size:13px;
+    color:rgba(0,0,0,0.6);
+}
+.front-class>.item>.homework-amount>span:nth-of-type(2){
+    color:#D95C5C;
+    font-weight:bolder;
+}
+.front-class>.item>h4{
+    margin:5px 0 -5px 0;
+    font-size:17px;
+    color:#4092CC
+}
+.front-class>.item>.sub-class{
+    margin-bottom:8px;
+    font-size:13px;
+    color:#C69C6D;
+}
+.front-class>.item>.button{
+    position:absolute;
+    right:40px;
+    height:26px;
+    font-size:13px;
+    font-weight:lighter;
+    top:50%;
+    margin-top:-15px;
 }

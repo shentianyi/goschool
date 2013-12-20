@@ -421,18 +421,18 @@
                 <input placeholder="姓名..." type="text" class="update-input" id="name">
                 <i class="user icon"></i>
             </div>
-            <div class="sex stop">
+            <div class="sex stop" id="gender">
                 <div class="ui radio checkbox">
-                    <input name="sex" checked="checked" type="radio">
+                    <input name="sex" checked="checked" value="1" type="radio">
                     <label>男</label>
                 </div>
                 <div class="ui radio checkbox">
-                    <input name="sex" type="radio">
+                    <input name="sex" value="2"  type="radio">
                     <label>女</label>
                 </div>
             </div>
             <div class="ui left icon input calendar">
-                <input placeholder="出生年月..." type="text" readonly id="born-date">
+                <input placeholder="出生年月..." type="text" class="update-input" readonly id="birthday">
                 <i class="calendar icon"></i>
             </div>
             <div class="ui left icon input">
@@ -440,7 +440,7 @@
                 <i class="building icon"></i>
             </div>
             <div class="ui left icon input calendar">
-                <input placeholder="毕业年限..." type="text" readonly id="graduation-date">
+                <input placeholder="毕业年限..." type="text" class="update-input" readonly id="graduation">
                 <i class="empty bookmark icon"></i>
             </div>
         </div>
@@ -477,7 +477,7 @@
                 </ul>
                 <i class="smile icon"></i>
             </div>
-            <div class="ui checkbox stop">
+            <div class="ui checkbox stop" id="is_active_account">
                 <input name="fun" type="checkbox" checked>
                 <label>同时开设学生账号</label>
             </div>
@@ -527,7 +527,9 @@
 <script type='text/javascript' src="javascripts/mustache.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_student_detail.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_detail.js" ></script>
+<script type='text/javascript' src="javascripts/BACK_student_edit.js" ></script>
 <script type='text/javascript' src="javascripts/Chart.min.js" ></script>
+<script type='text/javascript' src="javascripts/manage.source.base.js" ></script>
 <!--[if lte IE 8]>
 <script type='text/javascript'  src="javascripts/excanvas.js"></script>
 <![endif]-->

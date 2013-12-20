@@ -9,10 +9,10 @@
 <ul>
   <%@menus.each do |menu|%>
   <li>
-    <a href="#" type="<%= menu.value%>" class="homework-menu-a <%= 'pin' if menu.is_pin%>" pin="<%=menu.is_pin%>"><%= menu.display%><%= ':>>>>' if menu.is_pin%></a>
+    <a href="#" type="<%= menu.value%>" class="post-menu-a <%= 'pin' if menu.is_pin%>" pin="<%=menu.is_pin%>"><%= menu.display%><%= ':>>>>' if menu.is_pin%></a>
     <div  style="background: brown">
       <%if @menu_type==menu.value%>
-      <%= render 'menu_item'%>
+      <%= render 'list_item'%>
       <%end%>
     </div>
   </li>

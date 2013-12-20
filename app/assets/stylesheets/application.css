@@ -21,6 +21,7 @@
  *= require FRONT-index
  *= require FRONT-class
  *= require FRONT-teacher
+ *= require FRONT-student
  *= require dhtmlxscheduler
  *= require base
  *= require jquery-datepicker

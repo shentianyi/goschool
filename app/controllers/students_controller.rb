@@ -8,10 +8,10 @@ class StudentsController < ApplicationController
     @students = Student.all
     @student_presenters = StudentPresenter.init_presenters(@students)
     
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @students }
-    end
+    #respond_to do |format|
+    #  format.html # index.html.erb
+    #  format.json { render json: @students }
+    #end
   end
 
   # GET /students/1
@@ -101,6 +101,11 @@ class StudentsController < ApplicationController
     begin
       @student = Student.find(params[:id])
       @student.tags = params[:student].slice(:tags).strip
+      if params[:is_active_account]
+        @logininfo = @student.logininfo
+        @status = (params[:is_active_account]) ? UserStatus::ACTIVE : UserStatus::LOCKED
+        @logininfo.update_attribute(:status=>@status);
+      end
       ActiveRecord::Base.transaction do
         if params[:student][:email]
           @student.logininfo.update_attributes!(:email=>params[:student][:email])
@@ -186,7 +191,7 @@ class StudentsController < ApplicationController
     end
     @relations = []
     Recommendation.new.get_potential_relation(student.tenant_id,student.id).each do |relation|
-      s = Student.find_by_id(relation['id'])
+      s = Student.find_by_id(relation['reced_id'])
       if s
         @relations<<s
       end

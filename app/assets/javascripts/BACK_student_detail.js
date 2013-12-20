@@ -575,7 +575,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         $(".prompt.label").remove()
     });
     /////////////////////////////////////////////////////// 编辑学生信息
-    $("body").on("blur",".update-input",function(){
+    $("body").on("change",".update-input",function(){
         if($(this).attr("id")=="name" && $(this).val().length==0){
 	    MessageBox("抱歉，名字不能为空","top","warning");
 	    window.setTimeout(function(){
@@ -592,268 +592,273 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
                 STUDENTDETAIL.errors[1]="errors";
 	    }
 	    else{
-                var data = {
+		var data = {
 		    id: '',
 		    student : {},
 		    is_active_account : false
-                };
-                data.id =  $("#student-detail-info").attr('student');
-                if(BACKSTUDENT.check.test($(this).val(),$(this).attr('id'))){
+		};
+		data.id =  $("#student-detail-info").attr('student');
+		if(BACKSTUDENT.check.test($(this).val(),$(this).attr('id'))){
+                    data['student'][$(this).attr('id')] = $(this).val();
+                    student_manager.update($("#student-detail-info").attr('student'),data),function(){
+			if(data.result){}
+			else{}
+                    };
+                    data.id =  $("#student-detail-info").attr('student');
 		    data['student'][$(this).attr('id')] = $(this).val();
 		    student_manager.update($("#student-detail-info").attr('student'),data),function(){
-                        if(data.result){
+			if(data.result){
 
-                        }
-                        else{
+			}
+			else{
 
-                        }
+			}
 		    };
-                }
-	    }
-        }
-    }).on("click","#close-student-detail-edit",function(){
-        if(STUDENTDETAIL.errors[0]===undefined&&STUDENTDETAIL.errors[1]===undefined){
-	    $("#student-edit-section").css("left","-999em").css("right","auto");
-        }
-        else{
-	    if(STUDENTDETAIL.errors[0]!==undefined && $("#name").val().length==0){
-                MessageBox("抱歉，名字不能为空","top","warning");
-                window.setTimeout(function(){
-		    $("#name").focus();
-                },100)
-	    }
-	    else if(STUDENTDETAIL.errors[1]!==undefined && ( $("#email").val().length==0 || !easy_email_validate($("#email").val() ))){
-                MessageBox("抱歉，请填写正确的邮箱","top","warning");
-                window.setTimeout(function(){
-		    $("#email").focus();
-                },100)
-	    }
-	    else{
-                $("#student-edit-section").css("left","-999em").css("right","auto");
-                STUDENTDETAIL.errors=new Array(2);
-	    }
-        }
-    }).on("click","#edit-student",function(){
-        $("#close-student-detail-edit").click();
-    });
-    $("body").on("click_remove", "#referrer .delete.icon", function(event, msg) {
-        var item = $(this);
-        student_manager.update($("#student-detail-info").attr('student'),{student:{referrer_id:null}},function(data) {
-	    msg.result = data.result;
-	    if(!data.result) {
-                MessageBox(data.content, "top", "warning");
-                stopEvent(event);
-	    }
-        });
-    });
-    $("body").on("blur",".tag-input-blur",function() {
-        var data = {
-	    student : {}
-        };
-        var tags = [];
-        $.each($('.tags-items>li>div'), function() {
-	    tags.push($.trim($(this).text()));
-        });
-        data['student']['tags'] = tags;
-        console.log(data);
-        student_manager.update($("#student-detail-info").attr('student'), data);
-    });
-    $("body").on("click_add", "#autoComplete-call li", function(event, msg) {
-        if(msg.id) {
-	    if($("#autoComplete-call").attr("target")=="edit_referrer"){
-                if($("#edit_referrer").parent().prevAll().length==1){
-		    msg.callback=function(data){
-                        return false;
-		    }
-		    MessageBox("抱歉,只能添加一个推荐人","top","warning");
-		    $("#edit_referrer").val("");
-                }
-                else{
-		    student_manager.update($("#student-detail-info").attr('student'), {student:{referrer_id:msg.id}}, function(data){
-                        if(data.result){
-
-                        }
-                        else{
-			    msg.callback=function(data){
-                                return false;
-			    }
-			    MessageBox_content(data.content);
-                        }
-		    })
-                }
-	    }
-        }
-    });
-
-    $(document).ready(function(){
-        var href=window.location.href.split("/");
-        var new_href=href[href.length-1].split("#")[0];
-        if( new_href=="achieve"){
-	    if($("#achieve_final_tabular>a").length>=1){
-                $("#achieve_final_tabular>a").eq(0).click();
-	    }
-        }
-	//	STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
-    });
-
-})();
-STUDENTDETAIL.errors=new Array(2);
-STUDENTDETAIL.labels;
-STUDENTDETAIL.data;
-STUDENTDETAIL.check=0;
-STUDENTDETAIL.option={
-    scaleOverride : true,
-    scaleSteps : 20,
-    scaleStartValue :0,
-    bezierCurve:false
-}
-function sortNumber(a, b)
-{
-    return b-a
-}
-STUDENTDETAIL.generate_option=function(){
-    var c=[];
-    var p=STUDENTDETAIL.data;
-    c=deepCopy(p,c);
-    c.sort(sortNumber);
-    STUDENTDETAIL.option.scaleStepWidth=Math.ceil(c[0]/STUDENTDETAIL.option.scaleSteps);
-}
-STUDENTDETAIL.generateCanvas=function(labels,scores){
-    STUDENTDETAIL.labels=labels;
-    STUDENTDETAIL.data=scores;
-    if(labels.length<=1){
-        $("#myChart").remove();
-    }
-    else{
-        if($("#myChart").length==0){
-            $("#grade").append($("<canvas />").attr("id","myChart"))
-        }
-        var width=$("#accordion").width()-40;
-        $("#grade canvas").attr("height",400).attr("width",width);
-        var canvas = $('#myChart')[0];
-        canvas.width=canvas.width;
-        canvas.height=canvas.height;
-        var data = {
-            labels : labels,
-            datasets : [{
-                fillColor : "rgba(151,187,205,0.5)",
-                strokeColor : "rgba(151,187,205,1)",
-                pointColor : "rgba(151,187,205,1)",
-                pointStrokeColor : "#fff",
-                data :scores
-            }]
-        }
-        var ctx = $("#myChart").get(0).getContext("2d");
-        var myNewChart = new Chart(ctx);
-        STUDENTDETAIL.generate_option();
-        new Chart(ctx).Line(data,STUDENTDETAIL.option);
-    }
-};
-STUDENTDETAIL.editCanvas=function(index,score){
-    if(arguments.length==3){
-	var label=arguments[2];
-	STUDENTDETAIL.labels.push(label);
-    }
-    STUDENTDETAIL.data[index]=score;
-    if(STUDENTDETAIL.labels.length>1){
-	if($("#myChart").length==0){
-            var width=$("#grade").width();
-            $("#grade").append($("<canvas />").attr("id","myChart").attr("height",400).attr("width",width))
-	}
-	var canvas = $('#myChart')[0];
-	canvas.width=canvas.width;
-	canvas.height=canvas.height;
-	var data = {
-            labels : STUDENTDETAIL.labels,
-            datasets : [
-		{
-                    fillColor : "rgba(151,187,205,0.5)",
-                    strokeColor : "rgba(151,187,205,1)",
-                    pointColor : "rgba(151,187,205,1)",
-                    pointStrokeColor : "#fff",
-                    data :STUDENTDETAIL.data
 		}
-            ]
-	}
-	var ctx = $("#myChart").get(0).getContext("2d");
-	var myNewChart = new Chart(ctx);
-        STUDENTDETAIL.generate_option();
-	new Chart(ctx).Line(data,STUDENTDETAIL.option);
-    }
+            }
+	}).on("click","#close-student-detail-edit",function(){
+            if(STUDENTDETAIL.errors[0]===undefined&&STUDENTDETAIL.errors[1]===undefined){
+		$("#student-edit-section").css("left","-999em").css("right","auto");
+            }
+            else{
+		if(STUDENTDETAIL.errors[0]!==undefined && $("#name").val().length==0){
+                    MessageBox("抱歉，名字不能为空","top","warning");
+                    window.setTimeout(function(){
+			$("#name").focus();
+                    },100)
+		}
+		else if(STUDENTDETAIL.errors[1]!==undefined && ( $("#email").val().length==0 || !easy_email_validate($("#email").val() ))){
+                    MessageBox("抱歉，请填写正确的邮箱","top","warning");
+                    window.setTimeout(function(){
+			$("#email").focus();
+                    },100)
+		}
+		else{
+                    $("#student-edit-section").css("left","-999em").css("right","auto");
+                    STUDENTDETAIL.errors=new Array(2);
+		}
+            }
+	}).on("click","#edit-student",function(){
+            $("#close-student-detail-edit").click();
+	});
+		 $("body").on("click_remove", "#referrer .delete.icon", function(event, msg) {
+		     var item = $(this);
+		     student_manager.update($("#student-detail-info").attr('student'),{student:{referrer_id:null}},function(data) {
+			 msg.result = data.result;
+			 if(!data.result) {
+			     MessageBox(data.content, "top", "warning");
+			     stopEvent(event);
+			 }
+		     });
+		 });
+		 $("body").on("blur",".tag-input-blur",function() {
+		     var data = {
+			 student : {}
+		     };
+		     var tags = [];
+		     $.each($('.tags-items>li>div'), function() {
+			 tags.push($.trim($(this).text()));
+		     });
+		     data['student']['tags'] = tags;
+		     console.log(data);
+		     student_manager.update($("#student-detail-info").attr('student'), data);
+		 });
+		 $("body").on("click_add", "#autoComplete-call li", function(event, msg) {
+		     if(msg.id) {
+			 if($("#autoComplete-call").attr("target")=="edit_referrer"){
+			     if($("#edit_referrer").parent().prevAll().length==1){
+				 msg.callback=function(data){
+				     return false;
+				 }
+				 MessageBox("抱歉,只能添加一个推荐人","top","warning");
+				 $("#edit_referrer").val("");
+			     }
+			     else{
+				 student_manager.update($("#student-detail-info").attr('student'), {student:{referrer_id:msg.id}}, function(data){
+				     if(data.result){
 
-}
-STUDENTDETAIL.deleteCanvas=function(index){
-    STUDENTDETAIL.labels.splice(index,1);
-    STUDENTDETAIL.data.splice(index,1);
-    if(STUDENTDETAIL.labels.length<=1){
-        $("#myChart").remove();
-    }
-    else{
-        if($("#myChart").length==0){
-            var width=$("#grade").width();
-            $("#grade").append($("<canvas />").attr("id","myChart").attr("height",400).attr("width",width))
-        }
-        var canvas = $('#myChart')[0];
-        canvas.width=canvas.width;
-        canvas.height=canvas.height;
-        var data = {
-            labels : STUDENTDETAIL.labels,
-            datasets : [{
-                fillColor : "rgba(151,187,205,0.5)",
-                strokeColor : "rgba(151,187,205,1)",
-                pointColor : "rgba(151,187,205,1)",
-                pointStrokeColor : "#fff",
-                data :STUDENTDETAIL.data
-            }]
-        }
-    }
-    var ctx = $("#myChart").get(0).getContext("2d");
-    var myNewChart = new Chart(ctx);
-    STUDENTDETAIL.generate_option();
-    new Chart(ctx).Line(data,STUDENTDETAIL.option);
-}
-STUDENTDETAIL.add_consult_record=function(){
-    //post
-    var time=$("#consult-record-time").val()+" "+$("#consult-record-hour :selected").text(),
-    customer=$("#consult-record-customer").val(),
-    content=$("#consult-record-content").val(),
-    service=$("#consult-record-service").val();
+				     }
+				     else{
+					 msg.callback=function(data){
+					     return false;
+					 }
+					 MessageBox_content(data.content);
+				     }
+				 })
+			     }
+			 }
+		     }
+		 });
 
-    var student_id = $("div#detail-content div.info").attr("student");
-    var consultation = {};
-    consultation.student_id = student_id;
-    consultation.consultants = customer;
-    consultation.consult_time = time;
-    consultation.content = content;
+		 $(document).ready(function(){
+		     var href=window.location.href.split("/");
+		     var new_href=href[href.length-1].split("#")[0];
+		     if( new_href=="achieve"){
+			 if($("#achieve_final_tabular>a").length>=1){
+			     $("#achieve_final_tabular>a").eq(0).click();
+			 }
+		     }
+		     //	STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
+		 });
 
-    $.post("/consultations",{
-	id:student_id,
-	consultation:consultation
-    },function(data){
-	if(data.result){
-	    var res = data.object;
-	    var render=Mustache.render("{{#consultation}}<div class='item'>"+
-				       "<p>{{consult_time_display}}"+" "+"{{consultants}}</p>"+
-				       "<p>{{content}}</p>"+
-				       "<p>接线人:{{recorder}}</p>"+
-				       "<dl>"+
-				       "<dt>评论：</dt>"+
-				       "</dl>"+
-				       "<div class='comment-block'>"+
-				       "<input type='text'/>"+
-				       "<div class='ui button tiny'>评论</div>"+
-				       "</div>"+
-				       "</div>{{/consultation}}",res);
-	    $("#consult-record .content").append(render);
-	    $(".detail-add[type='consult-record'] .icon.remove").click();
-	}else
-	{
-	    MessageBox_content(data.content);
-	}
-    });
-    
+		})();
+ STUDENTDETAIL.errors=new Array(2);
+ STUDENTDETAIL.labels;
+ STUDENTDETAIL.data;
+ STUDENTDETAIL.check=0;
+ STUDENTDETAIL.option={
+     scaleOverride : true,
+     scaleSteps : 20,
+     scaleStartValue :0,
+     bezierCurve:false
+ }
+ function sortNumber(a, b)
+ {
+     return b-a
+ }
+ STUDENTDETAIL.generate_option=function(){
+     var c=[];
+     var p=STUDENTDETAIL.data;
+     c=deepCopy(p,c);
+     c.sort(sortNumber);
+     STUDENTDETAIL.option.scaleStepWidth=Math.ceil(c[0]/STUDENTDETAIL.option.scaleSteps);
+ }
+ STUDENTDETAIL.generateCanvas=function(labels,scores){
+     STUDENTDETAIL.labels=labels;
+     STUDENTDETAIL.data=scores;
+     if(labels.length<=1){
+         $("#myChart").remove();
+     }
+     else{
+         if($("#myChart").length==0){
+             $("#grade").append($("<canvas />").attr("id","myChart"))
+         }
+         var width=$("#accordion").width()-40;
+         $("#grade canvas").attr("height",400).attr("width",width);
+         var canvas = $('#myChart')[0];
+         canvas.width=canvas.width;
+         canvas.height=canvas.height;
+         var data = {
+             labels : labels,
+             datasets : [{
+                 fillColor : "rgba(151,187,205,0.5)",
+                 strokeColor : "rgba(151,187,205,1)",
+                 pointColor : "rgba(151,187,205,1)",
+                 pointStrokeColor : "#fff",
+                 data :scores
+             }]
+         }
+         var ctx = $("#myChart").get(0).getContext("2d");
+         var myNewChart = new Chart(ctx);
+         STUDENTDETAIL.generate_option();
+         new Chart(ctx).Line(data,STUDENTDETAIL.option);
+     }
+ };
+ STUDENTDETAIL.editCanvas=function(index,score){
+     if(arguments.length==3){
+	 var label=arguments[2];
+	 STUDENTDETAIL.labels.push(label);
+     }
+     STUDENTDETAIL.data[index]=score;
+     if(STUDENTDETAIL.labels.length>1){
+	 if($("#myChart").length==0){
+             var width=$("#grade").width();
+             $("#grade").append($("<canvas />").attr("id","myChart").attr("height",400).attr("width",width))
+	 }
+	 var canvas = $('#myChart')[0];
+	 canvas.width=canvas.width;
+	 canvas.height=canvas.height;
+	 var data = {
+             labels : STUDENTDETAIL.labels,
+             datasets : [
+		 {
+                     fillColor : "rgba(151,187,205,0.5)",
+                     strokeColor : "rgba(151,187,205,1)",
+                     pointColor : "rgba(151,187,205,1)",
+                     pointStrokeColor : "#fff",
+                     data :STUDENTDETAIL.data
+		 }
+             ]
+	 }
+	 var ctx = $("#myChart").get(0).getContext("2d");
+	 var myNewChart = new Chart(ctx);
+         STUDENTDETAIL.generate_option();
+	 new Chart(ctx).Line(data,STUDENTDETAIL.option);
+     }
 
-    
-}
+ }
+ STUDENTDETAIL.deleteCanvas=function(index){
+     STUDENTDETAIL.labels.splice(index,1);
+     STUDENTDETAIL.data.splice(index,1);
+     if(STUDENTDETAIL.labels.length<=1){
+         $("#myChart").remove();
+     }
+     else{
+         if($("#myChart").length==0){
+             var width=$("#grade").width();
+             $("#grade").append($("<canvas />").attr("id","myChart").attr("height",400).attr("width",width))
+         }
+         var canvas = $('#myChart')[0];
+         canvas.width=canvas.width;
+         canvas.height=canvas.height;
+         var data = {
+             labels : STUDENTDETAIL.labels,
+             datasets : [{
+                 fillColor : "rgba(151,187,205,0.5)",
+                 strokeColor : "rgba(151,187,205,1)",
+                 pointColor : "rgba(151,187,205,1)",
+                 pointStrokeColor : "#fff",
+                 data :STUDENTDETAIL.data
+             }]
+         }
+     }
+     var ctx = $("#myChart").get(0).getContext("2d");
+     var myNewChart = new Chart(ctx);
+     STUDENTDETAIL.generate_option();
+     new Chart(ctx).Line(data,STUDENTDETAIL.option);
+ }
+ STUDENTDETAIL.add_consult_record=function(){
+     //post
+     var time=$("#consult-record-time").val()+" "+$("#consult-record-hour :selected").text(),
+     customer=$("#consult-record-customer").val(),
+     content=$("#consult-record-content").val(),
+     service=$("#consult-record-service").val();
+
+     var student_id = $("div#detail-content div.info").attr("student");
+     var consultation = {};
+     consultation.student_id = student_id;
+     consultation.consultants = customer;
+     consultation.consult_time = time;
+     consultation.content = content;
+
+     $.post("/consultations",{
+	 id:student_id,
+	 consultation:consultation
+     },function(data){
+	 if(data.result){
+	     var res = data.object;
+	     var render=Mustache.render("{{#consultation}}<div class='item'>"+
+					"<p>{{consult_time_display}}"+" "+"{{consultants}}</p>"+
+					"<p>{{content}}</p>"+
+					"<p>接线人:{{recorder}}</p>"+
+					"<dl>"+
+					"<dt>评论：</dt>"+
+					"</dl>"+
+					"<div class='comment-block'>"+
+					"<input type='text'/>"+
+					"<div class='ui button tiny'>评论</div>"+
+					"</div>"+
+					"</div>{{/consultation}}",res);
+	     $("#consult-record .content").append(render);
+	     $(".detail-add[type='consult-record'] .icon.remove").click();
+	 }else
+	 {
+	     MessageBox_content(data.content);
+	 }
+     });
+     
+
+     
+ }
 
 

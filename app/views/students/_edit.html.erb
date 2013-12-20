@@ -59,7 +59,7 @@
 	<% @presenter.tags_.each do |tag|%>
 	<li><div class="ui label"><%= tag %><i class="delete icon"></i></div></li>
 	<% end %>
-        <li><input type='text' class="tag-input-blur" placeholder="标签..." id="autoC2"/></li>
+        <li><input type='text' class="tag-input-blur" placeholder="标签..." id="autoC2" autocomplete="tags"/></li>
       </ul>
       <i class="tag icon stop"></i>
     </div>
