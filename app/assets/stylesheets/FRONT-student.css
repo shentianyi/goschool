@@ -14,9 +14,16 @@
 .segment.student-homework>h2{
     color:#63A69F
 }
+/**************************************************************  homework  */
 .segment.student-homework{
     float:left;
     border:1px solid rgba(0,0,0,0.3);
     width:50%;
     margin-left:30px !important;
+}
+.segment.student-homework ul{
+    list-style-type: none;
+    padding:10px 5px;
+    margin:0px;
+
 }
