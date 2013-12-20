@@ -575,7 +575,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         $(".prompt.label").remove()
     });
     /////////////////////////////////////////////////////// 编辑学生信息
-    $("body").on("blur",".update-input",function(){
+    $("body").on("change",".update-input",function(){
         if($(this).attr("id")=="name" && $(this).val().length==0){
 	    MessageBox("抱歉，名字不能为空","top","warning");
 	    window.setTimeout(function(){
@@ -592,15 +592,15 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
                 STUDENTDETAIL.errors[1]="errors";
 	    }
 	    else{
-                var data = {
-		    id: '',
-		    student : {},
-		    is_active_account : false
+            var data = {
+		        id: '',
+		        student : {},
+		        is_active_account : false
                 };
                 data.id =  $("#student-detail-info").attr('student');
                 if(BACKSTUDENT.check.test($(this).val(),$(this).attr('id'))){
-		    data['student'][$(this).attr('id')] = $(this).val();
-		    student_manager.update($("#student-detail-info").attr('student'),data),function(){
+		            data['student'][$(this).attr('id')] = $(this).val();
+		            student_manager.update($("#student-detail-info").attr('student'),data),function(){
                         if(data.result){
 
                         }
