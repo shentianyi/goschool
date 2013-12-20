@@ -186,7 +186,7 @@ class StudentsController < ApplicationController
     end
     @relations = []
     Recommendation.new.get_potential_relation(student.tenant_id,student.id).each do |relation|
-      s = Student.find_by_id(relation['id'])
+      s = Student.find_by_id(relation['reced_id'])
       if s
         @relations<<s
       end

@@ -44,7 +44,7 @@ class StudentPresenter<Presenter
   def relation_
     @relations = []
     Recommendation.new.get_potential_relation(self.tenant_id,self.id).each do |relation|
-      s = Student.find_by_id(relation['id'])
+      s = Student.find_by_id(relation['reced_id'])
       if s
         @relations<<s
       end
