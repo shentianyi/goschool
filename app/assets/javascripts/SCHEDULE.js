@@ -19,10 +19,10 @@ SCHEDULE.widget.init=function(){
     scheduler.templates.quick_info_title = function(start, end, ev){
         var teachers=ev.teachers.join(",");
         if(ev.sub_courses.is_default==1){
-            return ev.text.substr(0,50)+'<span></span>'+'<span>'+teachers+'</span>';
+            return ev.text.substr(0,50)+'<span></span>'+'<span>'+teachers+'</span>'+'<span>'+ev.institution_name+'</span>';
         }
         else{
-            return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>'+teachers+'</span>';
+            return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>'+teachers+'</span>'+'<span>'+ev.institution_name+'</span>';
         }
     };
     //绑定模板
@@ -150,6 +150,11 @@ SCHEDULE.calendar.getData=function(){
             SCHEDULE.calendar.have_load.min=maxDate>SCHEDULE.calendar.have_load.min?minDate:SCHEDULE.calendar.have_load.min;
         }
         //post
+//        var experiment=[
+//            {id:"1",text:"儿童秋季班",teachers:["Wayne","王子骁"],start_date:1385870400000,end_date:1385872200000,color:'#FFA500',sub_courses:{value:"default",text:"没指定"}},
+//            {id:"2",text:"SAT秋季冲刺班",teachers:["Kobe","Bryant"],start_date:1386086400000,end_date:1386088200000,color:'#63A69F',sub_courses:{value:"0",text:"听力"}},
+//            {id:"3",text:"托福秋季班",teachers:["Wayne","王子骁"],start_date:1386237600000,end_date:1386239400000,color:'#D95C5C',sub_courses:{value:"0",text:"口语强化"}}
+//        ];
         if(arguments[0]!='readonly'){
             $.get("/schedules/dates",{
                 start_date:scheduler.getState().min_date.toWayneString().day,
@@ -165,14 +170,18 @@ SCHEDULE.calendar.getData=function(){
             });
         }
         else{
+            var callback;
+            if(arguments[1]!==undefined){
+               var callback=arguments[1];
+            }
             $.get("/schedules/teachers",{
                 start_date:scheduler.getState().min_date.toWayneString().day,
                 end_date:scheduler.getState().max_date.toWayneString().day
             },function(data){
                 if(data.result){
                     scheduler.parse(data.content,"json");
-                    if(arguments[1]!==undefined){
-                        arguments[1](data.content);
+                    if(callback!==undefined){
+                        callback(data.content);
                     }
                 }
                 else{
