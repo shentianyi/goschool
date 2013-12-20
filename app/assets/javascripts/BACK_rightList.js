@@ -65,6 +65,11 @@ BACKINDEX.right_list.loadData=function(){
                     }
                     $("#search-result").append(data.content);
                     BACKINDEX.right_list.temp_object.page++;
+                    window.setTimeout(function(){
+                        if($("#search-list").height()+parseInt($("#search-list>.search-input").css("margin-top"))<$(window).height()){
+                            BACKINDEX.right_list.loadData();
+                        }
+                    },100);
                 }
                 else{
                     MessageBox_content(data.content);
@@ -87,11 +92,7 @@ BACKINDEX.right_list.loadData=function(){
 //        }).always(function(){
 //                BACKINDEX.right_list.loadCheck--;
 //        });
-        window.setTimeout(function(){
-            if($("#search-list").height()+parseInt($("#search-list>.search-input").css("margin-top"))<$(window).height()){
-                BACKINDEX.right_list.loadData();
-            }
-        },100);
+
     },1000);
 };
 BACKINDEX.right_list.nextPage=function(){
