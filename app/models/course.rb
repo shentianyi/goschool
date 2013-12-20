@@ -53,6 +53,10 @@ class Course < ActiveRecord::Base
   def recommendations
     Student.where(:id=>Recommendation.new.get_potential_student_for_course(self.tenant_id,self.id).map{|res| res.id}).all
   end
+  
+  def self.detail_by_id id
+   joins(:institution).where(courses:{id:id}).select('courses.*,institutions.name as institution_name')
+  end
 
   private
 
