@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131220021238) do
+ActiveRecord::Schema.define(:version => 20131220071910) do
 
   create_table "achievementresults", :force => true do |t|
     t.string   "valuestring"
@@ -103,6 +103,16 @@ ActiveRecord::Schema.define(:version => 20131220021238) do
   add_index "courses", ["institution_id"], :name => "index_courses_on_institution_id"
   add_index "courses", ["tenant_id"], :name => "index_courses_on_tenant_id"
   add_index "courses", ["user_id"], :name => "index_courses_on_user_id"
+
+  create_table "custom_views", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "query_type"
+    t.string   "entity_type"
+    t.string   "query"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "homeworks", :force => true do |t|
     t.string   "title"
@@ -220,7 +230,6 @@ ActiveRecord::Schema.define(:version => 20131220021238) do
     t.integer  "sub_course_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.datetime "date"
     t.integer  "tenant_id"
   end
 
