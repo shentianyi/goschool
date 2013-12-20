@@ -31,16 +31,15 @@
       <td class="two wide">
 	<% if presenter.referrer_ %>
         <p class="maybe-know">推荐人</p>
-        <p><span><%= presenter.referrer_.name %></span></p>
+        <p><a href="/students/<%= presenter.referrer_.id %>"><%= presenter.referrer_.name %></a></p>
 	<% end %>
       </td>
       <td class="three wide">
 	<% if presenter.relation_.length > 0 %>
         <p class="recommend">可能认识</p>
         <p>
-	  <span>李四</span><span>王八</span><span>白一</span>
 	  <% presenter.relation_.each do |relation|%>
-	  <span><%= relation.name%></span>
+	  <a href="/students/<%= relation.id%>"><%= relation.name%></a>
 	  <% end %>
 	</p>
 	<% end %>
