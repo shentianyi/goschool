@@ -95,15 +95,17 @@ var Search = {
                         }
                         break;
                     case 'conditions':
-                        this.current_query = null;
+
                         if(mode=="full_text"){
                             this.cast_queries();
+                            this.current_query = null;
                             result =  true;
                         }
                         else if(mode=="conditions"){
                             result = true;
                         }
                         else if(mode=="select_query"){
+                            this.current_query = null;
                             result=  true;
                         }
                         break;
@@ -165,7 +167,7 @@ var Search = {
 
         //change the event of the input controller on runtime. Three modes: select_query, conditions, full text
         search.handler = {
-             //obj
+
             full_text: function(event){
                 if(event.which==13){
                // #search_type: full_text
@@ -269,7 +271,6 @@ var Search = {
         };
 
         search.bind_query = function(){
-
             if(this.queries){
                 this.queries = {};
             }
@@ -433,7 +434,6 @@ var Search = {
 
 
 
-
         search.get_buffer = function(key){
             if(!this.query_types_buffered) {this.query_types_buffered = {};}
               var mk_key = this.make_buffer_storage_key(this.entity,key);
@@ -538,11 +538,13 @@ var Search = {
             //switch mode to conditions
             //delete the item from stored queries
 
-            this.switch_mode("conditions",{notice:this.current_query["introduction"]});
-            console.log(this.current_query);
-            WAYNE.change_to_condition(this.input.attr("id"));
 
             this.current_query = this.query_types[query_type];
+
+            this.switch_mode("conditions",{notice:this.current_query["introduction"]});
+            WAYNE.change_to_condition(this.input.attr("id"));
+
+
 
             this.input.val(this.queries[query_type]);
 
