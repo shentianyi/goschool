@@ -15,16 +15,18 @@ class LogininfoSessionsController < ApplicationController
   end
 
   def create
+    msg = Msg.new
+    msg.result = false
+    msg.content = "登录失败！"
     @user_session = LogininfoSession.new(:email=>params[:email],:password=>params[:password])
-
-    if @user_session.save
+    if msg.result = @user_session.save
       flash[:notice] = "登录成功！"
-      redirect_to root_url
+      #redirect_to root_url
     else
-      flash[:notice] = "登录失败！"
-      render :action => :new
+      msg.content = @user_session.errors
     end    
-  end
+    render :json=>msg
+  end 
 
   def destroy
     current_user_session.destroy

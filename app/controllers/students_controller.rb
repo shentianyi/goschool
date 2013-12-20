@@ -101,6 +101,11 @@ class StudentsController < ApplicationController
     begin
       @student = Student.find(params[:id])
       @student.tags = params[:student].slice(:tags).strip
+      if params[:is_active_account]
+        @logininfo = @student.logininfo
+        @status = if(params[:is_active_account]) ? UserStatus::ACTIVE:UserStatus::LOCKED
+        @logininfo.update_attribute(:status=>@status);
+      end
       ActiveRecord::Base.transaction do
         if params[:student][:email]
           @student.logininfo.update_attributes!(:email=>params[:student][:email])

@@ -598,17 +598,15 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 		    is_active_account : false
                 };
                 data.id =  $("#student-detail-info").attr('student');
-                if(BACKSTUDENT.check.test($(this).val(),$(this).attr('id'))){
-		    data['student'][$(this).attr('id')] = $(this).val();
-		    student_manager.update($("#student-detail-info").attr('student'),data),function(){
-                        if(data.result){
+		data['student'][$(this).attr('id')] = $(this).val();
+		student_manager.update($("#student-detail-info").attr('student'),data),function(){
+                    if(data.result){
 
-                        }
-                        else{
+                    }
+                    else{
 
-                        }
-		    };
-                }
+                    }
+		};
 	    }
         }
     }).on("click","#close-student-detail-edit",function(){
