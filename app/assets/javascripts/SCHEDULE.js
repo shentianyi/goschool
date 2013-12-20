@@ -173,9 +173,7 @@ SCHEDULE.calendar.getData=function(){
             var callback;
             if(arguments[1]!==undefined){
                var callback=arguments[1];
-                callback(experiment)
             }
-
             $.get("/schedules/teachers",{
                 start_date:scheduler.getState().min_date.toWayneString().day,
                 end_date:scheduler.getState().max_date.toWayneString().day
