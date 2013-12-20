@@ -12,9 +12,9 @@ class SearchEngineController < ApplicationController
     case params[:entity_type]
     when 'Course'
       @courses=CoursePresenter.init_presenters(Course.detail_by_id(ids).all)
-      render partial:'courses/search_result' 
+      render partial:'courses/search_result'
     else
-    render nil
+    render :nothing => true, :status => 200, :content_type => 'text/html'
     end
   end
 end
