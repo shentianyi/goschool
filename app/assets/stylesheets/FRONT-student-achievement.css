@@ -1,0 +1,170 @@
+/***************************************************************** 总体*/
+.front-people-inner>.my-achieve-wrap{
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    background-color:#fff;
+    box-shadow:2px 2px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow:2px 2px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow:2px 2px 3px rgba(0,0,0,0.5);
+    margin:15px 15px 30px;
+    border:1px solid rgba(0,0,0,0.3);
+    padding:15px;
+
+}
+.front-people-inner .content-item:not(:last-of-type){
+    border-bottom:1px solid rgba(0,0,0,0.3);
+}
+.front-people-inner .content-item{
+    padding:15px 0;
+}
+.front-people-inner .content-item>p{
+    margin:0 ;
+    font-size:16px;
+    color:#63A69F
+}
+.front-people-inner .content-item>p>i{
+    color:#23b890;
+    margin-left:5px;
+    cursor:pointer;
+    font-size:13px;
+    transition:color 0.25s ease-out
+}
+.front-people-inner .content-item>p>i:hover{
+    color:#22deac
+}
+/*最终成就*/
+.front-people-inner .content-item.achieve dl{
+    margin:10px 0 5px;
+}
+.front-people-inner .content-item.achieve dd{
+    font-size:13px;
+    margin-bottom:5px;
+}
+.front-people-inner .content-item.achieve dd>i{
+    margin-left:8px;
+    cursor:pointer;
+    display:none;
+    transition:color 0.25s ease-out;
+}
+.front-people-inner .content-item.achieve dd>i.template-remove{
+    display:inline-block;
+}
+.front-people-inner .content-item.achieve dd:hover i,
+.front-people-inner .content-item.achieve dd>i:hover{
+    display:inline-block;
+}
+.front-people-inner .achievement .content-item.achieve dd>i:hover{
+    color:rgba(0,0,0,0.6);
+}
+/*所有录取*/
+.front-people-inner .offer tr td:last-of-type span:last-of-type{
+    text-align:center;
+    color:#D95C5C;
+    text-decoration:underline;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+}
+.front-people-inner .offer tr td:last-of-type:hover span:last-of-type{
+    color:#ef1414
+}
+.front-people-inner .offer-template-operate span:first-of-type{
+    color:#63A69F;
+    display:inline-block;
+    margin-right:18px;
+    text-decoration:underline;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+}
+.front-people-inner .offer-template-operate span:first-of-type:hover{
+    color:#2ac6b6;
+}
+/*成绩*/
+.front-people-inner .grade .grade-add{
+    width:150px;
+    height:65px;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    background-color:rgba(0,0,0,0.9);
+    position:fixed;
+    left:-999em;
+    z-index:101;
+}
+.front-people-inner .grade .grade-add:before{
+    content:'';
+    display:block;
+    width:0px;
+    height:0px;
+    border-bottom:10px solid rgba(0,0,0,0.9);
+    border-right:10px solid transparent;
+    position:relative;
+    top:-10px;
+    left:10px;
+}
+.front-people-inner .grade .grade-add p{
+    margin:0px;
+    color:#fff;
+    font-size:13px;
+    padding-left:5px;
+
+}
+.front-people-inner .grade .grade-add input{
+    width:130px;
+    margin-left:5px;
+    margin-top:6px;
+    background:#fff;
+    border:1px solid rgba(0,0,0,0.5);
+    padding:3px;
+}
+.front-people-inner .grade .tabular.menu a.item{
+    font-size:13px;
+}
+.front-people-inner .grade .tabular.menu a.item.active{
+    color:#D95C5C
+}
+.front-people-inner .grade .tabular.menu .label{
+    display:none;
+}
+.front-people-inner .grade .tabular.menu .label:hover,
+.front-people-inner .grade .tabular.menu a:hover .label{
+    display:block;
+}
+.front-people-inner .grade .tabular.menu .label:hover{
+    background-color:rgba(217,92,92,0.7);
+}
+.front-people-inner .grade thead th>span{
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 11px;
+}
+.front-people-inner .grade tfoot th{
+    color:#63A69F;
+    text-decoration:underline;
+    font-size:13px;
+    font-style:normal;
+    cursor:pointer;
+}
+.front-people-inner .grade tfoot th:hover{
+    color:#2ac6b6;
+}
+.front-people-inner .grade tr td:last-of-type span:last-of-type{
+    text-align:center;
+    color:#D95C5C;
+    text-decoration:underline;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+}
+.front-people-inner .grade tr td:last-of-type span:last-of-type:hover{
+    color:#ef1414
+}
+.front-people-inner .grade-template-operate span:first-of-type{
+    color:#63A69F;
+    display:inline-block;
+    margin-right:18px;
+    text-decoration:underline;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+}
+.front-people-inner .grade-template-operate span:first-of-type:hover{
+    color:#2ac6b6;
+}
