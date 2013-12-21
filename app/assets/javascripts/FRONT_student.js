@@ -1,10 +1,4 @@
 (function(){
-<<<<<<< HEAD
-    $(document).ready(function(){
-        
-    });
-})()
-=======
     $(window).resize(function(){
         STUDENT_FRONT.check++;
         window.setTimeout(function(){
@@ -37,29 +31,18 @@
 })();
 var STUDENT_FRONT=STUDENT_FRONT || {};
 STUDENT_FRONT.check=0;
->>>>>>> a6eaddf6b950544a4807f5c8897c55e8e6e8f1a4
 
 function create_post(){
     var title = $("#title").val();
     var content = $("#content").val();
     var id = $("#course").attr("course");
-<<<<<<< HEAD
-
-=======
->>>>>>> a6eaddf6b950544a4807f5c8897c55e8e6e8f1a4
     var data = {
     	id:id,
     	post:{
     	    title:title,
     	    content:content
-<<<<<<< HEAD
-    	},
-    }
-    
-=======
     	}
     }
->>>>>>> a6eaddf6b950544a4807f5c8897c55e8e6e8f1a4
     var attachs = [];
     var length = $("#task-attach-uploader-preview").children().length;
     for(var i = 0;i<length;i++){
