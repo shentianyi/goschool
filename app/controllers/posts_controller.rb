@@ -40,7 +40,7 @@ class PostsController < ApplicationController
     @post.logininfo = current_user
     @post.course = @current_course
 
-    get_attach(params[:attachs],@post)
+    Attachment.add(params[:attachs],@post)
 
     msg.result = @post.save
     
@@ -70,16 +70,25 @@ class PostsController < ApplicationController
     @posts = Post.by_type({id:params[:id],menu_type:menu_type})
   end
 
+=begin
   def get_attach attachs,target
     unless attachs.blank?
       attachs.each do |index,att|
-        path = File.join($AttachPath,att[:pathName])
+        path = File.join($AttachTmpPath,att[:pathName])
+        size = FileData.get_size(path)
+        type = FileData.get_type(path)
+
+        data = AttachService.generate_attachment path
+        filename = att[:oriName]
+
+        url = AliyunOssService.store_attachments(filename,data)
         #Get from tmp folder and upload to the Cloud Server
         #Delete from tmp folder
-        FileUtils.mv(File.join($AttachTmpPath,att[:pathName]),path)
+        #FileUtils.mv(File.join($AttachTmpPath,att[:pathName]),path)
         #
-        target.attachments<<Attachment.new(:name=>att[:oriName],:path=>path,:size=>FileData.get_size(path),:type=>FileData.get_type(path))
+        target.attachments<<Attachment.new(:name=>att[:oriName],:path=>url,:size=>size,:type=>type)
       end
     end
   end
+=end
 end
