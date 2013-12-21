@@ -15,6 +15,7 @@ class Logininfo < ActiveRecord::Base
   # authlogic
   acts_as_authentic do |c|
     c.login_field = :email
+    c.validate_email_field = false
   end
   
   #check role
@@ -26,7 +27,7 @@ class Logininfo < ActiveRecord::Base
     return false
   end
   
-  #role change
+  #role change2
   def role_change? roles
     self.role_ids == roles ? false : true
   end
@@ -103,5 +104,10 @@ class Logininfo < ActiveRecord::Base
 
   def is_manager?
     Role.manager?(self.role_ids)
+  end
+  
+  ## if true 
+  def is_employee?
+    Role.admin?(self.role_ids) || Role.sale?(role_ids) || Role.manager?(role_ids)
   end
 end

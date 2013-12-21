@@ -15,13 +15,44 @@ function init_teacher_homework() {
                }
           });
      });
+     bind_sh_input_text_update_event(function(data) {
+          if(data.result) {
+               // 更新成功
+               if(data.content) {
+                    // 批改成功：即修改了分数
+                    console.log('批改成功');
+               }
+          } else {
+               // 跟新失败
+               // data.content 未消息
+               MessageBox_content(data.content);
+          }
+     });
+     bind_th_input_text_update_event(function(data) {
+          if(data.result) {
+               // 更新成功
+               if(data.content) {
+                    // 修改作业成功
+                    console.log('修改成功');
+               }
+          } else {
+               // 跟新失败
+               // data.content 未消息
+               MessageBox_content(data.content);
+          }
+     });
+}
+
+function init_student_homework() {
+     bind_menu_event();
+     bind_sh_submit_event();
 }
 
 function bind_menu_event() {
-     $(".homework-menu-a").click(function() {
+     $(".homework-menu-a[pin=false]").click(function() {
           var homework_list = $(this).next('div');
           var menu_type = $(this).attr('type');
-          homework_manager.list($("#teacher-course-hidden").val(), menu_type, function(data) {
+          homework_manager.list($("#teacher-course-hidden").val(), menu_type, $(this).attr('sid'), function(data) {
                homework_list.html(data);
           });
      });
@@ -31,3 +62,83 @@ function bind_menu_event() {
           });
      });
 }
+
+function bind_sh_input_text_update_event(callback) {
+     $('body').on('change', ".student-homwork-input", function() {
+          var data = {
+               student_homework : {}
+          };
+          var value = get_input_value($(this));
+	  data['student_homework'][ $(this).attr('name')] = value;
+          student_homework_manager.update($(this).attr('homework'), data, function(data) {
+                    if(callback)
+                         callback(data);
+          });
+     });
+}
+
+function bind_th_input_text_update_event(callback){
+ $('body').on('change','.teacher-homework-input',function(){
+   var data={
+       homework:{}
+   };
+   var value=get_input_value($(this));
+   data['homework'][$(this).attr('name')]=value;
+   homework_manager.update($(this).attr('homework'),data,function(data){
+     if(callback)
+        callback();     
+   });
+ });  
+}
+
+function get_input_value(ele){
+  var value;
+  switch(ele.attr('type')){
+      case 'text':
+              value=ele.val();
+	      break;
+      case 'checkbox':
+		  value= ele.attr('checked') ? true :false;
+	      break;
+      default:
+	      value= null;
+	      break;
+  }
+  return value;
+}
+
+function bind_sh_submit_event() {
+     $('body').on('click', "#student-homework-submit-button", function() {
+          var submit = $(this);
+          var sh = submit.attr('student-homework');
+          if(sh && sh.length > 0) {
+               student_homework_manager.update(sh, {
+                    student_homework : {
+                         homework_id : submit.attr('homework'),
+                         content : $("#student-homework-content").val()
+                    }
+               }, function(data) {
+                    if(data.result) {
+                         alert('resumit success!');
+                    } else {
+                         MessageBox_content(data.content);
+                    }
+               });
+          } else {
+               student_homework_manager.create({
+                    student_homework : {
+                         homework_id : submit.attr('homework'),
+                         content : $("#student-homework-content").val()
+                    }
+               }, function(data) {
+                    if(data.result) {
+                         alert('sumit success!');
+                         submit.attr('student-homework', data.content);
+                    } else {
+                         MessageBox_content(data.content);
+                    }
+               });
+          }
+     });
+}
+

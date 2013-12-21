@@ -55,7 +55,6 @@ function signup(){
     var password = $("#password").val();
     var password_confirmation = $("#password_confirmation").val();
     var company_name = $("#company_name").val();
-    var role = $("#role").val();
 
     $.ajax({
         url:'/subscriptions',
@@ -67,18 +66,41 @@ function signup(){
             email: email,
             password: password,
             password_confirmation: password_confirmation,
-            company_name: company_name,
-            role: role
+            company_name: company_name
         },
         type: 'POST',
         dataType: 'json',
         success: function(data){
-
+	    if(data.result){
+		window.location = '/welcome';
+	    }
+	    else{
+		MessageBox_content(data.content)
+	    }
         }
     });
 }
 
-function login() {
+function loginin() {
+    var email = $("#log_email").val();
+    var password = $("#log_password").val();
 
+    $.ajax({
+        url:'/logininfo_sessions',
+        data: {
+            email: email,
+            password: password
+        },
+        type: 'POST',
+        dataType: 'json',
+        success: function(data){
+	    if(data.result){
+		window.location = '/welcome';
+	    }
+	    else{
+		MessageBox_content(data.content)
+	    }
+        }
+    });
 }
 

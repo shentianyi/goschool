@@ -55,14 +55,35 @@ class AchievementsController < ApplicationController
     render :json => msg
   end
   
+  #
+  def sub_achievement
+    msg = Msg.new
+    msg.result = false
+    msg.content = '获取成就失败'
+    
+    @presenters = StudentAchievementPresenter.init_presenters(Achievement.achieves(params[:id],params[:student_id]))
+    if @presenters
+      datas = []
+      @presenters.each do |presenter|
+        data = presenter.to_json
+        datas << data
+      end
+      msg.result = true
+      msg.object = datas
+    end
+    render :json => msg
+  end
+
+  #create sub class
   def create_sub
     msg = Msg.new
     msg.result = false;
     msg.content = '创建子课程失败'
     @achievement = Achievement.find(params[:id])
     if AchievementType.can_have_sub? @achievement.type
-      @new_achieve = Achievement.new(params[:achievement])
+      @new_achieve = Achievement.new(:parent_id=>params[:id],:name=>params[:name],:type=>AchievementType::SUB_COURSE)
       msg.result = @new_achieve.save
+      msg.object = @new_achieve
     else
       msg.content = '该成就类型不支持创建子课程'
     end
@@ -89,12 +110,13 @@ class AchievementsController < ApplicationController
   # DELETE /achievements/1
   # DELETE /achievements/1.json
   def destroy
+    msg = Msg.new
+    msg.result = false
+    msg.content = '删除子课程失败'
     @achievement = Achievement.find(params[:id])
     @achievement.destroy
-
-    respond_to do |format|
-      format.html { redirect_to achievements_url }
-      format.json { head :no_content }
-    end
+    msg.result = true
+    
+    render :json=>msg
   end
 end

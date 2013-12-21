@@ -29,7 +29,7 @@ test:
  database: goschooldb_test
  pool: 5
  username: goer
- password:  goer@
+ password: goer@
  socket: /var/run/mysqld/mysqld.sock
 
 

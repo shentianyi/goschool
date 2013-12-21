@@ -1,0 +1,11 @@
+<div id="student-submit-homework-div" style="background:#A757A8 ">
+     ANSWER:
+     <table>
+          <tr>
+               <td><textarea class="homework-input" name="content" id="student-homework-content" placeholder="作业内容..."><%= @student_homework.content%></textarea></td>
+               <td>
+               <input type="button" value="SUBMIT" id="student-homework-submit-button" homework="<%= @homework.id%>" student-homework="<%= @student_homework.id%>"/>
+               </td>
+          </tr>
+     </table>
+</div>

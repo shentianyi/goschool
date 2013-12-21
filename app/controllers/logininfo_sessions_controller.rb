@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 class LogininfoSessionsController < ApplicationController
   before_filter :require_no_user,:only=>[:new,:create]
+  skip_before_filter :require_user_as_employee,:only=>[:new,:create,:destroy]
   skip_before_filter :require_user,:only=>[:new,:create]
   skip_before_filter :require_active_user,:only=>[:new,:create]
   #skip_before_filter :check_tenant_status
@@ -14,16 +15,18 @@ class LogininfoSessionsController < ApplicationController
   end
 
   def create
+    msg = Msg.new
+    msg.result = false
+    msg.content = "登录失败！"
     @user_session = LogininfoSession.new(:email=>params[:email],:password=>params[:password])
-
-    if @user_session.save
+    if msg.result = @user_session.save
       flash[:notice] = "登录成功！"
-      redirect_to root_url
+      #redirect_to root_url
     else
-      flash[:notice] = "登录失败！"
-      render :action => :new
+      msg.content = @user_session.errors
     end    
-  end
+    render :json=>msg
+  end 
 
   def destroy
     current_user_session.destroy
@@ -31,10 +34,13 @@ class LogininfoSessionsController < ApplicationController
     redirect_to new_logininfo_sessions_url
   end
   
-  def switch
-    #if user
-    redirect_to root_url
-    #if teacher or student
-    #redirect_to front_end_url
+  def switch user
+    if user.is_employee?
+      redirect_to root_path
+    elsif user.is_student?
+      redirect_to student_index_path
+    elsif user.is_teacher?
+      redirect_to teachers_index_path
+    end
   end
 end

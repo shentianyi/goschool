@@ -40,7 +40,7 @@ var BACKSTUDENT=BACKSTUDENT||{};
 	    var student = {};
 	    student.image_url = $("#image_url").attr("src");
 	    student.name = $("#name").val();
-	    student.gender = $("#gender input[type=radio]:checked").val();
+	    student.gender = $("#gender input[type=radio]:checked").attr("value");
 	    student.birthday = $("#birthday").val();
 	    student.school = $("#school").val();
 	    student.graduation = $("#graduation").val();
@@ -64,6 +64,8 @@ var BACKSTUDENT=BACKSTUDENT||{};
 	    BACKSTUDENT.post_add_student({student:student,is_active_account:is_active_account})
         });
     })
+    search_obj = Search.instance();
+    search_obj.init("full_text","Student",$("#container_for_input"),$("#container_for_list"));
 })();
 
 BACKSTUDENT.post_add_student = function(option){
@@ -109,11 +111,11 @@ BACKSTUDENT.check.phone = /^0*(13|15|18)\d{9}$/;
 BACKSTUDENT.check.guardian_phone = /^0*(13|15|18)\d{9}$/;
 
 BACKSTUDENT.check.test = function(str,type){
-    if(BACKSTUDENT.check[type].test(str)){
+    if(BACKSTUDENT.check[type] && BACKSTUDENT.check[type].test(str)){
 	return true;
     }
     else{
-	MessageBox_content('格式不正确！请输入正确的格式');
+	MessageBox("格式不正确！请输入正确的格式!","top","warning")
 	return false;
     }
 }

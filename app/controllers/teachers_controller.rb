@@ -1,11 +1,12 @@
 #encoding: utf-8
 class TeachersController < ApplicationController
   skip_load_and_authorize_resource
-   before_filter :require_user_as_teacher, :only=>[:index]
-  layout 'teacher'
+  before_filter :require_user_as_teacher, :only=>[:index]
+  skip_before_filter :require_user_as_employee
+  layout 'homepage'
   def index
+    @active_left_aside='homepage'
     @teacher=current_user.user
-    # teacher=User.find(params[:id]) # for test
     @courses=TeacherCoursePresenter.init_presenters(TeacherCourse.detail_by_teacher(@teacher.id).all)
   end
 

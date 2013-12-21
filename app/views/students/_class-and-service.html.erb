@@ -10,6 +10,7 @@
     </tr>
   </thead>
   <tbody>
+    <% if @courses %>
     <% @courses.each do |course|%>
     <tr id="<%= course.id_display%>">
       <td><%= course.name %></td>
@@ -17,9 +18,10 @@
       <td><%= course.period_display%></td>
       <td class="pay-lack"><%= course.paid_display%></td>
       <td>
-        <input type="text" />
+        <input type="text" value="<%= course.progress%>"/>
       </td>
     </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>

@@ -16,21 +16,24 @@ class CoursePresenter<Presenter
   def type_display
     CourseType.display self.type
   end
-   
+
   def teacher_names
     @course.teachers.uniq.map{|t| t.name}
   end
-  
+
   def teacher_details
-     @course.teacher_details.all
+    @course.teacher_details.all
   end
-  
+
   def sub_courses
     @course.sub_courses.where(:is_default=>false)
   end
-  
+
   def teacher_names_string
     teacher_names.join(', ')
   end
 
+  def ongoing?
+    self.status==CourseStatus::ONGOING
+  end
 end

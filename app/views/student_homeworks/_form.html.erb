@@ -1,49 +1,11 @@
-<%= form_for(@student_homework) do |f| %>
-  <% if @student_homework.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@student_homework.errors.count, "error") %> prohibited this student_homework from being saved:</h2>
-
-      <ul>
-      <% @student_homework.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :score %><br />
-    <%= f.text_field :score %>
-  </div>
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_field :content %>
-  </div>
-  <div class="field">
-    <%= f.label :improved %><br />
-    <%= f.check_box :improved %>
-  </div>
-  <div class="field">
-    <%= f.label :marked %><br />
-    <%= f.check_box :marked %>
-  </div>
-  <div class="field">
-    <%= f.label :marked_time %><br />
-    <%= f.datetime_select :marked_time %>
-  </div>
-  <div class="field">
-    <%= f.label :submited_time %><br />
-    <%= f.datetime_select :submited_time %>
-  </div>
-  <div class="field">
-    <%= f.label :student %><br />
-    <%= f.text_field :student %>
-  </div>
-  <div class="field">
-    <%= f.label :homework %><br />
-    <%= f.text_field :homework %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<div id="student-submit-homework-div" style="background:#A757A8 ">
+     ANSWER:
+     <table>
+          <tr>
+               <td><textarea class="homework-input" name="content" id="student-homework-content" placeholder="作业内容..."></textarea></td>
+               <td>
+               <input type="button" value="SUBMIT" id="student-homework-submit-button" homework="<%= @homework.id%>"/>
+               </td>
+          </tr>
+     </table>
+</div>

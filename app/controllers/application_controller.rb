@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
   before_filter :require_user
   before_filter :require_active_user
+  before_filter :require_user_as_employee
   before_filter :find_current_user_tenant
 
   set_current_tenant_through_filter
@@ -48,6 +49,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  #must be employee
+  def require_user_as_employee
+    unless current_user.is_employee?
+      error_page_403
+    end
+  end
+
   def error_page_403
     respond_to do |format|
       format.html {render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false}
@@ -62,16 +70,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # user must be manager
-  def require_user_as_manager
-    # unless Role.manager?(current_user.loginingfo_roles)
-    # respond_to do |format|
-    # format.html {render :file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false}
-    # format.json { render json: {access:false} ,status: 403 }
-    # end
-    # end
-  end
-
   private
 
   def current_user_session
@@ -82,6 +80,15 @@ class ApplicationController < ActionController::Base
   def current_user
     return @current_user if defined?(@current_user)
     @current_user = current_user_session && current_user_session.record
+  end
+
+  def current_student_id
+    return session[:current_student_id]  unless session[:current_student_id].nil?
+    if current_user.is_student?
+       session[:current_student_id] = Student.find_by_logininfo_id(current_user.id).id
+    else
+      error_page_404
+    end
   end
 
   # set cancan Ability

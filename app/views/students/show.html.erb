@@ -65,35 +65,35 @@
     </div>
     <div class="ui fluid accordion" id="accordion" name="student">
       <div class="item" id="class-and-service">
-        <div class="active title">
+        <div class="<%= 'active'  if @partial=='class-and-service' %> title">
           <i class="dropdown icon"></i>课程及服务
         </div>
-        <div class="active content class-and-service">
-	  <%= render partial:'class-and-service' if @courses%>
+        <div class="<%= 'active'  if @partial=='class-and-service' %> content class-and-service">
+	  <%= render partial:'class-and-service' if @partial=='class-and-service' %>
 	</div>
       </div>
       <div class="item achievement" id="achieve">
-        <div class="title">
+        <div class="title <%=  'active'  if @partial=='achieve' %>">
           <i class="dropdown icon"></i>所获成就
         </div>
-        <div class="content">
-	  <%= render partial:'achieve' %>
+        <div class="<%=  'active'  if @partial=='achieve' %> content">
+	  <%= render partial:'achieve' if @partial=='achieve' %>
 	</div>
       </div>
       <div class="item friendship" id="friendship">
-        <div class="title">
+        <div class="title <%=  'active'  if @partial=='friendship' %>">
           <i class="dropdown icon"></i>人际
         </div>
-        <div class="content">
-	  <%= render partial:'friendship' if @referrer || @relations%>
+        <div class=" <%=  'active'  if @partial=='friendship' %> content">
+	  <%= render partial:'friendship' if @partial=='friendship' %>
 	</div>
       </div>
       <div class="item consult-record" id="consult-record">
-        <div class="title">
+        <div class="title <%=  'active'  if @partial=='consult-record' %>">
           <i class="dropdown icon"></i>咨询记录
         </div>
-        <div class="content">
-	  <%= render partial:'consult-record' if @consultations %>
+        <div class="<%=  'active'  if @partial=='consult-record' %> content">
+	  <%= render partial:'consult-record' if @partial='consult-record' %>
 	</div>
 	<div class="ui mini button" for="detail-add" type="consult-record"><i class="add icon"></i> 添加咨询记录</div>
       </div>
@@ -142,9 +142,12 @@
 
 <%= render partial:'shares/log_footer'%>
 <% content_for :javascript_includes do%>
+<%= javascript_include_tag "Chart.min.js"%>
+<%= javascript_include_tag "excanvas.js"%>
 <%= javascript_include_tag "manage.source.base.js"%>
 <%= javascript_include_tag "BACK_index.js"%>
 <%= javascript_include_tag "BACK_detail.js"%>
+<%= javascript_include_tag "BACK_student.js"%>
 <%= javascript_include_tag "BACK_student_detail.js"%>
 <%= javascript_include_tag "BACK_student_edit.js"%>
 

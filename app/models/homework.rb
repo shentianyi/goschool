@@ -13,16 +13,14 @@ class Homework < ActiveRecord::Base
     joins(:teacher_course).where(teacher_courses:{user_id:teacher_id,sub_course_id:sub_course_id}).sum(:unmark_number)
   end
 
-  def self.by_homework_type params
-    case params[:homework_type]
-    when HomeworkType::TEACHER
-	where(teacher_course_id:params[:id]).where(HomeworkTeacherMenuType.condition(params[:menu_type])).all
-    when HomeworkType::Stuent
-      []
-    else
-      []
-    end
+  def self.by_type params 
+	where(teacher_course_id:params[:id]).where(HomeworkTeacherMenuType.condition(params[:menu_type]))
   end
+  
+   def can_submit?
+      !self.status && self.deadline>=Date.current
+   end
+
   private 
   def validate_save
     errors.add(:title,'标题不可为空') if self.title.blank?

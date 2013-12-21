@@ -1,33 +1,117 @@
-/*老师的信息*/
-.teacher-info{
 
+/*******************************************************************************************  老师的课程表*/
+.teacher-schedule{
+    width:66%;
+    margin-left:15px !important;
+    float:left;
+    margin-top:20px !important;
+    margin-bottom:20px !important;
+    border:1px solid rgba(0,0,0,0.25);
+    box-shadow:3px 3px 3px rgba(0,0,0,0.5) !important;
+    -moz-box-shadow:3px 3px 3px rgba(0,0,0,0.5) !important;
+    -webkit-box-shadow:3px 3px 3px rgba(0,0,0,0.5) !important;
 }
-.teacher-info>p:first-of-type{
-    color:#63A69F;
-    font-weight:bold;
-    font-size:30px;
+.teacher-schedule>h2,
+.teacher-class>h2{
+    color:#63A69F !important;
 }
-/*老师的课程列表*/
-.teacher-class{
-    list-style-type: none;
-    background-color:rgba(0, 0, 0, 0.02);
-    border-radius:5px;
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
-    box-shadow:0 1px 2px 1px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow:0 1px 2px 1px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow:0 1px 2px 1px rgba(0, 0, 0, 0.1);
-    padding:5px 0;
-    position:relative;
+.teacher-schedule>.schedule-block{
+    margin-top:-15px;
+    width:100%;
+    height:550px;
 }
-.teacher-class>li{
-    padding:8px 15px
+/*课程的样式*/
+.dhx_cal_container>.dhx_cal_navline>div{
+    top:23px;
 }
-.teacher-class td{
+.dhx_cal_container>.dhx_cal_navline>div.dhx_cal_date{
+    font-size:15px !important;
+    top:-5px;
+}
+.schedule-block .dhx_cal_event_clear{
+    font-size:10px;
+    color:#fff;
+    text-shadow:1px 1px 1px rgba(0, 0, 0, 0.6);
+    -moz-text-shadow:1px 1px 1px rgba(0, 0, 0, 0.6);
+    -webkit-text-shadow:1px 1px 1px rgba(0, 0, 0, 0.6);
+    padding:1px 0px 5px 2px;
+    border-radius:0px 4px 4px 0;
+    -moz-border-radius:0px 4px 4px 0;
+    -webkit-border-radius:0px 4px 4px 0;
+}
+.schedule-block .dhx_cal_event_clear b{
+    font-weight:lighter;
+}
+.schedule-block .dhx_cal_event>.dhx_title{
+    cursor:move;
+}
+.dhtmlx_popup_button.dhtmlx_ok_button div{
+    background:#D95C5C !important;
+    border:1px solid #D95C5C !important;
+}
+.dhtmlx_popup_button.dhtmlx_ok_button {
+    background-color: #D95C5C !important;
+    border: 1px solid #D95C5C !important;
+}
+
+/*单击跳出来来的info*/
+.dhx_cal_qi_content{
+    display:none
+}
+.dhx_cal_qi_controls .dhx_qi_big_icon{
+    background-color:#63A69F;
+}
+.dhx_cal_qi_controls .dhx_qi_big_icon.icon_delete{
+    background-color: #D95C5C
+}
+.dhx_cal_quick_info{
+    background: none repeat scroll 0 0 rgba(0,0,0,0.7) !important;
+    border: 1px solid rgba(0,0,0,0.7) !important;
+}
+.dhx_cal_qi_tcontent>span:nth-of-type(1){
+    font-size:13px;
+    display:block;
+    font-weight:lighter;
+    color:rgba(255,255,255,0.8);
+    margin: -3px 0 2px;
+}
+.dhx_cal_qi_tcontent>span:nth-of-type(2){
+    font-weight:lighter;
+    margin:3px 0 5px;
+    display:block;
+    font-size:13px;
+}
+.dhx_cal_qi_tcontent>span:nth-of-type(3){
+    font-weight:lighter;
+    margin:-5px 0 5px;
+    display:block;
+    font-size:13px;
+}
+.dhx_wrap_section .new-schedule-teachers{
+    font-size:13px;
+    line-height:9px;
+}
+.dhx_wrap_section .ui.input input[type='text']{
+    padding:5px 10px;
+}
+/*******************************************************************************************  课程表详情*/
+.teacher-schedule-detail{
+    margin-top:25px;
+    float:left;
+    width:29%;
+    margin-left:15px;
+    box-shadow:3px 3px 3px rgba(0,0,0,0.5) !important;
+    -moz-box-shadow:3px 3px 3px rgba(0,0,0,0.5) !important;
+    -webkit-box-shadow:3px 3px 3px rgba(0,0,0,0.5) !important;
+    max-height:613px;
+    overflow-y:auto;
+}
+.teacher-schedule-detail td{
     word-break:break-all;
     word-wrap:break-word;
 }
-.teacher-class p{
-    font-size:13px;
-    cursor:default;
+.teacher-schedule-detail td>span{
+    display:block;
+    font-size:11px;
 }
+

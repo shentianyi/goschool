@@ -62,3 +62,8 @@ gem 'rmmseg-cpp-huacnlee'
 
 gem 'memcache-client'
 
+gem 'thinking-sphinx'
+
+
+
+

@@ -14,8 +14,7 @@
 //= require jquery-datepicker
 //= require mustache
 //= require semantic.min
-//= require Chart.min
-//= require excanvas
+//= require search
 //= require wayne-base
 
 

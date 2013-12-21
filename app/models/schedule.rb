@@ -1,13 +1,14 @@
 #encoding: utf-8
 class Schedule < ActiveRecord::Base
   belongs_to :sub_course
+   belongs_to :tenant
   delegate :course,:to=>:sub_course
   has_many :teachers,:through=>:sub_course
   attr_accessible :end_time, :start_time
   attr_accessible :sub_course_id
 
   validate :validate_save
-  
+    acts_as_tenant(:tenant)
   def self.by_id id
     joins(:sub_course).where(:id=>id).select('*,sub_courses.*').first
   end
@@ -25,7 +26,10 @@ class Schedule < ActiveRecord::Base
   end
   
   def self.by_teacher_date params
-    between_date(params).where(teacher_courses:{user_id:params[:teacher_id]})
+    joins( :sub_course=>[:institution,:teacher_courses])
+    .where(start_time:params[:start_date]..params[:end_date],teacher_courses:{user_id:params[:teacher_id]})
+    .where(SubCourse.status_neq)
+    .select('institutions.name as institution_name,sub_courses.*,schedules.*')
   end
   
   def self.by_course_id params
@@ -56,9 +60,10 @@ class Schedule < ActiveRecord::Base
   
   def self.base_query institution_id=nil
     if institution_id
-     return  joins(:sub_course).where(sub_courses:{institution_id:institution_id,status:CourseStatus::UNLOCK}).select('sub_courses.*,schedules.*')
+     return  joins(:sub_course).where(sub_courses:{institution_id:institution_id}).where(SubCourse.status_neq).select('sub_courses.*,schedules.*')
      else
-        return joins(:sub_course).where(sub_courses:{status:CourseStatus::UNLOCK}).select('sub_courses.*,schedules.*')
+        return joins( :sub_course=>:institution).where(SubCourse.status_neq).select('sub_courses.*,schedules.*')
      end
   end
+  
 end

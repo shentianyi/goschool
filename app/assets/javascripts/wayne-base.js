@@ -49,6 +49,7 @@ if(!Date.prototype.toWayneString) {
           var month = this.getMonth() + 1 < 10 ? "0" + (this.getMonth() + 1) : this.getMonth() + 1;
           var year = this.getFullYear();
           return {
+               only_minute:hour + ":" + minute,
                second : year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second,
                minute : year + "-" + month + "-" + day + " " + hour + ":" + minute,
                hour : year + "-" + month + "-" + day + " " + hour + ":00",
@@ -290,8 +291,9 @@ GLOBAL.autoComplete.count = 0;
                               $("#autoComplete-call").scrollTop(0);
                          }
                     }
-
-                    validate = true;
+                   if(auto_complete!="experiment"){
+                       validate = true;
+                   }
                }
 
           }
@@ -318,14 +320,18 @@ GLOBAL.autoComplete.count = 0;
                          }
 
                     }
-                    validate = true;
+                   if(auto_complete!="experiment"){
+                       validate = true;
+                   }
                }
           }
           //除去left and right
           else if(e.keyCode != 37 && e.keyCode != 39 && e.keyCode != 13) {
+               if(auto_complete!="experiment"){
                    window.setTimeout(function(){
-                      $("#autoComplete-call>ul").empty();
+                       $("#autoComplete-call>ul").empty();
                    },100);
+               }
                GLOBAL.autoComplete.count++;
                var $this = $(adapt_event(event).target).parents(".autoComplete").eq(0);
                var $my = $(adapt_event(event).target);
@@ -370,7 +376,11 @@ GLOBAL.autoComplete.count = 0;
                                              $target.append($("<p />").addClass("no_match").text("没有匹配内容..."))
                                         }
                                    });
-                              } else {
+                              }
+                              else if(auto_complete=="experiment"){
+
+                              }
+                              else {
                                    $.get("/" + auto_complete + "/fast_search", {
                                         q : value
                                    }, function(data) {
@@ -390,8 +400,11 @@ GLOBAL.autoComplete.count = 0;
                               }
                               $("#autoComplete-call").css("width", width - 2).css("left", left).css("top", top).attr("target", target);
                               $(window).resize(function() {
-                                   var width = parseInt($this.css("width")), left = $this[0].getBoundingClientRect().left, top = $this[0].getBoundingClientRect().bottom;
-                                   $("#autoComplete-call").css("width", width - 2).css("left", left).css("top", top);
+                                  if($("#autoComplete-call").attr("target")!=""){
+                                      var width = parseInt($this.css("width")), left = $this[0].getBoundingClientRect().left, top = $this[0].getBoundingClientRect().bottom;
+                                      $("#autoComplete-call").css("width", width - 2).css("left", left).css("top", top);
+                                  }
+
                               });
                          }
                     }
@@ -450,6 +463,9 @@ GLOBAL.autoComplete.count = 0;
                }
                $this.val("");
           }
+          else if($("#" + target).attr("autocomplete")=="experiment"){
+
+          }
      });
 })();
 //labelForm
@@ -485,6 +501,7 @@ GLOBAL.autoComplete.count = 0;
 (function() {
      $("body").on("keyup", "input[type='text']", function(event) {
           var e = adapt_event(event).event, $input = $(this);
+          var autocomplete=$input.attr("autocomplete");
           if(e.keyCode == 32) {
                if($.trim($input.val()).length == 0) {
                     e.preventDefault();
@@ -542,6 +559,9 @@ GLOBAL.autoComplete.count = 0;
                if($.trim($input.val()).length == 0) {
                     e.preventDefault();
                     $input.val("");
+                   if(autocomplete=="experiment"){
+                       input_for_big_search();
+                   }
                } else {
                     if($input.attr("im") == "label" && $input.attr("ishould") == "BeSelected") {
                          if($("#autoComplete-call").find(".active").length > 0) {
@@ -586,12 +606,44 @@ GLOBAL.autoComplete.count = 0;
                          $("#autoComplete-call").css("left", "-999em").attr("target", "")
                     } else if($input.attr("ishould") == "BeSelected") {
                          if($("#autoComplete-call").find(".active").length > 0) {
+                             $("#autoComplete-call .active").click();
                               $("#autoComplete-call").css("left", "-999em").attr("target", "")
                          } else {
-                              MessageBox("请在下拉提示菜单中选择一条", "top", "warning");
+                             if(autocomplete=="experiment"){
+                                 input_for_big_search();
+                             }
+                             else{
+                                 MessageBox("请在下拉提示菜单中选择一条", "top", "warning");
+                             }
                          }
                     }
                }
           }
      });
 })()
+function input_for_big_search(){
+    var instance=Search.instance();
+    var data_to_sent = {search_type:instance.current_mode,entity_type:instance.entity,page:1,per_page:20,search_queries:instance.queries};
+    if(instance.current_mode=="full_text"){
+        if($.trim(instance.input.val()).length>0){
+            BACKINDEX.right_list.generateResult(data_to_sent);
+        }
+        else{
+            MessageBox("请输入搜索内容","top","warning");
+        }
+
+    }
+    else if(instance.current_mode=="select_query"){
+        var count=0;
+        for(var i in data_to_sent.search_queries){
+            count++;
+        }
+        if(count>0){
+            BACKINDEX.right_list.generateResult(data_to_sent);
+        }
+        else{
+            MessageBox("请按提示创造至少一个搜索条件","top","warning");
+        }
+    }
+
+}

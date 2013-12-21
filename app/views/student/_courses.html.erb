@@ -1,0 +1,12 @@
+<div>
+  <% if @courses %>
+  <% @courses.each do | c |%>
+  <h2><%= c.name %></h2>
+  <p><%= c.description %></p>
+  <p>授课老师:<%= User.by_course_id(c.course_id).pluck(:name).join(',')%></p>
+  <p>授课时间:<%= c.period_display %></p>
+  <p><%= c.status_display %></p>
+  <a href="/posts/index/<%= c.course_id%>">进入课堂</a>
+  <% end %>
+  <% end %>
+</div>

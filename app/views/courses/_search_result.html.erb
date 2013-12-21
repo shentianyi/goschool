@@ -1,50 +1,50 @@
-<ul class="search-result" id="search-result" name="course">
-     <%@courses.each do |course|%>
-     <li>
-          <table class="ui table segment">
-               <tr>
-                    <td colspan="3" class="fourteen wide">
-                    <p class="course-name">
-                         <%= course.name%>
-                    </p>
-                    <div class="ui blue labels small">
-                         <%course.tags.each do |tag|%>
-                         <a class="ui label"> <%= tag%> </a>
-                         <%end%>
-                    </div></td>
-                    <td rowspan="2" class="course-status">
-                    <p>
-                         状态
-                    </p>
-                    <p>
-                         <%=course.status_display%>
-                    </p></td>
-               </tr>
-               <tr>
-                    <td class="five wide">
-                    <p >
-                         授课时间:<span><%=course.start_date%>-<%=course.end_date%></span>
-                    </p>
-                    <p class="course-teachers">
-                         授课老师:<%=course.teacher_names_string%>
-                    </p>
-                    <p>
-                         所属机构:<span><%=course.institution_name%></span>
-                    </p>
-                    <p>
-                         已报班: <span class="class-size"><%=course.actual_number%></span> 人
+<%@courses.each do |course|%>
+<li>
+     <table class="ui table segment">
+          <tr>
+               <td colspan="3" class="fourteen wide">
+               <p class="course-name">
+                    <%= course.name%>
+               </p>
+               <div class="ui blue labels small">
+                    <%course.tags.each do |tag|%>
+                    <a class="ui label"> <%= tag%> </a>
+                    <%end%>
+               </div></td>
+               <td rowspan="2" class="course-status">
+               <p>
+                    状态
+               </p>
+               <p state="<%= course.status%>">
+                    <%= course.status_display%>
+               </p>
+               <div class="ui slider checkbox" id="<%= course.id%>">
+                    <input name="walk" type="checkbox"  <%= 'checked' if course.ongoing?%>>
+                    <label> </label>
+               </div></td>
+          </tr>
+          <tr>
+               <td class="six wide">
+               <p >
+                    授课时间:<span><%= course.start_date%>-<%= course.end_date%></span>
+               </p>
+               <p class="course-teachers">
+                    授课老师:<%= course.teacher_names_string%>
+               </p>
+               <p>
+                    所属机构:<span><%= course.institution_name%></span>
+               </p>
+               <p>
+                    已报班: <span class="class-size"><%= course.actual_number%></span> 人
 
-                    </p></td>
-                    <td class="course-desc six wide">
-                    <p>
-                         <span>简介:</span><span>
-                        <%=course.description%>
-                    </span>
-                    </p></td>
-                    <td class="three wide"><a class="ui mini button teal" href="/courses/<%=course.id%>"> 详情 </a></td>
+               </p></td>
+               <td class="course-desc six wide">
+               <p>
+                    <span>简介:</span><span> <%= course.description%> </span>
+               </p></td>
+               <td class="two wide"><a class="ui mini button teal" href="/courses/<%= course.id%>"> 详情 </a></td>
 
-               </tr>
-          </table>
-     </li>
-     <%end%>
-</ul>
+          </tr>
+     </table>
+</li>
+<%end%>

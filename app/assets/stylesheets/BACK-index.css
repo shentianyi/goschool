@@ -105,10 +105,10 @@
 }
 .back-index-side-header>label{
     position:relative;
-    top:13px;
+    top:15px;
     left:14px;
-    font-size:19px;
-    font-weight:bold;
+    font-size:15px;
+    font-weight:lighter;
     color:#444;
 }
 .back-index-side-header>.ui.button:first-of-type{
@@ -118,7 +118,12 @@
 }
 .back-index-side-header>.ui.button:nth-of-type(2){
     position:absolute;
-    right:140px;
+    right:135px;
+    top:17px;
+}
+.back-index-side-header>.ui.button:nth-of-type(3){
+    position:absolute;
+    right:234px;
     top:17px;
 }
 /*中间段*/
@@ -158,6 +163,7 @@
     min-height:768px;
     transition:right 0.35s ease-out;
     height:100%;
+    min-width:670px;
 }
 .back-index-main>.search-list{
     width:90%;
@@ -169,9 +175,16 @@
     margin-top:20px;
     margin-bottom:10px;
 }
+.back-index-main>.search-list>.search-input>i{
+    cursor:pointer !important;
+    transition:color 0.25s ease-out !important;
+}
+.back-index-main>.search-list>.search-input>i:hover{
+    color:#D95C5C
+}
 /*搜索条件的记录*/
 .back-index-main>.search-list>.search-conditions{
-    padding:6px 20px;
+    padding:0;
     margin:0 0 15px;
 }
 .back-index-main>.search-list>.search-conditions p{
@@ -450,7 +463,34 @@
     -moz-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
     -webkit-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
 }
-
+/*超级搜索框*/
+.query_list>div{
+    padding:6px 20px;
+    width:80%;
+}
+.query_list>div:not(:first-of-type){
+    margin-top:-8px;
+}
+.query_list>div>span{
+    font-size:13px;
+}
+.query_list>div>span:last-of-type{
+    display:inline-block;
+    margin-right:15px;
+}
+.query_list>div>a{
+    color:#D95C5C;
+    transition:color 0.25s ease-out;
+    display:none;
+    margin-right:5px;
+}
+.query_list>div:hover a,
+.query_list>div>a:hover{
+    display:inline;
+}
+.query_list>div>a:hover{
+    color:rgba(228,75,61,0.6)
+}
 
 
 

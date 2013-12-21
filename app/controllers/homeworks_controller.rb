@@ -1,16 +1,19 @@
 #encoding: utf-8
 class HomeworksController < ApplicationController
-  before_filter :init_message ,:only=>[:show,:create,:update,:destroy]
+  before_filter :init_message ,:only=>[:create,:update,:destroy]
   before_filter :get_homework,:only=>[:show,:update,:destroy]
   before_filter :render_nil_msg , :only=>[:edit,:update,:destroy]
-  before_filter :require_user_as_teacher, :only=>[:index,:create,:update,:destroy]
+  skip_before_filter :require_user_as_employee
+  before_filter :require_user_as_teacher, :only=>[:create,:update,:destroy]
 
   layout 'homework'
   def index
     if current_user.is_teacher?
       teacher_index
     elsif current_user.is_student?
-
+      student_index
+    else
+      error_page_404
     end
   end
 
@@ -23,13 +26,11 @@ class HomeworksController < ApplicationController
   end
 
   def show
-    if   @homework=Homework.find_by_id(params[:id])
+    if   @homework
       if current_user.is_teacher?
-        @homework=TeacherHomeworkPresenter.new(@homework)
-        render partial:'teacher_homework'
+        teacher_show
       elsif current_user.is_student?
-        @homework=StudentHomeworkPresenter.new(Homework.find_by_id(params[:id]))
-        render partial:'stuent_homework'
+        student_show
       end
     else
       error_page_404
@@ -68,9 +69,11 @@ class HomeworksController < ApplicationController
 
   def get_homeworks menu_type
     @homeworks =if current_user.is_teacher?
-      Homework.by_homework_type({id:params[:id],homework_type:HomeworkType::TEACHER,menu_type:menu_type})
+      Homework.by_type({id:params[:id],menu_type:menu_type})
     elsif current_user.is_student?
-
+       StudentHomework.by_type({id:params[:id],menu_type:menu_type,student_id:current_student_id,sub_course_id:params[:sid]})
+      else
+          error_page_404
     end
   end
 
@@ -84,4 +87,28 @@ class HomeworksController < ApplicationController
     end
   end
 
+  def student_index
+    if @student_course=StudentCourse.by_student(params[:id],current_student_id)
+      @sub_courses=@student_course.disfault_sub_cousres.all
+      @sub_course_id=params[:sid]
+      @menus=  HomeworkStudentMenuType.generate_menu
+      render 'student_index'
+    else
+      error_page_404
+    end
+  end
+
+  def teacher_show
+    @homework=TeacherHomeworkPresenter.new(@homework)
+    @student_homeworks=StudentHomeworkPresenter.init_presenters(StudentHomework.detail_by_homework_id(@homework.id).all)
+    render partial:'teacher_homework'
+  end
+
+  def student_show
+    @homework=TeacherHomeworkPresenter.new(@homework)
+    if sh=StudentHomework.detail_by_homework_id(@homework.id,current_student_id).first
+      @student_homework=StudentHomeworkPresenter.new(sh)
+    end
+    render partial:'student_homework'
+  end
 end

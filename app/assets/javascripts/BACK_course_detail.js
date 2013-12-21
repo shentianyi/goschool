@@ -8,34 +8,7 @@
 var DETAIL=DETAIL || {};
 DETAIL.course={};
 (function(){
-    $(".ui.checkbox[name='join'],.ui.checkbox[name='choose']").checkbox({
-        onChange:function(){
-            $(this).parents("tr").eq(0).toggleClass("positive");
-        }
-    });
-    $(".ui.checkbox[name='join-pay']").checkbox({
-        onChange:function(){
-            var $this=$(this);
-            $(this).parent().parent().toggleClass("positive");
-            //post
-            var id=$(this).parents("tr").eq(0).attr("id");
-            var paid=$(this).parent().parent().hasClass("positive");
-            $.ajax({
-                url:"/student_courses/"+id,
-                data:{student_course:{paid:paid}},
-                type:'PUT',
-                success:function(data){
-                    if(data.result){
-                        MessageBox("操作成功","top","success");
-                    }
-                    else{
-                        $this.checkbox('toggle');
-                        MessageBox_content(data.content);
-                    }
-                }
-            })
-        }
-    });
+
     $("body").on("click","#course-detail-edit",function(){
         $("#teacher").children().removeClass("active");
         $(".back-index-add[name='course']").css("left","0px").css("right","0px");
@@ -330,6 +303,34 @@ DETAIL.course={};
         $("#add-class-choose-institution,#add-service-choose-institution").dropdown();
         $("#add-class-choose-institution .item").eq(0).addClass("active");
         $("#add-service-choose-institution .item").eq(0).addClass("active");
+        $(".ui.checkbox[name='join'],.ui.checkbox[name='choose']").checkbox({
+            onChange:function(){
+                $(this).parents("tr").eq(0).toggleClass("positive");
+            }
+        });
+        $(".ui.checkbox[name='join-pay']").checkbox({
+            onChange:function(){
+                var $this=$(this);
+                $(this).parent().parent().toggleClass("positive");
+                //post
+                var id=$(this).parents("tr").eq(0).attr("id");
+                var paid=$(this).parent().parent().hasClass("positive");
+                $.ajax({
+                    url:"/student_courses/"+id,
+                    data:{student_course:{paid:paid}},
+                    type:'PUT',
+                    success:function(data){
+                        if(data.result){
+                            MessageBox("操作成功","top","success");
+                        }
+                        else{
+                            $this.checkbox('toggle');
+                            MessageBox_content(data.content);
+                        }
+                    }
+                })
+            }
+        });
 
     });
 })();

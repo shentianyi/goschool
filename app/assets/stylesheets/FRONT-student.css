@@ -1,0 +1,192 @@
+/**************************************************************  课程  */
+.front-class.student-class{
+    width:95%;
+    box-shadow:2px 2px 2px rgba(0,0,0,0.5);
+    -moz-box-shadow:2px 2px 2px rgba(0,0,0,0.5);
+    -webkit-box-shadow:2px 2px 2px rgba(0,0,0,0.5);
+    border:1px solid rgba(0,0,0,0.3);
+    float:left;
+    margin-left:25px !important;
+}
+.front-class.student-class .class-state>span:nth-of-type(2){
+    color:#D95C5C
+}
+
+/**************************************************************  homework  */
+.segment.student-homework{
+    float:left;
+    width:40%;
+    margin-left:30px !important;
+    box-shadow:2px 2px 2px rgba(0,0,0,0.5);
+    -moz-box-shadow:2px 2px 2px rgba(0,0,0,0.5);
+    -webkit-box-shadow:2px 2px 2px rgba(0,0,0,0.5);
+    border:1px solid rgba(0,0,0,0.3);
+    margin-top:5px !important;
+    margin-bottom:350px;
+}
+.segment.student-homework>.ignored.ui.icon.message>i{
+    font-size:35px;
+}
+.segment.student-homework>.ignored.ui.icon.message>.content>h3{
+    font-size:14px;
+}
+.segment.student-homework>.ignored.ui.icon.message>.content>p{
+    color:#39a43c;
+    font-size:13px;
+}
+.segment.student-homework>.ignored.ui.icon.message>.content>p>i:first-of-type{
+    color:#C69C6D
+}
+.segment.student-homework>.ignored.ui.icon.message>.content>p>i:last-of-type{
+    color:#4092CC
+}
+
+.segment.student-homework ul{
+    list-style-type: none;
+    padding:10px 5px;
+    margin:-10px 0 0;
+}
+.segment.student-homework ul li{
+    margin-bottom:15px;
+}
+.segment.student-homework ul table{
+   box-shadow:0 0 0 1px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow:0 0 0 1px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow:0 0 0 1px rgba(0, 0, 0, 0.6);
+   border-radius:3px;
+   -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+}
+.segment.student-homework ul table td:first-of-type>p,
+.segment.student-homework ul table td:nth-of-type(2)>p{
+   font-size:12px;
+   line-height:12px;
+   width:100%;
+   word-break:break-all;
+   word-wrap:break-word;
+}
+.segment.student-homework ul table td:nth-of-type(2)>p:nth-of-type(2){
+    color:rgba(0,0,0,0.5);
+    font-size:11px;
+}
+.segment.student-homework ul table td:nth-of-type(3)>i,
+.segment.student-homework ul table td:nth-of-type(4)>i{
+    font-size:15px;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+}
+.segment.student-homework ul table td:nth-of-type(3)>i:hover,
+.segment.student-homework ul table td:nth-of-type(4)>i:hover{
+    color:rgba(0,0,0,0.8);
+}
+.segment.student-homework ul table td:nth-of-type(3)>i{
+    color:#C69C6D;
+}
+.segment.student-homework ul table td:nth-of-type(4)>i{
+    color:#4092CC;
+}
+
+.homework-wrap{
+    border:1px solid rgba(0,0,0,0.3);
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    box-shadow:2px 2px 2px rgba(0,0,0,0.5);
+    -moz-box-shadow:2px 2px 2px rgba(0,0,0,0.5);
+    -webkit-box-shadow:2px 2px 2px rgba(0,0,0,0.5);
+    background-color:#fff;
+    position:relative;
+}
+.homework-wrap>label{
+    font-size: 14px;
+    position:absolute;
+    left:10px;
+    top:8px;
+    color:rgba(0, 0, 0, 0.8);
+    font-weight:bold;
+}
+/**************************************************************  作业表现 line  */
+.homework-line-wrap{
+    margin-top:5px;
+    float:left;
+    width:52%;
+    margin-left:2%;
+    height:260px;
+}
+.homework-line-wrap>.buttons{
+    font-size:13px;
+    position:absolute;
+    right:10px;
+    top:5px;
+    max-width:85%;
+}
+.homework-line-wrap>.ui.basic.buttons>.button.active{
+    background-color:#F38630;
+    color:white;
+}
+.homework-line-wrap>.buttons>.button:hover:not(.active){
+    color:#F38630 !important;
+    background-color:rgba(0,0,0,0.06) !important;
+}
+.homework-line-wrap>canvas{
+    position:absolute;
+    top:36px;
+}
+/**************************************************************  作业表现 pie  */
+.homework-pie-wrap{
+    margin-top:16px;
+    float:left;
+    margin-left:2%;
+    width:28%;
+    height:180px;
+}
+.homework-pie-wrap>canvas{
+    position:absolute;
+    top:20px;
+}
+.homework-pie-wrap>.deal-on-date{
+    font-size:12px;
+    color:rgba(0,0,0,0.7);
+    position:absolute;
+    right:5px;
+    top:4px;
+}
+.homework-pie-wrap>.deal-on-date>span{
+    display:block;
+    font-weight:bold;
+    color:rgba(151,187,205,1);
+    text-align:right;
+    font-size:15px
+}
+/**************************************************************  我的进步  */
+.homework-progress-wrap{
+    margin:16px 0 0 2%;
+    float:left;
+    width:22%;
+    height:180px;
+}
+.homework-progress-wrap>p{
+    font-size:12px;
+    color:rgba(151,187,205,1);
+    margin-left:10px;
+}
+.homework-progress-wrap>p:first-of-type{
+    margin-top:36px;
+}
+.homework-progress-wrap>.icons{
+    margin-left:15px;
+}
+.homework-progress-wrap .smile{
+    color:#52A954
+}
+.homework-progress-wrap .frown{
+    color:#D95C5C
+}
+.homework-progress-wrap>.progress_times{
+    color:rgba(0,0,0,0.8);
+    margin-left:15px;
+}
+.homework-progress-wrap>.progress_times>i{
+    font-size:16px;
+}
+

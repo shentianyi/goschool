@@ -5661,7 +5661,7 @@ i.massive.basic.icon {
 .ui.gigantic.buttons .loading.button:after,
 .ui.massive.loading.button:after,
 .ui.gigantic.loading.button:after {
-  background-image: url(../images/loader-medium.gif);
+  background-image: url(/assets/loader-medium.gif);
 }
 
 .ui.huge.loading.button:after,
@@ -5677,7 +5677,7 @@ i.massive.basic.icon {
 .ui.gigantic.buttons .loading.button.active:after,
 .ui.massive.loading.button.active:after,
 .ui.gigantic.loading.button.active:after {
-  background-image: url(../images/loader-medium.gif);
+  background-image: url(/assets/loader-medium.gif);
 }
 
 /*--------------
@@ -5702,9 +5702,9 @@ i.massive.basic.icon {
 
 .ui.basic.buttons .button,
 .ui.basic.button {
-  background-color: transparent !important;
+  background-color: transparent;
   background-image: none;
-  color: #808080 !important;
+  color: #808080 ;
   font-weight: normal;
   text-transform: none;
   -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
@@ -5720,7 +5720,7 @@ i.massive.basic.icon {
 .ui.basic.buttons .button:hover,
 .ui.basic.button:hover {
   background-image: none;
-  color: #7F7F7F !important;
+  color: #7F7F7F;
   -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.18) inset;
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.18) inset;
 }
@@ -9069,6 +9069,9 @@ img.ui.image {
 .ui.input input-placeholder {
   color: #BBBBBB;
 }
+::-webkit-input-placeholder {
+    color:rgba(0,0,0,0.4) !important;
+}
 
 /*******************************
             States
@@ -10306,7 +10309,7 @@ a.ui.teal.label:hover:before {
 
 .ui.dimmer .ui.loader,
 .ui.inverted.loader {
-  background-image: url(../images/loader-medium-inverted.gif);
+  background-image: url(/assets/loader-medium-inverted.gif);
 }
 
 /* Large Size */
@@ -10342,7 +10345,7 @@ a.ui.teal.label:hover:before {
 .ui.loader {
   width: 32px;
   height: 32px;
-  background: url(../images/loader-medium.gif) no-repeat;
+  background: url(/assets/loader-medium.gif) no-repeat;
   background-position: 48% 0px;
 }
 
@@ -11082,8 +11085,8 @@ a.ui.teal.label:hover:before {
   left: -1px;
   position: absolute;
   width: 100%;
-  -webkit-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow:  2px 2px 4px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.5);
 }
 
 .ui.piled.segment:after {

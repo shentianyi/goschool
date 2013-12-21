@@ -1,5 +1,5 @@
 <!--partial-->
-
+<% if @consultations %>
 <% @consultations.each do |consultation| %>
 <div class="item" id="<%= consultation.id%>">
   <p><%= consultation.consult_time_display%> <%= consultation.consultants%></p>
@@ -7,8 +7,8 @@
   <p>接线人:<%= consultation.recorder%></p>
   <dl>
     <dt>评论：</dt>
-    <% if !consultation.comment.blank? %>
-    <dd><span><%= consultation.comment%></span><span><%= consultation.comment_time_display%></span><i student="<%= consultation.id%>" class="icon remove"></i></dd>
+    <% consultation.comments.each do |c|%>
+    <dd><span><%= c[:comment]%></span><span><%= c[:comment_time] %></span><i comment="<%= c[:id] %>" class="icon remove"></i></dd>
     <% end %>
   </dl>
   <div class="comment-block">
@@ -16,5 +16,6 @@
     <div class="ui button tiny" id=<%= consultation.id%>>评论</div>
   </div>
 </div>
+<% end %>
 <% end %>
 <!--partial-->

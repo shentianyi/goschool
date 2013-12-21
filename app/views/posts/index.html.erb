@@ -1,25 +1,15 @@
 <h1>Listing posts</h1>
+<h2>当前课堂:</h2><p id="course" course="<%= @current_course.id%>"><%= @current_course.name%></p>
+<%= render partial:'header' %>
+<%= render partial:'side_list' %>
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<p>帖子内容</p>
+<div id="post-content" style="float: left">
+  
+</div>
 
-<% @posts.each do |post| %>
-  <tr>
-    <td><%= post.id %></td>
-    <td><%= link_to 'Show', post %></td>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Post', new_post_path %>
-
-<%= render partial:'shares/file_upload'%>
+<% content_for :javascript_includes do%>
+<%= javascript_include_tag "manage.source.base.js"%>
+<%= javascript_include_tag "manage.post.base.js"%>
+<%= javascript_include_tag "FRONT_student.js"%>
+<%end%>

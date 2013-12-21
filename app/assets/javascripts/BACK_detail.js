@@ -57,6 +57,36 @@
                             $("#achieve_final_tabular>a").eq(0).click();
                         }
                     }
+                    else if(target=="student"){
+                        $(".ui.checkbox[name='join'],.ui.checkbox[name='choose']").checkbox({
+                            onChange:function(){
+                                $(this).parents("tr").eq(0).toggleClass("positive");
+                            }
+                        });
+                        $(".ui.checkbox[name='join-pay']").checkbox({
+                            onChange:function(){
+                                var $this=$(this);
+                                $(this).parent().parent().toggleClass("positive");
+                                //post
+                                var id=$(this).parents("tr").eq(0).attr("id");
+                                var paid=$(this).parent().parent().hasClass("positive");
+                                $.ajax({
+                                    url:"/student_courses/"+id,
+                                    data:{student_course:{paid:paid}},
+                                    type:'PUT',
+                                    success:function(data){
+                                        if(data.result){
+                                            MessageBox("操作成功","top","success");
+                                        }
+                                        else{
+                                            $this.checkbox('toggle');
+                                            MessageBox_content(data.content);
+                                        }
+                                    }
+                                })
+                            }
+                        });
+                    }
                 }
             });
         }
@@ -84,6 +114,36 @@
                         if($("#achieve_final_tabular>a").length>=1){
                             $("#achieve_final_tabular>a").eq(0).click();
                         }
+                    }
+                    else if(target=="student"){
+                        $(".ui.checkbox[name='join'],.ui.checkbox[name='choose']").checkbox({
+                            onChange:function(){
+                                $(this).parents("tr").eq(0).toggleClass("positive");
+                            }
+                        });
+                        $(".ui.checkbox[name='join-pay']").checkbox({
+                            onChange:function(){
+                                var $this=$(this);
+                                $(this).parent().parent().toggleClass("positive");
+                                //post
+                                var id=$(this).parents("tr").eq(0).attr("id");
+                                var paid=$(this).parent().parent().hasClass("positive");
+                                $.ajax({
+                                    url:"/student_courses/"+id,
+                                    data:{student_course:{paid:paid}},
+                                    type:'PUT',
+                                    success:function(data){
+                                        if(data.result){
+                                            MessageBox("操作成功","top","success");
+                                        }
+                                        else{
+                                            $this.checkbox('toggle');
+                                            MessageBox_content(data.content);
+                                        }
+                                    }
+                                })
+                            }
+                        });
                     }
                 }
             });

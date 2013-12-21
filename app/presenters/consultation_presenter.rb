@@ -1,5 +1,5 @@
 class ConsultationPresenter<Presenter
-  def_delegators :@consultation, :id,:student_id,:logininfo_id,:consultants,:content,:consult_time,:comment,:comment_time
+  def_delegators :@consultation, :id,:student_id,:logininfo_id,:consultants,:content,:consult_time,:comment#,:comment_time
 
   def initialize(consultation)
     @consultation = consultation
@@ -20,10 +20,16 @@ class ConsultationPresenter<Presenter
     end
   end
 
-  def comment_time_display
-    if self.comment_time
-      self.comment_time.year.to_s + "-" + self.comment_time.month.to_s + "-" + self.comment_time.day.to_s + " " + self.comment_time.hour.to_s + ":"+self.comment_time.min.to_s+":"+self.comment_time.sec.to_s
+  def comments
+    datas = []
+    @consultation.consultcomments.each do |c|
+      datas<<{:id=>c.id,:comment=>c.comment,:comment_time=>comment_time_display(c.comment_time)}
     end
+    return datas
+  end
+
+  def comment_time_display time
+    time.year.to_s + "-" + time.month.to_s + "-" +time.day.to_s + " " + time.hour.to_s + ":"+time.min.to_s+":"+time.sec.to_s
   end
 
   def to_json
@@ -34,8 +40,9 @@ class ConsultationPresenter<Presenter
         consult_time_display:self.consult_time_display,
         consultants:self.consultants,
         content:self.content,
-        comment:self.comment,
-        comment_time_display:self.comment_time_display
+        comments:self.comments
+        #comment:self.comment,
+        #comment_time_display:self.comment_time_display
       }
     }
   end

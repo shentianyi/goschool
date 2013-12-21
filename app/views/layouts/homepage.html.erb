@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+     <head>
+          <title>Goschool</title>
+          <%= stylesheet_link_tag    "application", :media => "all" %>
+          <%= csrf_meta_tags %>
+     </head>
+     <body>
+          <%= render 'shares/left_aside'%>
+
+          <%= yield %>
+
+          <%= render 'shares/message_box'%>
+     </body>
+     <%= javascript_include_tag "application" %>
+     <%= yield :javascript_includes%>
+</html>

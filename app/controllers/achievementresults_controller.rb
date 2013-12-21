@@ -9,8 +9,10 @@ class AchievementresultsController < ApplicationController
     @achieve = Achievement.find(params[:id])
     if @achieve
       @achieveresult = Achievementresult.new(params[:achievementresult])
+
       msg.result = @achieveresult.save
-      msg.object = @achieveresult
+      @presenters = StudentAchievementPresenter.init_presenters(Achievement.get_result_by_id @achieveresult.id)
+      msg.object = @presenters[0].to_json
     else
       msg.content = '成就类型不存在'
     end
@@ -30,6 +32,17 @@ class AchievementresultsController < ApplicationController
       msg.content = '成就不存在'
     end
 
+    render :json=>msg
+  end
+
+  def update
+    msg = Msg.new
+    msg.result = false;
+    msg.content = '更新成就失败' 
+    @result = Achievementresult.find(params[:id])
+    @result.update_attributes(params[:result])
+    msg.result = true
+    
     render :json=>msg
   end
 end

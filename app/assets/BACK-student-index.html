@@ -79,7 +79,7 @@
 <!--view-->
 
 <!--list-->
-<article class="back-index-main" name="student">
+<article class="back-index-main" id="back-index-main" name="student">
     <header class="back-index-side-header">
         <div class="ui teal mini button" id="add-item" type="student">
             <div class="visible content">
@@ -89,13 +89,11 @@
         </div>
     </header>
     <div class="search-list" id="search-list">
-        <div class="ui big fluid icon input search-input autoComplete customAutoHeight" autoMaxHeight="210px">
-            <input placeholder="在此输入搜素条件..." type="text" id="autoC1">
+        <div class="ui big fluid icon input search-input customAutoHeight" id="container_for_input" autoMaxHeight="210px">
             <i class="search icon"></i>
         </div>
-        <div class="ui inverted segment search-conditions">
-            <p>所在高中：七宝中学</p>
-            <p>年龄：大于 18岁</p>
+        <div class="ui inverted segment search-conditions" id="container_for_list">
+
         </div>
         <div class="column">
             <div class="ui raised segment">
@@ -137,11 +135,11 @@
                         </td>
                         <td class="two wide">
                             <p class="maybe-know">推荐人</p>
-                            <p><span>张三</span></p>
+                            <p><a>张三</a></p>
                         </td>
                         <td class="three wide">
                             <p class="recommend">可能认识</p>
-                            <p><span>李四</span><span>王八</span><span>白一</span></p>
+                            <p><a>李四</a><a>王八</a><a>白一</a></p>
                         </td>
                         <td class="three wide">
                             <a class="ui mini button teal" href="BACK-student-detail.html">
@@ -336,10 +334,13 @@
 <script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>
 <script type='text/javascript' src="javascripts/jquery-datepicker.js" ></script>
 <script type='text/javascript' src="javascripts/semantic.min.js" ></script>
+<script type='text/javascript' src="javascripts/search.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_index.js" ></script>
 <script type='text/javascript' src="javascripts/wayne-base.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_rightList.js" ></script>
 <script type='text/javascript' src="javascripts/BACK_student.js" ></script>
 <script type='text/javascript' src="javascripts/mustache.js" ></script>
+
+
 </body>
 </html>

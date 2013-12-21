@@ -8,10 +8,10 @@ class StudentsController < ApplicationController
     @students = Student.all
     @student_presenters = StudentPresenter.init_presenters(@students)
     
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @students }
-    end
+    #respond_to do |format|
+    #  format.html # index.html.erb
+    #  format.json { render json: @students }
+    #end
   end
 
   # GET /students/1
@@ -20,10 +20,7 @@ class StudentsController < ApplicationController
     @active_left_aside='students'
     @student = Student.find(params[:id])
     @presenter=StudentPresenter.new(@student)
-    
     case params[:part]
-    when 'class-and-service'
-      courses(@student)
     when 'achieve'
       achievements(@student)
     when 'friendship'
@@ -31,6 +28,7 @@ class StudentsController < ApplicationController
     when 'consult-record'
       consultation(@student)
     else
+      @partial = 'class-and-service'
       courses(@student)
     end
     
@@ -103,6 +101,11 @@ class StudentsController < ApplicationController
     begin
       @student = Student.find(params[:id])
       @student.tags = params[:student].slice(:tags).strip
+      if params[:is_active_account]
+        @logininfo = @student.logininfo
+        @status = (params[:is_active_account]) ? UserStatus::ACTIVE : UserStatus::LOCKED
+        @logininfo.update_attribute(:status=>@status);
+      end
       ActiveRecord::Base.transaction do
         if params[:student][:email]
           @student.logininfo.update_attributes!(:email=>params[:student][:email])
@@ -123,11 +126,13 @@ class StudentsController < ApplicationController
   def destroy
     msg = Msg.new
     msg.result = false
-    @sutdent = Student.find_by_id(params[:id])
+    @student = Student.find(params[:id])
     if @student
       @student.destroy
+      msg.result = true
+    else
+      msg.content = '未找到该学生或您没有权限删除Ta'
     end
-    msg.result = true
     render :json=>msg
   end
 
@@ -175,8 +180,8 @@ class StudentsController < ApplicationController
     end
     
     if @final_grade
-      @sub_courses = Achievement.achieve_types(AchievementType::FINAL_GRADE,student.id)
-      @final_grades =  StudentAchievementPresenter.init_presenters(Achievement.achieves(@final_grade.id,student.id))
+      @sub_courses = Achievement.where("type"=>AchievementType::SUB_COURSE)
+      @final_grades =  StudentAchievementPresenter.init_presenters(Achievement.get_result_by_type(AchievementType::SUB_COURSE,student.id))
     end
   end
 
@@ -186,7 +191,7 @@ class StudentsController < ApplicationController
     end
     @relations = []
     Recommendation.new.get_potential_relation(student.tenant_id,student.id).each do |relation|
-      s = Student.find_by_id(relation['id'])
+      s = Student.find_by_id(relation['reced_id'])
       if s
         @relations<<s
       end

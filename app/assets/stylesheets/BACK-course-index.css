@@ -27,6 +27,7 @@
     margin-left:-35px;
     top:-20px;
 }
+
 .back-index-main > .search-list > .search-result[name="course"] > li .course-status{
     max-width:60px;
     min-width:60px;
@@ -38,6 +39,15 @@
 }
 .back-index-main > .search-list > .search-result[name="course"] > li .course-status p:nth-of-type(2){
     color:#E44B3D;
+}
+.back-index-main > .search-list > .search-result[name="course"] > li .course-status p:nth-of-type(2)[state="2"]{
+    color:#77c117;
+}
+.back-index-main > .search-list > .search-result[name="course"] > li .course-status .slider {
+    position:relative;
+    left:50%;
+    margin-left:-1.5em;
+    bottom:-5px;
 }
 .back-index-main > .search-list > .search-result[name="course"] > li .course-teachers>span{
     margin-right:6px;
