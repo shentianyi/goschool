@@ -5,3 +5,23 @@
   <p><%= @student.address %></p>
   <% end %>
 </div>
+
+<!--view-->
+<aside class="back-index-condition front-index-condition">
+  <header class="back-index-side-header">
+    <label>个人信息</label>
+  </header>
+  <div class="front-people-info">
+    <img class=" ui image" src="<%= @student.image_url %>">
+    <label class="label"><span><%= @student.name %></span></label>
+    <p><i class="icon mail"></i> <span><%= @student.email %></span></p>
+    <p><i class="icon building"></i> <span><%= @student.school %></span></p>
+    <p><i class="icon home"></i> <span><%= @student.address %></span></p>
+  </div>
+  <div class="front-statistics">
+
+    <canvas id="grade-chart" width="160" height="100"></canvas>
+    <canvas id="delivery-chart" width="80" height="100"></canvas>
+  </div>
+</aside>
+<!--view-->

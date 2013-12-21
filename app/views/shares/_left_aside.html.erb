@@ -11,7 +11,7 @@
     <%end%>
     <%if current_user.is_teacher? || current_user.is_student?%>
     <li>
-      <a class="<%= @active_left_aside=='homepage' ? 'active' : ''%>"  href='<%=  current_user.is_teacher? ?  teachers_path : students_path%>'>我的主页</a>
+      <a class="<%= @active_left_aside=='homepage' ? 'active' : ''%>"  href='<%=  current_user.is_teacher? ?  teachers_path : student_index_path%>'>我的主页</a>
     </li>
     <%end%>
      </ul>

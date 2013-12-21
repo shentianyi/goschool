@@ -49,7 +49,7 @@ class StudentPresenter<Presenter
         @relations<<s
       end
     end
-    return @relations
+    return @relations.first(3)
   end
 
   def last_consultation_
