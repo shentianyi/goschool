@@ -32,6 +32,8 @@ class SubscriptionsController < ApplicationController
       if @logininfo
         @user.logininfo_id = @logininfo.id
         @user.tenant = @logininfo.tenant
+        puts "-====================="
+        puts @user.to_json
         if msg.result = @user.save
         else
           msg.content = @user.errors

@@ -59,10 +59,7 @@ function signup(){
     $.ajax({
         url:'/subscriptions',
         data: {
-            user : {
-                name: name,
-                email:email
-            },
+            name: name,
             email: email,
             password: password,
             password_confirmation: password_confirmation,
