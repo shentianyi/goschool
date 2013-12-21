@@ -1,30 +1,5 @@
-/**************************************************************  课程  */
-<<<<<<< HEAD
-.front-statistics{
-    margin-top:80px;
-}
-.front-statistics>img{
-    background-size:contain;
-    width:56px;
-    height:56px;
-    border-radius:56px;
-    -moz-border-radius:56px;
-    -webkit-border-radius:56px;
-    margin-left:62px;
-}
-.front-statistics>p{
-    text-align:center;
-    color:#63A69F;
-    font-size:16px;
-    margin-top:0px;
-}
-/**************************************************************  课程  */
-.front-class.student-class{
-    width:40%;
-=======
 .front-class.student-class{
     width:95%;
->>>>>>> a6eaddf6b950544a4807f5c8897c55e8e6e8f1a4
     box-shadow:2px 2px 2px rgba(0,0,0,0.5);
     -moz-box-shadow:2px 2px 2px rgba(0,0,0,0.5);
     -webkit-box-shadow:2px 2px 2px rgba(0,0,0,0.5);
@@ -35,17 +10,6 @@
 .front-class.student-class .class-state>span:nth-of-type(2){
     color:#D95C5C
 }
-<<<<<<< HEAD
-.front-class.student-class>h2,{
-    color:#63A69F
-}
-/**************************************************************  homework  */
-.segment.student-homework{
-    float:left;
-    border:1px solid rgba(0,0,0,0.3);
-    width:50%;
-    margin-left:30px !important;
-=======
 
 /**************************************************************  homework  */
 .segment.student-homework{
@@ -58,7 +22,6 @@
     border:1px solid rgba(0,0,0,0.3);
     margin-top:5px !important;
     margin-bottom:350px;
->>>>>>> a6eaddf6b950544a4807f5c8897c55e8e6e8f1a4
 }
 .segment.student-homework>.ignored.ui.icon.message>i{
     font-size:35px;
@@ -87,16 +50,6 @@
 }
 .segment.student-homework ul table{
    box-shadow:0 0 0 1px rgba(0, 0, 0, 0.6);
-<<<<<<< HEAD
-   border-raidus:3px;
-   -moz-border-raidus:3px;
-    -webkit-border-raidus:3px;
-}
-.segment.student-homework ul table td:first-of-type>p,
-.segment.student-homework ul table td:nth-of-type(2)>p{
-   font-size:13px;
-   line-height:14px;
-=======
     -moz-box-shadow:0 0 0 1px rgba(0, 0, 0, 0.6);
     -webkit-box-shadow:0 0 0 1px rgba(0, 0, 0, 0.6);
    border-radius:3px;
@@ -107,18 +60,14 @@
 .segment.student-homework ul table td:nth-of-type(2)>p{
    font-size:12px;
    line-height:12px;
->>>>>>> a6eaddf6b950544a4807f5c8897c55e8e6e8f1a4
    width:100%;
    word-break:break-all;
    word-wrap:break-word;
 }
-<<<<<<< HEAD
-=======
 .segment.student-homework ul table td:nth-of-type(2)>p:nth-of-type(2){
     color:rgba(0,0,0,0.5);
     font-size:11px;
 }
->>>>>>> a6eaddf6b950544a4807f5c8897c55e8e6e8f1a4
 .segment.student-homework ul table td:nth-of-type(3)>i,
 .segment.student-homework ul table td:nth-of-type(4)>i{
     font-size:15px;
@@ -135,8 +84,6 @@
 .segment.student-homework ul table td:nth-of-type(4)>i{
     color:#4092CC;
 }
-<<<<<<< HEAD
-=======
 
 .homework-wrap{
     border:1px solid rgba(0,0,0,0.3);
@@ -241,5 +188,3 @@
 .homework-progress-wrap>.progress_times>i{
     font-size:16px;
 }
-
->>>>>>> a6eaddf6b950544a4807f5c8897c55e8e6e8f1a4

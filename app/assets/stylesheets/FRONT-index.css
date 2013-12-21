@@ -56,67 +56,6 @@
     word-break:break-all;
     word-wrap:break-word;
     display:inline-block;
-<<<<<<< HEAD
-}
-/****************************************************最右*/
-.front-people-inner{
-    position:absolute;
-    z-index:0;
-    width:100%;
-}
-.back-index-main.front-index-main{
-    left:280px;
-}
-.front-people-inner .segment{
-    padding-bottom:30px !important;
-}
-.front-people-inner .segment>h2{
-    font-size:19px;
-    color:rgba(0,0,0,0.7);
-}
-/*class*/
-.front-class{
-    margin-top:30px !important;
-    width:95%;
-    margin-left:25px !important;
-}
-.front-class>.item{
-    border-radius:5px;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-    border:1px solid rgba(0,0,0,0.3);
-    padding:5px 10px;
-    margin-bottom:15px;
-    position:relative;
-    background:rgba(0,0,0,0.03);;
-}
-.front-class>.item>h4,
-.front-class>.item>p{
-    width:75%;
-    word-break:break-all;
-    word-wrap:break-word;
-    font-size:13px;
-    color:rgba(0,0,0,0.6);
-
-}
-.front-class>.item>p>span:nth-of-type(1){
-    vertical-align:top;
-}
-.front-class>.item>p>span:nth-of-type(2){
-    word-break:break-all;
-    word-wrap:break-word;
-    display:inline-block;
-    max-width:100%;
-}
-.front-class>.item>.homework-amount{
-    font-size:13px;
-    color:rgba(0,0,0,0.6);
-}
-.front-class>.item>.homework-amount>span:nth-of-type(2){
-    color:#D95C5C;
-    font-weight:bolder;
-}
-=======
 }
 /****************************************************最右*/
 .front-people-inner{
@@ -182,7 +121,6 @@
     color:#D95C5C;
     font-weight:bolder;
 }
->>>>>>> a6eaddf6b950544a4807f5c8897c55e8e6e8f1a4
 .front-class>.item>h4{
     margin:5px 0 -5px 0;
     font-size:17px;
@@ -195,18 +133,10 @@
 }
 .front-class>.item>.button{
     position:absolute;
-<<<<<<< HEAD
-    right:40px;
-=======
     right:12px;
->>>>>>> a6eaddf6b950544a4807f5c8897c55e8e6e8f1a4
     height:26px;
     font-size:13px;
     font-weight:lighter;
     top:50%;
-<<<<<<< HEAD
-    margin-top:-15px;
-=======
     margin-top:-13px;
->>>>>>> a6eaddf6b950544a4807f5c8897c55e8e6e8f1a4
 }
