@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="stylesheets/semantic.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/base_wayne.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/BACK-index.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/FRONT-index.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/FRONT-teacher.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/FRONT-student-achievement.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/dhtmlxscheduler.css" type="text/css" />
+</head>
+<body>
+
+<!--global partial-->
+<aside class="back-index-aside">
+    <a class="logo" ></a>
+    <ul class="first-ul">
+        <li>
+            <a href="FRONT-student.html" >我的主页</a>
+        </li>
+        <li>
+            <a class="active" href="Front-student-achievement.html" >我的成就</a>
+        </li>
+    </ul>
+    <ul class="second-ul" id="main-navigator-bottom">
+        <li>
+            <a>
+                <i class="smile icon" data-content="我的账户"></i>
+            </a>
+        </li>
+        <li>
+            <a>
+                <i class="sign out icon" data-content="退出账户"></i>
+            </a>
+        </li>
+    </ul>
+</aside>
+<!--global partial-->
+
+<!--view-->
+<aside class="back-index-condition front-index-condition">
+    <header class="back-index-side-header">
+        <label>个人信息</label>
+    </header>
+    <div class="front-people-info">
+        <img class=" ui image" src="images/portrait/6.jpg">
+        <label class="label"><span>王子骁</span></label>
+        <p><i class="icon mail"></i> <span>superxiao21@sina.com</span></p>
+        <p><i class="icon building"></i> <span>七宝中学</span></p>
+        <p><i class="icon home"></i> <span>闵行区XXX</span></p>
+    </div>
+    <div class="front-statistics">
+
+        <canvas id="grade-chart" width="160" height="100"></canvas>
+        <canvas id="delivery-chart" width="80" height="100"></canvas>
+    </div>
+</aside>
+<!--view-->
+
+
+<article class="back-index-main front-index-main" id="front-index-main">
+    <header class="back-index-side-header" id="front-index-side-header">
+        <label>我的成就</label>
+    </header>
+    <div class="front-people-inner">
+        <div class="my-achieve-wrap" id="my-achieve-wrap">
+
+            <div class="content-item achieve" id="final-achieve">
+                <p>最终成就<i class="icon plus"></i></p>
+                <dl class="list">
+                    <dd>MIT,麻省理工大学，建筑系<i class="icon remove"></i></dd>
+                </dl>
+            </div>
+
+            <div class="content-item offer" id="offer">
+                <p>所有录取<i class="icon plus"></i></p>
+                <table class="ui small table segment celled">
+                    <thead>
+                    <tr><th>学校</th>
+                        <th>专业</th>
+                        <th>时间</th>
+                        <th>奖学金</th>
+                        <th>操作</th>
+                    </tr></thead>
+                    <tbody>
+                    <tr>
+                        <td>MIT</td>
+                        <td>建筑</td>
+                        <td>2013-10</td>
+                        <td>否</td>
+                        <td><span class="remove">删除</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="content-item grade" id="grade">
+                <p>最终成绩<i class="icon plus"></i></p>
+                <div id="grade-add" class="grade-add">
+                    <p>添加新课程名称</p>
+                    <input type='text'/>
+                </div>
+                <div class="ui tabular menu" id="achieve_final_tabular">
+                    <a class="active item">
+                        <div class="floating ui label"><i class="icon remove"></i></div>
+                        托福
+                    </a>
+                    <a class="item">
+                        SAT
+                    </a>
+                </div>
+                <table class="ui small table segment celled">
+                    <thead>
+                    <tr><th class="five wide">时间</th>
+                        <th class="four wide">成绩<span>(双击可编辑)</span></th>
+                        <th>入校</th>
+                        <th>操作</th>
+                    </tr></thead>
+                    <tfoot>
+                    <tr><th colspan="4">添加记录</th>
+                    </tr></tfoot>
+                    <tbody>
+                    <tr>
+                        <td>2013-01-28</td>
+                        <td class="score">57</td>
+                        <td>入校前</td>
+                        <td><span class="remove">删除</span></td>
+                    </tr>
+                    <tr>
+                        <td>2013-01-29</td>
+                        <td class="score">68</td>
+                        <td>入校后</td>
+                        <td><span class="remove">删除</span></td>
+                    </tr>
+                    <tr>
+                        <td>2013-10-02</td>
+                        <td class="score">89</td>
+                        <td>入校后</td>
+                        <td><span class="remove">删除</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <canvas id="myChart" ></canvas>
+            </div>
+
+        </div>
+    </div>
+</article>
+
+<script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>
+<script type='text/javascript' src="javascripts/semantic.min.js" ></script>
+<script type='text/javascript' src="javascripts/Chart.min.js" ></script>
+<script type='text/javascript' src="javascripts/excanvas.js" ></script>
+<script type='text/javascript' src="javascripts/wayne-base.js" ></script>
+<script type='text/javascript' src="javascripts/mustache.js" ></script>
+<script type='text/javascript' src="javascripts/FRONT_index.js" ></script>
+<script type='text/javascript' src="javascripts/FRONT_student_achievement.js" ></script>
+</body>
+</html>

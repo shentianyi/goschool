@@ -69,26 +69,4 @@ class PostsController < ApplicationController
   def get_posts menu_type
     @posts = Post.by_type({id:params[:id],menu_type:menu_type})
   end
-
-=begin
-  def get_attach attachs,target
-    unless attachs.blank?
-      attachs.each do |index,att|
-        path = File.join($AttachTmpPath,att[:pathName])
-        size = FileData.get_size(path)
-        type = FileData.get_type(path)
-
-        data = AttachService.generate_attachment path
-        filename = att[:oriName]
-
-        url = AliyunOssService.store_attachments(filename,data)
-        #Get from tmp folder and upload to the Cloud Server
-        #Delete from tmp folder
-        #FileUtils.mv(File.join($AttachTmpPath,att[:pathName]),path)
-        #
-        target.attachments<<Attachment.new(:name=>att[:oriName],:path=>url,:size=>size,:type=>type)
-      end
-    end
-  end
-=end
 end

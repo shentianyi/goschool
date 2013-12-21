@@ -5702,9 +5702,9 @@ i.massive.basic.icon {
 
 .ui.basic.buttons .button,
 .ui.basic.button {
-  background-color: transparent !important;
+  background-color: transparent;
   background-image: none;
-  color: #808080 !important;
+  color: #808080 ;
   font-weight: normal;
   text-transform: none;
   -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
@@ -5720,7 +5720,7 @@ i.massive.basic.icon {
 .ui.basic.buttons .button:hover,
 .ui.basic.button:hover {
   background-image: none;
-  color: #7F7F7F !important;
+  color: #7F7F7F;
   -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.18) inset;
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.18) inset;
 }

@@ -105,9 +105,13 @@
 }
 .back-index-side-header>label{
     position:relative;
-    top:13px;
+    top:15px;
     left:14px;
+<<<<<<< HEAD
     font-size:19px;
+=======
+    font-size:15px;
+>>>>>>> a6eaddf6b950544a4807f5c8897c55e8e6e8f1a4
     font-weight:lighter;
     color:#444;
 }
@@ -163,6 +167,7 @@
     min-height:768px;
     transition:right 0.35s ease-out;
     height:100%;
+    min-width:670px;
 }
 .back-index-main>.search-list{
     width:90%;

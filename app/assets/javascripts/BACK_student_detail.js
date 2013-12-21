@@ -577,6 +577,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     /////////////////////////////////////////////////////// 编辑学生信息
     $("body").on("change",".update-input",function(){
         if($(this).attr("id")=="name" && $(this).val().length==0){
+<<<<<<< HEAD
 	    MessageBox("抱歉，名字不能为空","top","warning");
 	    window.setTimeout(function(){
                 $("#name").focus();
@@ -616,6 +617,44 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 		    };
 		}
             }
+=======
+	        MessageBox("抱歉，名字不能为空","top","warning");
+	        window.setTimeout(function(){
+                    $("#name").focus();
+	        },100)
+	        STUDENTDETAIL.errors[0]="errors";
+        }
+        else{
+	        if($(this).attr("id")=="email" && ($(this).val().length==0 || !easy_email_validate($(this).val()))){
+                MessageBox("抱歉，请填写正确的邮箱","top","warning");
+                window.setTimeout(function(){
+		            $("#email").focus();
+                },100)
+                STUDENTDETAIL.errors[1]="errors";
+	        }
+            else{
+                var data = {
+                    id: '',
+                    student : {},
+                    is_active_account : false
+                };
+                data.id =  $("#student-detail-info").attr('student');
+                if(BACKSTUDENT.check.test($(this).val(),$(this).attr('id'))){
+                    data['student'][$(this).attr('id')] = $(this).val();
+                    student_manager.update($("#student-detail-info").attr('student'),data),function(){
+                        if(data.result){}
+                        else{}
+                    };
+                    data.id =  $("#student-detail-info").attr('student');
+                    data['student'][$(this).attr('id')] = $(this).val();
+                    student_manager.update($("#student-detail-info").attr('student'),data),function(){
+                        if(data.result){}
+                        else{}
+                    };
+                }
+            }
+        }
+>>>>>>> a6eaddf6b950544a4807f5c8897c55e8e6e8f1a4
 	}).on("click","#close-student-detail-edit",function(){
             if(STUDENTDETAIL.errors[0]===undefined&&STUDENTDETAIL.errors[1]===undefined){
 		$("#student-edit-section").css("left","-999em").css("right","auto");
@@ -676,6 +715,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 			     else{
 				 student_manager.update($("#student-detail-info").attr('student'), {student:{referrer_id:msg.id}}, function(data){
 				     if(data.result){
+<<<<<<< HEAD
 
 				     }
 				     else{
@@ -817,6 +857,149 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
      STUDENTDETAIL.generate_option();
      new Chart(ctx).Line(data,STUDENTDETAIL.option);
  }
+=======
+
+				     }
+				     else{
+					 msg.callback=function(data){
+					     return false;
+					 }
+					 MessageBox_content(data.content);
+				     }
+				 })
+			     }
+			 }
+		     }
+		 });
+
+		 $(document).ready(function(){
+		     var href=window.location.href.split("/");
+		     var new_href=href[href.length-1].split("#")[0];
+		     if( new_href=="achieve"){
+			 if($("#achieve_final_tabular>a").length>=1){
+			     $("#achieve_final_tabular>a").eq(0).click();
+			 }
+		     }
+		     //	STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
+		 });
+
+		})();
+ STUDENTDETAIL.errors=new Array(2);
+STUDENTDETAIL.labels;
+STUDENTDETAIL.data;
+STUDENTDETAIL.check=0;
+STUDENTDETAIL.option={
+    scaleOverride : true,
+    scaleSteps : 20,
+    scaleStartValue :0,
+    bezierCurve:false
+}
+function sortNumber(a, b)
+{
+    return b-a
+}
+STUDENTDETAIL.generate_option=function(){
+    var c=[];
+    var p=STUDENTDETAIL.data;
+    c=deepCopy(p,c);
+    c.sort(sortNumber);
+    STUDENTDETAIL.option.scaleStepWidth=Math.ceil(c[0]/STUDENTDETAIL.option.scaleSteps);
+}
+STUDENTDETAIL.generateCanvas=function(labels,scores){
+    STUDENTDETAIL.labels=labels;
+    STUDENTDETAIL.data=scores;
+    if(labels.length<=1){
+        $("#myChart").remove();
+    }
+    else{
+        if($("#myChart").length==0){
+            $("#grade").append($("<canvas />").attr("id","myChart"))
+        }
+        var width=$("#accordion").width()-40;
+        $("#grade canvas").attr("height",400).attr("width",width);
+        var canvas = $('#myChart')[0];
+        canvas.width=canvas.width;
+        canvas.height=canvas.height;
+        var data = {
+            labels : labels,
+            datasets : [{
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,1)",
+                pointColor : "rgba(151,187,205,1)",
+                pointStrokeColor : "#fff",
+                data :scores
+            }]
+        }
+        var ctx = $("#myChart").get(0).getContext("2d");
+        var myNewChart = new Chart(ctx);
+        STUDENTDETAIL.generate_option();
+        new Chart(ctx).Line(data,STUDENTDETAIL.option);
+    }
+};
+STUDENTDETAIL.editCanvas=function(index,score){
+    if(arguments.length==3){
+        var label=arguments[2];
+        STUDENTDETAIL.labels.push(label);
+    }
+    STUDENTDETAIL.data[index]=score;
+    if(STUDENTDETAIL.labels.length>1){
+        if($("#myChart").length==0){
+            var width=$("#grade").width();
+            $("#grade").append($("<canvas />").attr("id","myChart").attr("height",400).attr("width",width))
+        }
+        var canvas = $('#myChart')[0];
+        canvas.width=canvas.width;
+        canvas.height=canvas.height;
+        var data = {
+            labels : STUDENTDETAIL.labels,
+            datasets : [
+                {
+                    fillColor : "rgba(151,187,205,0.5)",
+                    strokeColor : "rgba(151,187,205,1)",
+                    pointColor : "rgba(151,187,205,1)",
+                    pointStrokeColor : "#fff",
+                    data :STUDENTDETAIL.data
+                }
+            ]
+        }
+        var ctx = $("#myChart").get(0).getContext("2d");
+        var myNewChart = new Chart(ctx);
+        STUDENTDETAIL.generate_option();
+        new Chart(ctx).Line(data,STUDENTDETAIL.option);
+    }
+
+}
+STUDENTDETAIL.deleteCanvas=function(index){
+    STUDENTDETAIL.labels.splice(index,1);
+    STUDENTDETAIL.data.splice(index,1);
+    if(STUDENTDETAIL.labels.length<=1){
+        $("#myChart").remove();
+    }
+    else{
+        if($("#myChart").length==0){
+            var width=$("#grade").width();
+            $("#grade").append($("<canvas />").attr("id","myChart").attr("height",400).attr("width",width))
+        }
+        var canvas = $('#myChart')[0];
+        canvas.width=canvas.width;
+        canvas.height=canvas.height;
+        var data = {
+            labels : STUDENTDETAIL.labels,
+            datasets : [{
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,1)",
+                pointColor : "rgba(151,187,205,1)",
+                pointStrokeColor : "#fff",
+                data :STUDENTDETAIL.data
+            }]
+        }
+    }
+    var ctx = $("#myChart").get(0).getContext("2d");
+    var myNewChart = new Chart(ctx);
+    STUDENTDETAIL.generate_option();
+    new Chart(ctx).Line(data,STUDENTDETAIL.option);
+}
+>>>>>>> a6eaddf6b950544a4807f5c8897c55e8e6e8f1a4
  STUDENTDETAIL.add_consult_record=function(){
      //post
      var time=$("#consult-record-time").val()+" "+$("#consult-record-hour :selected").text(),
@@ -856,9 +1039,12 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 	     MessageBox_content(data.content);
 	 }
      });
+<<<<<<< HEAD
      
 
      
+=======
+>>>>>>> a6eaddf6b950544a4807f5c8897c55e8e6e8f1a4
  }
 
 
