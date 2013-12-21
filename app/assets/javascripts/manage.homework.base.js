@@ -28,6 +28,19 @@ function init_teacher_homework() {
                MessageBox_content(data.content);
           }
      });
+     bind_th_input_text_update_event(function(data) {
+          if(data.result) {
+               // 更新成功
+               if(data.content) {
+                    // 修改作业成功
+                    console.log('修改成功');
+               }
+          } else {
+               // 跟新失败
+               // data.content 未消息
+               MessageBox_content(data.content);
+          }
+     });
 }
 
 function init_student_homework() {
@@ -55,28 +68,43 @@ function bind_sh_input_text_update_event(callback) {
           var data = {
                student_homework : {}
           };
-          var value = "";
-          switch($(this).attr('type')) {
-               case 'text':
-                    value = $(this).val();
-                    break;
-               case 'checkbox':
-                    value = $(this).attr('checked') ? true : false;
-                    break;
-               default:
-                    value = null;
-                    break;
-          }
-          data['student_homework'][ $(this).attr('name')] = value;
+          var value = get_input_value($(this));
+	  data['student_homework'][ $(this).attr('name')] = value;
           student_homework_manager.update($(this).attr('homework'), data, function(data) {
-               if(data.result) {
                     if(callback)
                          callback(data);
-               } else {
-                    MessageBox_content(data.content);
-               }
           });
      });
+}
+
+function bind_th_input_text_update_event(callback){
+ $('body').on('change','.teacher-homework-input',function(){
+   var data={
+       homework:{}
+   };
+   var value=get_input_value($(this));
+   data['homework'][$(this).attr('name')]=value;
+   homework_manager.update($(this).attr('homework'),data,function(data){
+     if(callback)
+        callback();     
+   });
+ });  
+}
+
+function get_input_value(ele){
+  var value;
+  switch(ele.attr('type')){
+      case 'text':
+              value=ele.val();
+	      break;
+      case 'checkbox':
+		  value= ele.attr('checked') ? true :false;
+	      break;
+      default:
+	      value= null;
+	      break;
+  }
+  return value;
 }
 
 function bind_sh_submit_event() {
