@@ -1,85 +1,23 @@
-<article class="back-index-main front-index-main" id="front-index-main">
-  <header class="back-index-side-header" id="front-index-side-header">
-    <label>工作板</label>
-  </header>
-  <div class="front-people-inner">
-    <div class="ui segment front-class student-class">
-      <h2>我的课程</h2>
-      <% if @courses %>
+<div class="ui segment front-class student-class">
+  <h2>我的课程</h2>
+  <% if @courses %>
       <% @courses.each do |c| %>
-      <div class="item">
-        <h4><%= c.name %></h4>
-        <p class="sub-class"><%= User.by_course_id(c.course_id).pluck(:name).join(',') %></p>
-        <p><span>课程描述：</span><span><%= c.description %></span></p>
-        <p><span>授课时间：</span><span> <%= c.period_display %> </span></p>
-        <p class="class-state"><span>课程状态：</span><span><%= c.status_display %></span></p>
-        <a class="mini ui teal button" href="/posts/index/<%= c.course_id%>">
-          进入课堂
-        </a>
-      </div>
+          <div class="item">
+            <h4><%= c.name %></h4>
+
+            <p class="sub-class"><%= User.by_course_id(c.course_id).pluck(:name).join(',') %></p>
+
+            <p><span>课程描述：</span><span><%= c.description %></span></p>
+
+            <p><span>授课时间：</span><span> <%= c.period_display %> </span></p>
+
+            <p class="class-state"><span>课程状态：</span><span><%= c.status_display %></span></p>
+            <a class="mini ui teal button" href="/posts/index/<%= c.course_id %>">
+              进入课堂
+            </a>
+          </div>
       <% end %>
-      <% end %>
-    </div>
-
-    <div class="ui piled segment student-homework">
-      <div class="ui ignored positive icon message">
-        <i class="lab icon"></i>
-        <div class="content">
-          <h3 class="header">当前作业</h3>
-          <p>请通过<i class="icon download disk"></i>下载相关附件，最终应该以老师要求的格式通过<i class="icon upload disk"></i>上传作业</p>
-        </div>
-      </div>
-      <ul>
-        <li>
-          <table class="ui table segment">
-            <tbody>
-              <tr>
-                <td class="wide four">
-                  <p>听力作业</p>
-                  <p>2013-04-15</p>
-                  <p>托福秋季班</p>
-                </td>
-                <td class="wide ten">
-                  <p>作业描述:</p>
-                  <p>上传MP4格式，并且要有配套的文字</p>
-                </td>
-                <td class="wide one">
-                  <i class="icon download disk"></i>
-                </td>
-                <td class="wide one">
-                  <i class="icon upload disk"></i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </li>
-        <li>
-          <table class="ui table segment">
-            <tbody>
-              <tr>
-                <td class="wide four">
-                  <p>听力作业</p>
-                  <p>2013-04-15</p>
-                  <p>托福秋季班</p>
-                </td>
-                <td class="wide ten">
-                  <p>作业描述:</p>
-                  <p>上传MP4格式，并且要有配套的文字</p>
-                </td>
-                <td class="wide one">
-                  <i class="icon download disk"></i>
-                </td>
-                <td class="wide one">
-                  <i class="icon upload disk"></i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </li>
-      </ul>
-    </div>
+  <% end %>
+</div>
 
 
-
-  </div>
-</article>

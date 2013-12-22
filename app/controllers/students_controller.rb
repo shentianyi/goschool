@@ -167,9 +167,11 @@ class StudentsController < ApplicationController
   
   def achievements(student)
     # achievementtype id
+    puts "====================="
     @final = Achievement.find_by_type(AchievementType::FINAL)
     @admit = Achievement.find_by_type(AchievementType::ADMITTED)
     @final_grade = Achievement.find_by_type(AchievementType::FINAL_GRADE)
+    puts @final.to_json
     #
     if @final 
       @finals = StudentAchievementPresenter.init_presenters(Achievement.achieves(@final.id,student.id))
