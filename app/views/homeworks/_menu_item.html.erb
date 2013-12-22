@@ -8,6 +8,7 @@
 
 <ul>
     <%@homeworks.each do |homework|%>
+    //需要class active
      <li class="active">
         <a href="#" id="<%= homework.id%>" status="<%= homework.status%>" class="homework-menu-item-a"> <%= homework.title%> </a>
      </li>

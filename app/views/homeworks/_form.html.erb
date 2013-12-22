@@ -5,3 +5,25 @@
      deadline: <input placeholder="截止日期..." type="text" name="deadline" readonly id="homework-deadline" class="homework-input" > 
      <input type="button" value="CREATE" id="create-homework-button"/>
 </div>
+
+<div class="homework-post-add" id="homework-post-add">
+    <div class="inner">
+        <i class="icon remove"></i>
+        <p>新建作业</p>
+        <div>
+            <label>作业标题</label>
+            <div class="ui input fluid ">
+                <input  type="text" name="title" class="homework-input" />
+            </div>
+            <label>作业内容</label>
+            <textarea name='content' class="homework-input" ></textarea>
+            <label>截止日期</label>
+            <div class="ui input focus fluid ">
+                <input type="text" name="deadline" readonly id="homework-deadline" class="homework-input" >
+            </div>
+        </div>
+        <div id="create-homework-button" class="ui button red mini">
+            新建
+        </div>
+    </div>
+</div>
