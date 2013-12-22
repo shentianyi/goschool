@@ -352,6 +352,12 @@
 .post-homework>.right>.item>div>input[type='text']{
     width:100px;
 }
+.post-homework>.right>.upload-homework{
+    font-weight:lighter;
+    font-size:12px;
+    float:right;
+    margin-top:-28px;
+}
 /**************************************************************  上传 */
 .upload-wrap{
     position:fixed;

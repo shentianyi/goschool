@@ -116,7 +116,9 @@
             <p>请就本科应该住在外租房还是学校进行讨论3分钟</p>
             <label>截止日期:<span>2013-04-15</span></label>
             <label>当前状态:<span>已完成</span></label>
-
+            <div class="ui mini teal button upload-homework"  id="upload-homework">
+                上传我的作业
+            </div>
             <hr />
             <hr />
 
@@ -161,6 +163,14 @@
     </div>
 </div>
 
+<div id="upload-wrap" class="upload-wrap">
+    <i class="icon remove"></i>
+    <a class="upload-button">上传附件...</a>
+    <p>dsad.pdf</p>
+    <p>asdas.pdf</p>
+    <a class="ok-button">完成</a>
+</div>
+
 
 <script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>
 <script type='text/javascript' src="javascripts/jquery-datepicker.js" ></script>
@@ -174,6 +184,7 @@
 <script type='text/javascript' src="javascripts/manage.homework.base.js" ></script>
 <script type='text/javascript' src="javascripts/manage.source.base.js" ></script>
 <script type='text/javascript' src="javascripts/manage.post.base.js" ></script>
+<script type='text/javascript' src="javascripts/FRONT_homework.js" ></script>
 <script type="text/javascript">
     $(document).ready(function(){
         init_teacher_homework();
