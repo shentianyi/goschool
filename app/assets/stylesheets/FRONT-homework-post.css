@@ -1,0 +1,69 @@
+.homework-post-add{
+    position:absolute;
+    min-height:768px;
+    top:0px;
+    right:auto;
+    bottom:0px;
+    left:-999em;
+    background:rgba(0,0,0,0.9);
+    z-index:99;
+}
+.homework-post-add>.inner{
+    position:absolute;
+    width:500px;
+    height:360px;
+    top:40%;
+    left:50%;
+    margin-top:-180px;
+    margin-left:-250px;
+    background-color:white;
+}
+.homework-post-add>.inner>.remove.icon{
+    color:white;
+    font-size:28px;
+    position:absolute;
+    right:-35px;
+    top:-40px;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+}
+.homework-post-add>.inner>.remove.icon:hover{
+    color:rgba(255,255,255,0.5);
+}
+.homework-post-add>.inner>p{
+    text-align:center;
+    height:35px;
+    font-size:16px;
+    background:#D95C5C;
+    color:white;
+    line-height:35px;
+    margin:0px;
+    text-shadow:2px 2px 4px rgba(0,0,0,0.4);
+    -moz-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
+    -webkit-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
+}
+.homework-post-add>.inner>div{
+    width:80%;
+    position:relative;
+    left:50%;
+    margin-left:-40%;
+    margin-top:20px;
+}
+.homework-post-add>.inner>div>label{
+    display:block;
+    font-size:12px;
+    margin-top:10px;
+    color:rgba(0,0,0,0.6);
+}
+.homework-post-add>.inner>div textarea{
+    width:387px;
+    padding:5px;
+    border:1px solid rgba(0,0,0,0.2);
+    border-radius: 0.3125em;
+    -moz-border-radius: 0.3125em;
+    -webkitborder-radius: 0.3125em;
+}
+.homework-post-add>.inner>.button{
+    margin-left:120px;
+    width:80px;
+}
