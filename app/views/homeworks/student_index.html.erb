@@ -11,6 +11,131 @@
           <td style="background: grey;width: 60%"><div id="homework-content"></div></td>
      </tr>
 </table>
+
+
+
+
+
+<aside class="back-index-aside">
+    <a class="logo" ></a>
+    <ul class="first-ul">
+        <li>
+            <a href="FRONT-student.html" >我的主页</a>
+        </li>
+        <li>
+            <a href="FRONT-student-achievement.html" >我的成就</a>
+        </li>
+    </ul>
+    <ul class="second-ul" id="main-navigator-bottom">
+        <li>
+            <a>
+                <i class="smile icon" data-content="我的账户"></i>
+            </a>
+        </li>
+        <li>
+            <a>
+                <i class="sign out icon" data-content="退出账户"></i>
+            </a>
+        </li>
+    </ul>
+</aside>
+
+<aside class="back-index-condition front-index-condition">
+    <header class="back-index-side-header">
+        <a class="ui down button teal mini" href="FRONT-student.html">
+            <i class="left icon"></i>
+            返回上层
+        </a>
+    </header>
+    <div class="ui vertical menu">
+        <a class="item active">
+            <i class="inbox icon"></i>
+            <label>作业</label>
+        </a>
+        <a class="item">
+            <i class="chat outline icon"></i>
+            <label>互动</label>
+        </a>
+    </div>
+</aside>
+
+<article class="back-index-main front-index-main" id="front-index-main">
+    <header class="back-index-side-header front-index-side-header" id="front-index-side-header">
+        <div class="ui breadcrumb">
+            <a class="section active">全部</a>
+            <a class="section">听力</a>
+            <a class="section">口语</a>
+            <a class="section">写作</a>
+        </div>
+        <a class="ui red mini button" id="add-item" type="course">
+            <div class="visible content">
+                <i class="add icon"></i>
+                新建作业
+            </div>
+        </a>
+        <p><span>托福秋季班</span>的作业</p>
+    </header>
+
+    <div class="post-homework" id="post-home">
+
+        <div class="left">
+           <%= render 'menu'%>
+        </div>
+
+//right content
+        <div class="right">
+            <h3><i class="empty flag icon"></i> 托福听力</h3>
+            <p>请就本科应该住在外租房还是学校进行讨论3分钟</p>
+            <label>截止日期:<span>2013-04-15</span></label>
+            <label>当前状态:<span>已完成</span></label>
+            <hr />
+            <hr />
+
+            //每个人的回答
+            <div class="item">
+                <img class="ui image avatar" src="images/portrait/4.jpg" />
+                <p>王子骁</p>
+                <p>八天前</p>
+                <p>请老师查阅</p>
+                <div>
+                    <label>这次作业进步了吗</label>
+                    <input type="checkbox" />
+                    <label>得分</label>
+                    <input type="text" />
+                </div>
+            </div>
+             //每个人的回答
+
+        </div>
+//right content
+
+
+    </div>
+</article>
+
+<div class="homework-post-add" id="homework-post-add">
+    <div class="inner">
+        <i class="icon remove"></i>
+        <p>新建作业</p>
+        <div>
+            <label>作业标题</label>
+            <div class="ui input fluid ">
+                <input  type="text" name="title" class="homework-input" />
+            </div>
+            <label>作业内容</label>
+            <textarea  name='content' class="homework-input" ></textarea>
+            <label>截止日期</label>
+            <div class="ui input focus fluid ">
+                <input type="text" name="deadline" readonly id="homework-deadline" class="homework-input" >
+            </div>
+        </div>
+        <div id="create-homework-button" class="ui button red mini">
+            新建
+        </div>
+    </div>
+</div>
+
+
 <input type="hidden" value="<%= @student_course.course_id%>" id="teacher-course-hidden" />
 <script type="text/javascript">init_student_homework();</script>
 <% content_for :javascript_includes do%>

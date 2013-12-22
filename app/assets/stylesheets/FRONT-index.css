@@ -282,7 +282,20 @@
     word-wrap:break-word;
     font-size:13px;
     color:rgba(0,0,0,0.6);
-    margin-bottom:40px;
+    margin-bottom:30px;
+}
+.post-homework>.right>label{
+    font-size:13px;
+    color:rgba(0,0,0,0.7);
+    display:block;
+}
+.post-homework>.right>label:nth-of-type(2)>span{
+    color:#D95C5C;
+}
+.post-homework>.right>label>span{
+    display:inline-block;
+    margin-left:5px;
+    color:rgba(0,0,0,0.5);
 }
 .post-homework>.right>hr{
     color:rgba(0,0,0,0.4);

@@ -1,10 +1,4 @@
-LEFT MENU:
-<style  type="text/css">
-.pin{
-     font-weight:bold;
-     font-size: 20px;
-}
-</style>
+
 <ul>
      <%@menus.each do |menu|%>
      <li>
@@ -17,4 +11,18 @@ LEFT MENU:
      </li>
      <% end %>
 </ul>
+
+ <div class="ui accordion" id="accordion">
+    <%@menus.each do |menu|%>
+        <div class="active title">
+            <i class="dropdown icon"></i>
+                    12/13-12/20
+        </div>
+        <div class="active content">
+           <%if @menu_type==menu.value%>
+           <%= render 'menu_item'%>
+           <%end%>
+        </div>
+    <% end %>
+</div>
 

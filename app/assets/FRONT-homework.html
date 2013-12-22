@@ -6,10 +6,9 @@
     <link rel="stylesheet" href="stylesheets/semantic.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/base_wayne.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/BACK-index.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/jquery-datepicker.css" type="text/css" />
     <link rel="stylesheet" href="stylesheets/FRONT-index.css" type="text/css" />
-    <link rel="stylesheet" href="stylesheets/FRONT-teacher.css" type="text/css" />
-    <link rel="stylesheet" href="stylesheets/FRONT-student.css" type="text/css" />
-    <link rel="stylesheet" href="stylesheets/dhtmlxscheduler.css" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/FRONT-homework-post.css" type="text/css" />
 </head>
 <body>
 
@@ -48,11 +47,11 @@
         </a>
     </header>
     <div class="ui vertical menu">
-        <a class="item active">
+        <a class="item active" href="FRONT-homework.html">
             <i class="inbox icon"></i>
             <label>作业</label>
         </a>
-        <a class="item">
+        <a class="item" href="FRONT-post.html">
             <i class="chat outline icon"></i>
             <label>互动</label>
         </a>
@@ -115,6 +114,8 @@
         <div class="right">
             <h3><i class="empty flag icon"></i> 托福听力</h3>
             <p>请就本科应该住在外租房还是学校进行讨论3分钟</p>
+            <label>截止日期:<span>2013-04-15</span></label>
+            <label>当前状态:<span>已完成</span></label>
             <hr />
             <hr />
 
@@ -131,16 +132,37 @@
                 </div>
             </div>
 
-            
-
         </div>
 
     </div>
 
 </article>
 
+<div class="homework-post-add" id="homework-post-add">
+    <div class="inner">
+        <i class="icon remove"></i>
+        <p>新建作业</p>
+        <div>
+            <label>作业标题</label>
+            <div class="ui input fluid ">
+                <input  type="text" name="title" class="homework-input" />
+            </div>
+            <label>作业内容</label>
+            <textarea  name='content' class="homework-input" ></textarea>
+            <label>截止日期</label>
+            <div class="ui input focus fluid ">
+                <input type="text" name="deadline" readonly id="homework-deadline" class="homework-input" >
+            </div>
+        </div>
+        <div id="create-homework-button" class="ui button red mini">
+            新建
+        </div>
+    </div>
+</div>
+
 
 <script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>
+<script type='text/javascript' src="javascripts/jquery-datepicker.js" ></script>
 <script type='text/javascript' src="javascripts/semantic.min.js" ></script>
 <script type='text/javascript' src="javascripts/Chart.min.js" ></script>
 <script type='text/javascript' src="javascripts/excanvas.js" ></script>
@@ -149,6 +171,12 @@
 <script type='text/javascript' src="javascripts/FRONT_index.js" ></script>
 <script type='text/javascript' src="javascripts/manage.homework-post.js" ></script>
 <script type='text/javascript' src="javascripts/manage.homework.base.js" ></script>
+<script type='text/javascript' src="javascripts/manage.source.base.js" ></script>
 <script type='text/javascript' src="javascripts/manage.post.base.js" ></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        init_teacher_homework();
+    })
+</script>
 </body>
 </html>
