@@ -14,40 +14,16 @@
 
 
 
-
-
-<aside class="back-index-aside">
-    <a class="logo" ></a>
-    <ul class="first-ul">
-        <li>
-            <a href="FRONT-student.html" >我的主页</a>
-        </li>
-        <li>
-            <a href="FRONT-student-achievement.html" >我的成就</a>
-        </li>
-    </ul>
-    <ul class="second-ul" id="main-navigator-bottom">
-        <li>
-            <a>
-                <i class="smile icon" data-content="我的账户"></i>
-            </a>
-        </li>
-        <li>
-            <a>
-                <i class="sign out icon" data-content="退出账户"></i>
-            </a>
-        </li>
-    </ul>
-</aside>
-
 <aside class="back-index-condition front-index-condition">
     <header class="back-index-side-header">
-        <a class="ui down button teal mini" href="FRONT-student.html">
+    //连接地址
+        <a class="ui down button teal mini" href="">
             <i class="left icon"></i>
             返回上层
         </a>
     </header>
     <div class="ui vertical menu">
+    //要有active
         <a class="item active">
             <i class="inbox icon"></i>
             <label>作业</label>
@@ -62,17 +38,19 @@
 <article class="back-index-main front-index-main" id="front-index-main">
     <header class="back-index-side-header front-index-side-header" id="front-index-side-header">
         <div class="ui breadcrumb">
+        //标签
             <a class="section active">全部</a>
             <a class="section">听力</a>
             <a class="section">口语</a>
             <a class="section">写作</a>
         </div>
-        <a class="ui red mini button" id="add-item" type="course">
+        <a class="ui red mini button" id="add-item">
             <div class="visible content">
                 <i class="add icon"></i>
                 新建作业
             </div>
         </a>
+        //课程的标题
         <p><span>托福秋季班</span>的作业</p>
     </header>
 
@@ -82,12 +60,15 @@
            <%= render 'menu'%>
         </div>
 
-//right content
+//右边的内容
         <div class="right">
             <h3><i class="empty flag icon"></i> 托福听力</h3>
             <p>请就本科应该住在外租房还是学校进行讨论3分钟</p>
             <label>截止日期:<span>2013-04-15</span></label>
             <label>当前状态:<span>已完成</span></label>
+            <div class="ui mini teal button upload-homework"  id="upload-homework">
+                上传我的作业
+            </div>
             <hr />
             <hr />
 
@@ -107,32 +88,17 @@
              //每个人的回答
 
         </div>
-//right content
-
+//右边的内容
 
     </div>
 </article>
 
-<div class="homework-post-add" id="homework-post-add">
-    <div class="inner">
-        <i class="icon remove"></i>
-        <p>新建作业</p>
-        <div>
-            <label>作业标题</label>
-            <div class="ui input fluid ">
-                <input  type="text" name="title" class="homework-input" />
-            </div>
-            <label>作业内容</label>
-            <textarea  name='content' class="homework-input" ></textarea>
-            <label>截止日期</label>
-            <div class="ui input focus fluid ">
-                <input type="text" name="deadline" readonly id="homework-deadline" class="homework-input" >
-            </div>
-        </div>
-        <div id="create-homework-button" class="ui button red mini">
-            新建
-        </div>
-    </div>
+<div id="upload-wrap" class="upload-wrap">
+    <i class="icon remove"></i>
+    <a class="upload-button">上传附件...</a>
+    <p>dsad.pdf</p>
+    <p>asdas.pdf</p>
+    <a class="ok-button">完成</a>
 </div>
 
 
@@ -141,4 +107,5 @@
 <% content_for :javascript_includes do%>
 <%= javascript_include_tag "manage.source.base.js"%>
 <%= javascript_include_tag "manage.homework.base.js"%>
+<%= javascript_include_tag "manage.homework-post.js"%>
 <%end%>

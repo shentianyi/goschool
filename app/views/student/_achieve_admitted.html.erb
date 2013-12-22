@@ -1,0 +1,20 @@
+<table class="ui small table segment celled">
+  <thead>
+    <tr><th>学校</th>
+      <th>专业</th>
+      <th>时间</th>
+      <th>奖学金</th>
+  </tr></thead>
+  <tbody>
+    <% if @admitted %>
+    <% @admitted.each do |admit|%>
+    <tr>
+      <td><%= admit.admitted[:school] %></td>
+      <td><%= admit.admitted[:specialty] %></td>
+      <td><%= admit.admitted[:date] %></td>
+      <td><%= admit.admitted[:scholarship] %></td>
+    </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>

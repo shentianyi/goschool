@@ -1,31 +1,36 @@
 <aside class="back-index-aside">
-  <a class="logo" ></a>
+  <a class="logo"></a>
   <ul class="first-ul">
-       <%if current_user.is_employee?%>
-    <li>
-      <a class="<%= @active_left_aside=='students' ? 'active' : ''%>" href='<%= students_path%>'>学生信息</a>
-    </li>
-    <li>
-      <a class="<%= @active_left_aside=='courses' ? 'active' : ''%>"  href='<%= courses_path%>'>课程信息</a>
-    </li>
-    <%end%>
-    <%if current_user.is_teacher? || current_user.is_student?%>
-    <li>
-      <a class="<%= @active_left_aside=='homepage' ? 'active' : ''%>"  href='<%=  current_user.is_teacher? ?  teachers_path : student_index_path%>'>我的主页</a>
-    </li>
-    <%end%>
-     </ul>
+    <% if current_user.is_employee? %>
+        <li>
+          <a class="<%= @active_left_aside=='students' ? 'active' : '' %>" href='<%= students_path %>'>学生信息</a>
+        </li>
+        <li>
+          <a class="<%= @active_left_aside=='courses' ? 'active' : '' %>" href='<%= courses_path %>'>课程信息</a>
+        </li>
+    <% end %>
+    <% if current_user.is_teacher? || current_user.is_student? %>
+        <li>
+          <a class="<%= @active_left_aside=='homepage' ? 'active' : '' %>" href='<%= current_user.is_teacher? ? teachers_path : student_index_path %>'>我的主页</a>
+        </li>
+    <% end %>
+    <% if current_user.is_student? %>
+        <li>
+          <a class="<%= @active_left_aside=='achievements' ? 'active' : '' %>" href="/student/<%= current_user.student.id %>">我的成就</a>
+        </li>
+    <% end %>
+  </ul>
   <ul class="second-ul" id="main-navigator-bottom">
-    <% if current_user.is_admin?%>
-    <li>
-      <a href='<%= settings_path%>'> <i class="settings icon" data-content="全局配置"></i></a>
-    </li>
+    <% if current_user.is_admin? %>
+        <li>
+          <a href='<%= settings_path %>'> <i class="settings icon" data-content="全局配置"></i></a>
+        </li>
     <% end %>
     <li>
-      <a>  <i class="smile icon" data-content="我的账户"></i></a>
+      <a> <i class="smile icon" data-content="我的账户"></i></a>
     </li>
     <li>
-      <a>   <i class="mail outline icon" data-content="发送信息"></i></a>
+      <a> <i class="mail outline icon" data-content="发送信息"></i></a>
     </li>
     <li>
       <a href="/logininfo_sessions/destroy"> <i class="sign out icon" data-content="退出账户"></i></a>

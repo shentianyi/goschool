@@ -6,6 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 var STUDENTDETAIL=STUDENTDETAIL || {};
+var STUDENT_FRONT=STUDENT_FRONT || {};
+STUDENT_FRONT.check=0;
 (function(){
     //课程及服务
     $("body").on("keyup","#class-and-service tbody input",function(event){
@@ -475,35 +477,51 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
         }
     });
     $(window).resize(function(){
-        STUDENTDETAIL.check++;
-        window.setTimeout(function(){
-	    if(STUDENTDETAIL.check==1){
-                var width=$("#accordion").width()-40;
-                $("#grade canvas").attr("height",400).attr("width",width);
-                var canvas = $('#myChart')[0];
-                canvas.width=canvas.width;
-                canvas.height=canvas.height;
-                var data = {
-		    labels : STUDENTDETAIL.labels,
-		    datasets : [
-                        {
-			    fillColor : "rgba(151,187,205,0.5)",
-			    strokeColor : "rgba(151,187,205,1)",
-			    pointColor : "rgba(151,187,205,1)",
-			    pointStrokeColor : "#fff",
-			    data :STUDENTDETAIL.data
-                        }
-		    ]
+        if($("#class-performance .title").hasClass("active")){
+            STUDENT_FRONT.check++;
+            window.setTimeout(function(){
+                if(STUDENT_FRONT.check==1){
+                    HOMEWORKCHART.generateLine(STUDENT_FRONT.line.labels,STUDENT_FRONT.line.scores,"homework-line-wrap");
+                    HOMEWORKCHART.generatePie(STUDENT_FRONT.pie.scores,"homework-pie-wrap");
+                    STUDENT_FRONT.check--;
                 }
-                var ctx = $("#myChart").get(0).getContext("2d");
-                var myNewChart = new Chart(ctx);
-                new Chart(ctx).Line(data,STUDENTDETAIL.option);
-                STUDENTDETAIL.check--;
-	    }
-	    else{
-                STUDENTDETAIL.check--;
-	    }
-        },600);
+                else{
+                    STUDENT_FRONT.check--;
+                }
+            },300);
+        }
+        if($("#achieve .title").hasClass("active")){
+            STUDENTDETAIL.check++;
+            window.setTimeout(function(){
+                if(STUDENTDETAIL.check==1){
+                    var width=$("#accordion").width()-40;
+                    $("#grade canvas").attr("height",400).attr("width",width);
+                    var canvas = $('#myChart')[0];
+                    canvas.width=canvas.width;
+                    canvas.height=canvas.height;
+                    var data = {
+                        labels : STUDENTDETAIL.labels,
+                        datasets : [
+                            {
+                                fillColor : "rgba(151,187,205,0.5)",
+                                strokeColor : "rgba(151,187,205,1)",
+                                pointColor : "rgba(151,187,205,1)",
+                                pointStrokeColor : "#fff",
+                                data :STUDENTDETAIL.data
+                            }
+                        ]
+                    }
+                    var ctx = $("#myChart").get(0).getContext("2d");
+                    var myNewChart = new Chart(ctx);
+                    new Chart(ctx).Line(data,STUDENTDETAIL.option);
+                    STUDENTDETAIL.check--;
+                }
+                else{
+                    STUDENTDETAIL.check--;
+                }
+            },600);
+        }
+
     });
     //添加咨询记录验证
     $('.detail-add[type="consult-record"] .form').form({
@@ -534,17 +552,6 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
                 }
 	    ]
         }
-        /*
-	  service:{
-	  identifier : 'service',
-	  rules: [
-	  {
-	  type   : 'empty',
-	  prompt : '请填写接线人姓名'
-	  }
-	  ]
-	  }
-	*/
     },{
         inline : true,
         onSuccess:function(){
@@ -688,6 +695,18 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
 		 });
 
 		 $(document).ready(function(){
+             //post(得到的数组放到下面的对象中就可以了)
+             STUDENT_FRONT.line={
+                 labels:["2013-01-03","2013-01-04","2013-01-05"],
+                 scores:[15,18,19]
+             };
+             STUDENT_FRONT.pie={
+                 scores:[20,1]
+             };
+             HOMEWORKCHART.generateLine(STUDENT_FRONT.line.labels,STUDENT_FRONT.line.scores,"homework-line-wrap");
+             HOMEWORKCHART.generatePie(STUDENT_FRONT.pie.scores,"homework-pie-wrap","small");
+
+
 		     var href=window.location.href.split("/");
 		     var new_href=href[href.length-1].split("#")[0];
 		     if( new_href=="achieve"){

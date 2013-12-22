@@ -19,9 +19,10 @@
  *= require BACK-course-detail
  *= require BACK-course-schedule
  *= require FRONT-index
- *= require FRONT-class
+ *= require FRONT-homework-post
  *= require FRONT-teacher
  *= require FRONT-student
+ *= require FRONT-student-achievement
  *= require dhtmlxscheduler
  *= require base
  *= require jquery-datepicker

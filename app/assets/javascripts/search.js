@@ -181,19 +181,6 @@ var Search = {
                     if($.trim($(target).val()).length>0){
                         var data_to_sent = {search_type:event.data.obj.current_mode,entity_type:event.data.obj.entity,page:1,per_page:20,search_queries:this.value};
                         BACKINDEX.right_list.generateResult(data_to_sent);
-//                        $.get('/search_engine/search',{
-//                            search_type:data_to_sent.search_type,
-//                            entity_type:data_to_sent.entity_type,
-//                            q:$.trim(data_to_sent.search_queries),
-//                            page:data_to_sent.page
-//                        },function(data){
-//                            if(data.result){
-//                                Search.instance().show_result(data.content)
-//                            }
-//                            else{
-//                                MessageBox_content(data.content);
-//                            }
-//                        })
 
                     }
                     else{
@@ -260,6 +247,7 @@ var Search = {
                             context.current_query = null;
                             context.switch_mode("select_query");
                             WAYNE.change_mode(event,"select_query");
+                            WAYNE.query_count_validate(++WAYNE.query_count);
                             return false;
                         }
                         else{
@@ -397,7 +385,7 @@ var Search = {
                 $("#autoComplete-call>ul").empty();
                 $target.append($("<p />").addClass("no_match").text("没有匹配内容..."))
             }
-            //here to bind event to on_select_callback
+
             var obj=obj;
             var callback =  function(event){
                 event.stopPropagation();
@@ -420,13 +408,7 @@ var Search = {
             $("#autoComplete-call li").on("click",{obj:obj},callback);
             $("#autoComplete-call li").unbind("keyup").bind("keyup",{obj:obj},callback);
 
-//            var on_select_callback = function(obj,data){
-//                obj.current_query = data;
-//                if(!obj.query_types[obj.current_query['query_type']]){
-//                    obj.query_types[obj.current_query['query_type']] = obj.current_query;
-//                }
-//                obj.switch_mode("conditions",{notice:obj.current_query["introduction"]});
-//            }
+
 
         };
 
@@ -565,6 +547,7 @@ var Search = {
             //remove from the container
             this.queries[id]=null;
             this.query_list.find("#" + id).remove();
+            WAYNE.query_count_validate(--WAYNE.query_count);
         };
 
 
@@ -612,6 +595,9 @@ WAYNE.change_to_condition=function(target){
 WAYNE.query_count=0;
 WAYNE.query_count_validate=function(count){
     if(count==0){
-
+       $("#query_list").find("#query_add_view").remove()
+    }
+    else{
+        $("#query_list").append($("<div />").addClass("ui button mini red").attr("id","#query_add_view").text("添加为快捷试图"))
     }
 }

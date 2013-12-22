@@ -352,6 +352,18 @@
 .post-homework>.right>.item>div>input[type='text']{
     width:100px;
 }
+.post-homework>.right>.upload-homework{
+    font-weight:lighter;
+    font-size:12px;
+    float:right;
+    margin-top:-28px;
+}
+.post-homework>.right>.item>.teacher-answer{
+    font-size:12px;
+    background-color:#D95C5C;
+    color:white;
+    padding:3px 8px;
+}
 /**************************************************************  上传 */
 .upload-wrap{
     position:fixed;
