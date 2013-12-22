@@ -27,6 +27,7 @@ BACKINDEX.right_list.course.info={
 //////////////////////////////////////////////////////////////////////////////////////////////////// 列表的呈现
 BACKINDEX.right_list.currentPage;
 BACKINDEX.right_list.loadCheck=0;
+BACKINDEX.right_list.send_only_page;
 BACKINDEX.right_list.stillHave=false;
 BACKINDEX.right_list.threshold=50;
 BACKINDEX.right_list.temp_object;
@@ -34,10 +35,14 @@ BACKINDEX.right_list.temp_object;
 BACKINDEX.right_list.generateResult=function(data_to_sent){
 //    BACKINDEX.right_list.id=parameter;
     BACKINDEX.right_list.currentPage=0;
+    BACKINDEX.right_list.sent_only_page=false;
     BACKINDEX.right_list.stillHave=true;
     $("#search-result").empty();
     var p=data_to_sent,c={};
     BACKINDEX.right_list.temp_object=deepCopy(p,c);
+    if(arguments[1]=="only_page"){
+        BACKINDEX.right_list.send_only_page=true
+    }
     BACKINDEX.right_list.loadData();
 }
 BACKINDEX.right_list.loadData=function(){
@@ -46,16 +51,24 @@ BACKINDEX.right_list.loadData=function(){
     loader("search-result","auto","auto","0","50%");
     window.setTimeout(function(){
         //post
-        $.ajax({
-            type:"GET",
-            async:false,
-            url:'/search_engine/search',
-            data:{
+        if(BACKINDEX.right_list.send_only_page){
+            var my_data={
+                page:BACKINDEX.right_list.temp_object.page
+            }
+        }
+        else{
+            var my_data={
                 search_type:BACKINDEX.right_list.temp_object.search_type,
                 entity_type:BACKINDEX.right_list.temp_object.entity_type,
                 q:$.trim(BACKINDEX.right_list.temp_object.search_queries),
                 page:BACKINDEX.right_list.temp_object.page
-            },
+            }
+        }
+        $.ajax({
+            type:"GET",
+            async:false,
+            url:'/search_engine/search',
+            data: my_data,
             success:function(data){
                     remove_loader();
                     if(data.length==0){
