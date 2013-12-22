@@ -140,3 +140,66 @@
     top:50%;
     margin-top:-13px;
 }
+/**************************************************************  上传 */
+.upload-wrap{
+    position:fixed;
+    top:0;
+    left:-999em;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    box-shadow:3px 3px 4px rgba(0,0,0,0.7);
+    -moz-box-shadow:3px 3px 4px rgba(0,0,0,0.7);
+    -webkit-box-shadow:3px 3px 4px rgba(0,0,0,0.7);
+    border:1px solid rgba(0,0,0,0.3);
+    z-index:99;
+    width:140px;
+    padding-bottom:10px;
+    background-color:#fff;
+}
+.upload-wrap>i{
+    float:right;
+    color:#000;
+    font-size:13px;
+    cursor:pointer
+}
+.upload-wrap>i:hover{
+    color:#D95C5C
+}
+.upload-wrap>.upload-button{
+    background:linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)) #63A69F;
+    margin-top:20px;
+    margin-left:17px;
+    font-size:12px;
+    text-align:center;
+    padding:4px 6px;
+    color:#fff;
+    border-radius:2px;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    width:90px;
+    display:block;
+}
+.upload-wrap>p{
+    font-size:12px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    margin:2px 17px;
+}
+.upload-wrap>.ok-button{
+    color:#63A69F;
+    display:inline-block;
+    padding:0px 6px;
+    margin-left:81px;
+    margin-top:6px;
+    border:1px solid rgba(0,0,0,0.2);
+    border-radius:2px;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    font-size:12px;
+    text-align: center;
+}
+.upload-wrap>.ok-button:hover{
+    color:#D95C5C
+}
