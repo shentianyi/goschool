@@ -1,0 +1,31 @@
+<article class="back-index-main front-index-main" id="front-index-main">
+  <header class="back-index-side-header" id="front-index-side-header">
+    <label>我的成就</label>
+  </header>
+  <div class="front-people-inner">
+    <div class="my-achieve-wrap" id="my-achieve-wrap">
+
+      <div class="content-item achieve" id="final-achieve" <% if @final %>achieve="<%=@final.id%>"<% end %>>
+	<p>最终成就</p>
+	<dl class=list>
+	  <%= render partial: 'achieve_final'%>
+	</dl>
+      </div>
+
+      <div class="content-item offer" id="offer" <% if @admit %>achieve="<%=@admit.id%>"<% end %>>
+	<p>所有录取</p>
+	<%= render partial: 'achieve_admitted'%>
+      </div>
+
+      <div class="content-item grade" id="grade" <% if @final_grade %>achieve="<%=@final_grade.id%>"<% end %>>
+	<p>最终成绩</i></p>
+	<div id="grade-add" class="grade-add">
+	  <p>添加新课程名称</p>
+	  <input type='text'/>
+	</div>
+	<%= render partial: 'achieve_final_grade'%>
+      </div>
+
+    </div>
+  </div>
+</article>

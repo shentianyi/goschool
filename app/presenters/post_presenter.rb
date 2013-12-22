@@ -9,6 +9,10 @@ class PostPresenter < Presenter
   def comments
     CommentPresenter.init_presenters(@post.comments)
   end
+  
+  def attachments
+    @post.attachments
+  end
 
   def post_time
     day = 3600*24
