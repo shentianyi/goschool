@@ -17,6 +17,10 @@ gem 'redis'
 gem 'resque'
 gem 'redis-namespace'
 
+# gem for rich editor
+gem "ckeditor"
+gem "paperclip"
+# rails generate ckeditor:install --orm=active_record --backend=paperclip
 # gem for generate pdf
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'

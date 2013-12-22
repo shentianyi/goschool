@@ -5,8 +5,8 @@
 <div style="background: pink">
 <%if @student_homework %>
 <table style=" border: solid red 1px; width: 100%">
-     <tr >
-          <td>content:<%= @student_homework.content%></td>
+     <tr>
+          <td>content:<%= raw @student_homework.content%></td>
           <td>improved:<%= @student_homework.improved%>
           </td>
           <td>marked: <%= @student_homework.marked%></td>

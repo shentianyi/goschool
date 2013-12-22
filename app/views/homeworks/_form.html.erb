@@ -1,7 +1,14 @@
 <div>
-     <h3>CREATE HOMEWORK</h3>
-     title:<input type="text" name="title" placeholder="作业标题..." class="homework-input" /> 
-     content:  <textarea placeholder="作业描述..." name='content' class="homework-input" ></textarea> 
-     deadline: <input placeholder="截止日期..." type="text" name="deadline" readonly id="homework-deadline" class="homework-input" > 
-     <input type="button" value="CREATE" id="create-homework-button"/>
+	<h3>CREATE HOMEWORK</h3>
+	title:
+	<input type="text" name="title" placeholder="作业标题..." class="homework-input" />
+	content: 	<textarea placeholder="作业描述..." name='content' id="content" class="ckeditor homework-input" ></textarea>
+	deadline:
+ <input placeholder="截止日期..." type="text" name="deadline" readonly id="homework-deadline" class="homework-input" >
+	<input type="button" value="CREATE" id="create-homework-button"/>
 </div>
+<script type="text/javascript">
+	var content=CKEDITOR.replace('content', {
+		preset : 'standard',
+	});
+</script>

@@ -1,5 +1,7 @@
 Goschool::Application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
+
   get "search_engine/search"
 
   controller :teachers do

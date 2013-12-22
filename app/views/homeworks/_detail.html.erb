@@ -3,7 +3,7 @@
           <td>title: <%= @homework.title%></td>
      </tr>
      <tr>
-          <td>content: <%= @homework.content%></td>
+          <td>content: <%= raw @homework.content%></td>
      </tr>
      <tr>
           <td>deadline: <%= @homework.deadline_display%></td>

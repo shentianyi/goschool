@@ -1,11 +1,16 @@
 <div id="student-submit-homework-div" style="background:#A757A8 ">
-     ANSWER:
-     <table>
-          <tr>
-               <td><textarea class="homework-input" name="content" id="student-homework-content" placeholder="作业内容..."></textarea></td>
-               <td>
-               <input type="button" value="SUBMIT" id="student-homework-submit-button" homework="<%= @homework.id%>"/>
-               </td>
-          </tr>
-     </table>
+	ANSWER:
+	<table>
+		<tr>
+			<td>			<textarea class="homework-input" name="content" id="student-homework-content" placeholder="作业内容..."></textarea></td>
+			<td>
+			<input type="button" value="SUBMIT" id="student-homework-submit-button" homework="<%= @homework.id%>"/>
+			</td>
+		</tr>
+	</table>
 </div>
+<script type="text/javascript">
+	var content = CKEDITOR.replace('student-homework-content', {
+		preset : 'standard',
+	}); 
+</script>

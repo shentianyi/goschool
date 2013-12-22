@@ -2,10 +2,15 @@
      ANSWER:
      <table>
           <tr>
-               <td><textarea class="homework-input" name="content" id="student-homework-content" placeholder="作业内容..."><%= @student_homework.content%></textarea></td>
+               <td><textarea class="homework-input" name="content" id="student-homework-content" placeholder="作业内容..."><%= raw @student_homework.content%></textarea></td>
                <td>
                <input type="button" value="SUBMIT" id="student-homework-submit-button" homework="<%= @homework.id%>" student-homework="<%= @student_homework.id%>"/>
                </td>
           </tr>
      </table>
 </div>
+<script type="text/javascript">
+	var content=CKEDITOR.replace('student-homework-content', {
+		preset : 'standard',
+	});
+</script>

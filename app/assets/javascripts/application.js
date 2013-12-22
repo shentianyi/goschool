@@ -20,8 +20,3 @@
 //= require wayne-base
 
 
-
-
-
-
-
