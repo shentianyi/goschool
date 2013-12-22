@@ -420,14 +420,14 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     });
 
     $(document).ready(function(){
-//        var href=window.location.href.split("/");
-//        var new_href=href[href.length-1].split("#")[0];
-//        if( new_href=="achieve"){
-//            if($("#achieve_final_tabular>a").length>=1){
-//                $("#achieve_final_tabular>a").eq(0).click();
-//            }
-//        }
-        	STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
+        var href=window.location.href.split("/");
+        var new_href=href[href.length-1].split("#")[0];
+        if( new_href=="achieve"){
+            if($("#achieve_final_tabular>a").length>=1){
+                $("#achieve_final_tabular>a").eq(0).click();
+            }
+        }
+//        	STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
     });
 
 })();
