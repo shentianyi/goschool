@@ -57,6 +57,20 @@
     word-wrap:break-word;
     display:inline-block;
 }
+.back-index-condition.front-index-condition>.ui.vertical.menu{
+    background-color:rgba(0,0,0,0);
+    box-shadow:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    width:180px;
+    margin-top:6px;
+}
+.back-index-condition.front-index-condition>.ui.vertical.menu .item{
+    cursor:pointer;
+}
+.back-index-condition.front-index-condition>.ui.vertical.menu .item.active{
+    color:#63A69F
+}
 /****************************************************最右*/
 .front-people-inner{
     position:absolute;
