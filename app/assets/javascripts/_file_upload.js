@@ -33,9 +33,11 @@ function attach_upload() {
         success: function (data) {
             var prev = $("#" + id + '-preview');
             if (data.result) {
-                prev.find(".template").remove();
                 //remove the previous attachments
 
+                remove_all_attachment(prev);
+
+                prev.find(".template").remove();
 
                 for (var i = 0; i < data.object.length; i++) {
                     prev.append($("<p />").addClass("attachment-item upload-file-name")
@@ -56,10 +58,20 @@ function attachment_remove(event) {
     var e = event ? event : (window.event ? window.event : null);
     var obj = e.srcElement || e.target;
     e.stopPropagation();
-    $(".attachment-item[path-name='" + $(obj).attr("path-name") + "']").remove();
-    if ($("#task-attach-uploader-preview").children().length == 0) {
-        $("#task-attach-uploader-preview").css("display", "none");
+    var data = {
+        file: $(obj).attr("path-name")
     }
+    remove_attach(data,function(data){
+        if(data.result){
+            $(".attachment-item[path-name='" + $(obj).attr("path-name") + "']").remove();
+            if ($("#task-attach-uploader-preview").children().length == 0) {
+                $("#task-attach-uploader-preview").css("display", "none");
+            }
+        }
+        else{
+            MessageBox_content(data.content);
+        }
+    });
 }
 
 function get_attach() {
@@ -71,4 +83,34 @@ function get_attach() {
         attachs[i].pathName = $("#task-attach-uploader-preview>p").eq(i).attr("path-name")
     }
     return attachs;
+}
+
+
+function remove_attach(data,callback){
+    $.ajax({
+        url : '/files/remove_attach',
+        data : data,
+        type : 'POST',
+        success : function(data) {
+            if(callback)
+                callback(data);
+        }
+    });
+}
+
+function remove_all_attachment(target){
+    var length = target.children().length;
+    for(var i = 0;i < length;i++){
+        var data = {
+            file:$("#task-attach-uploader-preview>p").eq(i).attr("path-name")
+        }
+        remove_attach(data,function(data){
+            if(data.result){
+                $(".attachment-item[path-name='" + data.object + "']").remove();
+                if (target.children().length == 0) {
+                    target.css("display", "none");
+                }
+            }
+        });
+    }
 }

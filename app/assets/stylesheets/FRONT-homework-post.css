@@ -1,3 +1,4 @@
+/**************************************************** 添加*/
 .homework-post-add{
     position:absolute;
     min-height:768px;
@@ -50,6 +51,7 @@
     margin-top:20px;
     height:300px;
     overflow-y:auto;
+    overflow-x:hidden;
 }
 .homework-post-add>.inner>div.content>label{
     display:block;
@@ -89,4 +91,324 @@
 }
 .homework-post-add>.inner>div.content .upload-file{
     margin-top:8px;
+}
+/****************************************************中间部分*/
+/*针对post和homework的*/
+.back-index-condition.front-index-condition>.ui.vertical.menu{
+    background-color:rgba(0,0,0,0);
+    box-shadow:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    width:180px;
+    margin-top:13px;
+}
+.back-index-condition.front-index-condition>.ui.vertical.menu .item{
+    cursor:pointer;
+    border-radius:0px;
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+    padding:0.53em 0.95em
+}
+.back-index-condition.front-index-condition>.ui.vertical.menu .item:hover{
+    background-color:rgba(0,0,0,0.03);
+}
+.back-index-condition.front-index-condition>.ui.vertical.menu .item.active{
+    background-color:#63A69F;
+    color:#fff;
+}
+.back-index-condition.front-index-condition .down.button{
+    right:auto;
+    left:10px;
+    font-size:12px;
+    font-weight:lighter;
+}
+/****************************************************最右*/
+/*针对homework和post的*/
+.front-index-side-header>.ui.breadcrumb{
+    font-size:14px;
+    margin-top:15px;
+    margin-left:16px;
+}
+.front-index-side-header>.breadcrumb>a{
+    transition:color 0.25s ease-out;
+    color:#009FDA
+}
+.front-index-side-header>.breadcrumb>a:not(:last-of-type):after{
+    content:"/";
+    color:rgba(0,0,0,0.2);
+    font-weight:bold;
+    font-size:15px;
+    padding:0 5px;
+}
+.front-index-side-header>.breadcrumb>a.active,
+.front-index-side-header>.breadcrumb>a:hover{
+    color:rgba(0,0,0,0.7);
+}
+.front-index-side-header>.breadcrumb>a+div.divider{
+    font-weight:bold;
+    font-size:15px;
+}
+.front-index-side-header>p{
+    position:absolute;
+    left:0px;
+    right:0px;
+    top:15px;
+    text-align:center;
+    font-size:15px;
+    font-weight:500;
+    pointer-events:none;
+}
+.post-homework{
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    background:white;
+    margin:15px;
+    box-shadow:3px 3px 4px rgba(0,0,0,0.4);
+    -moz-box-shadow:3px 3px 4px rgba(0,0,0,0.4);
+    -webkit-box-shadow:3px 3px 4px rgba(0,0,0,0.4);
+    border:1px solid rgba(0,0,0,0.2);
+    height:85%;
+    overflow-y:auto;
+}
+.post-homework>.left{
+    width:200px;
+    min-height:100%;
+    overflow-y: auto;
+    float:left;
+    border-right:1px solid rgba(0,0,0,0.15);
+}
+.post-homework>.left>.accordion{
+    border-radius:0px;
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+    background:none;
+    border-right:none;
+}
+.post-homework>.left>.accordion .item:first-of-type .title {
+    border-top: medium none;
+}
+.post-homework>.left>.accordion .title{
+    border-top: 1px solid rgba(0, 0, 0, 0.03);
+    font-size:14px;
+    font-weight:bolder;
+    background-color:rgba(226,226,226,0.3);
+    color:#C69C6D;
+    padding:5px 10px;
+}
+.post-homework>.left>.accordion .active.title{
+    background-color:#63A69F;
+    color:#fff;
+}
+.post-homework>.left>.accordion .content{
+    padding:5px 10px;
+}
+.post-homework>.left>.accordion .content ul{
+    padding:0px;
+    margin:0px;
+    list-style-type: none;
+}
+.post-homework>.left>.accordion .content ul a{
+    display:block;
+    font-size:13px;
+    padding:5px 0px;
+    border-bottom:1px solid rgba(0,0,0,0.1);
+    color:#222;
+}
+.post-homework>.left>.accordion .content ul li:last-of-type a{
+    border-bottom:none;
+}
+.post-homework>.left>.accordion .content ul li.active a,
+.post-homework>.left>.accordion .content ul a:hover{
+    color:#63A69F;
+}
+
+.post-homework>.right{
+    float:left;
+    padding:0px 20px;
+}
+.post-homework>.right>.homework-info{
+    width:80%;
+}
+.post-homework>.right>.homework-info>h3{
+    color:#63A69F;
+    margin-bottom:3px;
+}
+.post-homework>.right>.homework-info>p{
+    width:100%;
+    word-break:break-all;
+    word-wrap:break-word;
+    font-size:13px;
+    color:rgba(0,0,0,0.8);
+    margin-bottom:30px;
+}
+.post-homework>.right>.homework-info>label,
+.post-homework>.right>label{
+    font-size:13px;
+    color:rgba(0,0,0,0.8);
+    display:block;
+}
+.post-homework>.right>.homework-info>label:nth-of-type(2)>span{
+    color:#D95C5C;
+}
+.post-homework>.right>.homework-info.post>label:nth-of-type(2)>span{
+    color:#4092CC;
+}
+.post-homework>.right>.homework-info>label>span{
+    display:inline-block;
+    margin-left:5px;
+    color:rgba(0,0,0,0.75);
+}
+.post-homework>.right>.homework-info>.attachments{
+    width:60%;
+    margin:5px 0px;
+}
+.post-homework>.right>.homework-info>.attachments>a{
+    color:rgba(0,0,0,0.6);
+    margin-right:2px;
+}
+.post-homework>.right>.homework-info>.attachments>a>i{
+    color:#63A69F;
+    transition:color 0.25s ease-out;
+}
+.post-homework>.right>.homework-info>.attachments>a>:hover{
+    color:#D95C5C;
+}
+.post-homework>.right>.homework-info input[type='checkbox']{
+    position:relative;
+    left:-5px;
+}
+
+
+.post-homework>.right>hr{
+    color:rgba(0,0,0,0.4);
+}
+.post-homework>.right>hr:nth-of-type(2){
+    margin-bottom:0px;
+}
+.post-homework>.right>.item{
+    padding:10px 0;
+    border-bottom:1px solid rgba(0,0,0,0.3);
+    position:relative;
+}
+.post-homework>.right>.item.true{
+    background-color:#DEFCD5
+}
+.post-homework>.right>.item:after{
+    content:'';
+    display:block;
+    clear:both;
+}
+.post-homework>.right>.item>img{
+    float:left;
+}
+.post-homework>.right>.item>p{
+    max-width:85%;
+}
+.post-homework>.right>.item>p:first-of-type{
+    font-size:15px;
+    font-weight:bold;
+    color:#4092CC;
+    padding-right:25px;
+    padding-bottom:3px;
+    margin-top:-2px;
+}
+.post-homework>.right>.item>p:nth-of-type(2){
+    font-size:11px;
+    color:#4e4e4e;
+    margin-top:-8px;
+}
+.post-homework>.right>.item>p:nth-of-type(3){
+    font-size:14px;
+    color:rgba(0,0,0,0.7);
+    margin-top:6px;
+    word-break:break-all;
+    word-wrap:break-word;
+}
+.post-homework>.right>.item>.attachment-a{
+    position:absolute;
+    right:10px;
+    top:10px;
+    color:#63A69F;
+    cursor:pointer;
+    font-size:20px;
+    transition:color 0.25s ease-out;
+}
+.post-homework>.right>.item>.attachment-a:hover{
+    color:#D95C5C;
+}
+.post-homework>.right>.item>div.item-operate{
+    float:right;
+    margin-right:10px;
+}
+.post-homework>.right>.item>div.item-operate>label{
+    font-size:12px;
+    color:#D95C5C;
+}
+.post-homework>.right>.item.true>div.item-operate>label{
+    color:#52A954;
+}
+.post-homework>.right>.item>div.item-operate>input[type='checkbox']{
+    cursor:pointer;
+    margin-right:20px;
+    position:relative;
+    top:0
+}
+.post-homework>.right>.item>div.item-operate>input[type='text']{
+    width:100px;
+}
+.post-homework>.right>.upload-homework{
+    font-weight:lighter;
+    font-size:12px;
+    float:right;
+    margin-top:-28px;
+}
+.post-homework>.right>.item>.teacher-answer{
+    font-size:12px;
+    background-color:#D95C5C;
+    color:white;
+    padding:3px 8px;
+}
+/*post的添加回复*/
+.post-homework>.right>.item.replay-input textarea{
+    width:96%;
+    min-width:96%;
+    max-width:96%;
+    position:relative;
+    left:50%;
+    margin-top:25px;
+    margin-bottom:15px;
+    margin-left:-49%;
+    padding:10px 1%;
+    height:80px;
+    min-height:80px;
+    max-height:120px;
+    border:1px solid rgba(0,0,0,0.3);
+    border-radius: 0.3125em;
+    -moz-border-radius: 0.3125em;
+    -webkitborder-radius: 0.3125em;
+    font-size:15px;
+    color:#222;
+    font-family: "Helvetica Neue","Helvetica",Arial;
+}
+.post-homework>.right>.item.replay-input>.button{
+    width:98%;
+    position:relative;
+    left:50%;
+    margin-left:-49%;
+}
+.post-homework>.right>.item.replay-input{
+    border-bottom:none;
+}
+.post-homework>.right>.item.replay-input>.upload-file{
+    width:98%;
+    position:relative;
+    left:50%;
+    margin-left:-49%;
+    margin-top:-10px;
+    margin-bottom:20px;
+}
+.post-homework>.right>.item.replay-input>.upload-file .button{
+    background-color:rgba(0,0,0,0.1);
+    color:rgba(0,0,0,0.6);
 }

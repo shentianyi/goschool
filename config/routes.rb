@@ -49,6 +49,7 @@ Goschool::Application.routes.draw do
 
   controller :files do
     post 'files/attach'=>:attach
+    post 'files/remove_attach' =>:remove_attach
     get 'files/download'=>:download
   end
 
