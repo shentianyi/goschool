@@ -20,7 +20,7 @@
           <label>这次作业进步了吗</label>
           <input type="checkbox" name="improved"  homework="<%= sh.id%>"  class="student-homwork-input" <%= 'checked' if sh.improved%>/>
           <label>得分</label>
-          <input type="text" name="score" value="<%= sh.score_display%>" homework="<%= sh.id%>" class="student-homwork-input"/>
+          <input type="text" name="score" value="<%= sh.score_input_display%>" homework="<%= sh.id%>" class="student-homwork-input"/>
      </div>
 </div>
 <%end%>
