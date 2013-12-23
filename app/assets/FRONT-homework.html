@@ -133,8 +133,6 @@
                 </div>
             </div>
 
-
-
         </div>
 
     </div>
@@ -167,15 +165,20 @@
     </div>
 </div>
 
-<div class="homework-post-add" name="upload-my-homework">
+<div class="homework-post-add upload-my-home-work" id="upload-my-home-work">
     <div class="inner">
         <i class="icon remove"></i>
-        <p>新建作业</p>
+        <p>上传我的作业</p>
         <div class="content">
-
+            <label>作业内容</label>
+            <textarea  name='content' class="homework-input" ></textarea>
+            <div class="upload-file">
+                <a class="ui button twitter mini" onclick="$('#task-attach-uploader').click()">上传附件(最大为20M)</a>
+                <p class="upload-file-name">wzx.pdf<i class="icon remove"></i></p>
+            </div>
         </div>
         <div  class="ui button red mini">
-            新建
+            上传
         </div>
     </div>
 </div>
@@ -195,6 +198,7 @@
 <script type='text/javascript' src="javascripts/manage.homework.base.js" ></script>
 <script type='text/javascript' src="javascripts/manage.source.base.js" ></script>
 <script type='text/javascript' src="javascripts/manage.post.base.js" ></script>
+<script type='text/javascript' src="javascripts/FRONT_homework_post.js" ></script>
 <script type='text/javascript' src="javascripts/FRONT_homework.js" ></script>
 <script type="text/javascript">
     $(document).ready(function(){
