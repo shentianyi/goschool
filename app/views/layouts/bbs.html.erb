@@ -8,6 +8,8 @@
           <%= yield :javascript_includes%>
      </head>
      <body>
+          <%= render 'shares/left_aside'%>
+          <%= render 'shares/bbs_aside'%>
           <%= yield %>
           <%=render 'shares/message_box'%>
      </body>

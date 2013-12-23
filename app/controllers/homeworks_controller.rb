@@ -6,8 +6,9 @@ class HomeworksController < ApplicationController
   skip_before_filter :require_user_as_employee
   before_filter :require_user_as_teacher, :only=>[:create,:update,:destroy]
 
-  layout 'homework'
+  layout 'bbs'
   def index
+    @homework_acitve=true
     if current_user.is_teacher?
       teacher_index
     elsif current_user.is_student?
@@ -26,6 +27,7 @@ class HomeworksController < ApplicationController
   end
 
   def show
+    @homework_acitve=true
     if   @homework
       if current_user.is_teacher?
         teacher_show

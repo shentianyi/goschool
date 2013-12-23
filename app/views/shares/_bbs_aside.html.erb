@@ -1,0 +1,9 @@
+<aside class="back-index-condition front-index-condition">
+     <header class="back-index-side-header">
+          <a class="ui down button teal mini" href="FRONT-student.html"> <i class="left icon"></i> </a>
+     </header>
+     <div class="ui vertical menu">
+          <a class="item <%='active' if @homework_acitve%>" href="/homeworks/index/<%= @teacher_course.id%>"> <i class="inbox icon"></i> <label>作业</label> </a>
+          <a class="item" href="FRONT-post.html"> <i class="chat outline icon"></i> <label>互动</label> </a>
+     </div>
+</aside>

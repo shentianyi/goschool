@@ -1,20 +1,113 @@
-<div style="background:gold ">
-	<%= render 'form'%>
+<article class="back-index-main front-index-main" id="front-index-main">
+     <header class="back-index-side-header front-index-side-header" id="front-index-side-header">
+          <div class="ui breadcrumb">
+               <a class="section active">全部</a>
+               <a class="section">听力</a>
+               <a class="section">口语</a>
+               <a class="section">写作</a>
+          </div>
+          <a class="ui red mini button" id="add-item">
+          <div class="visible content">
+               <i class="add icon"></i>
+               新建作业
+          </div> </a>
+          <p>
+               <span>托福秋季班</span>的作业
+          </p>
+     </header>
+
+     <div class="post-homework" id="post-home">
+
+          <div class="left">
+               <%= render 'menu'%>
+          </div>
+
+          <div class="right" id="homework-post-right">
+               <h3><i class="empty flag icon"></i> 托福听力</h3>
+               <p>
+                    请就本科应该住在外租房还是学校进行讨论3分钟
+               </p>
+               <label>截止日期:<span>2013-04-15</span></label>
+               <label>当前状态:<span>已完成</span></label>
+               <div class="ui mini teal button upload-homework"  id="upload-homework">
+                    上传我的作业
+               </div>
+               <hr />
+               <hr />
+
+               <div class="item">
+                    <img class="ui image avatar" src="images/portrait/4.jpg" />
+                    <p>
+                         王子骁
+                    </p>
+                    <p>
+                         八天前
+                    </p>
+                    <p>
+                         请老师查阅
+                    </p>
+                    <div>
+                         <label>这次作业进步了吗</label>
+                         <input type="checkbox" />
+                         <label>得分</label>
+                         <input type="text" />
+                    </div>
+               </div>
+
+          </div>
+
+     </div>
+
+</article>
+
+<div class="homework-post-add" id="homework-post-add">
+     <div class="inner">
+          <i class="icon remove"></i>
+          <p>
+               新建作业
+          </p>
+          <div>
+               <label>作业标题</label>
+               <div class="ui input fluid ">
+                    <input  type="text" name="title" class="homework-input" />
+               </div>
+               <label>作业内容</label>
+               <textarea  name='content' class="homework-input" ></textarea>
+               <label>截止日期</label>
+               <div class="ui input focus fluid ">
+                    <input type="text" name="deadline" readonly id="homework-deadline" class="homework-input" >
+               </div>
+          </div>
+          <div id="create-homework-button" class="ui button red mini">
+               新建
+          </div>
+     </div>
 </div>
-<table style="height: 600px; width:100%">
-	<tr style="height: 60px; background: yellow;"  colspan="2">
-		<td>HOME WORK OF: <span style="color:red;"><%= @sub_course.parent_name%>:<%= @sub_course.name%></span></td>
-	</tr>
-	<tr>
-		<td style="background: green;width: 20%"> <%= render 'menu'%> </td>
-		<td style="background: grey;width: 60%"><div id="homework-content"></div></td>
-	</tr>
-</table>
+
+<div id="upload-wrap" class="upload-wrap">
+     <i class="icon remove"></i>
+     <a class="upload-button">上传附件...</a>
+     <p>
+          dsad.pdf
+     </p>
+     <p>
+          asdas.pdf
+     </p>
+     <a class="ok-button">完成</a>
+</div>
+
 <input type="hidden" value="<%= @teacher_course.id%>" id="teacher-course-hidden" />
-<script type="text/javascript">init_teacher_homework();</script>
+<script type="text/javascript">
+     $(document).ready(function() {
+          init_teacher_homework();
+     })
+</script>
 <% content_for :javascript_includes do%>
 <%= javascript_include_tag "manage.source.base.js"%>
+<%= javascript_include_tag "manage.homework-post.js"%>
 <%= javascript_include_tag "manage.homework.base.js"%>
+<%= javascript_include_tag "FRONT_index.js"%>
+<%= javascript_include_tag "FRONT_homework.js"%>
 <%= javascript_include_tag "ckeditor/ckeditor.js" %>
 <%= javascript_include_tag "ckeditor/config.js" %>
 <%end%>
