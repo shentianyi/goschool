@@ -4,7 +4,7 @@
           <p>
                新建作业
           </p>
-          <div>
+          <div class="content">
                <label>作业标题</label>
                <div class="ui input fluid ">
                     <input  type="text" name="title" class="homework-input" placeholder="作业标题..." />
@@ -15,8 +15,11 @@
                <div class="ui input focus fluid ">
                     <input placeholder="截止日期..." type="text" name="deadline" readonly id="homework-deadline" class="homework-input" >
                </div>
+               <div class="upload-file">
+                 <%=render 'shares/file_upload'%>
+               </div>
           </div>
-          <%=render 'shares/file_upload'%>
+
           <div id="create-homework-button" class="ui button red mini">
                新建
           </div>

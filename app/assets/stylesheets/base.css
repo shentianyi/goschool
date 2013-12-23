@@ -271,3 +271,27 @@ select{
     word-break:break-all;
     word-wrap:break-word;
 }
+/********************************************************************************************************* 上传
+*******************************************************************************************************************/
+.upload-file-name{
+    font-size:13px;
+    color:#222;
+    max-width:80%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.upload-file-name>i{
+    display:none;
+    margin-left:3px;
+    color:rgba(0,0,0,0.7);
+    cursor:pointer;
+}
+.upload-file-name:hover i,
+.upload-file-name>i:hover{
+    display:inline-block;
+    transition:color 0.25s ease-out;
+}
+.upload-file-name>i:hover{
+    color:#D95C5C;
+}

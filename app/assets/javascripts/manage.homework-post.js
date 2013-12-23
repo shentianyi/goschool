@@ -6,7 +6,7 @@
     $("body").on("click","#add-item",function(){
         $("#homework-post-add").css("left",0).css("right",0);
     });
-    $("body").on("click","#homework-post-add .remove",function(){
+    $("body").on("click","#homework-post-add>.inner>.remove",function(){
         $("#homework-post-add input,#homework-post-add textarea").val("");
         $("#homework-post-add").css("left","-999em").css("right","auto");
 

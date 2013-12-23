@@ -11,7 +11,7 @@
 .homework-post-add>.inner{
     position:absolute;
     width:500px;
-    height:360px;
+    height:400px;
     top:40%;
     left:50%;
     margin-top:-180px;
@@ -42,33 +42,46 @@
     -moz-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
     -webkit-text-shadow:2px 2px 4px rgba(0,0,0,0.4);
 }
-.homework-post-add>.inner>div{
+.homework-post-add>.inner>div.content{
     width:80%;
     position:relative;
     left:50%;
     margin-left:-40%;
     margin-top:20px;
+    height:300px;
+    overflow-y:auto;
 }
-.homework-post-add>.inner>div>label{
+.homework-post-add>.inner>div.content>label{
     display:block;
     font-size:12px;
     margin-top:10px;
     color:rgba(0,0,0,0.6);
 }
-.homework-post-add>.inner>div textarea{
-    width:368px;
-    min-width:368px;
-    max-width:368px;
+.homework-post-add>.inner>div.content input{
+    padding:5px 10px;
+    font-size:15px;
+    color:#222;
+}
+.homework-post-add>.inner>div.content textarea{
+    width:378px;
+    min-width:378px;
+    max-width:378px;
     height:50px;
     max-height:50px;
     min-height:50px;
-    padding:15px;
+    padding:5px 10px;
     border:1px solid rgba(0,0,0,0.2);
     border-radius: 0.3125em;
     -moz-border-radius: 0.3125em;
     -webkitborder-radius: 0.3125em;
+    font-size:15px;
+    color:#222;
+    font-family: "Helvetica Neue","Helvetica",Arial;
 }
 .homework-post-add>.inner>.button{
-    margin-left:120px;
+    margin-left:371px;
     width:80px;
+}
+.homework-post-add>.inner>div.content .upload-file{
+    margin-top:8px;
 }

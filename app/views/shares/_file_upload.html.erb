@@ -1,9 +1,6 @@
-<div>
-  <!--放附件的地方-->
-  <label id="attachmentLabel" class="desc-label">附件(最大为20M)</label><br />
-  <i class="icon-folder-open description-ad-btn" title="添加附件" onclick="$('#task-attach-uploader').click()">Add </i>
-  <input id="task-attach-uploader" class="task-attach-upload" type="file" name="files[]" data-url="/files/attach" multiple="true" style="display: none;"/>
-  <div class="atta-line" id="task-attach-uploader-preview" ></div>
+<a class="ui button twitter mini" onclick="$('#task-attach-uploader').click()">上传附件(最大为20M)</a>
+<input id="task-attach-uploader" class="task-attach-upload" type="file" style="display: none;" multiple="true" data-url="/files/attach" name="files[]">
+<div id="task-attach-uploader-preview">
 </div>
 
 <% content_for :javascript_includes do%>

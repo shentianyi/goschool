@@ -14,4 +14,6 @@
         }).on("click","#upload-wrap a,#upload-wrap,#upload-wrap p",function(event){
             stop_propagation(event);
         })
+    $("#homework-post-right .attachments a").popup();
+
 })()
