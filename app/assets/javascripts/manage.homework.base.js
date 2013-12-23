@@ -1,6 +1,8 @@
 function init_teacher_homework() {
      init_date_picker("#homework-deadline");
+     init_date_picker("#homework-deadline-resubmit");
      bind_menu_event();
+
      $("#create-homework-button").click(function() {
           var homework = {};
           $.each($(".homework-input"), function() {
@@ -20,6 +22,7 @@ function init_teacher_homework() {
                }
           });
      });
+
      bind_sh_input_text_update_event(function(data) {
           if(data.result) {
                // 更新成功
