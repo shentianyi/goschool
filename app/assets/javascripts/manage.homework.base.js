@@ -16,7 +16,7 @@ function init_teacher_homework() {
                     MessageBox_content(data.content);
                    $("#homework-post-add>.inner>.remove").click();
                }else{
-                    CKEDITOR.instances['content'].setData('');
+                    // CKEDITOR.instances['content'].setData('');
                }
           });
      });
