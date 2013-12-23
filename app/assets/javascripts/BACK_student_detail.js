@@ -677,7 +677,7 @@ STUDENT_FRONT.check = 0;
                     $("#edit_referrer").val("");
                 }
                 else {
-                    student_manager.update($("#student-detail-info").attr('student'), {student: {referrer_id: msg.id}}, function (data) {
+                    student_manager.update($("#student-detail-info").attr('student'), {student: {referrer_id: msg.logininfo_id}}, function (data) {
                         if (data.result) {
 
                         }
