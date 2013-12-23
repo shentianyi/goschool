@@ -8,7 +8,7 @@ function init_teacher_homework() {
           $.each($(".homework-input"), function() {
                homework[$(this).attr('name')] = $(this).val();
           });
-          homework.attach=get_attach();
+          homework.attach = get_attach();
           homework['teacher_course_id'] = $("#teacher-course-hidden").val();
           // homework['content'] = CKEDITOR.instances['content'].getData();
           homework_manager.create({
@@ -16,9 +16,8 @@ function init_teacher_homework() {
           }, function(data) {
                if(!data.result) {
                     MessageBox_content(data.content);
-                   $("#homework-post-add>.inner>.remove").click();
-               }else{
-                    // CKEDITOR.instances['content'].setData('');
+               } else {
+                    $("#homework-post-add>.inner>.remove").click();
                }
           });
      });
@@ -38,7 +37,7 @@ function init_teacher_homework() {
      });
      bind_th_input_text_update_event(function(data) {
           if(data.result) {
-                $("#homework-status").text(data.content);
+               $("#homework-status").text(data.content);
           } else {
                // 跟新失败
                // data.content 未消息
@@ -46,8 +45,8 @@ function init_teacher_homework() {
           }
      });
 
-    // CKEDITOR.replace('content', {
-          // preset : 'standard',
+     // CKEDITOR.replace('content', {
+     // preset : 'standard',
      // });
 }
 
@@ -68,9 +67,9 @@ function bind_menu_event() {
           homework_manager.show($(this).attr('id'), function(data) {
                $("#homework-post-right").html(data);
           });
-          if(!$(this).parent().hasClass("active")){
-              $(this).parent().siblings().removeClass("active");
-              $(this).addClass("active");
+          if(!$(this).parent().hasClass("active")) {
+               $(this).parent().siblings().removeClass("active");
+               $(this).addClass("active");
           }
      });
 }
@@ -127,7 +126,7 @@ function bind_sh_submit_event() {
                student_homework_manager.update(sh, {
                     student_homework : {
                          homework_id : submit.attr('homework'),
-                         content :$("#student-homework-content").val()
+                         content : $("#student-homework-content").val()
                     }
                }, function(data) {
                     if(data.result) {
@@ -140,7 +139,7 @@ function bind_sh_submit_event() {
                student_homework_manager.create({
                     student_homework : {
                          homework_id : submit.attr('homework'),
-                         content :$("#student-homework-content").val()
+                         content : $("#student-homework-content").val()
                     }
                }, function(data) {
                     if(data.result) {

@@ -21,22 +21,21 @@
       <label>帖子标题</label>
 
       <div class="ui input fluid ">
-        <input type="text" name="title" class="homework-input"/>
+        <input id="title" type="text" name="title" class="homework-input"/>
       </div>
       <label>帖子内容</label>
-      <textarea name='content' class="homework-input"></textarea>
-      <!--<label>截止日期</label>-->
-      <!--<div class="ui input focus fluid ">-->
-      <!--<input type="text" name="deadline" readonly id="homework-deadline" class="homework-input" >-->
-      <!--</div>-->
+      <textarea id="content" name='content' class="homework-input"></textarea>
+      <%= render partial:'shares/file_upload'%>
     </div>
-    <div id="create-homework-button" class="ui button red mini">
+    <div id="create-homework-button" class="ui button red mini" onclick="create_post()">
       新建
     </div>
   </div>
 </div>
 <% content_for :javascript_includes do %>
-    <%= javascript_include_tag "Homework-chart.js"%>
+    <%= javascript_include_tag "FRONT_index.js" %>
+    <%= javascript_include_tag "manage.homework-post.js"%>
+    <%= javascript_include_tag "manage.homework.base.js"%>
     <%= javascript_include_tag "manage.source.base.js" %>
     <%= javascript_include_tag "FRONT_index.js"%>
     <%= javascript_include_tag "FRONT_student.js"%>

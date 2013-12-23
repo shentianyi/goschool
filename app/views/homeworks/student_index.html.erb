@@ -2,8 +2,9 @@
      <header class="back-index-side-header front-index-side-header" id="front-index-side-header">
           <div class="ui breadcrumb">
                <%if @sub_courses.count>0%>
-               <a href="/homeworks/index/<%= @student_course.course_id%>" class="active"> 全部 </a><%end%>
-               <%@sub_courses.each do |sub_course|%> <a href="/homeworks/index/<%= @student_course.course_id%>/<%= sub_course.id%>"> <%= sub_course.name%> </a>
+               <a href="/homeworks/index/<%= @student_course.course_id%>" class="<%='active'  unless @sub_course_id%>"> 全部 </a><%end%>
+               <%@sub_courses.each do |sub_course|%> <a href="/homeworks/index/<%= @student_course.course_id%>/<%= sub_course.id%>"
+                     class="<%='active'  if @sub_course_id==sub_course.id%>"> <%= sub_course.name%> </a>
                <%end%>
           </div>
           <p>
