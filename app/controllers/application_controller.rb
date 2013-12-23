@@ -123,7 +123,7 @@ class ApplicationController < ActionController::Base
   #must be login and active
   def require_active_user
     unless current_user && current_user.status == UserStatus::ACTIVE
-      flash[:alert] = "帐号被锁定，请联系管理员！"
+      flash[:notice] = "帐号被锁定，请联系管理员！"
       current_user_session.destroy
       redirect_to new_logininfo_sessions_url
     return false

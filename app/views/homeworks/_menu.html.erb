@@ -1,13 +1,14 @@
-<div class="left">
+
      <div class="ui accordion" id="accordion">
           <%@menus.each do |menu|%>
           <div class="title homework-menu-a <%= 'pin' if menu.is_pin%>"  pin="<%= menu.is_pin%>"  <%= "sid=#{@sub_course_id}" if @sub_course_id%>  type="<%= menu.value%>">
                <i class="dropdown icon"></i>
                <%= menu.display%>
           </div>
+
           <div class="content homework-list">
 
           </div>
           <%end%>
      </div>
-</div>
+
