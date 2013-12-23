@@ -1,6 +1,6 @@
 <aside class="back-index-condition front-index-condition">
      <header class="back-index-side-header">
-          <a class="ui down button teal mini" href="FRONT-student.html"> </a>
+
      </header>
      <div class="ui vertical menu">
        <% if current_user.is_teacher? %>
@@ -10,7 +10,6 @@
            <a class="item <%='active' if @homework_active %>" href="/homeworks/index/<%= @course.id%>"> <i class="inbox icon"></i> <label>作业</label> </a>
            <a class="item <%='active' if @post_active %>" href="/posts/index/<%= @course.id %>"> <i class="chat outline icon"></i> <label>互动</label> </a>
        <% end %>
-
 
      </div>
 </aside>

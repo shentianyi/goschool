@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    session[:course_id] = @course.id
     @post_active = true
     @posts = Post.where("course_id"=>params[:id])
     @menus = PostStudentMenuType.generate_menu
