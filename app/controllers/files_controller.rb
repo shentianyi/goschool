@@ -27,10 +27,11 @@ class FilesController < ApplicationController
 
   # remove attach
   def remove_attach
-    msg=Message.new
+    msg=Msg.new
     begin
       File.delete(File.join($AttachTmpPath,params[:file]))
       msg.result=true
+      msg.object=params[:file]
     rescue Exception=>e
       msg.content="附件删除失败"
     end
