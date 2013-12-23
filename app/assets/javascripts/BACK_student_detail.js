@@ -595,20 +595,11 @@ STUDENT_FRONT.check = 0;
                 STUDENTDETAIL.errors[1] = "errors";
             }
             else {
-                var data = {
-                    id: '',
+                data = {
                     student: {}
-                };
-                data.id = $("#student-detail-info").attr('student');
+                }
+                //data.id = $("#student-detail-info").attr('student');
                 //if(BACKSTUDENT.check.test($(this).val(),$(this).attr('id'))){
-                data['student'][$(this).attr('id')] = $(this).val();
-                student_manager.update($("#student-detail-info").attr('student'), data), function () {
-                    if (data.result) {
-                    }
-                    else {
-                    }
-                };
-                data.id = $("#student-detail-info").attr('student');
                 data['student'][$(this).attr('id')] = $(this).val();
                 student_manager.update($("#student-detail-info").attr('student'), data), function () {
                     if (data.result) {
@@ -663,7 +654,6 @@ STUDENT_FRONT.check = 0;
             tags.push($.trim($(this).text()));
         });
         data['student']['tags'] = tags;
-        console.log(data);
         student_manager.update($("#student-detail-info").attr('student'), data);
     });
     $("body").on("click_add", "#autoComplete-call li", function (event, msg) {

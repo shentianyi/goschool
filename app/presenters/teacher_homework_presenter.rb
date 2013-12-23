@@ -10,7 +10,7 @@ class TeacherHomeworkPresenter<Presenter
     end
     
     
-    def status_change_display
-      
+    def status_display
+      self.status  ?  '已完成批改' : '未完成批改' 
     end
 end

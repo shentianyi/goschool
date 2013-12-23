@@ -9,7 +9,7 @@ class StudentHomework < ActiveRecord::Base
 
   validate :validate_save
   def self.detail_by_homework_id homework_id,student_id=nil
-    q=joins(:student).where(homework_id:homework_id).select("students.name, students.id as student_id,student_homeworks.*")
+    q=joins(:student).where(homework_id:homework_id).select("students.id as student_id,students.*,student_homeworks.*")
     q=q.where(student_id:student_id) if student_id
     q
   end
