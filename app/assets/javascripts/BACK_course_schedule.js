@@ -99,6 +99,25 @@
            })
        }
     });
+    //右边的搜索框的点击事件
+    $("body").on("click","#search-courses+.search",function(){
+        if($("#autoComplete-call .active").length>0){
+            var id=$("#autoComplete-call .active").attr("id");
+            var type=$("#autoComplete-call .active").attr("type");
+            $.get("/schedules/courses",{
+                id:id,
+                type:type
+            },function(data){
+                if(data.result){
+                    $("#search-list").empty();
+                    SCHEDULE.generate_search_result(data.content);
+                }
+                else{
+                    MessageBox_content(data.content);
+                }
+            })
+        }
+    });
     //发送课表
     $("body").on("click","#send-schedule-button",function(){
         $("#send-schedule").css("left","0").css("right",0);

@@ -204,6 +204,12 @@
 .schedule-search>.search-block>.input>input{
     font-size:12px;
 }
+.schedule-search>.search-block>.input>i{
+    cursor:pointer !important;
+}
+.schedule-search>.search-block>.input>i:hover{
+    color:#D95C5C;
+}
 /*search结果列出来*/
 .schedule-search>.search-block>.search-list{
     max-height:400px;

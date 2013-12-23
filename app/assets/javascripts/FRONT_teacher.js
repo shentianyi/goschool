@@ -28,7 +28,7 @@ GRONTTEACHER.generate_calendar_detail=function(data){
        text=data[i].text;
        institution=data[i].institution_name;
        time=new Date(data[i].start_date).toWayneString().minute+"-"+new Date(data[i].end_date).toWayneString().only_minute;
-       render+="<tr><td>"+text+"<span>"+institution+"</span></td><td>"+time+"</td></tr>";
+       render+="<tr><td>"+text+"</td><td>"+institution+"</td><td>"+time+"</td></tr>";
     }
     $("#teacher-schedule-detail tbody").append(render);
 }

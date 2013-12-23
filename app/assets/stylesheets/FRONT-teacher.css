@@ -110,8 +110,8 @@
     word-break:break-all;
     word-wrap:break-word;
 }
-.teacher-schedule-detail td>span{
-    display:block;
-    font-size:11px;
+.teacher-schedule-detail tr td:nth-of-type(2){
+    font-size:12px;
 }
+
 

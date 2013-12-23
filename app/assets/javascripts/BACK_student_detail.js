@@ -471,6 +471,11 @@ STUDENT_FRONT.check = 0;
             else {
                 MessageBox("请输入内容", "top", "warning");
             }
+        }).on("keyup","#consult-record .comment-block input",function(event){
+            var e=adapt_event(event).event;
+            if(e.keyCode==13){
+                $(this).next().click();
+            }
         });
     $(window).resize(function () {
         if ($("#class-performance .title").hasClass("active")) {
