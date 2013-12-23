@@ -30,9 +30,9 @@ class PostPresenter < Presenter
   def poster
     @logininfo = Logininfo.find(logininfo_id)
     if @logininfo.is_teacher?
-      self.post_time + '由' + @logininfo.user.name + '提出'
+       @logininfo.user
     else
-      self.post_time + '由' + @logininfo.student.name + '提出'
+      @logininfo.student
     end
   end
 end

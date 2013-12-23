@@ -5,27 +5,8 @@
   <div class="post-homework" id="post-home">
     <%= render partial: 'side_list' %>
 
-    <div class="right">
-      <h3><i class="empty flag icon"></i> 托福听力</h3>
-      <p>请就本科应该住在外租房还是学校进行讨论3分钟</p>
-      <!--<label>截止日期:<span>2013-04-15</span></label>-->
-      <!--<label>当前状态:<span>已完成</span></label>-->
-      <hr />
-      <hr />
+    <div class="right" id="post-content">
 
-      <div class="item">
-        <img class="ui image avatar" src="images/portrait/4.jpg" />
-        <p>王子骁</p>
-        <p>八天前</p>
-        <label class="teacher-answer">导师回答</label>
-        <p>请老师查阅</p>
-        <!--<div>-->
-        <!--<label>这次作业进步了吗</label>-->
-        <!--<input type="checkbox" />-->
-        <!--<label>得分</label>-->
-        <!--<input type="text" />-->
-        <!--</div>-->
-      </div>
 
     </div>
   </div>
@@ -55,8 +36,9 @@
   </div>
 </div>
 <% content_for :javascript_includes do %>
+    <%= javascript_include_tag "Homework-chart.js"%>
     <%= javascript_include_tag "manage.source.base.js" %>
     <%= javascript_include_tag "manage.post.base.js" %>
     <%= javascript_include_tag "FRONT_index.js"%>
-    <%= javascript_include_tag "FRONT_student.js" %>
+    <%= javascript_include_tag "FRONT_student.js"%>
 <% end %>

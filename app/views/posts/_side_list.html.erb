@@ -8,49 +8,34 @@
 <div>帖子列表</div>
 <% if @posts %>
 <ul>
-  <%@menus.each do |menu|%>
+  <% @menus.each do |menu| %>
   <li>
-    <a href="#" type="<%= menu.value%>" class="post-menu-a <%= 'pin' if menu.is_pin%>" pin="<%=menu.is_pin%>"><%= menu.display%><%= ':>>>>' if menu.is_pin%></a>
+    <a href="#" type="<%= menu.value %>" class="post-menu-a <%= 'pin' if menu.is_pin %>" pin="<%= menu.is_pin %>"><%= menu.display %><%= ':>>>>' if menu.is_pin %></a>
     <div  style="background: brown">
-      <%if @menu_type==menu.value%>
-      <%= render 'list_item'%>
-      <%end%>
+      <% if @menu_type==menu.value %>
+            <%= render 'list_item' %>
+        <% end %>
     </div>
   </li>
   <% end %>
 </ul>
 <% end %>
 -->
-
 <div class="left">
-  <div class="ui accordion" id="accordion">
-    <div class="active title">
-      <i class="dropdown icon"></i>
-      12/13-12/20
-    </div>
-    <div class="active content">
-      <ul>
-        <li class="active">
-          <a>托福听力</a>
-        </li>
-        <li>
-          <a>雅思听力</a>
-        </li>
-      </ul>
-    </div>
-    <div class="title">
-      <i class="dropdown icon"></i>
-      12/21-12/31
-    </div>
-    <div class="content">
-      <ul>
-        <li class="active">
-          <a>托福听力</a>
-        </li>
-        <li>
-          <a>雅思听力</a>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <% if @posts %>
+      <% @menus.each do |menu| %>
+          <div class="ui accordion" id="accordion">
+            <div class="title">
+              <i class="dropdown icon"></i>
+              <a href="#" type="<%= menu.value %>" class="post-menu-a <%= 'pin' if menu.is_pin %>" pin="<%= menu.is_pin %>"><%= menu.display %><%= ':>>>>' if menu.is_pin %></a>
+            </div>
+            <div class="content">
+              <% if @menu_type==menu.value %>
+                  <%= render 'list_item' %>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
+  <% end %>
 </div>
+
