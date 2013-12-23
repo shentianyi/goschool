@@ -260,11 +260,12 @@
     font-size:13px;
     padding:5px 0px;
     border-bottom:1px solid rgba(0,0,0,0.1);
+    color:#222;
 }
 .post-homework>.left>.accordion .content ul li:last-of-type a{
     border-bottom:none;
 }
-.post-homework>.left>.accordion .content ul li.active,
+.post-homework>.left>.accordion .content ul a.active,
 .post-homework>.left>.accordion .content ul a:hover{
     color:#63A69F;
 }
@@ -285,7 +286,7 @@
     word-break:break-all;
     word-wrap:break-word;
     font-size:13px;
-    color:rgba(0,0,0,0.6);
+    color:rgba(0,0,0,0.8);
     margin-bottom:30px;
 }
 .post-homework>.right>.homework-info>label{
