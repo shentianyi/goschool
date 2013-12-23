@@ -308,10 +308,14 @@
     margin:5px 0px;
 }
 .post-homework>.right>.homework-info>.attachments>a{
+    color:rgba(0,0,0,0.6);
+    margin-right:2px;
+}
+.post-homework>.right>.homework-info>.attachments>a>i{
     color:#63A69F;
     transition:color 0.25s ease-out;
 }
-.post-homework>.right>.homework-info>.attachments>a:hover{
+.post-homework>.right>.homework-info>.attachments>a>:hover{
     color:#D95C5C;
 }
 .post-homework>.right>.homework-info input[type='checkbox']{

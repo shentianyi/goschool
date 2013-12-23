@@ -1,5 +1,6 @@
 function init_teacher_homework() {
      init_date_picker("#homework-deadline");
+     init_date_picker("#homework-deadline-resubmit");
      bind_menu_event();
      $("#create-homework-button").click(function() {
           var homework = {};
