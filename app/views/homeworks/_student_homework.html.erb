@@ -1,30 +1,43 @@
-<h3> HOMEWORK DETAIL</h3>
 <%if @homework%>
-<%=render 'detail'%>
+<%= render 'detail'%>
 <hr />
-<div style="background: pink">
 <%if @student_homework %>
-<table style=" border: solid red 1px; width: 100%">
-     <tr>
-          <td>content:<%= raw @student_homework.content%></td>
-          <td>improved:<%= @student_homework.improved%>
-          </td>
-          <td>marked: <%= @student_homework.marked%></td>
-          <td>score:<%= @student_homework.score_display%></td>
-          <td><%= @student_homework.submited_time_display%></td>
-          <td><%= @student_homework.marked_time_display%></td>
-          <%if @homework.can_submit? && @student_homework.can_resubmit?%>
-          <td>
-               <input type="button" value="RESUBMIT" id="student-homework-resubmit-button" onclick="$(this).next().show();">
-               <div style="display:none">
-              <%= render partial:'student_homeworks/edit'%>
-              </div>
-           </td>
-           <%end%>
-     </tr>
-</table>
-<%elsif @homework.can_submit?%>
- <%= render partial:'student_homeworks/form'%>
-<%end%>
+<!-- <table style=" border: solid red 1px; width: 100%">
+<tr>
+<td>content:<%= raw @student_homework.content%></td>
+<td>improved:<%= @student_homework.improved%>
+</td>
+<td>marked: <%= @student_homework.marked%></td>
+<td>score:<%= @student_homework.score_display%></td>
+<td><%= @student_homework.submited_time_display%></td>
+<td><%= @student_homework.marked_time_display%></td>
+<%if @homework.can_submit? && @student_homework.can_resubmit?%>
+<td>
+<input type="button" value="RESUBMIT" id="student-homework-resubmit-button" onclick="$(this).next().show();">
+<div style="display:none">
+<%= render partial:'student_homeworks/form'%>
 </div>
+</td>
+<%end%>
+</tr>
+</table> -->
+<div class="item">
+     <img class="ui image avatar" src="<%= @student_homework.image_url%>" />
+     <p>
+          <%= @student_homework.name%>
+     </p>
+     <p>
+          <%= @student_homework.submited_time_display%>
+     </p>
+     <p>
+          <%= @student_homework.content%>
+     </p>
+     <div>
+          <label>是否进步：<%= @student_homework.improved_display%></label>
+          <label>得分:<%= @student_homework.score_display%></label>
+     </div>
+</div>
+<%elsif @homework.can_submit?%>
+<%= render partial:'student_homeworks/form'%>
+<%end%>
 <%end%>
