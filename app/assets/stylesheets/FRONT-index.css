@@ -265,7 +265,7 @@
 .post-homework>.left>.accordion .content ul li:last-of-type a{
     border-bottom:none;
 }
-.post-homework>.left>.accordion .content ul a.active,
+.post-homework>.left>.accordion .content ul li.active a,
 .post-homework>.left>.accordion .content ul a:hover{
     color:#63A69F;
 }
@@ -302,16 +302,24 @@
     margin-left:5px;
     color:rgba(0,0,0,0.5);
 }
+.post-homework>.right>.homework-info input[type='checkbox']{
+    position:relative;
+    left:-5px;
+}
+
 
 .post-homework>.right>hr{
     color:rgba(0,0,0,0.4);
 }
 .post-homework>.right>hr:nth-of-type(2){
-    margin-bottom:5px;
+    margin-bottom:0px;
 }
 .post-homework>.right>.item{
     padding:10px 0;
     border-bottom:1px solid rgba(0,0,0,0.3);
+}
+.post-homework>.right>.item.true{
+    background-color:#DEFCD5
 }
 .post-homework>.right>.item:after{
     content:'';
@@ -331,7 +339,7 @@
 }
 .post-homework>.right>.item>p:nth-of-type(2){
     font-size:11px;
-    color:rgba(0,0,0,0.4);
+    color:#4e4e4e;
     margin-top:-8px;
 }
 .post-homework>.right>.item>p:nth-of-type(3){
@@ -348,6 +356,9 @@
 .post-homework>.right>.item>div>label{
     font-size:12px;
     color:#D95C5C;
+}
+.post-homework>.right>.item.true>div>label{
+    color:#52A954;
 }
 .post-homework>.right>.item>div>input[type='checkbox']{
     cursor:pointer;
