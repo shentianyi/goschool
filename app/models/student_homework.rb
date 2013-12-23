@@ -37,6 +37,6 @@ class StudentHomework < ActiveRecord::Base
   private
 
   def validate_save
-    errors.add(:score,'作业分数不可为空') if self.score.blank? unless self.new_record?
+    errors.add(:score,'作业分数不可为空') if self.score.blank? && !self.score.nil? unless self.new_record?
   end
 end

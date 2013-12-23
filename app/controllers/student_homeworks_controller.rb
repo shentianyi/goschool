@@ -1,9 +1,9 @@
 #encoding: utf-8
 class StudentHomeworksController < ApplicationController
   before_filter :init_message ,:only=>[:create,:update,:destroy]
-  before_filter :get_student_homework , :only=>[:update,:show,:destroy]
+  before_filter :get_student_homework , :only=>[:update,:edit,:show,:destroy]
   before_filter :render_nil_msg , :only=>[:update,:destroy]
-  before_filter :require_user_as_student,:only=>[:create]
+  before_filter :require_user_as_student,:only=>[:create,:edit]
   skip_before_filter :require_user_as_employee
   def create
     @student_homework=StudentHomework.new(params[:student_homework])
@@ -15,6 +15,10 @@ class StudentHomeworksController < ApplicationController
 
   def show
     render :json=>@student_homework
+  end
+  
+  def edit
+    render partial:'edit'
   end
 
   def update

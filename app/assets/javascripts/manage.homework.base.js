@@ -130,7 +130,6 @@ function bind_sh_submit_event() {
                     }
                }, function(data) {
                     if(data.result) {
-                         alert('resumit success!');
                          show_homework(submit.attr('homework'), "#homework-post-right");
                     } else {
                          MessageBox_content(data.content);
