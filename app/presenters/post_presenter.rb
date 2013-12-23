@@ -35,4 +35,8 @@ class PostPresenter < Presenter
       @logininfo.student
     end
   end
+
+  def post_time_string
+    self.post_time + '由' +self.poster.name + '提出'
+  end
 end
