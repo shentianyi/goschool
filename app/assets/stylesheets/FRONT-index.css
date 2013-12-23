@@ -273,11 +273,14 @@
     float:left;
     padding:0px 20px;
 }
-.post-homework>.right>h3{
+.post-homework>.right>.homework-info{
+    width:80%;
+}
+.post-homework>.right>.homework-info>h3{
     color:#63A69F;
     margin-bottom:3px;
 }
-.post-homework>.right>p{
+.post-homework>.right>.homework-info>p{
     width:100%;
     word-break:break-all;
     word-wrap:break-word;
@@ -285,19 +288,20 @@
     color:rgba(0,0,0,0.6);
     margin-bottom:30px;
 }
-.post-homework>.right>label{
+.post-homework>.right>.homework-info>label{
     font-size:13px;
     color:rgba(0,0,0,0.7);
     display:block;
 }
-.post-homework>.right>label:nth-of-type(2)>span{
+.post-homework>.right>.homework-info>label:nth-of-type(2)>span{
     color:#D95C5C;
 }
-.post-homework>.right>label>span{
+.post-homework>.right>.homework-info>label>span{
     display:inline-block;
     margin-left:5px;
     color:rgba(0,0,0,0.5);
 }
+
 .post-homework>.right>hr{
     color:rgba(0,0,0,0.4);
 }
@@ -348,7 +352,7 @@
     cursor:pointer;
     margin-right:20px;
     position:relative;
-    top:2px;
+    top:0
 }
 .post-homework>.right>.item>div>input[type='text']{
     width:100px;
