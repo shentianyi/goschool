@@ -62,8 +62,8 @@ function get_attach() {
      var length = $("#task-attach-uploader-preview").children().length;
      for(var i = 0; i < length; i++) {
           attachs[i] = {};
-          attachs[i].oriName = $("#task-attach-uploader-preview >div").eq(i).attr("title");
-          attachs[i].pathName = $("#task-attach-uploader-preview >div").eq(i).attr("path-name")
+          attachs[i].oriName = $("#task-attach-uploader-preview>p").eq(i).attr("title");
+          attachs[i].pathName = $("#task-attach-uploader-preview>p").eq(i).attr("path-name")
      }
      return attachs;
 }
