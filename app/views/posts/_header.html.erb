@@ -1,7 +1,21 @@
 <div>
+
+  <!--
   <h1>新建帖子</h1>
   <input id="title" type="text" placeholder="标题..."></input>
   <input id="content" type="textarea" placeholder="内容..."></input>
   <input type="button" onclick="create_post()" value="创建"></input>
-  <%= render partial:'/shares/file_upload'%>
+  -->
+
+  <header class="back-index-side-header front-index-side-header" id="front-index-side-header">
+    <div class="ui breadcrumb">
+    </div>
+    <a class="ui red mini button" id="add-item" type="course">
+      <div class="visible content">
+        <i class="add icon"></i>
+        新建帖子
+      </div>
+    </a>
+    <p><span><%= @course.name %></span>的互动</p>
+  </header>
 </div>
