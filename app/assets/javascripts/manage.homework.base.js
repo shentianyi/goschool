@@ -68,7 +68,10 @@ function bind_menu_event() {
           homework_manager.show($(this).attr('id'), function(data) {
                $("#homework-post-right").html(data);
           });
-          $(this).addClass("active");
+          if(!$(this).parent().hasClass("active")){
+              $(this).parent().siblings().removeClass("active");
+              $(this).addClass("active");
+          }
      });
 }
 
