@@ -33,16 +33,12 @@ function attach_upload() {
                if(data.result) {
                    prev.find(".template").remove();
                     for(var i = 0; i < data.object.length; i++) {
-                        prev.append(
-                            $("<p/>").addClass("upload-file-name").attr("title", data.object[i].oriName).text("上传中....")
-                        );
-                         prev.append($("<p />").addClass("attachment-item")
+                         prev.append($("<p />").addClass("attachment-item upload-file-name")
                              .attr("title", data.object[i].oriName)
                              .attr("path-name", data.object[i].pathName)
                              .text(data.object[i].oriName)
                              .append($("<i />").addClass("icon remove").attr("path-name", data.object[i].pathName).click(attachment_remove))
                          )
-
                     }
                } else {
                     alert(data.content);
