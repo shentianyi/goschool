@@ -78,6 +78,11 @@
     color:#222;
     font-family: "Helvetica Neue","Helvetica",Arial;
 }
+.homework-post-add.upload-my-home-work>.inner>div.content textarea{
+    height:50px;
+    max-height:150px;
+    min-height:50px;
+}
 .homework-post-add>.inner>.button{
     margin-left:371px;
     width:80px;

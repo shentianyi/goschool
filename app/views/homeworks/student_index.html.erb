@@ -2,8 +2,9 @@
      <header class="back-index-side-header front-index-side-header" id="front-index-side-header">
           <div class="ui breadcrumb">
                <%if @sub_courses.count>0%>
-               <a href="/homeworks/index/<%= @student_course.course_id%>" class="active"> 全部 </a><%end%>
-               <%@sub_courses.each do |sub_course|%> <a href="/homeworks/index/<%= @student_course.course_id%>/<%= sub_course.id%>"> <%= sub_course.name%> </a>
+               <a href="/homeworks/index/<%= @student_course.course_id%>" class="<%='active'  unless @sub_course_id%>"> 全部 </a><%end%>
+               <%@sub_courses.each do |sub_course|%> <a href="/homeworks/index/<%= @student_course.course_id%>/<%= sub_course.id%>"
+                     class="<%='active'  if @sub_course_id==sub_course.id%>"> <%= sub_course.name%> </a>
                <%end%>
           </div>
           <p>
@@ -23,17 +24,25 @@
      </div>
 </article>
 
-<div id="upload-wrap" class="upload-wrap">
-     <i class="icon remove"></i>
-     <a class="upload-button">上传附件...</a>
-     <p>
-          dsad.pdf
-     </p>
-     <p>
-          asdas.pdf
-     </p>
-     <a class="ok-button">完成</a>
+<div class="homework-post-add upload-my-home-work" id="upload-my-home-work">
+  <div class="inner">
+    <i class="icon remove"></i>
+    <p>上传我的作业</p>
+    <div class="content">
+      <label>作业内容</label>
+      <textarea  name='content' class="homework-input" ></textarea>
+      <div class="upload-file">
+        <%=render 'shares/file_upload'%>
+      </div>
+    </div>
+    <div  class="ui button red mini">
+      上传
+    </div>
+  </div>
 </div>
+
+
+
 
 <input type="hidden" value="<%= @student_course.course_id%>" id="teacher-course-hidden" />
 <script type="text/javascript">
@@ -44,5 +53,7 @@
 <% content_for :javascript_includes do%>
 <%= javascript_include_tag "manage.source.base.js"%>
 <%= javascript_include_tag "manage.homework.base.js"%>
-<%= javascript_include_tag "manage.homework-post.js"%>
+<%= javascript_include_tag "FRONT_index.js"%>
+<%= javascript_include_tag "FRONT_homework_post.js"%>
+<%= javascript_include_tag "FRONT_homework.js"%>
 <%end%>
