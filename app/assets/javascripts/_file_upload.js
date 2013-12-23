@@ -36,6 +36,7 @@ function attach_upload() {
                 prev.find(".template").remove();
                 //remove the previous attachments
 
+
                 for (var i = 0; i < data.object.length; i++) {
                     prev.append($("<p />").addClass("attachment-item upload-file-name")
                         .attr("title", data.object[i].oriName)
