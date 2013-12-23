@@ -99,7 +99,7 @@ class StudentsController < ApplicationController
     msg.result = false
     begin
       @student = Student.find(params[:id])
-      @student.tags = params[:student].slice(:tags)[:tags] if params[:student]
+
       if params[:is_active_account]
         @logininfo = @student.logininfo
         status = (params[:is_active_account] == 'true') ? UserStatus::ACTIVE : UserStatus::LOCKED
@@ -110,10 +110,12 @@ class StudentsController < ApplicationController
           @student.logininfo.update_attributes!(:email => params[:student][:email])
           @student.logininfo.save!
         end
-        puts "============================"
-        puts params[:student].except(:tags)
+
         @student.update_attributes(params[:student].except(:tags)) if params[:student]
-        @student.save!
+        if params[:student] && params[:student][:tags]
+          @student.tags = params[:student].slice(:tags)[:tags]
+          @student.add_tags
+        end
         msg.result = true
       end
     rescue ActiveRecord::RecordInvalid => invalid

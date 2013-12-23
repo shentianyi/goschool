@@ -53,6 +53,10 @@ class Student < ActiveRecord::Base
     where(:id=>id)
   end
 
+  def add_tags
+    TagService.add_tags(self)  if self.tags
+  end
+
   def validate_save
     errors.add(:name,'名字不能为空') if self.name.blank?
     errors.add(:phone, '电话不能为空') if self.phone.blank?
