@@ -7,9 +7,8 @@
         $("#homework-post-add").css("left",0).css("right",0);
     });
     $("body").on("click","#homework-post-add>.inner>.remove",function(){
-        $("#homework-post-add input,#homework-post-add textarea").val("");
-        $("#homework-post-add").css("left","-999em").css("right","auto");
-
+        $(".homework-post-add input,.homework-post-add textarea").val("");
+        $(".homework-post-add").css("left","-999em").css("right","auto");
     });
     $("body").on("keyup","#homework-post-right input[type='text']",function(event){
         var obj=adapt_event(event).target;

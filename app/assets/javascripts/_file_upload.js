@@ -31,21 +31,16 @@ function attach_upload() {
                     data.submit();
         },
         success: function (data) {
-            //remove the previous attachments
             var prev = $("#" + id + '-preview');
             if (data.result) {
                 prev.find(".template").remove();
                 for (var i = 0; i < data.object.length; i++) {
-                    prev.append(
-                        $("<p/>").addClass("upload-file-name").attr("title", data.object[i].oriName).text("上传中....")
-                    );
-                    prev.append($("<p />").addClass("attachment-item")
+                    prev.append($("<p />").addClass("attachment-item upload-file-name")
                         .attr("title", data.object[i].oriName)
                         .attr("path-name", data.object[i].pathName)
                         .text(data.object[i].oriName)
                         .append($("<i />").addClass("icon remove").attr("path-name", data.object[i].pathName).click(attachment_remove))
                     )
-
                 }
             } else {
                 alert(data.content);
@@ -69,8 +64,8 @@ function get_attach() {
     var length = $("#task-attach-uploader-preview").children().length;
     for (var i = 0; i < length; i++) {
         attachs[i] = {};
-        attachs[i].oriName = $("#task-attach-uploader-preview >div").eq(i).attr("title");
-        attachs[i].pathName = $("#task-attach-uploader-preview >div").eq(i).attr("path-name")
+        attachs[i].oriName = $("#task-attach-uploader-preview>p").eq(i).attr("title");
+        attachs[i].pathName = $("#task-attach-uploader-preview>p").eq(i).attr("path-name")
     }
     return attachs;
 }

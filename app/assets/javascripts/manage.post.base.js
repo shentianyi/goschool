@@ -11,18 +11,14 @@ function bind_menu_event() {
     $(".post-menu-a[pin=false]").click(function () {
 
         var post_list = $(this);
-        if (post_list.hasClass("active")) {
-            post_list.removeClass("active");
-            post_list.next('div').removeClass("active");
-        } else {
-            var menu_type = $(this).attr('type');
 
-            post_manager.list($("#course").attr("course"), menu_type, function (data) {
-                post_list.addClass("active");
-                post_list.next('div').addClass("active");
-                post_list.next('div').html(data);
-            });
-        }
+
+        var menu_type = $(this).attr('type');
+
+        post_manager.list($("#course").attr("course"), menu_type, function (data) {
+            post_list.next('div').html(data);
+        });
+
     });
 
     $('body').on('click', ".post-menu-item-a", function () {
@@ -54,25 +50,25 @@ function comment() {
     })
 }
 
-function create_post(){
+function create_post() {
     var title = $("#title").val();
     var content = $("#content").val();
     var id = $("#course").attr("course");
     var data = {
-        id:id,
-        post:{
-            title:title,
-            content:content
+        id: id,
+        post: {
+            title: title,
+            content: content
         }
     }
     var attachs = get_attach();
 
     data.attachs = attachs;
 
-    posts_manager.create(data,function(data){
-        if(data.result){
-            MessageBox("新建帖子成功","top","success");
-        }else{
+    posts_manager.create(data, function (data) {
+        if (data.result) {
+            MessageBox("新建帖子成功", "top", "success");
+        } else {
             MessageBox_content(data.content)
         }
     })
