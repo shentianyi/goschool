@@ -39,7 +39,6 @@ function attach_upload() {
                              .text(data.object[i].oriName)
                              .append($("<i />").addClass("icon remove").attr("path-name", data.object[i].pathName).click(attachment_remove))
                          )
-
                     }
                } else {
                     alert(data.content);
