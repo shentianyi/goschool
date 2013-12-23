@@ -184,10 +184,15 @@
 </article>
 
 <div id="upload-wrap" class="upload-wrap">
-  <i class="icon remove"></i>
-  <a class="upload-button">上传附件...</a>
-    <p>dsad.pdf</p>
-    <p>asdas.pdf</p>
+    <i class="icon remove"></i>
+    <div class="upload-file">
+        <a class="ui button twitter mini" onclick="$('#task-attach-uploader').click()">上传附件(最大为20M)</a>
+        <div id="task-attach-uploader-preview">
+            <p class="upload-file-name">wzx.pdf<i class="icon remove"></i></p>
+        </div>
+    </div>
+
+
     <a class="ok-button">完成</a>
 </div>
 

@@ -17,6 +17,7 @@
     $("body").on("click",".homework-post-add>.inner>.remove",function(){
         $(".homework-post-add input,.homework-post-add textarea").val("");
         $(".homework-post-add").css("left","-999em").css("right","auto");
+        $("#task-attach-uploader-preview").empty();
     });
     $(window).resize(function(){
         var width=$("#post-home").width()-$("#post-home .left").width()-80;

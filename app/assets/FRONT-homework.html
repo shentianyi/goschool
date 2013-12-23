@@ -125,7 +125,7 @@
                 <p>王子骁</p>
                 <p>八天前</p>
                 <p>请老师查阅</p>
-                <div>
+                <div class="item-operate">
                     <label>这次作业进步了吗</label>
                     <input type="checkbox" />
                     <label>得分</label>
@@ -156,7 +156,10 @@
             </div>
             <div class="upload-file">
                 <a class="ui button twitter mini" onclick="$('#task-attach-uploader').click()">上传附件(最大为20M)</a>
-                <p class="upload-file-name">wzx.pdf<i class="icon remove"></i></p>
+                <div id="task-attach-uploader-preview">
+                    <p class="upload-file-name">wzx.pdf<i class="icon remove"></i></p>
+                </div>
+
             </div>
         </div>
         <div id="create-homework-button" class="ui button red mini">

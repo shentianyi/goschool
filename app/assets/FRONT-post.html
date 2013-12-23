@@ -127,12 +127,21 @@
                 <p>八天前</p>
                 <label class="teacher-answer">导师回答</label>
                 <p>请老师查阅</p>
-                <!--<div>-->
-                    <!--<label>这次作业进步了吗</label>-->
-                    <!--<input type="checkbox" />-->
-                    <!--<label>得分</label>-->
-                    <!--<input type="text" />-->
-                <!--</div>-->
+                <a href="" class="attachment-a"><i class="icon attachment"></i></a>
+            </div>
+
+            <div class="item replay-input">
+                <textarea placeholder="在此输入评论..."></textarea>
+                <div class="upload-file">
+
+                    <!--render upload-->
+                    <a class="ui button twitter mini" onclick="$('#task-attach-uploader').click()">上传附件(最大为20M)</a>
+                    <div id="task-attach-uploader-preview">
+                    </div>
+                    <!--render upload-->
+
+                </div>
+                <div class="ui button fluid red icon labeled"><i class="icon edit"></i>添加回复</div>
             </div>
 
         </div>
@@ -152,10 +161,6 @@
             </div>
             <label>帖子内容</label>
             <textarea  name='content' class="homework-input" ></textarea>
-            <!--<label>截止日期</label>-->
-            <!--<div class="ui input focus fluid ">-->
-                <!--<input type="text" name="deadline" readonly id="homework-deadline" class="homework-input" >-->
-            <!--</div>-->
         </div>
         <div id="create-homework-button" class="ui button red mini">
             新建
