@@ -1,5 +1,6 @@
 <h1>Listing posts</h1>
-<h2>当前课堂:</h2><p id="course" course="<%= @current_course.id%>"><%= @current_course.name%></p>
+<h2>当前课堂:</h2><p id="course" course="<%= @course.id%>"><%= @course.name%></p>
+<%= render partial:'shares/bbs_aside'%>
 <%= render partial:'header' %>
 <%= render partial:'side_list' %>
 

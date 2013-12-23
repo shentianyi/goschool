@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
   skip_before_filter :require_user_as_employee
   before_filter :get_course, :only=>[:index,:create]
-  layout "non_authorized"
+  layout "bbs"
   # GET /posts
   # GET /posts.json
   def index
+    @post_active = true
     @posts = Post.where("course_id"=>params[:id])
     @menus = PostStudentMenuType.generate_menu
   end
@@ -38,7 +39,7 @@ class PostsController < ApplicationController
     @post = Post.new(params[:post])
     @post.tenant = current_tenant
     @post.logininfo = current_user
-    @post.course = @current_course
+    @post.course = @course
 
     Attachment.add(params[:attachs],@post)
 
@@ -61,7 +62,7 @@ class PostsController < ApplicationController
   end
 
   def get_course
-    @current_course = Course.find(params[:id])
+    @course = Course.find(params[:id])
   end
 
   private
