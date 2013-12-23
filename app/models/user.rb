@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :schedules,:through=>:sub_courses
   has_many :logininfo_roles, :through=> :logininfo
   has_many :logininfo_institutions, :through=> :logininfo
-  
+  has_many :custom_views
   validate :validate_save
 
   after_destroy :delete_related

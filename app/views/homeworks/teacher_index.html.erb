@@ -1,18 +1,12 @@
 <article class="back-index-main front-index-main" id="front-index-main">
      <header class="back-index-side-header front-index-side-header" id="front-index-side-header">
-          <div class="ui breadcrumb">
-               <a class="section active">全部</a>
-               <a class="section">听力</a>
-               <a class="section">口语</a>
-               <a class="section">写作</a>
-          </div>
           <a class="ui red mini button" id="add-item">
           <div class="visible content">
                <i class="add icon"></i>
                新建作业
           </div> </a>
           <p>
-               <span>托福秋季班</span>的作业
+               <span><%= @sub_course.parent_name%><%= ':'+@sub_course.name unless @sub_course.is_default%></span>的作业
           </p>
      </header>
 

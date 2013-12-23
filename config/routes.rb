@@ -117,7 +117,7 @@ Goschool::Application.routes.draw do
       get :teacher
     end
   end
-
+  resources :custom_views
   resources :logininfos
   resource :subscriptions
   resource :logininfo_sessions
