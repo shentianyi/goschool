@@ -9,9 +9,9 @@ class CommentPresenter < Presenter
   def commenter
     @logininfo = Logininfo.find(logininfo_id)
     if @logininfo.is_teacher?
-      self.comment_time + '由' + @logininfo.user.name + '回答'
+      @logininfo.user
     else
-      self.comment_time + '由' + @logininfo.student.name + '回答'
+      @logininfo.student
     end
   end
 
@@ -19,14 +19,14 @@ class CommentPresenter < Presenter
     if is_teacher
       '导师回答'
     else
-      ''
+      nil
     end
   end
 
   def comment_time
     day = 3600*24
     if ((diff=Time.now.to_i - self.created_at.to_i) < day)
-      self.created_at.getlocal.hour.to_s + ':'+self.created_at.getlocal.min.to_s+':'+self.created_at.getlocal.sec.to_s
+      '今天 ' + self.created_at.getlocal.hour.to_s + ':'+self.created_at.getlocal.min.to_s+':'+self.created_at.getlocal.sec.to_s
     elsif diff < 7*day
       "#{(diff/day).to_i}天前"
     elsif diff < 30*day
@@ -34,5 +34,22 @@ class CommentPresenter < Presenter
     else
       "#{self.created_at.strftime('%Y-%m-%d')}"
     end + "，"
+  end
+
+  def comment_time_string
+    self.comment_time + '由' +self.commenter.name + '回答'
+  end
+
+  def to_json
+    {
+        comment:{
+            id:self.id,
+            content:self.content,
+            comment_time:self.comment_time,
+            commenter:self.commenter.to_json,
+            is_teacher: self.who_answer ? true: false,
+            who_answer: self.who_answer
+        }
+    }
   end
 end

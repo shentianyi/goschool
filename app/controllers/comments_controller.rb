@@ -19,7 +19,9 @@ class CommentsController < ApplicationController
     end
     if @comment.save
       msg.result = true
-      msg.content = @comment
+      msg.object = CommentPresenter.new(@comment).to_json
+    else
+      msg.content = @comment.errors.full_messages
     end
     
     render :json=>msg

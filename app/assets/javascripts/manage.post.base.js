@@ -31,7 +31,7 @@ function bind_menu_event() {
 
 function comment() {
 
-    var post_id = $("#post").attr("post")
+    var post_id = $("#post").attr("post");
     var content = $("#comment").val();
 
     var data = {
@@ -43,7 +43,29 @@ function comment() {
 
     comment_manager.create(data, function (data) {
         if (data.result) {
+            var res = data.object;
+            /*$("#comment-pre-holder").append();
+            var tr = Mustache.render("{{#comment}}<div>" +
+                "<img class='ui image avatar' src='{{commenter.image_url}}'/>"+
+                "<p>{{commenter.name}}</p>"+
+                "<p>{{comment_time}}</p>"+
+                "<label></label>"+
+                "</div>{{/comment}}")
+                */
+            /*
+            var tr = Mustache.render("{{#comment}}<tr>" +
+                "<td>{{object.school}}</td>" +
+                "<td>{{object.specialty}}</td>" +
+                "<td>{{object.date}}</td>" +
+                "<td>{{object.scholarship}}</td>" +
+                "<td><span class='remove' admit='{{id}}'>删除</span></td>" +
+                "</tr>{{/comment}}", res);
+            $("#offer tbody").append(tr);
+            */
 
+
+            MessageBox("回答成功","top","warning");
+            $("#comment").val("");
         } else {
 
         }
