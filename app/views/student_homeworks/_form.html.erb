@@ -1,11 +1,21 @@
-<div id="student-submit-homework-div" style="background:#A757A8 ">
-	ANSWER:
-	<table>
-		<tr>
-			<td>			<textarea class="homework-input" name="content" id="student-homework-content" placeholder="作业内容..."></textarea></td>
-			<td>
-			<input type="button" value="SUBMIT" id="student-homework-submit-button" homework="<%= @homework.id%>"/>
-			</td>
-		</tr>
-	</table>
+<div class="ui mini teal button upload-homework"  id="upload-homework">
+     上传我的作业
+</div>
+<div class="homework-post-add upload-my-home-work" id="upload-my-home-work">
+     <div class="inner">
+          <i class="icon remove"></i>
+          <p>
+               上传我的作业
+          </p>
+          <div class="content">
+               <label>作业内容</label>
+               <textarea  class="homework-input" name="content" id="student-homework-content"></textarea>
+               <div class="upload-file">
+                    <%= render 'shares/file_upload'%>
+               </div>
+          </div>
+          <div  class="ui button red mini" id="student-homework-submit-button" homework="<%= @homework.id%>">
+               提交
+          </div>
+     </div>
 </div>

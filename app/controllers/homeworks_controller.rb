@@ -95,7 +95,7 @@ class HomeworksController < ApplicationController
     if @student_course=StudentCourse.by_student(params[:id],current_student_id)
       session[:course_id]=params[:id]
       @sub_courses=@student_course.disfault_sub_cousres.all
-      @sub_course_id=params[:sid].to_i
+      @sub_course_id=params[:sid]
       @menus=  HomeworkStudentMenuType.generate_menu
       render 'student_index'
     else

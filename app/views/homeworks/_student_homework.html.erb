@@ -2,25 +2,12 @@
 <%= render 'detail'%>
 <hr />
 <%if @student_homework %>
-<!-- <table style=" border: solid red 1px; width: 100%">
-<tr>
-<td>content:<%= raw @student_homework.content%></td>
-<td>improved:<%= @student_homework.improved%>
-</td>
-<td>marked: <%= @student_homework.marked%></td>
-<td>score:<%= @student_homework.score_display%></td>
-<td><%= @student_homework.submited_time_display%></td>
-<td><%= @student_homework.marked_time_display%></td>
 <%if @homework.can_submit? && @student_homework.can_resubmit?%>
-<td>
-<input type="button" value="RESUBMIT" id="student-homework-resubmit-button" onclick="$(this).next().show();">
-<div style="display:none">
-<%= render partial:'student_homeworks/form'%>
+<div class="ui mini teal button upload-homework"  id="upload-homework" resub='true' sh="<%=@student_homework.id%>">
+     重新提交我的作业
 </div>
-</td>
+<div id="edit-sh-div"></div>
 <%end%>
-</tr>
-</table> -->
 <div class="item">
      <img class="ui image avatar" src="<%= @student_homework.image_url%>" />
      <p>

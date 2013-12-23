@@ -4,7 +4,7 @@
                <%if @sub_courses.count>0%>
                <a href="/homeworks/index/<%= @student_course.course_id%>" class="<%='active'  unless @sub_course_id%>"> 全部 </a><%end%>
                <%@sub_courses.each do |sub_course|%> <a href="/homeworks/index/<%= @student_course.course_id%>/<%= sub_course.id%>"
-                     class="<%='active'  if @sub_course_id==sub_course.id%>"> <%= sub_course.name%> </a>
+                     class="<%='active'  if @sub_course_id.to_i==sub_course.id%>"> <%= sub_course.name%> </a>
                <%end%>
           </div>
           <p>
@@ -23,26 +23,6 @@
           </div>
      </div>
 </article>
-
-<div class="homework-post-add upload-my-home-work" id="upload-my-home-work">
-  <div class="inner">
-    <i class="icon remove"></i>
-    <p>上传我的作业</p>
-    <div class="content">
-      <label>作业内容</label>
-      <textarea  name='content' class="homework-input" ></textarea>
-      <div class="upload-file">
-        <%=render 'shares/file_upload'%>
-      </div>
-    </div>
-    <div  class="ui button red mini">
-      上传
-    </div>
-  </div>
-</div>
-
-
-
 
 <input type="hidden" value="<%= @student_course.course_id%>" id="teacher-course-hidden" />
 <script type="text/javascript">
