@@ -7,7 +7,7 @@ class StudentsController < ApplicationController
     @active_left_aside='students'
     @students = Student.all
     @student_presenters = StudentPresenter.init_presenters(@students)
-    
+
     #respond_to do |format|
     #  format.html # index.html.erb
     #  format.json { render json: @students }
@@ -21,19 +21,19 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
     @presenter=StudentPresenter.new(@student)
     case params[:part]
-    when 'achieve'
-      achievements(@student)
-    when 'friendship'
-      relation(@student)
-    when 'consult-record'
-      consultation(@student)
-    else
-      @partial = 'class-and-service'
-      courses(@student)
+      when 'achieve'
+        achievements(@student)
+      when 'friendship'
+        relation(@student)
+      when 'consult-record'
+        consultation(@student)
+      else
+        @partial = 'class-and-service'
+        courses(@student)
     end
-    
+
     @partial ||= params[:part]
-    render :partial=>@partial if params[:ajax]
+    render :partial => @partial if params[:ajax]
 
     #respond_to do |formxat|
     #  format.html # show.html.erb 
@@ -41,7 +41,6 @@ class StudentsController < ApplicationController
     #end
   end
 
-  
 
   # GET /students/new
   # GET /students/new.json
@@ -58,7 +57,7 @@ class StudentsController < ApplicationController
   def edit
     @student = Student.find(params[:id])
     @presenter = StudentPresenter.new(@student)
-    render partial:'edit'
+    render partial: 'edit'
   end
 
   # POST /students
@@ -66,13 +65,13 @@ class StudentsController < ApplicationController
   def create
     msg = Msg.new
     msg.result = false
-    begin 
+    begin
       ActiveRecord::Base.transaction do
         @student = Student.new(params[:student].except(:tags))
         @student.tags = params[:student].slice(:tags)[:tags] if params[:student].has_key?(:tags)
         @default_pwd = current_tenant.setting.default_pwd
-        @logininfo = Logininfo.new(:email=>params[:student][:email],:password=>@default_pwd,:password_confirmation=>@default_pwd)
-        @new_role = LogininfoRole.new(:role_id=>'300')
+        @logininfo = Logininfo.new(:email => params[:student][:email], :password => @default_pwd, :password_confirmation => @default_pwd)
+        @new_role = LogininfoRole.new(:role_id => '300')
         @logininfo.logininfo_roles<<@new_role
         @logininfo.tenant = current_tenant
         if params[:is_active_account]
@@ -86,7 +85,7 @@ class StudentsController < ApplicationController
         @student.save!
         msg.result = true
       end
-    rescue ActiveRecord::RecordInvalid=>invalid
+    rescue ActiveRecord::RecordInvalid => invalid
       msg.result = false
       msg.content = invalid.record.errors
     end
@@ -100,25 +99,28 @@ class StudentsController < ApplicationController
     msg.result = false
     begin
       @student = Student.find(params[:id])
-      @student.tags = params[:student].slice(:tags).strip if params[:student]
+      @student.tags = params[:student].slice(:tags)[:tags] if params[:student]
       if params[:is_active_account]
         @logininfo = @student.logininfo
         status = (params[:is_active_account] == 'true') ? UserStatus::ACTIVE : UserStatus::LOCKED
-        @logininfo.update_attribute("status",status)
+        @logininfo.update_attribute("status", status)
       end
       ActiveRecord::Base.transaction do
         if params[:student] && params[:student][:email]
-          @student.logininfo.update_attributes!(:email=>params[:student][:email])
+          @student.logininfo.update_attributes!(:email => params[:student][:email])
           @student.logininfo.save!
         end
+        puts "============================"
+        puts params[:student].except(:tags)
         @student.update_attributes(params[:student].except(:tags)) if params[:student]
+        @student.save!
         msg.result = true
       end
-    rescue ActiveRecord::RecordInvalid => invalid 
+    rescue ActiveRecord::RecordInvalid => invalid
       msg.result = false
       msg.content = invalid.record.errors
     end
-    render :json=>msg
+    render :json => msg
   end
 
   # DELETE /students/1
@@ -133,25 +135,25 @@ class StudentsController < ApplicationController
     else
       msg.content = '未找到该学生或您没有权限删除Ta'
     end
-    render :json=>msg
+    render :json => msg
   end
 
   # List Search Result
   def fast_search
     results = []
-    results = Redis::Search.complete('Student',params[:q],:conditions =>{:tenant_id=>current_tenant.id})
+    results = Redis::Search.complete('Student', params[:q], :conditions => {:tenant_id => current_tenant.id})
     students = []
-    results.slice(0,10).each do |student|
-      students<<{:name=>student['title'],:school=>student['school'],:info=>student['email'],:guardian=>student['guardian'],:id=>student['id'],:logininfo_id=>student['logininfo_id']}
+    results.slice(0, 10).each do |student|
+      students<<{:name => student['title'], :school => student['school'], :info => student['email'], :guardian => student['guardian'], :id => student['id'], :logininfo_id => student['logininfo_id']}
     end
-    render :json=>students
+    render :json => students
   end
-  
+
   #nil msg
   def render_all_msg
     unless @student
       @msg.content='不存在此学生'
-      render :json=>msg
+      render :json => msg
     end
   end
 
@@ -164,7 +166,7 @@ class StudentsController < ApplicationController
   def courses(student)
     @courses = StudentCoursePresenter.init_presenters(Student.course_detail(student.id).all)
   end
-  
+
   def achievements(student)
     # achievementtype id
     puts "====================="
@@ -173,17 +175,17 @@ class StudentsController < ApplicationController
     @final_grade = Achievement.find_by_type(AchievementType::FINAL_GRADE)
     puts @final.to_json
     #
-    if @final 
-      @finals = StudentAchievementPresenter.init_presenters(Achievement.achieves(@final.id,student.id))
+    if @final
+      @finals = StudentAchievementPresenter.init_presenters(Achievement.achieves(@final.id, student.id))
     end
-    
+
     if @admit
-      @admitted = StudentAchievementPresenter.init_presenters(Achievement.achieves(@admit.id,student.id))
+      @admitted = StudentAchievementPresenter.init_presenters(Achievement.achieves(@admit.id, student.id))
     end
-    
+
     if @final_grade
-      @sub_courses = Achievement.where("type"=>AchievementType::SUB_COURSE)
-      @final_grades =  StudentAchievementPresenter.init_presenters(Achievement.get_result_by_type(AchievementType::SUB_COURSE,student.id))
+      @sub_courses = Achievement.where("type" => AchievementType::SUB_COURSE)
+      @final_grades = StudentAchievementPresenter.init_presenters(Achievement.get_result_by_type(AchievementType::SUB_COURSE, student.id))
     end
   end
 
@@ -192,7 +194,7 @@ class StudentsController < ApplicationController
       @referrer = Logininfo.find(student.referrer_id).student
     end
     @relations = []
-    Recommendation.new.get_potential_relation(student.tenant_id,student.id).each do |relation|
+    Recommendation.new.get_potential_relation(student.tenant_id, student.id).each do |relation|
       s = Student.find_by_id(relation['reced_id'])
       if s
         @relations<<s
