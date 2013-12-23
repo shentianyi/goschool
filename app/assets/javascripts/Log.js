@@ -48,6 +48,8 @@
             }
         }
     });
+
+    error_msg();
 })();
 function signup(){
     var name = $("#name").val();
@@ -101,3 +103,10 @@ function loginin() {
     });
 }
 
+
+function error_msg(){
+    if(errors != undefined)
+    {
+        MessageBox(errors,"top","warning");
+    }
+}

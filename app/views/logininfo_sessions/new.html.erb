@@ -1,41 +1,40 @@
 <!--<h1>Login&Signup</h1>-->
 <!--<form action="/subscriptions" method="post">-->
-  <!--<div>-->
-    <!--<p>Name</p><input type="text" id="name" name="name"/>-->
-  <!--</div>-->
-  <!--<div>-->
-    <!--<p>Email</p><input type="text" id="email" name="email"/>-->
-  <!--</div>-->
-  <!--<div>-->
-    <!--<p>Password</p><input id="password" name="password" type="password"/>-->
-  <!--</div>-->
-  <!--<div>-->
-    <!--<p>Password_confirmation</p><input  id="password_confirmation" name="password_confirmation" type="password"/>-->
-  <!--</div>-->
-  <!--<div>-->
-    <!--<p>Company</p><input id="company_name" name="company_name" type="text"/>-->
-  <!--</div>-->
+<!--<div>-->
+<!--<p>Name</p><input type="text" id="name" name="name"/>-->
+<!--</div>-->
+<!--<div>-->
+<!--<p>Email</p><input type="text" id="email" name="email"/>-->
+<!--</div>-->
+<!--<div>-->
+<!--<p>Password</p><input id="password" name="password" type="password"/>-->
+<!--</div>-->
+<!--<div>-->
+<!--<p>Password_confirmation</p><input  id="password_confirmation" name="password_confirmation" type="password"/>-->
+<!--</div>-->
+<!--<div>-->
+<!--<p>Company</p><input id="company_name" name="company_name" type="text"/>-->
+<!--</div>-->
 <!--</form>-->
 <!--<a onclick="document.forms[0].submit();">Sign up</a>-->
 
 <!--<form action="/logininfo_sessions" method="post">-->
-  <!--<div>-->
-    <!--<p>Email</p>-->
-    <!--<input type="text" id="email" name="email"/>-->
-  <!--</div>-->
-  <!--<div>-->
-    <!--<p>Password</p>-->
-    <!--<input id="password" name="password" type="password"/>-->
-  <!--</div>-->
+<!--<div>-->
+<!--<p>Email</p>-->
+<!--<input type="text" id="email" name="email"/>-->
+<!--</div>-->
+<!--<div>-->
+<!--<p>Password</p>-->
+<!--<input id="password" name="password" type="password"/>-->
+<!--</div>-->
 <!--</form>-->
 <!--<a onclick="document.forms[1].submit();">Login in</a>-->
-
-
 
 <div>
   <div class="login-bg">
     <div class="login-caption">
       <h3>Go <span style="color:#5496C2">School</span></h3>
+
       <p>该起床上学了</p>
       <a class="log-btn login-recommend" id="sign-up-now">立刻注册</a>
     </div>
@@ -43,11 +42,11 @@
   <div class="login-block">
     <div class="login-operate clearfix">
       <a class="log-btn pull-left" id="sign-in" state="close">登录</a>
-      <a class="log-btn pull-right" id="sign-up"  state="close">注册</a>
+      <a class="log-btn pull-right" id="sign-up" state="close">注册</a>
     </div>
   </div>
 </div>
-<form  class="signIn-block signShow-block clearfix" id="signUp-block" style="display:none" special="sign-up">
+<form class="signIn-block signShow-block clearfix" id="signUp-block" style="display:none" special="sign-up">
   <h3 class="text-center">注册</h3>
   <dl>
     <dt>
@@ -56,28 +55,28 @@
     <dd>
       <input type="text" id="name" name="name"/>
     </dd>
-    <br />
+    <br/>
     <dt>
       邮箱:
     </dt>
     <dd>
       <input type="text" id="email" name="email"/>
     </dd>
-    <br />
+    <br/>
     <dt>
       密码:
     </dt>
     <dd>
-      <input type="password" id="password" name="password" />
+      <input type="password" id="password" name="password"/>
     </dd>
-    <br />
+    <br/>
     <dt>
       确认密码:
     </dt>
     <dd>
-      <input type="password"  id="password_confirmation" name="password_confirmation"/>
+      <input type="password" id="password_confirmation" name="password_confirmation"/>
     </dd>
-    <br />
+    <br/>
     <dt>
       公司:
     </dt>
@@ -85,7 +84,7 @@
       <input type="text" id="company_name" name="company_name"/>
     </dd>
   </dl>
-  <br />
+  <br/>
   <a id="sign-up-btn" class="login-btn log-btn" onclick="signup()">Ok</a>
 </form>
 <form class="signIn-block signShow-block clearfix" id="signIn-block" style="display:none">
@@ -97,21 +96,24 @@
     <dd>
       <input type="text" id="log_email" name="email"/>
     </dd>
-    <br />
+    <br/>
     <dt>
       密码:
     </dt>
     <dd>
-      <input type="password" id="log_password" name="password" />
+      <input type="password" id="log_password" name="password"/>
     </dd>
   </dl>
-  <br />
-  <a id="sign-in-btn" class="login-btn log-btn"  onclick="loginin();">Go</a>
+  <br/>
+  <a id="sign-in-btn" class="login-btn log-btn" onclick="loginin();">Go</a>
 </form>
 
+<% if flash[:notice] %>
+    <script type="text/javascript">
+        var errors = "<%= flash[:notice]%>" ;
+    </script>
+<% end %>
 
-<% content_for :javascript_includes do%>
-    <%= javascript_include_tag "Log.js"%>
-<%end%>
-
-
+<% content_for :javascript_includes do %>
+    <%= javascript_include_tag "Log.js" %>
+<% end %>
