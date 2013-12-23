@@ -289,7 +289,8 @@
     color:rgba(0,0,0,0.8);
     margin-bottom:30px;
 }
-.post-homework>.right>.homework-info>label{
+.post-homework>.right>.homework-info>label,
+.post-homework>.right>label{
     font-size:13px;
     color:rgba(0,0,0,0.7);
     display:block;
@@ -301,6 +302,17 @@
     display:inline-block;
     margin-left:5px;
     color:rgba(0,0,0,0.5);
+}
+.post-homework>.right>.homework-info>.attachments{
+    width:60%;
+    margin:5px 0px;
+}
+.post-homework>.right>.homework-info>.attachments>a{
+    color:#63A69F;
+    transition:color 0.25s ease-out;
+}
+.post-homework>.right>.homework-info>.attachments>a:hover{
+    color:#D95C5C;
 }
 .post-homework>.right>.homework-info input[type='checkbox']{
     position:relative;

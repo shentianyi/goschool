@@ -21,8 +21,8 @@
 /export/pdf/schedule/*.pdf
 /config/*.conf
 /db/sphinx/*
-!/uploadfiles/attach/tmp/*.ignore
-!/uploadfiles/attach/uped/*.ignore
+!/uploadfiles/attach/tmp/a.ignore
+!/uploadfiles/attach/uped/a.ignore
 *~
 *#
 .#*

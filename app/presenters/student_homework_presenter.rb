@@ -29,4 +29,8 @@ end
      return self.score.to_i if self.score.to_i==self.score
      self.score
     end
+    
+    def improved_display
+      self.improved ? '进步' : '未进步'
+    end
 end

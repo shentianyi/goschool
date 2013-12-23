@@ -106,9 +106,13 @@
                 <p>请就本科应该住在外租房还是学校进行讨论3分钟</p>
                 <label>截止日期:<span>2013-04-15</span></label>
                 <label>当前状态:<span>已完成</span></label>
-                <label>关闭作业:<span><input type="checkbox" /></span></label>
+                <div class="attachments">
+                    <a href="" data-content="我的账户" data-variation="inverted"><i class="icon attachment"></i></a>
+                    <a><i class="icon attachment"></i></a>
+                    <a><i class="icon attachment"></i></a>
+                </div>
             </div>
-
+            <label>关闭作业:<span><input type="checkbox" /></span></label>
             <div class="ui mini teal button upload-homework"  id="upload-homework">
                 上传我的作业
             </div>
@@ -141,7 +145,7 @@
     <div class="inner">
         <i class="icon remove"></i>
         <p>新建作业</p>
-        <div>
+        <div class="content">
             <label>作业标题</label>
             <div class="ui input fluid ">
                 <input  type="text" name="title" class="homework-input" />
@@ -151,6 +155,11 @@
             <label>截止日期</label>
             <div class="ui input focus fluid ">
                 <input type="text" name="deadline" readonly id="homework-deadline" class="homework-input" >
+            </div>
+            <div class="upload-file">
+                <a class="ui button twitter mini" onclick="$('#task-attach-uploader').click()">上传附件(最大为20M)</a>
+                <p class="upload-file-name">wzx.pdf<i class="icon remove"></i></p>
+
             </div>
         </div>
         <div id="create-homework-button" class="ui button red mini">

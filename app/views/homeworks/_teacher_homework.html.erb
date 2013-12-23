@@ -1,7 +1,7 @@
 <%if @homework%>
 <%= render 'detail'%>
-finished:
-<input type="checkbox" name="status" homework="<%= @homework.id%>"  class="teacher-homework-input" <%= 'checked' if @homework.status%>/>
+<label>关闭作业:<span><input type="checkbox" name="status" homework="<%= @homework.id%>"  class="teacher-homework-input" <%= 'checked' if @homework.status%> /></span></label>
+<hr />
 <hr />
 
 <%@student_homeworks.each_with_index do |sh,i|%>
@@ -14,7 +14,7 @@ finished:
           <%= sh.submited_time_display%>
      </p>
      <p>
-          <%= raw sh.content%>
+          <%= sh.content%>
      </p>
      <div>
           <label>这次作业进步了吗</label>
