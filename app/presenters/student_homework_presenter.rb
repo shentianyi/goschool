@@ -1,6 +1,6 @@
 #encoding: utf-8
 class StudentHomeworkPresenter<Presenter
-    def_delegators :@student_homework,:id,:content,:improved,:marked,:marked_time,:score,:submited_time,:homework_id,:name,:stuent_id,:attachments,:can_resubmit?
+    def_delegators :@student_homework,:id,:content,:improved,:marked,:marked_time,:score,:submited_time,:homework_id,:name,:image_url,:stuent_id,:attachments,:can_resubmit?
     def initialize(student_homework)
 	@student_homework=student_homework
     end
@@ -12,7 +12,7 @@ class StudentHomeworkPresenter<Presenter
 	    "#{diff}天前"
 	else
 	    "#{self.submited_time.strftime('%Y-%m-%d')}"
-	end + ",由#{self.name}提出"
+	end + "，提出"
 end
 
     def marked_time_display
