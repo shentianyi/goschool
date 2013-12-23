@@ -9,5 +9,10 @@ class Tenant < ActiveRecord::Base
   has_many :students, :dependent=>:destroy
   attr_accessible :access_key, :company_name, :edition, :subscription_status,:domain,:logininfo_id
 
-  validates :company_name, :presence => true
+  validate :validate_save
+
+  private
+  def validate_save
+    errors.add(:company_name,'公司名称不能为空') if self.company_name.blank?
+  end
 end

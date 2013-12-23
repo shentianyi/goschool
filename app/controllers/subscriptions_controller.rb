@@ -32,8 +32,6 @@ class SubscriptionsController < ApplicationController
       if @logininfo
         @user.logininfo_id = @logininfo.id
         @user.tenant = @logininfo.tenant
-        puts "-====================="
-        puts @user.to_json
         if msg.result = @user.save
         else
           msg.content = @user.errors
@@ -43,9 +41,9 @@ class SubscriptionsController < ApplicationController
         msg.content = '注册失败！'
       end
     rescue ArgumentError=>invalid
-      msg.content = invalid.record.errors
+      msg.content = invalid.record.errors.full_messages
     rescue ActiveRecord::RecordInvalid=> invalid
-      msg.content = invalid.record.errors
+      msg.content = invalid.record.errors.full_messages
     end
     render :json=>msg
   end

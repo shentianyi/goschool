@@ -8,7 +8,7 @@ function init_teacher_homework() {
           });
           homework.attach=get_attach();
           homework['teacher_course_id'] = $("#teacher-course-hidden").val();
-          homework['content'] = CKEDITOR.instances['content'].getData();
+          // homework['content'] = CKEDITOR.instances['content'].getData();
           homework_manager.create({
                homework : homework
           }, function(data) {
@@ -46,9 +46,9 @@ function init_teacher_homework() {
           }
      });
 
-    CKEDITOR.replace('content', {
-          preset : 'standard',
-     });
+    // CKEDITOR.replace('content', {
+          // preset : 'standard',
+     // });
 }
 
 function init_student_homework() {
@@ -127,7 +127,7 @@ function bind_sh_submit_event() {
                student_homework_manager.update(sh, {
                     student_homework : {
                          homework_id : submit.attr('homework'),
-                         content : CKEDITOR.instances['student-homework-content'].getData()
+                         content :$("#student-homework-content").val()
                     }
                }, function(data) {
                     if(data.result) {
@@ -140,7 +140,7 @@ function bind_sh_submit_event() {
                student_homework_manager.create({
                     student_homework : {
                          homework_id : submit.attr('homework'),
-                         content : CKEDITOR.instances['student-homework-content'].getData()
+                         content :$("#student-homework-content").val()
                     }
                }, function(data) {
                     if(data.result) {

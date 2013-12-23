@@ -10,7 +10,7 @@ class StudentCourse < ActiveRecord::Base
   acts_as_tenant(:tenant)
 
   def self.by_student id,student_id
-    joins(:course).where(courses:{id:id},student_id:student_id).first
+    joins(:course).where(courses:{id:id},student_id:student_id).select('courses.*,student_courses.*').first
   end
   
   def disfault_sub_cousres
