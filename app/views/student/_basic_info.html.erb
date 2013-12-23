@@ -3,7 +3,7 @@
   <header class="back-index-side-header">
     <label>个人信息</label>
   </header>
-  <div class="front-people-info">
+  <div class="front-people-info" id="detail-content" student="<%= @student.id%>">
     <img class=" ui image" src="<%= @student.image_url %>">
     <label class="label"><span><%= @student.name %></span></label>
     <p><i class="icon mail"></i> <span><%= @student.email %></span></p>
