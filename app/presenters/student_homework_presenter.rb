@@ -26,6 +26,7 @@ end
     end
 
     def score_display
+      return '未批改' if self.score.nil?
      return self.score.to_i if self.score.to_i==self.score
      self.score
     end

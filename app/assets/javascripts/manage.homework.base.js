@@ -131,6 +131,7 @@ function bind_sh_submit_event() {
                }, function(data) {
                     if(data.result) {
                          alert('resumit success!');
+                         show_homework(submit.attr('homework'), "#homework-post-right");
                     } else {
                          MessageBox_content(data.content);
                     }
@@ -143,8 +144,10 @@ function bind_sh_submit_event() {
                     }
                }, function(data) {
                     if(data.result) {
-                         alert('sumit success!');
+                         // alert('sumit success!');
                          submit.attr('student-homework', data.content);
+                         show_homework(submit.attr('homework'), "#homework-post-right");
+                         $("#upload-my-home-work>.inner>.remove").click();
                     } else {
                          MessageBox_content(data.content);
                     }
@@ -153,3 +156,8 @@ function bind_sh_submit_event() {
      });
 }
 
+function show_homework(id, content) {
+     homework_manager.show(id, function(data) {
+          $(content).html(data);
+     });
+}

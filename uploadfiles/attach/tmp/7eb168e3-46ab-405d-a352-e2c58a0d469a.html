@@ -47,11 +47,11 @@
         </a>
     </header>
     <div class="ui vertical menu">
-        <a class="item" href="FRONT-homework.html">
+        <a class="item active" href="FRONT-homework.html">
             <i class="inbox icon"></i>
             <label>作业</label>
         </a>
-        <a class="item active" href="FRONT-post.html">
+        <a class="item" href="FRONT-post.html">
             <i class="chat outline icon"></i>
             <label>互动</label>
         </a>
@@ -67,13 +67,13 @@
             <a class="section">口语</a>
             <a class="section">写作</a>
         </div>
-        <a class="ui red mini button" id="add-item" type="course">
+        <a class="ui red mini button" id="add-item">
             <div class="visible content">
                 <i class="add icon"></i>
-                新建帖子
+                新建作业
             </div>
         </a>
-        <p><span>托福秋季班</span>的互动</p>
+        <p><span>托福秋季班</span>的作业</p>
     </header>
 
     <div class="post-homework" id="post-home">
@@ -84,55 +84,53 @@
                     <i class="dropdown icon"></i>
                     12/13-12/20
                 </div>
+
                 <div class="active content">
                     <ul>
                         <li class="active">
-                            <a>托福听力</a>
+                            <a href="">托福听力</a>
                         </li>
                         <li>
                             <a>雅思听力</a>
                         </li>
                     </ul>
                 </div>
-                <div class="title">
-                    <i class="dropdown icon"></i>
-                    12/21-12/31
-                </div>
-                <div class="content">
-                    <ul>
-                        <li class="active">
-                            <a>托福听力</a>
-                        </li>
-                        <li>
-                            <a>雅思听力</a>
-                        </li>
-                    </ul>
-                </div>
+
+
             </div>
         </div>
 
-        <div class="right">
-            <div class="homework-info post">
+        <div class="right" id="homework-post-right">
+            <div class="homework-info">
                 <h3><i class="empty flag icon"></i> 托福听力</h3>
                 <p>请就本科应该住在外租房还是学校进行讨论3分钟</p>
-                <label>发帖人:<span>王子骁</span></label>
-                <label>发帖日期:<span>2013-04-15</span></label>
+                <label>截止日期:<span>2013-04-15</span></label>
+                <label>当前状态:<span>已完成</span></label>
+                <div class="attachments">
+                    <a href="" data-content="我的账户" data-variation="inverted"><i class="icon attachment"></i>wayne</a>
+                    <a><i class="icon attachment"></i>zi</a>
+                    <a><i class="icon attachment"></i>xiao</a>
+                </div>
             </div>
+            <label>关闭作业:<span><input type="checkbox" /></span></label>
+            <div class="ui mini teal button upload-homework"  id="upload-homework">
+                上传我的作业
+            </div>
+
             <hr />
             <hr />
 
-            <div class="item">
+            <div class="item ">
                 <img class="ui image avatar" src="images/portrait/4.jpg" />
                 <p>王子骁</p>
                 <p>八天前</p>
-                <label class="teacher-answer">导师回答</label>
                 <p>请老师查阅</p>
-                <!--<div>-->
-                    <!--<label>这次作业进步了吗</label>-->
-                    <!--<input type="checkbox" />-->
-                    <!--<label>得分</label>-->
-                    <!--<input type="text" />-->
-                <!--</div>-->
+                <div>
+                    <label>这次作业进步了吗</label>
+                    <input type="checkbox" />
+                    <label>得分</label>
+                    <input type="text" />
+                </div>
             </div>
 
         </div>
@@ -144,24 +142,48 @@
 <div class="homework-post-add" id="homework-post-add">
     <div class="inner">
         <i class="icon remove"></i>
-        <p>新建帖子</p>
-        <div>
-            <label>帖子标题</label>
+        <p>新建作业</p>
+        <div class="content">
+            <label>作业标题</label>
             <div class="ui input fluid ">
                 <input  type="text" name="title" class="homework-input" />
             </div>
-            <label>帖子内容</label>
+            <label>作业内容</label>
             <textarea  name='content' class="homework-input" ></textarea>
-            <!--<label>截止日期</label>-->
-            <!--<div class="ui input focus fluid ">-->
-                <!--<input type="text" name="deadline" readonly id="homework-deadline" class="homework-input" >-->
-            <!--</div>-->
+            <label>截止日期</label>
+            <div class="ui input focus fluid ">
+                <input type="text" name="deadline" readonly id="homework-deadline" class="homework-input" >
+            </div>
+            <div class="upload-file">
+                <a class="ui button twitter mini" onclick="$('#task-attach-uploader').click()">上传附件(最大为20M)</a>
+                <p class="upload-file-name">wzx.pdf<i class="icon remove"></i></p>
+            </div>
         </div>
         <div id="create-homework-button" class="ui button red mini">
             新建
         </div>
     </div>
 </div>
+
+<div class="homework-post-add upload-my-home-work" id="upload-my-home-work">
+    <div class="inner">
+        <i class="icon remove"></i>
+        <p>上传我的作业</p>
+        <div class="content">
+            <label>作业内容</label>
+            <textarea  name='content' class="homework-input" ></textarea>
+            <div class="upload-file">
+                <a class="ui button twitter mini" onclick="$('#task-attach-uploader').click()">上传附件(最大为20M)</a>
+                <p class="upload-file-name">wzx.pdf<i class="icon remove"></i></p>
+            </div>
+        </div>
+        <div  class="ui button red mini">
+            上传
+        </div>
+    </div>
+</div>
+
+
 
 
 <script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>
@@ -175,7 +197,9 @@
 <script type='text/javascript' src="javascripts/manage.homework-post.js" ></script>
 <script type='text/javascript' src="javascripts/manage.homework.base.js" ></script>
 <script type='text/javascript' src="javascripts/manage.source.base.js" ></script>
+<script type='text/javascript' src="javascripts/manage.post.base.js" ></script>
 <script type='text/javascript' src="javascripts/FRONT_homework_post.js" ></script>
+<script type='text/javascript' src="javascripts/FRONT_homework.js" ></script>
 <script type="text/javascript">
     $(document).ready(function(){
         init_teacher_homework();
