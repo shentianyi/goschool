@@ -2,6 +2,8 @@
 class AchievementsController < ApplicationController
   # GET /achievements
   # GET /achievements.json
+  skip_before_filter :require_user_as_employee, :only=>[:sub_achievement]
+
   def index
     @achievements = Achievement.all
 

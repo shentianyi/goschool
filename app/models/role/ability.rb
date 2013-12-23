@@ -12,13 +12,13 @@ class Ability
       can :manage,[Logininfo],:id=>user.id
       can :read,:all
     elsif Role.student?(user.role_ids)
-      #can :manage,:all
+      can :manage,:all
       can :manage,[LogininfoSession,Attachment,FileData,Post,Comment]
       can :manage,[Student],:student_id=>user.student.id
       can :manage,[Logininfo],:id=>user.id
       can :manage,StudentHomework,:student_id=>user.student.id
+      can :manage,Achievementresult, :student_id=>user.student.id
       can :manage,Homework
-      can :manage,[Post,Comment]
       can :read,:all
     elsif Role.teacher?(user.role_ids)
       can :manage,[LogininfoSession,Homework,StudentHomework,Attachment,FileData]
