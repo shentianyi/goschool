@@ -34,11 +34,7 @@ function init_teacher_homework() {
      });
      bind_th_input_text_update_event(function(data) {
           if(data.result) {
-               // 更新成功
-               if(data.content) {
-                    // 修改作业成功
-                    console.log('修改成功');
-               }
+                $("#homework-status").text(data.content);
           } else {
                // 跟新失败
                // data.content 未消息
@@ -98,7 +94,7 @@ function bind_th_input_text_update_event(callback) {
           data['homework'][$(this).attr('name')] = value;
           homework_manager.update($(this).attr('homework'), data, function(data) {
                if(callback)
-                    callback();
+                    callback(data);
           });
      });
 }

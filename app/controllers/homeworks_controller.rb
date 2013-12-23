@@ -40,7 +40,7 @@ class HomeworksController < ApplicationController
   end
 
   def update
-    @msg.content=@homework.errors.messages unless @msg.result=@homework.update_attributes(params[:homework])
+    @msg.content=   (@msg.result=@homework.update_attributes(params[:homework])) ? @homework.status  ?  '已完成批改' : '未完成批改'  : @homework.errors.messages
     render :json=>@msg
   end
 
