@@ -1,7 +1,8 @@
 <h3> HOMEWORK DETAIL</h3>
 <%if @homework%>
 <%= render 'detail'%>
-finished:<input type="checkbox" name="status" homework="<%=@homework.id%>"  class="teacher-homework-input" <%='checked' if @homework.status%>/>
+finished:
+<input type="checkbox" name="status" homework="<%= @homework.id%>"  class="teacher-homework-input" <%= 'checked' if @homework.status%>/>
 <hr />
 <div style="background: pink">
      <%@student_homeworks.each_with_index do |sh,i|%>
@@ -25,3 +26,4 @@ finished:<input type="checkbox" name="status" homework="<%=@homework.id%>"  clas
      <%end%>
 </div>
 <%end%>
+
