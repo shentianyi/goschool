@@ -5,3 +5,4 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Achievement.create([{type: '100', name: ''},{type: '200', name: ''},{type: '300', name: ''}])

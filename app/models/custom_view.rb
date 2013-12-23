@@ -1,5 +1,5 @@
 class CustomView < ActiveRecord::Base
-  belong_to :user
+  belongs_to :user
   attr_accessible :user_id,:name,:query_type,:entity_type,:query
 
   def get_by_user_id_and_entity_type(user_id,entity_type)
