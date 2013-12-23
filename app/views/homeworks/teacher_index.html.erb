@@ -17,66 +17,12 @@
           </div>
 
           <div class="right" id="homework-post-right">
-               <h3><i class="empty flag icon"></i> 托福听力</h3>
-               <p>
-                    请就本科应该住在外租房还是学校进行讨论3分钟
-               </p>
-               <label>截止日期:<span>2013-04-15</span></label>
-               <label>当前状态:<span>已完成</span></label>
-               <div class="ui mini teal button upload-homework"  id="upload-homework">
-                    上传我的作业
-               </div>
-               <hr />
-               <hr />
-
-               <div class="item">
-                    <img class="ui image avatar" src="images/portrait/4.jpg" />
-                    <p>
-                         王子骁
-                    </p>
-                    <p>
-                         八天前
-                    </p>
-                    <p>
-                         请老师查阅
-                    </p>
-                    <div>
-                         <label>这次作业进步了吗</label>
-                         <input type="checkbox" />
-                         <label>得分</label>
-                         <input type="text" />
-                    </div>
-               </div>
-
           </div>
-
      </div>
 
 </article>
 
-<div class="homework-post-add" id="homework-post-add">
-     <div class="inner">
-          <i class="icon remove"></i>
-          <p>
-               新建作业
-          </p>
-          <div>
-               <label>作业标题</label>
-               <div class="ui input fluid ">
-                    <input  type="text" name="title" class="homework-input" />
-               </div>
-               <label>作业内容</label>
-               <textarea  name='content' class="homework-input" ></textarea>
-               <label>截止日期</label>
-               <div class="ui input focus fluid ">
-                    <input type="text" name="deadline" readonly id="homework-deadline" class="homework-input" >
-               </div>
-          </div>
-          <div id="create-homework-button" class="ui button red mini">
-               新建
-          </div>
-     </div>
-</div>
+<%=render 'form'%>
 
 <div id="upload-wrap" class="upload-wrap">
      <i class="icon remove"></i>

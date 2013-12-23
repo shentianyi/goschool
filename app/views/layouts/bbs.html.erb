@@ -5,12 +5,12 @@
           <%= stylesheet_link_tag    "application", :media => "all" %>
           <%= csrf_meta_tags %>
           <%= javascript_include_tag "application" %>
-          <%= yield :javascript_includes%>
      </head>
      <body>
           <%= render 'shares/left_aside'%>
           <%= render 'shares/bbs_aside'%>
           <%= yield %>
-          <%=render 'shares/message_box'%>
+          <%= render 'shares/message_box'%>
      </body>
+     <%= yield :javascript_includes%>
 </html>

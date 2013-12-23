@@ -1,8 +1,7 @@
-
 <ul>
      <%@menus.each do |menu|%>
      <li>
-          <a href="#" type="<%= menu.value%>" class="homework-menu-a <%= 'pin' if menu.is_pin%>" pin="<%=menu.is_pin%>" <%="sid=#{@sub_course_id}" if @sub_course_id%>><%= menu.display%><%= ':>>>>' if menu.is_pin%></a>
+          <a href="#" type="<%= menu.value%>" class="homework-menu-a <%= 'pin' if menu.is_pin%>" pin="<%= menu.is_pin%>" <%= "sid=#{@sub_course_id}" if @sub_course_id%>><%= menu.display%><%= ':>>>>' if menu.is_pin%></a>
           <div class="homework-list"  style="background: brown">
                <%if @menu_type==menu.value%>
                <%= render 'menu_item'%>
@@ -11,20 +10,3 @@
      </li>
      <% end %>
 </ul>
-
- <div class="ui accordion" id="accordion">
-    <%@menus.each do |menu|%>
-        //需要class active
-        <div class="active title">
-            <i class="dropdown icon"></i>
-                    12/13-12/20
-        </div>
-         //需要class active
-        <div class="active content">
-           <%if @menu_type==menu.value%>
-           <%= render 'menu_item'%>
-           <%end%>
-        </div>
-    <% end %>
-</div>
-
