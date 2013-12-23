@@ -2,7 +2,14 @@
      <header class="back-index-side-header">
      </header>
      <div class="ui vertical menu">
-          <a class="item <%='active' if @homework_acitve%>" href="/homeworks/index/<%= @teacher_course.id%>"> <i class="inbox icon"></i> <label>作业</label> </a>
-          <a class="item" href="FRONT-post.html"> <i class="chat outline icon"></i> <label>互动</label> </a>
+       <% if current_user.is_teacher? %>
+           <a class="item <%='active' if @homework_active %>" href="/homeworks/index/<%= @teacher_course.id%>"> <i class="inbox icon"></i> <label>作业</label> </a>
+           <a class="item" href="FRONT-post.html"> <i class="chat outline icon"></i> <label>互动</label> </a>
+       <% elsif current_user.is_student? %>
+           <a class="item <%='active' if @homework_active %>" href="/homeworks/index/<%= @course.id%>"> <i class="inbox icon"></i> <label>作业</label> </a>
+           <a class="item <%='active' if @post_active %>" href="/posts/index/<%= @course.id %>"> <i class="chat outline icon"></i> <label>互动</label> </a>
+       <% end %>
+
+
      </div>
 </aside>
