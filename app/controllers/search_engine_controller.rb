@@ -21,6 +21,9 @@ class SearchEngineController < ApplicationController
     end
   end
 
+  def tip
+    
+  end
 
   def search_by_view
     id = parameter[:id]

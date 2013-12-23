@@ -1,14 +1,13 @@
 <aside class="back-index-condition front-index-condition">
      <header class="back-index-side-header">
-
      </header>
      <div class="ui vertical menu">
        <% if current_user.is_teacher? %>
-           <a class="item <%='active' if @homework_active %>" href="/homeworks/index/<%= @teacher_course.id%>"> <i class="inbox icon"></i> <label>作业</label> </a>
-           <a class="item" href="FRONT-post.html"> <i class="chat outline icon"></i> <label>互动</label> </a>
+           <a class="item <%='active' if @homework_active %>" href="/homeworks/index/<%= session[:teacher_course_id]%>"> <i class="inbox icon"></i> <label>作业</label> </a>
+           <a class="item <%='active' if @post_active %>" href="/posts/index/<%= session[:course_id] %>"> <i class="chat outline icon"></i> <label>互动</label> </a>
        <% elsif current_user.is_student? %>
-           <a class="item <%='active' if @homework_active %>" href="/homeworks/index/<%= @course.id%>"> <i class="inbox icon"></i> <label>作业</label> </a>
-           <a class="item <%='active' if @post_active %>" href="/posts/index/<%= @course.id %>"> <i class="chat outline icon"></i> <label>互动</label> </a>
+           <a class="item <%='active' if @homework_active %>" href="/homeworks/index/<%= session[:course_id] %>"> <i class="inbox icon"></i> <label>作业</label> </a>
+           <a class="item <%='active' if @post_active %>" href="/posts/index/<%= session[:course_id] %>"> <i class="chat outline icon"></i> <label>互动</label> </a>
        <% end %>
 
      </div>

@@ -8,7 +8,7 @@ class HomeworksController < ApplicationController
 
   layout 'bbs'
   def index
-    @homework_acitve=true
+    @homework_active=true
     if current_user.is_teacher?
       teacher_index
     elsif current_user.is_student?
@@ -82,6 +82,8 @@ class HomeworksController < ApplicationController
   def teacher_index
     if @teacher_course=TeacherCourse.by_teacher(params[:id],current_user.id)
       @sub_course=@teacher_course.sub_course
+      session[:course_id]=@sub_course.course_id
+      session[:teacher_course_id]=@teacher_course.id
       @menus=  HomeworkTeacherMenuType.generate_menu
       render 'teacher_index'
     else
@@ -91,6 +93,7 @@ class HomeworksController < ApplicationController
 
   def student_index
     if @student_course=StudentCourse.by_student(params[:id],current_student_id)
+      session[:course_id]=params[:id]
       @sub_courses=@student_course.disfault_sub_cousres.all
       @sub_course_id=params[:sid]
       @menus=  HomeworkStudentMenuType.generate_menu
