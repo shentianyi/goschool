@@ -11,4 +11,11 @@
      <tr>
           <td>finished:<%= @homework.status%> </td>
      </tr>
+     <tr>
+          <td>
+               <%@homework.attachments.each do |attach|%>
+                 <a href="<%=attach.path%>" target="blank"> <%=attach.name%></a>||
+               <%end%>
+          </td>
+     </tr>
 </table>

@@ -6,6 +6,7 @@ function init_teacher_homework() {
           $.each($(".homework-input"), function() {
                homework[$(this).attr('name')] = $(this).val();
           });
+          homework.attach=get_attach();
           homework['teacher_course_id'] = $("#teacher-course-hidden").val();
           homework['content'] = CKEDITOR.instances['content'].getData();
           homework_manager.create({
