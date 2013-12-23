@@ -292,16 +292,19 @@
 .post-homework>.right>.homework-info>label,
 .post-homework>.right>label{
     font-size:13px;
-    color:rgba(0,0,0,0.7);
+    color:rgba(0,0,0,0.8);
     display:block;
 }
 .post-homework>.right>.homework-info>label:nth-of-type(2)>span{
     color:#D95C5C;
 }
+.post-homework>.right>.homework-info.post>label:nth-of-type(2)>span{
+    color:#4092CC;
+}
 .post-homework>.right>.homework-info>label>span{
     display:inline-block;
     margin-left:5px;
-    color:rgba(0,0,0,0.5);
+    color:rgba(0,0,0,0.75);
 }
 .post-homework>.right>.homework-info>.attachments{
     width:60%;
