@@ -29,7 +29,7 @@ class Schedule < ActiveRecord::Base
     joins( :sub_course=>[:institution,:teacher_courses])
     .where(start_time:params[:start_date]..params[:end_date],teacher_courses:{user_id:params[:teacher_id]})
     .where(SubCourse.status_neq)
-    .select('institutions.name as institution_name,sub_courses.*,schedules.*')
+    .select('institutions.name as institution_name,sub_courses.*,schedules.*').order('start_time')
   end
   
   def self.by_course_id params
