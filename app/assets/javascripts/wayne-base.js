@@ -448,6 +448,7 @@ GLOBAL.autoComplete.count = 0;
                var msg = {
                     result : true,
                     id : data.data.id,
+                    logininfo_id : logininfo_id,
                     callback : null
                };
                $(this).trigger('click_add', [msg]);
@@ -527,6 +528,7 @@ GLOBAL.autoComplete.count = 0;
                               var msg = {
                                    result : true,
                                    id : data.data.id,
+                                   logininfo_id : logininfo_id,
                                    callback : null
                               };
                               $("#autoComplete-call").find(".active").trigger('click_add', [msg]);
@@ -583,6 +585,7 @@ GLOBAL.autoComplete.count = 0;
                               var msg = {
                                    result : true,
                                    id : data.data.id,
+                                   logininfo_id : logininfo_id,
                                    callback : null
                               };
                               $("#autoComplete-call").find(".active").trigger('click_add', [msg]);

@@ -45,6 +45,7 @@ class Schedule < ActiveRecord::Base
   
   private
   def validate_save
+    errors.add(:sub_course_id,'课程已结束，不可排课') if self.course.status==CourseStatus::FINISHED
     if self.start_time>=self.end_time
       errors.add(:start_time,'开始时间应小于结束时间')
     else
