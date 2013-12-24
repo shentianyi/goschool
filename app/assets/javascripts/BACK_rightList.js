@@ -53,23 +53,15 @@ BACKINDEX.right_list.loadData=function(){
         //post
         if(BACKINDEX.right_list.send_only_page){
             var my_data={
+                id:BACKINDEX.right_list.temp_object.view_id,
                 page:BACKINDEX.right_list.temp_object.page
             }
-        }
-        else{
-            var my_data={
-                search_type:BACKINDEX.right_list.temp_object.search_type,
-                entity_type:BACKINDEX.right_list.temp_object.entity_type,
-                q:$.trim(BACKINDEX.right_list.temp_object.search_queries),
-                page:BACKINDEX.right_list.temp_object.page
-            }
-        }
-        $.ajax({
-            type:"GET",
-            async:false,
-            url:'/search_engine/search',
-            data: my_data,
-            success:function(data){
+            $.ajax({
+                type:"GET",
+                async:false,
+                url:'/search_engine/search_by_view',
+                data: my_data,
+                success:function(data){
                     remove_loader();
                     if(data.length==0){
                         BACKINDEX.right_list.stillHave=false;
@@ -84,10 +76,44 @@ BACKINDEX.right_list.loadData=function(){
                             BACKINDEX.right_list.loadData();
                         }
                     },100);
-            }
-        }).always(function(){
-                BACKINDEX.right_list.loadCheck--;
-        });
+                }
+            }).always(function(){
+                    BACKINDEX.right_list.loadCheck--;
+                });
+        }
+        else{
+            var my_data={
+                search_type:BACKINDEX.right_list.temp_object.search_type,
+                entity_type:BACKINDEX.right_list.temp_object.entity_type,
+                q:$.trim(BACKINDEX.right_list.temp_object.search_queries),
+                page:BACKINDEX.right_list.temp_object.page
+            };
+            $.ajax({
+                type:"GET",
+                async:false,
+                url:'/search_engine/search',
+                data: my_data,
+                success:function(data){
+                    remove_loader();
+                    if(data.length==0){
+                        BACKINDEX.right_list.stillHave=false;
+                        return
+                    }
+                    $("#search-result").append(data);
+                    $("#search-result .checkbox").checkbox();
+                    BACKINDEX.right_list.temp_object.page++;
+                    $("#result-count").text($("#search-result").children().length);
+                    window.setTimeout(function(){
+                        if($("#search-list").height()+parseInt($("#search-list>.search-input").css("margin-top"))<$(window).height()){
+                            BACKINDEX.right_list.loadData();
+                        }
+                    },100);
+                }
+            }).always(function(){
+                    BACKINDEX.right_list.loadCheck--;
+                });
+        }
+
 
 //        $.getJSON(BACKINDEX.right_list.nextPage(),{},function(data){
 //            remove_loader();

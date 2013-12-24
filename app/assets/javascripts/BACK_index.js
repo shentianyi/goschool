@@ -76,10 +76,25 @@ BACKINDEX.init=(function(){
     $("body").on("click","#short-view .trash",function(event){
         stop_propagation(event);
         //post delete
-        $(this).parents(".item").eq(0).remove();
+        var id=$(this).parents(".item").eq(0).attr("id");
+        var $this=$(this);
+        $.ajax({
+            url:"/custom_views/"+id,
+            method:"DELETE",
+            data:{},
+            success:function(data){
+                if(data.result){
+                    $this.parents(".item").eq(0).remove();
+                }
+                else{
+                    MessageBox_content(data.content);
+                }
+            }
+        })
+
     });
     $("body").on("click","#short-view  .item",function(){
-        var data_to_sent = {page:1};
+        var data_to_sent = {view_id:$(this).attr("id"),page:1};
         BACKINDEX.right_list.generateResult(data_to_sent,"only_page");
     })
 

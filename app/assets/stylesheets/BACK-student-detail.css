@@ -137,6 +137,7 @@
     right:10px;
     top:5px;
     max-width:85%;
+    z-index:99;
 }
 .class-performance .homework-line-wrap>.ui.basic.buttons>.button.active{
     background-color:#F38630;
