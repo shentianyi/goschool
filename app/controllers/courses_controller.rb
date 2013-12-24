@@ -8,7 +8,7 @@ class CoursesController < ApplicationController
   def index
     @active_left_aside='courses'
     @institutions=current_tenant.institutions
-    @courses=CoursePresenter.init_presenters(Course.joins(:institution).select('courses.*,institutions.name as institution_name').all)
+    @courses=CoursePresenter.init_presenters(Course.joins(:institution).select('courses.*,institutions.name as institution_name').limit(10))
     @custom_views=CustomView.by_user_id_and_entity_type(current_user.id,'Course').all
   end
    

@@ -47,7 +47,7 @@ class SchedulesController < ApplicationController
 
   def teachers
     @msg.result=true
-    params[:teacher_id]= params[:teacher_id] || current_user.id
+    params[:teacher_id]= params[:teacher_id] || current_user.user.id
     @msg.content=SchedulePresenter.init_json_presenters( Schedule.by_teacher_date(params).all)
     render :json=>@msg
   end
