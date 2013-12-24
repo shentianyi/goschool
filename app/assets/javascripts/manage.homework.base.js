@@ -16,7 +16,7 @@ function init_teacher_homework() {
           }, function(data) {
                if(data.result) {
                     $("#homework-post-add>.inner>.remove").click();
-                   MessageBox('作业创建成功');
+                   MessageBox('作业创建成功',"top","success");
                } else {
                      MessageBox_content(data.content);
                }
@@ -28,7 +28,7 @@ function init_teacher_homework() {
                // 更新成功
                if(data.content) {
                     // 批改成功：即修改了分数
-                    MessageBox('批改成功');
+                    MessageBox('批改成功',"top","success");
                }
           } else {
                // 跟新失败
