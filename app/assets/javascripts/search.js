@@ -365,6 +365,7 @@ var Search = {
 
 
         search.bind_auto_complete = function(data,obj){
+             console.log(data);
             //when a item is selected, should give the query object to current_query object and switch mode
             //to conditions
 
