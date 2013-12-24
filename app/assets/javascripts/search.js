@@ -73,7 +73,7 @@
         var $this=$(this);
         $.ajax({
             url:"/custom_views/"+id,
-            method:"DELETE",
+            type:"DELETE",
             data:{},
             success:function(data){
                 if(data.result){
