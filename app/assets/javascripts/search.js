@@ -270,7 +270,7 @@ var Search = {
               .replace(/!id!/g,this.current_query["query_type"]));
 
             //context.queries[context.current_query["query_type"]]= this.get_conditions();
-            WAYNE.query_count_validate(WAYNE.query_count++)
+
         };
 
         search.get_conditions = function(){
@@ -441,19 +441,26 @@ var Search = {
         search.load_buffer = function(key,callback){
             var obj =this;
 
-            $.ajax(
-                {
-                    success:function(data){Search.instance().after_get_buffer(data,key,obj,callback)}
-                }
-            );
+            $.get("search-engine/tip",{
+                entity_type:search.entity,
+                q: $.trim($("#search_input").val())
+            },function(data){
+                Search.instance().after_get_buffer(data,key,obj,callback)
+            });
+
+//            $.ajax(
+//                {
+//                    success:function(data){Search.instance().after_get_buffer(data,key,obj,callback)}
+//                }
+//            );
 
 //            alert("load_buffer has not been finished")
 
 //            var data = [{name:"名字",introduction:"请输入s名字",parameter_type:'string',query_type:"StudentName",is_explicit:false}];
 //
-            var data = [{name:"按照名字查询",introduction:"输入学生的名字",parameter_type:'string',query_type:"StudentName",is_explicit:false},
-                {name:"按监护人查找",introduction:"输入学生的监护人名字",parameter_type:'string',query_type:"StudentParent",is_explicit:false},
-                {name:"按学校查询",introduction:"按学生的学校查找",parameter_type:'string',query_type:"StudentSchool",is_explicit:false}];
+//            var data = [{name:"按照名字查询",introduction:"输入学生的名字",parameter_type:'string',query_type:"StudentName",is_explicit:false},
+//                {name:"按监护人查找",introduction:"输入学生的监护人名字",parameter_type:'string',query_type:"StudentParent",is_explicit:false},
+//                {name:"按学校查询",introduction:"按学生的学校查找",parameter_type:'string',query_type:"StudentSchool",is_explicit:false}];
 
         };
 
@@ -596,6 +603,33 @@ WAYNE.query_count_validate=function(count){
        $("#query_list").find("#query_add_view").remove()
     }
     else{
-        $("#query_list").append($("<div />").addClass("ui action input query_add_view").attr("id","#query_add_view").text("添加为快捷试图"))
+        if($("#query_add_view").length>0){
+            $("#query_add_view").remove();
+        }
+        $("#query_list").append($("<div />").addClass("ui action input query_add_view mini").attr("id","query_add_view")
+                .append($("<input type='text' placeholder='快捷视图名称' id='add-to-view'/>"))
+                .append($("<div />").addClass("ui red  button ").text("添加为快捷试图")
+                    .prepend($("<i />").addClass("icon add"))
+                )
+        )
+
     }
 }
+(function(){
+    $("body").on("keyup","#add-to-view",function(event){
+        var e=adapt_event(event).event;
+        if(e.keyCode==13){
+           $("#add-to-view+.button").click();
+        }
+    });
+    $("body").on("click","#add-to-view+.button",function(){
+        var value= $.trim($("#add-to-view").val());
+        if(value.length==0){
+            MessageBox("请填写快捷视图名称","top","warning");
+        }
+        else{
+            //post
+
+        }
+    })
+})()
