@@ -9,7 +9,6 @@ class StudentController < ApplicationController
   def index
     @active_left_aside = 'homepage'
     @courses = StudentCoursePresenter.init_presenters(Student.course_detail @student.id)
-    @homeworks =
   end
 
   def show
