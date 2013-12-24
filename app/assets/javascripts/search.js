@@ -89,6 +89,8 @@
     $("body").on("click","#short-view  .item",function(){
         var data_to_sent = {view_id:$(this).attr("id"),page:1};
         BACKINDEX.right_list.generateResult(data_to_sent,"only_page");
+        $("#container_for_list").empty();
+
     })
 })()
 var Search = {
