@@ -10,37 +10,35 @@
   </div>
   <ul>
     <% if @homeworkds %>
-        <% @homeworkds.each do |h| %>
-            <li>
-              <table class="ui table segment">
-                <tbody>
-                <tr>
-                  <td class="wide four">
-                    <p><%= h.title %></p>
+        <% @homeworkds.each do |h |%>
+        <li>
+          <table class="ui table segment">
+            <tbody>
+            <tr>
+              <td class="wide four">
+                <p><%= h.title %></p>
 
-                    <p><%= h.deadline_time %></p>
+                <p><%= h.deadline_time %></p>
 
-                    <p><%= h.homework_course %></p>
-                  </td>
-                  <td class="wide ten">
-                    <p>作业描述:</p>
+                <p><%= h.homework_course %>></p>
+              </td>
+              <td class="wide ten">
+                <p>作业描述:</p>
 
-                    <p><%= h.content %></p>
-                  </td>
-                  <% h.attachments.each do |attach| %>
-                  <td class="wide one">
-                    <a href="<%= attach.path %>"><i class="icon download disk"></i></a>
-                  </td>
-                  <% end %>
-                  <td class="wide one">
-                    <i class="icon upload disk"></i>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </li>
-        <% end %>
-
+                <p><%= h.content%></p>
+              </td>
+              <td class="wide one">
+                <% h.attachments.each do |attach|%>
+                <a href="<%= attach.path %>"><i class="icon download disk"></i></a>
+                <% end %>
+              </td>
+              <td class="wide one">
+                <a  name="upload-file"><i class="icon upload disk"></i></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </li>
     <% end %>
   </ul>
 </div>
@@ -63,4 +61,13 @@
   <canvas id="homework-pie" class="homework-pie"></canvas>
 </div>
 
-<%= render 'student_homeworks/improve' %>
+
+<div id="upload-wrap" class="upload-wrap">
+  <i class="icon remove"></i>
+  <div class="upload-file">
+    <%=render 'shares/file_upload'%>
+  </div>
+  <a class="ok-button">完成</a>
+</div>
+
+<%=render 'student_homeworks/improve' %>
