@@ -1,5 +1,6 @@
 var BACKINDEX=BACKINDEX || {};
 BACKINDEX.init=(function(){
+
     $("#main-navigator-bottom i").popup();
     //添加view
     $("body").on("click","#view-add",function(){
@@ -31,6 +32,40 @@ BACKINDEX.init=(function(){
     $("body").on("click","#back-index-main>.search-list>.search-input>i",function(){
         input_for_big_search();
     });
+    //query
+    $("body").on("keyup","#add-to-view",function(event){
+        var e=adapt_event(event).event;
+        if(e.keyCode==13){
+            $("#add-to-view+.button").click();
+        }
+    });
+    $("body").on("click","#add-to-view+.button",function(){
+        var value= $.trim($("#add-to-view").val());
+        if(value.length==0){
+            MessageBox("请填写快捷视图名称","top","warning");
+        }
+        else{
+            //post
+            var template={data:{value:value,id:21}};
+            var render=Mustache.render('<a class="item">' +
+                '<i class="icon trash"></i>' +
+                '<label>value</label>' +
+                '</a>',template);
+            $("#short-view").append(render);
+        }
+    });
+    $("body").on("click","#short-view .trash",function(event){
+        stop_propagation(event);
+        //post delete
+        $(this).parents(".item").eq(0).remove();
+    });
+    $("body").on("click","#short-view  .item",function(){
+        var data_to_sent = {page:1};
+        BACKINDEX.right_list.generateResult(data_to_sent,"only_page");
+    })
+
+
+
     $(document).ready(function(){
         $("body").on("click",".back-index-add .remove",function(){
             var name=$(this).parents(".back-index-add").attr("name");

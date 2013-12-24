@@ -151,6 +151,13 @@
 .back-index-condition>.ui.vertical.menu .item.active{
     color:#63A69F
 }
+.back-index-condition>.ui.vertical.menu .item>i{
+    cursor:pointer;
+    z-index:99;
+}
+.back-index-condition>.ui.vertical.menu .item>i:hover{
+    color:#D95C5C;
+}
 /************************************************************   right main */
 .back-index-main{
     background:#fef9ee;

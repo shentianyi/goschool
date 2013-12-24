@@ -441,7 +441,7 @@ var Search = {
         search.load_buffer = function(key,callback){
             var obj =this;
 
-            $.get("search-engine/tip",{
+            $.get("search_engine/tip",{
                 entity_type:search.entity,
                 q: $.trim($("#search_input").val())
             },function(data){
@@ -615,21 +615,4 @@ WAYNE.query_count_validate=function(count){
 
     }
 }
-(function(){
-    $("body").on("keyup","#add-to-view",function(event){
-        var e=adapt_event(event).event;
-        if(e.keyCode==13){
-           $("#add-to-view+.button").click();
-        }
-    });
-    $("body").on("click","#add-to-view+.button",function(){
-        var value= $.trim($("#add-to-view").val());
-        if(value.length==0){
-            MessageBox("请填写快捷视图名称","top","warning");
-        }
-        else{
-            //post
 
-        }
-    })
-})()
