@@ -13,13 +13,23 @@ var HOMEWORKCHART=HOMEWORKCHART || {};
             $(this).addClass("active");
             //post
             $.get('/student_homeworks/scores',{id:$("#detail-content").attr('student'),sid:$(this).attr('sub-course')},function(data){
-                 
+                var labels=[],scores=[],day;
+                for(var i=0;i<data.length;i++){
+                    day=new Date(parseInt(data[i].time)).toWayneString().day;
+                    labels.push(day);
+                    scores.push(parseFloat(data[i].score));
+                }
+                STUDENT_FRONT.line={
+                    labels:labels,
+                    scores:scores
+                };
+                HOMEWORKCHART.generateLine(STUDENT_FRONT.line.labels,STUDENT_FRONT.line.scores,"homework-line-wrap");
             });
-            STUDENT_FRONT.line={
-                labels:["2013-01-03","2013-01-04","2013-01-05"],
-                scores:[100,200,300]
-            };
-            HOMEWORKCHART.generateLine(STUDENT_FRONT.line.labels,STUDENT_FRONT.line.scores,"homework-line-wrap");
+//            STUDENT_FRONT.line={
+//                labels:["2013-01-03","2013-01-04","2013-01-05"],
+//                scores:[100,200,300]
+//            };
+//            HOMEWORKCHART.generateLine(STUDENT_FRONT.line.labels,STUDENT_FRONT.line.scores,"homework-line-wrap");
         }
     })
 })()
