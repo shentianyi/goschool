@@ -115,6 +115,6 @@ class SearchEngineType
     end
 
 
-    private_class_method :new
+    # private_class_method :new
 
 end
