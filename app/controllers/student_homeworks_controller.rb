@@ -6,7 +6,10 @@ class StudentHomeworksController < ApplicationController
   before_filter :require_user_as_student,:only=>[:create,:edit]
   skip_before_filter :require_user_as_employee
   def create
-    @student_homework=StudentHomework.new(params[:student_homework])
+    attach=params[:student_homework].slice(:attach)[:attach] if params[:student_homework].has_key?(:attach)
+
+    @student_homework=StudentHomework.new(params[:student_homework].except(:attach))
+    Attachment.add(attach,@student_homework)
     @student_homework.student=current_user.student
     @student_homework.submited_time=Time.now
     @msg.content=(@msg.result=@student_homework.save) ? @student_homework.id :  @student_homework.errors.messages
@@ -16,7 +19,7 @@ class StudentHomeworksController < ApplicationController
   def show
     render :json=>@student_homework
   end
-  
+
   def edit
     render partial:'edit'
   end
