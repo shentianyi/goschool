@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131224024207) do
+ActiveRecord::Schema.define(:version => 20131224084159) do
 
   create_table "achievementresults", :force => true do |t|
     t.string   "valuestring"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20131224024207) do
     t.integer  "student_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.datetime "achievetime"
   end
 
   add_index "achievementresults", ["achievement_id"], :name => "index_achievementresults_on_achievement_id"
