@@ -10,11 +10,12 @@
                <div class="upload-file">
                     <%= render 'shares/file_upload'%>
                </div>
-               <div class="attachments">
-                    <%@student_homework.attachments.each do |attach|%>
-                    <a  href="<%= attach.path%>" target="blank" data-content="<%= attach.name%>" data-variation="inverted"><i class="icon attachment"></i><%= attach.name%></a>
-                    <%end%>
-               </div>
+               <%@student_homework.attachments.each do |attach|%>
+                 <p class="attachment-item upload-file-name resubmit-attachment-item" data-content="<%= attach.name%>" data-variation="inverted" >
+                   <%= attach.name%>
+                    <i class="icon remove" ></i>
+                </p>
+               <%end%>
           </div>
           <div  class="ui button red mini" id="student-homework-submit-button" homework="<%= @student_homework.homework_id%>" student-homework="<%= @student_homework.id%>">
                提交
