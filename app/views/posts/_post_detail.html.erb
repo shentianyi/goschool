@@ -3,15 +3,16 @@
       <h3><i class="empty flag icon"></i> <%= @post.title %></h3>
 
       <p><%= @post.content %></p>
-      <label>发帖人:<span><%= @post.poster.name %></span></label>
-      <label>发帖日期:<span><%= @post.post_time %></span></label>
-
       <div class="attachments">
         <% @post.attachments.each do |attacth| %>
             <a href="<%= attacth.path %>" data-content="我的账户" data-variation="inverted"><i class="icon attachment"></i><%= attacth.name %>
             </a>
         <% end %>
       </div>
+      <label>发帖人:<span><%= @post.poster.name %></span></label>
+      <label>发帖日期:<span><%= @post.post_time %></span></label>
+
+
     </div>
     <hr/>
     <hr/>
@@ -33,6 +34,6 @@
     <div class="item replay-input">
       <textarea placeholder="在此输入评论..." id="comment"></textarea>
 
-      <div class="ui button fluid red icon labeled" onclick="comment()"><i class="icon edit"></i>添加回复</div>
+      <div class="ui button fluid black icon labeled" onclick="comment()"><i class="icon edit"></i>添加回复</div>
     </div>
 <% end %>
