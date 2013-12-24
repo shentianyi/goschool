@@ -44,9 +44,20 @@
 //        HOMEWORKCHART.generatePie(STUDENT_FRONT.pie.scores,"homework-pie-wrap");
     });
 
-    init_student_homework();
+    init_front_student();
 })();
 var STUDENT_FRONT=STUDENT_FRONT || {};
 STUDENT_FRONT.check=0;
+
+function init_front_student(){
+    bind_sh_submit_event(function(data){
+        if(data.result){
+            MessageBox("提交作业成功!","top","success");
+        }
+        else{
+            MessageBox("提交作业失败!","top","warning");
+        }
+    });
+}
 
 
