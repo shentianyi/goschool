@@ -46,7 +46,7 @@ class StudentHomeworksController < ApplicationController
 
   def submit_calculate
     @total=StudentHomework.where(student_id:params[:id]).count
-    @intime_total=StudentHomework.joins(:homework).where('student_homeworks.submited_time>=homeworks.deadline').where(student_id:params[:id]).count
+    @intime_total=StudentHomework.joins(:homework).where('student_homeworks.submited_time<=homeworks.deadline').where(student_id:params[:id]).count
     render json:[@intime_total,@total]
   end
 

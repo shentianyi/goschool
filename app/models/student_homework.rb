@@ -21,6 +21,12 @@ class StudentHomework < ActiveRecord::Base
        q=q.where("homeworks.id not in (?)",ids) if ids.count>0
        q.select('sub_courses.name as sub_course_name,sub_courses.parent_name as course_name,homeworks.*')
   end
+  
+  def self.scores student_id,sub_course_id
+    joins(:homework=>{:teacher_course=>:sub_course}).joins(:student)
+      .where(student_id:student_id,sub_courses:{id:sub_course_id},marked:true)
+      .select("student_homeworks.score,student_homeworks.marked_time")
+  end
 
   def self.by_type params
    if params[:menu_type].to_i==HomeworkStudentMenuType::UNSUBMIT

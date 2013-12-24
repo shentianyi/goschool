@@ -14,7 +14,7 @@ class CourseNameExact
   end
 
   def query_type_description
-    {:name=>self.name,:introduction=>self.introduction,:parameter_type=>'String',:query_type=>self.class.name}
+    {:name=>self.name,:introduction=>self.introduction,:parameter_type=>'string',:query_type=>self.class.name}
   end
 
 
