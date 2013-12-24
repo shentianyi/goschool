@@ -116,10 +116,22 @@ class SearchEngine
   end
 
 
+  def get_query_types_by_key(entity_type,key,limit=10)
+    type_keys = SearchEngineType.instance.get_query_types(entity_type,key,limit)
 
-  def index_query_type
+    type_objs = []
+
+    type_keys.each do |type_key|
+      type_objs.push (self.get_query_type(entity_type,type_key).query_type_description)
+    end
+
+    return type_objs
 
   end
+
+
+
+
 
 
 
