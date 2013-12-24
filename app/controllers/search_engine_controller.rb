@@ -8,8 +8,23 @@ class SearchEngineController < ApplicationController
   #search_type: select_query
   #{search_type:"select_query",entity_type:"Student",page:1,per_page:20,search_queries:[{query_type:"StudentName",parameters:[]}}
   def search
-    ids= SearchEngine.new.search_id(params[:search_type],params[:entity_type],params[:q],params[:page],20,current_tenant.id)
-    case params[:entity_type]
+     search_ids(params[:search_type],params[:entity_type],params[:q],params[:page])
+  end
+
+  def tip
+    render json:    SearchEngine.new.get_query_type(params[:entity_type],params[:q])
+  end
+
+  def search_by_view
+    cv= CustomView.find_by_id  params[:id]
+    query=cv.query_obj
+    search_ids cv.search_type,cv.entity_type,cv.query_obj,params[:page]
+  end
+  
+ private 
+ def search_ids search_type,entity_type,q,page
+    ids= SearchEngine.new.search_id(search_type,entity_type,q,page,20,current_tenant.id)
+    case entity_type
     when 'Course'
       @courses=CoursePresenter.init_presenters(Course.detail_by_id(ids).all)
       render partial:'courses/search_result'
@@ -19,14 +34,5 @@ class SearchEngineController < ApplicationController
     else
     render :nothing => true, :status => 200, :content_type => 'text/html'
     end
-  end
-
-  def tip
-    
-  end
-
-  def search_by_view
-    id = parameter[:id]
-
-  end
+ end
 end

@@ -29,11 +29,6 @@ class InstitutionsController < ApplicationController
   end
 
   private
-
-  def init_message
-    @msg=Msg.new
-  end
-
   def get_institution
     @institution=Institution.find_by_id(params[:id])
   end
