@@ -5,13 +5,13 @@
     <div class="content">
       <h3 class="header">当前作业</h3>
 
-      <p>请通过<i class="icon download disk"></i>下载相关附件，最终应该以老师要求的格式通过<i class="icon upload disk"></i>上传作业</p>
+      <p>请通过<i class="icon download disk"></i>下载相关附件，最终应该以老师要求的格式通过<i class="icon upload disk"></i>提交作业</p>
     </div>
   </div>
   <ul>
     <% if @homeworkds %>
         <% @homeworkds.each do |h |%>
-        <li homewokr="<%= h.id %>">
+        <li homework="<%= h.id %>">
           <table class="ui table segment">
             <tbody>
             <tr>

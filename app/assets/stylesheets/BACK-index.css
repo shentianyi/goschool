@@ -509,8 +509,8 @@
     width:250px;
 }
 .query_list .query_add_view input{
-    padding:3px 4px;
-    font-size:12px;
+    padding:3px 4px !important;
+    font-size:12px !important;
 }
 .query_list .query_add_view .button{
     font-size:12px;
