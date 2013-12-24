@@ -30,7 +30,7 @@ class StudentHomework < ActiveRecord::Base
      q
   end
   
-      def  can_resubmit?
+    def  can_resubmit?
       !self.marked
     end
     

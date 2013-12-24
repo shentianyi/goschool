@@ -9,6 +9,9 @@ class StudentController < ApplicationController
   def index
     @active_left_aside = 'homepage'
     @courses = StudentCoursePresenter.init_presenters(Student.course_detail @student.id)
+    @shs=@student.student_homeworks.where(marked:true).order('marked_time desc').limit(5).all
+    @improved=@student.student_homeworks.where(marked:true,improved:true).count
+    @disimproved=@student.student_homeworks.where(marked:true,improved:false).count
   end
 
   def show

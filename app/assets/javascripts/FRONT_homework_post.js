@@ -27,7 +27,7 @@
         var width=$("#post-home").width()-$("#post-home .left").width()-80;
         $("#post-home .right").width(width);
         if($("#accordion .pin").length==1){
-            $("#accordion .title").eq(0).css("background-color","#D95C5C").css("color","#fff")
+            $("#accordion .title").eq(0).css("background-color","#63A69F").css("color","#fff")
             $("#accordion .pin").prepend($("<i />").addClass("icon triangle  down"))
         }
     })
