@@ -12,7 +12,7 @@ class SearchEngineController < ApplicationController
   end
 
   def tip
-    render json:    SearchEngine.new.get_query_type(params[:entity_type],params[:q])
+    render json:SearchEngineType.instance.get_query_types(params[:entity_type],params[:q])
   end
 
   def search_by_view
