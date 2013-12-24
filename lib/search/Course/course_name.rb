@@ -1,12 +1,12 @@
 #encoding:UTF-8
-class CourseNameExact
+class CourseName
 
   def query_type
     self.class.name
   end
 
   def name
-     '课程名'
+     '按课程名查询'
   end
 
   def introduction
@@ -27,7 +27,7 @@ class CourseNameExact
     if !query_obj
       query_obj = Course.where(true==true)
     end
-    return query_obj.where('name=?',parameters)
+
   end
 
 

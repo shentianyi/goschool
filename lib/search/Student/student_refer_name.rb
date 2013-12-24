@@ -27,8 +27,7 @@ class StudentReferName
     if !query_obj
       query_obj = Student.where(true)
     end
-    
-    return query_obj
+    return query_obj 
   end
 
 

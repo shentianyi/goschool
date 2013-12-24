@@ -28,7 +28,9 @@ class StudentAttendedCourses
       query_obj = Student.where(true)
     end
 
-    return query_obj.where('id in (?)',ids)
+    ids = Course.search_for_ids :conditions=>{:name=>parameters[0]},:star=>true
+
+    return query_obj.joins(:courses).where('courses.id in (?)',parameters[0])
   end
 
 
