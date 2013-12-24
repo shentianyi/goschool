@@ -7,7 +7,6 @@ class StudentHomeworksController < ApplicationController
   skip_before_filter :require_user_as_employee
   def create
     attach=params[:student_homework].slice(:attach)[:attach] if params[:student_homework].has_key?(:attach)
-
     @student_homework=StudentHomework.new(params[:student_homework].except(:attach))
     Attachment.add(attach,@student_homework)
     @student_homework.student=current_user.student
@@ -29,9 +28,12 @@ class StudentHomeworksController < ApplicationController
       params[:student_homework][:marked]=true
       params[:student_homework][:marked_time]=Time.now
     end
-    @msg.content=@student_homework.errors.messages unless @msg.result=@student_homework.update_attributes(params[:student_homework])
-    if params[:student_homework].has_key?(:score) && @msg.result
-    @msg.content=true # if marked
+    attach=params[:student_homework].slice(:attach)[:attach] if params[:student_homework].has_key?(:attach)
+    if @msg.result=@student_homework.update_attributes(params[:student_homework].except(:attach))
+      @msg.content=true
+      Attachment.add(attach,@student_homework)
+    else
+    @msg.content=@student_homework.errors.messages
     end
     render :json=>@msg
   end

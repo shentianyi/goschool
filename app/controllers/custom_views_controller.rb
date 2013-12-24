@@ -1,3 +1,4 @@
+#encoding: utf-8
 class CustomViewController < ApplicationController
 
   def create

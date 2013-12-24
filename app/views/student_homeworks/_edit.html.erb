@@ -13,7 +13,7 @@
                <%@student_homework.attachments.each do |attach|%>
                  <p class="attachment-item upload-file-name resubmit-attachment-item" data-content="<%= attach.name%>" data-variation="inverted" >
                    <%= attach.name%>
-                    <i class="icon remove" ></i>
+                    <i class="icon remove attachment-destroy-icon" attach="<%=attach.id%>"></i>
                 </p>
                <%end%>
           </div>

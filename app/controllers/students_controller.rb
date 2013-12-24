@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#encoding: utf-8
 class StudentsController < ApplicationController
   # layout "non_authorized"
   # GET /students

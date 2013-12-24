@@ -1,3 +1,4 @@
+#encoding: utf-8
 class CommentsController < ApplicationController
   skip_before_filter :require_user_as_employee
   # GET /comments/1/edit
@@ -10,21 +11,20 @@ class CommentsController < ApplicationController
   def create
     msg = Msg.new
     msg.result = false
-    @comment = Comment.new(params[:comment])
-    @comment.logininfo = current_user
+    @c = Comment.new(params[:comment])
+    @c.logininfo = current_user
     if current_user.check_role(400)
-      @comment.is_teacher = true
+      @c.is_teacher = true
     else
-      @comment.is_teacher = false
+      @c.is_teacher = false
     end
-    if @comment.save
-      msg.result = true
-      msg.object = CommentPresenter.new(@comment).to_json
+    if @c.save
+      @comment = CommentPresenter.new(@c)
+      render partial: 'posts/comment'
     else
-      msg.content = @comment.errors.full_messages
+      msg.content = @c.errors.full_messages
+      render :json=>msg
     end
-    
-    render :json=>msg
   end
 
   # DELETE /comments/1
