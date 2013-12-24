@@ -3,10 +3,11 @@
     <img class="ui image avatar" src="<%= @comment.commenter.image_url%>" />
     <p><%= @comment.commenter.name %></p>
     <p><%= @comment.comment_time %></p>
+    <p><%= @comment.content %></p>
   </div>
   <% if @comment.who_answer %>
       <label class="teacher-answer"><% @comment.who_answer %></label>
   <% end %>
 
-  <p><%= @comment.content %></p>
+
 </div>
