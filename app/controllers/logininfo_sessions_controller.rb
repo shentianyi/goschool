@@ -23,7 +23,7 @@ class LogininfoSessionsController < ApplicationController
       flash[:notice] = "登录成功！"
       #redirect_to root_url
     else
-      msg.content = @user_session.errors
+      msg.content = @user_session.errors.full_messages
     end    
     render :json=>msg
   end 

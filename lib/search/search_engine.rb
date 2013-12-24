@@ -17,7 +17,7 @@ class SearchEngine
     query=query.offset((page-1)*per_page)
 
     if only_id
-      query = query.select(:id)
+      query = query.select("#{entity_type.downcase.pluralize}.id")
     end
 
     return query
@@ -48,7 +48,7 @@ class SearchEngine
       when 'full_text'
         search_full_text_with_object_id(entity_type,search_queries,page,per_page,tenant_id)
       when 'select_query'
-        search_return_relation(entity_type,search_queries,page,per_page,tenant_id).select(:id).all
+        search_return_relation(entity_type,search_queries,page,per_page,tenant_id).select("#{entity_type.downcase.pluralize}.id").all
       else
         return 'search type undefined'
     end

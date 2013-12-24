@@ -5,7 +5,6 @@
         <div class="ui button" sub-course="<%=sc.id%>"><%=sc.parent_name%> <%=":#{sc.name}" if sc.name%></div>
     <%end%>
   </div>
-  <canvas name="line_chart" class="homework-line"></canvas>
 </div>
 
 
@@ -13,7 +12,6 @@
   <label>作业交付</label>
 
   <p class="deal-on-date">按时交付率<span id="deal-on-date"></span></p>
-  <canvas id="homework-pie" class="homework-pie"></canvas>
 </div>
 
 <%= render 'student_homeworks/improve'%>
