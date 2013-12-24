@@ -78,6 +78,7 @@ STUDENT_FRONT.check = 0;
                     data.achievementresult.student_id = $("div#detail-content div.info").attr("student");
                     data.achievementresult.valuestring = text;
                     data.achievementresult.achievement_id = data.id;
+                    data.achievementresult.achievetime = new Date().toWayneString();
 
                     achievementres_manager.create(data, function (data) {
                         if (data.result) {
@@ -163,7 +164,7 @@ STUDENT_FRONT.check = 0;
                 data.achievementresult.student_id = $("div#detail-content div.info").attr("student");
                 data.achievementresult.valuestring = school + ";" + major + ";" + time + ";" + scholarship;
                 data.achievementresult.achievement_id = data.id;
-
+                data.achievementresult.achievetime = time;
                 achievementres_manager.create(data, function (data) {
                     if (data.result) {
                         var res = data.object
@@ -338,6 +339,7 @@ STUDENT_FRONT.check = 0;
                 data.achievementresult.student_id = $("div#detail-content div.info").attr("student");
                 data.achievementresult.valuestring = time + ';' + score + ';' + join_time;
                 data.achievementresult.achievement_id = data.id;
+                data.achievementresult.achievetime = time;
 
                 achievementres_manager.create(data, function (data) {
                     if (data.result) {

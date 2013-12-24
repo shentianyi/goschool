@@ -17,7 +17,7 @@ class StudentHomework < ActiveRecord::Base
   def self.unsubmits  student_id
      student=Student.find_by_id(student_id)
       ids=StudentHomework.where(student_id:student.id).pluck(:homework_id)
-      q= student.original_homeworks.where(student_courses:{student_id:student_id})
+      q= student.original_homeworks.where(student_courses:{student_id:student_id},homeworks:{status:false})
        q=q.where("homeworks.id not in (?)",ids) if ids.count>0
        q.select('sub_courses.name as sub_course_name,sub_courses.parent_name as course_name,homeworks.*')
   end
