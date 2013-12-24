@@ -28,6 +28,8 @@ class StudentsController < ApplicationController
         relation(@student)
       when 'consult-record'
         consultation(@student)
+      when 'class-performance'
+        performance(@student)
       else
         @partial = 'class-and-service'
         courses(@student)
@@ -166,6 +168,13 @@ class StudentsController < ApplicationController
   end
 
   private
+
+  def performance student
+    @shs=@student.student_homeworks.where(marked:true).order('marked_time desc').limit(5).all
+    @improved=@student.student_homeworks.where(marked:true,improved:true).count
+    @disimproved=@student.student_homeworks.where(marked:true,improved:false).count
+    @sub_courses=@student.sub_courses
+  end
 
   def consultation(student)
     @consultations = ConsultationPresenter.init_presenters(student.consultations)

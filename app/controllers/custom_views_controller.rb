@@ -23,7 +23,7 @@ before_filter :init_message ,:only=>[:create,:destroy]
 private
 
  def get_custom_view
-    @custom_view=custom_view.find_by_id(params[:id])
+    @custom_view=CustomView.find_by_id(params[:id])
   end
 
   def render_nil_msg
