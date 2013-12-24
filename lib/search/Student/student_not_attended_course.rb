@@ -29,7 +29,7 @@ class StudentNotAttendedCourse
       query_obj = Student.where(true)
     end
 
-    ids = Course.search_for_ids :conditions=>{:name=>parameters[0]},:star=>true
+    ids = Course.search_for_ids :conditions=>{:name=>parameters},:star=>true
 
     return query_obj.where('students.id not in (select student_id from student_courses,courses where courses.id=student_courses.id and courses.id in (?))', ids)
   end

@@ -1,5 +1,6 @@
 #encoding: utf-8
 class SchedulesController < ApplicationController
+  skip_before_filter :require_user_as_employee
   before_filter :init_message ,:only=>[:show,:create,:update,:destroy,:dates,:courses,:teachers]
   before_filter :get_schedule,:only=>[:update,:destroy]
   before_filter :render_nil_msg , :only=>[:update,:destroy]

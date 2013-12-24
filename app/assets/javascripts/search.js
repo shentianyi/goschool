@@ -325,7 +325,7 @@ var Search = {
         };
 
         search.bind_query = function(){
-            if(this.queries){
+            if(!this.queries){
                 this.queries = {};
             }
            this.queries[this.current_query["query_type"]]=this.get_conditions();
