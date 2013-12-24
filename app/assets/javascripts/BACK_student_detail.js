@@ -78,6 +78,7 @@ STUDENT_FRONT.check = 0;
                     data.achievementresult.student_id = $("div#detail-content div.info").attr("student");
                     data.achievementresult.valuestring = text;
                     data.achievementresult.achievement_id = data.id;
+                    data.achievementresult.achievetime = new Date().toWayneString();
 
                     achievementres_manager.create(data, function (data) {
                         if (data.result) {
@@ -163,7 +164,7 @@ STUDENT_FRONT.check = 0;
                 data.achievementresult.student_id = $("div#detail-content div.info").attr("student");
                 data.achievementresult.valuestring = school + ";" + major + ";" + time + ";" + scholarship;
                 data.achievementresult.achievement_id = data.id;
-
+                data.achievementresult.achievetime = time;
                 achievementres_manager.create(data, function (data) {
                     if (data.result) {
                         var res = data.object
@@ -338,6 +339,7 @@ STUDENT_FRONT.check = 0;
                 data.achievementresult.student_id = $("div#detail-content div.info").attr("student");
                 data.achievementresult.valuestring = time + ';' + score + ';' + join_time;
                 data.achievementresult.achievement_id = data.id;
+                data.achievementresult.achievetime = time;
 
                 achievementres_manager.create(data, function (data) {
                     if (data.result) {
@@ -695,18 +697,6 @@ STUDENT_FRONT.check = 0;
     });
 
     $(document).ready(function () {
-        //post(得到的数组放到下面的对象中就可以了)
-        STUDENT_FRONT.line = {
-            labels: ["2013-01-03", "2013-01-04", "2013-01-05"],
-            scores: [15, 18, 19]
-        };
-        STUDENT_FRONT.pie = {
-            scores: [20, 1]
-        };
-        HOMEWORKCHART.generateLine(STUDENT_FRONT.line.labels, STUDENT_FRONT.line.scores, "homework-line-wrap");
-        HOMEWORKCHART.generatePie(STUDENT_FRONT.pie.scores, "homework-pie-wrap", "small");
-
-
         var href = window.location.href.split("/");
         var new_href = href[href.length - 1].split("#")[0];
         if (new_href == "achieve") {
@@ -714,7 +704,16 @@ STUDENT_FRONT.check = 0;
                 $("#achieve_final_tabular>a").eq(0).click();
             }
         }
-        //	STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
+        else if(new_href="class-performance"){
+            $.get("/student_homeworks/submit_calculate",{id:$("#student-detail-info").attr("student")},function(data){
+                STUDENT_FRONT.pie={
+                    scores:data
+                };
+                HOMEWORKCHART.generatePie(STUDENT_FRONT.pie.scores,"homework-pie-wrap");
+            });
+            $("#homework-line-wrap .buttons .button").eq(0).click();
+        }
+
     });
 
 })();

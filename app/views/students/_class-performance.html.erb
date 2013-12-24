@@ -1,0 +1,19 @@
+<div id="homework-line-wrap" class="homework-line-wrap homework-wrap">
+  <label>作业成绩</label>
+  <div class="tiny ui buttons basic">
+    <%@sub_courses.each do |sc|%>
+        <div class="ui button" sub-course="<%=sc.id%>"><%=sc.parent_name%> <%=":#{sc.name}" if sc.name%></div>
+    <%end%>
+  </div>
+  <canvas name="line_chart" class="homework-line"></canvas>
+</div>
+
+
+<div id="homework-pie-wrap" class="homework-pie-wrap homework-wrap">
+  <label>作业交付</label>
+
+  <p class="deal-on-date">按时交付率<span id="deal-on-date"></span></p>
+  <canvas id="homework-pie" class="homework-pie"></canvas>
+</div>
+
+<%= render 'student_homeworks/improve'%>

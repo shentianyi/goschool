@@ -1,13 +1,31 @@
 <div>
-	<%schedules.each_with_index do |schedule,i|%>
-	<div>
-		<span><%= i+1%></span>
-		<span><%= schedule.parent_name%></span>
-		<span><%= schedule.name%></span>
-		<span><%= schedule.start_time%></span>
-		<span><%= schedule.end_time%></span>
-		<span><% schedule.teachers.each do |teacher|%> <span><%= teacher.name%></span> <%end%> </span>
-	</div>
-	<hr />
-	<%end%>
+  <table style="border-collapse:collapse;border:1px solid rgba(0,0,0,0.8)">
+
+    <thead>
+    <tr  style="border-bottom:1px solid rgba(0,0,0,0.8)">
+      <th style="padding:15px;">序号</th>
+      <th style="padding:15px;">课程所在机构</th>
+      <th style="padding:15px;">课程名称</th>
+      <th style="padding:15px;">开始时间</th>
+      <th style="padding:15px;">结束时间</th>
+      <th style="padding:15px;">老师</th>
+    </tr>
+    </thead>
+
+    <tbody style="color:rgba(0,0,0,0.7)">
+    <%schedules.each_with_index do |schedule,i|%>
+    <tr>
+      <td style="padding:15px;text-align:center"><%= i+1%></td>
+      <td style="padding:15px;"><%= schedule.parent_name%></td>
+      <td style="padding:15px;"><%= schedule.name%></td>
+      <td style="padding:15px;"><%= schedule.start_time%></td>
+      <td style="padding:15px;"><%= schedule.end_time%></td>
+      <td style="padding:15px;">
+        <% schedule.teachers.each do |teacher|%> <span style="display:inline-block"><%= teacher.name%></span> <%end%>
+      </td>
+    </tr>
+    <%end%>
+    </tbody>
+
+  </table>
 </div>

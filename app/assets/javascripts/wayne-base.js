@@ -327,11 +327,11 @@ GLOBAL.autoComplete.count = 0;
           }
           //除去left and right
           else if(e.keyCode != 37 && e.keyCode != 39 && e.keyCode != 13) {
-//               if(auto_complete!="experiment"){
+               if(auto_complete!="experiment"){
                    window.setTimeout(function(){
                        $("#autoComplete-call>ul").empty();
                    },100);
-//               }
+               }
                GLOBAL.autoComplete.count++;
                var $this = $(adapt_event(event).target).parents(".autoComplete").eq(0);
                var $my = $(adapt_event(event).target);

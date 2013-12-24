@@ -1,14 +1,15 @@
 #encoding: utf-8
-class CustomViewController < ApplicationController
+class CustomViewsController < ApplicationController
 before_filter :init_message ,:only=>[:create,:destroy]
   before_filter :get_custom_view,:only=>:destroy
   before_filter :render_nil_msg , :only=>:destroy
   def create
-    @custom_view = CustomView.new(params[:custom_view])
-    # custom.name=params[:name]
-    # custom.query = params[:q].to_json
-    # custom.query_type=params[:query_type]
-    # custom.entity_type = params[:entity_type]
+    @custom_view = CustomView.new
+    @custom_view.user=current_user.user
+    @custom_view.name=params[:name]
+    @custom_view.query = params[:q].to_json
+    @custom_view.query_type=params[:query_type]
+    @custom_view.entity_type = params[:entity_type]
     @msg.content=(@msg.result=@custom_view.save) ? @custom_view.id :  @custom_view.errors.messages
     render :json=>@msg
   end
@@ -22,7 +23,7 @@ before_filter :init_message ,:only=>[:create,:destroy]
 private
 
  def get_custom_view
-    @custom_view=custom_view.find_by_id(params[:id])
+    @custom_view=CustomView.find_by_id(params[:id])
   end
 
   def render_nil_msg

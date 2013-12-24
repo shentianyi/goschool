@@ -71,7 +71,7 @@
     width:90%;
     left:29px;
     height:90%;
-    top:4%;
+    top:29px;
     box-shadow:2px 3px 9px rgba(0, 0, 0, 0.6);
     -moz-box-shadow:2px 3px 9px rgba(0, 0, 0, 0.6);
     -webkit-box-shadow:2px 3px 9px rgba(0, 0, 0, 0.6);
@@ -220,6 +220,10 @@
     border-color:rgba(0, 0, 0, 0.15);
     border-style:solid;
     border-width:0px 1px 1px 1px;
+}
+.schedule-search>.search-block>.search-list .uncommon{
+    font-size:13px;
+    padding:5px 0px 5px 14px;
 }
 .search-list>.search-class-name{
     font-size:13px;

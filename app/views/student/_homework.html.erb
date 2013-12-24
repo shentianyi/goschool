@@ -5,13 +5,13 @@
     <div class="content">
       <h3 class="header">当前作业</h3>
 
-      <p>请通过<i class="icon download disk"></i>下载相关附件，最终应该以老师要求的格式通过<i class="icon upload disk"></i>上传作业</p>
+      <p>请通过<i class="icon download disk"></i>下载相关附件，最终应该以老师要求的格式通过<i class="icon upload disk"></i>提交作业</p>
     </div>
   </div>
   <ul>
     <% if @homeworkds %>
         <% @homeworkds.each do |h |%>
-        <li>
+        <li homework="<%= h.id %>">
           <table class="ui table segment">
             <tbody>
             <tr>
@@ -33,7 +33,7 @@
                 <% end %>
               </td>
               <td class="wide one">
-                <a  name="upload-file"><i class="icon upload disk"></i></a>
+                <a  name="upload-file" homework="<%= h.id %>"><i class="icon upload disk"></i></a>
               </td>
             </tr>
             </tbody>
@@ -46,14 +46,14 @@
 
 <div id="homework-line-wrap" class="homework-line-wrap homework-wrap">
   <label>作业成绩</label>
-
   <div class="tiny ui buttons basic">
-    <div class="ui button active">托福听力</div>
-    <div class="ui button">托福口语</div>
-    <div class="ui button">雅思</div>
+       <%@sub_courses.each do |sc|%>
+       <div class="ui button" sub-course="<%=sc.id%>"><%=sc.parent_name%> <%=":#{sc.name}" if sc.name%></div>
+       <%end%>
   </div>
   <canvas name="line_chart" class="homework-line"></canvas>
 </div>
+
 
 <div id="homework-pie-wrap" class="homework-pie-wrap homework-wrap">
   <label>作业交付</label>
@@ -62,13 +62,19 @@
   <canvas id="homework-pie" class="homework-pie"></canvas>
 </div>
 
-
-<div id="upload-wrap" class="upload-wrap">
-  <i class="icon remove"></i>
-  <div class="upload-file">
-    <%=render 'shares/file_upload'%>
+<div class="homework-post-add upload-my-home-work" id="upload-my-home-work">
+  <div class="inner">
+    <i class="icon remove"></i>
+    <p>上传我的作业</p>
+    <div class="content">
+      <label>作业内容</label>
+      <textarea  id="student-homework-content" name='content' class="homework-input" ></textarea>
+      <%= render 'shares/file_upload'%>
+    </div>
+    <div  id="student-homework-submit-button" class="ui button red mini">
+      上传
+    </div>
   </div>
-  <a class="ok-button">完成</a>
 </div>
 
 <%=render 'student_homeworks/improve' %>

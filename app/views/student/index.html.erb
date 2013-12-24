@@ -3,7 +3,9 @@
 <%= render partial: 'workspace' %>
 
 <% content_for :javascript_includes do%>
-<%= javascript_include_tag "FRONT_index.js"%>
-<%= javascript_include_tag "FRONT_student.js"%>
-<%= javascript_include_tag "Homework-chart.js"%>
+    <%= javascript_include_tag "manage.source.base.js"%>
+    <%= javascript_include_tag "manage.homework.base.js"%>
+    <%= javascript_include_tag "FRONT_index.js"%>
+    <%= javascript_include_tag "FRONT_student.js"%>
+    <%= javascript_include_tag "Homework-chart.js"%>
 <%end%>

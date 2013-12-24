@@ -57,6 +57,9 @@
                             $("#achieve_final_tabular>a").eq(0).click();
                         }
                     }
+                    else if(target=="class-performance"){
+                        initial_class_performance()
+                    }
                     else if(target=="student"){
                         $(".ui.checkbox[name='join'],.ui.checkbox[name='choose']").checkbox({
                             onChange:function(){
@@ -114,6 +117,9 @@
                         if($("#achieve_final_tabular>a").length>=1){
                             $("#achieve_final_tabular>a").eq(0).click();
                         }
+                    }
+                    else if(target=="class-performance"){
+                        initial_class_performance();
                     }
                     else if(target=="student"){
                         $(".ui.checkbox[name='join'],.ui.checkbox[name='choose']").checkbox({
@@ -177,3 +183,12 @@
         }
     });
 })()
+function initial_class_performance(){
+    $.get("/student_homeworks/submit_calculate",{id:$("#student-detail-info").attr("student")},function(data){
+        STUDENT_FRONT.pie={
+            scores:data
+        };
+        HOMEWORKCHART.generatePie(STUDENT_FRONT.pie.scores,"homework-pie-wrap");
+    });
+    $("#homework-line-wrap .buttons .button").eq(0).click();
+}

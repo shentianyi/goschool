@@ -12,7 +12,8 @@ class StudentController < ApplicationController
     @shs=@student.student_homeworks.where(marked:true).order('marked_time desc').limit(5).all
     @improved=@student.student_homeworks.where(marked:true,improved:true).count
     @disimproved=@student.student_homeworks.where(marked:true,improved:false).count
-    @homeworkds = StudentHomeworkPresenter.init_presenters(StudentHomework.unsubmits(@student.id))
+    @homeworkds = FrontHomeworkPresenter.init_presenters(StudentHomework.unsubmits(@student.id))
+    @sub_courses=@student.sub_courses
   end
 
   def show

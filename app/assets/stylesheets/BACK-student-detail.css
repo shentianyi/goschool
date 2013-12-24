@@ -137,6 +137,7 @@
     right:10px;
     top:5px;
     max-width:85%;
+    z-index:99;
 }
 .class-performance .homework-line-wrap>.ui.basic.buttons>.button.active{
     background-color:#F38630;
@@ -156,6 +157,7 @@
     margin-left:2%;
     width:20%;
     height:260px;
+    margin-top:5px;
 }
 .class-performance .homework-pie-wrap>canvas{
     position:absolute;
@@ -178,7 +180,7 @@
 }
 /**************************************************************  我的进步  */
 .class-performance .homework-progress-wrap{
-    margin-left:2%;
+    margin:5px 0 0 2%;
     float:left;
     width:22%;
     height:260px;

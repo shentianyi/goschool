@@ -183,18 +183,29 @@
     </div>
 </article>
 
-<div id="upload-wrap" class="upload-wrap">
-    <i class="icon remove"></i>
-    <div class="upload-file">
-        <a class="ui button twitter mini" onclick="$('#task-attach-uploader').click()">上传附件(最大为20M)</a>
-        <div id="task-attach-uploader-preview">
-            <p class="upload-file-name">wzx.pdf<i class="icon remove"></i></p>
+<div class="homework-post-add upload-my-home-work" id="upload-my-home-work">
+    <div class="inner">
+        <i class="icon remove"></i>
+        <p>上传我的作业</p>
+        <div class="content">
+            <label>作业内容</label>
+            <textarea  name='content' class="homework-input" ></textarea>
+            <div class="upload-file">
+                <a class="ui button twitter mini" onclick="$('#task-attach-uploader').click()">上传附件(最大为20M)</a>
+                <p class="upload-file-name">wzx.pdf<i class="icon remove"></i></p>
+            </div>
+        </div>
+        <div  class="ui button red mini">
+            上传
         </div>
     </div>
-
-
-    <a class="ok-button">完成</a>
 </div>
+<!--<div class="upload-wrap">-->
+    <!--<i class="icon remove"></i>-->
+    <!--<div class="ui mini teal button upload-homework"  id="upload-homework">-->
+         <!--上传我的作业-->
+    <!--</div>-->
+<!--</div>-->
 
 
 <script type='text/javascript' src="javascripts/jquery-1.8.2.min.js"></script>

@@ -14,7 +14,7 @@ class CourseName
   end
 
   def query_type_description
-    {:name=>self.name,:introduction=>self.introduction,:parameter_type=>'String',:query_type=>self.class.name}
+    {:name=>self.name,:introduction=>self.introduction,:parameter_type=>'string',:query_type=>self.class.name}
   end
 
 
@@ -27,8 +27,7 @@ class CourseName
     if !query_obj
       query_obj = Course.where(true==true)
     end
-    ids= Course.search
-    return query_obj.where('name=?',parameters[0])
+
   end
 
 

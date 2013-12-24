@@ -12,11 +12,29 @@ var HOMEWORKCHART=HOMEWORKCHART || {};
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
             //post
-            STUDENT_FRONT.line={
-                labels:["2013-01-03","2013-01-04","2013-01-05"],
-                scores:[100,200,300]
-            };
-            HOMEWORKCHART.generateLine(STUDENT_FRONT.line.labels,STUDENT_FRONT.line.scores,"homework-line-wrap");
+            $.get('/student_homeworks/scores',{id:$("#detail-content").attr('student'),sid:$(this).attr('sub-course')},function(data){
+                if(data.length==0){
+                    $("#"+"homework-line-wrap").find("[name='line_chart']").remove();
+                }
+                else{
+                    var labels=[],scores=[],day;
+                    for(var i=0;i<data.length;i++){
+                        day=new Date(parseInt(data[i].time)).toWayneString().day;
+                        labels.push(day);
+                        scores.push(parseFloat(data[i].score));
+                    }
+                    STUDENT_FRONT.line={
+                        labels:labels,
+                        scores:scores
+                    };
+                    HOMEWORKCHART.generateLine(STUDENT_FRONT.line.labels,STUDENT_FRONT.line.scores,"homework-line-wrap");
+                }
+            });
+//            STUDENT_FRONT.line={
+//                labels:["2013-01-03","2013-01-04","2013-01-05"],
+//                scores:[100,200,300]
+//            };
+//            HOMEWORKCHART.generateLine(STUDENT_FRONT.line.labels,STUDENT_FRONT.line.scores,"homework-line-wrap");
         }
     })
 })()
@@ -89,12 +107,15 @@ HOMEWORKCHART.generatePie=function(scores,target_wrap){
         canvas.height=canvas.height;
         var data = [
             {value:scores[0],color:"rgba(151,187,205,0.5)"},
-            {value :scores[1]-scores[0],color : "#F38630"}
+            {value:scores[1]-scores[0],color : "#F38630"}
         ]
         var ctx = $("#"+target_wrap).find("canvas").get(0).getContext("2d");
         var myNewChart = new Chart(ctx);
         new Chart(ctx).Pie(data);
         var percentage=((scores[0]/scores[1])*100).toFixed(1)+"%";
-        $("#deal-on-date").text(percentage);
+        if(!isNaN((scores[0]/scores[1])*100)){
+            $("#deal-on-date").text(percentage);
+        }
+
     }
 };

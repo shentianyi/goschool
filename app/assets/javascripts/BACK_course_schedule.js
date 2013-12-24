@@ -110,7 +110,12 @@
             },function(data){
                 if(data.result){
                     $("#search-list").empty();
-                    SCHEDULE.generate_search_result(data.content);
+                    if(data.content.length==0){
+                        $("#search-list").append($("<p />").text("尚未安排课程..."))
+                    }
+                    else{
+                        SCHEDULE.generate_search_result(data.content);
+                    }
                 }
                 else{
                     MessageBox_content(data.content);
