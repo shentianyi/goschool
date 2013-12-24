@@ -28,7 +28,7 @@ class StudentNotAttendedCoursesCode
       query_obj = Student.where(true)
     end
 
-    return query_obj.where('students.id not in (select student_id from student_courses,courses where courses.id=student_courses.id and courses.code = ?', parameters)
+    return query_obj.where('students.id not in (select student_id from student_courses,courses where courses.id=student_courses.course_id and courses.code = ?', parameters)
   end
 
 
