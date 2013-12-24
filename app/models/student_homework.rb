@@ -19,7 +19,7 @@ class StudentHomework < ActiveRecord::Base
       ids=StudentHomework.where(student_id:student.id).pluck(:homework_id)
       q= student.original_homeworks.where(student_courses:{student_id:student_id})
        q=q.where("homeworks.id not in (?)",ids) if ids.count>0
-       q.select('sub_courses.name as sub_course_name,sub_courses.parent as course_name,homewoks.*')
+       q.select('sub_courses.name as sub_course_name,sub_courses.parent as course_name,homeworks.*')
   end
 
   def self.by_type params
