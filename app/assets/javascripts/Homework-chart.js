@@ -89,7 +89,7 @@ HOMEWORKCHART.generatePie=function(scores,target_wrap){
         canvas.height=canvas.height;
         var data = [
             {value:scores[0],color:"rgba(151,187,205,0.5)"},
-            {value :scores[1]-scores[0],color : "#F38630"}
+            {value:scores[1]-scores[0],color : "#F38630"}
         ]
         var ctx = $("#"+target_wrap).find("canvas").get(0).getContext("2d");
         var myNewChart = new Chart(ctx);
