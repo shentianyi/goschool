@@ -25,12 +25,12 @@ class CourseName
 
   def query(query_obj,parameters)
     if !query_obj
-      query_obj = Course.where(true==true)
+      query_obj = Course.where(true)
     end
 
-    ids = Course.search :conditions=>{:name=>parameters}, :star=>true
+    ids = Course.search_for_ids :conditions=>{:name=>parameters},:star=>true
 
-    return query_obj.where('courses.id in (?)', ids)
+    return query_obj.where('courses.id in (?)',ids)
 
   end
 
