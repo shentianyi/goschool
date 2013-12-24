@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Attachment < ActiveRecord::Base
   # attr_accessible :title, :body
   self.inheritance_column = nil

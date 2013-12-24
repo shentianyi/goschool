@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#encoding: utf-8
 class StudentsController < ApplicationController
   # layout "non_authorized"
   # GET /students
@@ -112,10 +112,12 @@ class StudentsController < ApplicationController
         end
 
         @student.update_attributes(params[:student].except(:tags)) if params[:student]
-        if params[:student] && params[:student][:tags]
+        if params.has_key?(:student)
           @student.tags = params[:student].slice(:tags)[:tags]
-          @student.add_tags
+        else
+          @student.tags = []
         end
+        @student.add_tags
         msg.result = true
       end
     rescue ActiveRecord::RecordInvalid => invalid

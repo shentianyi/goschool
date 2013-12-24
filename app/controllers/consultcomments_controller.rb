@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#encoding: utf-8
 class ConsultcommentsController < ApplicationController
   def create
     msg = Msg.new

@@ -1,3 +1,4 @@
+#encoding: utf-8
 class CommentsController < ApplicationController
   skip_before_filter :require_user_as_employee
   # GET /comments/1/edit

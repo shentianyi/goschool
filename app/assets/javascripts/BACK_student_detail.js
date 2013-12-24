@@ -652,7 +652,9 @@ STUDENT_FRONT.check = 0;
     });
     $("body").on("blur", ".tag-input-blur", function () {
         var data = {
-            student: {}
+            student: {
+                tags:[]
+            }
         };
         var tags = [];
         $.each($('.tags-items>li>div'), function () {

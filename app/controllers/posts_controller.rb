@@ -1,3 +1,4 @@
+#encoding: utf-8
 class PostsController < ApplicationController
   skip_before_filter :require_user_as_employee
   before_filter :get_course, :only=>[:index,:create]

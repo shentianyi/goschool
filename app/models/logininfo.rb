@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Logininfo < ActiveRecord::Base
   # attr_accessible :title, :body
   attr_accessible :email,:password,:password_confirmation,:status,:is_tenant,:tenant_id,:persishable_token

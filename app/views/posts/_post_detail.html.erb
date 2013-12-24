@@ -19,16 +19,17 @@
     <div id="comment-pre-holder"></div>
     <% @post.comments.each do |comment| %>
         <div class="item">
-          <img class="ui image avatar" src="<%= comment.commenter.image_url %>"/>
+          <div class="basic-info">
+            <img class="ui image avatar" src="<%= comment.commenter.image_url %>"/>
 
-          <p><%= comment.commenter.name %></p>
+            <p><%= comment.commenter.name %></p>
 
-          <p><%= comment.comment_time %></p>
-          <% if comment.who_answer %>
-              <label class="teacher-answer"><%= comment.who_answer %></label>
-          <% end %>
-          <p><%= comment.content %></p>
-
+            <p><%= comment.comment_time %></p>
+            <% if comment.who_answer %>
+                <label class="teacher-answer"><%= comment.who_answer %></label>
+            <% end %>
+            <p><%= comment.content %></p>
+          </div>
         </div>
     <% end %>
     <div class="item replay-input">

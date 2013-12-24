@@ -1,3 +1,4 @@
+#encoding: utf-8
 class LogininfosController < ApplicationController
   #filter with ability
   #

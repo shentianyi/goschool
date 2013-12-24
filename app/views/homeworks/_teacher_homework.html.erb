@@ -6,16 +6,18 @@
 
 <%@student_homeworks.each_with_index do |sh,i|%>
 <div class="item">
-     <img class="ui image avatar" src="<%= sh.image_url%>" />
-     <p>
-          <%= sh.name%>
-     </p>
-     <p>
-          <%= sh.submited_time_display%>
-     </p>
-     <p>
-          <%= sh.content%>
-     </p>
+  <div class="basic-info">
+    <img class="ui image avatar" src="<%= sh.image_url%>" />
+    <p>
+      <%= sh.name%>
+    </p>
+    <p>
+      <%= sh.submited_time_display%>
+    </p>
+    <p>
+      <%= sh.content%>
+    </p>
+  </div>
      <div class="item-operate">
           <label>这次作业进步了吗</label>
           <input type="checkbox" name="improved"  homework="<%= sh.id%>"  class="student-homwork-input" <%= 'checked' if sh.improved%>/>
