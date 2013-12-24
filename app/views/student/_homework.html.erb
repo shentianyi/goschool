@@ -46,14 +46,14 @@
 
 <div id="homework-line-wrap" class="homework-line-wrap homework-wrap">
   <label>作业成绩</label>
-
   <div class="tiny ui buttons basic">
-    <div class="ui button active">托福听力</div>
-    <div class="ui button">托福口语</div>
-    <div class="ui button">雅思</div>
+       <%@sub_courses.each do |sc|%>
+       <div class="ui button" sub-course="<%=sc.id%>"><%=sc.parent_name%> <%=":#{sc.name}" if sc.name%></div>
+       <%end%>
   </div>
   <canvas name="line_chart" class="homework-line"></canvas>
 </div>
+
 
 <div id="homework-pie-wrap" class="homework-pie-wrap homework-wrap">
   <label>作业交付</label>

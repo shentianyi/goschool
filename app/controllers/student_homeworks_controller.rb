@@ -50,6 +50,10 @@ class StudentHomeworksController < ApplicationController
     render json:[@intime_total,@total]
   end
 
+  def scores
+    render json: StudentHomework.scores(params[:id],params[:sid]).map{|sh| {time:sh.time.to_milli,score:sh.score}}
+  end
+
   private
 
   def init_message

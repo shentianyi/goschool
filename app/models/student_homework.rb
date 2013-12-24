@@ -25,7 +25,7 @@ class StudentHomework < ActiveRecord::Base
   def self.scores student_id,sub_course_id
     joins(:homework=>{:teacher_course=>:sub_course}).joins(:student)
       .where(student_id:student_id,sub_courses:{id:sub_course_id},marked:true)
-      .select("student_homeworks.score,student_homeworks.marked_time")
+      .select("student_homeworks.score,student_homeworks.marked_time as time")
   end
 
   def self.by_type params
