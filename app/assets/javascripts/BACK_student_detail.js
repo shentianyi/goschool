@@ -618,6 +618,10 @@ STUDENT_FRONT.check = 0;
     }).on("click", "#close-student-detail-edit",function () {
             if (STUDENTDETAIL.errors[0] === undefined && STUDENTDETAIL.errors[1] === undefined) {
                 $("#student-edit-section").css("left", "-999em").css("right", "auto");
+
+                student_manager($("#student-detail-info").attr("student"),function(data){
+
+                });
             }
             else {
                 if (STUDENTDETAIL.errors[0] !== undefined && $("#name").val().length == 0) {
@@ -871,5 +875,3 @@ STUDENTDETAIL.add_consult_record = function () {
         }
     });
 }
-
-

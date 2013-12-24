@@ -32,40 +32,10 @@
   
   <div class="detail-content" id="detail-content">
     <div class="content-info">内容主页</div>
-    <div class="info" id="student-detail-info" student="<%= @presenter.id%>">
-      <div class="left">
-        <img class="circular ui image" src="<%= @presenter.student.image_url %>"/>
-        <p class="name"><%= @presenter.name %></p>
-        <P class="type"><%= @presenter.status_%></P>
-      </div>
-      <div class="middle">
-	<p><span>性别:</span><span><%= @presenter.gender_ %></span></p>
-        <p><span>出生年月:</span><span><%= @presenter.birth_ %></span></p>
-        <p><span>联系电话:</span><span><%= @presenter.phone%></span></p>
-        <p><span>联系邮件:</span><span><%= @presenter.email%></span></p>
-        <p><span>居住地址:</span><span><%= @presenter.address%></span></p>
-	<% if @presenter.tags_.length > 0 %>
-	<p class="labels"><span>标签:</span>
-          <span>
-	    <% @presenter.tags_.each do |tag| %>
-	    <a class="ui blue label"><%= tag%></a>
-	    <% end %>
-          </span>
-        </p>
-	<% end %>
-      </div>
-      <div class="right">
-        <p><span>就读学校：</span><span><%= @presenter.school %></span></p>
-        <p><span>毕业年限：</span><span><%= @presenter.graduate_ %></span></p>
-        <p><span>监护人：</span><span><%= @presenter.guardian %></span></p>
-        <p><span>监护人电话：</span><span><%= @presenter.guardian_phone %></span></p>
-	<% if @presenter.referrer_ %>
-        <p><span>推荐人：</span><span><%= @presenter.referrer_.name %></span></p>
-	<% end %>
-      </div>
-      <a class="ui red button detail-student-button" id="delete-student-button">删除学生</a>
-      <a class="ui teal button detail-student-button" id="student-detail-edit" type="student">编辑学生信息</a>
+    <div id="student-detail">
+      <%= render partial: 'detail'%>
     </div>
+
     <div class="ui fluid accordion" id="accordion" name="student">
       <div class="item" id="class-and-service">
         <div class="<%= 'active'  if @partial=='class-and-service' %> title">
