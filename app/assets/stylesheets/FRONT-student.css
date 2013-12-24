@@ -73,7 +73,7 @@
     font-size:15px;
     cursor:pointer;
     transition:color 0.25s ease-out;
-    pointer-events:none
+
 }
 .segment.student-homework ul table td:nth-of-type(3) i{
     color:#C69C6D;
