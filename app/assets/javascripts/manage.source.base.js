@@ -160,6 +160,10 @@ var teacher_course_manager = $.extend({
      source : 'teacher_courses'
 }, manager);
 
+var attachment_manager = $.extend({
+     source : 'attachments'
+}, manager);
+
 var schedule_manager = $.extend({
      source : 'schedules',
      send_email : function(params, callback) {

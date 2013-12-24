@@ -53,6 +53,7 @@ function init_student_homework() {
      $('body').on('click', "#task-attach-uploader", function() {
           attach_upload();
      });
+     bind_attach_destroy_event();
 }
 
 function bind_menu_event() {
@@ -122,13 +123,15 @@ function bind_sh_submit_event() {
      $('body').on('click', "#student-homework-submit-button", function() {
           var submit = $(this);
           var sh = submit.attr('student-homework');
-          if(sh && sh.length > 0) {
-               student_homework_manager.update(sh, {
+          var param={
                     student_homework : {
                          homework_id : submit.attr('homework'),
-                         content : $("#student-homework-content").val()
+                         content : $("#student-homework-content").val(),
+                         attach: get_attach()
                     }
-               }, function(data) {
+          };
+          if(sh && sh.length > 0) {
+               student_homework_manager.update(sh, param, function(data) {
                     if(data.result) {
                          show_homework(submit.attr('homework'), "#homework-post-right");
                     } else {
@@ -136,13 +139,7 @@ function bind_sh_submit_event() {
                     }
                });
           } else {
-               student_homework_manager.create({
-                    student_homework : {
-                         homework_id : submit.attr('homework'),
-                         content : $("#student-homework-content").val(),
-                         attach: get_attach()
-                    }
-               }, function(data) {
+               student_homework_manager.create(param, function(data) {
                     if(data.result) {
                          // alert('sumit success!');
                          submit.attr('student-homework', data.content);
@@ -159,5 +156,18 @@ function bind_sh_submit_event() {
 function show_homework(id, content) {
      homework_manager.show(id, function(data) {
           $(content).html(data);
+     });
+}
+
+function bind_attach_destroy_event(){
+     $('body').on('click','.attachment-destroy-icon',function(){
+          var item=$(this);
+          attachment_manager.destroy(item.attr('attach'),function(data){
+               if(data.result){
+                    item.parent().remove();
+               }else{
+                     MessageBox_content(data.content);
+               }
+          });
      });
 }
