@@ -619,8 +619,8 @@ STUDENT_FRONT.check = 0;
             if (STUDENTDETAIL.errors[0] === undefined && STUDENTDETAIL.errors[1] === undefined) {
                 $("#student-edit-section").css("left", "-999em").css("right", "auto");
 
-                student_manager($("#student-detail-info").attr("student"),function(data){
-
+                student_manager.detail($("#student-detail-info").attr("student"),function(data){
+                    $("#student-detail").html(data);
                 });
             }
             else {

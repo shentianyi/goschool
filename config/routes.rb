@@ -81,7 +81,7 @@ Goschool::Application.routes.draw do
       get ':id/edit'=>:edit
       get ':id/:part'=>:show
       get ':id/:part/:ajax'=>:show
-      get 'detail/:id'=>:detail
+      get :detail
     end
   end
 

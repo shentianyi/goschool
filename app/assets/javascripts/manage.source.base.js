@@ -113,9 +113,11 @@ var course_manager = $.extend({
 
 var student_manager = $.extend({
     source: 'students',
-    detail: function (id, callback) {
+    detail: function (id, callback,async) {
+        if (async == null)
+            async = true;
         $.ajax({
-            url: '/' + this.source + '/detail/' + id,
+            url: '/' + this.source + '/detail',
             data: {
                 id: id,
             },
