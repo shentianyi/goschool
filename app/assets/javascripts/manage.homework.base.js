@@ -119,7 +119,7 @@ function get_input_value(ele) {
      return value;
 }
 
-function bind_sh_submit_event() {
+function bind_sh_submit_event(callback) {
      $('body').on('click', "#student-homework-submit-button", function() {
           var submit = $(this);
           var sh = submit.attr('student-homework');
@@ -137,6 +137,9 @@ function bind_sh_submit_event() {
                     } else {
                          MessageBox_content(data.content);
                     }
+                   if(callback){
+                       callback(data);
+                   }
                });
           } else {
                student_homework_manager.create(param, function(data) {
@@ -148,6 +151,9 @@ function bind_sh_submit_event() {
                     } else {
                          MessageBox_content(data.content);
                     }
+                   if(callback){
+                       callback(data);
+                   }
                });
           }
      });

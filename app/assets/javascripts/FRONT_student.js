@@ -18,6 +18,7 @@
     }
     $("body").on("click","[name='upload-file']",function(){
         $("#upload-my-home-work").css("left","0px").css("right","0px")
+        $("#student-homework-submit-button").attr("homework",$(this).attr("homework"));
     });
     $("body").on("click",".homework-post-add>.inner>.remove",function(){
         $(".homework-post-add input,.homework-post-add textarea").val("");
@@ -42,6 +43,8 @@
         HOMEWORKCHART.generateLine(STUDENT_FRONT.line.labels,STUDENT_FRONT.line.scores,"homework-line-wrap");
 //        HOMEWORKCHART.generatePie(STUDENT_FRONT.pie.scores,"homework-pie-wrap");
     });
+
+    init_student_homework();
 })();
 var STUDENT_FRONT=STUDENT_FRONT || {};
 STUDENT_FRONT.check=0;
