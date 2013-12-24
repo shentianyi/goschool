@@ -248,6 +248,7 @@ ActiveRecord::Schema.define(:version => 20131224084159) do
     t.integer  "sub_course_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.datetime "date"
     t.integer  "tenant_id"
   end
 
