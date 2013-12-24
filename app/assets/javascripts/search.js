@@ -179,7 +179,7 @@ var Search = {
                //
                     var target=adapt_event(event).target;
                     if($.trim($(target).val()).length>0){
-                        var data_to_sent = {search_type:event.data.obj.current_mode,entity_type:event.data.obj.entity,page:1,per_page:20,search_queries:this.value};
+                        var data_to_sent = {search_type:event.data.obj.current_mode,entity_type:event.data.obj.entity,page:1,per_page:20,search_queries: $.trim(this.value)};
                         BACKINDEX.right_list.generateResult(data_to_sent);
 
                     }
@@ -259,7 +259,7 @@ var Search = {
         };
 
         search.bind_query = function(){
-            if(this.queries){
+            if(!this.queries){
                 this.queries = {};
             }
            this.queries[this.current_query["query_type"]]=this.get_conditions();

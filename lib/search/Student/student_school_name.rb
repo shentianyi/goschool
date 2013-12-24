@@ -28,7 +28,7 @@ class StudentSchoolName
       query_obj = Student.where(true)
     end
     if parameters
-      ids = SearchEngine.new.search_full_text_with_conditions_only_object(Student.name,{:school=>parameters[0]},1,20000)
+      ids = SearchEngine.new.search_full_text_with_conditions_only_object(Student.name,{:school=>parameters},1,20000)
     end
     return query_obj.where('id in (?)',ids)
   end

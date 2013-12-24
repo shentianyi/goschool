@@ -27,8 +27,9 @@ class StudentReferName
     if !query_obj
       query_obj = Student.where(true)
     end
-    ids = Student.search :conditions=>{:name=>parameters[0]}
-    return query_obj.where('id in (?)',ids)
+
+
+    return query_obj
   end
 
 

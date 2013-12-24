@@ -8,11 +8,11 @@ class StudentsController < ApplicationController
     @active_left_aside='students'
     @students = Student.all
     @student_presenters = StudentPresenter.init_presenters(@students)
-
-    #respond_to do |format|
-    #  format.html # index.html.erb
-    #  format.json { render json: @students }
-    #end
+    @custom_views=CustomView.by_user_id_and_entity_type(current_user.id,'Student').all
+  #respond_to do |format|
+  #  format.html # index.html.erb
+  #  format.json { render json: @students }
+  #end
   end
 
   # GET /students/1
@@ -22,28 +22,27 @@ class StudentsController < ApplicationController
     #@student = Student.find(params[:id])
     @presenter=StudentPresenter.new(@student)
     case params[:part]
-      when 'achieve'
-        achievements(@student)
-      when 'friendship'
-        relation(@student)
-      when 'consult-record'
-        consultation(@student)
-      when 'class-performance'
-        performance(@student)
-      else
-        @partial = 'class-and-service'
-        courses(@student)
+    when 'achieve'
+      achievements(@student)
+    when 'friendship'
+      relation(@student)
+    when 'consult-record'
+      consultation(@student)
+    when 'class-performance'
+      performance(@student)
+    else
+    @partial = 'class-and-service'
+    courses(@student)
     end
 
     @partial ||= params[:part]
     render :partial => @partial if params[:ajax]
 
-    #respond_to do |formxat|
-    #  format.html # show.html.erb 
-    #  format.json { render json: @student }
-    #end
+  #respond_to do |formxat|
+  #  format.html # show.html.erb
+  #  format.json { render json: @student }
+  #end
   end
-
 
   # GET /students/new
   # GET /students/new.json
@@ -89,8 +88,8 @@ class StudentsController < ApplicationController
         msg.result = true
       end
     rescue ActiveRecord::RecordInvalid => invalid
-      msg.result = false
-      msg.content = invalid.record.errors
+    msg.result = false
+    msg.content = invalid.record.errors
     end
     render :json => msg
   end
@@ -110,7 +109,7 @@ class StudentsController < ApplicationController
       ActiveRecord::Base.transaction do
         if params[:student] && params[:student][:email]
           @student.logininfo.update_attributes!(:email => params[:student][:email])
-          @student.logininfo.save!
+        @student.logininfo.save!
         end
 
         @student.update_attributes(params[:student].except(:tags)) if params[:student]
@@ -123,8 +122,8 @@ class StudentsController < ApplicationController
         msg.result = true
       end
     rescue ActiveRecord::RecordInvalid => invalid
-      msg.result = false
-      msg.content = invalid.record.errors
+    msg.result = false
+    msg.content = invalid.record.errors
     end
     render :json => msg
   end
@@ -135,8 +134,8 @@ class StudentsController < ApplicationController
     msg = Msg.new
     msg.result = false
     if @student
-      @student.destroy
-      msg.result = true
+    @student.destroy
+    msg.result = true
     else
       msg.content = '未找到该学生或您没有权限删除Ta'
     end
@@ -214,7 +213,7 @@ class StudentsController < ApplicationController
     Recommendation.new.get_potential_relation(student.tenant_id, student.id).each do |relation|
       s = Student.find_by_id(relation['reced_id'])
       if s
-        @relations<<s
+      @relations<<s
       end
     end
   end
