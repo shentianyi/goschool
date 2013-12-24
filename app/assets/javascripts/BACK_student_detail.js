@@ -485,7 +485,7 @@ STUDENT_FRONT.check = 0;
             window.setTimeout(function () {
                 if (STUDENT_FRONT.check == 1) {
                     HOMEWORKCHART.generateLine(STUDENT_FRONT.line.labels, STUDENT_FRONT.line.scores, "homework-line-wrap");
-                    HOMEWORKCHART.generatePie(STUDENT_FRONT.pie.scores, "homework-pie-wrap");
+                    HOMEWORKCHART.generatePie(STUDENT_FRONT.pie.scores, "homework-pie-wrap","small");
                     STUDENT_FRONT.check--;
                 }
                 else {
@@ -709,7 +709,7 @@ STUDENT_FRONT.check = 0;
                 STUDENT_FRONT.pie={
                     scores:data
                 };
-                HOMEWORKCHART.generatePie(STUDENT_FRONT.pie.scores,"homework-pie-wrap");
+                HOMEWORKCHART.generatePie(STUDENT_FRONT.pie.scores,"homework-pie-wrap","small");
             });
             $("#homework-line-wrap .buttons .button").eq(0).click();
         }

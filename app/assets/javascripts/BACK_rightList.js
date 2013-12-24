@@ -85,7 +85,7 @@ BACKINDEX.right_list.loadData=function(){
             var my_data={
                 search_type:BACKINDEX.right_list.temp_object.search_type,
                 entity_type:BACKINDEX.right_list.temp_object.entity_type,
-                q:$.trim(BACKINDEX.right_list.temp_object.search_queries),
+                q:BACKINDEX.right_list.temp_object.search_queries,
                 page:BACKINDEX.right_list.temp_object.page
             };
             $.ajax({

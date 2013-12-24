@@ -12,7 +12,8 @@ var HOMEWORKCHART=HOMEWORKCHART || {};
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
             //post
-            $.get('/student_homeworks/scores',{id:$("#detail-content").attr('student'),sid:$(this).attr('sub-course')},function(data){
+            var id=$("#student-detail-info").attr("student")===undefined?$("#detail-content").attr('student'):$("#student-detail-info").attr("student");
+            $.get('/student_homeworks/scores',{id:id,sid:$(this).attr('sub-course')},function(data){
                 if(data.length==0){
                     $("#"+"homework-line-wrap").find("[name='line_chart']").remove();
                 }
@@ -100,7 +101,7 @@ HOMEWORKCHART.generatePie=function(scores,target_wrap){
             $("#"+target_wrap).append($("<canvas />").attr("name","pie_chart"))
         }
         var width= arguments[2]=="small" ? $("#"+target_wrap).width()-80: $("#"+target_wrap).width()-10;
-        var height= arguments[2]=="small" ? $("#"+target_wrap).width()-80: $("#"+target_wrap).height()-20;
+        var height= arguments[2]=="small" ? $("#"+target_wrap).height()-80: $("#"+target_wrap).height()-20;
         $("#"+target_wrap).find("canvas").attr("height",height).attr("width",width);
         var canvas = $("#"+target_wrap).find("canvas")[0];
         canvas.width=canvas.width;

@@ -188,7 +188,7 @@ function initial_class_performance(){
         STUDENT_FRONT.pie={
             scores:data
         };
-        HOMEWORKCHART.generatePie(STUDENT_FRONT.pie.scores,"homework-pie-wrap");
+        HOMEWORKCHART.generatePie(STUDENT_FRONT.pie.scores,"homework-pie-wrap","small");
     });
     $("#homework-line-wrap .buttons .button").eq(0).click();
 }
