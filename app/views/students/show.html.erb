@@ -4,9 +4,10 @@
       <i class="left icon"></i>
       返回上层
     </a>
+
     <p>学生详细信息</p>
   </header>
-  
+
   <div class="detail-navigation" id="detail-navigation" origin_top=56>
     <div class="ui vertical pointing menu" id="detail-navigation-menu">
       <div class="header item">
@@ -19,8 +20,8 @@
         <i class="trophy icon"></i> 所获成就
       </a>
       <a class="item" href="#class-performance">
-            <i class="lab icon"></i> 课程成绩
-     </a>
+        <i class="lab icon"></i> 课程成绩
+      </a>
       <a class="item" href="#friendship">
         <i class="meh icon"></i> 人际
       </a>
@@ -29,46 +30,56 @@
       </a>
     </div>
   </div>
-  
+
   <div class="detail-content" id="detail-content">
     <div class="content-info">内容主页</div>
     <div id="student-detail">
-      <%= render partial: 'detail'%>
+      <%= render partial: 'detail' %>
     </div>
 
     <div class="ui fluid accordion" id="accordion" name="student">
       <div class="item" id="class-and-service">
-        <div class="<%= 'active'  if @partial=='class-and-service' %> title">
+        <div class="<%= 'active' if @partial=='class-and-service' %> title">
           <i class="dropdown icon"></i>课程及服务
         </div>
-        <div class="<%= 'active'  if @partial=='class-and-service' %> content class-and-service">
-	  <%= render partial:'class-and-service' if @partial=='class-and-service' %>
-	</div>
+        <div class="<%= 'active' if @partial=='class-and-service' %> content class-and-service">
+          <%= render partial: 'class-and-service' if @partial=='class-and-service' %>
+        </div>
       </div>
       <div class="item achievement" id="achieve">
-        <div class="title <%=  'active'  if @partial=='achieve' %>">
+        <div class="title <%= 'active' if @partial=='achieve' %>">
           <i class="dropdown icon"></i>所获成就
         </div>
-        <div class="<%=  'active'  if @partial=='achieve' %> content">
-	  <%= render partial:'achieve' if @partial=='achieve' %>
-	</div>
+        <div class="<%= 'active' if @partial=='achieve' %> content">
+          <%= render partial: 'achieve' if @partial=='achieve' %>
+        </div>
       </div>
+
+      <div class="item class-performance" id="class-performance">
+        <div class="<%= 'active' if @partial=='class-performance' %> title">
+          <i class="dropdown icon"></i>课程成绩
+        </div>
+        <div class="<%= 'active' if @partial=='class-performance' %> content">
+          <%= render partial: 'class-performance' if @partial=='class-performance' %>
+        </div>
+      </div>
+
       <div class="item friendship" id="friendship">
-        <div class="title <%=  'active'  if @partial=='friendship' %>">
+        <div class="title <%= 'active' if @partial=='friendship' %>">
           <i class="dropdown icon"></i>人际
         </div>
-        <div class=" <%=  'active'  if @partial=='friendship' %> content">
-	  <%= render partial:'friendship' if @partial=='friendship' %>
-	</div>
+        <div class=" <%= 'active' if @partial=='friendship' %> content">
+          <%= render partial: 'friendship' if @partial=='friendship' %>
+        </div>
       </div>
       <div class="item consult-record" id="consult-record">
-        <div class="title <%=  'active'  if @partial=='consult-record' %>">
+        <div class="title <%= 'active' if @partial=='consult-record' %>">
           <i class="dropdown icon"></i>咨询记录
         </div>
-        <div class="<%=  'active'  if @partial=='consult-record' %> content">
-	  <%= render partial:'consult-record' if @partial='consult-record' %>
-	</div>
-	<div class="ui mini button" for="detail-add" type="consult-record"><i class="add icon"></i> 添加咨询记录</div>
+        <div class="<%= 'active' if @partial=='consult-record' %> content">
+          <%= render partial: 'consult-record' if @partial='consult-record' %>
+        </div>
+        <div class="ui mini button" for="detail-add" type="consult-record"><i class="add icon"></i> 添加咨询记录</div>
       </div>
     </div>
   </div>
@@ -79,7 +90,9 @@
 <section class="detail-add" type="consult-record">
   <div class="inner">
     <i class="remove icon detail-add-close"></i>
+
     <p>添加咨询记录</p>
+
     <div class="ui form segment">
       <div class="field">
         <label>咨询时间</label>
@@ -88,7 +101,7 @@
       </div>
       <div class="field">
         <label>咨询人</label>
-        <input name="customer" type="text" id="consult-record-customer" />
+        <input name="customer" type="text" id="consult-record-customer"/>
       </div>
       <div class="field">
         <label>咨询内容</label>
@@ -108,20 +121,21 @@
 
 
 <!--编辑学生信息-->
-<section class="back-index-add"  name="student" id="student-edit-section">
-  
+<section class="back-index-add" name="student" id="student-edit-section">
+
 </section>
 
 
-<%= render partial:'shares/log_footer'%>
-<% content_for :javascript_includes do%>
-<%= javascript_include_tag "Chart.min.js"%>
-<%= javascript_include_tag "excanvas.js"%>
-<%= javascript_include_tag "manage.source.base.js"%>
-<%= javascript_include_tag "BACK_index.js"%>
-<%= javascript_include_tag "BACK_detail.js"%>
-<%= javascript_include_tag "BACK_student.js"%>
-<%= javascript_include_tag "BACK_student_detail.js"%>
-<%= javascript_include_tag "BACK_student_edit.js"%>
-<%= javascript_include_tag "Homework-chart.js"%>
-<%end%>
+<%= render partial: 'shares/log_footer' %>
+<% content_for :javascript_includes do %>
+    <%= javascript_include_tag "Chart.min.js" %>
+    <%= javascript_include_tag "excanvas.js" %>
+    <%= javascript_include_tag "Homework-chart.js" %>
+    <%= javascript_include_tag "manage.source.base.js" %>
+    <%= javascript_include_tag "BACK_index.js" %>
+    <%= javascript_include_tag "BACK_detail.js" %>
+    <%= javascript_include_tag "BACK_student.js" %>
+    <%= javascript_include_tag "BACK_student_detail.js" %>
+    <%= javascript_include_tag "BACK_student_edit.js" %>
+
+<% end %>

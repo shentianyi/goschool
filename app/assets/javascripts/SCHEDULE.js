@@ -16,6 +16,7 @@ SCHEDULE.widget.init=function(){
     scheduler.config.buttons_left = [];
     scheduler.config.buttons_right = ["dhx_cancel_btn","dhx_save_btn"];
     scheduler.config.icons_select =arguments[0]=="readonly"?[]: ["icon_delete"];
+    scheduler.config.readonly = arguments[0]=="readonly"?true: false;
     scheduler.templates.quick_info_title = function(start, end, ev){
         var teachers=ev.teachers.join(",");
         if(ev.sub_courses.is_default==1){
