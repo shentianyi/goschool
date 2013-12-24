@@ -1,3 +1,4 @@
+#encoding: utf-8
 class CustomView < ActiveRecord::Base
   belongs_to :user
   attr_accessible :user_id,:name,:query_type,:entity_type,:query

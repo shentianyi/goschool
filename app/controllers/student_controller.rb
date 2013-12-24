@@ -1,3 +1,4 @@
+#encoding: utf-8
 class StudentController < ApplicationController
   skip_before_filter :require_user_as_employee
   before_filter :require_user_as_student
@@ -8,6 +9,7 @@ class StudentController < ApplicationController
   def index
     @active_left_aside = 'homepage'
     @courses = StudentCoursePresenter.init_presenters(Student.course_detail @student.id)
+    @homeworks =
   end
 
   def show

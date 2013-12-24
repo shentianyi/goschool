@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Achievement < ActiveRecord::Base
   self.inheritance_column = :_type_disabled
   attr_accessible :type, :parent_id, :name

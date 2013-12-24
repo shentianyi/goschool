@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#encoding: utf-8
 class FilesController < ApplicationController
   skip_load_and_authorize_resource
   skip_before_filter :require_user_as_employee

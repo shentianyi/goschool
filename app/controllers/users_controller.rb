@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#encoding: utf-8
 class UsersController < ApplicationController
   #filter with ability [index,create,destroy,update,edit]
   def index

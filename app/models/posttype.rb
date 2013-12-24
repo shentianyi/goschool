@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#encoding: utf-8
 class Posttype < ActiveRecord::Base
   # attr_accessible :title, :body
   attr_accessible :value

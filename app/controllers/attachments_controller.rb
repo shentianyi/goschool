@@ -1,3 +1,4 @@
+#encoding: utf-8
 class AttachmentsController < ApplicationController
   skip_before_filter :require_user_as_employee
   def destroy

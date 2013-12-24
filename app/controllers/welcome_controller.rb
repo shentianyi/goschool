@@ -1,3 +1,4 @@
+#encoding: utf-8
 class WelcomeController < ApplicationController
 	skip_authorize_resource
 	skip_before_filter :require_user_as_employee

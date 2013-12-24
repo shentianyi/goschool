@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#encoding: utf-8
 class Comment < ActiveRecord::Base
   # attr_accessible :title, :body
   attr_accessible :post_id, :is_teacher, :logininfo_id, :content

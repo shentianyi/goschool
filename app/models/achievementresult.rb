@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Achievementresult < ActiveRecord::Base
   # attr_accessible :title, :body
   attr_accessible :student_id,:valuestring,:achievement_id
