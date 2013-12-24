@@ -16,6 +16,14 @@
     if(height>200){
         $("#student-homework").css("margin-bottom","200px");
     }
+    $("body").on("click","[name='upload-file']",function(){
+        $("#upload-my-home-work").css("left","0px").css("right","0px")
+    });
+    $("body").on("click",".homework-post-add>.inner>.remove",function(){
+        $(".homework-post-add input,.homework-post-add textarea").val("");
+        $(".homework-post-add").css("left","-999em").css("right","auto");
+        $("#task-attach-uploader-preview").empty();
+    });
     $(document).ready(function(){
         //post(得到的数组放到下面的对象中就可以了)
         $.get("/student_homeworks/submit_calculate",{id:$("#detail-content").attr("student")},function(data){
