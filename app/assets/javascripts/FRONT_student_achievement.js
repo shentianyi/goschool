@@ -22,7 +22,7 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
             if(!$(this).hasClass("active")){
                 $(this).addClass("active").siblings().removeClass("active");
                 $("#grade .label").remove();
-                $(this).append($("<div />").addClass("floating ui label").append($("<i />")));
+                //$(this).append($("<div />").addClass("floating ui label").append($("<i />")));
                 //post
                 var data = {
                     id : '',
@@ -101,13 +101,13 @@ var STUDENTDETAIL=STUDENTDETAIL || {};
     });
 
     $(document).ready(function(){
-        var href=window.location.href.split("/");
+        /*var href=window.location.href.split("/");
         var new_href=href[href.length-1].split("#")[0];
-        if( new_href=="achieve"){
+        if( new_href=="achieve"){*/
             if($("#achieve_final_tabular>a").length>=1){
                 $("#achieve_final_tabular>a").eq(0).click();
             }
-        }
+        //}
 //        	STUDENTDETAIL.generateCanvas(["2013-01-28","2013-01-29","2013-10-02"],[57,68,89]);
     });
 
@@ -226,46 +226,6 @@ STUDENTDETAIL.deleteCanvas=function(index){
     var myNewChart = new Chart(ctx);
     STUDENTDETAIL.generate_option();
     new Chart(ctx).Line(data,STUDENTDETAIL.option);
-}
-STUDENTDETAIL.add_consult_record=function(){
-    //post
-    var time=$("#consult-record-time").val()+" "+$("#consult-record-hour :selected").text(),
-        customer=$("#consult-record-customer").val(),
-        content=$("#consult-record-content").val(),
-        service=$("#consult-record-service").val();
-
-    var student_id = $("div#detail-content div.info").attr("student");
-    var consultation = {};
-    consultation.student_id = student_id;
-    consultation.consultants = customer;
-    consultation.consult_time = time;
-    consultation.content = content;
-
-    $.post("/consultations",{
-        id:student_id,
-        consultation:consultation
-    },function(data){
-        if(data.result){
-            var res = data.object;
-            var render=Mustache.render("{{#consultation}}<div class='item'>"+
-                "<p>{{consult_time_display}}"+" "+"{{consultants}}</p>"+
-                "<p>{{content}}</p>"+
-                "<p>接线人:{{recorder}}</p>"+
-                "<dl>"+
-                "<dt>评论：</dt>"+
-                "</dl>"+
-                "<div class='comment-block'>"+
-                "<input type='text'/>"+
-                "<div class='ui button tiny'>评论</div>"+
-                "</div>"+
-                "</div>{{/consultation}}",res);
-            $("#consult-record .content").append(render);
-            $(".detail-add[type='consult-record'] .icon.remove").click();
-        }else
-        {
-            MessageBox_content(data.content);
-        }
-    });
 }
 
 

@@ -1,5 +1,6 @@
 #encoding: utf-8
 class StudentsController < ApplicationController
+  before_filter :get_student, :only=>[:edit,:show,:update,:edit,:destroy,:detail]
   # layout "non_authorized"
   # GET /students
   # GET /students.json
@@ -18,7 +19,7 @@ class StudentsController < ApplicationController
   # GET /students/1.json
   def show
     @active_left_aside='students'
-    @student = Student.find(params[:id])
+    #@student = Student.find(params[:id])
     @presenter=StudentPresenter.new(@student)
     case params[:part]
       when 'achieve'
@@ -55,7 +56,7 @@ class StudentsController < ApplicationController
 
   # GET /students/1/edit
   def edit
-    @student = Student.find(params[:id])
+    #@student = Student.find(params[:id])
     @presenter = StudentPresenter.new(@student)
     render partial: 'edit'
   end
@@ -98,7 +99,6 @@ class StudentsController < ApplicationController
     msg = Msg.new
     msg.result = false
     begin
-      @student = Student.find(params[:id])
 
       if params[:is_active_account]
         @logininfo = @student.logininfo
@@ -132,7 +132,6 @@ class StudentsController < ApplicationController
   def destroy
     msg = Msg.new
     msg.result = false
-    @student = Student.find(params[:id])
     if @student
       @student.destroy
       msg.result = true
@@ -140,6 +139,11 @@ class StudentsController < ApplicationController
       msg.content = '未找到该学生或您没有权限删除Ta'
     end
     render :json => msg
+  end
+
+  def detail
+    @presenter = StudentPresenter.new(@student)
+    render partial:'detail'
   end
 
   # List Search Result
@@ -204,5 +208,9 @@ class StudentsController < ApplicationController
         @relations<<s
       end
     end
+  end
+
+  def get_student
+    @student = Student.find(params[:id])
   end
 end

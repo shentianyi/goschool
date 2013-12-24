@@ -3,6 +3,12 @@ Goschool::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
   get "search_engine/search"
+  controller :search_engine do
+    get 'search_engine/search'
+    get 'search_engine/tip'
+    get 'search_engine/search_by_view'
+  end
+  
 
   controller :teachers do
     get 'teachers'=>:index
@@ -81,6 +87,7 @@ Goschool::Application.routes.draw do
       get ':id/edit'=>:edit
       get ':id/:part'=>:show
       get ':id/:part/:ajax'=>:show
+      get :detail
     end
   end
 
