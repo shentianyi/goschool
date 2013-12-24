@@ -12,6 +12,9 @@ var HOMEWORKCHART=HOMEWORKCHART || {};
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
             //post
+            $.get('/student_homeworks/scores',{id:$("#detail-content").attr('student'),sid:$(this).attr('sub-course')},function(data){
+                 
+            });
             STUDENT_FRONT.line={
                 labels:["2013-01-03","2013-01-04","2013-01-05"],
                 scores:[100,200,300]
