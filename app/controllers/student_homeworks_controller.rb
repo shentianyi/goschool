@@ -44,6 +44,12 @@ class StudentHomeworksController < ApplicationController
     render :json=>@msg
   end
 
+  def submit_calculate
+    @total=StuentHomework.where(student_id:params[:id]).count
+    @intime_total=StudentHomework.join(:homework).where('student_homeworks.submited_time>=homeworks.deadline').where(student_id:params[:id]).count
+    render json:[@intime_total,@total]
+  end
+
   private
 
   def init_message

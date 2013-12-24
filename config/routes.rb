@@ -15,7 +15,11 @@ Goschool::Application.routes.draw do
     get 'tags/fast_search'
   end
 
-  resources :student_homeworks
+  resources :student_homeworks do
+    collection do
+      get :submit_calculate
+    end
+  end
 
   resources :homeworks do
     collection do
