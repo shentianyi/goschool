@@ -12,7 +12,8 @@ var HOMEWORKCHART=HOMEWORKCHART || {};
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
             //post
-            $.get('/student_homeworks/scores',{id:$("#detail-content").attr('student'),sid:$(this).attr('sub-course')},function(data){
+            var id=$("#student-detail-info").attr("student")===undefined?$("#detail-content").attr('student'):$("#student-detail-info").attr("student");
+            $.get('/student_homeworks/scores',{id:id,sid:$(this).attr('sub-course')},function(data){
                 if(data.length==0){
                     $("#"+"homework-line-wrap").find("[name='line_chart']").remove();
                 }
