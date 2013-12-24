@@ -275,7 +275,7 @@ var Search = {
 
         search.get_conditions = function(){
             if(this.current_query){
-              var parsed = this.condition_validator[this.current_query["parameter_type"]](this.input.val());
+              var parsed = this.condition_validator[this.current_query["parameter_type"].toLowerCase()](this.input.val());
               if (parsed.success){
                   return parsed.result;
               }
@@ -283,7 +283,7 @@ var Search = {
         };
 
         search.validate_condition = function() {
-          return this.condition_validator[this.current_query["parameter_type"]](this.input.val());
+          return this.condition_validator[this.current_query["parameter_type"].toLowerCase()](this.input.val());
         };
 
        // String_Array,Number_Array,Time_Span,DateTime,String,Number
