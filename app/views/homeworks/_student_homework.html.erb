@@ -25,8 +25,8 @@
         <%end%>
     </div>
      <div class="item-operate">
-          <label>是否进步：<%= @student_homework.improved_display%></label>
-          <label>得分:<%= @student_homework.score_display%></label>
+          <label class="item-label-student">是否进步：<%= @student_homework.improved_display%></label>
+          <label class="item-label-student">得分：<%= @student_homework.score_display%></label>
      </div>
 </div>
 <%elsif @homework.can_submit?%>

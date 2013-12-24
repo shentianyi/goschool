@@ -303,7 +303,7 @@
     float:left;
 }
 .post-homework>.right>.item>p{
-    max-width:85%;
+    max-width:70%;
 }
 .post-homework>.right>.item>p:first-of-type{
     font-size:15px;
@@ -325,16 +325,23 @@
     word-break:break-all;
     word-wrap:break-word;
 }
-.post-homework>.right>.item>.attachment-a{
+.post-homework>.right>.item>.attachments{
     position:absolute;
     right:10px;
-    top:10px;
-    color:#63A69F;
-    cursor:pointer;
-    font-size:20px;
-    transition:color 0.25s ease-out;
+    top:15px;
+    max-width:25%;
+
 }
-.post-homework>.right>.item>.attachment-a:hover{
+.post-homework>.right>.item>.attachments>a{
+    transition:color 0.25s ease-out;
+    color:#63A69F;
+    font-size:14px;
+    margin-left:3px;
+}
+.post-homework>.right>.item>.attachments>a>i{
+    font-size:17px;
+}
+.post-homework>.right>.item>.attachments>a:hover{
     color:#D95C5C;
 }
 .post-homework>.right>.item>div.item-operate{
@@ -344,6 +351,14 @@
 .post-homework>.right>.item>div.item-operate>label{
     font-size:12px;
     color:#D95C5C;
+}
+.post-homework>.right>.item>div.item-operate>label.item-label-student{
+    display:block;
+    text-align:right;
+    color:#52A954;
+}
+.post-homework>.right>.item>div.item-operate>label.item-label-student:first-of-type{
+    margin-bottom:5px;
 }
 .post-homework>.right>.item.true>div.item-operate>label{
     color:#52A954;
