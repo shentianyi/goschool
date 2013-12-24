@@ -53,9 +53,9 @@ function init_teacher_homework() {
 function init_student_homework() {
      bind_menu_event();
      bind_sh_submit_event();
-    $('body').on('click',"#task-attach-uploader",function(){
-         attach_upload();
-    });
+     $('body').on('click', "#task-attach-uploader", function() {
+          attach_upload();
+     });
 }
 
 function bind_menu_event() {
@@ -142,7 +142,8 @@ function bind_sh_submit_event() {
                student_homework_manager.create({
                     student_homework : {
                          homework_id : submit.attr('homework'),
-                         content : $("#student-homework-content").val()
+                         content : $("#student-homework-content").val(),
+                         attach: get_attach()
                     }
                }, function(data) {
                     if(data.result) {

@@ -19,6 +19,11 @@
      <p>
           <%= @student_homework.content%>
      </p>
+        <div class="attachments">
+        <%@student_homework.attachments.each do |attach|%>
+        <a  href="<%= attach.path%>" target="blank" data-content="<%= attach.name%>" data-variation="inverted"><i class="icon attachment"></i><%= attach.name%></a>
+        <%end%>
+    </div>
      <div class="item-operate">
           <label>是否进步：<%= @student_homework.improved_display%></label>
           <label>得分:<%= @student_homework.score_display%></label>
