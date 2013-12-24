@@ -408,8 +408,6 @@ var Search = {
             $("#autoComplete-call li").on("click",{obj:obj},callback);
             $("#autoComplete-call li").unbind("keyup").bind("keyup",{obj:obj},callback);
 
-
-
         };
 
 
@@ -598,6 +596,6 @@ WAYNE.query_count_validate=function(count){
        $("#query_list").find("#query_add_view").remove()
     }
     else{
-        $("#query_list").append($("<div />").addClass("ui button mini red").attr("id","#query_add_view").text("添加为快捷试图"))
+        $("#query_list").append($("<div />").addClass("ui action input query_add_view").attr("id","#query_add_view").text("添加为快捷试图"))
     }
 }

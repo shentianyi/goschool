@@ -491,6 +491,20 @@
 .query_list>div>a:hover{
     color:rgba(228,75,61,0.6)
 }
+.query_list{
+    position:relative;
+}
+.query_list .query_add_view{
+    float:left;
+    margin-top:4px !important;
+    width:140px;
+    margin-left:18px;
+    margin-bottom:5px;
+    transition:background-color 0.25s ease-out;
+}
+.query_list .query_add_view:hover{
+    background-color:rgba(228,75,61,0.8) !important;
+}
 
 
 
