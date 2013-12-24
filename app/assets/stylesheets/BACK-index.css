@@ -151,6 +151,13 @@
 .back-index-condition>.ui.vertical.menu .item.active{
     color:#63A69F
 }
+.back-index-condition>.ui.vertical.menu .item>i{
+    cursor:pointer;
+    z-index:99;
+}
+.back-index-condition>.ui.vertical.menu .item>i:hover{
+    color:#D95C5C;
+}
 /************************************************************   right main */
 .back-index-main{
     background:#fef9ee;
@@ -496,15 +503,29 @@
 }
 .query_list .query_add_view{
     float:left;
-    margin-top:4px !important;
-    width:140px;
-    margin-left:18px;
+    margin-top:5px !important;
+    margin-left:0px;
     margin-bottom:5px;
+    width:250px;
+}
+.query_list .query_add_view input{
+    padding:3px 4px;
+    font-size:12px;
+}
+.query_list .query_add_view .button{
+    font-size:12px;
+    padding:3px 4px;
     transition:background-color 0.25s ease-out;
 }
-.query_list .query_add_view:hover{
-    background-color:rgba(228,75,61,0.8) !important;
+.query_list .query_add_view .button:hover{
+    background-color:rgba(228,75,61,0.8)
 }
+.query_list .query_add_view .button>i{
+    position:relative;
+    left:-3px;
+    pointer-events:none;
+}
+
 
 
 

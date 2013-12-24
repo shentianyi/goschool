@@ -1,16 +1,16 @@
 #encoding:UTF-8
-class StudentName
+class StudentReferName
 
   def query_type
     self.class.name
   end
 
   def name
-    '学生名字'
+    '学生参加的课程'
   end
 
   def introduction
-    '按学生名字查询：'
+    '按照学生参加过的课程代码查询：'
   end
 
   def query_type_description
@@ -19,7 +19,7 @@ class StudentName
 
 
   def index_key_word
-    ['student name','学生名字','名字','学生']
+    ['学生','推荐人','推荐人名字']
   end
 
 
@@ -27,9 +27,7 @@ class StudentName
     if !query_obj
       query_obj = Student.where(true)
     end
-    if parameters
-      ids = SearchEngine.new.search_full_text_with_object_id(Student.name,parameters[0],1,20)
-    end
+
     return query_obj.where('id in (?)',ids)
   end
 
