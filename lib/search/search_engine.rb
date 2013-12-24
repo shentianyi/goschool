@@ -6,15 +6,15 @@ class SearchEngine
   # @return [ACTIVERECORD::Relation] of the queried object (course, Student)
   def search_return_relation(entity_type,search_queries,page=1,per_page=20,only_id=false,tenant_id=nil)
     query = nil
-    search_queries.each do |proc|
-      query = get_query_type(entity_type, proc[:query_type]).query(query,proc[:parameters])
+    search_queries.keys.each do |key|
+      query = get_query_type(entity_type, key).query(query,search_queries[key])
     end
     if tenant_id
       query.where('tenant_id=?',tenant_id)
     end
 
     query = query.limit(per_page)
-    query.offset(page*per_page)
+    query=query.offset((page-1)*per_page)
 
     if only_id
       query = query.select(:id)
@@ -101,7 +101,7 @@ class SearchEngine
 
 
   def get_query_type(entity_type,query_type_key)
-     return SearchEngineType.instance.search_query_types[entity_type.camelize][query_type_key.camelize]
+     return SearchEngineType.instance.search_query_types[entity_type.camelize][query_type_key.to_s.camelize]
   end
 
 

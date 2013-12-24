@@ -28,9 +28,8 @@ class StudentAttendedCoursesCode
       query_obj = Student.where(true)
     end
 
-    return query_obj.where('id in (?)',ids)
+    return query_obj.joins(:courses).where('courses.code=?',parameters[0])
   end
-
 
 
 end
