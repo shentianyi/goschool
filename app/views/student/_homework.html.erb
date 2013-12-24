@@ -33,7 +33,7 @@
                 <% end %>
               </td>
               <td class="wide one">
-                <a  name="upload-file"><i class="icon upload disk"></i></a>
+                <a  name="upload-file" homework="<%= h.id %>"><i class="icon upload disk"></i></a>
               </td>
             </tr>
             </tbody>
@@ -62,20 +62,16 @@
   <canvas id="homework-pie" class="homework-pie"></canvas>
 </div>
 
-
 <div class="homework-post-add upload-my-home-work" id="upload-my-home-work">
   <div class="inner">
     <i class="icon remove"></i>
     <p>上传我的作业</p>
     <div class="content">
       <label>作业内容</label>
-      <textarea  name='content' class="homework-input" ></textarea>
-      <div class="upload-file">
-        <a class="ui button twitter mini" onclick="$('#task-attach-uploader').click()">上传附件(最大为20M)</a>
-        <p class="upload-file-name">wzx.pdf<i class="icon remove"></i></p>
-      </div>
+      <textarea  id="student-homework-content" name='content' class="homework-input" ></textarea>
+      <%= render 'shares/file_upload'%>
     </div>
-    <div  class="ui button red mini">
+    <div  id="student-homework-submit-button" class="ui button red mini">
       上传
     </div>
   </div>

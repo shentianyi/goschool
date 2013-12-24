@@ -221,6 +221,10 @@
     border-style:solid;
     border-width:0px 1px 1px 1px;
 }
+.schedule-search>.search-block>.search-list .uncommon{
+    font-size:13px;
+    padding:5px 0px 5px 14px;
+}
 .search-list>.search-class-name{
     font-size:13px;
     margin:10px 8px 1px;
