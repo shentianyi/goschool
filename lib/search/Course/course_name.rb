@@ -28,6 +28,10 @@ class CourseName
       query_obj = Course.where(true==true)
     end
 
+    ids = Course.search :conditions=>{:name=>parameters}, :star=>true
+
+    return query_obj.where('courses.id in (?)', ids)
+
   end
 
 
