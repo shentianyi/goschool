@@ -99,10 +99,10 @@ function remove_attach(data,callback){
 }
 
 function remove_all_attachment(target){
-    var length = target.children().length;
+    var length = target.find(".attachment-item").length;
     for(var i = 0;i < length;i++){
         var data = {
-            file:$("#task-attach-uploader-preview>p").eq(i).attr("path-name")
+            file:target.find(".attachment-item").eq(i).attr("path-name")
         }
         remove_attach(data,function(data){
             if(data.result){

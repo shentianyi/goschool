@@ -2,7 +2,7 @@ class Attachment < ActiveRecord::Base
   # attr_accessible :title, :body
   self.inheritance_column = nil
   belongs_to :attachable, :polymorphic=>true
-  attr_accessible :name, :path, :size, :type, :attachable_id, :attachable_type
+  attr_accessible :name, :path, :size, :type, :attachable_id, :attachable_type,:pathname
   
   # this method can be used to add attachemts
   def self.add attachments,attachable
@@ -17,9 +17,12 @@ class Attachment < ActiveRecord::Base
 
         url = AliyunOssService.store_attachments(att[:pathName],data)
         File.delete(path)
-        attachable.attachments<<Attachment.new(:name=>att[:oriName],:path=>url,:size=>size,:type=>type)
+        attachable.attachments<<Attachment.new(:name=>att[:oriName],:path=>url,:size=>size,:type=>type,:pathname=>att[:pathName])
       end
     end
   end
-  
+
+  def self.delete? name
+    AliyunOssService.delete_attachments(name)
+  end
 end

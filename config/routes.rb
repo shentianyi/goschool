@@ -121,12 +121,16 @@ Goschool::Application.routes.draw do
   resources :custom_views
   resources :logininfos
   resource :subscriptions
-  resource :logininfo_sessions
+
   resources :consultations
 
+  resource :logininfo_sessions
   controller :logininfo_sessions do
-    match 'logininfo_sessions/create' => :create
     match 'logininfo_sessions/destroy' => :destroy
+  end
+
+  controller :attachments do
+    match 'attachments/:id' => :destroy, :via => "delete"
   end
 
   # The priority is based upon order of creation:

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131222193833) do
+ActiveRecord::Schema.define(:version => 20131224024207) do
 
   create_table "achievementresults", :force => true do |t|
     t.string   "valuestring"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20131222193833) do
     t.string   "attachable_type"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "pathname"
   end
 
   add_index "attachments", ["attachable_id"], :name => "index_attachments_on_attachable_id"
