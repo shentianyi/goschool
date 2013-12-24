@@ -53,6 +53,8 @@ function init_front_student(){
     bind_sh_submit_event(function(data){
         if(data.result){
             MessageBox("提交作业成功!","top","success");
+            var container = "li[homework="+data.content+"]";
+            $("ul").find(container).remove();
         }
         else{
             MessageBox("提交作业失败!","top","warning");
