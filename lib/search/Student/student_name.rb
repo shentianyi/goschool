@@ -29,8 +29,9 @@ class StudentName
     end
     if parameters
       ids = SearchEngine.new.search_full_text_with_object_id(Student.name,parameters[0],1,20)
+      return query_obj.where('id in (?)',ids)
     end
-    return query_obj.where('id in (?)',ids)
+
   end
 
 
