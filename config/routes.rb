@@ -24,6 +24,7 @@ Goschool::Application.routes.draw do
   resources :student_homeworks do
     collection do
       get :submit_calculate
+      get :scores
     end
   end
 
