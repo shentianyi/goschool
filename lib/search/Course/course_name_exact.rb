@@ -27,7 +27,7 @@ class CourseNameExact
     if !query_obj
       query_obj = Course.where(true==true)
     end
-    return query_obj.where('name=?',parameters[0])
+    return query_obj.where('name=?',parameters)
   end
 
 
