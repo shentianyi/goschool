@@ -32,71 +32,7 @@ BACKINDEX.init=(function(){
     $("body").on("click","#back-index-main>.search-list>.search-input>i",function(){
         input_for_big_search();
     });
-    //query
-    $("body").on("keyup","#add-to-view",function(event){
-        var e=adapt_event(event).event;
-        if(e.keyCode==13){
-            $("#add-to-view+.button").click();
-        }
-    });
-    $("body").on("click","#add-to-view+.button",function(){
-        var value= $.trim($("#add-to-view").val());
-        if(value.length==0){
-            MessageBox("请填写快捷视图名称","top","warning");
-        }
-        else{
-            var object=Search.instance();
-            //post
-            $.post("/custom_views",{
-                name:value,
-                q:object.queries,
-                query_type:object.current_mode,
-                entity_type:object.entity
-            },function(data){
-                 if(data.result){
-                     var template={data:{value:value,id:data.content}};
-                     var render=Mustache.render('{{#data}}<a class="item" id="{{id}}">' +
-                         '<i class="icon trash" ></i>' +
-                         '<label>{{value}}</label>' +
-                         '</a>{{/data}}',template);
-                     $("#short-view").append(render);
-                 }
-                else{
-                     MessageBox_content(data.content);
-                 }
-            });
-//            var template={data:{value:value,21}};
-//            var render=Mustache.render('<a class="item">' +
-//                '<i class="icon trash"></i>' +
-//                '<label>value</label>' +
-//                '</a>',template);
-//            $("#short-view").append(render);
-        }
-    });
-    $("body").on("click","#short-view .trash",function(event){
-        stop_propagation(event);
-        //post delete
-        var id=$(this).parents(".item").eq(0).attr("id");
-        var $this=$(this);
-        $.ajax({
-            url:"/custom_views/"+id,
-            method:"DELETE",
-            data:{},
-            success:function(data){
-                if(data.result){
-                    $this.parents(".item").eq(0).remove();
-                }
-                else{
-                    MessageBox_content(data.content);
-                }
-            }
-        })
 
-    });
-    $("body").on("click","#short-view  .item",function(){
-        var data_to_sent = {view_id:$(this).attr("id"),page:1};
-        BACKINDEX.right_list.generateResult(data_to_sent,"only_page");
-    })
 
 
 
