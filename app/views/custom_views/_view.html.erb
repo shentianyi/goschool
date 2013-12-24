@@ -2,7 +2,7 @@
      <header class="back-index-side-header">
           <label>快捷视图</label>
      </header>
-     <div class="ui vertical menu">
+     <div class="ui vertical menu" id="short-view">
           <%@custom_views.each do |cv|%>
           <a class="item"> <label><%= cv.name%></label> </a>
           <%end%>

@@ -52,10 +52,10 @@
             <p>上传MP4格式，并且要有配套的文字</p>
           </td>
           <td class="wide one">
-            <i class="icon download disk"></i>
+            <a><i class="icon download disk"></i></a>
           </td>
           <td class="wide one">
-            <i class="icon upload disk"></i>
+            <a  name="upload-file"><i class="icon upload disk"></i></a>
           </td>
         </tr>
         </tbody>
@@ -80,6 +80,15 @@
 
   <p class="deal-on-date">按时交付率<span id="deal-on-date"></span></p>
   <canvas id="homework-pie" class="homework-pie"></canvas>
+</div>
+
+
+<div id="upload-wrap" class="upload-wrap">
+  <i class="icon remove"></i>
+  <div class="upload-file">
+    <%=render 'shares/file_upload'%>
+  </div>
+  <a class="ok-button">完成</a>
 </div>
 
 <%=render 'student_homeworks/improve'%>

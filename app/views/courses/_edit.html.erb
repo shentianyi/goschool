@@ -13,10 +13,12 @@
                     <textarea placeholder="<%= @course.type_display%>描述..." class="update-input" name="description"><%= @course.description%></textarea>
                     <i class="book icon"></i>
                </div>
+               <%if @course.type==CourseType::COURSE%>
                <div class="ui left icon input">
                     <input placeholder="预计课时数..." type="text"  value="<%= @course.lesson%>"  class="update-input" name="lesson"/>
                     <i class="time icon"></i>
                </div>
+               <%end%>
                <div class="ui left icon input">
                     <input placeholder="预计报名人数..." type="text"value="<%= @course.expect_number%>" class="update-input" name="expect_number"/>
                     <i class="users icon"></i>
