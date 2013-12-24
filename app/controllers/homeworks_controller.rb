@@ -80,7 +80,7 @@ class HomeworksController < ApplicationController
   end
 
   def teacher_index
-    if @teacher_course=TeacherCourse.by_teacher(params[:id],current_user.id)
+    if @teacher_course=TeacherCourse.by_teacher(params[:id],current_user.user.id)
       @sub_course=@teacher_course.sub_course
       session[:course_id]=@sub_course.course_id
       session[:teacher_course_id]=@teacher_course.id
