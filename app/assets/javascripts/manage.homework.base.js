@@ -53,6 +53,9 @@ function init_teacher_homework() {
 function init_student_homework() {
      bind_menu_event();
      bind_sh_submit_event();
+    $('body').on('click',"#task-attach-uploader",function(){
+         attach_upload();
+    });
 }
 
 function bind_menu_event() {
