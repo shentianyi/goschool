@@ -459,9 +459,9 @@ var Search = {
 
 //            var data = [{name:"名字",introduction:"请输入s名字",parameter_type:'string',query_type:"StudentName",is_explicit:false}];
 //
-//            var data = [{name:"按照名字查询",introduction:"输入学生的名字",parameter_type:'string',query_type:"StudentName",is_explicit:false},
-//                {name:"按监护人查找",introduction:"输入学生的监护人名字",parameter_type:'string',query_type:"StudentParent",is_explicit:false},
-//                {name:"按学校查询",introduction:"按学生的学校查找",parameter_type:'string',query_type:"StudentSchool",is_explicit:false}];
+            var data = [{name:"按照名字查询",introduction:"输入学生的名字",parameter_type:'string',query_type:"StudentName",is_explicit:false},
+                {name:"按监护人查找",introduction:"输入学生的监护人名字",parameter_type:'string',query_type:"StudentParent",is_explicit:false},
+                {name:"按学校查询",introduction:"按学生的学校查找",parameter_type:'string',query_type:"StudentSchool",is_explicit:false}];
 
         };
 
