@@ -13,6 +13,14 @@ class StudentHomework < ActiveRecord::Base
     q=q.where(student_id:student_id) if student_id
     q
   end
+  
+  def self.unsubmits  student_id
+     student=Student.find_by_id(student_id)
+      ids=StudentHomework.where(student_id:student.id).pluck(:homework_id)
+      q= student.original_homeworks.where(student_courses:{student_id:student_id})
+       q=q.where("homeworks.id not in (?)",ids) if ids.count>0
+       q.select('sub_courses.name as sub_course_name,sub_courses.parent as course_name,homewoks.*')
+  end
 
   def self.by_type params
    if params[:menu_type].to_i==HomeworkStudentMenuType::UNSUBMIT
