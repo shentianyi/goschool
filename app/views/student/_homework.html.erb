@@ -9,58 +9,39 @@
     </div>
   </div>
   <ul>
-    <li>
-      <table class="ui table segment">
-        <tbody>
-        <tr>
-          <td class="wide four">
-            <p>听力作业</p>
+    <% if @homeworkds %>
+        <% @homeworkds.each do |h| %>
+            <li>
+              <table class="ui table segment">
+                <tbody>
+                <tr>
+                  <td class="wide four">
+                    <p><%= h.title %></p>
 
-            <p>2013-04-15</p>
+                    <p><%= h.deadline_time %></p>
 
-            <p>托福秋季班</p>
-          </td>
-          <td class="wide ten">
-            <p>作业描述:</p>
+                    <p><%= h.homework_course %></p>
+                  </td>
+                  <td class="wide ten">
+                    <p>作业描述:</p>
 
-            <p>上传MP4格式，并且要有配套的文字</p>
-          </td>
-          <td class="wide one">
-            <i class="icon download disk"></i>
-          </td>
-          <td class="wide one">
-            <i class="icon upload disk"></i>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </li>
-    <li>
-      <table class="ui table segment">
-        <tbody>
-        <tr>
-          <td class="wide four">
-            <p>听力作业</p>
+                    <p><%= h.content %></p>
+                  </td>
+                  <% h.attachments.each do |attach| %>
+                  <td class="wide one">
+                    <a href="<%= attach.path %>"><i class="icon download disk"></i></a>
+                  </td>
+                  <% end %>
+                  <td class="wide one">
+                    <i class="icon upload disk"></i>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </li>
+        <% end %>
 
-            <p>2013-04-15</p>
-
-            <p>托福秋季班</p>
-          </td>
-          <td class="wide ten">
-            <p>作业描述:</p>
-
-            <p>上传MP4格式，并且要有配套的文字</p>
-          </td>
-          <td class="wide one">
-            <i class="icon download disk"></i>
-          </td>
-          <td class="wide one">
-            <i class="icon upload disk"></i>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </li>
+    <% end %>
   </ul>
 </div>
 
@@ -82,4 +63,4 @@
   <canvas id="homework-pie" class="homework-pie"></canvas>
 </div>
 
-<%=render 'student_homeworks/improve'%>
+<%= render 'student_homeworks/improve' %>
