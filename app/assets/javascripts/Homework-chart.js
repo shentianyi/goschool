@@ -113,6 +113,9 @@ HOMEWORKCHART.generatePie=function(scores,target_wrap){
         var myNewChart = new Chart(ctx);
         new Chart(ctx).Pie(data);
         var percentage=((scores[0]/scores[1])*100).toFixed(1)+"%";
-        $("#deal-on-date").text(percentage);
+        if(!isNaN((scores[0]/scores[1])*100)){
+            $("#deal-on-date").text(percentage);
+        }
+
     }
 };
