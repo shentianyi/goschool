@@ -4,7 +4,9 @@
      </header>
      <div class="ui vertical menu" id="short-view">
           <%@custom_views.each do |cv|%>
-          <a class="item"> <label><%= cv.name%></label> </a>
+          <a class="item" id="<%=cv.id%>"> 
+               <i class="icon trash"></i>
+               <label><%= cv.name%></label> </a>
           <%end%>
      </div>
 </aside>
