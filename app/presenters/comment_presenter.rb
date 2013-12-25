@@ -31,7 +31,7 @@ class CommentPresenter < Presenter
       #'今天 ' + self.created_at.getlocal.hour.to_s + ':'+self.created_at.getlocal.min.to_s
       self.created_at.getlocal.strftime('今天 %H:%M')
     elsif diff < 7*day
-      "#{(diff/day).to_i}天前"
+      "#{(diff/day).to_i+1}天前"
     elsif diff < 30*day
       "#{(diff/7/day).to_i}周前"
     else
