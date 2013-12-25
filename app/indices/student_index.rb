@@ -7,6 +7,7 @@ ThinkingSphinx::Index.define :student, :with=>:real_time do
   indexes guardian
   indexes school
   indexes phone
+  indexes course_number
   indexes tenant_id
-  indexes graduation
+  indexes graduation,:type=>:string
 end
