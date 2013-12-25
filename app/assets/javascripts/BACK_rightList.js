@@ -35,15 +35,16 @@ BACKINDEX.right_list.temp_object;
 BACKINDEX.right_list.generateResult=function(data_to_sent){
 //    BACKINDEX.right_list.id=parameter;
     BACKINDEX.right_list.currentPage=0;
-    BACKINDEX.right_list.sent_only_page=false;
+    BACKINDEX.right_list.send_only_page=false;
     BACKINDEX.right_list.stillHave=true;
     $("#search-result").empty();
     var p=data_to_sent,c={};
     BACKINDEX.right_list.temp_object=deepCopy(p,c);
     if(arguments[1]=="only_page"){
-        BACKINDEX.right_list.send_only_page=true
+        BACKINDEX.right_list.send_only_page=true;
     }
     BACKINDEX.right_list.loadData();
+
 }
 BACKINDEX.right_list.loadData=function(){
     if(BACKINDEX.right_list.loadCheck!=0) return;
@@ -52,6 +53,7 @@ BACKINDEX.right_list.loadData=function(){
     window.setTimeout(function(){
         //post
         if(BACKINDEX.right_list.send_only_page){
+
             var my_data={
                 id:BACKINDEX.right_list.temp_object.view_id,
                 page:BACKINDEX.right_list.temp_object.page
@@ -82,6 +84,7 @@ BACKINDEX.right_list.loadData=function(){
                 });
         }
         else{
+
             var my_data={
                 search_type:BACKINDEX.right_list.temp_object.search_type,
                 entity_type:BACKINDEX.right_list.temp_object.entity_type,

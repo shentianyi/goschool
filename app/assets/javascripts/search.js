@@ -92,7 +92,9 @@
         $("#container_for_list").empty();
 
     })
-})()
+})();
+
+
 var Search = {
     //constructor
     private_instance: null,
@@ -611,7 +613,8 @@ var Search = {
         search.cancel= function(){
             //restore the select query mode
             this.current_query = null;
-            this.switch_mode("select_query")
+            this.switch_mode("select_query");
+            WAYNE.change_to_select_query();
         };
 
 
@@ -666,6 +669,13 @@ WAYNE.change_mode=function(event,mode){
 WAYNE.change_to_condition=function(target){
     $("#"+target).attr("autocomplete","").attr("ishould","").parent().removeClass("autoComplete");
 }
+WAYNE.change_to_no_autocomplete=function(){
+    $("#search_input").attr("autocomplete","").attr("ishould","").parent().removeClass("autoComplete");
+}
+WAYNE.change_to_select_query=function(){
+    $("#search_input").attr("autocomplete","experiment").parent().addClass("autoComplete");
+}
+
 WAYNE.query_count=0;
 WAYNE.query_count_validate=function(count){
     if(count==0){
