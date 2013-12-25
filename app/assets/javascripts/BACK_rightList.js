@@ -52,6 +52,7 @@ BACKINDEX.right_list.loadData=function(){
     window.setTimeout(function(){
         //post
         if(BACKINDEX.right_list.send_only_page){
+            alert(BACKINDEX.right_list.send_only_page)
             var my_data={
                 id:BACKINDEX.right_list.temp_object.view_id,
                 page:BACKINDEX.right_list.temp_object.page
@@ -82,6 +83,7 @@ BACKINDEX.right_list.loadData=function(){
                 });
         }
         else{
+            alert(BACKINDEX.right_list.send_only_page)
             var my_data={
                 search_type:BACKINDEX.right_list.temp_object.search_type,
                 entity_type:BACKINDEX.right_list.temp_object.entity_type,
