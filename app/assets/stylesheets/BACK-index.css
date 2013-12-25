@@ -55,11 +55,11 @@
     color:#FFFFFF;
 }
 .back-index-aside>.second-ul{
-    position:absolute;
+    position:fixed;
     padding:0px;
     margin:0px;
-    left:0px;
-    right:0px;
+    left:35px;
+
     bottom:10px;
     list-style-type:none;
 }
