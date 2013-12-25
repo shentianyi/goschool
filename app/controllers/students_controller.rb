@@ -6,8 +6,8 @@ class StudentsController < ApplicationController
   # GET /students.json
   def index
     @active_left_aside='students'
-    #@students = Student.all
-    #@student_presenters = StudentPresenter.init_presenters(@students)
+    @students = Student.order("created_at DESC").first(10)
+    @student_presenters = StudentPresenter.init_presenters(@students)
     @custom_views=CustomView.by_user_id_and_entity_type(current_user.id,'Student').all
     #respond_to do |format|
   #  format.html # index.html.erb
