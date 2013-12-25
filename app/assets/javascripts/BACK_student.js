@@ -70,7 +70,7 @@ var BACKSTUDENT=BACKSTUDENT||{};
 
 BACKSTUDENT.post_add_student = function(option){
     if(option.student.name.length>0){
-        if(BACKSTUDENT.easy_email_validate(option.student.email)){
+        if(BACKSTUDENT.check.test(option.student.email,"email")){
             $.post("/students",{
                 student:option.student,
                 is_active_account:option.is_active_account
