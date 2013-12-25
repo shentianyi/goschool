@@ -6,11 +6,11 @@ class StudentName
   end
 
   def name
-    '学生名字'
+    '按学生名字寻找学生'
   end
 
   def introduction
-    '按学生名字查询：'
+    '按学生名字查询，您可以输入一个完整的名字或名字的一部分'
   end
 
   def query_type_description
@@ -28,7 +28,8 @@ class StudentName
       query_obj = Student.where(true)
     end
     if parameters
-      ids = SearchEngine.new.search_full_text_with_object_id(Student.name,parameters,1,2000)
+      engine = SearchEngine.new
+      ids = engine.search_full_text_with_object_id(Student.name,engine.prepare_search_string(parameters),1,2000)
       return query_obj.where('students.id in (?)',ids)
     end
 

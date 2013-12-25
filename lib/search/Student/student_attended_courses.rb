@@ -6,11 +6,11 @@ class StudentAttendedCourses
   end
 
   def name
-    '学生参加的课程名字'
+    '按学生参加的课程名字寻找学生'
   end
 
   def introduction
-    '按照学生参加过的课程名字查询：'
+    '按照学生参加过的课程名字查询，您可以输入一个模糊的课程名称'
   end
 
   def query_type_description
@@ -30,7 +30,7 @@ class StudentAttendedCourses
 
     ids = Course.search_for_ids :conditions=>{:name=>parameters},:star=>true
 
-    return query_obj.joins(:courses).where('courses.id in (?)',parameters)
+    return query_obj.joins(:courses).where('courses.id in (?)',ids)
   end
 
 

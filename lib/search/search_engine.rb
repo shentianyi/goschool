@@ -69,10 +69,10 @@ class SearchEngine
     search_queries=prepare_search_string(search_queries)
     if tenant_id
       entity_type.camelize.constantize.search \
-      search_queries,:page => page, :per_page => per_page,:star=>true,:conditions => {:tenant_id => tenant_id.to_s}
+      search_queries,:page => page, :per_page => per_page,:conditions => {:tenant_id => tenant_id.to_s}
 
     else
-      entity_type.camelize.constantize.search search_queries,:star=>true,:page => page, :per_page => per_page
+      entity_type.camelize.constantize.search search_queries,:page => page, :per_page => per_page
     end
   end
 
@@ -83,9 +83,9 @@ class SearchEngine
     if tenant_id
 
       entity_type.camelize.constantize.search_for_ids\
-       search_queries,:page => page,:per_page => per_page,:star=>true,:conditions => {:tenant_id => tenant_id.to_s}
+       search_queries,:page => page,:per_page => per_page,:conditions => {:tenant_id => tenant_id.to_s}
     else
-      entity_type.camelize.constantize.search_for_ids search_queries,:star=>true,:page => page,:per_page => per_page
+      entity_type.camelize.constantize.search_for_ids search_queries,:page => page,:per_page => per_page
     end
   end
 
@@ -94,7 +94,7 @@ class SearchEngine
       if !conditions.keys.include?(:tenant_id)
           conditions[:tenant_id]=tenant_id
       end
-      entity_type.camelize.constantize.search_for_ids conditions,:star=>true,:page=>page,:per_page=>per_page
+      entity_type.camelize.constantize.search_for_ids conditions,:page=>page,:per_page=>per_page
     end
   end
 

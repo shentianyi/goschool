@@ -6,11 +6,11 @@ class StudentSchoolName
   end
 
   def name
-    '来自学校'
+    '通过学校查找学生'
   end
 
   def introduction
-    '按照学生的学校查询：'
+    '按照学生的学校查询，可以输入一个完整或部分的学校名'
   end
 
   def query_type_description
@@ -27,10 +27,11 @@ class StudentSchoolName
     if !query_obj
       query_obj = Student.where(true)
     end
+    engine = SearchEngine.new
     if parameters
-      ids = SearchEngine.new.search_full_text_with_conditions_only_object(Student.name,{:school=>parameters},1,20000)
+      ids = engine.search_full_text_with_conditions_only_object(Student.name,{:school=>engine.prepare_search_string(parameters)},1,20000)
     end
-    return query_obj.where('id in (?)',ids)
+    return query_obj.where('student_id in (?)',ids)
   end
 
 

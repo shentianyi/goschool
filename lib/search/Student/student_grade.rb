@@ -1,16 +1,15 @@
-#encoding:UTF-8
-class StudentReferName
-
+#encoding: UTF-8
+class StudentGrade
   def query_type
     self.class.name
   end
 
   def name
-    '查找某位推荐人推荐过的所有学生'
+    '按毕业时间寻找学生'
   end
 
   def introduction
-    '按推荐人姓名查找，您可以输入一个完整或部分推荐人姓名：'
+    '按毕业时间查找学生，你可以输入一个年份如2013或者加上月份如2013-9'
   end
 
   def query_type_description
@@ -19,7 +18,7 @@ class StudentReferName
 
 
   def index_key_word
-    ['学生','推荐人','推荐人名字']
+    ['grade','graduation','时间','毕业时间']
   end
 
 
@@ -28,10 +27,8 @@ class StudentReferName
       query_obj = Student.where(true)
     end
 
+    ids = Student.search_for_ids :conditions=>{:graduation=>parameters},:star=>true
 
-    return query_obj
+    return query_obj.where('students.id in (?)',ids)
   end
-
-
-
 end

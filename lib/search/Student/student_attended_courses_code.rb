@@ -6,11 +6,11 @@ class StudentAttendedCoursesCode
   end
 
   def name
-    '学生参加的课程'
+    '按学生参加的课程代码查询学生'
   end
 
   def introduction
-    '按照学生参加过的课程代码查询：'
+    '按照学生参加过的课程代码查询，您需要输入一个准确的课程代码'
   end
 
   def query_type_description
