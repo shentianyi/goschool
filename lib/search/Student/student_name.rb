@@ -29,7 +29,7 @@ class StudentName
     end
     if parameters
       engine = SearchEngine.new
-      ids = engine.new.search_full_text_with_object_id(Student.name,engine.prepare_search_string(parameters),1,2000)
+      ids = engine.search_full_text_with_object_id(Student.name,engine.prepare_search_string(parameters),1,2000)
       return query_obj.where('students.id in (?)',ids)
     end
 
