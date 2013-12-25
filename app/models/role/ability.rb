@@ -21,7 +21,7 @@ class Ability
       can :manage,Homework
 
     elsif Role.teacher?(user.role_ids)
-      can :manage,[LogininfoSession,Homework,StudentHomework,Attachment,Schedule,FileData]
+      can :manage,[LogininfoSession,Homework,StudentHomework,Attachment,Schedule,FileData,Post,Comment]
       # can :manage,:all
       can :read,:all
     end
