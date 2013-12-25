@@ -6,11 +6,11 @@ class StudentNotAttendedCourse
   end
 
   def name
-    '学生没有参加的课程名称'
+    '寻找没有参加某课程的学生'
   end
 
   def introduction
-    '按照学生没有参加过的课程名称查询：'
+    '按学生没有参加过的课程名称查询，您可以输入一个模糊的课程名称'
   end
 
   def query_type_description

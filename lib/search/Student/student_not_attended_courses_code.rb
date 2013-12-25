@@ -6,11 +6,11 @@ class StudentNotAttendedCoursesCode
   end
 
   def name
-    '学生未参加的课程'
+    '查询未参加某课程的学生，用课程代码查询'
   end
 
   def introduction
-    '按照学生未参加过的课程代码查询：'
+    '按照学生未参加过的课程代码查询，您需要输入一个准确的课程代码'
   end
 
   def query_type_description

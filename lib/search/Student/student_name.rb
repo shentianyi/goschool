@@ -6,11 +6,11 @@ class StudentName
   end
 
   def name
-    '学生名字'
+    '按学生名字寻找学生'
   end
 
   def introduction
-    '按学生名字查询：'
+    '按学生名字查询，您可以输入一个完整的名字或名字的一部分'
   end
 
   def query_type_description
