@@ -23,6 +23,7 @@
  *= require FRONT-teacher
  *= require FRONT-student
  *= require FRONT-student-achievement
+ *= require MY-account
  *= require dhtmlxscheduler
  *= require base
  *= require jquery-datepicker
