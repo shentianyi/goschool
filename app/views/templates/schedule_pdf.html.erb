@@ -1,13 +1,11 @@
 <div>
   <table style="border-collapse:collapse;border:1px solid rgba(0,0,0,0.8)">
-
     <thead>
     <tr  style="border-bottom:1px solid rgba(0,0,0,0.8)">
       <th style="padding:15px;">序号</th>
       <th style="padding:15px;">课程所在机构</th>
       <th style="padding:15px;">课程名称</th>
       <th style="padding:15px;">课程时间</th>
-      <th style="padding:15px;">老师</th>
     </tr>
     </thead>
 
@@ -18,9 +16,6 @@
       <td style="padding:15px;"><%= schedule.institution_name%></td>
       <td style="padding:15px;"><%= schedule.course_name%></td>
       <td style="padding:15px;"><%= schedule.local_time_string%></td>
-      <td style="padding:15px;">
-        <% schedule.teachers.each do |teacher|%> <span style="display:inline-block"><%= teacher.name%></span> <%end%>
-      </td>
     </tr>
     <%end%>
     </tbody>
