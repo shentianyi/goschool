@@ -89,13 +89,14 @@ class SearchEngine
     end
   end
 
-  def search_full_text_with_conditions_only_object(entity_type,conditions,page,per_page,tenant_id=nil)
-    if tenant_id
-      if !conditions.keys.include?(:tenant_id)
+    def search_full_text_with_conditions_only_object(entity_type,conditions,page,per_page,tenant_id=nil)
+    if tenant_id && !conditions.keys.include?(:tenant_id)
+
           conditions[:tenant_id]=tenant_id
-      end
-      entity_type.camelize.constantize.search_for_ids conditions,:page=>page,:per_page=>per_page
     end
+      entity_type.camelize.constantize.search_for_ids conditions,:page=>page,:per_page=>per_page
+
+
   end
 
 
