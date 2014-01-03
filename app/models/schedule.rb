@@ -61,9 +61,9 @@ class Schedule < ActiveRecord::Base
   
   def self.base_query institution_id=nil
     if institution_id
-     return  joins(:sub_course).where(sub_courses:{institution_id:institution_id}).where(SubCourse.status_neq).select('sub_courses.*,schedules.*')
+     return  joins(:sub_course=>:institution).where(sub_courses:{institution_id:institution_id}).where(SubCourse.status_neq).select('institutions.name as institution_name,sub_courses.*,schedules.*')
      else
-        return joins( :sub_course=>:institution).where(SubCourse.status_neq).select('sub_courses.*,schedules.*')
+        return joins( :sub_course=>:institution).where(SubCourse.status_neq).select('institutions.name as institution_name,sub_courses.*,schedules.*')
      end
   end
   
