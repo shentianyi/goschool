@@ -31,7 +31,7 @@ class StudentSchoolName
     if parameters
       ids = engine.search_full_text_with_conditions_only_object(Student.name,{:school=>engine.prepare_search_string(parameters)},1,20000)
     end
-    return query_obj.where('student_id in (?)',ids)
+    return query_obj.where('students.id in (?)',ids)
   end
 
 
