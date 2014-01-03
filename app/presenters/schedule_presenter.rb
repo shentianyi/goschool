@@ -7,7 +7,7 @@ class SchedulePresenter<Presenter
   
   
   def start_hour
-   '%02d:%02d' % [self.start_time..hour,self.start_time.min]
+   '%02d:%02d' % [self.start_time.hour,self.start_time.min]
   end
   
   def end_hour
@@ -18,13 +18,18 @@ class SchedulePresenter<Presenter
     self.start_time.strftime('%Y-%m-%d')
   end
   
-  
   def end_date
     self.end_time.strftime('%Y-%m-%d')
   end
   
+  
+  
   def time_string
     "#{start_date}  #{start_hour}-#{end_hour}"
+  end
+
+  def course_name
+    self.parent_name  + ( self.name.nil? ? '' : ": #{self.name}")
   end
   
   def teacher_names
@@ -50,4 +55,25 @@ end
     }
   end
 
+# local
+  
+  def start_hour_local
+   '%02d:%02d' % [self.start_time.getlocal.hour,self.start_time.getlocal.min]
+  end
+  
+  def end_hour_local
+    '%02d:%02d' % [self.end_time.getlocal.hour,self.end_time.getlocal.min]
+  end
+  
+  def start_date_local
+    self.start_time.getlocal.strftime('%Y-%m-%d')
+  end
+  
+  def end_date_local
+    self.end_time.getlocal.strftime('%Y-%m-%d')
+  end
+  
+  def local_time_string
+    "#{start_date_local}  #{start_hour_local}-#{end_hour_local}"
+  end
 end

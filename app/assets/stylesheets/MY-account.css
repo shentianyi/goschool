@@ -1,0 +1,21 @@
+.user-info-block{
+    width:290px;
+    margin:50px auto 0;
+    position:relative;
+}
+.user-info-block>p{
+    color:#63A69F;
+    font-size:16px;
+    margin-top:25px;
+}
+.user-info-block>label,
+.user-info-block>.input{
+    margin-left:10px;
+    display:block;
+    width:280px;
+}
+.user-info-block .button{
+    position:absolute;
+    right:0px;
+    bottom:-60px;
+}

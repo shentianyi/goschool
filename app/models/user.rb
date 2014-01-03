@@ -57,8 +57,8 @@ class User < ActiveRecord::Base
 
   #find all the teachers by institution_id
   def self.get_teachers institution_id
-    User.joins(:logininfo_roles).where(logininfo_roles:{role_id:400}).all
-    #User.joins(:logininfo_institutions).joins(:logininfo_roles).where(logininfo_roles:{role_id:400},logininfo_institutions:{institution_id:institution_id}).all
+    # User.joins(:logininfo_roles).where(logininfo_roles:{role_id:400}).all
+    User.joins(:logininfo_institutions).joins(:logininfo_roles).where(logininfo_roles:{role_id:400},logininfo_institutions:{institution_id:institution_id}).all
   end
 
   #find all the employees by institution_id
@@ -68,8 +68,8 @@ class User < ActiveRecord::Base
   # User.joins(:logininfo_institutions).joins(:logininfo_roles).where(logininfo_roles:{role_id:[100,200]},logininfo_instutions:{institution_id:institution_id}).all
   # end
   def self.get_employees institution_id
-    User.joins(:logininfo_roles).where(logininfo_roles:{role_id:[100,200]}).all
-    #User.joins(:logininfo_institutions).joins(:logininfo_roles).where(logininfo_roles:{role_id:[100,200]},logininfo_institutions:{institution_id:institution_id}).all
+    # User.joins(:logininfo_roles).where(logininfo_roles:{role_id:[100,200]}).all
+    User.joins(:logininfo_institutions).joins(:logininfo_roles).where(logininfo_roles:{role_id:[100,200]},logininfo_institutions:{institution_id:institution_id}).all
   end
 
 
