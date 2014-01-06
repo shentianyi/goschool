@@ -1,0 +1,27 @@
+<!--list-->
+<article class="back-index-main" id="back-index-main" name="2column">
+  <header class="back-index-side-header">
+    <p><span><%= @user.name %></span>的账户</p>
+  </header>
+  <div class="user-info-block" id="account-info" account="<%= current_user.id %>">
+    <p>账户名：</p>
+    <label><%= @user.name %></label>
+    <p>邮箱：</p>
+    <div class="ui left icon input">
+      <input id="account-email" type="text" value="<%= @user.email%>">
+      <i class="mail outline icon"></i>
+    </div>
+    <p>密码：</p>
+    <div class="ui left icon input">
+      <input id="account-password" type="password">
+      <i class="key icon"></i>
+    </div>
+    <div id="account-save" class="ui button teal">
+      保存更改
+    </div>
+  </div>
+</article>
+<!--list-->
+<% content_for :javascript_includes do%>
+    <%= javascript_include_tag "account.js"%>
+<%end%>
