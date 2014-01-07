@@ -38,13 +38,19 @@ class CoursesController < ApplicationController
     @course.subs=params[:course].slice(:subs)[:subs].values if params[:course].has_key?(:subs)
     @course.tags=params[:course].slice(:tags)[:tags] if params[:course].has_key?(:tags)
     @course.teachs=params[:course].slice(:teachers)[:teachers].values if params[:course].has_key?(:teachers)
-      
+    
     @course.subs.each do |sub|
-      sub_course=SubCourse.new(:name=>sub[:name],:parent_name=>@course.name,:institution_id=>@course.institution_id,:is_default=>false)
+      is_base=sub[:is_base]=='1'
+      sub_course=SubCourse.new(:name=>sub[:name],:parent_name=>@course.name,:institution_id=>@course.institution_id,:is_default=>false,:is_base=>sub[:is_base])
       sub_course.assign_teachers(sub[:teachers].values) if sub.has_key?(:teachers)
       @course.sub_courses<<sub_course
+       if is_base
+         @course.has_base=true
+        else
+          @course.has_sub=true
+       end
     end if @course.subs
-    @course.has_sub=true if @course.subs
+    
     unless @msg.result=@course.save
     @msg.content=@course.errors.messages
     else

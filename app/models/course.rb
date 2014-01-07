@@ -11,9 +11,9 @@ class Course < ActiveRecord::Base
   has_many :students,:through=> :student_courses
   has_many :teachers,:through=>:sub_courses
   attr_accessible :actual_number, :description, :end_date, :expect_number, :lesson, :name, :start_date, :type
-  attr_accessible :has_sub,:status,:institution_id,:tenant_id,:code
+  attr_accessible :has_sub,:status,:institution_id,:tenant_id,:code,:has_base
   # for callback
-  attr_accessor :tags,:subs,:teachs
+  attr_accessor :tags,:subs,:teachs,:base_subs
   acts_as_tenant(:tenant)
 
   validate :validate_save
@@ -23,6 +23,7 @@ class Course < ActiveRecord::Base
                      :alias_field=>:code,
                      :condition_fields => [:tenant_id,:institution_id],
                      :ext_fields=>[:has_sub])
+                     
   def create_default_sub_course
     unless self.has_sub
       sub_course= self.sub_courses.create(parent_name:self.name,is_default:true,institution_id:self.institution_id)
