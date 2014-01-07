@@ -19,7 +19,7 @@ function attach_upload() {
                 } else {
                     vali = false;
                     prev.append($("<p/>").addClass("upload-file-name").text(file.name + "&nbsp;&nbsp;" + (file.size / 1000000).toFixed(2) + "MB,超出最大值")
-                        .append($("<i />").addClass('icon remove').click(function () {
+                        .append($("<i />").addClass('icon remove icon-remove').click(function () {
                             $(this).parents("p").eq(0).remove()
                         })));
                 }
@@ -44,7 +44,7 @@ function attach_upload() {
                         .attr("title", data.object[i].oriName)
                         .attr("path-name", data.object[i].pathName)
                         .text(data.object[i].oriName)
-                        .append($("<i />").addClass("icon remove").attr("path-name", data.object[i].pathName).click(attachment_remove))
+                        .append($("<i />").addClass("icon remove icon-remove").attr("path-name", data.object[i].pathName).click(attachment_remove))
                     )
                 }
             } else {
