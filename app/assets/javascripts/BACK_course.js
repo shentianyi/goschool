@@ -2,6 +2,7 @@ var BACKCOURSE=BACKCOURSE || {};
 //init
 (function(){
     //添加课程
+    $(".sub-course-block i.flag").popup();
     $("#course-begin-date").datepicker({
         showOtherMonths: true,
         selectOtherMonths: true,
@@ -69,7 +70,7 @@ var BACKCOURSE=BACKCOURSE || {};
         }
     });
 
-     $("body").on("click", ".sub-course-block-item>i", function() {
+     $("body").on("click", ".sub-course-block-item>i.collapse", function() {
           var msg = {
                result : true
           };
@@ -78,7 +79,10 @@ var BACKCOURSE=BACKCOURSE || {};
                $(this).parent().remove();
           }
      }); 
-
+    //子课程那一块
+    $("body").on("click",".sub-course-block i.flag",function(){
+        $(this).toggleClass("active");
+    })
     $("body").on("click","#add-sub-class",function(){
         var data={counts:{count:BACKCOURSE.sub_teacher.count}};
         var render=Mustache.render(BACKCOURSE.sub_teacher.class.template,data);
@@ -89,6 +93,7 @@ var BACKCOURSE=BACKCOURSE || {};
             var max_width=parseInt($(this).css("width"))*0.45;
             $input.css("width",max_width).css("maxWidth","999em").addClass('sub-course-teachers-input-complete');
         });
+        $(".sub-course-block i.flag").popup();
     });
     $("body").on("click","#add-sub-service",function(){
         var data={counts:{count:BACKCOURSE.sub_teacher.count}};
@@ -100,6 +105,7 @@ var BACKCOURSE=BACKCOURSE || {};
             var max_width=parseInt($(this).css("width"))*0.45;
             $input.css("width",max_width).css("maxWidth","999em").addClass('sub-course-teachers-input-complete');
         });
+        $(".sub-course-block i.flag").popup();
     });
     $("body").on("keyup","input[name='long'],input[name='people']",function(event){
         var obj=adapt_event(event).target;
@@ -126,41 +132,42 @@ var BACKCOURSE=BACKCOURSE || {};
                var teacher_type=$(".choose-teacher-delivery:visible .active").attr("for").indexOf("total");
                var $teacher_target, i,teacher_id_array=[],teacher_id;
                //总选课程
-               if(teacher_type!=-1){
+//               if(teacher_type!=-1){
                    $teacher_target=$(".choose-teacher-delivery:visible").next().find("ul").children();
-                   if($teacher_target.length>1){
+//                   if($teacher_target.length>1){
                        var length=$teacher_target.length;
                        for(i=0;i<length-1;i++){
                            teacher_id=$teacher_target.eq(i).find("div").attr("id");
                            var teacher_id_array_item={id:teacher_id};
                            teacher_id_array.push(teacher_id_array_item);
                        }
-                       var option={
-                           description: desc,
-                           end_date: end,
-                           expect_number: people,
-                           lesson:long,
-                           institution_id:institution,
-                           name:  name,
-                           tags:label_array,
-                           code:code,
-                           start_date:begin,
-                           type: type,
-                           teachers:teacher_id_array
-                       }
-                       BACKCOURSE.post_add_class(option)
-                   }
-                   else{
-                       MessageBox("请添加至少一位老师","top","warning")
-                   }
-               }
+//                       var option={
+//                           description: desc,
+//                           end_date: end,
+//                           expect_number: people,
+//                           lesson:long,
+//                           institution_id:institution,
+//                           name:  name,
+//                           tags:label_array,
+//                           code:code,
+//                           start_date:begin,
+//                           type: type,
+//                           teachers:teacher_id_array
+//                       }
+//                       BACKCOURSE.post_add_class(option)
+//                   }
+//                   else{
+//                       MessageBox("请添加至少一位老师","top","warning")
+//                   }
+//               }
                //按分课程来
-               else{
+//               else{
                    $teacher_target=$(".choose-teacher-delivery:visible").next().next(),i,sub_teacher_array=[];
                    var item_length=$teacher_target.find(".sub-course-block-item").length;
                    for(var i=0;i<item_length;i++){
                        var sub_teacher_array_item={};
                        sub_teacher_array_item.name=$teacher_target.find(".sub-course-block-item").eq(i).find(".sub-course-name input").val();
+                       sub_teacher_array_item.extro=$teacher_target.find(".sub-course-block-item").eq(i).find("i.flag").hasClass("active")?true:false;
                        var length=$teacher_target.find(".sub-course-block-item").eq(i).find(".total-teachers ul").children().length,teacher_ids=[];
                        if(length>1){
                            var $teachers_target=$teacher_target.find(".sub-course-block-item").eq(i).find(".total-teachers ul li")
@@ -173,6 +180,7 @@ var BACKCOURSE=BACKCOURSE || {};
                        sub_teacher_array_item.teachers=teacher_ids;
                        sub_teacher_array.push(sub_teacher_array_item);
                    }
+                   console.log(option)
                    var option={
                        description: desc,
                        institution_id:institution,
@@ -184,10 +192,11 @@ var BACKCOURSE=BACKCOURSE || {};
                        code:code,
                        start_date:begin,
                        type: type,
+                       teachers:teacher_id_array,//新加入
                        subs:sub_teacher_array
                    }
                    BACKCOURSE.post_add_class(option)
-               }
+//               }
            }
            else{
                    MessageBox("请选择机构","top","warning");
@@ -253,6 +262,7 @@ BACKCOURSE.sub_teacher.class.template=
                 <li><input type="text" placeholder="老师..." id="sub{{count}}" autocomplete="teachers" readonly="" /></li>\
             </ul>\
          </div>\
+         <i class="icon flag" data-content="练习课/考试" data-variation="inverted"></i>\
          <i class="icon collapse"></i>\
     </div>{{/counts}}';
 BACKCOURSE.sub_teacher.service={};
@@ -266,6 +276,7 @@ BACKCOURSE.sub_teacher.service.template=
             <li><input type="text" placeholder="老师..." id="sub{{count}}" autocomplete="teachers" readonly="" /></li>\
             </ul>\
          </div>\
+         <i class="icon flag" data-content="练习课/考试" data-variation="inverted"></i>\
          <i class="icon collapse" ></i>\
     </div>{{/counts}}';
 BACKCOURSE.post_add_class=function(option){

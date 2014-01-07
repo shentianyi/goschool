@@ -2,6 +2,7 @@ var BACKINDEX=BACKINDEX || {};
 BACKINDEX.init=(function(){
 
     $("#main-navigator-bottom i").popup();
+
     //添加view
     $("body").on("click","#view-add",function(){
           $(".view-add").css("display","block");

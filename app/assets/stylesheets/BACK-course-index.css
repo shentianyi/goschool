@@ -206,11 +206,17 @@
     border-color: rgba(0, 0, 0, 0.2);
     color: rgba(0, 0, 0, 0.85);
 }
+.back-index-add[name='course']>.inner .right-part{
+    overflow-x:hidden;
+}
 .back-index-add[name='course']>.inner .right-part>div.input.specialInput{
     margin:5px 0 1px 25px;
 }
 .back-index-add[name='course']>.inner .right-part>.choose-teacher-delivery{
     margin:5px 0px 6px 25px;
+}
+.back-index-add[name='course']>.inner .right-part>.choose-teacher-delivery .or:before{
+    content:"&"
 }
 .back-index-add[name='course']>.inner>.button{
     width:130px;
@@ -247,7 +253,21 @@
 .back-index-add[name='course']>.inner .right-part .sub-course-block-item .specialInput li{
     padding:0 2px;
 }
-.back-index-add[name='course']>.inner .right-part .sub-course-block-item>i{
+.back-index-add[name='course']>.inner .right-part .sub-course-block-item>i.flag{
+    pointer-events:auto;
+    position:absolute;
+    left:-23px;
+    font-size:15px;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+    color:rgba(0,0,0,0.4);
+    top:28px;
+}
+
+.back-index-add[name='course']>.inner .right-part .sub-course-block-item>i.flag.active{
+    color:#D95C5C;
+}
+.back-index-add[name='course']>.inner .right-part .sub-course-block-item>i.collapse{
     font-size:29px;
     color:#D95C5C;
     position:relative;
@@ -255,7 +275,7 @@
     top:5px;
     cursor:pointer;
 }
-.back-index-add[name='course']>.inner .right-part .sub-course-block-item>i:hover{
+.back-index-add[name='course']>.inner .right-part .sub-course-block-item>i.collapse:hover{
     color:rgba(217,92,92,0.8);
 }
 .back-index-add[name='course']>.inner .right-part>.sub-course-block>i{
