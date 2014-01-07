@@ -8,7 +8,7 @@ class Ability
       can :manage,:all
       can :read,:all
     elsif Role.sale?(user.role_ids)
-      can :manage,[Cousultation,Student,LogininfoSession,Attachment,FileData]
+      can :manage,[Consultation,Student,LogininfoSession,Attachment,FileData]
       can :manage,[Logininfo],:id=>user.id
       can :read,:all
     elsif Role.student?(user.role_ids)
