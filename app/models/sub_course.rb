@@ -32,6 +32,7 @@ class SubCourse < ActiveRecord::Base
   def  teacher_details
     self.teachers.select('teacher_courses.id as teacher_course_id,users.*')
   end
+
   
   def self.status_neq status=CourseStatus::FINISHED
     SubCourse.arel_table[:status].not_eq(status)

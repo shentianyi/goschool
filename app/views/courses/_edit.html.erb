@@ -63,7 +63,7 @@
                </div>
                <div class="ui left icon input specialInput labelForm autoComplete total-teachers teachers" id="total-course-teachers" style="<%= 'display:none' if @course.has_sub%>">
                     <ul>
-                         <%@course.teacher_details.each do |teacher|%>
+                         <%@course.default_teacher_details.each do |teacher|%>
                          <li total_sub_couse_id="<%= teacher.sub_course_id%>">
                               <div class="ui label" id="<%= teacher.teacher_course_id%>">
                                    <%= teacher.name%><i class="delete icon"></i>

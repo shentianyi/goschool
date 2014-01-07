@@ -11,8 +11,8 @@ class SubCourseObserver<ActiveRecord::Observer
   def after_destroy sub_course
     course=sub_course.course
     if course.sub_courses.where(:is_default=>false).count==0
-      course.update_attributes(:has_sub=>false)
-    course.create_default_sub_course
+       course.update_attributes(:has_sub=>false)
+       course.create_default_sub_course
     end
   end
 end

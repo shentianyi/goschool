@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140107054145) do
+ActiveRecord::Schema.define(:version => 20140107092919) do
 
   create_table "achievementresults", :force => true do |t|
     t.string   "valuestring"
@@ -251,6 +251,8 @@ ActiveRecord::Schema.define(:version => 20140107054145) do
     t.datetime "updated_at",    :null => false
     t.datetime "date"
     t.integer  "tenant_id"
+    t.string   "remark"
+    t.string   "color"
   end
 
   add_index "schedules", ["sub_course_id"], :name => "index_schedules_on_sub_course_id"
