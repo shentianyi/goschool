@@ -81,7 +81,13 @@ var BACKCOURSE=BACKCOURSE || {};
      }); 
     //子课程那一块
     $("body").on("click",".sub-course-block i.flag",function(){
+        var msg = {
+               result : true
+          };
+          $(this).trigger('click_flag', [msg]);
+          if(msg.result) {
         $(this).toggleClass("active");
+        }
     })
     $("body").on("click","#add-sub-class",function(){
         var data={counts:{count:BACKCOURSE.sub_teacher.count}};
