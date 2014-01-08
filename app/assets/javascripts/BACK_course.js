@@ -269,7 +269,7 @@ BACKCOURSE.sub_teacher.class.template=
                 <li><input type="text" placeholder="老师..." id="sub{{count}}" autocomplete="teachers" readonly="" /></li>\
             </ul>\
          </div>\
-         <i class="icon checkobox empty" data-content="练习课/考试" data-variation="inverted"></i>\
+         <i class="icon checkbox empty" data-content="练习课/考试" data-variation="inverted"></i>\
          <i class="icon collapse"></i>\
     </div>{{/counts}}';
 BACKCOURSE.sub_teacher.service={};
@@ -283,7 +283,7 @@ BACKCOURSE.sub_teacher.service.template=
             <li><input type="text" placeholder="老师..." id="sub{{count}}" autocomplete="teachers" readonly="" /></li>\
             </ul>\
          </div>\
-         <i class="icon checkobox empty" data-content="练习课/考试" data-variation="inverted"></i>\
+         <i class="icon checkbox empty" data-content="练习课/考试" data-variation="inverted"></i>\
          <i class="icon collapse" ></i>\
     </div>{{/counts}}';
 BACKCOURSE.post_add_class=function(option){
