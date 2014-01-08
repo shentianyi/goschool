@@ -8,7 +8,7 @@ class SubCourse < ActiveRecord::Base
   has_many :schedules,:dependent=>:destroy
   has_many :teachers,:through=>:teacher_courses,:class_name=>'User'
   has_many :homeworks,:through=>:teacher_courses
-  attr_accessible :name, :parent_name,:course_id,:is_default,:institution_id
+  attr_accessible :name, :parent_name,:course_id,:is_default,:institution_id,:is_base
 
   acts_as_tenant(:tenant)
 
@@ -32,6 +32,7 @@ class SubCourse < ActiveRecord::Base
   def  teacher_details
     self.teachers.select('teacher_courses.id as teacher_course_id,users.*')
   end
+
   
   def self.status_neq status=CourseStatus::FINISHED
     SubCourse.arel_table[:status].not_eq(status)

@@ -54,16 +54,16 @@
                </div>
                <div class="ui buttons choose-teacher-delivery" id="choose-teacher-delivery" name="class">
                     <div class="ui mini button<%= ' teal active' unless @course.has_sub%>" for="total-course-teachers">
-                         以总<%= @course.type_display%>安排老师
+                        总体<%= @course.type_display%>安排老师
                     </div>
                     <div class="or"></div>
                     <div class="ui mini button<%= ' teal active' if @course.has_sub%>" for="sub-course-teachers">
-                         以子<%= @course.type_display%>安排老师
+                         子<%= @course.type_display%>安排老师
                     </div>
                </div>
                <div class="ui left icon input specialInput labelForm autoComplete total-teachers teachers" id="total-course-teachers" style="<%= 'display:none' if @course.has_sub%>">
                     <ul>
-                         <%@course.teacher_details.each do |teacher|%>
+                         <%@course.default_teacher_details.each do |teacher|%>
                          <li total_sub_couse_id="<%= teacher.sub_course_id%>">
                               <div class="ui label" id="<%= teacher.teacher_course_id%>">
                                    <%= teacher.name%><i class="delete icon"></i>
@@ -96,6 +96,7 @@
                                    </li>
                               </ul>
                          </div>
+                         <i class="icon checkbox  <%=sub_course.is_base ? 'active checked' : 'empty'%>" data-content="练习课/考试" data-variation="inverted" name="is_base" id="<%= sub_course.id%>"></i>
                          <i class="icon collapse" id="<%= sub_course.id%>"></i>
                     </div>
                     <%end%>

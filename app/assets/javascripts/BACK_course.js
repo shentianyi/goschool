@@ -80,8 +80,15 @@ var BACKCOURSE=BACKCOURSE || {};
           }
      }); 
     //子课程那一块
+
     $("body").on("click",".sub-course-block i.checkbox",function(){
+        var msg = {
+               result : true
+          };
+          $(this).trigger('click_flag', [msg]);
+          if(msg.result) {
         $(this).toggleClass("active").toggleClass("empty").toggleClass("checked");
+        }
     })
     $("body").on("click","#add-sub-class",function(){
         var data={counts:{count:BACKCOURSE.sub_teacher.count}};
