@@ -190,11 +190,13 @@ DETAIL.course={};
         var id = $(this).parent().nextAll("i").attr("id");
         var sub = $(this).parent().parent();
         var i = $(this).parent().nextAll("i");
+        var is_base= $(this).parent().nextAll("i.flag").hasClass('active');
         if(id == null) {
             sub_course_manager.create({
                 course_id : $("#course-detail-info").attr('course'),
                 sub_course : {
-                    name : $(this).val()
+                    name : $(this).val(),
+                    is_base:is_base
                 }
             }, function(data) {
                 if(data.result) {
@@ -260,6 +262,19 @@ DETAIL.course={};
                     teacher_course_manager.create(params, callback, false);
             }
         }
+    });
+    
+     $("body").on("click_flag",".sub-course-block i.checkbox",function(msg){
+          sub_course_manager.update($(this).attr('id'), {
+                sub_course : {
+                    is_base : !$(this).hasClass('active')
+                }
+            }, function(data) {
+                 msg.result=data.result;
+                if(!data.result) {
+                    MessageBox(data.content, "top", "warning");
+                }
+            });
     });
 
     $("body").on("click_remove", ".teachers .delete.icon", function(event, msg) {

@@ -2,7 +2,7 @@ var BACKCOURSE=BACKCOURSE || {};
 //init
 (function(){
     //添加课程
-    $(".sub-course-block i.flag").popup();
+    $(".sub-course-block i.checkbox").popup();
     $("#course-begin-date").datepicker({
         showOtherMonths: true,
         selectOtherMonths: true,
@@ -80,8 +80,15 @@ var BACKCOURSE=BACKCOURSE || {};
           }
      }); 
     //子课程那一块
-    $("body").on("click",".sub-course-block i.flag",function(){
-        $(this).toggleClass("active");
+
+    $("body").on("click",".sub-course-block i.checkbox",function(){
+        var msg = {
+               result : true
+          };
+          $(this).trigger('click_flag', [msg]);
+          if(msg.result) {
+        $(this).toggleClass("active").toggleClass("empty").toggleClass("checked");
+        }
     })
     $("body").on("click","#add-sub-class",function(){
         var data={counts:{count:BACKCOURSE.sub_teacher.count}};
@@ -93,7 +100,7 @@ var BACKCOURSE=BACKCOURSE || {};
             var max_width=parseInt($(this).css("width"))*0.45;
             $input.css("width",max_width).css("maxWidth","999em").addClass('sub-course-teachers-input-complete');
         });
-        $(".sub-course-block i.flag").popup();
+        $(".sub-course-block i.checkbox").popup();
     });
     $("body").on("click","#add-sub-service",function(){
         var data={counts:{count:BACKCOURSE.sub_teacher.count}};
@@ -105,7 +112,7 @@ var BACKCOURSE=BACKCOURSE || {};
             var max_width=parseInt($(this).css("width"))*0.45;
             $input.css("width",max_width).css("maxWidth","999em").addClass('sub-course-teachers-input-complete');
         });
-        $(".sub-course-block i.flag").popup();
+        $(".sub-course-block i.checkbox").popup();
     });
     $("body").on("keyup","input[name='long'],input[name='people']",function(event){
         var obj=adapt_event(event).target;
@@ -167,7 +174,7 @@ var BACKCOURSE=BACKCOURSE || {};
                    for(var i=0;i<item_length;i++){
                        var sub_teacher_array_item={};
                        sub_teacher_array_item.name=$teacher_target.find(".sub-course-block-item").eq(i).find(".sub-course-name input").val();
-                       sub_teacher_array_item.extro=$teacher_target.find(".sub-course-block-item").eq(i).find("i.flag").hasClass("active")?true:false;
+                       sub_teacher_array_item.extro=$teacher_target.find(".sub-course-block-item").eq(i).find("i.checkbox").hasClass("active")?true:false;
                        var length=$teacher_target.find(".sub-course-block-item").eq(i).find(".total-teachers ul").children().length,teacher_ids=[];
                        if(length>1){
                            var $teachers_target=$teacher_target.find(".sub-course-block-item").eq(i).find(".total-teachers ul li")
@@ -262,7 +269,7 @@ BACKCOURSE.sub_teacher.class.template=
                 <li><input type="text" placeholder="老师..." id="sub{{count}}" autocomplete="teachers" readonly="" /></li>\
             </ul>\
          </div>\
-         <i class="icon flag" data-content="练习课/考试" data-variation="inverted"></i>\
+         <i class="icon checkbox empty" data-content="练习课/考试" data-variation="inverted"></i>\
          <i class="icon collapse"></i>\
     </div>{{/counts}}';
 BACKCOURSE.sub_teacher.service={};
@@ -276,7 +283,7 @@ BACKCOURSE.sub_teacher.service.template=
             <li><input type="text" placeholder="老师..." id="sub{{count}}" autocomplete="teachers" readonly="" /></li>\
             </ul>\
          </div>\
-         <i class="icon flag" data-content="练习课/考试" data-variation="inverted"></i>\
+         <i class="icon checkbox empty" data-content="练习课/考试" data-variation="inverted"></i>\
          <i class="icon collapse" ></i>\
     </div>{{/counts}}';
 BACKCOURSE.post_add_class=function(option){

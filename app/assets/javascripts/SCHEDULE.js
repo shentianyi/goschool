@@ -22,7 +22,7 @@ SCHEDULE.widget.init=function(){
         var teachers=ev.teachers.join(",");
         if(ev.sub_courses.is_default==1){
             if(ev.institution_name==null){
-                if(ev.remark.length>0){
+                if(ev.remark && ev.remark.length>0){
                     return ev.text.substr(0,50)+'<span></span>'+'<span>简介:'+ev.remark+'</span>'+'<span>老师:'+teachers+'</span>';
                 }
                 else{
@@ -30,7 +30,7 @@ SCHEDULE.widget.init=function(){
                 }
             }
             else{
-                if(ev.remark.length>0){
+                if(ev.remark && ev.remark.length>0){
                     return ev.text.substr(0,50)+'<span></span>'+'<span>简介:'+ev.remark+'</span>'+'<span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
                 }
                 else{
@@ -40,7 +40,7 @@ SCHEDULE.widget.init=function(){
         }
         else{
             if(ev.institution_name==null){
-                if(ev.remark.length>0){
+                if(ev.remark && ev.remark.length>0){
                     return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>简介:'+ev.remark+'</span><span>老师:'+teachers+'</span>';
                 }
                 else{
@@ -48,7 +48,7 @@ SCHEDULE.widget.init=function(){
                 }
             }
             else{
-                if(ev.remark.length>0){
+                if(ev.remark && ev.remark.length>0){
                     return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>简介:'+ev.remark+'</span><span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
                 }
                 else{
@@ -141,7 +141,9 @@ SCHEDULE.widget.init=function(){
                 schedule:{
                     sub_course_id:$("#schedule-sub-courses :selected").attr("id"),
                     start_time:standardParse(base_time+" "+start).date,
-                    end_time:standardParse(base_time+" "+end).date
+                    end_time:standardParse(base_time+" "+end).date,
+                    remark: $("#schedule-remark").val(),
+                    color : $("#schedule-color .active").attr("color")
                 }
             },function(data){
                 if(data.result){

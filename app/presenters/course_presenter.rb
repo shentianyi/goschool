@@ -24,6 +24,11 @@ class CoursePresenter<Presenter
   def teacher_details
     @course.teacher_details.all
   end
+  
+    
+  def default_teacher_details
+    @course.default_teacher_details.all
+  end
 
   def sub_courses
     @course.sub_courses.where(:is_default=>false)
