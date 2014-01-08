@@ -1,5 +1,6 @@
 #encoding: utf-8
 class LogininfosController < ApplicationController
+  skip_before_filter :require_user_as_employee, :only => [:index,:update]
   #filter with ability
   #
   def index
