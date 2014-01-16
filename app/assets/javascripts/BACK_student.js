@@ -2,7 +2,7 @@
 var BACKSTUDENT=BACKSTUDENT||{};
 //student init
 (function(){
-    $("#birthday,#graduation").datepicker({
+    $("#birthday").datepicker({
         showOtherMonths: true,
         selectOtherMonths: true,
         changeMonth: true,
@@ -32,7 +32,9 @@ var BACKSTUDENT=BACKSTUDENT||{};
 
         }
     });
-
+    if($('#is_active_account').hasClass("create")){
+        $('#is_active_account').checkbox('disable');
+    }
     $(document).ready(function(){
 	//        //add student
 	$("body").on("click","#add-student",function(){

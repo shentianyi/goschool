@@ -7,7 +7,7 @@
  */
 
 function init_student_edit() {
-    $("#birthday,#graduation").datepicker({
+    $("#birthday").datepicker({
         showOtherMonths: true,
         selectOtherMonths: true,
         changeMonth: true,
