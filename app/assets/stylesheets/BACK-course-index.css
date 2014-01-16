@@ -253,7 +253,7 @@
 .back-index-add[name='course']>.inner .right-part .sub-course-block-item .specialInput li{
     padding:0 2px;
 }
-.back-index-add[name='course']>.inner .right-part .sub-course-block-item>i.flag{
+.back-index-add[name='course']>.inner .right-part .sub-course-block-item>i.checkbox{
     pointer-events:auto;
     position:absolute;
     left:-23px;
@@ -264,7 +264,7 @@
     top:28px;
 }
 
-.back-index-add[name='course']>.inner .right-part .sub-course-block-item>i.flag.active{
+.back-index-add[name='course']>.inner .right-part .sub-course-block-item>i.checkbox.active{
     color:#D95C5C;
 }
 .back-index-add[name='course']>.inner .right-part .sub-course-block-item>i.collapse{

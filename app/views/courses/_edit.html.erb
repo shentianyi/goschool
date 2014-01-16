@@ -96,7 +96,7 @@
                                    </li>
                               </ul>
                          </div>
-                         <i class="icon flag  <%='active' if sub_course.is_base%>" data-content="练习课/考试" data-variation="inverted" name="is_base" id="<%= sub_course.id%>"></i>
+                         <i class="icon checkbox  <%=sub_course.is_base ? 'active checked' : 'empty'%>" data-content="练习课/考试" data-variation="inverted" name="is_base" id="<%= sub_course.id%>"></i>
                          <i class="icon collapse" id="<%= sub_course.id%>"></i>
                     </div>
                     <%end%>

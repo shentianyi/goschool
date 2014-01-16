@@ -3,9 +3,10 @@
   <header class="back-index-side-header">
     <p><span><%= @user.name %></span>的账户</p>
   </header>
+
   <div class="user-info-block" id="account-info" account="<%= current_user.id %>">
-    <p>账户名：</p>
-    <label><%= @user.name %></label>
+    <img class="ui circular image user-info-portrait" src="<%= @user.image_url%>"/>
+    <label class="user-info-name"><%= @user.name %></label>
     <p>邮箱：</p>
     <div class="ui left icon input">
       <input id="account-email" type="text" value="<%= @user.email%>">

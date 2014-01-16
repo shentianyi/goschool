@@ -264,7 +264,7 @@ DETAIL.course={};
         }
     });
     
-     $("body").on("click_flag",".sub-course-block i.flag",function(msg){
+     $("body").on("click_flag",".sub-course-block i.checkbox",function(msg){
           sub_course_manager.update($(this).attr('id'), {
                 sub_course : {
                     is_base : !$(this).hasClass('active')
