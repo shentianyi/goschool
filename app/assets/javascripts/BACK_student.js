@@ -11,6 +11,8 @@ var BACKSTUDENT=BACKSTUDENT||{};
         yearRange: "-30:+10",
         dateFormat:'yy-mm-dd'
     });
+    $("#student-list-name i").popup();
+
     $("body").on("keyup","#phone",function(event){
         var obj=adapt_event(event).target;
         phoneValidate(obj);
@@ -40,8 +42,9 @@ var BACKSTUDENT=BACKSTUDENT||{};
 	$("body").on("click","#add-student",function(){
             //write your post code here
 	    var student = {};
-	    student.image_url = $("#image_url").attr("src");
+//	    student.image_url = $("#image_url").attr("src");
 	    student.name = $("#name").val();
+        student.remark = $.trim($("#remark").val());
 	    student.gender = $("#gender input[type=radio]:checked").attr("value");
 	    student.birthday = $("#birthday").val();
 	    student.school = $("#school").val();

@@ -81,6 +81,7 @@ BACKINDEX.right_list.loadData=function(){
                 }
             }).always(function(){
                     BACKINDEX.right_list.loadCheck--;
+                    $("#student-list-name i").popup();
                 });
         }
         else{

@@ -3,9 +3,9 @@
   <i class="remove icon" id="close-student-detail-edit"></i>
   <p>编辑学生</p>
   <div class="left-part">
-    <div class="portrait">
-      <img id="image-url" class="ui circular image " src="<%= @presenter.image_url%>">
-    </div>
+    <!--<div class="portrait">-->
+      <!--<img id="image-url" class="ui circular image " src="<%= @presenter.image_url%>">-->
+    <!--</div>-->
     <div class="ui left icon input">
       <input id="name" placeholder="姓名..." type="text" value="<%= @presenter.name %>" class="update-input">
       <i class="user icon" id="close-student-detail-edit"></i>
@@ -19,6 +19,10 @@
         <input name="sex" <% if !@presenter.student.is_male?%> checked="checked"<% end %>  type="radio">
         <label>女</label>
       </div>
+    </div>
+    <div class="student-remark">
+      <textarea placeholder="备注..." id="remark" class="update-input"><%= @presenter.remark_ %></textarea>
+      <i class="info icon"></i>
     </div>
     <div class="ui left icon input calendar">
       <input placeholder="出生年月..." type="text" readonly id="birthday" value="<%= @presenter.birth_ %>" class="update-input">

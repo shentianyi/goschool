@@ -3,9 +3,14 @@
 <li>
   <table class="ui table segment">
     <tr>
-      <td class="two wide">
-	<img class="circular ui image mini portrait" src="<%= presenter.student.image_url %>"/>
-	<p class="name"><%= presenter.name %></p>
+      <td class="two wide first-column" id="student-list-name">
+	<!--<img class="circular ui image mini portrait" src="<%= presenter.student.image_url %>"/>-->
+	<p class="name" ><%= presenter.name %></p>
+        <div class="icons">
+          <i class="user icon" data-content="a lot of descriptions here" data-variation="inverted" data-position="bottom center"></i>
+          <i class="book icon" data-title="已报班级" data-content="正在进行:1,2,3,234,235,325<br />未进行:4,5,6" data-variation="inverted" data-position="bottom center"></i>
+        </div>
+
       </td>
       <td class="two wide">
 	<p class="type"><%= presenter.status_%></p>
