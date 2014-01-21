@@ -26,7 +26,7 @@ var BACKSTUDENT=BACKSTUDENT||{};
                 if($("#edit_referrer").parent().prevAll().length==1){
                     msg.callback=function(data){
                         return false;
-                    }
+                    };
                     MessageBox("抱歉,只能添加一个推荐人","top","warning");
                     $("#edit_referrer").val("");
                 }
@@ -55,27 +55,27 @@ var BACKSTUDENT=BACKSTUDENT||{};
 	    student.guardian = $("#guardian").val();
 	    student.guardian_phone = $("#guardian_phone").val();
 	    student.referrer_id = $("#referrer>li").eq(0).find("div").attr("logininfo_id");
-	    var is_active_account = $("#is_active_account input[type='checkbox']").prop("checked")
+	    var is_active_account = $("#is_active_account input[type='checkbox']").prop("checked");
 
 	    student.tags = [];
-	    var $target = $(".back-index-add[name='student']")
-	    var length = $target.find("[id='tags']").children().length,tag,tags=[]
+	    var $target = $(".back-index-add[name='student']");
+	    var length = $target.find("[id='tags']").children().length,tag,tags=[];
 	    for(var i =0;i<length-1;i++){
 		tag = $target.find("[id='tags']>li").eq(i).find("div").text();
 		tags.push(tag);
 	    }
 	    student.tags = tags;
 
-	    BACKSTUDENT.post_add_student({student:student,is_active_account:is_active_account})
+	    BACKSTUDENT.post_add_student({student:student,is_active_account:is_active_account});
         });
-    })
+    });
     search_obj = Search.instance();
     search_obj.init("full_text","Student",$("#container_for_input"),$("#container_for_list"));
 })();
 
 BACKSTUDENT.post_add_student = function(option){
     if(option.student.name.length>0){
-        if(BACKSTUDENT.check.test(option.student.email,"email")){
+        //if(BACKSTUDENT.check.test(option.student.email,"email")){
             $.post("/students",{
                 student:option.student,
                 is_active_account:option.is_active_account
@@ -87,11 +87,11 @@ BACKSTUDENT.post_add_student = function(option){
                 else{
                     MessageBox_content(data.content);
                 }
-            })
-        }
-        else{
-            MessageBox("请填写正确的邮件地址","top","warning");
-        }
+            });
+        //}
+        //else{
+        //    MessageBox("请填写正确的邮件地址","top","warning");
+        //}
     }
     else{
        MessageBox("请填写学生的姓名","top","warning");

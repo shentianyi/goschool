@@ -67,6 +67,38 @@ class StudentsController < ApplicationController
   def create
     msg = Msg.new
     msg.result = false
+    # if not need create account,just give a name
+    begin
+      ActiveRecord::Base.transaction do
+        @student = Student.new(params[:student].except(:tags))
+        @student = params[:student].slice(:tags)[:tags] if params[:student].has_key?(:tags)
+
+        account_create = false
+
+        if params[:is_active_account]
+          if !params[:student][:email].blank?
+            @default_pwd = current_tenant.setting.default_pwd
+            @logininfo = Logininfo.new(:email => params[:student][:email], :password => @default_pwd, :password_confirmation => @default_pwd)
+            @new_role = LogininfoRole.new(:role_id => '300')
+            @logininfo.logininfo_roles<<@new_role
+            @logininfo.tenant = current_tenant
+            @logininfo.status = UserStatus::ACTIVE
+            @logininfo.save!
+            account_create = true
+          end
+        end
+        @student.tenant = current_tenant
+        if account_create
+          @student.logininfo - @logininfo
+        end
+        @student.save!
+        msg.result = true
+      end
+    rescue ActiveRecord::RecordInvalid=> invalid
+      msg.result = false
+      msg.content = invalid.record.errors
+    end
+=begin
     begin
       ActiveRecord::Base.transaction do
         @student = Student.new(params[:student].except(:tags))
@@ -91,6 +123,7 @@ class StudentsController < ApplicationController
     msg.result = false
     msg.content = invalid.record.errors
     end
+=end
     render :json => msg
   end
 
@@ -99,6 +132,46 @@ class StudentsController < ApplicationController
   def update
     msg = Msg.new
     msg.result = false
+    begin
+      ActiveRecord::Base.transaction do
+        if params[:is_active_account] == "true"
+          if !@student.logininfo
+            @default_pwd = current_tenant.setting.default_pwd
+            @logininfo = Logininfo.new(:email => params[:student][:email], :password => @default_pwd, :password_confirmation => @default_pwd)
+            @new_role = LogininfoRole.new(:role_id => '300')
+            @logininfo.logininfo_roles<<@new_role
+            @logininfo.tenant = current_tenant
+            @logininfo.status = UserStatus::ACTIVE
+            @logininfo.save!
+            @student.logininfo = @logininfo
+          end
+        else
+          if @student.logininfo
+            @student.logininfo.update_attribute("status",false)
+          end
+        end
+
+        if params[:student] && !params[:student][:email].blank?
+          if @student.logininfo
+            @student.logininfo.update_attribute("email",params[:student][:email])
+            @student.logininfo.save!
+          end
+        end
+
+        @student.update_attributes(params[:student].except(:tags)) if params[:student]
+        if params.has_key?(:student)
+          @student.tags = params[:student].slice(:tags)[:tags]
+        else
+          @student.tags = []
+        end
+        @student.add_tags
+        msg.result = true
+      end
+    rescue ActiveRecord::RecordInvalid => invalid
+      msg.result = false
+      msg.content = invalid.record.errors
+    end
+=begin
     begin
 
       if params[:is_active_account]
@@ -125,6 +198,7 @@ class StudentsController < ApplicationController
     msg.result = false
     msg.content = invalid.record.errors
     end
+=end
     render :json => msg
   end
 

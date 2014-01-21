@@ -26,6 +26,14 @@ class StudentPresenter<Presenter
   def courses_
     StudentCourse.find_by_student_id(self.id)
   end
+  
+  def account_actived?
+    if @student.logininfo
+      @student.logininfo.status
+    else
+      false
+    end
+  end
 
   def age_
     if self.birthday

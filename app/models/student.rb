@@ -3,7 +3,7 @@ class Student < ActiveRecord::Base
   include Redis::Search
 
   attr_accessible :address, :birthday, :email, :gender, :graduation, :guardian, :guardian_phone, :name, :phone, :school,:referrer_id,:logininfo_id,:image_url,:tenant_id
-  attr_accessible :student_status,:course_number
+  attr_accessible :student_status,:course_number, :remark
 
   attr_accessor :tags
 
@@ -62,7 +62,7 @@ class Student < ActiveRecord::Base
     #errors.add(:phone, '电话不能为空') if self.phone.blank?
     #errors.add(:guardian, '监护人不能为空') if self.guardian.blank?
     #errors.add(:guardian_phone, '监护人号码不能为空') if self.guardian_phone.blank?
-    errors.add(:email, 'email bunengweikong') if self.email.blank?
+    #errors.add(:email, 'email bunengweikong') if self.email.blank?
   end
 
   after_save ThinkingSphinx::RealTime.callback_for(:student)
