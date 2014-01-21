@@ -37,17 +37,26 @@ function init_student_edit() {
 
     });
     $('#is_active_account').on("click", function () {
-        var result = $("input", this).prop("checked");
-        var data = {
-            id: '',
-            is_active_account: result
-        };
-        data.id = $("#student-detail-info").attr('student');
+      var result = $("input", this).prop("checked");
+      var data = {
+        id: '',
+        is_active_account: result,
+        student:{
+          email: $("#email").val()
+        }
+      };
+      data.id = $("#student-detail-info").attr('student');
+      if(data.student.email.length > 0){
         student_manager.update($("#student-detail-info").attr('student'), data), function () {
-            if (data.result) {
-            }
-            else {
-            }
+          if (data.result) {
+          }
+          else {
+          }
         };
+      }
+      else
+      {
+        MessageBox("Email should not be blank.","top","warning");
+      }
     });
 }
