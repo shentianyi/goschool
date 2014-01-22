@@ -4,8 +4,8 @@
     <label>个人信息</label>
   </header>
   <div class="front-people-info" id="detail-content" student="<%= @student.id%>">
-    <img class=" ui image" src="<%= @student.image_url %>">
-    <label class="label"><span><%= @student.name %></span></label>
+
+    <label class="label label-without-pic"><span><%= @student.name %></span></label>
     <p><i class="icon mail"></i> <span><%= @student.email %></span></p>
     <p><i class="icon building"></i> <span><%= @student.school %></span></p>
     <p><i class="icon home"></i> <span><%= @student.address %></span></p>

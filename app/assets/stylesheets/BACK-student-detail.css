@@ -1,4 +1,7 @@
 /*info*/
+.info .name-without-pic{
+    margin-top:30px;
+}
 .info .left p,
 .info .middle p,
 .info .right p{

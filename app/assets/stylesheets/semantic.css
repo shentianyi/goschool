@@ -5149,8 +5149,8 @@ i.massive.basic.icon {
 .ui.active.button {
   background-color: #EAEAEA;
   background-image: none;
-  -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05) inset !important;
-  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05) inset !important;
+  -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05) inset;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05) inset;
   color: rgba(0, 0, 0, 0.7);
 }
 

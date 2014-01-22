@@ -60,13 +60,13 @@
     margin-right:15px;
     float:left
 }
-.admin-operate>table .template .add.sign.box{
+.admin-operate>table .template .finish-add{
     color:#119000;
     font-size:27px;
     cursor:pointer;
     margin-right:18px;
 }
-.admin-operate>table .template .add.sign.box:hover{
+.admin-operate>table .template .finish-add:hover{
     color:#31c31d;
 }
 .admin-operate>table .ui.checkbox{

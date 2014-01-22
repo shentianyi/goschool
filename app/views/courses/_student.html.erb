@@ -1,17 +1,17 @@
 <table class="ui celled table segment">
      <thead>
           <tr>
-               <th class="wide two"></th>
+               <!--<th class="wide two"></th>-->
                <th class="wide three">姓名</th>
-               <th class="wide four">报班时间</th>
-               <th class="wide four">支付情况</th>
+               <th class="wide five">报班时间</th>
+               <th class="wide five">支付情况</th>
                <th class="wide three"></th>
           </tr>
      </thead>
      <tbody>
           <%@students.each do |student|%>
           <tr id="<%=student.student_course_id%>">
-               <td><img class="ui avatar image" src="<%=student.image_url%>"/></td>
+
                <td><%=student.name%></td>
                <td><%=student.enrol_time_display%></td>
                <td <%= 'class=positive' if student.paid%>>
