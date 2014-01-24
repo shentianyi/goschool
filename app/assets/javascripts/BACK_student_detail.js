@@ -541,7 +541,7 @@ STUDENT_FRONT.check = 0;
             }
         });
     //////////////////////////////////////////////////////// 咨询记录
-    $("body").on("click", "#consult-record .item .icon.remove",function () {
+    $("body").on("click", "#consult-record .item [affect='remove-consult-item']",function () {
         //post
         //$(this).parent().remove();
         var target = $(this)
