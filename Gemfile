@@ -25,6 +25,7 @@ gem "paperclip"
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 
+gem 'will_paginate'
 # gem for store file in aliyun oss 
 # gem 'carrierwave-aliyun'
 gem 'aliyun-oss'
