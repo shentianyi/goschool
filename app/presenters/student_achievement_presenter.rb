@@ -24,8 +24,11 @@ class StudentAchievementPresenter<Presenter
       date:ss[2],
       grade:ss[3],
       scholarship:ss[4],
-      offer:ss[5],
-      admitted:ss[6],
+      scholarshio_value: ss[5],
+      offer:ss[6],
+      offer_value:ss[7],
+      admitted:ss[8],
+      admitted_value:ss[9],
     }
   end
 
