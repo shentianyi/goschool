@@ -26,6 +26,15 @@ class StudentPresenter<Presenter
   def courses_
     StudentCourse.find_by_student_id(self.id)
   end
+
+  def attend_
+    courses = self.student.courses
+    res = ''
+    courses.each do |c|
+      res = res + c.name + ','
+    end
+    return res
+  end
   
   def account_actived?
     if @student.logininfo
