@@ -129,7 +129,7 @@ STUDENT_FRONT.check = 0;
                 "<td><input type='text' id='offer-template-time'></td>" +
                 "<td><input type='text'></td>" +
                 "<td><select><option value='0'>否</option><option value='1'>是</option></select></td>" +
-                "<td><select><option value='0'>无</option><option value='1'>有</option></select></td>" +
+                "<td><select><option value='0'>否</option><option value='1'>是</option></select></td>" +
                 "<td><select><option value='0'>否</option><option value='1'>是</option></select></td>" +
                 "<td class='offer-template-operate'><span id='offer-template-ok'>完成</span><span class='remove' id='offer-template-cancel'>删除</span></td>" +
                 "</tr>", {});
@@ -170,24 +170,38 @@ STUDENT_FRONT.check = 0;
                 }
                 data.id = $("#offer").attr("achieve")
                 data.achievementresult.student_id = $("div#detail-content div.info").attr("student");
-                data.achievementresult.valuestring = school + ";" + major + ";"+ score + ";" + time + ";" + scholarship+";"+offer+";"+final_choose;
+                data.achievementresult.valuestring = school + ";" + major + ";"+ time + ";"+ score + ";"  + scholarship+";"+ scholarship_value+";"+offer+";"+offer_value+";"+final_choose+";"+final_choose_value;
                 data.achievementresult.achievement_id = data.id;
                 data.achievementresult.achievetime = time;
                 achievementres_manager.create(data, function (data) {
                     if (data.result) {
-                        var res = data.object
-                        var tr = Mustache.render("{{#achieve}}<tr class='{{#object.final_choose}}final-choose{{object.final_choose}}'>" +
-                            "<td>{{object.school}}</td>" +
-                            "<td>{{object.specialty}}</td>" +
-                            "<td>{{object.date}}</td>" +
-                            "<td>{{object.grade}}</td>" +
-                            "<td>{{object.scholarship}}</td>" +
-                            "<td>{{object.offer}}</td>" +
-                            "<td>{{object.admitted}}</td>" +
-                            "<td><span class='remove' admit='{{id}}'>删除</span></td>" +
+                        var res = {achieve:{
+                            school:school,
+                            major:major,
+                            time:time,
+                            score:score,
+                            scholarship:scholarship,
+                            offer:offer,
+                            final_choose:final_choose,
+                            final_choose_value:final_choose_value,
+                            id:data.object.achieve.id
+                        }};
+                        var tr = Mustache.render("{{#achieve}}<tr id='{{id}}'>" +
+                            "<td>{{school}}</td>" +
+                            "<td>{{major}}</td>" +
+                            "<td>{{time}}</td>" +
+                            "<td>{{score}}</td>" +
+                            "<td value={{scholarship_value}}>{{scholarship}}</td>" +
+                            "<td value={{offer_value}}>{{offer}}</td>" +
+                            "<td value={{final_choose_value}}>{{final_choose}}</td>" +
+                            "<td><span class='edit' admit='{{id}}'>编辑</span><span class='remove' admit='{{id}}'>删除</span></td>" +
                             "</tr>{{/achieve}}", res);
                         $("#offer tbody").append(tr);
                         $("#offer-template-cancel").click();
+                        if(final_choose_value==1){
+                            $("#offer").find("#"+res.achieve.id).addClass("final-choose");
+                        }
+
                     }
                     else {
                         MessageBox_content(data.content)
@@ -213,6 +227,51 @@ STUDENT_FRONT.check = 0;
                     }
                 });
             }
+        }).on("click", "#offer .edit", function () {
+            var target = $(this);
+            var id = target.attr("admit"),
+                count=$("#offer thead tr").children().length,
+                text,
+                value,
+                $column_item,
+                temp_datepicker_id
+            var $column=$("#offer").find("#"+id).children();
+            for(var i=0;i<count-1;i++){
+                $column_item=$column.eq(i);
+                text=$column_item.text();
+                if(i<4){
+                    $column_item.text("").append($("<input type='text'/>").val(text));
+                    if(i==2){
+                        temp_datepicker_id="datepicker-"+id;
+                        $column_item.find("input").attr("id",temp_datepicker_id);
+                        $("#"+temp_datepicker_id).datepicker({
+                            showOtherMonths: true,
+                            selectOtherMonths: true,
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: 'yy-mm'
+                        });
+                    }
+                }
+                else if(i<count-1){
+                   value=$column_item.attr("value");
+                   $column_item.text("").append("<select><option value='0'>否</option><option value='1'>是</option></select>");
+                   if(value===0){
+                       $column_item.find("option").eq(0).prop("checked");
+                   }
+                   else{
+                       $column_item.find("option").eq(1).prop("checked");
+                   }
+                }
+            }
+//            $("#offer").find("#"+id)
+//                achievementres_manager.destroy(id, function (data) {
+//                    if (data.result) {
+//                        target.parents("tr").eq(0).remove()
+//                    } else {
+//                        MessageBox_content(data.content)
+//                    }
+//                });
         });
     ////////////////////////////////////////// 最终成就
     $("body").on("click", "#grade .icon.plus",function (event) {

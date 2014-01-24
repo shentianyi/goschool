@@ -12,7 +12,7 @@
   <tbody>
     <% if @admitted %>
     <% @admitted.each do |admit|%>
-    <tr>
+    <tr id="<%= admit.id%>">
       <td><%= admit.admitted[:school] %></td>
       <td><%= admit.admitted[:specialty] %></td>
       <td><%= admit.admitted[:date] %></td>
@@ -20,7 +20,7 @@
       <td value="<%= admit.admitted[:scholarship_value]%>"><%= admit.admitted[:scholarship] %></td>
       <td value="<%= admit.admitted[:offer_value]%>"><%= admit.admitted[:offer] %></td>
       <td value="<%= admit.admitted[:admitted_value]%>"><%= admit.admitted[:admitted] %></td>
-      <td><span admit="<%= admit.id%>" class="remove">删除</span></td>
+      <td><span admit="<%= admit.id%>" class="edit">编辑</span><span admit="<%= admit.id%>" class="remove">删除</span></td>
     </tr>
     <% end %>
     <% end %>
