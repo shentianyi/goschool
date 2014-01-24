@@ -1,8 +1,11 @@
 <!--partial-->
+<% is_admin = current_user.is_admin? %>
 <% if @consultations %>
 <% @consultations.each do |consultation| %>
 <div class="item" id="<%= consultation.id%>">
-  <i class="icon remove" affect="remove-consult"></i>
+  <% if is_admin%>
+      <i consultation="<%= consultation.id %>" class="icon remove" affect="remove-consult"></i>
+  <%end%>
   <p><%= consultation.consult_time_display%> <%= consultation.consultants%></p>
   <p><%= consultation.content%></p>
   <p>接线人:<%= consultation.recorder%></p>
