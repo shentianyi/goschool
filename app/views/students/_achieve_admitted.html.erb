@@ -19,7 +19,7 @@
       <td><%= admit.admitted[:grade] %></td>
       <td value="<%= admit.admitted[:scholarship_value]%>"><%= admit.admitted[:scholarship] %></td>
       <td value="<%= admit.admitted[:offer_value]%>"><%= admit.admitted[:offer] %></td>
-      <td value="<%= admit.admitted[:admitted_value]%>"><%= admit.admitted[:admitted] %></td>
+      <td value="<%= admit.admitted[:admitted_value]%>" target="admitted"><%= admit.admitted[:admitted] %></td>
       <td><span admit="<%= admit.id%>" class="edit">编辑</span><span admit="<%= admit.id%>" class="remove">删除</span></td>
     </tr>
     <% end %>

@@ -143,15 +143,7 @@ STUDENT_FRONT.check = 0;
                 dateFormat: 'yy-mm'
             });
         }
-    }).on("keyup", "#offer-template input",function (event) {
-            var e = adapt_event(event).event;
-            if (e.keyCode == 13) {
-                $("#offer-template-ok").click()
-            }
-            else if (e.keyCode == 27) {
-                $("#offer-template-cancel").click();
-            }
-        }).on("click", "#offer-template-ok",function () {
+    }).on("click", "#offer-template-ok",function () {
             var school = $.trim($("#offer-template input").eq(0).val());
             var major = $.trim($("#offer-template input").eq(1).val());
             var time = $.trim($("#offer-template input").eq(2).val());
@@ -193,7 +185,7 @@ STUDENT_FRONT.check = 0;
                             "<td>{{score}}</td>" +
                             "<td value={{scholarship_value}}>{{scholarship}}</td>" +
                             "<td value={{offer_value}}>{{offer}}</td>" +
-                            "<td value={{final_choose_value}}>{{final_choose}}</td>" +
+                            "<td value={{final_choose_value}} target='admitted'>{{final_choose}}</td>" +
                             "<td><span class='edit' admit='{{id}}'>编辑</span><span class='remove' admit='{{id}}'>删除</span></td>" +
                             "</tr>{{/achieve}}", res);
                         $("#offer tbody").append(tr);
@@ -256,22 +248,75 @@ STUDENT_FRONT.check = 0;
                 else if(i<count-1){
                    value=$column_item.attr("value");
                    $column_item.text("").append("<select><option value='0'>否</option><option value='1'>是</option></select>");
-                   if(value===0){
-                       $column_item.find("option").eq(0).prop("checked");
+                   if(value==="0"){
+                       $column_item.find("option").eq(0).prop("selected",true);
                    }
                    else{
-                       $column_item.find("option").eq(1).prop("checked");
+                       $column_item.find("option").eq(1).prop("selected",true);
                    }
                 }
             }
-//            $("#offer").find("#"+id)
-//                achievementres_manager.destroy(id, function (data) {
-//                    if (data.result) {
-//                        target.parents("tr").eq(0).remove()
-//                    } else {
-//                        MessageBox_content(data.content)
-//                    }
-//                });
+            $("#offer").find("#"+id).find(".edit").removeClass("edit").addClass("finish").text("完成");
+        }).on("click","#offer .finish",function(){
+            var target = $(this);
+            var id = target.attr("admit");
+            var $target=$("#offer").find("#"+id),
+                $input=$target.find("input"),
+                $select=$target.find("select");
+            var school = $.trim($input.eq(0).val());
+            var major = $.trim($input.eq(1).val());
+            var time = $.trim($input.eq(2).val());
+            var score = $.trim($input.eq(3).val());
+            var scholarship = $select.eq(0).find(":selected").text();
+            var offer = $select.eq(1).find(":selected").text();
+            var final_choose = $select.eq(2).find(":selected").text();
+            var scholarship_value = $select.eq(0).find(":selected").attr("value");
+            var offer_value = $select.eq(1).find(":selected").attr("value");
+            var final_choose_value = $select.eq(2).find(":selected").attr("value");
+            if (school.length > 0 && major.length > 0 && time.length > 0 && score.length>0 ) {
+                var result={};
+                result.valuestring=school + ";" + major + ";"+ time + ";"+ score + ";"  + scholarship+";"+ scholarship_value+";"+offer+";"+offer_value+";"+final_choose+";"+final_choose_value;
+                achievementres_manager.update(id,result, function (data) {
+                    if (data.result) {
+                        var $target_item,
+                            text,
+                            value;
+                        for(var i=0;i<7;i++){
+                                $target_item=$target.children().eq(i);
+                            if(i<4){
+                                text=$target_item.find("input").val();
+                                $target_item.empty().text(text);
+                            }
+                            else{
+                                text=$target_item.find(":selected").text();
+                                value=$target_item.find(":selected").attr("value");
+                                $target_item.empty().text(text).attr("value",value);
+                            }
+                        }
+                        if($target.find("[target='admitted']").attr("value")==="1"){
+                            $target.addClass("final-choose");
+                        }
+                        else{
+                            $target.removeClass("final-choose");
+                        }
+                        $target.find(".finish").removeClass("finish").addClass("edit").text("编辑");
+                    }
+                    else {
+                        MessageBox_content(data.content)
+                    }
+                });
+            }
+            else {
+                MessageBox("信息填写不完整", "top", "warning");
+            }
+        }).on("keyup","#offer td input",function(event){
+            var e=adapt_event(event).event;
+            if (e.keyCode == 13) {
+                $(this).parents("tr").eq(0).find("span").eq(0).click();
+            }
+            else if (e.keyCode == 27) {
+                $(this).parents("tr").eq(0).find("span").eq(1).click();
+            }
         });
     ////////////////////////////////////////// 最终成就
     $("body").on("click", "#grade .icon.plus",function (event) {

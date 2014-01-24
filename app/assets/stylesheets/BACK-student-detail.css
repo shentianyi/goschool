@@ -364,6 +364,17 @@
 .accordion[name='student'] .offer tr td:last-of-type span.edit:hover{
     color:#097cd5;
 }
+.accordion[name='student'] .offer tr td:last-of-type span.finish{
+    text-align:center;
+    color:#63A69F;
+    text-decoration:underline;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+    margin-right:18px;
+}
+.accordion[name='student'] .offer tr td:last-of-type span.finish:hover{
+    color:#2ac6b6;
+}
 .accordion[name='student'] .offer input{
     width:120px;
 }
