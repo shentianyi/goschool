@@ -180,10 +180,10 @@ STUDENT_FRONT.check = 0;
                             "<td>{{object.school}}</td>" +
                             "<td>{{object.specialty}}</td>" +
                             "<td>{{object.date}}</td>" +
-                            "<td>{{object.score}}</td>" +
+                            "<td>{{object.grade}}</td>" +
                             "<td>{{object.scholarship}}</td>" +
                             "<td>{{object.offer}}</td>" +
-                            "<td>{{object.final_choose}}</td>" +
+                            "<td>{{object.admitted}}</td>" +
                             "<td><span class='remove' admit='{{id}}'>删除</span></td>" +
                             "</tr>{{/achieve}}", res);
                         $("#offer tbody").append(tr);

@@ -1,5 +1,6 @@
 #encoding: utf-8
 class ConsultcommentsController < ApplicationController
+  before_filter :require_user_as_admin, :only=>:destroy
   def create
     msg = Msg.new
     msg.result = false
