@@ -276,7 +276,8 @@ STUDENT_FRONT.check = 0;
             if (school.length > 0 && major.length > 0 && time.length > 0 && score.length>0 ) {
                 var result={};
                 result.valuestring=school + ";" + major + ";"+ time + ";"+ score + ";"  + scholarship+";"+ scholarship_value+";"+offer+";"+offer_value+";"+final_choose+";"+final_choose_value;
-                achievementres_manager.update(id,result, function (data) {
+
+                achievementres_manager.update(id,{result:result}, function (data) {
                     if (data.result) {
                         var $target_item,
                             text,
