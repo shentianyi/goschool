@@ -595,7 +595,17 @@ STUDENT_FRONT.check = 0;
                 $(this).next().click();
             }
         }).on("click","[affect='remove-consult']",function(){
-
+            var target = $(this);
+            var id = target.attr("consultation");
+            consultation_manager.destroy(id,function(data){
+                if(data.result){
+                    target.parent().remove();
+                    MessageBox("删除咨询成功","top","success");
+                }
+                else{
+                    MessageBox("删除咨询失败","top","warning");
+                }
+            });
         });
     $(window).resize(function () {
         if ($("#class-performance .title").hasClass("active")) {
