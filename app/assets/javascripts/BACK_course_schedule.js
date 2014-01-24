@@ -90,6 +90,7 @@
            },function(data){
                if(data.result){
                    $("#search-list").empty();
+                           $("#search-teacher").val("");
                    SCHEDULE.generate_search_result(data.content);
 
                }
@@ -110,6 +111,7 @@
             },function(data){
                 if(data.result){
                     $("#search-list").empty();
+                                $("#search-teacher").val("");
                     if(data.content.length==0){
                         $("#search-list").append($("<p />").text("尚未安排课程..."))
                     }
@@ -123,6 +125,50 @@
             })
         }
     });
+    // search by teacher
+     //右边的搜索框回车事件
+    $("body").on("keyup","#search-teacher",function(event){
+       var e=adapt_event(event).event;
+       if(e.keyCode==13 && $("#autoComplete-call .active").length>0){
+           var id=$("#autoComplete-call .active").attr("id");
+           $.get("/schedules/teacher",{
+               teacher_id:id
+           },function(data){
+               if(data.result){
+                   $("#search-list").empty();
+                   $("#search-courses").val("");
+                   SCHEDULE.generate_search_result(data.content);
+               }
+               else{
+                   MessageBox_content(data.content);
+               }
+           })
+       }
+    });
+    //右边的搜索框的点击事件
+    $("body").on("click","#search-teacher+.search",function(){
+        if($("#autoComplete-call .active").length>0){
+            var id=$("#autoComplete-call .active").attr("id");
+            $.get("/schedules/teacher",{
+                teacher_id:id
+            },function(data){
+                if(data.result){
+                      $("#search-list").empty();
+                               $("#search-courses").val("");
+                    if(data.content.length==0){
+                        $("#search-list").append($("<p />").text("尚未安排课程..."))
+                    }
+                    else{
+                        SCHEDULE.generate_search_result(data.content);
+                    }
+                }
+                else{
+                    MessageBox_content(data.content);
+                }
+            })
+        }
+    });
+    
     //发送课表
     $("body").on("click","#send-schedule-button",function(){
         $("#send-schedule").css("left","0").css("right",0);
