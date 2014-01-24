@@ -581,7 +581,7 @@ STUDENT_FRONT.check = 0;
                             .append($("<dd />")
                                 .append($("<span />").text(res.comment))
                                 .append($("<span />").text(res.comment_time))
-                                .append($("<i />").addClass("icon remove").attr("comment", res.id))
+                                .append($("<i />").addClass("icon remove").attr("comment", res.id).attr("affect","remove-consult-item"))
                             )
                     }
                 });
