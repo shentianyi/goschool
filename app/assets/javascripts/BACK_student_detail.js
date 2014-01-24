@@ -176,14 +176,14 @@ STUDENT_FRONT.check = 0;
                 achievementres_manager.create(data, function (data) {
                     if (data.result) {
                         var res = data.object
-                        var tr = Mustache.render("{{#achieve}}<tr class='{{#object.final_choose}}final-choose{{object.final_choose}}'>" +
+                        var tr = Mustache.render("{{#achieve}}<tr class='{{#object.admitted}}final-choose{{/object.admitted}}'>" +
                             "<td>{{object.school}}</td>" +
                             "<td>{{object.specialty}}</td>" +
                             "<td>{{object.date}}</td>" +
                             "<td>{{object.score}}</td>" +
                             "<td>{{object.scholarship}}</td>" +
                             "<td>{{object.offer}}</td>" +
-                            "<td>{{object.final_choose}}</td>" +
+                            "<td>{{object.admitted}}</td>" +
                             "<td><span class='remove' admit='{{id}}'>删除</span></td>" +
                             "</tr>{{/achieve}}", res);
                         $("#offer tbody").append(tr);
