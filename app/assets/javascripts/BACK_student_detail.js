@@ -180,7 +180,7 @@ STUDENT_FRONT.check = 0;
                             "<td>{{object.school}}</td>" +
                             "<td>{{object.specialty}}</td>" +
                             "<td>{{object.date}}</td>" +
-                            "<td>{{object.score}}</td>" +
+                            "<td>{{object.grade}}</td>" +
                             "<td>{{object.scholarship}}</td>" +
                             "<td>{{object.offer}}</td>" +
                             "<td>{{object.admitted}}</td>" +
