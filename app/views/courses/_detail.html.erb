@@ -31,7 +31,7 @@
      </p>
      <p class="detail-labels">
           <span>标签:</span>
-          <span> <%@course.tags.each do |tag|%> <a class="ui blue label"> <%= tag%> </a> <%end%>
+          <span> <%@course.tags.each do |tag|%> <a class="ui blue label"> <%= tag%> </a> <%end%></span>
      </p>
      <a class="ui red button detail-button"  course="<%= @course.id%>" id="delete-course-button">删除<%= @course.type_display%></a>
      <a class="ui teal button detail-button" id="course-detail-edit" course="<%= @course.id%>">编辑<%= @course.type_display%>信息</a>

@@ -189,6 +189,9 @@ SCHEDULE.calendar.getData=function(){
             SCHEDULE.calendar.have_load.min=maxDate>SCHEDULE.calendar.have_load.min?minDate:SCHEDULE.calendar.have_load.min;
         }
         //post
+
+
+
 //        var experiment=[
 //            {id:"1",text:"儿童秋季班",teachers:["Wayne","王子骁"],start_date:1385870400000,end_date:1385872200000,color:'#FFA500',sub_courses:{value:"default",text:"没指定"},remark:"123"},
 //            {id:"2",text:"SAT秋季冲刺班",teachers:["Kobe","Bryant"],start_date:1386086400000,end_date:1386088200000,color:'#63A69F',sub_courses:{value:"0",text:"听力"},remark:"123"},

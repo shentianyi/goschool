@@ -66,7 +66,7 @@ DETAIL.course={};
                     var object_item={};
                     object_item.id=data.content;
                     object_item.name= $.trim($("#join-for-student").val());
-                    object_item.img=Math.floor(Math.random()*9)+".jpg";
+//                    object_item.img=Math.floor(Math.random()*9)+".jpg";
                     object_item.time=new Date().toWayneString().day;
                     var data={student:object_item};
                     var render=Mustache.render(DETAIL.course.student.template,data);
@@ -354,9 +354,6 @@ DETAIL.course.teacher={};
 //<img class="ui avatar image" src="/assets/portrait/{{img}}"/>\
 DETAIL.course.student.template='\
     {{#student}}<tr id="{{id}}">\
-        <td>\
-        <img class="ui avatar image" src="/assets/portrait/{{img}}"/>\
-        </td>\
         <td>{{name}}</td>\
         <td>{{time}}</td>\
         <td ><div class="ui checkbox" name="join-pay">\

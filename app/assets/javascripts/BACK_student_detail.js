@@ -127,6 +127,7 @@ STUDENT_FRONT.check = 0;
                 "<td><input type='text'></td>" +
                 "<td><input type='text'></td>" +
                 "<td><input type='text' id='offer-template-time'></td>" +
+                "<td><input type='text'></td>" +
                 "<td><select><option value='0'>否</option><option value='1'>是</option></select></td>" +
                 "<td class='offer-template-operate'><span id='offer-template-ok'>完成</span><span class='remove' id='offer-template-cancel'>删除</span></td>" +
                 "</tr>", {});
@@ -149,12 +150,13 @@ STUDENT_FRONT.check = 0;
                 $("#offer-template-cancel").click();
             }
         }).on("click", "#offer-template-ok",function () {
-            var school = $("#offer-template input").eq(0).val();
-            var major = $("#offer-template input").eq(1).val();
-            var time = $("#offer-template input").eq(2).val();
+            var school = $.trim($("#offer-template input").eq(0).val());
+            var major = $.trim($("#offer-template input").eq(1).val());
+            var time = $.trim($("#offer-template input").eq(2).val());
+            var score = $.trim($("#offer-template input").eq(3).val());
             var scholarship = $("#offer-template select :selected").text();
             var scholarship_value = $("#offer-template select :selected").attr("value");
-            if (school.length > 0 && major.length > 0 && time.length > 0) {
+            if (school.length > 0 && major.length > 0 && time.length > 0 && score.length>0 ) {
                 //post
                 var data = {
                     id: '',
@@ -162,7 +164,7 @@ STUDENT_FRONT.check = 0;
                 }
                 data.id = $("#offer").attr("achieve")
                 data.achievementresult.student_id = $("div#detail-content div.info").attr("student");
-                data.achievementresult.valuestring = school + ";" + major + ";" + time + ";" + scholarship;
+                data.achievementresult.valuestring = school + ";" + major + ";"+ score + ";" + time + ";" + scholarship;
                 data.achievementresult.achievement_id = data.id;
                 data.achievementresult.achievetime = time;
                 achievementres_manager.create(data, function (data) {
@@ -172,6 +174,7 @@ STUDENT_FRONT.check = 0;
                             "<td>{{object.school}}</td>" +
                             "<td>{{object.specialty}}</td>" +
                             "<td>{{object.date}}</td>" +
+                            "<td>{{object.score}}</td>" +
                             "<td>{{object.scholarship}}</td>" +
                             "<td><span class='remove' admit='{{id}}'>删除</span></td>" +
                             "</tr>{{/achieve}}", res);
@@ -704,7 +707,7 @@ STUDENT_FRONT.check = 0;
                 $("#achieve_final_tabular>a").eq(0).click();
             }
         }
-        else if(new_href="class-performance"){
+        else if(new_href == "class-performance"){
             $.get("/student_homeworks/submit_calculate",{id:$("#student-detail-info").attr("student")},function(data){
                 STUDENT_FRONT.pie={
                     scores:data

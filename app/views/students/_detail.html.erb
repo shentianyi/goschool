@@ -1,8 +1,8 @@
 <div class="info" id="student-detail-info" student="<%= @presenter.id %>">
   <div class="left">
-    <img class="circular ui image" src="<%= @presenter.student.image_url %>"/>
 
-    <p class="name"><%= @presenter.name %></p>
+
+    <p class="name name-without-pic"><%= @presenter.name %></p>
 
     <P class="type"><%= @presenter.status_ %></P>
   </div>
@@ -16,7 +16,9 @@
     <p><span>联系邮件:</span><span><%= @presenter.email %></span></p>
 
     <p><span>居住地址:</span><span><%= @presenter.address %></span></p>
-    <p><span>备注:</span><span><%= @presenter.remark %></span></p>
+
+
+
     <% if @presenter.tags_.length > 0 %>
         <p class="labels"><span>标签:</span>
           <span>
