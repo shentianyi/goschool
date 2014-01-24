@@ -5,6 +5,8 @@
       <th>时间</th>
       <th>成绩</th>
       <th>奖学金</th>
+      <th>Offer</th>
+      <th>最终录取</th>
       <th>操作</th>
   </tr></thead>
   <tbody>
@@ -14,8 +16,10 @@
       <td><%= admit.admitted[:school] %></td>
       <td><%= admit.admitted[:specialty] %></td>
       <td><%= admit.admitted[:date] %></td>
-      <td></td>
+      <td><%= admit.admitted[:grade] %></td>
       <td><%= admit.admitted[:scholarship] %></td>
+      <td><%= admit.admitted[:offer] %></td>
+      <td><%= admit.admitted[:admitted] %></td>
       <td><span admit="<%= admit.id%>" class="remove">删除</span></td>
     </tr>
     <% end %>

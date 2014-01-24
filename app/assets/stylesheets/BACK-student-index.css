@@ -17,7 +17,7 @@
 }
 .back-index-main>.search-list>.search-result>li .first-column i{
     font-size:13px;
-    color:#c8c8c8;
+    color:#63A69F;
     pointer-events:auto;
     cursor:pointer;
     transition:color 0.25s ease-out;

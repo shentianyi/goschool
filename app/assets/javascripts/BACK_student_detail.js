@@ -129,6 +129,8 @@ STUDENT_FRONT.check = 0;
                 "<td><input type='text' id='offer-template-time'></td>" +
                 "<td><input type='text'></td>" +
                 "<td><select><option value='0'>否</option><option value='1'>是</option></select></td>" +
+                "<td><select><option value='0'>无</option><option value='1'>有</option></select></td>" +
+                "<td><select><option value='0'>否</option><option value='1'>是</option></select></td>" +
                 "<td class='offer-template-operate'><span id='offer-template-ok'>完成</span><span class='remove' id='offer-template-cancel'>删除</span></td>" +
                 "</tr>", {});
             $("#offer tbody").append(tr);
@@ -154,8 +156,12 @@ STUDENT_FRONT.check = 0;
             var major = $.trim($("#offer-template input").eq(1).val());
             var time = $.trim($("#offer-template input").eq(2).val());
             var score = $.trim($("#offer-template input").eq(3).val());
-            var scholarship = $("#offer-template select :selected").text();
-            var scholarship_value = $("#offer-template select :selected").attr("value");
+            var scholarship = $("#offer-template select").eq(0).find(":selected").text();
+            var offer = $("#offer-template select").eq(1).find(":selected").text();
+            var final_choose = $("#offer-template select").eq(2).find(":selected").text();
+            var scholarship_value = $("#offer-template select").eq(0).find(":selected").attr("value");
+            var offer_value = $("#offer-template select").eq(1).find(":selected").attr("value");
+            var final_choose_value = $("#offer-template select").eq(2).find(":selected").attr("value");
             if (school.length > 0 && major.length > 0 && time.length > 0 && score.length>0 ) {
                 //post
                 var data = {
@@ -164,18 +170,20 @@ STUDENT_FRONT.check = 0;
                 }
                 data.id = $("#offer").attr("achieve")
                 data.achievementresult.student_id = $("div#detail-content div.info").attr("student");
-                data.achievementresult.valuestring = school + ";" + major + ";"+ score + ";" + time + ";" + scholarship;
+                data.achievementresult.valuestring = school + ";" + major + ";"+ score + ";" + time + ";" + scholarship+";"+offer+";"+final_choose;
                 data.achievementresult.achievement_id = data.id;
                 data.achievementresult.achievetime = time;
                 achievementres_manager.create(data, function (data) {
                     if (data.result) {
                         var res = data.object
-                        var tr = Mustache.render("{{#achieve}}<tr>" +
+                        var tr = Mustache.render("{{#achieve}}<tr class='{{#object.final_choose}}final-choose{{object.final_choose}}'>" +
                             "<td>{{object.school}}</td>" +
                             "<td>{{object.specialty}}</td>" +
                             "<td>{{object.date}}</td>" +
-                            "<td>{{object.score}}</td>" +
+                            "<td>{{object.grade}}</td>" +
                             "<td>{{object.scholarship}}</td>" +
+                            "<td>{{object.offer}}</td>" +
+                            "<td>{{object.admitted}}</td>" +
                             "<td><span class='remove' admit='{{id}}'>删除</span></td>" +
                             "</tr>{{/achieve}}", res);
                         $("#offer tbody").append(tr);
