@@ -78,6 +78,7 @@ Goschool::Application.routes.draw do
       get :dates
       get :courses
       get :teachers
+      get :teacher
       post :send_email
     end
   end
