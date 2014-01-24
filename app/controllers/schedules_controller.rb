@@ -69,7 +69,7 @@ class SchedulesController < ApplicationController
   def send_email
     @msg=Msg.new({result:true,content:'课表已发送'})
     begin
-      EmailService.send_schedule_job(params[:type],params[:institution_id],params[:user_ids])
+      EmailService.send_schedule_job(params[:type],params[:institution_id],params[:user_ids].nil? ? nil : params[:user_ids].uniq)
     rescue Exception=>e
       @msg.result=false
       @msg.content='课表发送失败，请联系服务商'
