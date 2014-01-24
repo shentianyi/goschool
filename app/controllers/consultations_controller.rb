@@ -1,5 +1,7 @@
 #encoding: utf-8
 class ConsultationsController < ApplicationController
+  before_filter :require_user_as_admin, :only=>:destroy
+
   def index
     
   end
@@ -32,6 +34,16 @@ class ConsultationsController < ApplicationController
     @consultation.update_attributes(params[:consultation])
     msg.result = true
     msg.object = ConsultationPresenter.new(@consultation).to_json
+    render :json=>msg
+  end
+
+  def destroy
+    msg = Msg.new
+    msg.result = false
+
+    @consultation = Consultation.find(params[:id])
+    @consultation.destroy
+    msg.result = true
     render :json=>msg
   end
 end
