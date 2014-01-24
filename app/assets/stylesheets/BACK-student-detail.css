@@ -353,6 +353,17 @@
 .accordion[name='student'] .offer tr td:last-of-type:hover span:last-of-type{
     color:#ef1414
 }
+.accordion[name='student'] .offer input{
+    width:120px;
+}
+.accordion[name='student'] .offer select{
+    width:60px;
+    padding:2px 4px;
+}
+.accordion[name='student'] .offer .final-choose{
+    background:#F2F8F0;
+    color:#119000;
+}
 .accordion[name='student'] .offer-template-operate span:first-of-type{
     color:#63A69F;
     display:inline-block;
