@@ -1,7 +1,7 @@
 #encoding: utf-8
 class SchedulesController < ApplicationController
   skip_before_filter :require_user_as_employee
-  before_filter :init_message ,:only=>[:show,:create,:update,:destroy,:dates,:courses,:teachers]
+  before_filter :init_message ,:only=>[:show,:create,:update,:destroy,:dates,:courses,:teachers,:teacher]
   before_filter :get_schedule,:only=>[:update,:destroy]
   before_filter :render_nil_msg , :only=>[:update,:destroy]
   def index
@@ -53,16 +53,23 @@ class SchedulesController < ApplicationController
     render :json=>@msg
   end
 
+  def teacher
+    @msg.result=true
+    teacher_id= params[:teacher_id] || current_user.user.id
+    @msg.content=SchedulePresenter.init_json_presenters( Schedule.by_teacher_id(nil,teacher_id).all)
+    render :json=>@msg
+  end
+
   def courses
     @msg.result=true
     @msg.content=SchedulePresenter.init_json_presenters( Schedule.by_course_id(params).all)
-      render :json=>@msg 
+    render :json=>@msg
   end
 
   def send_email
     @msg=Msg.new({result:true,content:'课表已发送'})
     begin
-    EmailService.send_schedule_job(params[:type],params[:institution_id])
+      EmailService.send_schedule_job(params[:type],params[:institution_id],params[:user_ids])
     rescue Exception=>e
       @msg.result=false
       @msg.content='课表发送失败，请联系服务商'

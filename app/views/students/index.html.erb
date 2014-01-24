@@ -18,12 +18,17 @@
     </div>
     <div class="column">
       <div class="ui raised segment">
-	<div class="ui red ribbon label">搜索结果: <div class="ui red label" id="result-count">0</div></div>
+	<div class="ui red ribbon label">搜索结果: <div class="ui red label" id="result-count">
+	     <%=@students.total_entries%>
+	</div></div>
       </div>
     </div>
     <ul class="search-result" id="search-result">
       <%= render partial:'search_results'%>
     </ul>
+    <div>
+               <%= will_paginate @students%>
+          </div>
   </div>
 </article>
 

@@ -56,9 +56,13 @@ class User < ActiveRecord::Base
   end
 
   #find all the teachers by institution_id
-  def self.get_teachers institution_id
+  def self.get_teachers institution_id,teacher_ids=nil
     # User.joins(:logininfo_roles).where(logininfo_roles:{role_id:400}).all
-    User.joins(:logininfo_institutions).joins(:logininfo_roles).where(logininfo_roles:{role_id:400},logininfo_institutions:{institution_id:institution_id}).all
+    if teacher_ids
+  return    User.joins(:logininfo_institutions).joins(:logininfo_roles).where(logininfo_roles:{role_id:400},logininfo_institutions:{institution_id:institution_id},id:teacher_ids).all
+    else
+  return  User.joins(:logininfo_institutions).joins(:logininfo_roles).where(logininfo_roles:{role_id:400},logininfo_institutions:{institution_id:institution_id}).all
+  end
   end
 
   #find all the employees by institution_id

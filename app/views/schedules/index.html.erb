@@ -28,8 +28,13 @@
              <%=render 'institutions/select'%>
         </div>
         <div class="search-block">
+              <div class="ui icon search-input input autoComplete customAutoHeight" autoMaxHeight="210px">
+                <input placeholder="按老师课程安排..." type="text" id="search-teacher"  autocomplete="teachers">
+                <i class="search icon"></i>
+            </div>
+            <p></p>
             <div class="ui icon search-input input autoComplete customAutoHeight" autoMaxHeight="210px">
-                <input placeholder="搜索课程安排..." type="text" id="search-courses"  autocomplete="courses,list">
+                <input placeholder="按课程搜索课程安排..." type="text" id="search-courses"  autocomplete="courses,list">
                 <i class="search icon"></i>
             </div>
             <div class="search-list" id="search-list">
