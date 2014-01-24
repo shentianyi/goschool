@@ -343,15 +343,26 @@
     color:rgba(0,0,0,0.6);
 }
 /*所有录取*/
-.accordion[name='student'] .offer tr td:last-of-type span:last-of-type{
+.accordion[name='student'] .offer tr td:last-of-type span.remove{
     text-align:center;
-    color:#D95C5C;
+    color:#e34545;
     text-decoration:underline;
     cursor:pointer;
     transition:color 0.25s ease-out;
 }
-.accordion[name='student'] .offer tr td:last-of-type:hover span:last-of-type{
+.accordion[name='student'] .offer tr td:last-of-type span.remove:hover{
     color:#ef1414
+}
+.accordion[name='student'] .offer tr td:last-of-type span.edit{
+    text-align:center;
+    color:#359ceb;
+    text-decoration:underline;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+    margin-right:18px;
+}
+.accordion[name='student'] .offer tr td:last-of-type span.edit:hover{
+    color:#097cd5;
 }
 .accordion[name='student'] .offer input{
     width:120px;
