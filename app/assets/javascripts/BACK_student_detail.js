@@ -593,6 +593,8 @@ STUDENT_FRONT.check = 0;
             if(e.keyCode==13){
                 $(this).next().click();
             }
+        }).on("click","[affect='remove-consult']",function(){
+
         });
     $(window).resize(function () {
         if ($("#class-performance .title").hasClass("active")) {

@@ -247,6 +247,18 @@
     padding:10px 8px 5px;
     margin-bottom:38px;
 }
+.accordion[name='student'] .consult-record .content .item .icon.remove{
+    position:absolute;
+    pointer-events:auto;
+    right:5px;
+    top:5px;
+    font-size:16px;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+}
+.accordion[name='student'] .consult-record .content .item .icon.remove:hover{
+    color:#D95C5C;
+}
 .accordion[name='student'] .consult-record .content .item p{
     font-size:13px;
     margin:0px;
