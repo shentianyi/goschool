@@ -22,7 +22,10 @@ class StudentAchievementPresenter<Presenter
       school:ss[0],
       specialty:ss[1],
       date:ss[2],
-      scholarship:ss[3],
+      grade:ss[3],
+      scholarship:ss[4],
+      offer:ss[5],
+      admitted:ss[6],
     }
   end
 
