@@ -24,7 +24,7 @@ class StudentAchievementPresenter<Presenter
       date:ss[2],
       grade:ss[3],
       scholarship:ss[4],
-      scholarshio_value: ss[5],
+      scholarship_value: ss[5],
       offer:ss[6],
       offer_value:ss[7],
       admitted:ss[8],

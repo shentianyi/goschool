@@ -12,7 +12,7 @@
   <tbody>
     <% if @admitted %>
     <% @admitted.each do |admit|%>
-    <tr id="<%= admit.id%>">
+    <tr id="<%= admit.id%>" <% if admit.admitted[:admitted_value] == 1%> class="final-choose"<% end %>>
       <td><%= admit.admitted[:school] %></td>
       <td><%= admit.admitted[:specialty] %></td>
       <td><%= admit.admitted[:date] %></td>
