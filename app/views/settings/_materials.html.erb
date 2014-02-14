@@ -1,0 +1,34 @@
+<div class="admin-operate" name="materials" id="admin-operate">
+  <p>默认服务材料</p>
+  <label><i class="icon info"></i>双击单项编辑</label>
+  <table class="ui column table segment celled" id="admin-operate-table">
+    <thead>
+    <tr>
+      <th class="five wide">材料名</th>
+      <th class="nine wide">材料描述</th>
+      <th class="two wide"></th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+      <th colspan="2"></th>
+      <th>
+        <div class="ui teal small labeled icon button add-button" id="admin-operate-add">
+          <i class="add icon"></i> 添加材料
+        </div>
+      </th>
+    </tr>
+    </tfoot>
+    <tbody>
+    <% @materials.each do |material| %>
+        <tr id="<%= material.id %>">
+          <td post="name"><%= material.name %></td>
+          <td post="desc"><%= material.description %></td>
+          <td>
+            <i class="trash icon" affect="<%= material.id %>"></i>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

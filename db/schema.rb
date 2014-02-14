@@ -204,17 +204,21 @@ ActiveRecord::Schema.define(:version => 20140214030859) do
   create_table "materials", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.integer  "status"
+    t.integer  "status",            :default => 0
     t.integer  "materialable_id"
     t.string   "materialable_type"
     t.integer  "material_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.integer  "tenant_id"
+    t.integer  "logininfo_id"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
+  add_index "materials", ["logininfo_id"], :name => "index_materials_on_logininfo_id"
   add_index "materials", ["material_id"], :name => "index_materials_on_material_id"
   add_index "materials", ["materialable_id"], :name => "index_materials_on_materialable_id"
   add_index "materials", ["materialable_type"], :name => "index_materials_on_materialable_type"
+  add_index "materials", ["tenant_id"], :name => "index_materials_on_tenant_id"
 
   create_table "posts", :force => true do |t|
     t.integer  "course_id"
@@ -264,6 +268,7 @@ ActiveRecord::Schema.define(:version => 20140214030859) do
     t.integer  "sub_course_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.datetime "date"
     t.integer  "tenant_id"
     t.string   "remark"
     t.string   "color"

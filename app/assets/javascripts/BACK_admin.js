@@ -15,22 +15,22 @@ BACKINDEX.admin.init=(function(){
     $(document).ready(function(){
         BACKINDEX.admin.operate.init();
 
-        BACKINDEX.admin.operate.type="materials";
+//        BACKINDEX.admin.operate.type="materials";
 
         //post
-//        var url=(window.location.href).split("/");
-//        if(url[url.length-1]=="settings" && url[url.length-2]!="settings"){
-//             $("#admin-setting>a").eq(0).addClass("active");
-//             var name=$("#admin-setting>a").eq(0).attr("name");
-//             BACKINDEX.admin.operate.type=name;
-//            $("#back-index-main>header label").text($("#admin-setting>a").eq(0).find("label").text());
-//        }
-//        else{
-//            var name=url[url.length-1];
-//            $("#admin-setting").find("a[name='"+name+"']").addClass("active");
-//            BACKINDEX.admin.operate.type=name;
-//            $("#back-index-main>header label").text($("#admin-setting>a.active").find("label").text());
-//        }
+        var url=(window.location.href).split("/");
+        if(url[url.length-1]=="settings" && url[url.length-2]!="settings"){
+             $("#admin-setting>a").eq(0).addClass("active");
+             var name=$("#admin-setting>a").eq(0).attr("name");
+             BACKINDEX.admin.operate.type=name;
+            $("#back-index-main>header label").text($("#admin-setting>a").eq(0).find("label").text());
+        }
+        else{
+            var name=url[url.length-1];
+            $("#admin-setting").find("a[name='"+name+"']").addClass("active");
+            BACKINDEX.admin.operate.type=name;
+            $("#back-index-main>header label").text($("#admin-setting>a.active").find("label").text());
+        }
 
     });
 })();
@@ -88,7 +88,7 @@ BACKINDEX.admin.operate.entities={
         item_template:
             "<tr id='template' class='template'>"
                 +"<td post='name'><input type='text' name='name'/></td>"
-                +"<td post='desc'><input type='text' name='desc'/></td>"
+                +"<td post='description'><input type='text' name='description'/></td>"
                 +"<td><i class='icon checkmark sign finish-add'></i><i class='icon trash' role='temp'></i></td>"+
                 "</tr>"
     },
@@ -382,9 +382,9 @@ BACKINDEX.admin.operate.init=function(){
 
 
             //post
-            var postObject={material:{}};
+            var postObject={material:{},type:100};
             postObject.material.name=value_array[0];
-            postObject.material.desc=value_array[1];
+            postObject.material.description=value_array[1];
             $.ajax({
                 url:href,
                 data:postObject,
