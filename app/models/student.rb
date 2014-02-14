@@ -21,6 +21,7 @@ class Student < ActiveRecord::Base
   has_many :sub_courses,:through=>:courses
   has_many :original_homeworks,:source=>'homeworks',:through=>:sub_courses
   has_many :materials,:as=>'materialable'
+  has_many :course_materials, :source => 'materials',:through => :student_courses
 
   after_destroy :delete_related
 

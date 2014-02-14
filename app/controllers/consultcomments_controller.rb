@@ -6,7 +6,7 @@ class ConsultcommentsController < ApplicationController
     msg.result = false
     msg.content = '创建咨询评论失败'
     @consultcomment = Consultcomment.new(params[:consultcomment])
-    @consultcomment.logininfo = current_user
+    @consultcomment.logininfo = current_logininfo
     
     msg.result = @consultcomment.save
     msg.object = ConsultcommentPresenter.new(@consultcomment).to_json

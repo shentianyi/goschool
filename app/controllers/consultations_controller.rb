@@ -13,7 +13,7 @@ class ConsultationsController < ApplicationController
     @student = Student.find(params[:id])
     if @student
       @consultation = Consultation.new(params[:consultation])
-      @consultation.logininfo_id = current_user.id
+      @consultation.logininfo_id = current_logininfo.id
       if @consultation.save
         msg.result = true
         msg.object = ConsultationPresenter.new(@consultation).to_json

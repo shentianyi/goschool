@@ -12,8 +12,8 @@ class CommentsController < ApplicationController
     msg = Msg.new
     msg.result = false
     @c = Comment.new(params[:comment])
-    @c.logininfo = current_user
-    if current_user.check_role(400)
+    @c.logininfo = current_logininfo
+    if current_logininfo.check_role(400)
       @c.is_teacher = true
     else
       @c.is_teacher = false

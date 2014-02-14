@@ -8,7 +8,7 @@ class StudentsController < ApplicationController
     @active_left_aside='students'
     @students = Student.paginate(:page=>params[:page],:per_page=>10).order("created_at DESC")
     @student_presenters = StudentPresenter.init_presenters(@students)
-    @custom_views=CustomView.by_user_id_and_entity_type(current_user.id,'Student').all
+    @custom_views=CustomView.by_user_id_and_entity_type(current_logininfo.id,'Student').all
     #respond_to do |format|
   #  format.html # index.html.erb
   #  format.json { render json: @students }
@@ -295,7 +295,7 @@ class StudentsController < ApplicationController
   end
 
   def materials(student)
-    
+    @materials = student.material
   end
 
   def get_student

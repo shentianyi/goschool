@@ -48,14 +48,14 @@ class SchedulesController < ApplicationController
 
   def teachers
     @msg.result=true
-    params[:teacher_id]= params[:teacher_id] || current_user.user.id
+    params[:teacher_id]= params[:teacher_id] || current_logininfo.user.id
     @msg.content=SchedulePresenter.init_json_presenters( Schedule.by_teacher_date(params).all)
     render :json=>@msg
   end
 
   def teacher
     @msg.result=true
-    teacher_id= params[:teacher_id] || current_user.user.id
+    teacher_id= params[:teacher_id] || current_logininfo.user.id
     @msg.content=SchedulePresenter.init_json_presenters( Schedule.by_teacher_id(nil,teacher_id).all)
     render :json=>@msg
   end

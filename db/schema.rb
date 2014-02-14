@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140121024029) do
+ActiveRecord::Schema.define(:version => 20140214030859) do
 
   create_table "achievementresults", :force => true do |t|
     t.string   "valuestring"
@@ -200,6 +200,21 @@ ActiveRecord::Schema.define(:version => 20140121024029) do
   end
 
   add_index "logininfos", ["tenant_id"], :name => "index_logininfos_on_tenant_id"
+
+  create_table "materials", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "status"
+    t.integer  "materialable_id"
+    t.string   "materialable_type"
+    t.integer  "material_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "materials", ["material_id"], :name => "index_materials_on_material_id"
+  add_index "materials", ["materialable_id"], :name => "index_materials_on_materialable_id"
+  add_index "materials", ["materialable_type"], :name => "index_materials_on_materialable_type"
 
   create_table "posts", :force => true do |t|
     t.integer  "course_id"

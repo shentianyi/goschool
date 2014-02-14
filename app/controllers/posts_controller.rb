@@ -40,7 +40,7 @@ class PostsController < ApplicationController
     
     @post = Post.new(params[:post])
     @post.tenant = current_tenant
-    @post.logininfo = current_user
+    @post.logininfo = current_logininfo
     @post.course = @course
 
     Attachment.add(params[:attachs],@post)
