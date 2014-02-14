@@ -22,14 +22,16 @@ class StudentsController < ApplicationController
     #@student = Student.find(params[:id])
     @presenter=StudentPresenter.new(@student)
     case params[:part]
-    when 'achieve'
-      achievements(@student)
-    when 'friendship'
-      relation(@student)
-    when 'consult-record'
-      consultation(@student)
-    when 'class-performance'
-      performance(@student)
+      when 'achieve'
+        achievements(@student)
+      when 'friendship'
+        relation(@student)
+      when 'consult-record'
+        consultation(@student)
+      when 'class-performance'
+        performance(@student)
+      when 'materials'
+        materials(@student)
     else
     @partial = 'class-and-service'
     courses(@student)
@@ -290,6 +292,10 @@ class StudentsController < ApplicationController
       @relations<<s
       end
     end
+  end
+
+  def materials(student)
+    
   end
 
   def get_student
