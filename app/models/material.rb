@@ -12,6 +12,6 @@ class Material < ActiveRecord::Base
 
   private
   def validate_save
-    errors.add(:name, '材料名称不可为空') if self.name.blank? && (self.materialable.is_a?(Setting) || self.materialable.is_a?(Course)))
+    errors.add(:name, '材料名称不可为空') if self.name.blank? && (self.materialable.is_a?(Setting) || self.materialable.is_a?(Course))
   end
 end
