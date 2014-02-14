@@ -1,30 +1,33 @@
 <table class="ui celled table segment">
-     <thead>
-          <tr>
-               <!--<th class="wide two"></th>-->
-               <th class="wide three">姓名</th>
-               <th class="wide five">报班时间</th>
-               <th class="wide five">支付情况</th>
-               <th class="wide three"></th>
-          </tr>
-     </thead>
-     <tbody>
-          <%@students.each do |student|%>
-          <tr id="<%=student.student_course_id%>">
+  <thead>
+  <tr>
+    <!--<th class="wide two"></th>-->
+    <th class="wide three">姓名</th>
+    <th class="wide five">报班时间</th>
+    <th class="wide five">支付情况</th>
+    <th class="wide three"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @students.each do |student| %>
+      <tr id="<%= student.student_course_id %>">
+        <td>
+          <a href="<%= student_path(student.id) %>"> <%= student.name %></a>
+        </td>
+        <td><%= student.enrol_time_display %></td>
+        <td <%= 'class=positive' if student.paid %>>
+          <div class="ui checkbox" name="join-pay">
 
-               <td><%=student.name%></td>
-               <td><%=student.enrol_time_display%></td>
-               <td <%= 'class=positive' if student.paid%>>
-               <div class="ui checkbox" name="join-pay">
-                   
-                    <input type="checkbox" <%= ' checked' if student.paid%>>
-                    <label>已经支付</label>
-               </div></td>
-               <td>
-               <div class="red button ui mini out-class" affect='<%=student.student_course_id%>'>
-                    退班
-               </div></td>
-          </tr>
-          <%end%>
-     </tbody>
+            <input type="checkbox" <%= ' checked' if student.paid %>>
+            <label>已经支付</label>
+          </div>
+        </td>
+        <td>
+          <div class="red button ui mini out-class" affect='<%= student.student_course_id %>'>
+            退班
+          </div>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
 </table>
