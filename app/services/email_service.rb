@@ -1,6 +1,6 @@
 #encoding: utf-8
 class EmailService
-  def self. send_schedule_job  type,institution_id,user_ids=nil
+  def self.send_schedule_job  type,institution_id,user_ids=nil
     Resque.enqueue(CourseEmailSender,type,institution_id,user_ids)
   end
   def self.send_schedule_email type,institution_id,user_ids=nil
