@@ -3,7 +3,9 @@
   <% if @courses %>
       <% @courses.each do |c| %>
           <div class="item">
-            <h4><%= c.name %></h4>
+            <h4>
+              <%= c.name %>
+            </h4>
 
             <p class="sub-class"><%= User.by_course_id(c.course_id).pluck(:name).join(',') %></p>
 

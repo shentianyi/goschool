@@ -8,7 +8,7 @@ class InstitutionsController < ApplicationController
   end
 
   def create
-    @institution=current_tenant.institutions.build(params[:institution].strip)
+    @institution=current_tenant.institutions.build(params[:institution])
     @msg.content=(@msg.result=@institution.save) ? @institution.id :  @institution.errors.messages
     render :json=>@msg
   end

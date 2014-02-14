@@ -1,4 +1,4 @@
-#encoding: uft-8
+#encoding: utf-8
 class MaterialsController < ApplicationController
   before_filter :init_message, :only => [:create, :update, :destroy]
   before_filter :get_material, :only => [:update, :show, :destroy]
@@ -18,7 +18,8 @@ class MaterialsController < ApplicationController
         creates_student_course_material
     end
     if @material
-    @msg.content=(@msg.result=@material.save) ? @material.id : @material.errors.messages
+      @material.logininfo=current_logininfo
+      @msg.content=(@msg.result=@material.save) ? @material.id : @material.errors.messages
     else
       @msg.result=false
       @msg.content ='参数错误'
@@ -32,9 +33,8 @@ class MaterialsController < ApplicationController
   end
 
   def destroy
-    #@material.destroy
-
-    @msg.result=@material.destroy
+    @material.destroy
+    @msg.result=@material.destroyed?
     render :json => @msg
   end
 
@@ -55,7 +55,7 @@ class MaterialsController < ApplicationController
   end
 
   def create_course_material
-   @material=@course.materials.build(params[:material]) if @course=Course.find_by_id(params[:id])
+    @material=@course.materials.build(params[:material]) if @course=Course.find_by_id(params[:id])
   end
 
   def create_student_course_material

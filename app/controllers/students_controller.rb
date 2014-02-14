@@ -223,6 +223,28 @@ class StudentsController < ApplicationController
     render partial:'detail'
   end
 
+  #submit material
+  def submit_material
+    msg = Msg.new
+    msg.result = false
+    @material = Material.find_by_id(params[:id])
+    if @material
+      msg.result = @material.update_attribute('status',MaterialStatus::SUBMITTED)
+    end
+
+    render :json=>msg
+  end
+
+  #material
+  def student_materials
+    msg = Msg.new
+    msg.result = false
+    @materials = StudentCourse.find_by_id(params[:id]).materials
+    msg.result = true
+    msg.content = @materials
+    render :json => msg
+  end
+
   # List Search Result
   def fast_search
     results = []
@@ -295,7 +317,7 @@ class StudentsController < ApplicationController
   end
 
   def materials(student)
-    @materials = student.material
+    Course.joins(:student_courses).where('student_courses.student_id = ?',student.id).select('student_courses.id as student_course_id,courses.*')
   end
 
   def get_student
