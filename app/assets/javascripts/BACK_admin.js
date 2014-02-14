@@ -15,22 +15,22 @@ BACKINDEX.admin.init=(function(){
     $(document).ready(function(){
         BACKINDEX.admin.operate.init();
 
-//        BACKINDEX.admin.operate.type="users";
+        BACKINDEX.admin.operate.type="materials";
 
         //post
-        var url=(window.location.href).split("/");
-        if(url[url.length-1]=="settings" && url[url.length-2]!="settings"){
-             $("#admin-setting>a").eq(0).addClass("active");
-             var name=$("#admin-setting>a").eq(0).attr("name");
-             BACKINDEX.admin.operate.type=name;
-            $("#back-index-main>header label").text($("#admin-setting>a").eq(0).find("label").text());
-        }
-        else{
-            var name=url[url.length-1];
-            $("#admin-setting").find("a[name='"+name+"']").addClass("active");
-            BACKINDEX.admin.operate.type=name;
-            $("#back-index-main>header label").text($("#admin-setting>a.active").find("label").text());
-        }
+//        var url=(window.location.href).split("/");
+//        if(url[url.length-1]=="settings" && url[url.length-2]!="settings"){
+//             $("#admin-setting>a").eq(0).addClass("active");
+//             var name=$("#admin-setting>a").eq(0).attr("name");
+//             BACKINDEX.admin.operate.type=name;
+//            $("#back-index-main>header label").text($("#admin-setting>a").eq(0).find("label").text());
+//        }
+//        else{
+//            var name=url[url.length-1];
+//            $("#admin-setting").find("a[name='"+name+"']").addClass("active");
+//            BACKINDEX.admin.operate.type=name;
+//            $("#back-index-main>header label").text($("#admin-setting>a.active").find("label").text());
+//        }
 
     });
 })();
@@ -80,6 +80,17 @@ BACKINDEX.admin.operate.entities={
                 +"</td>"
                 +"<td><i class='icon checkmark sign finish-add'></i><i class='icon trash' role='temp'></i></td>"+
             "</tr>"
+    },
+    materials:{
+        address:"/settings/materials/ajax",
+        href:"/settings/materials",
+        post_href:"/materials",
+        item_template:
+            "<tr id='template' class='template'>"
+                +"<td post='name'><input type='text' name='name'/></td>"
+                +"<td post='desc'><input type='text' name='desc'/></td>"
+                +"<td><i class='icon checkmark sign finish-add'></i><i class='icon trash' role='temp'></i></td>"+
+                "</tr>"
     },
     settings:{
         address:"/settings/settings/ajax",
@@ -160,6 +171,10 @@ BACKINDEX.admin.operate.init=function(){
             else if(type=="users"){
                 postObject.user={};
                 postObject.user[postType]=value;
+            }
+            else if(type=="materials"){
+                postObject.material={};
+                postObject.material[postType]=value;
             }
             $.ajax({
                url:href+"/"+id,
@@ -344,6 +359,52 @@ BACKINDEX.admin.operate.init=function(){
             else{
                 MessageBox("请赋予该用户至少一个角色","top","warning");
             }
+        }
+        else if(BACKINDEX.admin.operate.type=="materials"){
+            for(i=0;i<$target.length;i++){
+                validate=$target.eq(i).val().length>0?$target.eq(i).val():false;
+                if(validate){
+                    value_array.push(validate);
+                }
+                else{
+                    MessageBox("信息填写不完整","top","warning");
+                    return;
+                }
+            }
+
+//            for(i=0;i<$target.length;i++){
+//                $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
+//            }
+//            var new_id=21;
+//            $("#template").find(".add.sign.box").remove();
+//            $("#template").find(".trash").attr("role","").attr("affect",new_id);
+//            $("#template").removeClass("template").attr("id",new_id);
+
+
+            //post
+            var postObject={material:{}};
+            postObject.material.name=value_array[0];
+            postObject.material.desc=value_array[1];
+            $.ajax({
+                url:href,
+                data:postObject,
+                type:"POST",
+                success:function(data){
+                    if(data.result){
+                        for(i=0;i<$target.length;i++){
+                            $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
+                        }
+                        var new_id=data.content;
+                        $("#template").find(".add.sign.box").remove();
+                        $("#template").find(".trash").attr("role","").attr("affect",new_id);
+                        $("#template").removeClass("template").attr("id",new_id);
+                    }
+                    else{
+                        MessageBox_content(data.content);
+                    }
+                }
+            });
+
         }
     });
 //    default-password 修改
