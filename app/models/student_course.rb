@@ -4,6 +4,7 @@ class StudentCourse < ActiveRecord::Base
   belongs_to :course
   belongs_to :tenant
   has_many :sub_courses,:through=>:course
+  has_many :materials, :as=>'materialable'
   attr_accessible :paid, :status,:progress
   attr_accessible :student_id,:course_id
   validate :validate_save
