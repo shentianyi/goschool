@@ -2,6 +2,7 @@
 class Setting < ActiveRecord::Base
   belongs_to :tenant
   attr_accessible :default_pwd
+  has_many :materials,:as=>:materialable
 
   acts_as_tenant(:tenant)
 

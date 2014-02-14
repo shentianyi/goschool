@@ -6,11 +6,12 @@ class CreateMaterials < ActiveRecord::Migration
       t.integer :status
       t.references :materialable, :polymorphic=>true
       t.references :material
-
+      t.references :tenant
       t.timestamps
     end
     add_index :materials, :materialable_id
     add_index :materials, :material_id
     add_index :materials, :materialable_type
+    add_index :materials,:tenant_id
   end
 end

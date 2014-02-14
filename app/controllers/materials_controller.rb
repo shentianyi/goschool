@@ -1,83 +1,64 @@
+#encoding: uft-8
 class MaterialsController < ApplicationController
-  # GET /materials
-  # GET /materials.json
-  def index
-    @materials = Material.all
+  before_filter :init_message, :only => [:create, :update, :destroy]
+  before_filter :get_material, :only => [:update, :show, :destroy]
+  before_filter :render_nil_msg, :only => [:update, :destroy]
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @materials }
-    end
-  end
+  before_filter :require_user_as_admin, :only => :create_setting_material
+  before_filter :require_user_as_manager, :only => [:create_course_material, :create_student_course_material]
 
-  # GET /materials/1
-  # GET /materials/1.json
-  def show
-    @material = Material.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @material }
-    end
-  end
-
-  # GET /materials/new
-  # GET /materials/new.json
-  def new
-    @material = Material.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @material }
-    end
-  end
-
-  # GET /materials/1/edit
-  def edit
-    @material = Material.find(params[:id])
-  end
-
-  # POST /materials
-  # POST /materials.json
   def create
-    @material = Material.new(params[:material])
-
-    respond_to do |format|
-      if @material.save
-        format.html { redirect_to @material, notice: 'Material was successfully created.' }
-        format.json { render json: @material, status: :created, location: @material }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @material.errors, status: :unprocessable_entity }
-      end
+    type=params[:type].to_i
+    case type
+      when 100
+        create_setting_material
+      when 200
+        create_course_material
+      when 300
+        creates_student_course_material
     end
+    if @material
+    @msg.content=(@msg.result=@material.save) ? @material.id : @material.errors.messages
+    else
+      @msg.result=false
+      @msg.content ='参数错误'
+    end
+    render :json => @msg
   end
 
-  # PUT /materials/1
-  # PUT /materials/1.json
   def update
-    @material = Material.find(params[:id])
+    @msg.content=@material.errors.messages unless @msg.result=@material.update_attributes(params[:material].strip)
+    render :json => @msg
+  end
 
-    respond_to do |format|
-      if @material.update_attributes(params[:material])
-        format.html { redirect_to @material, notice: 'Material was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @material.errors, status: :unprocessable_entity }
-      end
+  def destroy
+    #@material.destroy
+
+    @msg.result=@material.destroy
+    render :json => @msg
+  end
+
+  private
+  def get_material
+    @material=Material.find_by_id(params[:id])
+  end
+
+  def render_nil_msg
+    unless @material
+      @msg.content='不存在此材料'
+      render :json => @msg
     end
   end
 
-  # DELETE /materials/1
-  # DELETE /materials/1.json
-  def destroy
-    @material = Material.find(params[:id])
-    @material.destroy
+  def create_setting_material
+    @material=current_tenant.setting.materials.build(params[:material])
+  end
 
-    respond_to do |format|
-      format.html { redirect_to materials_url }
-      format.json { head :no_content }
-    end
+  def create_course_material
+   @material=@course.materials.build(params[:material]) if @course=Course.find_by_id(params[:id])
+  end
+
+  def create_student_course_material
+    @material=@student_course.materials.build(params[:material]) if @student_course=StudentCourse.find_by_id(params[:id])
   end
 end
