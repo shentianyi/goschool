@@ -5,7 +5,7 @@ class Material < ActiveRecord::Base
   belongs_to :logininfo
   has_many :materials,:dependent => :delete_all
 
-  attr_accessible :description, :name, :status
+  attr_accessible :description, :name, :status ,:materialable_type
   acts_as_tenant(:tenant)
 
   validate :validate_save
