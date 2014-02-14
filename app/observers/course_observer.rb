@@ -4,6 +4,7 @@ class CourseObserver<ActiveRecord::Observer
   def after_create course
     course.create_default_sub_course
     course.add_tags
+    course.migrate_materials
   end
 
   def after_update course

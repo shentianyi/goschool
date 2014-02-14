@@ -23,7 +23,7 @@
     <% @materials.each do |material| %>
         <tr id="<%= material.id %>">
           <td post="name"><%= material.name %></td>
-          <td post="desc"><%= material.description %></td>
+          <td post="description"><%= material.description %></td>
           <td>
             <i class="trash icon" affect="<%= material.id %>"></i>
           </td>
