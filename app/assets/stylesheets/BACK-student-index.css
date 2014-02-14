@@ -5,12 +5,22 @@
     margin-left:-17.5px;
 }
 .back-index-main>.search-list>.search-result>li .name{
-    font-size:15px;
+    font-size:17px;
     color:#63A69F;
     font-weight:bolder;
     text-align:center;
-    margin-bottom:3px;
+    margin-bottom:0px;
 }
+/*.back-index-main>.search-list>.search-result>li .remark{*/
+    /*font-size:11px;*/
+    /*color:#9d9d9d;*/
+    /*word-break:break-all;*/
+    /*word-wrap:break-word;*/
+    /*width:100%;*/
+    /*font-weight:lighter;*/
+    /*text-align:left;*/
+    /*margin-bottom:0px;*/
+/*}*/
 .back-index-main>.search-list>.search-result>li .first-column .icons{
     width:40px;
     margin:0 auto;
@@ -26,13 +36,7 @@
 .back-index-main>.search-list>.search-result>li .first-column i:hover{
     color:#222;
 }
-.back-index-main>.search-list>.search-result>li .remark{
-    margin:0px;
-    font-size:11px;
-    word-break:break-all;
-    word-wrap:break-word;
-    color:#222;
-}
+
 .back-index-main>.search-list>.search-result>li .type{
     color:#E44B3D;
     font-weight:bolder;
