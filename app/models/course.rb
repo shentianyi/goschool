@@ -10,6 +10,7 @@ class Course < ActiveRecord::Base
   has_many :student_courses,:dependent=>:destroy
   has_many :students,:through=> :student_courses
   has_many :teachers,:through=>:sub_courses
+  has_many :materials,:as=>:materialable
   attr_accessible :actual_number, :description, :end_date, :expect_number, :lesson, :name, :start_date, :type
   attr_accessible :has_sub,:status,:institution_id,:tenant_id,:code,:has_base
   # for callback
