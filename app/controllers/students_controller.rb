@@ -242,6 +242,13 @@ class StudentsController < ApplicationController
     end
   end
 
+  #student_material
+  def materials
+    sc = StudentCourse.where('course_id = ? and student_id = ?',params[:course_id],params[:student_id])
+    @materials = sc.materials
+    render :json => @materials
+  end
+
   private
 
   def performance student
@@ -295,7 +302,7 @@ class StudentsController < ApplicationController
   end
 
   def materials(student)
-    @materials = student.material
+    @courses = Student.courses
   end
 
   def get_student
