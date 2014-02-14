@@ -1,7 +1,7 @@
 <aside class="back-index-aside">
   <a class="logo"></a>
   <ul class="first-ul">
-    <% if current_user.is_employee? %>
+    <% if current_logininfo.is_employee? %>
         <li>
           <a class="<%= @active_left_aside=='students' ? 'active' : '' %>" href='<%= students_path %>'>学生信息</a>
         </li>
@@ -9,19 +9,19 @@
           <a class="<%= @active_left_aside=='courses' ? 'active' : '' %>" href='<%= courses_path %>'>课程信息</a>
         </li>
     <% end %>
-    <% if current_user.is_teacher? || current_user.is_student? %>
+    <% if current_logininfo.is_teacher? || current_logininfo.is_student? %>
         <li>
-          <a class="<%= @active_left_aside=='homepage' ? 'active' : '' %>" href='<%= current_user.is_teacher? ? teachers_path : student_index_path %>'>我的主页</a>
+          <a class="<%= @active_left_aside=='homepage' ? 'active' : '' %>" href='<%= current_logininfo.is_teacher? ? teachers_path : student_index_path %>'>我的主页</a>
         </li>
     <% end %>
-    <% if current_user.is_student? %>
+    <% if current_logininfo.is_student? %>
         <li>
-          <a class="<%= @active_left_aside=='achievements' ? 'active' : '' %>" href="/student/<%= current_user.student.id %>">我的成就</a>
+          <a class="<%= @active_left_aside=='achievements' ? 'active' : '' %>" href="/student/<%= current_logininfo.student.id %>">我的成就</a>
         </li>
     <% end %>
   </ul>
   <ul class="second-ul" id="main-navigator-bottom">
-    <% if current_user.is_admin? %>
+    <% if current_logininfo.is_admin? %>
         <li>
           <a href='<%= settings_path %>'> <i class="settings icon" data-content="全局配置"></i></a>
         </li>

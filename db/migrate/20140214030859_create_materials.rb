@@ -3,7 +3,7 @@ class CreateMaterials < ActiveRecord::Migration
     create_table :materials do |t|
       t.string :name
       t.string :description
-      t.integer :status
+      t.integer :status, :default=>MaterialStatus::DEFAULT
       t.references :materialable, :polymorphic=>true
       t.references :material
       t.references :tenant

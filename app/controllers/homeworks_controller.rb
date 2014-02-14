@@ -9,9 +9,9 @@ class HomeworksController < ApplicationController
   layout 'bbs'
   def index
     @homework_active=true
-    if current_user.is_teacher?
+    if current_logininfo.is_teacher?
       teacher_index
-    elsif current_user.is_student?
+    elsif current_logininfo.is_student?
       student_index
     else
       error_page_404
@@ -29,9 +29,9 @@ class HomeworksController < ApplicationController
   def show
     @homework_acitve=true
     if   @homework
-      if current_user.is_teacher?
+      if current_logininfo.is_teacher?
         teacher_show
-      elsif current_user.is_student?
+      elsif current_logininfo.is_student?
         student_show
       end
     else
@@ -70,9 +70,9 @@ class HomeworksController < ApplicationController
   end
 
   def get_homeworks menu_type
-    @homeworks =if current_user.is_teacher?
+    @homeworks =if current_logininfo.is_teacher?
       Homework.by_type({id:params[:id],menu_type:menu_type})
-    elsif current_user.is_student?
+    elsif current_logininfo.is_student?
        StudentHomework.by_type({id:params[:id],menu_type:menu_type,student_id:current_student_id,sub_course_id:params[:sid]})
       else
           error_page_404
@@ -80,7 +80,7 @@ class HomeworksController < ApplicationController
   end
 
   def teacher_index
-    if @teacher_course=TeacherCourse.by_teacher(params[:id],current_user.user.id)
+    if @teacher_course=TeacherCourse.by_teacher(params[:id],current_logininfo.user.id)
       @sub_course=@teacher_course.sub_course
       session[:course_id]=@sub_course.course_id
       session[:teacher_course_id]=@teacher_course.id

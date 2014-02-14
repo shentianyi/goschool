@@ -6,7 +6,7 @@ class TeachersController < ApplicationController
   layout 'homepage'
   def index
     @active_left_aside='homepage'
-    @teacher=current_user.user
+    @teacher=current_logininfo.user
     @courses=TeacherCoursePresenter.init_presenters(TeacherCourse.detail_by_teacher(@teacher.id).all)
   end
 

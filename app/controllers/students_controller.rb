@@ -8,7 +8,7 @@ class StudentsController < ApplicationController
     @active_left_aside='students'
     @students = Student.paginate(:page=>params[:page],:per_page=>10).order("created_at DESC")
     @student_presenters = StudentPresenter.init_presenters(@students)
-    @custom_views=CustomView.by_user_id_and_entity_type(current_user.id,'Student').all
+    @custom_views=CustomView.by_user_id_and_entity_type(current_logininfo.id,'Student').all
     #respond_to do |format|
   #  format.html # index.html.erb
   #  format.json { render json: @students }
@@ -22,14 +22,16 @@ class StudentsController < ApplicationController
     #@student = Student.find(params[:id])
     @presenter=StudentPresenter.new(@student)
     case params[:part]
-    when 'achieve'
-      achievements(@student)
-    when 'friendship'
-      relation(@student)
-    when 'consult-record'
-      consultation(@student)
-    when 'class-performance'
-      performance(@student)
+      when 'achieve'
+        achievements(@student)
+      when 'friendship'
+        relation(@student)
+      when 'consult-record'
+        consultation(@student)
+      when 'class-performance'
+        performance(@student)
+      when 'materials'
+        materials(@student)
     else
     @partial = 'class-and-service'
     courses(@student)
@@ -290,6 +292,10 @@ class StudentsController < ApplicationController
       @relations<<s
       end
     end
+  end
+
+  def materials(student)
+    @materials = student.material
   end
 
   def get_student

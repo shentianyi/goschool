@@ -5,7 +5,7 @@ before_filter :init_message ,:only=>[:create,:destroy]
   before_filter :render_nil_msg , :only=>:destroy
   def create
     @custom_view = CustomView.new
-    @custom_view.user=current_user.user
+    @custom_view.user=current_logininfo.user
     @custom_view.name=params[:name]
     @custom_view.query = params[:q].to_json
     @custom_view.query_type=params[:query_type]

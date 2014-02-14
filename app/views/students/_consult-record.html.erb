@@ -1,5 +1,5 @@
 <!--partial-->
-<% is_admin = current_user.is_admin? %>
+<% is_admin = current_logininfo.is_admin? %>
 <% if @consultations %>
 <% @consultations.each do |consultation| %>
 <div class="item" id="<%= consultation.id%>">
