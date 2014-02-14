@@ -12,7 +12,7 @@
     <tfoot>
     <tr>
       <th colspan="2"></th>
-      <th >
+      <th>
         <div class="ui teal small labeled icon button add-button" id="admin-operate-add">
           <i class="add icon"></i> 添加材料
         </div>
@@ -20,15 +20,15 @@
     </tr>
     </tfoot>
     <tbody>
-
-    <tr id="<%= material.id %>">
-      <td post="name"><%= material.name %></td>
-      <td post="desc"><%= material.description %></td>
-      <td>
-        <i class="trash icon" affect="<%= material.id %>"></i>
-      </td>
-    </tr>
-
+    <% @materials.each do |material| %>
+        <tr id="<%= material.id %>">
+          <td post="name"><%= material.name %></td>
+          <td post="desc"><%= material.description %></td>
+          <td>
+            <i class="trash icon" affect="<%= material.id %>"></i>
+          </td>
+        </tr>
+    <% end %>
     </tbody>
   </table>
 </div>
