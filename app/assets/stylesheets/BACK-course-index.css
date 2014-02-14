@@ -149,6 +149,9 @@
     width:100%;
     max-height:198px;
     overflow-y:auto;
+    box-shadow:2px 2px 5px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow:2px 2px 5px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow:2px 2px 5px rgba(0, 0, 0, 0.6);
 }
 .back-index-add[name="course"]>.inner .left-part  .ui.dropdown .text
 {
@@ -189,7 +192,11 @@
     background-color: #FFFFFF;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 0.3125em;
+    -moz-border-radius: 0.3125em;
+    -webkit-border-radius: 0.3125em;
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3) inset;
+    -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3) inset;
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3) inset;
     color: rgba(0, 0, 0, 0.7);
     font-size: 0.875em;
     font-family: "Helvetica Neue","Helvetica",Arial;;
@@ -206,6 +213,41 @@
     border-color: rgba(0, 0, 0, 0.2);
     color: rgba(0, 0, 0, 0.85);
 }
+/*材料部分*/
+.back-index-add[name='course']>.inner .right-part .material-block{
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.3125em;
+    -moz-border-radius: 0.3125em;
+    -webkit-border-radius: 0.3125em;
+    margin:5px 0px 6px 25px;
+    width:298px;
+    padding:0 0px;
+    height:75px;
+}
+.back-index-add[name='course']>.inner .right-part .material-block .header{
+    background:#63A69F;
+    color:#fff;
+    cursor:pointer;
+    padding:1px 5px;
+    transition:background ease-out 0.25s;
+}
+.back-index-add[name='course']>.inner .right-part .material-block .header:hover{
+    background:#67c9bf;
+}
+.back-index-add[name='course']>.inner .right-part .material-block .header>i{
+    margin-left:7px;
+    margin-right:7px;
+}
+.back-index-add[name='course']>.inner .right-part .material-block .header>i,
+.back-index-add[name='course']>.inner .right-part .material-block .header label{
+    font-size: 0.875em;
+    font-weight:200;
+}
+.back-index-add[name='course']>.inner .right-part .material-block .button{
+    float:right;
+    margin-top:3px;
+}
+/*right part*/
 .back-index-add[name='course']>.inner .right-part{
     overflow-x:hidden;
 }
