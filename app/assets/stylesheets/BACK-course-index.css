@@ -236,7 +236,7 @@
 }
 .back-index-add[name='course']>.inner .right-part .material-block .header>i{
     margin-left:7px;
-    margin-right:7px;
+    margin-right:3px;
 }
 .back-index-add[name='course']>.inner .right-part .material-block .header>i,
 .back-index-add[name='course']>.inner .right-part .material-block .header label{
@@ -247,6 +247,137 @@
     float:right;
     margin-top:3px;
 }
+.back-index-add[name='course']>.inner .right-part .material-block .content{
+    height:55px;
+}
+.back-index-add[name='course']>.inner .right-part .material-block .content ul{
+    list-style-type: none;
+    padding:0px;
+    margin:0px;
+    height:100%;
+    width:100%;
+    overflow-y:auto;
+}
+.back-index-add[name='course']>.inner .right-part .material-block .content ul li{
+    margin-bottom:1px;
+    padding:2px 0 0 6px;
+    width:90%;
+    position:relative;
+}
+.back-index-add[name='course']>.inner .right-part .material-block .content ul li p{
+    margin:0px;
+    font-size:11px;
+    color:#9d9d9d;
+}
+.back-index-add[name='course']>.inner .right-part .material-block .content ul li p:first-of-type{
+    color:#222;
+    font-size:12px;
+}
+.back-index-add[name='course']>.inner .right-part .material-block .content ul li p:nth-of-type(2){
+    vertical-align:bottom;
+}
+.back-index-add[name='course']>.inner .right-part .material-block .content ul li .remove{
+    position:absolute;
+    right:-15px;
+    color:#9d9d9d;
+    cursor: pointer;
+    pointer-events:auto;
+    top:7px;
+    font-size:12px;
+    transition:color ease-out 0.2s;
+}
+.back-index-add[name='course']>.inner .right-part .material-block .content ul li .remove:hover{
+    color:#D95C5C;
+}
+.back-index-add[name='course']>.inner .right-part .material-setting{
+    width:296px;
+    height:230px;
+    background:#fff;
+    box-shadow:2px 2px 4px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow:2px 2px 4px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow:2px 2px 4px rgba(0, 0, 0, 0.5);
+    border-width:0 0px 1px 1px;
+    border-color:rgba(0,0,0,0.2);
+    border-style:solid;
+    z-index:101;
+    position:absolute;
+    margin-left:26px;
+    margin-top:-62px;
+    border-radius:0 0 0.3125em 0.3125em;
+    -moz-border-radius:0 0 0.3125em 0.3125em;
+    -webkit-border-radius:0 0 0.3125em 0.3125em;
+    display:none;
+    overflow-y:auto;
+}
+.back-index-add[name='course']>.inner .right-part .material-setting .table{
+    font-size:12px;
+    border-radius:0px;
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+    width:100%;
+}
+.back-index-add[name='course']>.inner .right-part .material-setting .table td{
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.back-index-add[name='course']>.inner .right-part .material-setting .table td input{
+    border:1px solid rgba(0,0,0,0.2);
+    border-radius:1px;
+    -moz-border-radius:1px;
+    -webkit-border-radius:1px;
+    padding:1px 2px;
+
+}
+.back-index-add[name='course']>.inner .right-part .material-setting .table tr td:first-of-type input{
+    width:50px;
+}
+.back-index-add[name='course']>.inner .right-part .material-setting .table tr td:nth-of-type(2) input{
+    width:150px;
+}
+.back-index-add[name='course']>.inner .right-part .material-setting .table tr td:last-of-type{
+    text-align:center;
+}
+.back-index-add[name='course']>.inner .right-part .material-setting .table .minus,
+.back-index-add[name='course']>.inner .right-part .material-setting .table .plus,
+.back-index-add[name='course']>.inner .right-part .material-setting .table .checkmark{
+    font-size:13px;
+    cursor:pointer;
+    transition:color ease-out 0.25s;
+}
+.back-index-add[name='course']>.inner .right-part .material-setting .table .minus{
+    color:#D95C5C;
+}
+.back-index-add[name='course']>.inner .right-part .material-setting .table .minus:hover{
+    color:#f69090;
+}
+
+.back-index-add[name='course']>.inner .right-part .material-setting .table .plus,
+.back-index-add[name='course']>.inner .right-part .material-setting .table .checkmark{
+    color:#63A69F;
+}
+.back-index-add[name='course']>.inner .right-part .material-setting .table .plus:hover,
+.back-index-add[name='course']>.inner .right-part .material-setting .table .checkmark:hover{
+    color:#88ede2;
+}
+.back-index-add[name='course']>.inner .right-part .material-setting .material-final{
+    height:20px;
+    position:absolute;
+    bottom:0px;
+    width:100%;
+}
+.back-index-add[name='course']>.inner .right-part .material-setting .material-final label{
+    float:right;
+    font-size:13px;
+    margin-right:9px;
+    margin-left:3px;
+    cursor:pointer;
+}
+.back-index-add[name='course']>.inner .right-part .material-setting .material-final label.finish{
+    color:#63A69F;
+}
+.back-index-add[name='course']>.inner .right-part .material-setting .material-final label.cancel{
+    color:#D95C5C;
+}
 /*right part*/
 .back-index-add[name='course']>.inner .right-part{
     overflow-x:hidden;
@@ -255,7 +386,7 @@
     margin:5px 0 1px 25px;
 }
 .back-index-add[name='course']>.inner .right-part>.choose-teacher-delivery{
-    margin:5px 0px 6px 25px;
+    margin:5px 0px 6px 26px;
 }
 .back-index-add[name='course']>.inner .right-part>.choose-teacher-delivery .or:before{
     content:"&"

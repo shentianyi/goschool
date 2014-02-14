@@ -85,7 +85,8 @@
 .detail-time span:first-of-type,
 .detail-labels span:first-of-type,
 .detail-count span:first-of-type,
-.detail-people span:first-of-type{
+.detail-people span:first-of-type,
+.detail-material span:first-of-type{
     display:inline-block;
     width:61px;
     text-align:right;
@@ -98,7 +99,8 @@
 .detail-institution span:nth-of-type(2),
 .detail-code span:nth-of-type(2),
 .detail-count span:nth-of-type(2),
-.detail-people span:nth-of-type(2){
+.detail-people span:nth-of-type(2),
+.detail-material span:nth-of-type(2){
     display:inline-block;
     max-width:85%;
     word-break:break-all;

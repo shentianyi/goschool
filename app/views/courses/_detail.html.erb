@@ -29,6 +29,14 @@
      <p class="detail-code">
           <span><%= @course.type_display%>代号:</span><span><%= @course.code%></span>
      </p>
+     <p class="detail-material">
+         <span>材料:</span>
+         <span>
+            <label>托福成绩单</label>
+            <label>体检证明</label>
+            <label>护照以及成绩</label>
+         </span>
+     </p>
      <p class="detail-labels">
           <span>标签:</span>
           <span> <%@course.tags.each do |tag|%> <a class="ui blue label"> <%= tag%> </a> <%end%></span>

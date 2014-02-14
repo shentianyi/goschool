@@ -289,7 +289,7 @@ BACKINDEX.admin.operate.init=function(){
                             $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
                         }
                         var new_id=data.content;
-                        $("#template").find(".add.sign.box").remove();
+                        $("#template").find(".finish-add").remove();
                         $("#template").find(".trash").attr("role","").attr("affect",new_id);
                         $("#template").removeClass("template").attr("id",new_id);
                     }
