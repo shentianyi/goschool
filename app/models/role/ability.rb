@@ -4,11 +4,17 @@ class Ability
   def initialize(user)
     if Role.admin?(user.role_ids)
       can :manage,:all
+      can :read, :all
     elsif Role.manager?(user.role_ids)
-      can :manage,:all
+      can :manage,[Student,LogininfoSession,Attachment,FileData,Course,Schedule]
+      can [:create],Consultation
+      can :manage, Consultcomment, :logininfo_id => user.id
+      can :manage,[Logininfo],:id=>user.id
       can :read,:all
     elsif Role.sale?(user.role_ids)
-      can :manage,[Cousultation,Student,LogininfoSession,Attachment,FileData]
+      can :manage,[Student,LogininfoSession,Attachment,FileData,Course,Schedule]
+      can [:create],Consultation
+      can :manage, Consultcomment, :logininfo_id => user.id
       can :manage,[Logininfo],:id=>user.id
       can :read,:all
     elsif Role.student?(user.role_ids)
@@ -21,8 +27,9 @@ class Ability
       can :manage,Homework
 
     elsif Role.teacher?(user.role_ids)
-      can :manage,[LogininfoSession,Homework,StudentHomework,Attachment,FileData]
-      can :manage,:all
+      can :manage,[LogininfoSession,Homework,StudentHomework,Attachment,Schedule,FileData,Post,Comment]
+      can :manage,Logininfo,:id=>user.id
+      # can :manage,:all
       can :read,:all
     end
   end

@@ -21,7 +21,7 @@
     -webkit-box-shadow:2px 2px 2px rgba(0,0,0,0.5);
     border:1px solid rgba(0,0,0,0.3);
     margin-top:5px !important;
-    margin-bottom:350px;
+    margin-bottom:350px !important;
 }
 .segment.student-homework>.ignored.ui.icon.message>i{
     font-size:35px;
@@ -73,7 +73,7 @@
     font-size:15px;
     cursor:pointer;
     transition:color 0.25s ease-out;
-    pointer-events:none
+
 }
 .segment.student-homework ul table td:nth-of-type(3) i{
     color:#C69C6D;
@@ -119,6 +119,7 @@
     right:10px;
     top:5px;
     max-width:85%;
+    z-index:99;
 }
 .homework-line-wrap>.ui.basic.buttons>.button.active{
     background-color:#F38630;

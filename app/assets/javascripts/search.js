@@ -24,6 +24,76 @@
 // {name:string,introduction:string,parameter_type:'String',query_type:string,is_explicit:boolean}
  //String_Array,Number_Array,Time_Span_Array,DateTime,Timespan,String,Number,Boolean
 
+(function(){
+    //query initial
+    $("body").on("keyup","#add-to-view",function(event){
+        var e=adapt_event(event).event;
+        if(e.keyCode==13){
+            $("#add-to-view+.button").click();
+        }
+    });
+    $("body").on("click","#add-to-view+.button",function(){
+        var value= $.trim($("#add-to-view").val());
+        if(value.length==0){
+            MessageBox("请填写快捷视图名称","top","warning");
+        }
+        else{
+            var object=Search.instance();
+            //post
+            $.post("/custom_views",{
+                name:value,
+                q:object.queries,
+                query_type:object.current_mode,
+                entity_type:object.entity
+            },function(data){
+                if(data.result){
+                    var template={data:{value:value,id:data.content}};
+                    var render=Mustache.render('{{#data}}<a class="item" id="{{id}}">' +
+                        '<i class="icon trash" ></i>' +
+                        '<label>{{value}}</label>' +
+                        '</a>{{/data}}',template);
+                    $("#short-view").append(render);
+                }
+                else{
+                    MessageBox_content(data.content);
+                }
+            });
+//            var template={data:{value:value,id:21}};
+//            var render=Mustache.render('<a class="item">' +
+//                '<i class="icon trash"></i>' +
+//                '<label>value</label>' +
+//                '</a>',template);
+//            $("#short-view").append(render);
+        }
+    });
+    $("body").on("click","#short-view .trash",function(event){
+        stop_propagation(event);
+        //post delete
+        var id=$(this).parents(".item").eq(0).attr("id");
+        var $this=$(this);
+        $.ajax({
+            url:"/custom_views/"+id,
+            type:"DELETE",
+            data:{},
+            success:function(data){
+                if(data.result){
+                    $this.parents(".item").eq(0).remove();
+                }
+                else{
+                    MessageBox_content(data.content);
+                }
+            }
+        })
+
+    });
+    $("body").on("click","#short-view  .item",function(){
+        var data_to_sent = {view_id:$(this).attr("id"),page:1};
+        BACKINDEX.right_list.generateResult(data_to_sent,"only_page");
+        $("#container_for_list").empty();
+
+    })
+})();
+
 
 var Search = {
     //constructor
@@ -179,7 +249,7 @@ var Search = {
                //
                     var target=adapt_event(event).target;
                     if($.trim($(target).val()).length>0){
-                        var data_to_sent = {search_type:event.data.obj.current_mode,entity_type:event.data.obj.entity,page:1,per_page:20,search_queries:this.value};
+                        var data_to_sent = {search_type:event.data.obj.current_mode,entity_type:event.data.obj.entity,page:1,per_page:20,search_queries: $.trim(this.value)};
                         BACKINDEX.right_list.generateResult(data_to_sent);
 
                     }
@@ -259,7 +329,7 @@ var Search = {
         };
 
         search.bind_query = function(){
-            if(this.queries){
+            if(!this.queries){
                 this.queries = {};
             }
            this.queries[this.current_query["query_type"]]=this.get_conditions();
@@ -270,12 +340,12 @@ var Search = {
               .replace(/!id!/g,this.current_query["query_type"]));
 
             //context.queries[context.current_query["query_type"]]= this.get_conditions();
-            WAYNE.query_count_validate(WAYNE.query_count++)
+
         };
 
         search.get_conditions = function(){
             if(this.current_query){
-              var parsed = this.condition_validator[this.current_query["parameter_type"]](this.input.val());
+              var parsed = this.condition_validator[this.current_query["parameter_type"].toLowerCase()](this.input.val());
               if (parsed.success){
                   return parsed.result;
               }
@@ -283,7 +353,7 @@ var Search = {
         };
 
         search.validate_condition = function() {
-          return this.condition_validator[this.current_query["parameter_type"]](this.input.val());
+          return this.condition_validator[this.current_query["parameter_type"].toLowerCase()](this.input.val());
         };
 
        // String_Array,Number_Array,Time_Span,DateTime,String,Number
@@ -365,6 +435,7 @@ var Search = {
 
 
         search.bind_auto_complete = function(data,obj){
+             console.log(data);
             //when a item is selected, should give the query object to current_query object and switch mode
             //to conditions
 
@@ -408,8 +479,6 @@ var Search = {
             $("#autoComplete-call li").on("click",{obj:obj},callback);
             $("#autoComplete-call li").unbind("keyup").bind("keyup",{obj:obj},callback);
 
-
-
         };
 
 
@@ -443,19 +512,26 @@ var Search = {
         search.load_buffer = function(key,callback){
             var obj =this;
 
-            $.ajax(
-                {
-                    success:function(data){Search.instance().after_get_buffer(data,key,obj,callback)}
-                }
-            );
+            $.get("search_engine/tip",{
+                entity_type:search.entity,
+                q: $.trim($("#search_input").val())
+            },function(data){
+                Search.instance().after_get_buffer(data,key,obj,callback)
+            });
+
+//            $.ajax(
+//                {
+//                    success:function(data){Search.instance().after_get_buffer(data,key,obj,callback)}
+//                }
+//            );
 
 //            alert("load_buffer has not been finished")
 
 //            var data = [{name:"名字",introduction:"请输入s名字",parameter_type:'string',query_type:"StudentName",is_explicit:false}];
 //
-            var data = [{name:"按照名字查询",introduction:"输入学生的名字",parameter_type:'string',query_type:"StudentName",is_explicit:false},
-                {name:"按监护人查找",introduction:"输入学生的监护人名字",parameter_type:'string',query_type:"StudentParent",is_explicit:false},
-                {name:"按学校查询",introduction:"按学生的学校查找",parameter_type:'string',query_type:"StudentSchool",is_explicit:false}];
+//            var data = [{name:"按照名字查询",introduction:"输入学生的名字",parameter_type:'string',query_type:"StudentName",is_explicit:false},
+//                {name:"按监护人查找",introduction:"输入学生的监护人名字",parameter_type:'string',query_type:"StudentParent",is_explicit:false},
+//                {name:"按学校查询",introduction:"按学生的学校查找",parameter_type:'string',query_type:"StudentSchool",is_explicit:false}];
 
         };
 
@@ -537,7 +613,8 @@ var Search = {
         search.cancel= function(){
             //restore the select query mode
             this.current_query = null;
-            this.switch_mode("select_query")
+            this.switch_mode("select_query");
+            WAYNE.change_to_select_query();
         };
 
 
@@ -592,12 +669,29 @@ WAYNE.change_mode=function(event,mode){
 WAYNE.change_to_condition=function(target){
     $("#"+target).attr("autocomplete","").attr("ishould","").parent().removeClass("autoComplete");
 }
+WAYNE.change_to_no_autocomplete=function(){
+    $("#search_input").attr("autocomplete","").attr("ishould","").parent().removeClass("autoComplete");
+}
+WAYNE.change_to_select_query=function(){
+    $("#search_input").attr("autocomplete","experiment").parent().addClass("autoComplete");
+}
+
 WAYNE.query_count=0;
 WAYNE.query_count_validate=function(count){
     if(count==0){
        $("#query_list").find("#query_add_view").remove()
     }
     else{
-        $("#query_list").append($("<div />").addClass("ui button mini red").attr("id","#query_add_view").text("添加为快捷试图"))
+        if($("#query_add_view").length>0){
+            $("#query_add_view").remove();
+        }
+        $("#query_list").append($("<div />").addClass("ui action input query_add_view mini").attr("id","query_add_view")
+                .append($("<input type='text' placeholder='快捷视图名称' id='add-to-view'/>"))
+                .append($("<div />").addClass("ui red  button ").text("添加为快捷试图")
+                    .prepend($("<i />").addClass("icon add"))
+                )
+        )
+
     }
 }
+

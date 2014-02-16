@@ -1,0 +1,28 @@
+<div class="homework-progress-wrap homework-wrap">
+     <label>我的进步</label>
+
+     <p>
+          最近五次
+     </p>
+
+     <div class="icons">
+          <%@shs.each do |sh|%>
+          <i class="<%= sh.improved ? 'smile' : 'frown'%> icon"></i>
+          <%end%>
+     </div>
+     <p>
+          进步次数
+     </p>
+
+     <p class="progress_times">
+          <i class="icon smile"></i><span><%= @improved%></span>次
+     </p>
+
+     <p>
+          退步次数
+     </p>
+
+     <p class="progress_times">
+          <i class="icon frown"></i><span><%= @disimproved%></span>次
+     </p>
+</div>

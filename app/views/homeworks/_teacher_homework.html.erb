@@ -1,22 +1,31 @@
 <%if @homework%>
 <%= render 'detail'%>
-<label>关闭作业:<span><input type="checkbox" name="status" homework="<%= @homework.id%>"  class="teacher-homework-input" <%= 'checked' if @homework.status%> /></span></label>
+<label>关闭作业:<span>
+          <input type="checkbox" name="status" homework="<%= @homework.id%>"  class="teacher-homework-input" <%= 'checked' if @homework.status%> />
+     </span></label>
 <hr />
 <hr />
 
 <%@student_homeworks.each_with_index do |sh,i|%>
 <div class="item">
-     <img class="ui image avatar" src="<%= sh.image_url%>" />
-     <p>
-          <%= sh.name%>
-     </p>
-     <p>
-          <%= sh.submited_time_display%>
-     </p>
-     <p>
-          <%= sh.content%>
-     </p>
-     <div>
+     <div class="basic-info">
+          <img class="ui image avatar" src="<%= sh.image_url%>" />
+          <p>
+               <%= sh.name%>
+          </p>
+          <p>
+               <%= sh.submited_time_display%>
+          </p>
+          <p>
+               <%= sh.content%>
+          </p>
+     </div>
+     <div class="attachments">
+          <%sh.attachments.each do |attach|%>
+          <a  href="<%= attach.path%>" target="blank" data-content="<%= attach.name%>" data-variation="inverted"><i class="icon attachment"></i><%= attach.name%></a>
+          <%end%>
+     </div>
+     <div class="item-operate">
           <label>这次作业进步了吗</label>
           <input type="checkbox" name="improved"  homework="<%= sh.id%>"  class="student-homwork-input" <%= 'checked' if sh.improved%>/>
           <label>得分</label>

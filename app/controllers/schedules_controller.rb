@@ -1,5 +1,6 @@
 #encoding: utf-8
 class SchedulesController < ApplicationController
+  skip_before_filter :require_user_as_employee
   before_filter :init_message ,:only=>[:show,:create,:update,:destroy,:dates,:courses,:teachers]
   before_filter :get_schedule,:only=>[:update,:destroy]
   before_filter :render_nil_msg , :only=>[:update,:destroy]
@@ -47,7 +48,7 @@ class SchedulesController < ApplicationController
 
   def teachers
     @msg.result=true
-    params[:teacher_id]= params[:teacher_id] || current_user.id
+    params[:teacher_id]= params[:teacher_id] || current_user.user.id
     @msg.content=SchedulePresenter.init_json_presenters( Schedule.by_teacher_date(params).all)
     render :json=>@msg
   end

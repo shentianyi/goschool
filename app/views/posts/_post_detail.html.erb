@@ -1,26 +1,38 @@
 <% if @post %>
-    <div style="background-color:#gray" id="post" post="<%= @post.id %>">
+    <div class="homework-info post" id="post" post="<%= @post.id%>">
+      <h3><i class="empty flag icon"></i> <%= @post.title %></h3>
 
-    <p>标题:</p><p><%= @post.title %></p>
-    <p>内容:</p><p><%= @post.content %></p>
-    <p>时间:</p><p><%= @post.post_time_string %></p>
-    <p>Attachment:</p>
-    <% @post.attachments.each do |attach| %>
-        <div>
-          <p><%= attach.name %></p><a href="<%= attach.path %>">下载</a>
+      <p><%= @post.content %></p>
+      <div class="attachments">
+        <% @post.attachments.each do |attacth| %>
+            <a href="<%= attacth.path %>" data-content="我的账户" data-variation="inverted"><i class="icon attachment"></i><%= attacth.name %>
+            </a>
+        <% end %>
+      </div>
+      <label>发帖人:<span><%= @post.poster.name %></span></label>
+      <label>发帖日期:<span><%= @post.post_time %></span></label>
+
+
+    </div>
+    <hr/>
+    <hr/>
+    <div id="comment-pre-holder"></div>
+    <% @post.comments.each do |comment| %>
+        <div class="item">
+          <div class="basic-info">
+            <img class="ui image avatar" src="<%= comment.commenter.image_url %>"/>
+            <p><%= comment.commenter.name %></p>
+            <p><%= comment.comment_time %></p>
+            <p><%= comment.content %></p>
+          </div>
+          <% if comment.who_answer %>
+              <label class="teacher-answer"><%= comment.who_answer %></label>
+          <% end %>
         </div>
     <% end %>
-    <% @post.comments.each do |comment| %>
-        <p>回答</p>
-        <p><%= comment.who_answer %></p>
-        <p><%= comment.content %></p>
-        <p><%= comment.commenter %></p>
-    <% end %>
+    <div class="item replay-input">
+      <textarea placeholder="在此输入评论..." id="comment"></textarea>
 
-
-    <input id="comment" type="textarea" placeholder="评论..."></input>
-    <input type="button" onclick="comment()" value="确定"></input>
+      <div class="ui button fluid black icon labeled" onclick="comment()"><i class="icon edit"></i>添加回复</div>
     </div>
-
-
 <% end %>

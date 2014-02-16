@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#encoding: utf-8
 class LogininfoSessionsController < ApplicationController
   before_filter :require_no_user,:only=>[:new,:create]
   skip_before_filter :require_user_as_employee,:only=>[:new,:create,:destroy]
@@ -23,7 +23,7 @@ class LogininfoSessionsController < ApplicationController
       flash[:notice] = "登录成功！"
       #redirect_to root_url
     else
-      msg.content = @user_session.errors
+      msg.content = @user_session.errors.full_messages
     end    
     render :json=>msg
   end 

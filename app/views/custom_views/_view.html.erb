@@ -1,0 +1,12 @@
+<aside class="back-index-condition ">
+     <header class="back-index-side-header">
+          <label>快捷视图</label>
+     </header>
+     <div class="ui vertical menu" id="short-view">
+          <%@custom_views.each do |cv|%>
+          <a class="item" id="<%=cv.id%>"> 
+               <i class="icon trash"></i>
+               <label><%= cv.name%></label> </a>
+          <%end%>
+     </div>
+</aside>

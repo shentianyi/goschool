@@ -6,18 +6,18 @@ class SearchEngine
   # @return [ACTIVERECORD::Relation] of the queried object (course, Student)
   def search_return_relation(entity_type,search_queries,page=1,per_page=20,only_id=false,tenant_id=nil)
     query = nil
-    search_queries.each do |proc|
-      query = get_query_type(entity_type, proc[:query_type]).query(query,proc[:parameters])
+    search_queries.keys.each do |key|
+      query = get_query_type(entity_type, key).query(query,search_queries[key])
     end
     if tenant_id
       query.where('tenant_id=?',tenant_id)
     end
 
     query = query.limit(per_page)
-    query.offset(page*per_page)
+    query=query.offset((page-1)*per_page)
 
     if only_id
-      query = query.select(:id)
+      query = query.select("#{entity_type.downcase.pluralize}.id")
     end
 
     return query
@@ -48,7 +48,7 @@ class SearchEngine
       when 'full_text'
         search_full_text_with_object_id(entity_type,search_queries,page,per_page,tenant_id)
       when 'select_query'
-        search_return_relation(entity_type,search_queries,page,per_page,tenant_id).select(:id).all
+        search_return_relation(entity_type,search_queries,page,per_page,tenant_id).select("#{entity_type.downcase.pluralize}.id").all
       else
         return 'search type undefined'
     end
@@ -69,30 +69,40 @@ class SearchEngine
     search_queries=prepare_search_string(search_queries)
     if tenant_id
       entity_type.camelize.constantize.search \
-      search_queries,:page => page, :per_page => per_page,:star=>true,:conditions => {:tenant_id => tenant_id.to_s}
+      search_queries,:page => page, :per_page => per_page,:conditions => {:tenant_id => tenant_id.to_s}
 
     else
-      entity_type.camelize.constantize.search search_queries,:star=>true,:page => page, :per_page => per_page
+      entity_type.camelize.constantize.search search_queries,:page => page, :per_page => per_page
     end
   end
 
 
 
-  def search_full_text_with_object_id(entity_type,search_queries,page,per_page,tenant_id=nil)
+  def search_full_text_with_object_id(entity_type,search_queries,page,per_page,tenant_id=nil,conditions=nil)
     search_queries=prepare_search_string(search_queries)
     if tenant_id
 
       entity_type.camelize.constantize.search_for_ids\
-       search_queries,:page => page,:per_page => per_page,:star=>true,:conditions => {:tenant_id => tenant_id.to_s}
+       search_queries,:page => page,:per_page => per_page,:conditions => {:tenant_id => tenant_id.to_s}
     else
-      entity_type.camelize.constantize.search_for_ids search_queries,:star=>true,:page => page,:per_page => per_page
+      entity_type.camelize.constantize.search_for_ids search_queries,:page => page,:per_page => per_page
     end
+  end
+
+    def search_full_text_with_conditions_only_object(entity_type,conditions,page,per_page,tenant_id=nil)
+    if tenant_id && !conditions.keys.include?(:tenant_id)
+
+          conditions[:tenant_id]=tenant_id
+    end
+      entity_type.camelize.constantize.search_for_ids conditions,:page=>page,:per_page=>per_page
+
+
   end
 
 
 
   def get_query_type(entity_type,query_type_key)
-     return SearchEngineType.instance.search_query_types[entity_type.camelize][query_type_key.camelize]
+     return SearchEngineType.instance.search_query_types[entity_type.camelize][query_type_key.to_s.camelize]
   end
 
 
@@ -107,10 +117,22 @@ class SearchEngine
   end
 
 
+  def get_query_types_by_key(entity_type,key,limit=10)
+    type_keys = SearchEngineType.instance.get_query_types(entity_type,key,limit)
 
-  def index_query_type
+    type_objs = []
+
+    type_keys.each do |type_key|
+      type_objs.push (self.get_query_type(entity_type,type_key).query_type_description)
+    end
+
+    return type_objs
 
   end
+
+
+
+
 
 
 

@@ -94,8 +94,8 @@ class SearchEngineType
     def split_pinyin_or_en(words)
       tmp_key = []
        if words.is_a?(Array)
-         words.collect!{|x| Pinyin.t(x.to_s,splitter:' ').gsub(/\s+/, ' ').strip}.\
-               uniq!.reject!{|a| a.empty?}
+         words = words.collect!{|x| Pinyin.t(x.to_s,splitter:' ').gsub(/\s+/, ' ').strip}.\
+               uniq.reject{|a| a.empty?}
 
          #words now looks like ["hello world","course name","ni hao","xxx"],
          # each element will have 1-* word splitted by a space"
@@ -115,6 +115,6 @@ class SearchEngineType
     end
 
 
-    private_class_method :new
+    # private_class_method :new
 
 end

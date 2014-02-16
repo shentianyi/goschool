@@ -11,13 +11,15 @@
     </div>
   </div>
 </article>
+
+<!--新建帖子-->
 <div class="homework-post-add" id="homework-post-add">
   <div class="inner">
     <i class="icon remove"></i>
 
     <p>新建帖子</p>
 
-    <div>
+    <div class="content">
       <label>帖子标题</label>
 
       <div class="ui input fluid ">
@@ -25,6 +27,7 @@
       </div>
       <label>帖子内容</label>
       <textarea id="content" name='content' class="homework-input"></textarea>
+
       <%= render partial:'shares/file_upload'%>
     </div>
     <div id="create-homework-button" class="ui button red mini" onclick="create_post()">
@@ -32,11 +35,12 @@
     </div>
   </div>
 </div>
+
 <% content_for :javascript_includes do %>
-    <%= javascript_include_tag "manage.homework-post.js"%>
-    <%= javascript_include_tag "manage.homework.base.js"%>
+    <%= javascript_include_tag "manage.homework-post.js" %>
+    <%= javascript_include_tag "manage.homework.base.js" %>
     <%= javascript_include_tag "manage.source.base.js" %>
     <%= javascript_include_tag "manage.post.base.js" %>
-    <%= javascript_include_tag "FRONT_index.js"%>
-    <%= javascript_include_tag "FRONT_homework_post.js"%>
+    <%= javascript_include_tag "FRONT_index.js" %>
+    <%= javascript_include_tag "FRONT_homework_post.js" %>
 <% end %>

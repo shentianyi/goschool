@@ -3,11 +3,12 @@
      <p>
           <%= @homework.content%>
      </p>
-     <label>截止日期:<span><%= @homework.deadline_display%></span></label>
-     <label>当前状态:<span id="homework-status"><%= @homework.status_display%></span></label>
      <div class="attachments">
         <%@homework.attachments.each do |attach|%>
         <a  href="<%= attach.path%>" target="blank" data-content="<%= attach.name%>" data-variation="inverted"><i class="icon attachment"></i><%= attach.name%></a>
         <%end%>
-    </div>
+     </div>
+     <label>截止日期(此日期之前):<span><%= @homework.deadline_display%></span></label>
+     <label>当前状态:<span id="homework-status"><%= @homework.status_display%></span></label>
+
 </div>

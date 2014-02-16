@@ -13,6 +13,20 @@ class StudentHomework < ActiveRecord::Base
     q=q.where(student_id:student_id) if student_id
     q
   end
+  
+  def self.unsubmits  student_id
+     student=Student.find_by_id(student_id)
+      ids=StudentHomework.where(student_id:student.id).pluck(:homework_id)
+      q= student.original_homeworks.where(student_courses:{student_id:student_id},homeworks:{status:false})
+       q=q.where("homeworks.id not in (?)",ids) if ids.count>0
+       q.select('sub_courses.name as sub_course_name,sub_courses.parent_name as course_name,homeworks.*')
+  end
+  
+  def self.scores student_id,sub_course_id
+    joins(:homework=>{:teacher_course=>:sub_course}).joins(:student)
+      .where(student_id:student_id,sub_courses:{id:sub_course_id},marked:true)
+      .select("student_homeworks.score,student_homeworks.marked_time as time")
+  end
 
   def self.by_type params
    if params[:menu_type].to_i==HomeworkStudentMenuType::UNSUBMIT
@@ -30,7 +44,7 @@ class StudentHomework < ActiveRecord::Base
      q
   end
   
-      def  can_resubmit?
+    def  can_resubmit?
       !self.marked
     end
     

@@ -9,20 +9,27 @@
 <div id="edit-sh-div"></div>
 <%end%>
 <div class="item">
-     <img class="ui image avatar" src="<%= @student_homework.image_url%>" />
-     <p>
-          <%= @student_homework.name%>
-     </p>
-     <p>
-          <%= @student_homework.submited_time_display%>
-     </p>
-     <p>
-          <%= @student_homework.content%>
-     </p>
-     <div class="item-operate">
-          <label>是否进步：<%= @student_homework.improved_display%></label>
-          <label>得分:<%= @student_homework.score_display%></label>
-     </div>
+  <div class="basic-info">
+    <img class="ui image avatar" src="<%= @student_homework.image_url%>" />
+    <p>
+      <%= @student_homework.name%>
+    </p>
+    <p>
+      <%= @student_homework.submited_time_display%>
+    </p>
+    <p>
+      <%= @student_homework.content%>
+    </p>
+  </div>
+  <div class="attachments">
+        <%@student_homework.attachments.each do |attach|%>
+        <a  href="<%= attach.path%>" target="blank" data-content="<%= attach.name%>" data-variation="inverted"><i class="icon attachment"></i><%= attach.name%></a>
+        <%end%>
+  </div>
+  <div class="item-operate">
+          <label class="item-label-student">是否进步：<%= @student_homework.improved_display%></label>
+          <label class="item-label-student">得分：<%= @student_homework.score_display%></label>
+  </div>
 </div>
 <%elsif @homework.can_submit?%>
 <%= render partial:'student_homeworks/form'%>

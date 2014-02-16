@@ -7,7 +7,7 @@ class PostPresenter < Presenter
   end
 
   def comments
-    CommentPresenter.init_presenters(@post.comments)
+    CommentPresenter.init_presenters(@post.comments.order("created_at DESC"))
   end
   
   def attachments
@@ -16,10 +16,11 @@ class PostPresenter < Presenter
 
   def post_time
     day = 3600*24
-    if ((diff=Time.now.to_i - self.created_at.to_i) < day)
-      self.created_at.getlocal.hour.to_s + ':'+self.created_at.getlocal.min.to_s+':'+self.created_at.getlocal.sec.to_s
+    midnight = Date.current.midnight.getlocal.to_i
+    if ((diff=midnight - self.created_at.getlocal.to_i) <= 0)
+      self.created_at.getlocal.strftime("今天 %H:%M")
     elsif diff < 7*day
-      "#{(diff/day).to_i}天前"
+      "#{(diff/day).to_i+1}天前"
     elsif diff < 30*day
       "#{(diff/7/day).to_i}周前"
     else

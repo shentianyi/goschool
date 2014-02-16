@@ -92,6 +92,9 @@
 .homework-post-add>.inner>div.content .upload-file{
     margin-top:8px;
 }
+.homework-post-add>.inner>div.content .resubmit-attachment-item>i{
+    display:inline-block;
+}
 /****************************************************中间部分*/
 /*针对post和homework的*/
 .back-index-condition.front-index-condition>.ui.vertical.menu{
@@ -126,8 +129,9 @@
 /*针对homework和post的*/
 .front-index-side-header>.ui.breadcrumb{
     font-size:14px;
-    margin-top:15px;
+    margin-top:15px !important;
     margin-left:16px;
+
 }
 .front-index-side-header>.breadcrumb>a{
     transition:color 0.25s ease-out;
@@ -196,15 +200,36 @@
     color:#C69C6D;
     padding:5px 10px;
 }
-.post-homework>.left>.accordion .active.title{
+.post-homework>.left>.accordion .pin{
     background-color:#63A69F;
-    color:#fff;
+    color:white;
+    padding:5px 10px ;
+    font-size:14px;
+    font-weight:bolder;
+    cursor:default;
+}
+.post-homework>.left>.accordion .pin>i{
+    margin:0px 12px 0px 4px;
+}
+.post-homework>.left>.accordion  .pin ~ .title{
+    background-color:white;
+    color:rgba(0,0,0,0.7);
+    padding:5px 10px 5px 18px;
+}
+.post-homework>.left>.accordion  .pin ~ .title>i{
+    margin-right:1px;
+}
+.post-homework>.left>.accordion  .pin ~ .content{
+    padding:1px 10px 1px 34px;
+}
+.post-homework>.left>.accordion  .pin ~ .content ul a{
+    padding:3px 0;
 }
 .post-homework>.left>.accordion .content{
     padding:5px 10px;
 }
 .post-homework>.left>.accordion .content ul{
-    padding:0px;
+    padding-left:5px;
     margin:0px;
     list-style-type: none;
 }
@@ -246,7 +271,7 @@
 .post-homework>.right>label{
     font-size:13px;
     color:rgba(0,0,0,0.8);
-    display:block;
+    display:inline-block;
 }
 .post-homework>.right>.homework-info>label:nth-of-type(2)>span{
     color:#D95C5C;
@@ -299,13 +324,19 @@
     display:block;
     clear:both;
 }
-.post-homework>.right>.item>img{
+.post-homework>.right>.item>.basic-info{
+    float:left;
+    width:65%;
+}
+.post-homework>.right>.item>.basic-info>img{
     float:left;
 }
-.post-homework>.right>.item>p{
-    max-width:85%;
+.post-homework>.right>.item>.basic-info>p{
+    max-width:100%;
+    word-break:break-all;
+    word-wrap:break-word;
 }
-.post-homework>.right>.item>p:first-of-type{
+.post-homework>.right>.item>.basic-info>p:first-of-type{
     font-size:15px;
     font-weight:bold;
     color:#4092CC;
@@ -313,37 +344,58 @@
     padding-bottom:3px;
     margin-top:-2px;
 }
-.post-homework>.right>.item>p:nth-of-type(2){
+.post-homework>.right>.item>.basic-info>p:nth-of-type(2){
     font-size:11px;
     color:#4e4e4e;
     margin-top:-8px;
 }
-.post-homework>.right>.item>p:nth-of-type(3){
+.post-homework>.right>.item>.basic-info>p:nth-of-type(3){
     font-size:14px;
     color:rgba(0,0,0,0.7);
     margin-top:6px;
     word-break:break-all;
     word-wrap:break-word;
 }
-.post-homework>.right>.item>.attachment-a{
-    position:absolute;
-    right:10px;
-    top:10px;
-    color:#63A69F;
-    cursor:pointer;
-    font-size:20px;
-    transition:color 0.25s ease-out;
+.post-homework>.right>.item>.attachments{
+    float:right;
+    max-width:30%;
+
 }
-.post-homework>.right>.item>.attachment-a:hover{
+.post-homework>.right>.item>.attachments>a{
+    transition:color 0.25s ease-out;
+    color:rgba(0, 0, 0, 0.6);
+    font-size:14px;
+    margin-left:3px;
+    display:inline-block;
+    max-width:98%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.post-homework>.right>.item>.attachments>a>i{
+    font-size:17px;
+    color:#63A69F;
+}
+.post-homework>.right>.item>.attachments>a:hover{
     color:#D95C5C;
 }
 .post-homework>.right>.item>div.item-operate{
     float:right;
+    margin-left:50%;
     margin-right:10px;
+    margin-top:15px;
 }
 .post-homework>.right>.item>div.item-operate>label{
     font-size:12px;
     color:#D95C5C;
+}
+.post-homework>.right>.item>div.item-operate>label.item-label-student{
+    display:block;
+    text-align:right;
+    color:#52A954;
+}
+.post-homework>.right>.item>div.item-operate>label.item-label-student:first-of-type{
+    margin-bottom:5px;
 }
 .post-homework>.right>.item.true>div.item-operate>label{
     color:#52A954;
@@ -361,7 +413,7 @@
     font-weight:lighter;
     font-size:12px;
     float:right;
-    margin-top:-28px;
+    margin-top:-48px;
 }
 .post-homework>.right>.item>.teacher-answer{
     font-size:12px;
@@ -369,7 +421,7 @@
     color:white;
     padding:5px 16px;
     float:right;
-    margin-top:-40px;
+    margin-top:0px;
 }
 /*post的添加回复*/
 .post-homework>.right>.item.replay-input textarea{

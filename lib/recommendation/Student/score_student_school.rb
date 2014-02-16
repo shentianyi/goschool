@@ -18,7 +18,7 @@ class ScoreStudentSchool
          result[stud.id.to_s] = 300
        else
          result[stud.id.to_s] = 100
-       end
+       end if stud.graduation && target.graduation
       end
     end
     return result

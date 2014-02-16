@@ -14,10 +14,11 @@ function init_teacher_homework() {
           homework_manager.create({
                homework : homework
           }, function(data) {
-               if(!data.result) {
-                    MessageBox_content(data.content);
-               } else {
+               if(data.result) {
                     $("#homework-post-add>.inner>.remove").click();
+                   MessageBox('作业创建成功',"top","success");
+               } else {
+                     MessageBox_content(data.content);
                }
           });
      });
@@ -27,7 +28,7 @@ function init_teacher_homework() {
                // 更新成功
                if(data.content) {
                     // 批改成功：即修改了分数
-                    console.log('批改成功');
+                    MessageBox('批改成功',"top","success");
                }
           } else {
                // 跟新失败
@@ -44,15 +45,15 @@ function init_teacher_homework() {
                MessageBox_content(data.content);
           }
      });
-
-     // CKEDITOR.replace('content', {
-     // preset : 'standard',
-     // });
 }
 
 function init_student_homework() {
      bind_menu_event();
      bind_sh_submit_event();
+     $('body').on('click', "#task-attach-uploader", function() {
+          attach_upload();
+     });
+     bind_attach_destroy_event();
 }
 
 function bind_menu_event() {
@@ -118,30 +119,30 @@ function get_input_value(ele) {
      return value;
 }
 
-function bind_sh_submit_event() {
+function bind_sh_submit_event(callback) {
      $('body').on('click', "#student-homework-submit-button", function() {
           var submit = $(this);
           var sh = submit.attr('student-homework');
-          if(sh && sh.length > 0) {
-               student_homework_manager.update(sh, {
+          var param={
                     student_homework : {
                          homework_id : submit.attr('homework'),
-                         content : $("#student-homework-content").val()
+                         content : $("#student-homework-content").val(),
+                         attach: get_attach()
                     }
-               }, function(data) {
+          };
+          if(sh && sh.length > 0) {
+               student_homework_manager.update(sh, param, function(data) {
                     if(data.result) {
                          show_homework(submit.attr('homework'), "#homework-post-right");
                     } else {
                          MessageBox_content(data.content);
                     }
+                   if(callback){
+                       callback(data);
+                   }
                });
           } else {
-               student_homework_manager.create({
-                    student_homework : {
-                         homework_id : submit.attr('homework'),
-                         content : $("#student-homework-content").val()
-                    }
-               }, function(data) {
+               student_homework_manager.create(param, function(data) {
                     if(data.result) {
                          // alert('sumit success!');
                          submit.attr('student-homework', data.content);
@@ -150,6 +151,9 @@ function bind_sh_submit_event() {
                     } else {
                          MessageBox_content(data.content);
                     }
+                   if(callback){
+                       callback(data);
+                   }
                });
           }
      });
@@ -158,5 +162,18 @@ function bind_sh_submit_event() {
 function show_homework(id, content) {
      homework_manager.show(id, function(data) {
           $(content).html(data);
+     });
+}
+
+function bind_attach_destroy_event(){
+     $('body').on('click','.attachment-destroy-icon',function(){
+          var item=$(this);
+          attachment_manager.destroy(item.attr('attach'),function(data){
+               if(data.result){
+                    item.parent().remove();
+               }else{
+                     MessageBox_content(data.content);
+               }
+          });
      });
 }

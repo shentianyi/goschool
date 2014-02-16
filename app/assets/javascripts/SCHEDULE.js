@@ -6,6 +6,7 @@ SCHEDULE.calendar={};
 SCHEDULE.widget.init=function(){
     scheduler.locale.labels.section_courses = '课程:';
     scheduler.locale.labels.section_sub_courses = '子课程:';
+    scheduler.locale.labels.section_remark = '简述:';
     scheduler.locale.labels.section_teachers = '老师:';
     scheduler.locale.labels.section_colors = '显示颜色:';
     scheduler.locale.labels.section_time = '上课时间:';
@@ -16,25 +17,44 @@ SCHEDULE.widget.init=function(){
     scheduler.config.buttons_left = [];
     scheduler.config.buttons_right = ["dhx_cancel_btn","dhx_save_btn"];
     scheduler.config.icons_select =arguments[0]=="readonly"?[]: ["icon_delete"];
+    scheduler.config.readonly = arguments[0]=="readonly"?true: false;
     scheduler.templates.quick_info_title = function(start, end, ev){
         var teachers=ev.teachers.join(",");
         if(ev.sub_courses.is_default==1){
             if(ev.institution_name==null){
-                return ev.text.substr(0,50)+'<span></span>'+'<span>老师:'+teachers+'</span>';
+                if(ev.remark && ev.remark.length>0){
+                    return ev.text.substr(0,50)+'<span></span>'+'<span>简介:'+ev.remark+'</span>'+'<span>老师:'+teachers+'</span>';
+                }
+                else{
+                    return ev.text.substr(0,50)+'<span></span>'+'<span>'+'</span>'+'<span>老师:'+teachers+'</span>';
+                }
             }
             else{
-                return ev.text.substr(0,50)+'<span></span>'+'<span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                if(ev.remark && ev.remark.length>0){
+                    return ev.text.substr(0,50)+'<span></span>'+'<span>简介:'+ev.remark+'</span>'+'<span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                }
+                else{
+                    return ev.text.substr(0,50)+'<span></span>'+'<span>'+'</span>'+'<span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                }
             }
-
         }
         else{
             if(ev.institution_name==null){
-                return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>老师:'+teachers+'</span>';
+                if(ev.remark && ev.remark.length>0){
+                    return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>简介:'+ev.remark+'</span><span>老师:'+teachers+'</span>';
+                }
+                else{
+                    return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>'+'</span><span>老师:'+teachers+'</span>';
+                }
             }
             else{
-                return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                if(ev.remark && ev.remark.length>0){
+                    return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>简介:'+ev.remark+'</span><span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                }
+                else{
+                    return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>'+'</span><span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                }
             }
-
         }
     };
     //绑定模板
@@ -46,6 +66,9 @@ SCHEDULE.widget.init=function(){
         ev.my_sub_courses ="<select id='schedule-sub-courses'>" +
             "<option value='wzx'>无</option>" +
             "</select>";
+        ev.my_remark ="<div class='ui input '>\
+                <input type='text' id='schedule-remark'>\
+            </div>";
         ev.my_colors="<ul id='schedule-color' class='schedule-color'>" +
             "<li color='#FFA500' class='active'></li>"+
             "<li color='#4092CC'></li>"+
@@ -60,6 +83,7 @@ SCHEDULE.widget.init=function(){
     scheduler.config.lightbox.sections = [
         {name:"courses", height:31, type:"template", map_to:"my_courses"},
         {name:"sub_courses", height:25, type:"template",map_to:"my_sub_courses" },
+        {name:"remark", height:31, type:"template",map_to:"my_remark" },
         {name:"teachers", height: 21, type:"template", map_to:"my_teachers"},
         {name:"colors", height: 25, type:"template", map_to:"my_colors"},
         {name: "time", height: 72, type: "time",time_format:["%Y","%m","%d","%H:%i"] , map_to: "auto"}
@@ -69,6 +93,7 @@ SCHEDULE.widget.init=function(){
         var i,sub_course_length=$("#schedule-sub-courses option").length;
         var w_data={};
         w_data.text= $.trim($("#schedule-course").val());
+        w_data.remark= $.trim($("#schedule-remark").val());
         w_data.sub_courses=[];
         for(i=0;i<sub_course_length;i++){
             var sub_item={};
@@ -116,7 +141,9 @@ SCHEDULE.widget.init=function(){
                 schedule:{
                     sub_course_id:$("#schedule-sub-courses :selected").attr("id"),
                     start_time:standardParse(base_time+" "+start).date,
-                    end_time:standardParse(base_time+" "+end).date
+                    end_time:standardParse(base_time+" "+end).date,
+                    remark: $("#schedule-remark").val(),
+                    color : $("#schedule-color .active").attr("color")
                 }
             },function(data){
                 if(data.result){
@@ -163,10 +190,12 @@ SCHEDULE.calendar.getData=function(){
         }
         //post
 //        var experiment=[
-//            {id:"1",text:"儿童秋季班",teachers:["Wayne","王子骁"],start_date:1385870400000,end_date:1385872200000,color:'#FFA500',sub_courses:{value:"default",text:"没指定"}},
-//            {id:"2",text:"SAT秋季冲刺班",teachers:["Kobe","Bryant"],start_date:1386086400000,end_date:1386088200000,color:'#63A69F',sub_courses:{value:"0",text:"听力"}},
-//            {id:"3",text:"托福秋季班",teachers:["Wayne","王子骁"],start_date:1386237600000,end_date:1386239400000,color:'#D95C5C',sub_courses:{value:"0",text:"口语强化"}}
+//            {id:"1",text:"儿童秋季班",teachers:["Wayne","王子骁"],start_date:1385870400000,end_date:1385872200000,color:'#FFA500',sub_courses:{value:"default",text:"没指定"},remark:"123"},
+//            {id:"2",text:"SAT秋季冲刺班",teachers:["Kobe","Bryant"],start_date:1386086400000,end_date:1386088200000,color:'#63A69F',sub_courses:{value:"0",text:"听力"},remark:"123"},
+//            {id:"3",text:"托福秋季班",teachers:["Wayne","王子骁"],start_date:1386237600000,end_date:1386239400000,color:'#D95C5C',sub_courses:{value:"0",text:"口语强化"},remark:""}
 //        ];
+//        scheduler.parse(experiment ,"json")
+
         if(arguments[0]!='readonly'){
             $.get("/schedules/dates",{
                 start_date:scheduler.getState().min_date.toWayneString().day,
@@ -202,12 +231,8 @@ SCHEDULE.calendar.getData=function(){
             });
         }
 
-//        var experiment=[
-//            {id:"1",text:"儿童秋季班",teachers:["Wayne","王子骁"],start_date:"1385870400000",end_date:"1385872200000",color:'#FFA500',sub_courses:{value:"default",text:"没指定"}},
-//            {id:"2",text:"SAT秋季冲刺班",teachers:["Kobe","Bryant"],start_date:new Date(2013,11,4,0,0),end_date:new Date(2013,11,4,0,30),color:'#63A69F',sub_courses:{value:"0",text:"听力"}},
-//            {id:"3",text:"托福秋季班",teachers:["Wayne","王子骁"],start_date:new Date(2013,11,5,18,0),end_date:new Date(2013,11,5,18,30),color:'#D95C5C',sub_courses:{value:"0",text:"口语强化"}}
-//        ];
-//        scheduler.parse(experiment ,"json")
+
+
     }
 };
 

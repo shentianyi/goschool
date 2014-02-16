@@ -10,18 +10,17 @@
      </thead>
      <tbody>
           <%@students.each do |student|%>
-          <tr id="<%=student.student_course_id%>">
-               <td><img class="ui avatar image" src="<%=student.image_url%>"/></td>
-               <td><%=student.name%></td>
-               <td><%=student.enrol_time_display%></td>
+          <tr id="<%= student.student_course_id%>">
+               <td><img class="ui avatar image" src="<%= student.image_url%>"/></td>
+               <td>   <a  href="/students/<%= student.id%>"><%= student.name%></a></td>
+               <td><%= student.enrol_time_display%></td>
                <td <%= 'class=positive' if student.paid%>>
                <div class="ui checkbox" name="join-pay">
-                   
                     <input type="checkbox" <%= ' checked' if student.paid%>>
                     <label>已经支付</label>
                </div></td>
                <td>
-               <div class="red button ui mini out-class" affect='<%=student.student_course_id%>'>
+               <div class="red button ui mini out-class" affect='<%= student.student_course_id%>'>
                     退班
                </div></td>
           </tr>

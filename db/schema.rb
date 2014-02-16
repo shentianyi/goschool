@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131222193833) do
+ActiveRecord::Schema.define(:version => 20140107092919) do
 
   create_table "achievementresults", :force => true do |t|
     t.string   "valuestring"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20131222193833) do
     t.integer  "student_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.datetime "achievetime"
   end
 
   add_index "achievementresults", ["achievement_id"], :name => "index_achievementresults_on_achievement_id"
@@ -41,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20131222193833) do
     t.string   "attachable_type"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "pathname"
   end
 
   add_index "attachments", ["attachable_id"], :name => "index_attachments_on_attachable_id"
@@ -114,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20131222193833) do
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
     t.string   "code"
+    t.boolean  "has_base",       :default => false
   end
 
   add_index "courses", ["institution_id"], :name => "index_courses_on_institution_id"
@@ -247,6 +250,8 @@ ActiveRecord::Schema.define(:version => 20131222193833) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "tenant_id"
+    t.string   "remark"
+    t.string   "color"
   end
 
   add_index "schedules", ["sub_course_id"], :name => "index_schedules_on_sub_course_id"
@@ -328,6 +333,7 @@ ActiveRecord::Schema.define(:version => 20131222193833) do
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
     t.integer  "status",         :default => 1
+    t.boolean  "is_base",        :default => false
   end
 
   add_index "sub_courses", ["course_id"], :name => "index_sub_courses_on_course_id"

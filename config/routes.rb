@@ -3,6 +3,12 @@ Goschool::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
   get "search_engine/search"
+  controller :search_engine do
+    get 'search_engine/search'
+    get 'search_engine/tip'
+    get 'search_engine/search_by_view'
+  end
+  
 
   controller :teachers do
     get 'teachers'=>:index
@@ -15,7 +21,12 @@ Goschool::Application.routes.draw do
     get 'tags/fast_search'
   end
 
-  resources :student_homeworks
+  resources :student_homeworks do
+    collection do
+      get :submit_calculate
+      get :scores
+    end
+  end
 
   resources :homeworks do
     collection do
@@ -77,6 +88,7 @@ Goschool::Application.routes.draw do
       get ':id/edit'=>:edit
       get ':id/:part'=>:show
       get ':id/:part/:ajax'=>:show
+      get :detail
     end
   end
 
@@ -121,12 +133,16 @@ Goschool::Application.routes.draw do
   resources :custom_views
   resources :logininfos
   resource :subscriptions
-  resource :logininfo_sessions
+
   resources :consultations
 
+  resource :logininfo_sessions
   controller :logininfo_sessions do
-    match 'logininfo_sessions/create' => :create
     match 'logininfo_sessions/destroy' => :destroy
+  end
+
+  controller :attachments do
+    match 'attachments/:id' => :destroy, :via => "delete"
   end
 
   # The priority is based upon order of creation:

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#encoding: utf-8
 class AchievementsController < ApplicationController
   # GET /achievements
   # GET /achievements.json
@@ -63,7 +63,7 @@ class AchievementsController < ApplicationController
     msg.result = false
     msg.content = '获取成就失败'
     
-    @presenters = StudentAchievementPresenter.init_presenters(Achievement.achieves(params[:id],params[:student_id]))
+    @presenters = StudentAchievementPresenter.init_presenters(Achievement.achieves(params[:id],params[:student_id]).order("achievetime"))
     if @presenters
       datas = []
       @presenters.each do |presenter|

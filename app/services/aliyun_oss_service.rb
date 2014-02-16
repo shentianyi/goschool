@@ -14,4 +14,8 @@ class AliyunOssService
     Aliyun::OSS::OSSObject.store(name,data,ATTACH_BUCKET)
     Aliyun::OSS::OSSObject.url_for(name,ATTACH_BUCKET ,expires:EMAIL_SCHEDULE_LINK_EXPIRES)
   end
+
+  def self.delete_attachments name
+    Aliyun::OSS::OSSObject.delete(name,ATTACH_BUCKET)
+  end
 end

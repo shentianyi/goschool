@@ -12,11 +12,30 @@ var HOMEWORKCHART=HOMEWORKCHART || {};
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
             //post
-            STUDENT_FRONT.line={
-                labels:["2013-01-03","2013-01-04","2013-01-05"],
-                scores:[100,200,300]
-            };
-            HOMEWORKCHART.generateLine(STUDENT_FRONT.line.labels,STUDENT_FRONT.line.scores,"homework-line-wrap");
+            var id=$("#student-detail-info").attr("student")===undefined?$("#detail-content").attr('student'):$("#student-detail-info").attr("student");
+            $.get('/student_homeworks/scores',{id:id,sid:$(this).attr('sub-course')},function(data){
+                if(data.length==0){
+                    $("#"+"homework-line-wrap").find("[name='line_chart']").remove();
+                }
+                else{
+                    var labels=[],scores=[],day;
+                    for(var i=0;i<data.length;i++){
+                        day=new Date(parseInt(data[i].time)).toWayneString().day;
+                        labels.push(day);
+                        scores.push(parseFloat(data[i].score));
+                    }
+                    STUDENT_FRONT.line={
+                        labels:labels,
+                        scores:scores
+                    };
+                    HOMEWORKCHART.generateLine(STUDENT_FRONT.line.labels,STUDENT_FRONT.line.scores,"homework-line-wrap");
+                }
+            });
+//            STUDENT_FRONT.line={
+//                labels:["2013-01-03","2013-01-04","2013-01-05"],
+//                scores:[100,200,300]
+//            };
+//            HOMEWORKCHART.generateLine(STUDENT_FRONT.line.labels,STUDENT_FRONT.line.scores,"homework-line-wrap");
         }
     })
 })()
@@ -82,19 +101,22 @@ HOMEWORKCHART.generatePie=function(scores,target_wrap){
             $("#"+target_wrap).append($("<canvas />").attr("name","pie_chart"))
         }
         var width= arguments[2]=="small" ? $("#"+target_wrap).width()-80: $("#"+target_wrap).width()-10;
-        var height= arguments[2]=="small" ? $("#"+target_wrap).width()-80: $("#"+target_wrap).height()-20;
+        var height= arguments[2]=="small" ? $("#"+target_wrap).height()-80: $("#"+target_wrap).height()-20;
         $("#"+target_wrap).find("canvas").attr("height",height).attr("width",width);
         var canvas = $("#"+target_wrap).find("canvas")[0];
         canvas.width=canvas.width;
         canvas.height=canvas.height;
         var data = [
             {value:scores[0],color:"rgba(151,187,205,0.5)"},
-            {value :scores[1],color : "#F38630"}
+            {value:scores[1]-scores[0],color : "#F38630"}
         ]
         var ctx = $("#"+target_wrap).find("canvas").get(0).getContext("2d");
         var myNewChart = new Chart(ctx);
         new Chart(ctx).Pie(data);
-        var percentage=((scores[0]/(scores[0]+scores[1]))*100).toFixed(1)+"%";
-        $("#deal-on-date").text(percentage);
+        var percentage=((scores[0]/scores[1])*100).toFixed(1)+"%";
+        if(!isNaN((scores[0]/scores[1])*100)){
+            $("#deal-on-date").text(percentage);
+        }
+
     }
 };

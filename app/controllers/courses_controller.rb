@@ -8,7 +8,8 @@ class CoursesController < ApplicationController
   def index
     @active_left_aside='courses'
     @institutions=current_tenant.institutions
-    @courses=CoursePresenter.init_presenters(Course.joins(:institution).select('courses.*,institutions.name as institution_name').all)
+    @courses=CoursePresenter.init_presenters(Course.joins(:institution).select('courses.*,institutions.name as institution_name').order('created_at desc').limit(10))
+    @custom_views=CustomView.by_user_id_and_entity_type(current_user.user.id,'Course').all
   end
    
   def show 
@@ -37,13 +38,21 @@ class CoursesController < ApplicationController
     @course.subs=params[:course].slice(:subs)[:subs].values if params[:course].has_key?(:subs)
     @course.tags=params[:course].slice(:tags)[:tags] if params[:course].has_key?(:tags)
     @course.teachs=params[:course].slice(:teachers)[:teachers].values if params[:course].has_key?(:teachers)
-      
+    
     @course.subs.each do |sub|
-      sub_course=SubCourse.new(:name=>sub[:name],:parent_name=>@course.name,:institution_id=>@course.institution_id,:is_default=>false)
+      unless sub[:name].blank?
+      is_base=sub[:extro]=='true'
+      sub_course=SubCourse.new(:name=>sub[:name],:parent_name=>@course.name,:institution_id=>@course.institution_id,:is_default=>false,:is_base=>is_base)
       sub_course.assign_teachers(sub[:teachers].values) if sub.has_key?(:teachers)
       @course.sub_courses<<sub_course
+       if is_base
+         @course.has_base=true
+        else
+          @course.has_sub=true
+       end
+       end
     end if @course.subs
-    @course.has_sub=true if @course.subs
+    
     unless @msg.result=@course.save
     @msg.content=@course.errors.messages
     else
@@ -100,9 +109,14 @@ class CoursesController < ApplicationController
   end
   
   def subs
-    if @course.has_sub
+    if @course.has_sub || @course.has_base
+      if @course.has_sub
        @subs=@course.sub_courses.where(is_default:false).all
        @msg.content={sub_courses:@subs.map{|s| {id:s.id,name:s.name}},teachers:@subs.first.teacher_names}  
+      else
+       @subs=@course.sub_courses.order('is_default desc').all
+       @msg.content={sub_courses:@subs.map{|s| {id:s.id,name: s.is_default? ? '无' : s.name }},teachers:@subs.first.teacher_names}  
+        end
     else
       @msg.content={sub_courses:[],teachers:@course.teacher_names}  
     end

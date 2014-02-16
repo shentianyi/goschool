@@ -70,7 +70,7 @@ var BACKSTUDENT=BACKSTUDENT||{};
 
 BACKSTUDENT.post_add_student = function(option){
     if(option.student.name.length>0){
-        if(BACKSTUDENT.easy_email_validate(option.student.email)){
+        if(BACKSTUDENT.check.test(option.student.email,"email")){
             $.post("/students",{
                 student:option.student,
                 is_active_account:option.is_active_account
@@ -104,7 +104,7 @@ BACKSTUDENT.easy_email_validate=function(email){
 
 BACKSTUDENT.check = new Object();
 
-BACKSTUDENT.check.email = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+BACKSTUDENT.check.email = /^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ ;
 
 BACKSTUDENT.check.phone = /^0*(13|15|18)\d{9}$/;
 
@@ -115,7 +115,7 @@ BACKSTUDENT.check.test = function(str,type){
 	return true;
     }
     else{
-	MessageBox("格式不正确！请输入正确的格式!","top","warning")
+	//MessageBox("格式不正确！请输入正确的格式!","top","warning")
 	return false;
     }
 }

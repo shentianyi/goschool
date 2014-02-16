@@ -59,9 +59,10 @@ class Student < ActiveRecord::Base
 
   def validate_save
     errors.add(:name,'名字不能为空') if self.name.blank?
-    errors.add(:phone, '电话不能为空') if self.phone.blank?
-    errors.add(:guardian, '监护人不能为空') if self.guardian.blank?
-    errors.add(:guardian_phone, '监护人号码不能为空') if self.guardian_phone.blank?
+    #errors.add(:phone, '电话不能为空') if self.phone.blank?
+    #errors.add(:guardian, '监护人不能为空') if self.guardian.blank?
+    #errors.add(:guardian_phone, '监护人号码不能为空') if self.guardian_phone.blank?
+    errors.add(:email, 'email bunengweikong') if self.email.blank?
   end
 
   after_save ThinkingSphinx::RealTime.callback_for(:student)

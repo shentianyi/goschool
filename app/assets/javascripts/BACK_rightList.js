@@ -35,15 +35,16 @@ BACKINDEX.right_list.temp_object;
 BACKINDEX.right_list.generateResult=function(data_to_sent){
 //    BACKINDEX.right_list.id=parameter;
     BACKINDEX.right_list.currentPage=0;
-    BACKINDEX.right_list.sent_only_page=false;
+    BACKINDEX.right_list.send_only_page=false;
     BACKINDEX.right_list.stillHave=true;
     $("#search-result").empty();
     var p=data_to_sent,c={};
     BACKINDEX.right_list.temp_object=deepCopy(p,c);
     if(arguments[1]=="only_page"){
-        BACKINDEX.right_list.send_only_page=true
+        BACKINDEX.right_list.send_only_page=true;
     }
     BACKINDEX.right_list.loadData();
+
 }
 BACKINDEX.right_list.loadData=function(){
     if(BACKINDEX.right_list.loadCheck!=0) return;
@@ -52,24 +53,17 @@ BACKINDEX.right_list.loadData=function(){
     window.setTimeout(function(){
         //post
         if(BACKINDEX.right_list.send_only_page){
+
             var my_data={
+                id:BACKINDEX.right_list.temp_object.view_id,
                 page:BACKINDEX.right_list.temp_object.page
             }
-        }
-        else{
-            var my_data={
-                search_type:BACKINDEX.right_list.temp_object.search_type,
-                entity_type:BACKINDEX.right_list.temp_object.entity_type,
-                q:$.trim(BACKINDEX.right_list.temp_object.search_queries),
-                page:BACKINDEX.right_list.temp_object.page
-            }
-        }
-        $.ajax({
-            type:"GET",
-            async:false,
-            url:'/search_engine/search',
-            data: my_data,
-            success:function(data){
+            $.ajax({
+                type:"GET",
+                async:false,
+                url:'/search_engine/search_by_view',
+                data: my_data,
+                success:function(data){
                     remove_loader();
                     if(data.length==0){
                         BACKINDEX.right_list.stillHave=false;
@@ -84,10 +78,45 @@ BACKINDEX.right_list.loadData=function(){
                             BACKINDEX.right_list.loadData();
                         }
                     },100);
-            }
-        }).always(function(){
-                BACKINDEX.right_list.loadCheck--;
-        });
+                }
+            }).always(function(){
+                    BACKINDEX.right_list.loadCheck--;
+                });
+        }
+        else{
+
+            var my_data={
+                search_type:BACKINDEX.right_list.temp_object.search_type,
+                entity_type:BACKINDEX.right_list.temp_object.entity_type,
+                q:BACKINDEX.right_list.temp_object.search_queries,
+                page:BACKINDEX.right_list.temp_object.page
+            };
+            $.ajax({
+                type:"GET",
+                async:false,
+                url:'/search_engine/search',
+                data: my_data,
+                success:function(data){
+                    remove_loader();
+                    if(data.length==0){
+                        BACKINDEX.right_list.stillHave=false;
+                        return
+                    }
+                    $("#search-result").append(data);
+                    $("#search-result .checkbox").checkbox();
+                    BACKINDEX.right_list.temp_object.page++;
+                    $("#result-count").text($("#search-result").children().length);
+                    window.setTimeout(function(){
+                        if($("#search-list").height()+parseInt($("#search-list>.search-input").css("margin-top"))<$(window).height()){
+                            BACKINDEX.right_list.loadData();
+                        }
+                    },100);
+                }
+            }).always(function(){
+                    BACKINDEX.right_list.loadCheck--;
+                });
+        }
+
 
 //        $.getJSON(BACKINDEX.right_list.nextPage(),{},function(data){
 //            remove_loader();

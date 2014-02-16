@@ -31,7 +31,7 @@ function bind_menu_event() {
 
 function comment() {
 
-    var post_id = $("#post").attr("post")
+    var post_id = $("#post").attr("post");
     var content = $("#comment").val();
 
     var data = {
@@ -42,10 +42,13 @@ function comment() {
     }
 
     comment_manager.create(data, function (data) {
-        if (data.result) {
+        if (data.result == undefined) {
+            $("#comment-pre-holder").after(data);
 
+            MessageBox("回答成功","top","success");
+            $("#comment").val("");
         } else {
-
+            MessageBox_content(data.content);
         }
     })
 }
@@ -67,6 +70,9 @@ function create_post() {
 
     posts_manager.create(data, function (data) {
         if (data.result) {
+            $(".homework-post-add input,.homework-post-add textarea").val("");
+            $(".homework-post-add").css("left","-999em").css("right","auto");
+            $("#task-attach-uploader-preview").empty();
             MessageBox("新建帖子成功", "top", "success");
         } else {
             MessageBox_content(data.content)

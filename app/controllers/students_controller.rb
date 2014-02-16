@@ -1,46 +1,48 @@
-# -*- coding: utf-8 -*-
+#encoding: utf-8
 class StudentsController < ApplicationController
+  before_filter :get_student, :only=>[:edit,:show,:update,:edit,:destroy,:detail]
   # layout "non_authorized"
   # GET /students
   # GET /students.json
   def index
     @active_left_aside='students'
-    @students = Student.all
+    @students = Student.order("created_at DESC").first(10)
     @student_presenters = StudentPresenter.init_presenters(@students)
-
+    @custom_views=CustomView.by_user_id_and_entity_type(current_user.id,'Student').all
     #respond_to do |format|
-    #  format.html # index.html.erb
-    #  format.json { render json: @students }
-    #end
+  #  format.html # index.html.erb
+  #  format.json { render json: @students }
+  #end
   end
 
   # GET /students/1
   # GET /students/1.json
   def show
     @active_left_aside='students'
-    @student = Student.find(params[:id])
+    #@student = Student.find(params[:id])
     @presenter=StudentPresenter.new(@student)
     case params[:part]
-      when 'achieve'
-        achievements(@student)
-      when 'friendship'
-        relation(@student)
-      when 'consult-record'
-        consultation(@student)
-      else
-        @partial = 'class-and-service'
-        courses(@student)
+    when 'achieve'
+      achievements(@student)
+    when 'friendship'
+      relation(@student)
+    when 'consult-record'
+      consultation(@student)
+    when 'class-performance'
+      performance(@student)
+    else
+    @partial = 'class-and-service'
+    courses(@student)
     end
 
     @partial ||= params[:part]
     render :partial => @partial if params[:ajax]
 
-    #respond_to do |formxat|
-    #  format.html # show.html.erb 
-    #  format.json { render json: @student }
-    #end
+  #respond_to do |formxat|
+  #  format.html # show.html.erb
+  #  format.json { render json: @student }
+  #end
   end
-
 
   # GET /students/new
   # GET /students/new.json
@@ -55,7 +57,7 @@ class StudentsController < ApplicationController
 
   # GET /students/1/edit
   def edit
-    @student = Student.find(params[:id])
+    #@student = Student.find(params[:id])
     @presenter = StudentPresenter.new(@student)
     render partial: 'edit'
   end
@@ -86,8 +88,8 @@ class StudentsController < ApplicationController
         msg.result = true
       end
     rescue ActiveRecord::RecordInvalid => invalid
-      msg.result = false
-      msg.content = invalid.record.errors
+    msg.result = false
+    msg.content = invalid.record.errors
     end
     render :json => msg
   end
@@ -98,7 +100,6 @@ class StudentsController < ApplicationController
     msg = Msg.new
     msg.result = false
     begin
-      @student = Student.find(params[:id])
 
       if params[:is_active_account]
         @logininfo = @student.logininfo
@@ -108,19 +109,21 @@ class StudentsController < ApplicationController
       ActiveRecord::Base.transaction do
         if params[:student] && params[:student][:email]
           @student.logininfo.update_attributes!(:email => params[:student][:email])
-          @student.logininfo.save!
+        @student.logininfo.save!
         end
 
         @student.update_attributes(params[:student].except(:tags)) if params[:student]
-        if params[:student] && params[:student][:tags]
+        if params.has_key?(:student)
           @student.tags = params[:student].slice(:tags)[:tags]
-          @student.add_tags
+        else
+          @student.tags = []
         end
+        @student.add_tags
         msg.result = true
       end
     rescue ActiveRecord::RecordInvalid => invalid
-      msg.result = false
-      msg.content = invalid.record.errors
+    msg.result = false
+    msg.content = invalid.record.errors
     end
     render :json => msg
   end
@@ -130,14 +133,18 @@ class StudentsController < ApplicationController
   def destroy
     msg = Msg.new
     msg.result = false
-    @student = Student.find(params[:id])
     if @student
-      @student.destroy
-      msg.result = true
+    @student.destroy
+    msg.result = true
     else
       msg.content = '未找到该学生或您没有权限删除Ta'
     end
     render :json => msg
+  end
+
+  def detail
+    @presenter = StudentPresenter.new(@student)
+    render partial:'detail'
   end
 
   # List Search Result
@@ -160,6 +167,13 @@ class StudentsController < ApplicationController
   end
 
   private
+
+  def performance student
+    @shs=@student.student_homeworks.where(marked:true).order('marked_time desc').limit(5).all
+    @improved=@student.student_homeworks.where(marked:true,improved:true).count
+    @disimproved=@student.student_homeworks.where(marked:true,improved:false).count
+    @sub_courses=@student.sub_courses
+  end
 
   def consultation(student)
     @consultations = ConsultationPresenter.init_presenters(student.consultations)
@@ -199,8 +213,12 @@ class StudentsController < ApplicationController
     Recommendation.new.get_potential_relation(student.tenant_id, student.id).each do |relation|
       s = Student.find_by_id(relation['reced_id'])
       if s
-        @relations<<s
+      @relations<<s
       end
     end
+  end
+
+  def get_student
+    @student = Student.find(params[:id])
   end
 end
