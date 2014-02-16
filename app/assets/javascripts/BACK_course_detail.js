@@ -7,6 +7,8 @@
  */
 var DETAIL=DETAIL || {};
 DETAIL.course={};
+var BACKCOURSE=BACKCOURSE || {};
+BACKCOURSE.edit_material=true;
 (function(){
 
     $("body").on("click","#course-detail-edit",function(){

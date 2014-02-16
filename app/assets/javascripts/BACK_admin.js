@@ -362,16 +362,12 @@ BACKINDEX.admin.operate.init=function(){
         }
         else if(BACKINDEX.admin.operate.type=="materials"){
             for(i=0;i<$target.length;i++){
-                validate=$target.eq(i).val().length>0?$target.eq(i).val():false;
-                if(validate){
-                    value_array.push(validate);
-                }
-                else{
-                    MessageBox("信息填写不完整","top","warning");
-                    return;
-                }
+                value_array.push($.trim($target.eq(i).val()));
             }
-
+            if(value_array[0].length===0){
+                MessageBox("请填写材料名称","top","warning");
+                return;
+            }
 //            for(i=0;i<$target.length;i++){
 //                $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
 //            }

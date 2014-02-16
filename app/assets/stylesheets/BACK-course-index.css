@@ -5,6 +5,9 @@
     margin-bottom:0px;
     float:left;
 }
+.back-index-main > .search-list > .search-result[name="course"] > li .course-name.service{
+    color:#D95C5C;
+}
 .back-index-main > .search-list > .search-result[name="course"] > li .labels{
     float:left;
     margin-top:10px;
@@ -223,16 +226,17 @@
     width:298px;
     padding:0 0px;
     height:75px;
+
 }
 .back-index-add[name='course']>.inner .right-part .material-block .header{
-    background:#63A69F;
-    color:#fff;
+    background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
+    color:#808080;
     cursor:pointer;
     padding:1px 5px;
-    transition:background ease-out 0.25s;
+    transition:color ease-out 0.25s;
 }
 .back-index-add[name='course']>.inner .right-part .material-block .header:hover{
-    background:#67c9bf;
+    color:#222;
 }
 .back-index-add[name='course']>.inner .right-part .material-block .header>i{
     margin-left:7px;
@@ -259,7 +263,7 @@
     overflow-y:auto;
 }
 .back-index-add[name='course']>.inner .right-part .material-block .content ul li{
-    margin-bottom:1px;
+    margin-bottom:2px;
     padding:2px 0 0 6px;
     width:90%;
     position:relative;
@@ -272,9 +276,11 @@
 .back-index-add[name='course']>.inner .right-part .material-block .content ul li p:first-of-type{
     color:#222;
     font-size:12px;
+
 }
 .back-index-add[name='course']>.inner .right-part .material-block .content ul li p:nth-of-type(2){
     vertical-align:bottom;
+    line-height:11px;
 }
 .back-index-add[name='course']>.inner .right-part .material-block .content ul li .remove{
     position:absolute;
@@ -282,7 +288,7 @@
     color:#9d9d9d;
     cursor: pointer;
     pointer-events:auto;
-    top:7px;
+    top:10px;
     font-size:12px;
     transition:color ease-out 0.2s;
 }
@@ -302,7 +308,7 @@
     z-index:101;
     position:absolute;
     margin-left:26px;
-    margin-top:-62px;
+    margin-top:-59px;
     border-radius:0 0 0.3125em 0.3125em;
     -moz-border-radius:0 0 0.3125em 0.3125em;
     -webkit-border-radius:0 0 0.3125em 0.3125em;

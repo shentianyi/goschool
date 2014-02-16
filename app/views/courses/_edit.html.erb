@@ -52,6 +52,53 @@
                     </ul>
                     <i class="tag icon stop"></i>
                </div>
+            <%if @course.type==CourseType::COURSE%>
+            <div class="material-block">
+              <div class="header" id="material-header">
+                <i class="icon text file"></i>
+                <label>材料</label>
+                <i class="icon reorder button"></i>
+              </div>
+
+              <div class="content" id="material-content">
+                <ul>
+
+                  <li id="21">
+                    <p>托福成绩单</p>
+                    <p>记录托福成绩的单子</p>
+                    <i class="icon remove material-list-remove" affect="21"></i>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="material-setting" id="material-setting">
+              <table class="ui column table segment">
+                <thead>
+                <tr><th class="five wide">名称</th>
+                  <th class="nine wide">描述</th>
+                  <th class="two wide"></th>
+                </tr></thead>
+                <tbody>
+
+                <tr id="213">
+                  <td>John</td>
+                  <td>Approved</td>
+                  <td><i class="icon minus basic" affect="213"></i></td>
+                </tr>
+
+                </tbody>
+                <tfoot>
+                <tr>
+                  <td colspan=2></td>
+                  <td><i class="icon plus basic" id="add-new-material"></i></td>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <%end%>
+
                <div class="ui buttons choose-teacher-delivery" id="choose-teacher-delivery" name="class">
                     <div class="ui mini button<%= ' teal active' unless @course.has_sub%>" for="total-course-teachers">
                         总体<%= @course.type_display%>安排老师

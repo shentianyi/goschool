@@ -1,3 +1,5 @@
+
+
 function init_course_edit() {
 //     $(function() {
           $("#course-begin-date").datepicker({
