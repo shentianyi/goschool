@@ -54,6 +54,132 @@ STUDENT_FRONT.check = 0;
             });
         }
     });
+    //2014.2新加入
+    ////////////////////////////////////////// 服务材料
+
+    //添加材料项
+    $("body")
+        .on("click","#service-material .plus",function(){
+            var $table=$(this).parents("p").next();
+            $table.find("tbody").append(
+            "<tr class='temp template'>"+
+                "<td><input type='text' /></td>"+
+                "<td><input type='text' /></td>"+
+                "<td>"+
+                    "<div class='ui checkbox'>"+
+                        "<input type='checkbox' class='temp-checkbox'>"+
+                        "<label></label>"+
+                    "</div>"+
+                "</td>"+
+                "<td>"+
+                    "<span class='ok'>完成</span>"+
+                    "<span class='remove'>删除</span>"+
+                "</td>"+
+            "</tr>"
+            );
+            $("#service-material .checkbox").checkbox();
+
+        })
+        .on("click","#service-material .ok",function(){
+//            $.post("",{},function(data){
+//                if(data.result){
+//
+//                }
+//                else{
+//                    MessageBox_content(data.content);
+//                }
+//            });
+
+            var $tr=$(this).parents("tr").eq(0),
+                $children=$tr.children();
+            var name= $.trim($children.eq(0).find("input").val()),
+                desc= $.trim($children.eq(1).find("input").val()),
+                got= $children.eq(2).find("input").prop("checked");
+            if(name.length>0){
+                $(this).remove();
+                $children.find("input[type='text']").remove();
+                $children.eq(0).text(name);
+                $children.eq(1).text(desc);
+                $tr.attr("id","id-temp").removeClass("template");
+                if($children.eq(2).find("input").prop("checked")){
+                    $tr.addClass("positive");
+                }
+                STUDENTDETAIL.material.check();
+            }
+            else{
+                MessageBox("请填写材料名称","top","warning");
+            }
+
+        })
+    //删除
+    $("body").on("click","#service-material .remove",function(){
+        var $tr=$(this).parents("tr");
+        if($tr.hasClass("template")){
+             $tr.remove();
+        }
+        else{
+            var id=$tr.attr("id");
+            $.ajax({
+                url: ""+id,
+                type: 'DELETE',
+                success: function (data) {
+                    if (data.result){
+                        $tr.remove();
+                    }
+                    else{
+                        MessageBox_content(data.content)
+                    }
+                }
+            });
+        }
+    });
+    //编辑
+    $("body").on("dblclick","#service-material td",function(){
+        var $tr=$(this).parents("tr"),
+            $this=$(this),
+            text;
+        if($tr.hasClass("temp") && $this.children().length==0){
+            text=$this.text();
+            $this.empty().append($("<input type='text'/>").val(text));
+            $this.find("input").focus();
+        }
+    })
+        .on("keyup","#service-material td input",function(event){
+            var e=adapt_event(event).event,
+                $tr=$(this).parents("tr"),
+                $this=$(this);
+            if(e.keyCode==13){
+                if($tr.hasClass("template")){
+                     $tr.find(".ok").click();
+                }
+                else{
+                    $this.blur();
+                }
+            }
+        })
+        .on("blur","#service-material td input",function(){
+            var $tr=$(this).parents("tr"),
+                $this=$(this),
+                text,
+                id;
+            if(!$tr.hasClass("template")){
+                text=$this.val();
+                id=$tr.attr("id");
+//                $.ajax({
+//                    url: ""+id,
+//                    type: 'PUT',
+//                    success: function (data) {
+//                        if (data.result){
+//
+//                        }
+//                        else{
+//                            MessageBox_content(data.content)
+//                        }
+//                    }
+//                });
+                $this.parent().empty().text(text);
+            }
+        });
     ////////////////////////////////////////////////////////最终成绩
     //最终成就
     $("body").on("click", "#final-achieve .icon.plus",function () {
@@ -825,6 +951,9 @@ STUDENT_FRONT.check = 0;
     });
 
     $(document).ready(function () {
+        //html测试用
+        STUDENTDETAIL.material.check();
+
         var href = window.location.href.split("/");
         var new_href = href[href.length - 1].split("#")[0];
         if (new_href == "achieve") {
@@ -841,10 +970,41 @@ STUDENT_FRONT.check = 0;
             });
             $("#homework-line-wrap .buttons .button").eq(0).click();
         }
-
+        else if(new_href="service-material"){
+            STUDENTDETAIL.material.check();
+        }
     });
 
 })();
+//新加入2014.2 材料
+STUDENTDETAIL.material={};
+STUDENTDETAIL.material.check=function(){
+    $("#service-material .checkbox").checkbox({
+        onChange:function(){
+            if(!$(this).parents('tr').hasClass("template")){
+                var $this=$(this),$tr=$this.parents("tr");
+                var id=$tr.attr("id"),
+                    checked=$this.prop("checked");
+//                $.ajax({
+//                    url:""+id,
+//                    data:{},
+//                    type:'PUT',
+//                    success:function(data){
+//                        if(data.result){
+//                            $tr.toggleClass("positive");
+//                        }
+//                        else{
+//                            $this.parent().checkbox('toggle');
+//                            MessageBox_content(data.content);
+//                        }
+//                    }
+//                })
+            }
+
+        }
+    });
+}
+
 STUDENTDETAIL.errors = new Array(2);
 STUDENTDETAIL.labels;
 STUDENTDETAIL.data;
@@ -858,6 +1018,7 @@ STUDENTDETAIL.option = {
 function sortNumber(a, b) {
     return b - a
 }
+
 STUDENTDETAIL.generate_option = function () {
     var c = [];
     var p = STUDENTDETAIL.data;

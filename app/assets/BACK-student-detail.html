@@ -69,6 +69,10 @@
             <a class="item active" href="#class-and-service">
                 <i class="browser icon"></i> 课程及服务
             </a>
+            //新加入材料
+            <a class="item active" href="#service-material">
+                <i class="text file icon"></i> 服务材料
+            </a>
             <a class="item" href="#achieve">
                 <i class="trophy icon"></i> 所获成就
             </a>
@@ -121,10 +125,10 @@
         <div class="ui fluid accordion" id="accordion" name="student">
             <!--partial-->
             <div class="item" id="class-and-service">
-                <div class="active title">
+                <div class="title">
                     <i class="dropdown icon"></i>课程及服务
                 </div>
-                <div class="active content class-and-service">
+                <div class="content class-and-service">
                     <table class="ui celled table segment">
                         <thead>
                         <tr>
@@ -183,6 +187,65 @@
                 </div>
             </div>
             <!--partial-->
+
+            <!--2014.2.16 材料 -->
+            <div class="item" id="service-material">
+                <div class="active title">
+                    <i class="dropdown icon"></i>服务材料
+                </div>
+                <div class="active content service-material">
+                    <div class="content-item">
+                        <p>服务1<i class="icon plus"></i></p>
+                        <table class="ui small table segment celled column">
+                            <thead>
+                            <tr><th class="four wide">材料名称</th>
+                                <th class="eight wide">描述</th>
+                                <th class="two wide">是否已提供</th>
+                                <th class="two wide"></th>
+                            </tr></thead>
+                            <tbody>
+
+                            <tr id="1">
+                                <td>托福成绩单</td>
+                                <td>托福的成绩单</td>
+                                <td>
+                                    <div class="ui checkbox">
+                                        <input type="checkbox">
+                                        <label></label>
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+
+                            <tr class="temp" id="2">
+                                <td>托福成绩单</td>
+                                <td>托福的成绩单</td>
+                                <td>
+                                    <div class="ui checkbox">
+                                        <input type="checkbox">
+                                        <label></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="remove">删除</span>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <!--2014.2.16 材料 -->
+
+
+
+
+
+
 
             <!--template-->
             <div class="item achievement" id="achieve">

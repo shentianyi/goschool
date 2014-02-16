@@ -102,6 +102,57 @@
 .accordion[name='student'] .class-and-service table td.pay-lack{
     color:#D95C5C;
 }
+/*新加入 2014.2*/
+/**************************************************************  服务材料  */
+.accordion[name='student'] .service-material .content-item{
+    margin-top:20px;
+}
+.accordion[name='student'] .service-material .content-item:first-of-type{
+    margin-top:0px;
+}
+.accordion[name='student'] .service-material .content-item>p{
+    color: #63A69F;
+    font-size: 16px;
+    margin: 0;
+}
+.accordion[name='student'] .service-material .content-item>p>i{
+    color: #23B890;
+    cursor: pointer;
+    font-size: 13px;
+    margin-left: 5px;
+    transition: color 0.25s ease-out 0s;
+}
+.accordion[name='student'] .service-material .content-item>p>i:hover{
+    color: #22DEAC;
+}
+.accordion[name='student'] .service-material .content-item>table{
+    margin-top:5px;
+}
+.accordion[name='student'] .service-material .content-item>table .remove{
+    color: #E34545;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: underline;
+    transition: color 0.25s ease-out 0s;
+}
+.accordion[name='student'] .service-material .content-item>table .remove:hover{
+    color: #EF1414;
+}
+
+.accordion[name='student'] .service-material .content-item>table .ok{
+    text-align:center;
+    color:#63A69F;
+    text-decoration:underline;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+    margin-right:18px;
+}
+.accordion[name='student'] .service-material .content-item>table .ok:hover{
+    color:#2ac6b6;
+}
+.accordion[name='student'] .service-material .content-item>table tr td:nth-of-type(2) input{
+    width:200px;
+}
 /***********在校成绩表现三个图***********/
 .class-performance .content:after{
     content:"";

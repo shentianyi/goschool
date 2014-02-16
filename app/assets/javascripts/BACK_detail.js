@@ -90,6 +90,9 @@
                             }
                         });
                     }
+                    else if(target="service-material"){
+                        STUDENTDETAIL.material.check();
+                    }
                 }
             });
         }
