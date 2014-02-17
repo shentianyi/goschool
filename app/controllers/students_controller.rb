@@ -229,7 +229,7 @@ class StudentsController < ApplicationController
     msg.result = false
     @material = Material.find_by_id(params[:id])
     if @material
-      msg.result = @material.update_attribute('status',MaterialStatus::SUBMITTED)
+      msg.result = @material.update_attribute('status',params[:status])
     end
 
     render :json=>msg
