@@ -9,7 +9,9 @@ class StudentCourseObserver<ActiveRecord::Observer
     # init material
     if (materials=student_course.course.materials).count>0
       materials.each do |material|
-        student_course.material.create
+        m=student_course.materials.build
+        m.material=material
+        m.save
       end
     end
   end
