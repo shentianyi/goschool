@@ -16,6 +16,7 @@ class CoursesController < ApplicationController
 
   def show
     @active_left_aside='courses'
+    @materials=@course.materials
     @course=CoursePresenter.new(@course)
     case params[:part]
       when 'teacher'
@@ -31,6 +32,7 @@ class CoursesController < ApplicationController
   end
 
   def edit
+    @materials=@course.materials
     @course=CoursePresenter.new(@course)
     render partial: 'edit'
   end

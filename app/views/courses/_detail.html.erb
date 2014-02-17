@@ -32,9 +32,9 @@
      <p class="detail-material">
          <span>材料:</span>
          <span>
-            <label>托福成绩单</label>
-            <label>体检证明</label>
-            <label>护照以及成绩</label>
+           <% @materials.each do |m| %>
+            <label title="<%= m.description %>"><%= m.name %></label>
+               <% end %>
          </span>
      </p>
      <p class="detail-labels">
