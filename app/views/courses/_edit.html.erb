@@ -52,7 +52,7 @@
                     </ul>
                     <i class="tag icon stop"></i>
                </div>
-            <%if @course.type==CourseType::COURSE%>
+            <%if CourseType.service?(@course.type) %>
             <div class="material-block">
               <div class="header" id="material-header">
                 <i class="icon text file"></i>
@@ -62,13 +62,14 @@
 
               <div class="content" id="material-content">
                 <ul>
+                  <% @materials.each do |m| %>
+                      <li id="<%= m.id %>">
+                        <p><%= m.name %></p>
 
-                  <li id="21">
-                    <p>托福成绩单</p>
-                    <p>记录托福成绩的单子</p>
-                    <i class="icon remove material-list-remove" affect="21"></i>
-                  </li>
-
+                        <p><%= m.description %></p>
+                        <i class="icon remove material-list-remove" affect="<%= m.id %>"></i>
+                      </li>
+                  <% end %>
                 </ul>
               </div>
             </div>
@@ -76,17 +77,13 @@
             <div class="material-setting" id="material-setting">
               <table class="ui column table segment">
                 <thead>
-                <tr><th class="five wide">名称</th>
+                <tr>
+                  <th class="five wide">名称</th>
                   <th class="nine wide">描述</th>
                   <th class="two wide"></th>
-                </tr></thead>
-                <tbody>
-
-                <tr id="213">
-                  <td>John</td>
-                  <td>Approved</td>
-                  <td><i class="icon minus basic" affect="213"></i></td>
                 </tr>
+                </thead>
+                <tbody>
 
                 </tbody>
                 <tfoot>

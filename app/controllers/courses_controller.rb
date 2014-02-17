@@ -11,10 +11,12 @@ class CoursesController < ApplicationController
     @courses_records=Course.paginate(:page => params[:page], :per_page => 10).joins(:institution).select('courses.*,institutions.name as institution_name').order('created_at desc')
     @courses=CoursePresenter.init_presenters(@courses_records)
     @custom_views=CustomView.by_user_id_and_entity_type(current_logininfo.id, 'Course').all
+    @materials=current_tenant.setting.materials
   end
 
   def show
     @active_left_aside='courses'
+    @materials=@course.materials
     @course=CoursePresenter.new(@course)
     case params[:part]
       when 'teacher'
@@ -30,16 +32,17 @@ class CoursesController < ApplicationController
   end
 
   def edit
+    @materials=@course.materials
     @course=CoursePresenter.new(@course)
     render partial: 'edit'
   end
 
   def create
-    @course = current_tenant.courses.build(params[:course].except(:subs).except(:tags).except(:teachers))
+    @course = current_tenant.courses.build(params[:course].except(:subs).except(:tags).except(:teachers).except(:materials).except(:material_ids))
     @course.subs=params[:course].slice(:subs)[:subs].values if params[:course].has_key?(:subs)
     @course.tags=params[:course].slice(:tags)[:tags] if params[:course].has_key?(:tags)
     @course.teacher_ids=params[:course].slice(:teachers)[:teachers].values if params[:course].has_key?(:teachers)
-    @course.material_ids=params[:course].slice(:material_ids)[:material_ids].values if params[:course].has_key?(:material_ids)
+    @course.material_ids=params[:course].slice(:material_ids)[:material_ids] if params[:course].has_key?(:material_ids)
     @course.private_materials=params[:course].slice(:materials)[:materials].values if params[:course].has_key?(:materials)
     @course.subs.each do |sub|
       unless sub[:name].blank?

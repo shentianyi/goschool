@@ -8,7 +8,7 @@
      <table class="ui table segment">
           <tr>
                <td colspan="3" class="fourteen wide">
-               <p class="course-name">
+               <p class="course-name <%= 'service' if CourseType.service?(course.type)%>">
                     <%= course.name%>
                </p>
                <div class="ui blue labels small">
