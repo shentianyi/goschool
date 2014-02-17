@@ -1,0 +1,36 @@
+<div class="content-item">
+  <% @courses.each do |c|%>
+      <p><%= c.name%><span class="plus-span"><i class="icon plus"></i>添加材料</span></p>
+      <table class="ui small table segment celled column">
+        <thead>
+        <tr><th class="four wide">材料名称</th>
+          <th class="eight wide">描述</th>
+          <th class="two wide">是否已提供</th>
+          <th class="two wide"></th>
+        </tr></thead>
+        <tbody>
+        <% materials=StudentCourse.find_by_id(c.student_course_id).materials %>
+        <% materials.each do |m| %>
+            <tr class="temp" id="2">
+              <td><%=m.name%></td>
+              <td><%=m.description%></td>
+              <td>
+                <div class="ui checkbox">
+                  <input type="checkbox" <%if m.status == MaterialStatus::SUBMITTED%> checked<%end%> >
+                  <label></label>
+                </div>
+              </td>
+              <td>
+                <% if m.editable%>
+                    <span class="remove">删除</span>
+                <%end%>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  <%end%>
+</div>
+</div>
+</div>
+<!--2014.2.16 材料 -->

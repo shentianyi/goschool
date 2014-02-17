@@ -30,7 +30,7 @@ class StudentsController < ApplicationController
         consultation(@student)
       when 'class-performance'
         performance(@student)
-      when 'materials'
+      when 'service-material'
         materials(@student)
     else
     @partial = 'class-and-service'
@@ -317,7 +317,7 @@ class StudentsController < ApplicationController
   end
 
   def materials(student)
-    Course.joins(:student_courses).where('student_courses.student_id = ?',student.id).select('student_courses.id as student_course_id,courses.*')
+    @courses = Course.joins(:student_courses).where('student_courses.student_id = ? AND type = ?',student.id,CourseType::SERVICE).select('student_courses.id as student_course_id,courses.*')
   end
 
   def get_student
