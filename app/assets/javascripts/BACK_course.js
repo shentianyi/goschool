@@ -189,11 +189,23 @@ var BACKCOURSE=BACKCOURSE || {};
                    }
 
                //新加入的 材料
-                   var $materialContent=$("material-content"),material;
-                   for(var i=0;i<$materialContent.find("ul").children().length;i++){
-
+                   var $materialContent=$("#material-content"),
+                       materials=[],
+                       material_ids=[],
+                       $li=$materialContent.find("ul").children(),
+                       $li_eq;
+                   for(var i=0;i<$li.length;i++){
+                       $li_eq=$li.eq(i);
+                       if($li_eq.attr("id")===undefined || $li_eq.attr("id").length===0){
+                           materials.push({
+                              name:$li_eq.find("p").eq(0).text(),
+                              description:$li_eq.find("p").eq(1).text()
+                           });
+                       }
+                       else{
+                           material_ids.push($li_eq.attr("id"));
+                       }
                    }
-
                    var option={
                        description: desc,
                        institution_id:institution,
@@ -206,9 +218,10 @@ var BACKCOURSE=BACKCOURSE || {};
                        start_date:begin,
                        type: type,
                        teachers:teacher_id_array,//新加入
-                       subs:sub_teacher_array
+                       subs:sub_teacher_array,
+                       materials:materials,//2014.2加入
+                       materials_ids:material_ids//2014.2加入
                    }
-                   console.log(option)
                    BACKCOURSE.post_add_class(option)
 //               }
            }
@@ -259,33 +272,21 @@ var BACKCOURSE=BACKCOURSE || {};
             $setting=$("#material-setting"),
             $ul=$content.find("ul"),
             $tbody=$setting.find("tbody"),
-            i;
+            i,id;
         if($(this).hasClass("open")){
             $(".reorder",this).removeClass("reorder").addClass("triangle up");
             $setting.slideDown();
             //
             $tbody.empty();
-            if(BACKCOURSE.edit_material){
-                for(i=0;i<$ul.children().length;i++){
-                    $tbody.append("<tr id="+$ul.find("li").eq(i).attr("id")+">"+
-                        "<td>"+$ul.find("li").eq(i).find("p").eq(0).text()+"</td>"+
-                        "<td>"+$ul.find("li").eq(i).find("p").eq(1).text()+"</td>"+
-                        "<td>"+
-                        "<i class='icon minus basic' affect="+$ul.find("li").eq(i).attr("id")+"></i>"+
-                        "</td>"+
-                        "</tr>");
-                }
-            }
-            else{
-                for(i=0;i<$ul.children().length;i++){
-                    $tbody.append("<tr>"+
-                        "<td>"+$ul.find("li").eq(i).find("p").eq(0).text()+"</td>"+
-                        "<td>"+$ul.find("li").eq(i).find("p").eq(1).text()+"</td>"+
-                        "<td>"+
-                        "<i class='icon minus basic'></i>"+
-                        "</td>"+
-                        "</tr>");
-                }
+            for(i=0;i<$ul.children().length;i++){
+                id=$ul.find("li").eq(i).attr("id")===undefined?"":$ul.find("li").eq(i).attr("id");
+                $tbody.append("<tr id="+id+">"+
+                    "<td>"+$ul.find("li").eq(i).find("p").eq(0).text()+"</td>"+
+                    "<td>"+$ul.find("li").eq(i).find("p").eq(1).text()+"</td>"+
+                    "<td>"+
+                    "<i class='icon minus basic' affect="+id+"></i>"+
+                    "</td>"+
+                    "</tr>");
             }
 
         }
@@ -294,25 +295,14 @@ var BACKCOURSE=BACKCOURSE || {};
             $(".triangle",this).removeClass("triangle up").addClass("reorder");
             //
             $ul.empty();
-            if(BACKCOURSE.edit_material){
-                for(i=0;i<$tbody.children().length;i++){
-                    $ul.append("<li id="+$tbody.find("tr").eq(i).attr("id")+">"+
-                        "<p>"+$tbody.find("tr").eq(i).find("td").eq(0).text()+"</p>"+
-                        "<p>"+$tbody.find("tr").eq(i).find("td").eq(1).text()+"</p>"+
-                        "<i class='icon remove material-list-remove' affect="+$tbody.find("tr").eq(i).attr("id")+"></i>"+
-                        "</li>");
-                }
+            for(i=0;i<$tbody.children().length;i++){
+                id=$tbody.find("tr").eq(i).attr("id")===undefined?"":$tbody.find("tr").eq(i).attr("id");
+                $ul.append("<li id="+id+">"+
+                    "<p>"+$tbody.find("tr").eq(i).find("td").eq(0).text()+"</p>"+
+                    "<p>"+$tbody.find("tr").eq(i).find("td").eq(1).text()+"</p>"+
+                    "<i class='icon remove material-list-remove' affect="+id+"></i>"+
+                    "</li>");
             }
-            else{
-                for(i=0;i<$tbody.children().length;i++){
-                    $ul.append("<li>"+
-                        "<p>"+$tbody.find("tr").eq(i).find("td").eq(0).text()+"</p>"+
-                        "<p>"+$tbody.find("tr").eq(i).find("td").eq(1).text()+"</p>"+
-                        "<i class='icon remove material-list-remove'></i>"+
-                        "</li>");
-                }
-            }
-
             $setting.slideUp();
         }
     });
