@@ -12,8 +12,8 @@
         <% materials=StudentCourse.find_by_id(c.student_course_id).materials %>
         <% materials.each do |m| %>
             <tr class="<% if m.editable%>temp<%end%><%if m.status == MaterialStatus::SUBMITTED%> positivexs <%end%>" id="2">
-              <td><%=m.name%></td>
-              <td><%=m.description%></td>
+              <td post_type='name'><%=m.name%></td>
+              <td post_type='description'><%=m.description%></td>
               <td>
                 <div class="ui checkbox">
                   <input type="checkbox" <%if m.status == MaterialStatus::SUBMITTED%> checked<%end%> >

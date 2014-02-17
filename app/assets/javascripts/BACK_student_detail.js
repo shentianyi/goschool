@@ -63,8 +63,8 @@ STUDENT_FRONT.check = 0;
             var $table=$(this).parents("p").next();
             $table.find("tbody").append(
             "<tr class='temp template'>"+
-                "<td><input type='text' /></td>"+
-                "<td><input type='text' /></td>"+
+                "<td post_type='name'><input type='text' /></td>"+
+                "<td post_type='description'><input type='text' /></td>"+
                 "<td>"+
                     "<div class='ui checkbox'>"+
                         "<input type='checkbox' class='temp-checkbox'>"+
@@ -81,14 +81,7 @@ STUDENT_FRONT.check = 0;
 
         })
         .on("click","#service-material .ok",function(){
-//            $.post("",{},function(data){
-//                if(data.result){
-//
-//                }
-//                else{
-//                    MessageBox_content(data.content);
-//                }
-//            });
+
 
             var $tr=$(this).parents("tr").eq(0),
                 $children=$tr.children();
@@ -96,15 +89,44 @@ STUDENT_FRONT.check = 0;
                 desc= $.trim($children.eq(1).find("input").val()),
                 got= $children.eq(2).find("input").prop("checked");
             if(name.length>0){
-                $(this).remove();
-                $children.find("input[type='text']").remove();
-                $children.eq(0).text(name);
-                $children.eq(1).text(desc);
-                $tr.attr("id","id-temp").removeClass("template");
-                if($children.eq(2).find("input").prop("checked")){
-                    $tr.addClass("positive");
-                }
-                STUDENTDETAIL.material.check();
+                $.post("/materials",{
+                    material:{
+                        name:name,
+                        description:desc
+                    },
+                    type:300
+                },function(data){
+                    if(data.result){
+                        var id=data.content;
+                        $(this).remove();
+                        $children.find("input[type='text']").remove();
+                        $children.eq(0).text(name);
+                        $children.eq(1).text(desc);
+                        $tr.attr("id",id).removeClass("template");
+                        STUDENTDETAIL.material.check();
+                        if(got){
+                            $tr.addClass("positive");
+                            $.ajax({
+                                url:"/materials/"+id,
+                                type:"PUT",
+                                data:{},
+                                success:function(data){
+                                    if(data.result){
+
+                                    }
+                                    else{
+                                        MessageBox_content(data.content);
+                                    }
+                                }
+                            })
+                        }
+
+                    }
+                    else{
+                        MessageBox_content(data.content);
+                    }
+                });
+
             }
             else{
                 MessageBox("请填写材料名称","top","warning");
@@ -120,7 +142,7 @@ STUDENT_FRONT.check = 0;
         else{
             var id=$tr.attr("id");
             $.ajax({
-                url: ""+id,
+                url: "/materials/"+id,
                 type: 'DELETE',
                 success: function (data) {
                     if (data.result){
@@ -165,18 +187,24 @@ STUDENT_FRONT.check = 0;
             if(!$tr.hasClass("template")){
                 text=$this.val();
                 id=$tr.attr("id");
-//                $.ajax({
-//                    url: ""+id,
-//                    type: 'PUT',
-//                    success: function (data) {
-//                        if (data.result){
-//
-//                        }
-//                        else{
-//                            MessageBox_content(data.content)
-//                        }
-//                    }
-//                });
+                var type=$this.parent("td").attr("post_type"),
+                    material={};
+                material[type]=text;
+                $.ajax({
+                    url: "/materials/"+id,
+                    type: 'PUT',
+                    data:{
+                        material:material
+                    },
+                    success: function (data) {
+                        if (data.result){
+
+                        }
+                        else{
+                            MessageBox_content(data.content)
+                        }
+                    }
+                });
                 $this.parent().empty().text(text);
             }
         });
