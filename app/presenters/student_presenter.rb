@@ -28,12 +28,7 @@ class StudentPresenter<Presenter
   end
 
   def attend_
-    courses = self.student.courses
-    res = ''
-    courses.each do |c|
-      res = res + c.name + ','
-    end
-    return res
+    self.student.courses.pluck('name').join(',')
   end
   
   def account_actived?
