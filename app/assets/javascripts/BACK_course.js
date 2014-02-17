@@ -3,6 +3,7 @@ var BACKCOURSE=BACKCOURSE || {};
 (function(){
     //添加课程
     $(".sub-course-block i.checkbox").popup();
+    $("#search-result .corner i").popup();
     $("#course-begin-date").datepicker({
         showOtherMonths: true,
         selectOtherMonths: true,
@@ -282,8 +283,8 @@ var BACKCOURSE=BACKCOURSE || {};
             for(i=0;i<$ul.children().length;i++){
                 id=$ul.find("li").eq(i).attr("id")===undefined?"":$ul.find("li").eq(i).attr("id");
                 $tbody.append("<tr id="+id+">"+
-                    "<td>"+$ul.find("li").eq(i).find("p").eq(0).text()+"</td>"+
-                    "<td>"+$ul.find("li").eq(i).find("p").eq(1).text()+"</td>"+
+                    "<td post_name='name'>"+$ul.find("li").eq(i).find("p").eq(0).text()+"</td>"+
+                    "<td post_name='description'>"+$ul.find("li").eq(i).find("p").eq(1).text()+"</td>"+
                     "<td>"+
                     "<i class='icon minus basic' affect="+id+"></i>"+
                     "</td>"+
@@ -327,15 +328,15 @@ var BACKCOURSE=BACKCOURSE || {};
             for(var i=0;i<length;i++){
                 value= $.trim($("#material-template td").eq(i).find("input").val());
                 valueArray.push(value);
-                console.log(length)
                 if(i==0 && value.length==0){
                     MessageBox("请填写材料名称","top","warning");
                     return ;
                 }
             }
                 if(BACKCOURSE.edit_material){
-                    $.post("",{
-
+                    $.post("/materials",{
+                       material:{name:valueArray[0],description:valueArray[1]},
+                        type:200
                     },function(data){
                         if(data.result){
                             for(var i=0;i<length;i++){
@@ -373,7 +374,7 @@ var BACKCOURSE=BACKCOURSE || {};
             if(BACKCOURSE.edit_material){
                 var id=$(this).attr("affect");
                 $.ajax({
-                    url:""+id,
+                    url:"/materials/"+id,
                     type:"DELETE",
                     success:function(data){
                         if(data.result){
@@ -394,7 +395,7 @@ var BACKCOURSE=BACKCOURSE || {};
             if(BACKCOURSE.edit_material){
                 var id=$(this).attr("affect");
                 $.ajax({
-                    url:""+id,
+                    url:"/materials/"+id,
                     type:"DELETE",
                     success:function(data){
                         if(data.result){
@@ -434,11 +435,16 @@ var BACKCOURSE=BACKCOURSE || {};
                 id=$(this).parents("tr").eq(0).attr("id");
             if(id!=="material-template"){
                 if(BACKCOURSE.edit_material){
-                    var $this=$(this);
+                    var $this=$(this),
+                        type=$this.parent("td").attr("post_name"),
+                        material={};
+                    material[type]= $.trim($this.val());
                     $.ajax({
-                        url:""+id,
+                        url:"/materials/"+id,
                         type:"PUT",
-                        data:{},
+                        data:{
+                            material:material
+                        },
                         success:function(data){
                             if(data.result){
                                 value=$this.val();

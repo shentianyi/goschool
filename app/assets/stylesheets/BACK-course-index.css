@@ -1,4 +1,16 @@
 /*列表*/
+.back-index-main > .search-list > .search-result[name="course"] > li{
+    position:relative;
+}
+.back-index-main > .search-list > .search-result[name="course"] > li .ui.corner.label:after{
+    right: 15px;
+    top: 22px;
+}
+.back-index-main > .search-list > .search-result[name="course"] > li .ui.corner.label .icon{
+    margin:26px 0 0 -20px;
+    font-size:14px;
+    cursor:default;
+}
 .back-index-main > .search-list > .search-result[name="course"] > li .course-name{
     color:#63A69F;
     font-size:21px;
