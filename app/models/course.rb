@@ -64,14 +64,6 @@ class Course < ActiveRecord::Base
     joins(:institution).where(courses: {id: id}).select('courses.*,institutions.name as institution_name')
   end
 
-  private
-
-  def validate_save
-    errors.add(:name, '课程名称不可为空') if self.name.blank?
-    errors.add(:code, '课程代码不可重复') if self.class.where(code: self.code).first if new_record?
-    errors.add(:code, '课程代码不可重复') if self.class.where('id<>? and code=?', self.id, self.code).first unless new_record?
-  end
-
   def migrate_materials
     if self.material_ids
       Material.where(id: self.material_ids).all.each do |material|
@@ -84,6 +76,15 @@ class Course < ActiveRecord::Base
       end
     end
   end
+
+  private
+
+  def validate_save
+    errors.add(:name, '课程名称不可为空') if self.name.blank?
+    errors.add(:code, '课程代码不可重复') if self.class.where(code: self.code).first if new_record?
+    errors.add(:code, '课程代码不可重复') if self.class.where('id<>? and code=?', self.id, self.code).first unless new_record?
+  end
+
 
   after_save ThinkingSphinx::RealTime.callback_for(:course)
 
