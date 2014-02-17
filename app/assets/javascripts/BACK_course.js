@@ -181,7 +181,7 @@ var BACKCOURSE=BACKCOURSE || {};
                        }
                        for(var j=0;j<length-1;j++){
                            var teacher_id=$teachers_target.eq(j).find(".label").attr("id");
-                           var teacher_ids_item={id:teacher_id}
+                           var teacher_ids_item={id:teacher_id};
                            teacher_ids.push(teacher_ids_item);
                        }
                        sub_teacher_array_item.teachers=teacher_ids;
@@ -220,7 +220,7 @@ var BACKCOURSE=BACKCOURSE || {};
                        teachers:teacher_id_array,//新加入
                        subs:sub_teacher_array,
                        materials:materials,//2014.2加入
-                       materials_ids:material_ids//2014.2加入
+                       material_ids:material_ids//2014.2加入
                    }
                    BACKCOURSE.post_add_class(option)
 //               }

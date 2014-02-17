@@ -18,7 +18,7 @@
                     <div class="select">
                          <div  class="ui red labeled icon top right pointing dropdown button" id="add-class-choose-institution">
                               <%=render 'institutions/select'%>
-                         </div> 
+                         </div>
                     </div>
                     <div class="ui left icon input">
                          <input placeholder="课程名称..." name='name' type="text">
@@ -148,13 +148,13 @@
 
                         <div class="content" id="material-content">
                           <ul>
-
-                            <li>
-                              <p>托福成绩单</p>
-                              <p>记录托福成绩的单子</p>
-                              <i class="icon remove material-list-remove"></i>
-                            </li>
-
+                            <% @materials.each do |material| %>
+                                <li id="<%= material.id %>">
+                                  <p><%= material.name %></p>
+                                  <p><%= material.description %></p>
+                                  <i class="icon remove material-list-remove" affect="<%= material.id %>"></i>
+                                </li>
+                            <% end %>
                           </ul>
                         </div>
                     </div>
