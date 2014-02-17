@@ -1,14 +1,14 @@
 <%@courses.each do |course|%>
 <li>
-
-    <div class="ui right red corner label">
-        <i class="chat icon"  data-content="服务"></i>
-    </div>
-
+  <% if CourseType.service?(course.type) %>
+      <div class="ui right red corner label">
+        <i class="chat icon" data-content="服务"></i>
+      </div>
+  <% end %>
      <table class="ui table segment">
           <tr>
                <td colspan="3" class="fourteen wide">
-               <p class="course-name <%= 'service' if CourseType.service?(course.type)%>">
+               <p class="course-name">
                     <%= course.name%>
                </p>
                <div class="ui blue labels small">

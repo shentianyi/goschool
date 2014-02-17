@@ -140,6 +140,7 @@ class CoursesController < ApplicationController
   end
 
   def detail
+    @materials=@course.materials
     @course=CoursePresenter.new(@course)
     render partial: 'detail'
   end
