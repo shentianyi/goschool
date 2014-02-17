@@ -14,7 +14,7 @@ class Course < ActiveRecord::Base
   attr_accessible :actual_number, :description, :end_date, :expect_number, :lesson, :name, :start_date, :type
   attr_accessible :has_sub, :status, :institution_id, :tenant_id, :code, :has_base
   # for callback
-  attr_accessor :tags, :subs, :teacher_ids, :material_ids, :base_subs
+  attr_accessor :tags, :subs, :teacher_ids, :material_ids,:private_materials, :base_subs
   acts_as_tenant(:tenant)
 
   validate :validate_save
@@ -76,6 +76,11 @@ class Course < ActiveRecord::Base
     if self.material_ids
       Material.where(id: self.material_ids).all.each do |material|
         self.materials.create(name: material.name, description: material.description)
+      end
+    end
+    if self.private_materials
+      self.private_materials.each do |material|
+        self.materials.create(name: material[:name], description: material[:description])
       end
     end
   end
