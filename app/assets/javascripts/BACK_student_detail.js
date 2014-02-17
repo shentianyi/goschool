@@ -952,7 +952,7 @@ STUDENT_FRONT.check = 0;
 
     $(document).ready(function () {
         //html测试用
-        STUDENTDETAIL.material.check();
+//        STUDENTDETAIL.material.check();
 
         var href = window.location.href.split("/");
         var new_href = href[href.length - 1].split("#")[0];
