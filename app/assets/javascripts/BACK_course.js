@@ -274,6 +274,7 @@ var BACKCOURSE=BACKCOURSE || {};
             $tbody=$setting.find("tbody"),
             i,id;
         if($(this).hasClass("open")){
+            $(this).css("background","#D95C5C").css("color","#fff");
             $(".reorder",this).removeClass("reorder").addClass("triangle up");
             $setting.slideDown();
             //
@@ -292,6 +293,7 @@ var BACKCOURSE=BACKCOURSE || {};
         }
         else{
             $("#material-template").remove();
+            $(this).css("background","").css("color","");
             $(".triangle",this).removeClass("triangle up").addClass("reorder");
             //
             $ul.empty();
