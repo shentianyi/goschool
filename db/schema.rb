@@ -267,7 +267,6 @@ ActiveRecord::Schema.define(:version => 20140217035745) do
     t.integer  "sub_course_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.datetime "date"
     t.integer  "tenant_id"
     t.string   "remark"
     t.string   "color"
