@@ -301,7 +301,7 @@
     color:#9d9d9d;
     cursor: pointer;
     pointer-events:auto;
-    top:10px;
+    top:3px;
     font-size:12px;
     transition:color ease-out 0.2s;
 }
