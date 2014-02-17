@@ -145,7 +145,7 @@ BACKINDEX.admin.operate.init=function(){
                 $(e.target).blur();
             }
             else{
-                $("#admin-operate-table #template").find(".add.sign.box").click();
+                $("#admin-operate-table #template").find(".finish-add").click();
             }
             stop_propagation(event);
         }
@@ -345,7 +345,7 @@ BACKINDEX.admin.operate.init=function(){
                                 $("#template").find("td").eq(i+1).text(value_array[i]).find("input").remove();
                             }
                             var new_id=data.content.id;
-                            $("#template").find(".add.sign.box").remove();
+                            $("#template").find(".finish-add").remove();
                             $("#template").find(".trash").attr("role","").attr("affect",new_id);
                             $("#template").removeClass("template").attr("id",new_id);
                         }
@@ -391,7 +391,7 @@ BACKINDEX.admin.operate.init=function(){
                             $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
                         }
                         var new_id=data.content;
-                        $("#template").find(".add.sign.box").remove();
+                        $("#template").find(".finish-add").remove();
                         $("#template").find(".trash").attr("role","").attr("affect",new_id);
                         $("#template").removeClass("template").attr("id",new_id);
                     }
