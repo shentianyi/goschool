@@ -235,16 +235,6 @@ class StudentsController < ApplicationController
     render :json=>msg
   end
 
-  #material
-  def student_materials
-    msg = Msg.new
-    msg.result = false
-    @materials = StudentCourse.find_by_id(params[:id]).materials
-    msg.result = true
-    msg.content = @materials
-    render :json => msg
-  end
-
   # List Search Result
   def fast_search
     results = []

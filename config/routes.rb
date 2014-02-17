@@ -91,7 +91,6 @@ Goschool::Application.routes.draw do
       get :fast_search
       get ':id/edit'=>:edit
       post ':id/submit_material'=>:submit_material
-      get ':id/student_materials'=>:student_materials
       get ':id/:part'=>:show
       get ':id/:part/:ajax'=>:show
       get :detail
