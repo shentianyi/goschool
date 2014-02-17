@@ -10,7 +10,7 @@ class CoursesController < ApplicationController
     @institutions=current_tenant.institutions
     @courses_records=Course.paginate(:page => params[:page], :per_page => 10).joins(:institution).select('courses.*,institutions.name as institution_name').order('created_at desc')
     @courses=CoursePresenter.init_presenters(@courses_records)
-    @custom_views=CustomView.by_user_id_and_entity_type(current_logininfo.id, 'Course').all
+    @custom_views=CustomView.by_user_id_and_entity_type(current_logininfo.user.id, 'Course').all
     @materials=current_tenant.setting.materials
   end
 
