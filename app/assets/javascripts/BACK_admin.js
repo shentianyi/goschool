@@ -145,7 +145,7 @@ BACKINDEX.admin.operate.init=function(){
                 $(e.target).blur();
             }
             else{
-                $("#admin-operate-table #template").find(".add.sign.box").click();
+                $("#admin-operate-table #template").find(".finish-add").click();
             }
             stop_propagation(event);
         }
