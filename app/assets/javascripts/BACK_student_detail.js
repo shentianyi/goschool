@@ -60,6 +60,7 @@ STUDENT_FRONT.check = 0;
     //添加材料项
     $("body")
         .on("click","#service-material .plus-span",function(){
+            var id = $(this).attr("student-course");
             var $table=$(this).parents("p").next();
             $table.find("tbody").append(
             "<tr class='temp template'>"+
@@ -72,7 +73,7 @@ STUDENT_FRONT.check = 0;
                     "</div>"+
                 "</td>"+
                 "<td>"+
-                    "<span class='ok'>完成</span>"+
+                    "<span class='ok' student-course='"+id+"'>完成</span>"+
                     "<span class='remove'>删除</span>"+
                 "</td>"+
             "</tr>"
@@ -90,6 +91,7 @@ STUDENT_FRONT.check = 0;
                 got= $children.eq(2).find("input").prop("checked");
             if(name.length>0){
                 $.post("/materials",{
+                    id:$(this).attr('student-course'),
                     material:{
                         name:name,
                         description:desc
