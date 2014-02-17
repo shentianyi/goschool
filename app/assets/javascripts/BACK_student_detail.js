@@ -85,7 +85,8 @@ STUDENT_FRONT.check = 0;
 
 
             var $tr=$(this).parents("tr").eq(0),
-                $children=$tr.children();
+                $children=$tr.children(),
+                $this=$(this);
             var name= $.trim($children.eq(0).find("input").val()),
                 desc= $.trim($children.eq(1).find("input").val()),
                 got= $children.eq(2).find("input").prop("checked");
@@ -100,7 +101,7 @@ STUDENT_FRONT.check = 0;
                 },function(data){
                     if(data.result){
                         var id=data.content;
-                        $(this).remove();
+                        $this.remove();
                         $children.find("input[type='text']").remove();
                         $children.eq(0).text(name);
                         $children.eq(1).text(desc);
@@ -1000,7 +1001,7 @@ STUDENT_FRONT.check = 0;
             });
             $("#homework-line-wrap .buttons .button").eq(0).click();
         }
-        else if(new_href="service-material"){
+        else if(new_href == "service-material"){
             STUDENTDETAIL.material.check();
         }
     });
