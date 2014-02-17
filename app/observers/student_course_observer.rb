@@ -6,6 +6,14 @@ class StudentCourseObserver<ActiveRecord::Observer
     if student=student_course.student
       student.update_attributes(:student_status=>StudentStatus::READING,:course_number=>student.course_number+1)
     end
+    # init material
+    if (materials=student_course.course.materials).count>0
+      materials.each do |material|
+        m=student_course.materials.build
+        m.material=material
+        m.save
+      end
+    end
   end
 
   def after_destroy student_course

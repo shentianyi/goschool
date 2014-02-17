@@ -3,9 +3,14 @@
 <li>
   <table class="ui table segment">
     <tr>
-      <td class="two wide">
-	<img class="circular ui image mini portrait" src="<%= presenter.student.image_url %>"/>
-	<p class="name"><%= presenter.name %></p>
+      <td class="two wide first-column" id="student-list-name">
+	<!--<img class="circular ui image mini portrait" src="<%= presenter.student.image_url %>"/>-->
+	<p class="name" ><%= presenter.name %></p>
+        <div class="icons">
+          <i class="user icon" data-content="<%= presenter.student.remark%>" data-variation="inverted" data-position="bottom center"></i>
+          <i class="book icon" data-title="已报班级" data-content="已报班:<%= presenter.attend_%>" data-variation="inverted" data-position="bottom center"></i>
+        </div>
+
       </td>
       <td class="two wide">
 	<p class="type"><%= presenter.status_%></p>
@@ -22,7 +27,9 @@
 	  <% end %>
 	  <% end%>
 	</div>
-	<p class="parent"><span>监护人:</span><span><%= presenter.student.guardian_phone %>(<%= presenter.student.guardian%>)</span></p>
+        <% if !presenter.student.guardian.blank? %>
+        <p class="parent"><span>监护人:</span><span><%= presenter.student.guardian_phone %>(<%= presenter.student.guardian%>)</span></p>
+        <% end %>
         <p class="phone"><span>联系电话:</span><span><%= presenter.phone %></span></p>
 	<% if presenter.last_consultation_ %>
 	<p class="consult-time"><span>上次咨询:</span><span><%= presenter.last_consultation_ %></span></p>

@@ -113,21 +113,43 @@
     margin-left:2%;
     height:260px;
 }
-.homework-line-wrap>.buttons{
+.homework-line-wrap>.ui.basic.buttons{
     font-size:13px;
     position:absolute;
     right:10px;
     top:5px;
-    max-width:85%;
+    max-width:75%;
+    white-space:nowrap;
+    overflow-y:hidden;
+    overflow-x:auto;
+    height:39px;
     z-index:99;
+    box-shadow:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+
+}
+.homework-line-wrap>.ui.basic.buttons>.button{
+    float:none;
 }
 .homework-line-wrap>.ui.basic.buttons>.button.active{
-    background-color:#F38630;
-    color:white;
+    color:#F38630;
+    background:none;
+    box-shadow:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    border:0px solid #fff;
 }
-.homework-line-wrap>.buttons>.button:hover:not(.active){
+.homework-line-wrap>.ui.basic.buttons>.button.active:hover{
+    color:#F38630;
+    background:none;
+    box-shadow:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    border:0px solid #fff;
+}
+.homework-line-wrap>.buttons>.button:hover{
     color:#F38630 !important;
-    background-color:rgba(0,0,0,0.06) !important;
 }
 .homework-line-wrap>canvas{
     position:absolute;

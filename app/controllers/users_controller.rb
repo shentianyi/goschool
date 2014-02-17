@@ -2,7 +2,7 @@
 class UsersController < ApplicationController
   #filter with ability [index,create,destroy,update,edit]
   def index
-    #@user = current_user.user
+    #@user = current_logininfo.user
   end
 
   def new
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
     @logininfo = @user.logininfo
     if @logininfo && @logininfo.is_tenant
       msg.content = "不能删除创建者"
-    elsif @logininfo.id == current_user.id
+    elsif @logininfo.id == current_logininfo.id
       msg.content = "不能删除自己"
     else
       @user.destroy

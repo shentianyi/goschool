@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140107092919) do
+ActiveRecord::Schema.define(:version => 20140217035745) do
 
   create_table "achievementresults", :force => true do |t|
     t.string   "valuestring"
@@ -136,7 +136,7 @@ ActiveRecord::Schema.define(:version => 20140107092919) do
   create_table "homeworks", :force => true do |t|
     t.string   "title"
     t.datetime "deadline"
-    t.string   "content"
+    t.text     "content"
     t.integer  "teacher_course_id"
     t.integer  "unmark_number"
     t.integer  "tenant_id"
@@ -200,6 +200,26 @@ ActiveRecord::Schema.define(:version => 20140107092919) do
   end
 
   add_index "logininfos", ["tenant_id"], :name => "index_logininfos_on_tenant_id"
+
+  create_table "materials", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "status",            :default => 0
+    t.integer  "materialable_id"
+    t.string   "materialable_type"
+    t.integer  "material_id"
+    t.integer  "tenant_id"
+    t.integer  "logininfo_id"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "editable",          :default => false
+  end
+
+  add_index "materials", ["logininfo_id"], :name => "index_materials_on_logininfo_id"
+  add_index "materials", ["material_id"], :name => "index_materials_on_material_id"
+  add_index "materials", ["materialable_id"], :name => "index_materials_on_materialable_id"
+  add_index "materials", ["materialable_type"], :name => "index_materials_on_materialable_type"
+  add_index "materials", ["tenant_id"], :name => "index_materials_on_tenant_id"
 
   create_table "posts", :force => true do |t|
     t.integer  "course_id"
@@ -317,6 +337,7 @@ ActiveRecord::Schema.define(:version => 20140107092919) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.integer  "course_number",  :default => 0
+    t.string   "remark"
   end
 
   add_index "students", ["logininfo_id"], :name => "index_students_on_logininfo_id"

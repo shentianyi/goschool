@@ -6,9 +6,9 @@ class StudentsController < ApplicationController
   # GET /students.json
   def index
     @active_left_aside='students'
-    @students = Student.order("created_at DESC").first(10)
+    @students = Student.paginate(:page=>params[:page],:per_page=>10).order("created_at DESC")
     @student_presenters = StudentPresenter.init_presenters(@students)
-    @custom_views=CustomView.by_user_id_and_entity_type(current_user.id,'Student').all
+    @custom_views=CustomView.by_user_id_and_entity_type(current_logininfo.user.id,'Student').all
     #respond_to do |format|
   #  format.html # index.html.erb
   #  format.json { render json: @students }
@@ -22,14 +22,16 @@ class StudentsController < ApplicationController
     #@student = Student.find(params[:id])
     @presenter=StudentPresenter.new(@student)
     case params[:part]
-    when 'achieve'
-      achievements(@student)
-    when 'friendship'
-      relation(@student)
-    when 'consult-record'
-      consultation(@student)
-    when 'class-performance'
-      performance(@student)
+      when 'achieve'
+        achievements(@student)
+      when 'friendship'
+        relation(@student)
+      when 'consult-record'
+        consultation(@student)
+      when 'class-performance'
+        performance(@student)
+      when 'service-material'
+        materials(@student)
     else
     @partial = 'class-and-service'
     courses(@student)
@@ -67,6 +69,38 @@ class StudentsController < ApplicationController
   def create
     msg = Msg.new
     msg.result = false
+    # if not need create account,just give a name
+    begin
+      ActiveRecord::Base.transaction do
+        @student = Student.new(params[:student].except(:tags))
+        @student = params[:student].slice(:tags)[:tags] if params[:student].has_key?(:tags)
+
+        account_create = false
+
+        if params[:is_active_account]
+          if !params[:student][:email].blank?
+            @default_pwd = current_tenant.setting.default_pwd
+            @logininfo = Logininfo.new(:email => params[:student][:email], :password => @default_pwd, :password_confirmation => @default_pwd)
+            @new_role = LogininfoRole.new(:role_id => '300')
+            @logininfo.logininfo_roles<<@new_role
+            @logininfo.tenant = current_tenant
+            @logininfo.status = UserStatus::ACTIVE
+            @logininfo.save!
+            account_create = true
+          end
+        end
+        @student.tenant = current_tenant
+        if account_create
+          @student.logininfo - @logininfo
+        end
+        @student.save!
+        msg.result = true
+      end
+    rescue ActiveRecord::RecordInvalid=> invalid
+      msg.result = false
+      msg.content = invalid.record.errors
+    end
+=begin
     begin
       ActiveRecord::Base.transaction do
         @student = Student.new(params[:student].except(:tags))
@@ -91,6 +125,7 @@ class StudentsController < ApplicationController
     msg.result = false
     msg.content = invalid.record.errors
     end
+=end
     render :json => msg
   end
 
@@ -99,6 +134,46 @@ class StudentsController < ApplicationController
   def update
     msg = Msg.new
     msg.result = false
+    begin
+      ActiveRecord::Base.transaction do
+        if params[:is_active_account] == "true"
+          if !@student.logininfo
+            @default_pwd = current_tenant.setting.default_pwd
+            @logininfo = Logininfo.new(:email => params[:student][:email], :password => @default_pwd, :password_confirmation => @default_pwd)
+            @new_role = LogininfoRole.new(:role_id => '300')
+            @logininfo.logininfo_roles<<@new_role
+            @logininfo.tenant = current_tenant
+            @logininfo.status = UserStatus::ACTIVE
+            @logininfo.save!
+            @student.logininfo = @logininfo
+          end
+        else
+          if @student.logininfo
+            @student.logininfo.update_attribute("status",false)
+          end
+        end
+
+        if params[:student] && !params[:student][:email].blank?
+          if @student.logininfo
+            @student.logininfo.update_attribute("email",params[:student][:email])
+            @student.logininfo.save!
+          end
+        end
+
+        @student.update_attributes(params[:student].except(:tags)) if params[:student]
+        if params.has_key?(:student)
+          @student.tags = params[:student].slice(:tags)[:tags]
+        else
+          @student.tags = []
+        end
+        @student.add_tags
+        msg.result = true
+      end
+    rescue ActiveRecord::RecordInvalid => invalid
+      msg.result = false
+      msg.content = invalid.record.errors
+    end
+=begin
     begin
 
       if params[:is_active_account]
@@ -125,6 +200,7 @@ class StudentsController < ApplicationController
     msg.result = false
     msg.content = invalid.record.errors
     end
+=end
     render :json => msg
   end
 
@@ -145,6 +221,18 @@ class StudentsController < ApplicationController
   def detail
     @presenter = StudentPresenter.new(@student)
     render partial:'detail'
+  end
+
+  #submit material
+  def submit_material
+    msg = Msg.new
+    msg.result = false
+    @material = Material.find_by_id(params[:id])
+    if @material
+      msg.result = @material.update_attribute('status',params[:status])
+    end
+
+    render :json=>msg
   end
 
   # List Search Result
@@ -216,6 +304,10 @@ class StudentsController < ApplicationController
       @relations<<s
       end
     end
+  end
+
+  def materials(student)
+    @courses = Course.joins(:student_courses).where('student_courses.student_id = ? AND type = ?',student.id,CourseType::SERVICE).select('student_courses.id as student_course_id,courses.*')
   end
 
   def get_student

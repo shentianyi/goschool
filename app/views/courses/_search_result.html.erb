@@ -1,5 +1,10 @@
 <%@courses.each do |course|%>
 <li>
+  <% if CourseType.service?(course.type) %>
+      <div class="ui right red corner label">
+        <i class="chat icon" data-content="服务"></i>
+      </div>
+  <% end %>
      <table class="ui table segment">
           <tr>
                <td colspan="3" class="fourteen wide">
@@ -25,6 +30,9 @@
           </tr>
           <tr>
                <td class="six wide">
+                      <p>
+                   代号: <span class="class-size"><%= course.code%></span>
+               </p>
                <p >
                     授课时间:<span><%= course.start_date%>-<%= course.end_date%></span>
                </p>
@@ -36,7 +44,6 @@
                </p>
                <p>
                     已报班: <span class="class-size"><%= course.actual_number%></span> 人
-
                </p></td>
                <td class="course-desc six wide">
                <p>

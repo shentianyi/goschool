@@ -1,4 +1,7 @@
 /*info*/
+.info .name-without-pic{
+    margin-top:30px;
+}
 .info .left p,
 .info .middle p,
 .info .right p{
@@ -86,6 +89,9 @@
 .accordion[name='student'] .class-and-service table td{
     font-size:14px;
 }
+.accordion[name='student'] .class-and-service table td a{
+    color:#000;
+}
 .accordion[name='student'] .class-and-service table td .progress{
     height:24px;
     padding:3px;
@@ -98,6 +104,57 @@
 }
 .accordion[name='student'] .class-and-service table td.pay-lack{
     color:#D95C5C;
+}
+/*新加入 2014.2*/
+/**************************************************************  服务材料  */
+.accordion[name='student'] .service-material .content-item{
+    margin-top:20px;
+}
+.accordion[name='student'] .service-material .content-item:first-of-type{
+    margin-top:0px;
+}
+.accordion[name='student'] .service-material .content-item>p{
+    color: #63A69F;
+    font-size: 16px;
+    margin: 0;
+}
+.accordion[name='student'] .service-material .content-item>p>span{
+    color: #4092CC;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 8px;
+    transition: color 0.25s ease-out 0s;
+}
+.accordion[name='student'] .service-material .content-item>p>span:hover{
+    color: #1AB8F3;
+}
+.accordion[name='student'] .service-material .content-item>table{
+    margin-top:5px;
+}
+.accordion[name='student'] .service-material .content-item>table .remove{
+    color: #E34545;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: underline;
+    transition: color 0.25s ease-out 0s;
+}
+.accordion[name='student'] .service-material .content-item>table .remove:hover{
+    color: #EF1414;
+}
+
+.accordion[name='student'] .service-material .content-item>table .ok{
+    text-align:center;
+    color:#63A69F;
+    text-decoration:underline;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+    margin-right:18px;
+}
+.accordion[name='student'] .service-material .content-item>table .ok:hover{
+    color:#2ac6b6;
+}
+.accordion[name='student'] .service-material .content-item>table tr td:nth-of-type(2) input{
+    width:200px;
 }
 /***********在校成绩表现三个图***********/
 .class-performance .content:after{
@@ -244,6 +301,18 @@
     padding:10px 8px 5px;
     margin-bottom:38px;
 }
+.accordion[name='student'] .consult-record .content .item>.icon.remove{
+    position:absolute;
+    pointer-events:auto;
+    right:5px;
+    top:5px;
+    font-size:16px;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+}
+.accordion[name='student'] .consult-record .content .item>.icon.remove:hover{
+    color:#D95C5C;
+}
 .accordion[name='student'] .consult-record .content .item p{
     font-size:13px;
     margin:0px;
@@ -340,15 +409,48 @@
     color:rgba(0,0,0,0.6);
 }
 /*所有录取*/
-.accordion[name='student'] .offer tr td:last-of-type span:last-of-type{
+.accordion[name='student'] .offer tr td:last-of-type span.remove{
     text-align:center;
-    color:#D95C5C;
+    color:#e34545;
     text-decoration:underline;
     cursor:pointer;
     transition:color 0.25s ease-out;
 }
-.accordion[name='student'] .offer tr td:last-of-type:hover span:last-of-type{
+.accordion[name='student'] .offer tr td:last-of-type span.remove:hover{
     color:#ef1414
+}
+.accordion[name='student'] .offer tr td:last-of-type span.edit{
+    text-align:center;
+    color:#359ceb;
+    text-decoration:underline;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+    margin-right:18px;
+}
+.accordion[name='student'] .offer tr td:last-of-type span.edit:hover{
+    color:#097cd5;
+}
+.accordion[name='student'] .offer tr td:last-of-type span.finish{
+    text-align:center;
+    color:#63A69F;
+    text-decoration:underline;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+    margin-right:18px;
+}
+.accordion[name='student'] .offer tr td:last-of-type span.finish:hover{
+    color:#2ac6b6;
+}
+.accordion[name='student'] .offer input{
+    width:120px;
+}
+.accordion[name='student'] .offer select{
+    width:60px;
+    padding:2px 4px;
+}
+.accordion[name='student'] .offer .final-choose{
+    background:#F2F8F0;
+    color:#119000;
 }
 .accordion[name='student'] .offer-template-operate span:first-of-type{
     color:#63A69F;

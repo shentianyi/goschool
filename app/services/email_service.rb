@@ -1,9 +1,9 @@
 #encoding: utf-8
 class EmailService
-  def self. send_schedule_job  type,institution_id
-    Resque.enqueue(CourseEmailSender,type,institution_id)
+  def self.send_schedule_job  type,institution_id,user_ids=nil
+    Resque.enqueue(CourseEmailSender,type,institution_id,user_ids)
   end
-  def self.send_schedule_email type,institution_id
+  def self.send_schedule_email type,institution_id,user_ids=nil
     case type
     when ScheduleType::ALL
       send_employee_schedule_email ScheduleType::EMPLOYEE,institution_id
@@ -12,7 +12,7 @@ class EmailService
     when ScheduleType::EMPLOYEE
       send_employee_schedule_email type,institution_id
     when ScheduleType::TEACHER
-      send_teacher_schedule_email type,institution_id
+      send_teacher_schedule_email type,institution_id,user_ids
     when ScheduleType::STUDENT
       send_student_schedule_email type,institution_id
     else
@@ -28,9 +28,8 @@ class EmailService
     end
   end
 
-  def self.send_teacher_schedule_email type,institution_id
-    teachers=User.get_teachers(institution_id)
-    puts "teachers:#{teachers.to_json}"
+  def self.send_teacher_schedule_email type,institution_id,teacher_ids=nil
+    teachers=User.get_teachers(institution_id,teacher_ids)
     teachers.each do |teacher|
       css=CourseScheduleService.new({type:type,institution_id:institution_id,user_id:teacher.id})
       if schedules=css.generate_schedule

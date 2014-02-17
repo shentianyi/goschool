@@ -54,6 +54,163 @@ STUDENT_FRONT.check = 0;
             });
         }
     });
+    //2014.2新加入
+    ////////////////////////////////////////// 服务材料
+
+    //添加材料项
+    $("body")
+        .on("click","#service-material .plus-span",function(){
+            var id = $(this).attr("student-course");
+            var $table=$(this).parents("p").next();
+            $table.find("tbody").append(
+            "<tr class='temp template'>"+
+                "<td post_type='name'><input type='text' /></td>"+
+                "<td post_type='description'><input type='text' /></td>"+
+                "<td>"+
+                    "<div class='ui checkbox'>"+
+                        "<input type='checkbox' class='temp-checkbox'>"+
+                        "<label></label>"+
+                    "</div>"+
+                "</td>"+
+                "<td>"+
+                    "<span class='ok' student-course='"+id+"'>完成</span>"+
+                    "<span class='remove'>删除</span>"+
+                "</td>"+
+            "</tr>"
+            );
+            $("#service-material .checkbox").checkbox();
+
+        })
+        .on("click","#service-material .ok",function(){
+
+
+            var $tr=$(this).parents("tr").eq(0),
+                $children=$tr.children(),
+                $this=$(this);
+            var name= $.trim($children.eq(0).find("input").val()),
+                desc= $.trim($children.eq(1).find("input").val()),
+                got= $children.eq(2).find("input").prop("checked");
+            if(name.length>0){
+                $.post("/materials",{
+                    id:$(this).attr('student-course'),
+                    material:{
+                        name:name,
+                        description:desc
+                    },
+                    type:300
+                },function(data){
+                    if(data.result){
+                        var id=data.content;
+                        $this.remove();
+                        $children.find("input[type='text']").remove();
+                        $children.eq(0).text(name);
+                        $children.eq(1).text(desc);
+                        $tr.attr("id",id).removeClass("template");
+                        STUDENTDETAIL.material.check();
+                        if(got){
+                            $tr.addClass("positive");
+                            $.ajax({
+                                url:"/materials/"+id,
+                                type:"PUT",
+                                data:{},
+                                success:function(data){
+                                    if(data.result){
+
+                                    }
+                                    else{
+                                        MessageBox_content(data.content);
+                                    }
+                                }
+                            })
+                        }
+
+                    }
+                    else{
+                        MessageBox_content(data.content);
+                    }
+                });
+
+            }
+            else{
+                MessageBox("请填写材料名称","top","warning");
+            }
+
+        })
+    //删除
+    $("body").on("click","#service-material .remove",function(){
+        var $tr=$(this).parents("tr");
+        if($tr.hasClass("template")){
+             $tr.remove();
+        }
+        else{
+            var id=$tr.attr("id");
+            $.ajax({
+                url: "/materials/"+id,
+                type: 'DELETE',
+                success: function (data) {
+                    if (data.result){
+                        $tr.remove();
+                    }
+                    else{
+                        MessageBox_content(data.content)
+                    }
+                }
+            });
+        }
+    });
+    //编辑
+    $("body").on("dblclick","#service-material td",function(){
+        var $tr=$(this).parents("tr"),
+            $this=$(this),
+            text;
+        if($tr.hasClass("temp") && $this.children().length==0){
+            text=$this.text();
+            $this.empty().append($("<input type='text'/>").val(text));
+            $this.find("input").focus();
+        }
+    })
+        .on("keyup","#service-material td input",function(event){
+            var e=adapt_event(event).event,
+                $tr=$(this).parents("tr"),
+                $this=$(this);
+            if(e.keyCode==13){
+                if($tr.hasClass("template")){
+                     $tr.find(".ok").click();
+                }
+                else{
+                    $this.blur();
+                }
+            }
+        })
+        .on("blur","#service-material td input",function(){
+            var $tr=$(this).parents("tr"),
+                $this=$(this),
+                text,
+                id;
+            if(!$tr.hasClass("template")){
+                text=$this.val();
+                id=$tr.attr("id");
+                var type=$this.parent("td").attr("post_type"),
+                    material={};
+                material[type]=text;
+                $.ajax({
+                    url: "/materials/"+id,
+                    type: 'PUT',
+                    data:{
+                        material:material
+                    },
+                    success: function (data) {
+                        if (data.result){
+
+                        }
+                        else{
+                            MessageBox_content(data.content)
+                        }
+                    }
+                });
+                $this.parent().empty().text(text);
+            }
+        });
     ////////////////////////////////////////////////////////最终成绩
     //最终成就
     $("body").on("click", "#final-achieve .icon.plus",function () {
@@ -127,6 +284,9 @@ STUDENT_FRONT.check = 0;
                 "<td><input type='text'></td>" +
                 "<td><input type='text'></td>" +
                 "<td><input type='text' id='offer-template-time'></td>" +
+                "<td><input type='text'></td>" +
+                "<td><select><option value='0'>否</option><option value='1'>是</option></select></td>" +
+                "<td><select><option value='0'>否</option><option value='1'>是</option></select></td>" +
                 "<td><select><option value='0'>否</option><option value='1'>是</option></select></td>" +
                 "<td class='offer-template-operate'><span id='offer-template-ok'>完成</span><span class='remove' id='offer-template-cancel'>删除</span></td>" +
                 "</tr>", {});
@@ -140,21 +300,18 @@ STUDENT_FRONT.check = 0;
                 dateFormat: 'yy-mm'
             });
         }
-    }).on("keyup", "#offer-template input",function (event) {
-            var e = adapt_event(event).event;
-            if (e.keyCode == 13) {
-                $("#offer-template-ok").click()
-            }
-            else if (e.keyCode == 27) {
-                $("#offer-template-cancel").click();
-            }
-        }).on("click", "#offer-template-ok",function () {
-            var school = $("#offer-template input").eq(0).val();
-            var major = $("#offer-template input").eq(1).val();
-            var time = $("#offer-template input").eq(2).val();
-            var scholarship = $("#offer-template select :selected").text();
-            var scholarship_value = $("#offer-template select :selected").attr("value");
-            if (school.length > 0 && major.length > 0 && time.length > 0) {
+    }).on("click", "#offer-template-ok",function () {
+            var school = $.trim($("#offer-template input").eq(0).val());
+            var major = $.trim($("#offer-template input").eq(1).val());
+            var time = $.trim($("#offer-template input").eq(2).val());
+            var score = $.trim($("#offer-template input").eq(3).val());
+            var scholarship = $("#offer-template select").eq(0).find(":selected").text();
+            var offer = $("#offer-template select").eq(1).find(":selected").text();
+            var final_choose = $("#offer-template select").eq(2).find(":selected").text();
+            var scholarship_value = $("#offer-template select").eq(0).find(":selected").attr("value");
+            var offer_value = $("#offer-template select").eq(1).find(":selected").attr("value");
+            var final_choose_value = $("#offer-template select").eq(2).find(":selected").attr("value");
+            if (school.length > 0 && major.length > 0 && time.length > 0 && score.length>0 ) {
                 //post
                 var data = {
                     id: '',
@@ -162,21 +319,38 @@ STUDENT_FRONT.check = 0;
                 }
                 data.id = $("#offer").attr("achieve")
                 data.achievementresult.student_id = $("div#detail-content div.info").attr("student");
-                data.achievementresult.valuestring = school + ";" + major + ";" + time + ";" + scholarship;
+                data.achievementresult.valuestring = school + ";" + major + ";"+ time + ";"+ score + ";"  + scholarship+";"+ scholarship_value+";"+offer+";"+offer_value+";"+final_choose+";"+final_choose_value;
                 data.achievementresult.achievement_id = data.id;
                 data.achievementresult.achievetime = time;
                 achievementres_manager.create(data, function (data) {
                     if (data.result) {
-                        var res = data.object
-                        var tr = Mustache.render("{{#achieve}}<tr>" +
-                            "<td>{{object.school}}</td>" +
-                            "<td>{{object.specialty}}</td>" +
-                            "<td>{{object.date}}</td>" +
-                            "<td>{{object.scholarship}}</td>" +
-                            "<td><span class='remove' admit='{{id}}'>删除</span></td>" +
+                        var res = {achieve:{
+                            school:school,
+                            major:major,
+                            time:time,
+                            score:score,
+                            scholarship:scholarship,
+                            offer:offer,
+                            final_choose:final_choose,
+                            final_choose_value:final_choose_value,
+                            id:data.object.achieve.id
+                        }};
+                        var tr = Mustache.render("{{#achieve}}<tr id='{{id}}'>" +
+                            "<td>{{school}}</td>" +
+                            "<td>{{major}}</td>" +
+                            "<td>{{time}}</td>" +
+                            "<td>{{score}}</td>" +
+                            "<td value={{scholarship_value}}>{{scholarship}}</td>" +
+                            "<td value={{offer_value}}>{{offer}}</td>" +
+                            "<td value={{final_choose_value}} target='admitted'>{{final_choose}}</td>" +
+                            "<td><span class='edit' admit='{{id}}'>编辑</span><span class='remove' admit='{{id}}'>删除</span></td>" +
                             "</tr>{{/achieve}}", res);
                         $("#offer tbody").append(tr);
                         $("#offer-template-cancel").click();
+                        if(final_choose_value==1){
+                            $("#offer").find("#"+res.achieve.id).addClass("final-choose");
+                        }
+
                     }
                     else {
                         MessageBox_content(data.content)
@@ -201,6 +375,105 @@ STUDENT_FRONT.check = 0;
                         MessageBox_content(data.content)
                     }
                 });
+            }
+        }).on("click", "#offer .edit", function () {
+            var target = $(this);
+            var id = target.attr("admit"),
+                count=$("#offer thead tr").children().length,
+                text,
+                value,
+                $column_item,
+                temp_datepicker_id
+            var $column=$("#offer").find("#"+id).children();
+            for(var i=0;i<count-1;i++){
+                $column_item=$column.eq(i);
+                text=$column_item.text();
+                if(i<4){
+                    $column_item.text("").append($("<input type='text'/>").val(text));
+                    if(i==2){
+                        temp_datepicker_id="datepicker-"+id;
+                        $column_item.find("input").attr("id",temp_datepicker_id);
+                        $("#"+temp_datepicker_id).datepicker({
+                            showOtherMonths: true,
+                            selectOtherMonths: true,
+                            changeMonth: true,
+                            changeYear: true,
+                            dateFormat: 'yy-mm'
+                        });
+                    }
+                }
+                else if(i<count-1){
+                   value=$column_item.attr("value");
+                   $column_item.text("").append("<select><option value='0'>否</option><option value='1'>是</option></select>");
+                   if(value==="0"){
+                       $column_item.find("option").eq(0).prop("selected",true);
+                   }
+                   else{
+                       $column_item.find("option").eq(1).prop("selected",true);
+                   }
+                }
+            }
+            $("#offer").find("#"+id).find(".edit").removeClass("edit").addClass("finish").text("完成");
+        }).on("click","#offer .finish",function(){
+            var target = $(this);
+            var id = target.attr("admit");
+            var $target=$("#offer").find("#"+id),
+                $input=$target.find("input"),
+                $select=$target.find("select");
+            var school = $.trim($input.eq(0).val());
+            var major = $.trim($input.eq(1).val());
+            var time = $.trim($input.eq(2).val());
+            var score = $.trim($input.eq(3).val());
+            var scholarship = $select.eq(0).find(":selected").text();
+            var offer = $select.eq(1).find(":selected").text();
+            var final_choose = $select.eq(2).find(":selected").text();
+            var scholarship_value = $select.eq(0).find(":selected").attr("value");
+            var offer_value = $select.eq(1).find(":selected").attr("value");
+            var final_choose_value = $select.eq(2).find(":selected").attr("value");
+            if (school.length > 0 && major.length > 0 && time.length > 0 && score.length>0 ) {
+                var result={};
+                result.valuestring=school + ";" + major + ";"+ time + ";"+ score + ";"  + scholarship+";"+ scholarship_value+";"+offer+";"+offer_value+";"+final_choose+";"+final_choose_value;
+
+                achievementres_manager.update(id,{result:result}, function (data) {
+                    if (data.result) {
+                        var $target_item,
+                            text,
+                            value;
+                        for(var i=0;i<7;i++){
+                                $target_item=$target.children().eq(i);
+                            if(i<4){
+                                text=$target_item.find("input").val();
+                                $target_item.empty().text(text);
+                            }
+                            else{
+                                text=$target_item.find(":selected").text();
+                                value=$target_item.find(":selected").attr("value");
+                                $target_item.empty().text(text).attr("value",value);
+                            }
+                        }
+                        if($target.find("[target='admitted']").attr("value")==="1"){
+                            $target.addClass("final-choose");
+                        }
+                        else{
+                            $target.removeClass("final-choose");
+                        }
+                        $target.find(".finish").removeClass("finish").addClass("edit").text("编辑");
+                    }
+                    else {
+                        MessageBox_content(data.content)
+                    }
+                });
+            }
+            else {
+                MessageBox("信息填写不完整", "top", "warning");
+            }
+        }).on("keyup","#offer td input",function(event){
+            var e=adapt_event(event).event;
+            if (e.keyCode == 13) {
+                $(this).parents("tr").eq(0).find("span").eq(0).click();
+            }
+            else if (e.keyCode == 27) {
+                $(this).parents("tr").eq(0).find("span").eq(1).click();
             }
         });
     ////////////////////////////////////////// 最终成就
@@ -425,7 +698,7 @@ STUDENT_FRONT.check = 0;
             }
         });
     //////////////////////////////////////////////////////// 咨询记录
-    $("body").on("click", "#consult-record .item .icon.remove",function () {
+    $("body").on("click", "#consult-record .item [affect='remove-consult-item']",function () {
         //post
         //$(this).parent().remove();
         var target = $(this)
@@ -465,7 +738,7 @@ STUDENT_FRONT.check = 0;
                             .append($("<dd />")
                                 .append($("<span />").text(res.comment))
                                 .append($("<span />").text(res.comment_time))
-                                .append($("<i />").addClass("icon remove").attr("comment", res.id))
+                                .append($("<i />").addClass("icon remove").attr("comment", res.id).attr("affect","remove-consult-item"))
                             )
                     }
                 });
@@ -478,6 +751,18 @@ STUDENT_FRONT.check = 0;
             if(e.keyCode==13){
                 $(this).next().click();
             }
+        }).on("click","[affect='remove-consult']",function(){
+            var target = $(this);
+            var id = target.attr("consultation");
+            consultation_manager.destroy(id,function(data){
+                if(data.result){
+                    target.parent().remove();
+                    MessageBox("删除咨询成功","top","success");
+                }
+                else{
+                    MessageBox("删除咨询失败","top","warning");
+                }
+            });
         });
     $(window).resize(function () {
         if ($("#class-performance .title").hasClass("active")) {
@@ -697,6 +982,9 @@ STUDENT_FRONT.check = 0;
     });
 
     $(document).ready(function () {
+        //html测试用
+//        STUDENTDETAIL.material.check();
+
         var href = window.location.href.split("/");
         var new_href = href[href.length - 1].split("#")[0];
         if (new_href == "achieve") {
@@ -704,7 +992,7 @@ STUDENT_FRONT.check = 0;
                 $("#achieve_final_tabular>a").eq(0).click();
             }
         }
-        else if(new_href="class-performance"){
+        else if(new_href == "class-performance"){
             $.get("/student_homeworks/submit_calculate",{id:$("#student-detail-info").attr("student")},function(data){
                 STUDENT_FRONT.pie={
                     scores:data
@@ -713,10 +1001,45 @@ STUDENT_FRONT.check = 0;
             });
             $("#homework-line-wrap .buttons .button").eq(0).click();
         }
-
+        else if(new_href == "service-material"){
+            STUDENTDETAIL.material.check();
+        }
     });
 
 })();
+//新加入2014.2 材料
+STUDENTDETAIL.material={};
+STUDENTDETAIL.material.check=function(){
+    $("#service-material .checkbox").checkbox({
+        onChange:function(){
+            if(!$(this).parents('tr').hasClass("template")){
+                var $this=$(this),$tr=$this.parents("tr");
+                var id=$tr.attr("id"),
+                    checked=$this.prop("checked");
+                var status = 0;
+                if(checked){
+                    status = 1;
+                }
+                $.ajax({
+                    url:"/students/submit_material",
+                    data:{id:id,status:status},
+                    type:'POST',
+                    success:function(data){
+                        if(data.result){
+                            $tr.toggleClass("positive");
+                        }
+                        else{
+                            $this.parent().checkbox('toggle');
+                            MessageBox_content(data.content);
+                        }
+                    }
+                })
+            }
+
+        }
+    });
+}
+
 STUDENTDETAIL.errors = new Array(2);
 STUDENTDETAIL.labels;
 STUDENTDETAIL.data;
@@ -730,6 +1053,7 @@ STUDENTDETAIL.option = {
 function sortNumber(a, b) {
     return b - a
 }
+
 STUDENTDETAIL.generate_option = function () {
     var c = [];
     var p = STUDENTDETAIL.data;

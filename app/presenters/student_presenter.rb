@@ -27,6 +27,18 @@ class StudentPresenter<Presenter
     StudentCourse.find_by_student_id(self.id)
   end
 
+  def attend_
+    self.student.courses.pluck('name').join(',')
+  end
+  
+  def account_actived?
+    if @student.logininfo
+      @student.logininfo.status
+    else
+      false
+    end
+  end
+
   def age_
     if self.birthday
       ((Time.now.to_i - self.birthday.to_i)/3600/24/365 + 1).to_s+'岁'

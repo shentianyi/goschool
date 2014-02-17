@@ -36,9 +36,8 @@ BACKINDEX.init=(function(){
 
 
 
-
     $(document).ready(function(){
-        $("body").on("click",".back-index-add .remove",function(){
+        $("body").on("click",".back-index-add>.inner>.remove",function(){
             var name=$(this).parents(".back-index-add").attr("name");
             if(name=="student"){
                 $(".back-index-add[name='student'] .radio.ui").eq(0).checkbox('enable');

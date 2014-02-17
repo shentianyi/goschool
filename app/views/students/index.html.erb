@@ -18,12 +18,17 @@
     </div>
     <div class="column">
       <div class="ui raised segment">
-	<div class="ui red ribbon label">搜索结果: <div class="ui red label" id="result-count">0</div></div>
+	<div class="ui red ribbon label">搜索结果: <div class="ui red label" id="result-count">
+	     <%=@students.total_entries%>
+	</div></div>
       </div>
     </div>
     <ul class="search-result" id="search-result">
       <%= render partial:'search_results'%>
     </ul>
+    <div>
+               <%= will_paginate @students%>
+          </div>
   </div>
 </article>
 
@@ -33,9 +38,9 @@
     <i class="remove icon"></i>
     <p>新建学生</p>
     <div class="left-part">
-      <div class="portrait">
-        <img id="image_url" class="ui circular image " src="/assets/portrait/1.jpg">
-      </div>
+      <!--<div class="portrait">-->
+        <!--<img id="image_url" class="ui circular image " src="/assets/portrait/1.jpg">-->
+      <!--</div>-->
       <div class="ui left icon input">
         <input id="name" placeholder="姓名..." type="text">
         <i class="user icon"></i>
@@ -50,6 +55,10 @@
           <label>女</label>
         </div>
       </div>
+      <div class="student-remark">
+        <textarea placeholder="备注..." id="remark"></textarea>
+        <i class="info icon"></i>
+      </div>
       <div class="ui left icon input calendar">
         <input placeholder="出生年月..." type="text" readonly id="birthday">
         <i class="calendar icon"></i>
@@ -59,7 +68,7 @@
         <i class="building icon"></i>
       </div>
       <div class="ui left icon input calendar">
-        <input placeholder="毕业年限..." type="text" readonly id="graduation">
+        <input placeholder="毕业年限..." type="text" id="graduation">
         <i class="empty bookmark icon"></i>
       </div>
     </div>
@@ -96,8 +105,8 @@
         </ul>
         <i class="smile icon"></i>
       </div>
-      <div id="is_active_account" class="ui checkbox stop">
-        <input name="fun" type="checkbox" checked >
+      <div id="is_active_account" class="ui checkbox stop create">
+        <input name="fun" type="checkbox" >
         <label>同时开设学生账号</label>
       </div>
       <div id="add-student" class="ui red button">

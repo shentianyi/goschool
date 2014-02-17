@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
 	skip_before_filter :require_user_as_employee
 
 	def index
-		switch current_user
+		switch current_logininfo
 	end
 
 	def switch user

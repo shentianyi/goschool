@@ -1,27 +1,26 @@
-
 <table class="ui celled table segment">
   <thead>
-    <tr>
-      <th class="wide three">课程/服务</th>
-      <th class="wide one">课时</th>
-      <th class="wide four">上课时间</th>
-      <th class="wide three">支付情况</th>
-      <th class="wide five">表现/进度</th>
-    </tr>
+  <tr>
+    <th class="wide three">课程/服务</th>
+    <th class="wide one">课时</th>
+    <th class="wide four">上课时间</th>
+    <th class="wide three">支付情况</th>
+    <th class="wide five">表现/进度</th>
+  </tr>
   </thead>
   <tbody>
-    <% if @courses %>
-    <% @courses.each do |course|%>
-    <tr id="<%= course.id_display%>">
-      <td><%= course.name %></td>
-      <td><%= course.lesson_display%></td>
-      <td><%= course.period_display%></td>
-      <td class="pay-lack"><%= course.paid_display%></td>
-      <td>
-        <input type="text" value="<%= course.progress%>"/>
-      </td>
-    </tr>
-    <% end %>
-    <% end %>
+  <% if @courses %>
+      <% @courses.each do |course| %>
+          <tr id="<%= course.id_display %>">
+            <td><a href="/courses/<%= course.course_id %>"><%= course.name %></a></td>
+            <td><%= course.lesson_display %></td>
+            <td><%= course.period_display %></td>
+            <td class="pay-lack"><%= course.paid_display %></td>
+            <td>
+              <input type="text" value="<%= course.progress %>"/>
+            </td>
+          </tr>
+      <% end %>
+  <% end %>
   </tbody>
 </table>

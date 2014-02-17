@@ -81,6 +81,8 @@ BACKINDEX.right_list.loadData=function(){
                 }
             }).always(function(){
                     BACKINDEX.right_list.loadCheck--;
+
+                    $("#search-result .corner i").popup();
                 });
         }
         else{
@@ -114,6 +116,7 @@ BACKINDEX.right_list.loadData=function(){
                 }
             }).always(function(){
                     BACKINDEX.right_list.loadCheck--;
+                    $("#search-result .corner i").popup();
                 });
         }
 

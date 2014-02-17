@@ -5,15 +5,43 @@
     margin-left:-17.5px;
 }
 .back-index-main>.search-list>.search-result>li .name{
-    font-size:15px;
+    font-size:17px;
     color:#63A69F;
     font-weight:bolder;
     text-align:center;
+    margin-bottom:0px;
 }
+/*.back-index-main>.search-list>.search-result>li .remark{*/
+    /*font-size:11px;*/
+    /*color:#9d9d9d;*/
+    /*word-break:break-all;*/
+    /*word-wrap:break-word;*/
+    /*width:100%;*/
+    /*font-weight:lighter;*/
+    /*text-align:left;*/
+    /*margin-bottom:0px;*/
+/*}*/
+.back-index-main>.search-list>.search-result>li .first-column .icons{
+    width:40px;
+    margin:0 auto;
+}
+.back-index-main>.search-list>.search-result>li .first-column i{
+    font-size:13px;
+    color:#63A69F;
+    pointer-events:auto;
+    cursor:pointer;
+    transition:color 0.25s ease-out;
+
+}
+.back-index-main>.search-list>.search-result>li .first-column i:hover{
+    color:#222;
+}
+
 .back-index-main>.search-list>.search-result>li .type{
     color:#E44B3D;
     font-weight:bolder;
 }
+
 .back-index-main>.search-list>.search-result>li .parent>span:first-of-type,
 .back-index-main>.search-list>.search-result>li .phone>span:first-of-type,
 .back-index-main>.search-list>.search-result>li .consult-time>span:first-of-type{
@@ -77,6 +105,44 @@
 }
 .back-index-add>.inner>.left-part>.sex>.radio{
     margin-right:20px;
+}
+.back-index-add>.inner>.left-part>.student-remark{
+    position:relative;
+}
+.back-index-add>.inner>.left-part>.student-remark textarea{
+    margin:5px 0px 6px 25px;
+    min-width:300px;
+    max-width:300px;
+    width:300px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing:border-box ;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.3125em;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3) inset;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 0.875em;
+    font-family: "Helvetica Neue","Helvetica",Arial;;
+    padding: 10px 10px 10px 39px;
+    height:93px;
+    min-height:93px;
+    max-height:123px;
+    transition: background-color 0.3s ease-out 0s, box-shadow 0.2s ease 0s, border-color 0.2s ease 0s;
+}
+.back-index-add>.inner>.left-part>.student-remark textarea:focus,
+.back-index-add>.inner>.left-part>.student-remark textarea:active,
+.back-index-add>.inner>.left-part>.student-remark textarea:focus+i,
+.back-index-add>.inner>.left-part>.student-remark textarea:active+i{
+    border-color: rgba(0, 0, 0, 0.2);
+    color: rgba(0, 0, 0, 0.85);
+}
+.back-index-add>.inner>.left-part>.student-remark>i{
+    position:absolute;
+    color: rgba(0, 0, 0, 0.55);
+    left:36px;
+    top:17px;
+    transition: color 0.3s ease-out 0s;
 }
 /*right*/
 .back-index-add>.inner>.right-part{

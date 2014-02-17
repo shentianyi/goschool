@@ -39,6 +39,6 @@ class StudentController < ApplicationController
 
   private
   def get_student
-    @student = current_user.student
+    @student = current_logininfo.student
   end
 end

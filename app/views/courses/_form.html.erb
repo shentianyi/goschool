@@ -18,7 +18,7 @@
                     <div class="select">
                          <div  class="ui red labeled icon top right pointing dropdown button" id="add-class-choose-institution">
                               <%=render 'institutions/select'%>
-                         </div> 
+                         </div>
                     </div>
                     <div class="ui left icon input">
                          <input placeholder="课程名称..." name='name' type="text">
@@ -138,6 +138,45 @@
                          </ul>
                          <i class="tag icon stop"></i>
                     </div>
+
+                    <div class="material-block">
+                        <div class="header" id="material-header">
+                            <i class="icon text file"></i>
+                            <label>材料</label>
+                            <i class="icon reorder button"></i>
+                        </div>
+
+                        <div class="content" id="material-content">
+                          <ul>
+                            <% @materials.each do |material| %>
+                                <li id="<%= material.id %>">
+                                  <p><%= material.name %></p>
+                                  <p><%= material.description %></p>
+                                  <i class="icon remove material-list-remove" affect="<%= material.id %>"></i>
+                                </li>
+                            <% end %>
+                          </ul>
+                        </div>
+                    </div>
+
+                    <div class="material-setting" id="material-setting">
+                      <table class="ui column table segment">
+                        <thead>
+                        <tr><th class="five wide">名称</th>
+                          <th class="nine wide">描述</th>
+                          <th class="two wide"></th>
+                        </tr></thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <td colspan=2></td>
+                          <td><i class="icon plus basic" id="add-new-material"></i></td>
+                        </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+
                     <div class="ui buttons choose-teacher-delivery" id="choose-teacher-service-delivery" name="service">
                          <div class="ui mini teal button active" for="total-service-teachers">
                            总体服务老师安排

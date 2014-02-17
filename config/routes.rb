@@ -1,5 +1,8 @@
 Goschool::Application.routes.draw do
 
+  resources :materials
+
+
   mount Ckeditor::Engine => '/ckeditor'
 
   get "search_engine/search"
@@ -78,6 +81,7 @@ Goschool::Application.routes.draw do
       get :dates
       get :courses
       get :teachers
+      get :teacher
       post :send_email
     end
   end
@@ -86,6 +90,7 @@ Goschool::Application.routes.draw do
     collection do
       get :fast_search
       get ':id/edit'=>:edit
+      post '/submit_material'=>:submit_material
       get ':id/:part'=>:show
       get ':id/:part/:ajax'=>:show
       get :detail

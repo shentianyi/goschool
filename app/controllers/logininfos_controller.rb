@@ -6,7 +6,7 @@ class LogininfosController < ApplicationController
   def index
     #@logininfos = Logininfo.find_by_tenant_id(current_tenant.id)
     #render :json=>@logininfos.as_json
-    @user = current_user.user
+    @user = current_logininfo.user
   end
 
   def new
@@ -26,8 +26,8 @@ class LogininfosController < ApplicationController
   
   def update
     msg = Msg.new
-    @logininfo = current_user
-    @user = current_user.user
+    @logininfo = current_logininfo
+    @user = current_logininfo.user
 
     if params.has_key?(:password)
       @logininfo.password = params[:password]

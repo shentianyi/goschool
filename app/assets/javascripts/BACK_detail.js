@@ -90,6 +90,9 @@
                             }
                         });
                     }
+                    else if(target="service-material"){
+                        STUDENTDETAIL.material.check();
+                    }
                 }
             });
         }
@@ -150,6 +153,9 @@
                                 })
                             }
                         });
+                    }
+                    else if(target="service-material"){
+                        STUDENTDETAIL.material.check();
                     }
                 }
             });

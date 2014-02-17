@@ -435,6 +435,7 @@
     left:-999em;
     background:rgba(0,0,0,0.9);
     z-index:99;
+    min-width:1024px;
 }
 .back-index-add>.inner{
     position:absolute;
