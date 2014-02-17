@@ -15,7 +15,7 @@ class MaterialsController < ApplicationController
       when 200
         create_course_material
       when 300
-        creates_student_course_material
+        create_student_course_material
     end
     if @material
       @material.logininfo=current_logininfo
@@ -59,6 +59,7 @@ class MaterialsController < ApplicationController
   end
 
   def create_student_course_material
-    @material=@student_course.materials.build(params[:material]) if @student_course=StudentCourse.find_by_id(params[:id])
+    @material=@student_course.materials.build(params[:material],:editable=>true) if @student_course=StudentCourse.find_by_id(params[:id])
+    @material.update_attribute("editable",true)
   end
 end

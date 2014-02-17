@@ -90,7 +90,7 @@ Goschool::Application.routes.draw do
     collection do
       get :fast_search
       get ':id/edit'=>:edit
-      post ':id/submit_material'=>:submit_material
+      post '/submit_material'=>:submit_material
       get ':id/:part'=>:show
       get ':id/:part/:ajax'=>:show
       get :detail

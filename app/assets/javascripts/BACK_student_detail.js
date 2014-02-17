@@ -60,6 +60,7 @@ STUDENT_FRONT.check = 0;
     //添加材料项
     $("body")
         .on("click","#service-material .plus-span",function(){
+            var id = $(this).attr("student-course");
             var $table=$(this).parents("p").next();
             $table.find("tbody").append(
             "<tr class='temp template'>"+
@@ -72,7 +73,7 @@ STUDENT_FRONT.check = 0;
                     "</div>"+
                 "</td>"+
                 "<td>"+
-                    "<span class='ok'>完成</span>"+
+                    "<span class='ok' student-course='"+id+"'>完成</span>"+
                     "<span class='remove'>删除</span>"+
                 "</td>"+
             "</tr>"
@@ -84,12 +85,14 @@ STUDENT_FRONT.check = 0;
 
 
             var $tr=$(this).parents("tr").eq(0),
-                $children=$tr.children();
+                $children=$tr.children(),
+                $this=$(this);
             var name= $.trim($children.eq(0).find("input").val()),
                 desc= $.trim($children.eq(1).find("input").val()),
                 got= $children.eq(2).find("input").prop("checked");
             if(name.length>0){
                 $.post("/materials",{
+                    id:$(this).attr('student-course'),
                     material:{
                         name:name,
                         description:desc
@@ -98,7 +101,7 @@ STUDENT_FRONT.check = 0;
                 },function(data){
                     if(data.result){
                         var id=data.content;
-                        $(this).remove();
+                        $this.remove();
                         $children.find("input[type='text']").remove();
                         $children.eq(0).text(name);
                         $children.eq(1).text(desc);
@@ -998,7 +1001,7 @@ STUDENT_FRONT.check = 0;
             });
             $("#homework-line-wrap .buttons .button").eq(0).click();
         }
-        else if(new_href="service-material"){
+        else if(new_href == "service-material"){
             STUDENTDETAIL.material.check();
         }
     });
@@ -1013,20 +1016,24 @@ STUDENTDETAIL.material.check=function(){
                 var $this=$(this),$tr=$this.parents("tr");
                 var id=$tr.attr("id"),
                     checked=$this.prop("checked");
-//                $.ajax({
-//                    url:""+id,
-//                    data:{},
-//                    type:'PUT',
-//                    success:function(data){
-//                        if(data.result){
-//                            $tr.toggleClass("positive");
-//                        }
-//                        else{
-//                            $this.parent().checkbox('toggle');
-//                            MessageBox_content(data.content);
-//                        }
-//                    }
-//                })
+                var status = 0;
+                if(checked){
+                    status = 1;
+                }
+                $.ajax({
+                    url:"/students/submit_material",
+                    data:{id:id,status:status},
+                    type:'POST',
+                    success:function(data){
+                        if(data.result){
+                            $tr.toggleClass("positive");
+                        }
+                        else{
+                            $this.parent().checkbox('toggle');
+                            MessageBox_content(data.content);
+                        }
+                    }
+                })
             }
 
         }

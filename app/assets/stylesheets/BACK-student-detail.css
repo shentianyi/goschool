@@ -89,6 +89,9 @@
 .accordion[name='student'] .class-and-service table td{
     font-size:14px;
 }
+.accordion[name='student'] .class-and-service table td a{
+    color:#000;
+}
 .accordion[name='student'] .class-and-service table td .progress{
     height:24px;
     padding:3px;
