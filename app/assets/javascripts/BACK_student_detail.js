@@ -1016,20 +1016,24 @@ STUDENTDETAIL.material.check=function(){
                 var $this=$(this),$tr=$this.parents("tr");
                 var id=$tr.attr("id"),
                     checked=$this.prop("checked");
-//                $.ajax({
-//                    url:""+id,
-//                    data:{},
-//                    type:'PUT',
-//                    success:function(data){
-//                        if(data.result){
-//                            $tr.toggleClass("positive");
-//                        }
-//                        else{
-//                            $this.parent().checkbox('toggle');
-//                            MessageBox_content(data.content);
-//                        }
-//                    }
-//                })
+                var status = 0;
+                if(checked){
+                    status = 1;
+                }
+                $.ajax({
+                    url:"/students/submit_material",
+                    data:{id:id,status:status},
+                    type:'POST',
+                    success:function(data){
+                        if(data.result){
+                            $tr.toggleClass("positive");
+                        }
+                        else{
+                            $this.parent().checkbox('toggle');
+                            MessageBox_content(data.content);
+                        }
+                    }
+                })
             }
 
         }

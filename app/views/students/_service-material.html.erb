@@ -11,7 +11,7 @@
         <tbody>
         <% materials=StudentCourse.find_by_id(c.student_course_id).materials %>
         <% materials.each do |m| %>
-            <tr class="<% if m.editable%>temp<%end%><%if m.status == MaterialStatus::SUBMITTED%> positivexs <%end%>" id="<%= m.id%>">
+            <tr class="<% if m.editable%>temp<%end%><%if m.status == MaterialStatus::SUBMITTED%> positive <%end%>" id="<%= m.id%>">
               <%if m.material %>
                   <td post_type='name'><%=m.material.name%></td>
                   <td post_type='description'><%=m.material.description%></td>
