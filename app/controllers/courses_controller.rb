@@ -39,7 +39,8 @@ class CoursesController < ApplicationController
     @course.subs=params[:course].slice(:subs)[:subs].values if params[:course].has_key?(:subs)
     @course.tags=params[:course].slice(:tags)[:tags] if params[:course].has_key?(:tags)
     @course.teacher_ids=params[:course].slice(:teachers)[:teachers].values if params[:course].has_key?(:teachers)
-    @course.material_ids=params[:course].slice(:materials)[:materials].values if params[:course].has_key?(:materials)
+    @course.material_ids=params[:course].slice(:material_ids)[:material_ids].values if params[:course].has_key?(:material_ids)
+    @course.private_materials=params[:course].slice(:materials)[:materials].values if params[:course].has_key?(:materials)
     @course.subs.each do |sub|
       unless sub[:name].blank?
         is_base=sub[:extro]=='true'
