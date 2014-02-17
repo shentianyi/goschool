@@ -14,19 +14,4 @@ class Material < ActiveRecord::Base
     errors.add(:name, '材料名称不可为空') if self.name.blank? && (self.materialable.is_a?(Setting) || self.materialable.is_a?(Course))
   end
 
-
-  def after_create_
-    puts '*****************************'
-    puts self.materialable.is_a?(Course)
-    puts self.materialable.class
-
-    if self.materialable.is_a?(Course)
-      self.materialable.student_courses.each do |student_course|
-        #student_course.material.create
-        m=student_course.materials.build
-        m.material=material
-        m.save
-      end
-    end
-  end
 end
