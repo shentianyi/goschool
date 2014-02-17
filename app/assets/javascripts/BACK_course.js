@@ -335,6 +335,7 @@ var BACKCOURSE=BACKCOURSE || {};
             }
                 if(BACKCOURSE.edit_material){
                     $.post("/materials",{
+                        id:$("#course-detail-info").attr('course'),
                        material:{name:valueArray[0],description:valueArray[1]},
                         type:200
                     },function(data){

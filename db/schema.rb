@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140214062237) do
+ActiveRecord::Schema.define(:version => 20140217035745) do
 
   create_table "achievementresults", :force => true do |t|
     t.string   "valuestring"
@@ -136,7 +136,7 @@ ActiveRecord::Schema.define(:version => 20140214062237) do
   create_table "homeworks", :force => true do |t|
     t.string   "title"
     t.datetime "deadline"
-    t.string   "content"
+    t.text     "content"
     t.integer  "teacher_course_id"
     t.integer  "unmark_number"
     t.integer  "tenant_id"
@@ -203,7 +203,7 @@ ActiveRecord::Schema.define(:version => 20140214062237) do
 
   create_table "materials", :force => true do |t|
     t.string   "name"
-    t.string   "description"
+    t.text     "description"
     t.integer  "status",            :default => 0
     t.integer  "materialable_id"
     t.string   "materialable_type"
@@ -267,6 +267,7 @@ ActiveRecord::Schema.define(:version => 20140214062237) do
     t.integer  "sub_course_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.datetime "date"
     t.integer  "tenant_id"
     t.string   "remark"
     t.string   "color"
