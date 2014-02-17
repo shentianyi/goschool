@@ -30,7 +30,7 @@ class StudentsController < ApplicationController
         consultation(@student)
       when 'class-performance'
         performance(@student)
-      when 'materials'
+      when 'service-material'
         materials(@student)
     else
     @partial = 'class-and-service'
@@ -229,20 +229,10 @@ class StudentsController < ApplicationController
     msg.result = false
     @material = Material.find_by_id(params[:id])
     if @material
-      msg.result = @material.update_attribute('status',MaterialStatus::SUBMITTED)
+      msg.result = @material.update_attribute('status',params[:status])
     end
 
     render :json=>msg
-  end
-
-  #material
-  def student_materials
-    msg = Msg.new
-    msg.result = false
-    @materials = StudentCourse.find_by_id(params[:id]).materials
-    msg.result = true
-    msg.content = @materials
-    render :json => msg
   end
 
   # List Search Result
@@ -317,7 +307,7 @@ class StudentsController < ApplicationController
   end
 
   def materials(student)
-    Course.joins(:student_courses).where('student_courses.student_id = ?',student.id).select('student_courses.id as student_course_id,courses.*')
+    @courses = Course.joins(:student_courses).where('student_courses.student_id = ? AND type = ?',student.id,CourseType::SERVICE).select('student_courses.id as student_course_id,courses.*')
   end
 
   def get_student

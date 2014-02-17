@@ -16,6 +16,9 @@
       <a class="item active" href="#class-and-service">
         <i class="browser icon"></i> 课程及服务
       </a>
+      <a class="item" href="#service-material">
+        <i class="text file icon"></i> 服务材料
+      </a>
       <a class="item" href="#achieve">
         <i class="trophy icon"></i> 所获成就
       </a>
@@ -46,6 +49,17 @@
           <%= render partial: 'class-and-service' if @partial=='class-and-service' %>
         </div>
       </div>
+
+      <!--2014.2.16 材料 -->
+      <div class="item" id="service-material">
+        <div class="title">
+          <i class="dropdown icon"></i>服务材料
+        </div>
+        <div class="content service-material">
+          <%= render partial: 'service-material' if @partial=='service-material' %>
+        </div>
+      </div>
+      
       <div class="item achievement" id="achieve">
         <div class="title <%= 'active' if @partial=='achieve' %>">
           <i class="dropdown icon"></i>所获成就
@@ -72,17 +86,18 @@
           <%= render partial: 'friendship' if @partial=='friendship' %>
         </div>
       </div>
+
+      
       <div class="item consult-record" id="consult-record">
         <div class="title <%= 'active' if @partial=='consult-record' %>">
           <i class="dropdown icon"></i>咨询记录
         </div>
         <div class="<%= 'active' if @partial=='consult-record' %> content">
-          <%= render partial: 'consult-record' if @partial='consult-record' %>
+          <%= render partial: 'consult-record' if @partial=='consult-record' %>
         </div>
         <div class="ui mini button" for="detail-add" type="consult-record"><i class="add icon"></i> 添加咨询记录</div>
       </div>
     </div>
-  </div>
 </article>
 
 <!--new partial-->

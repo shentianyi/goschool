@@ -76,10 +76,17 @@
     width:56%;
 }
 .info .detail-material span:nth-of-type(2) label{
-    display:block;
+    display:inline-block;
     margin-bottom:2px;
+    margin-right:8px;
     font-size:13px;
     color:#C69C6D;
+}
+.info .detail-material span:nth-of-type(2) label:after{
+    content:"|";
+    position:relative;
+    left:4px;
+    color:#222;
 }
 .info .detail-material span:nth-of-type(2) {
     display: inline-block;
