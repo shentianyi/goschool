@@ -115,15 +115,15 @@
     font-size: 16px;
     margin: 0;
 }
-.accordion[name='student'] .service-material .content-item>p>i{
-    color: #23B890;
+.accordion[name='student'] .service-material .content-item>p>span{
+    color: #4092CC;
     cursor: pointer;
-    font-size: 13px;
-    margin-left: 5px;
+    font-size: 12px;
+    margin-left: 8px;
     transition: color 0.25s ease-out 0s;
 }
-.accordion[name='student'] .service-material .content-item>p>i:hover{
-    color: #22DEAC;
+.accordion[name='student'] .service-material .content-item>p>span:hover{
+    color: #1AB8F3;
 }
 .accordion[name='student'] .service-material .content-item>table{
     margin-top:5px;

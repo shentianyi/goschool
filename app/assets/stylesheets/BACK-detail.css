@@ -33,6 +33,10 @@
     color:#23b890;
     border-color:#23b890;
 }
+.detail-navigation .ui.vertical.menu .active.item:nth-of-type(6){
+    color:#6e65e2;
+    border-color:#6e65e2;
+}
 /******************************************************************************** 右侧的内容*/
 .back-index-main .detail-content{
     float:right;

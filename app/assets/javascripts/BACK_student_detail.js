@@ -59,7 +59,7 @@ STUDENT_FRONT.check = 0;
 
     //添加材料项
     $("body")
-        .on("click","#service-material .plus",function(){
+        .on("click","#service-material .plus-span",function(){
             var $table=$(this).parents("p").next();
             $table.find("tbody").append(
             "<tr class='temp template'>"+
