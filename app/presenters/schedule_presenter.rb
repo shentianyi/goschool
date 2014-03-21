@@ -1,6 +1,6 @@
 #encoding: utf-8
 class SchedulePresenter<Presenter
-  def_delegators :@schedule,:name,:parent_name,:id,:start_time,:end_time,:remark,:color,:is_default,:institution_name,:teachers
+  def_delegators :@schedule,:name,:parent_name,:id,:start_time,:end_time,:remark,:color,:is_default,:is_base,:institution_name,:teachers
   def initialize(schedule)
     @schedule=schedule
   end
@@ -60,7 +60,7 @@ end
       remark:self.remark,
       color: self.color || '#FFA500',
       institution_name:self.institution,
-      sub_courses:{value:self.id,text:self.name,is_default:self.is_default}
+      sub_courses:{value:self.id,text:self.name,is_default:self.is_default,is_base:self.is_base}
     }
   end
 
