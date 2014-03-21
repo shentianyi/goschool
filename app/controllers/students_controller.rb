@@ -91,7 +91,7 @@ class StudentsController < ApplicationController
         end
         @student.tenant = current_tenant
         if account_create
-          @student.logininfo - @logininfo
+          @student.logininfo = @logininfo
         end
         @student.save!
         msg.result = true
