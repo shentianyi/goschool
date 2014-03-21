@@ -60,7 +60,8 @@ end
       remark:self.remark,
       color: self.color || '#FFA500',
       institution_name:self.institution,
-      sub_courses:{value:self.id,text:self.name,is_default:self.is_default,is_base:self.is_base}
+      is_base:self.is_base,
+      sub_courses:{value:self.id,text:self.name,is_default:self.is_default}
     }
   end
 
