@@ -33,8 +33,10 @@ class Student < ActiveRecord::Base
                      :alias_field=>:email,
                      :ext_fields=>[:email,:address,:school,:guardian,:logininfo_id])
   def delete_related
-    @logininfo = self.logininfo
-    @logininfo.destroy
+    if(self.logininfo)
+      @logininfo = self.logininfo
+      @logininfo.destroy
+    end
   end
 
   def is_male?

@@ -342,7 +342,7 @@ BACKINDEX.admin.operate.init=function(){
                     success:function(data){
                         if(data.result){
                             for(i=0;i<$target.length;i++){
-                                $("#template").find("td").eq(i+1).text(value_array[i]).find("input").remove();
+                                $("#template").find("td").eq(i).text(value_array[i]).find("input").remove();
                             }
                             var new_id=data.content.id;
                             $("#template").find(".finish-add").remove();
