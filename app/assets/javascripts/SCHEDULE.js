@@ -64,7 +64,7 @@ SCHEDULE.widget.init=function(){
                 <input type='text' id='schedule-course' autocomplete='courses,fast'>\
             </div>";
         ev.my_sub_courses ="<select id='schedule-sub-courses'>" +
-            "<option value='wzx'>无</option>" +
+            "<option value='wzx' is_base=false>无</option>" +
             "</select>";
         ev.my_remark ="<div class='ui input '>\
                 <input type='text' id='schedule-remark'>\
@@ -207,6 +207,7 @@ SCHEDULE.calendar.getData=function(){
             },function(data){
                 if(data.result){
                     scheduler.parse(data.content,"json");
+                    SCHEDULE.calendar.judgeBaseCourse(data.content);
                 }
                 else{
                     MessageBox_content(data.content);
@@ -224,6 +225,7 @@ SCHEDULE.calendar.getData=function(){
             },function(data){
                 if(data.result){
                     scheduler.parse(data.content,"json");
+                    SCHEDULE.calendar.judgeBaseCourse(data.content);
                     if(callback!==undefined){
                         callback(data.content);
                     }
@@ -238,7 +240,15 @@ SCHEDULE.calendar.getData=function(){
 
     }
 };
-
+SCHEDULE.calendar.judgeBaseCourse=function(content){
+    var id;
+    for(var i=0;i<content.length;i++){
+        if(content[i].is_base==1){
+            id=content[i].id;
+            $("div[event_id='"+id+"']").css("background","#fff").css("color",content[i].color).css("textShadow","none");
+        }
+    }
+}
 SCHEDULE.calendar.delete_item=function(id){
     //post delete(已经删除掉了，可能要去核心代码里面写ajax)
     var validate;
