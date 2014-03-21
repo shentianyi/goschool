@@ -117,7 +117,7 @@ class CoursesController < ApplicationController
     if @course.has_sub || @course.has_base
       if @course.has_sub
         @subs=@course.sub_courses.where(is_default: false).all
-        @msg.content={sub_courses: @subs.map { |s| {id: s.id, name: s.name} }, teachers: @subs.first.teacher_names}
+        @msg.content={sub_courses: @subs.map { |s| {id: s.id, is_base: s.is_base,name: s.name} }, teachers: @subs.first.teacher_names}
       else
         @subs=@course.sub_courses.order('is_default desc').all
         @msg.content={sub_courses: @subs.map { |s| {id: s.id, is_base: s.is_base, name: s.is_default? ? '无' : s.name} }, teachers: @subs.first.teacher_names}
