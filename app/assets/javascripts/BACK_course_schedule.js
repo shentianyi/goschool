@@ -25,12 +25,12 @@
                          $("#new-schedule-teachers").empty();
                          $("#schedule-sub-courses").empty();
                          if(data.content.sub_courses.length == 0) {
-                              $("#schedule-sub-courses").append($("<option />").attr("id", "wzx").text("无"))
+                              $("#schedule-sub-courses").append($("<option />").attr("id", "wzx").text("无").attr("is_base",false))
                          } else {
                               var length = data.content.sub_courses.length;
                               for(var i = 0; i < length; i++) {
                                    var item = data.content.sub_courses[i]
-                                   $("#schedule-sub-courses").append($("<option />").attr("id", item.id).text(item.name))
+                                   $("#schedule-sub-courses").append($("<option />").attr("id", item.id).text(item.name).attr("is_base",item.is_base))
                               }
                          }
                          var teachers = data.content.teachers.join(",");
