@@ -4077,6 +4077,7 @@ scheduler.render_event = function(ev) {
 		this._els["dhx_cal_data"][0].scrollLeft = 0;
 	}
 	if (this.xy.menu_width !== 0 && this._select_id == ev.id) {
+
 		if (this.config.cascade_event_display && this._drag_mode)
 			d.style.zIndex = 1; //fix overlapping issue for cascade view in case of dnd of selected event
 		var icons = this.config["icons_" + ((this._edit_id == ev.id) ? "edit" : "select")];
@@ -4092,6 +4093,7 @@ scheduler.render_event = function(ev) {
 	}
 };
 scheduler._render_v_bar = function (id, x, y, w, h, style, contentA, contentB, bottom) {
+
 	var d = document.createElement("DIV");
 	var ev = this.getEvent(id);
 
@@ -4201,11 +4203,12 @@ scheduler.render_event_bar = function (ev) {
 
 	var cse = scheduler.templates.event_class(ev.start_date, ev.end_date, ev);
 	if (cse) cs = cs + " " + cse;
-
 	var bg_color = (ev.color ? ("background:" + ev.color + ";") : "");
 	var color = (ev.textColor ? ("color:" + ev.textColor + ";") : "");
+    var border= (ev.border ? ("border:" + ev.border + ";") : "");
+    var textShadow= (ev.textShadow ? ("text-shadow:" + ev.textShadow + ";") : "");
 
-	var html = '<div event_id="' + ev.id + '" class="' + cs + '" style="position:absolute; top:' + y + 'px; left:' + x + 'px; width:' + (x2 - x - 15) + 'px;' + color + '' + bg_color + '' + (ev._text_style || "") + '">';
+	var html = '<div event_id="' + ev.id +'" class="' + cs + '" style="position:absolute; top:' + y + 'px; left:' + x + 'px; width:' + (x2 - x - 15) + 'px;' + color + '' + bg_color + ''+ textShadow + '' + border + '' + (ev._text_style || "") + '">';
 
 	ev = scheduler.getEvent(ev.id); // ev at this point could be a part of a larged event
 	if (ev._timed)

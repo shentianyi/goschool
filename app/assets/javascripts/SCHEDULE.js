@@ -41,18 +41,42 @@ SCHEDULE.widget.init=function(){
         else{
             if(ev.institution_name==null){
                 if(ev.remark && ev.remark.length>0){
-                    return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>简介:'+ev.remark+'</span><span>老师:'+teachers+'</span>';
+                    if(ev.is_base=1){
+                        return ev.text.substr(0,50)+'<span>'+ev.sub_courses.text.substr(0,50)+'(练习课)</span><span>简介:'+ev.remark+'</span><span>老师:'+teachers+'</span>';
+                    }
+                    else{
+                        return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>简介:'+ev.remark+'</span><span>老师:'+teachers+'</span>';
+                    }
+
                 }
                 else{
-                    return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>'+'</span><span>老师:'+teachers+'</span>';
+                    if(ev.is_base=1){
+                        return ev.text.substr(0,50)+'<span>'+ev.sub_courses.text.substr(0,50)+'(练习课)</span><span>'+'</span><span>老师:'+teachers+'</span>';
+                    }
+                    else{
+                        return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>'+'</span><span>老师:'+teachers+'</span>';
+                    }
+
                 }
             }
             else{
                 if(ev.remark && ev.remark.length>0){
-                    return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>简介:'+ev.remark+'</span><span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                    if(ev.is_base=1){
+                        return ev.text.substr(0,50)+'<span>'+ev.sub_courses.text.substr(0,50)+'(练习课)</span><span>简介:'+ev.remark+'</span><span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                    }
+                    else{
+                        return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>简介:'+ev.remark+'</span><span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                    }
+
                 }
                 else{
-                    return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>'+'</span><span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                    if(ev.is_base=1){
+                        return ev.text.substr(0,50)+'<span>'+ev.sub_courses.text.substr(0,50)+'(练习课)</span><span>'+'</span><span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                    }
+                    else{
+                        return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>'+'</span><span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                    }
+
                 }
             }
         }
@@ -64,7 +88,7 @@ SCHEDULE.widget.init=function(){
                 <input type='text' id='schedule-course' autocomplete='courses,fast'>\
             </div>";
         ev.my_sub_courses ="<select id='schedule-sub-courses'>" +
-            "<option value='wzx' is_base=false>无</option>" +
+            "<option value='wzx' is_base='false'>无</option>" +
             "</select>";
         ev.my_remark ="<div class='ui input '>\
                 <input type='text' id='schedule-remark'>\
@@ -206,8 +230,8 @@ SCHEDULE.calendar.getData=function(){
                 institution_id:institution
             },function(data){
                 if(data.result){
-                    scheduler.parse(data.content,"json");
                     SCHEDULE.calendar.judgeBaseCourse(data.content);
+                    scheduler.parse(data.content,"json");
                 }
                 else{
                     MessageBox_content(data.content);
@@ -224,8 +248,9 @@ SCHEDULE.calendar.getData=function(){
                 end_date:scheduler.getState().max_date.toWayneString().day
             },function(data){
                 if(data.result){
-                    scheduler.parse(data.content,"json");
                     SCHEDULE.calendar.judgeBaseCourse(data.content);
+                    scheduler.parse(data.content,"json");
+
                     if(callback!==undefined){
                         callback(data.content);
                     }
@@ -241,11 +266,12 @@ SCHEDULE.calendar.getData=function(){
     }
 };
 SCHEDULE.calendar.judgeBaseCourse=function(content){
-    var id;
     for(var i=0;i<content.length;i++){
         if(content[i].is_base==1){
-            id=content[i].id;
-            $("div[event_id='"+id+"']").css("background","#fff").css("color",content[i].color).css("textShadow","none");
+            content[i].textColor=content[i].color;
+            content[i].color="#fff";
+            content[i].textShadow="none";
+            content[i].border="1px solid #999";
         }
     }
 }
