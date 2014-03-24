@@ -166,6 +166,21 @@
      }).on("click", "#send-schedule .icon.remove", function() {
           $("#send-schedule").css("left", "-999em").css("right", "auto");
           $("#send-schedule").find("input").val("");
+          var i,
+              teacherChildren=$("#total-teachers>ul").children(),
+              studentChildren=$("#total-students>ul").children(),
+              teacherLength=teacherChildren.length,
+              studentLength=studentChildren.length;
+          if(teacherLength>1){
+             for(i=0;i<teacherLength-1;i++){
+                 teacherChildren.eq(i).remove();
+             }
+          }
+          if(studentLength>1){
+              for(i=0;i<studentLength-1;i++){
+                  studentChildren.eq(i).remove();
+              }
+          }
      });
 
      $(".schedule-sender-button").click(function() {
