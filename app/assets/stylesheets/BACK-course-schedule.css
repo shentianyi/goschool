@@ -201,12 +201,34 @@
     border-radius:5px;
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
+
+}
+.schedule-search>.search-block>p.clear{
+    height:0px;
+    clear:both;
+    display:block;
 }
 .schedule-search>.search-block>.input{
-    width:100%;
+    width:45%;
+    float:right;
+    position:relative;
+}
+.schedule-search>.search-block>.input:first-of-type{
+    margin-right:5%;
+    float:left;
+}
+.schedule-search>.search-block>.input:first-of-type:after{
+    content:"OR";
+    position:absolute;
+    right:-23px;
+    font-size:13px;
+    bottom:0px;
+    font-weight:bold;
+    color:rgba(0,0,0,0.4);
 }
 .schedule-search>.search-block>.input>input{
     font-size:12px;
+    padding:5px 6px !important;
 }
 .schedule-search>.search-block>.input>i{
     cursor:pointer !important;
@@ -224,6 +246,7 @@
     border-color:rgba(0, 0, 0, 0.15);
     border-style:solid;
     border-width:0px 1px 1px 1px;
+    margin-top:20px;
 }
 .schedule-search>.search-block>.search-list .uncommon{
     font-size:13px;
