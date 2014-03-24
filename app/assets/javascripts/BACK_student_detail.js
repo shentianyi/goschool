@@ -879,7 +879,7 @@ STUDENT_FRONT.check = 0;
             STUDENTDETAIL.errors[0] = "errors";
         }
         else {
-            if ($(this).attr("id") == "email" && ($(this).val().length == 0 || !easy_email_validate($(this).val()))) {
+            if ($(this).attr("id") == "email" && ($(this).val().length == 0  )) {
                 MessageBox("抱歉，请填写正确的邮箱", "top", "warning");
                 window.setTimeout(function () {
                     $("#email").focus();
