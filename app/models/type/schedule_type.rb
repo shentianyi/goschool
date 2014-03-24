@@ -4,4 +4,5 @@ class ScheduleType
   EMPLOYEE=100
   TEACHER=200
   STUDENT=300
+  COURSE=400
 end

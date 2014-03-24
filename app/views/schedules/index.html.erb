@@ -1,69 +1,73 @@
 <article class="back-index-main" id="back-index-main" name="2column">
-    <header class="back-index-side-header">
-        <a class="ui down button teal mini" href="<%=courses_path%>">
-            <i class="left icon"></i>
-            返回上层
-        </a>
-        <p>安排课程</p>
-    </header>
-    <div class="schedule-calendar">
-        <div class="schedule-calendar-inner">
-            <div id="schedule-here" class="dhx_cal_container" style='width:100%; height:100%;'>
-                <div class="dhx_cal_navline">
-                    <div class="dhx_cal_prev_button">&nbsp;</div>
-                    <div class="dhx_cal_next_button">&nbsp;</div>
-                    <div class="dhx_cal_today_button"></div>
-                    <div class="dhx_cal_date"></div>
-                    <div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
-                    <div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
-                    <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
-                </div>
-                <div class="dhx_cal_header"></div>
-                <div class="dhx_cal_data"></div>
-            </div>
+  <header class="back-index-side-header">
+    <a class="ui down button teal mini" href="<%= courses_path %>">
+      <i class="left icon"></i>
+      返回上层
+    </a>
+
+    <p>安排课程</p>
+  </header>
+  <div class="schedule-calendar">
+    <div class="schedule-calendar-inner">
+      <div id="schedule-here" class="dhx_cal_container" style='width:100%; height:100%;'>
+        <div class="dhx_cal_navline">
+          <div class="dhx_cal_prev_button">&nbsp;</div>
+          <div class="dhx_cal_next_button">&nbsp;</div>
+          <div class="dhx_cal_today_button"></div>
+          <div class="dhx_cal_date"></div>
+          <div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
+          <div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
+          <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
         </div>
+        <div class="dhx_cal_header"></div>
+        <div class="dhx_cal_data"></div>
+      </div>
     </div>
-    <div class="schedule-search ">
-        <div class="ui red labeled icon top right pointing dropdown button select-institution" id="schedule-select-institution">
-             <%=render 'institutions/select'%>
-        </div>
-        <div class="search-block">
-              <div class="ui icon search-input input autoComplete customAutoHeight" autoMaxHeight="210px">
-                <input placeholder="按老师课程安排..." type="text" id="search-teacher"  autocomplete="teachers">
-                <i class="search icon"></i>
-            </div>
-            <p></p>
-            <div class="ui icon search-input input autoComplete customAutoHeight" autoMaxHeight="210px">
-                <input placeholder="按课程搜索课程安排..." type="text" id="search-courses"  autocomplete="courses,list">
-                <i class="search icon"></i>
-            </div>
-            <div class="search-list" id="search-list">
-                
-            </div>
-        </div>
-        <div class="ui button teal save-schedule" id='send-schedule-button'>发送课表</div>
+  </div>
+  <div class="schedule-search ">
+    <div class="ui red labeled icon top right pointing dropdown button select-institution" id="schedule-select-institution">
+      <%= render 'institutions/select' %>
     </div>
+    <div class="search-block">
+      <div class="ui icon search-input input autoComplete customAutoHeight" autoMaxHeight="210px">
+        <input placeholder="按老师课程安排..." type="text" id="search-teacher" autocomplete="teachers">
+        <i class="search icon"></i>
+      </div>
+      <p></p>
+
+      <div class="ui icon search-input input autoComplete customAutoHeight" autoMaxHeight="210px">
+        <input placeholder="按课程搜索课程安排..." type="text" id="search-courses" autocomplete="courses,list">
+        <i class="search icon"></i>
+      </div>
+      <div class="search-list" id="search-list">
+
+      </div>
+    </div>
+    <div class="ui button teal save-schedule" id='send-schedule-button'>发送课表</div>
+  </div>
 </article>
 
 <div id="send-schedule" class="send-schedule">
   <div class="inner">
     <i class="remove icon"></i>
+
     <p>发送课表</p>
     <label>快捷发送</label>
+
     <div class="send-buttons">
-      <div class="ui animated fade button small twitter schedule-sender-button" sender="<%=ScheduleType::ALL%>">
+      <div class="ui animated fade button small twitter schedule-sender-button" sender="<%= ScheduleType::ALL %>">
         <div class="visible content">给所有人</div>
         <div class="hidden content">
           现在发送
         </div>
       </div>
-      <div class="ui animated fade button small twitter schedule-sender-button" sender="<%=ScheduleType::TEACHER%>">
+      <div class="ui animated fade button small twitter schedule-sender-button" sender="<%= ScheduleType::TEACHER %>">
         <div class="visible content">给所有的老师</div>
         <div class="hidden content">
           现在发送
         </div>
       </div>
-      <div class="ui animated fade button small twitter schedule-sender-button" sender="<%=ScheduleType::STUDENT%>">
+      <div class="ui animated fade button small twitter schedule-sender-button" sender="<%= ScheduleType::STUDENT %>">
         <div class="visible content">给所有的学生</div>
         <div class="hidden content">
           现在发送
@@ -71,23 +75,32 @@
       </div>
     </div>
     <label>指定条件发送</label>
-    <div class="ui right icon input specialInput labelForm autoComplete total-teachers" id="total-teachers" >
-                         <ul>
-                              <li>
-                                   <input type='text' placeholder="按老师(可多人次)..." id="autoC5" autocomplete="teachers"/>
-                              </li>
-                         </ul>
-                           <i class="inverted mail icon schedule-sender-button" by-condition="true" sender="<%=ScheduleType::TEACHER%>"></i>
-                    </div>
+
+    <div class="ui right icon input specialInput labelForm autoComplete total-teachers" id="total-teachers">
+      <ul>
+        <li>
+          <input type='text' placeholder="按老师(可多人次)..." id="autoC5" autocomplete="teachers"/>
+        </li>
+      </ul>
+      <i class="inverted mail icon schedule-sender-button" by-condition="true" sender="<%= ScheduleType::TEACHER %>"></i>
+    </div>
+    <div class="ui right icon input specialInput labelForm autoComplete total-students" id="total-students">
+      <ul>
+        <li>
+          <input type='text' placeholder="按学生(可多人次)..." id="autoC4" autocomplete="students"/>
+        </li>
+      </ul>
+      <i class="inverted mail icon schedule-sender-button" by-condition="true" sender="<%= ScheduleType::STUDENT %>"></i>
+    </div>
     <br/>
   </div>
 </div>
 
-<% content_for :javascript_includes do%>
-<%= javascript_include_tag "dhtmlxscheduler.js"%>
-<%= javascript_include_tag "dhtmlxscheduler_quick_info.js"%>
-<%= javascript_include_tag "locale_cn.js"%>
-<%= javascript_include_tag "manage.source.base.js"%>
-<%= javascript_include_tag "SCHEDULE.js"%>
-<%= javascript_include_tag "BACK_course_schedule.js"%>
-<%end%>
+<% content_for :javascript_includes do %>
+    <%= javascript_include_tag "dhtmlxscheduler.js" %>
+    <%= javascript_include_tag "dhtmlxscheduler_quick_info.js" %>
+    <%= javascript_include_tag "locale_cn.js" %>
+    <%= javascript_include_tag "manage.source.base.js" %>
+    <%= javascript_include_tag "SCHEDULE.js" %>
+    <%= javascript_include_tag "BACK_course_schedule.js" %>
+<% end %>
