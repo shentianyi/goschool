@@ -130,7 +130,7 @@ var BACKCOURSE=BACKCOURSE || {};
            end=$.trim($target.find("[name='end']").val()),
            code=$.trim($target.find("[name='code']").val()),
            type=$target.attr("id")=="new-class"?100:200;
-       if(name.length>0&&desc.length>0&&long.length>0&&people.length>0&&begin.length>0&&end.length>0&&code.length>0){
+       if(name.length>0){
            if(institution!=undefined){
                var label_length=$target.find("[name='label']").children().length,label_array=[],label_text;
                for(var i=0;i<label_length-1;i++){
