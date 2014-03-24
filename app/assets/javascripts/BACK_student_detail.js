@@ -917,7 +917,7 @@ STUDENT_FRONT.check = 0;
                         $("#name").focus();
                     }, 100)
                 }
-                else if (STUDENTDETAIL.errors[1] !== undefined && ( $("#email").val().length == 0 || !BACKSTUDENT.check.test($("#email").val(),"email"))) {
+                else if (STUDENTDETAIL.errors[1] !== undefined && ( $("#email").val().length == 0 )) {
                     MessageBox("抱歉，请填写正确的邮箱", "top", "warning");
                     window.setTimeout(function () {
                         $("#email").focus();
