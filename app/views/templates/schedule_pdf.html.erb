@@ -16,9 +16,9 @@
     <%schedules.each_with_index do |schedule,i|%>
     <tr>
       <td style="padding:15px;text-align:center"><%= i+1%></td>
-      <td style="padding:15px;"><%= schedule.institution_name%></td>
-      <td style="padding:15px;"><%= schedule.course_name%></td>
-      <td style="padding:15px;"><%= schedule.local_time_string%></td>
+      <td style="padding:15px;text-align:center"><%= schedule.institution_name%></td>
+      <td style="padding:15px;text-align:center"><%= schedule.course_name%></td>
+      <td style="padding:15px;text-align:center"><%= schedule.local_time_string%></td>
     </tr>
     <%end%>
     </tbody>
