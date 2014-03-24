@@ -41,18 +41,43 @@ SCHEDULE.widget.init=function(){
         else{
             if(ev.institution_name==null){
                 if(ev.remark && ev.remark.length>0){
-                    return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>简介:'+ev.remark+'</span><span>老师:'+teachers+'</span>';
+                    if(ev.is_base==1){
+                        return ev.text.substr(0,50)+'<span>'+ev.sub_courses.text.substr(0,50)+'(练习课)</span><span>简介:'+ev.remark+'</span><span>老师:'+teachers+'</span>';
+                    }
+                    else{
+                        return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>简介:'+ev.remark+'</span><span>老师:'+teachers+'</span>';
+                    }
+
                 }
                 else{
-                    return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>'+'</span><span>老师:'+teachers+'</span>';
+                    if(ev.is_base==1){
+                        return ev.text.substr(0,50)+'<span>'+ev.sub_courses.text.substr(0,50)+'(练习课)</span><span>'+'</span><span>老师:'+teachers+'</span>';
+                    }
+                    else{
+                        return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>'+'</span><span>老师:'+teachers+'</span>';
+                    }
+
                 }
             }
             else{
                 if(ev.remark && ev.remark.length>0){
-                    return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>简介:'+ev.remark+'</span><span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                    if(ev.is_base==1){
+                        return ev.text.substr(0,50)+'<span>'+ev.sub_courses.text.substr(0,50)+'(练习课)</span><span>简介:'+ev.remark+'</span><span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                    }
+                    else{
+                        return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>简介:'+ev.remark+'</span><span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                    }
+
                 }
                 else{
-                    return ev.text.substr(0,50)+'<span><'+ev.sub_courses.text.substr(0,50)+'></span><span>'+'</span><span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                    if(ev.is_base==1){
+                        return ev.text.substr(0,50)+'<span>'+ev.sub_courses.text.substr(0,50)+'(练习课)</span><span>'+'</span><span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                    }
+                    else{
+
+                        return ev.text.substr(0,50)+'<span>'+ev.sub_courses.text.substr(0,50)+'</span><span>'+'</span><span>老师:'+teachers+'</span>'+'<span>机构:'+ev.institution_name+'</span>';
+                    }
+
                 }
             }
         }
@@ -64,7 +89,7 @@ SCHEDULE.widget.init=function(){
                 <input type='text' id='schedule-course' autocomplete='courses,fast'>\
             </div>";
         ev.my_sub_courses ="<select id='schedule-sub-courses'>" +
-            "<option value='wzx'>无</option>" +
+            "<option value='wzx' is_base='false'>无</option>" +
             "</select>";
         ev.my_remark ="<div class='ui input '>\
                 <input type='text' id='schedule-remark'>\
@@ -94,19 +119,31 @@ SCHEDULE.widget.init=function(){
         var w_data={};
         w_data.text= $.trim($("#schedule-course").val());
         w_data.remark= $.trim($("#schedule-remark").val());
-        w_data.sub_courses=[];
-        for(i=0;i<sub_course_length;i++){
-            var sub_item={};
-            sub_item.value=$("#schedule-sub-courses option").eq(i).attr("value");
-            sub_item.text=$("#schedule-sub-courses option").eq(i).text();
-            if($("#schedule-sub-courses option").eq(i).prop("selected")){
-                sub_item.selected=true
-            }
-            w_data.sub_courses.push(sub_item);
+//        w_data.sub_courses=[];
+//        for(i=0;i<sub_course_length;i++){
+//            var sub_item={};
+//            sub_item.value=$("#schedule-sub-courses option").eq(i).attr("value");
+//            sub_item.text=$("#schedule-sub-courses option").eq(i).text();
+//            if($("#schedule-sub-courses option").eq(i).prop("selected")){
+//                sub_item.selected=true
+//            }
+//            w_data.sub_courses.push(sub_item);
+//        }
+        w_data.sub_courses={
+            value:$("#schedule-sub-courses :selected").attr("value"),
+            text:$("#schedule-sub-courses :selected").text(),
+            is_default:$("#schedule-sub-courses :selected").attr("id")=="wzx"?1:0
         }
-        w_data.sub_courses={value:$("#schedule-sub-courses :selected").attr("value"),text:$("#schedule-sub-courses :selected").text()}
         w_data.color=$("#schedule-color .active").attr("color");
         w_data.teachers=$("#new-schedule-teachers").text().split(",");
+        w_data.institution_name=$.trim($("#schedule-select-institution .menu>div.active").text());
+        if($("#schedule-sub-courses :selected").attr("is_base")=="true"){
+            w_data.is_base=1;
+            w_data.textColor=w_data.color;
+            w_data.color="#fff";
+            w_data.textShadow="none";
+            w_data.border="1px solid #999";
+        }
         //post
         var length=$(".dhx_section_time>label").length,base_time="";
         for(var i=0;i<length;i++){
@@ -122,7 +159,9 @@ SCHEDULE.widget.init=function(){
                 schedule:{
                     course_id:$("#schedule-course").attr("course_id"),
                     start_time:standardParse(base_time+" "+start).date,
-                    end_time:standardParse(base_time+" "+end).date
+                    end_time:standardParse(base_time+" "+end).date,
+                    remark: $("#schedule-remark").val(),
+                    color : $("#schedule-color .active").attr("color")
                 }
 
             },function(data){
@@ -206,6 +245,7 @@ SCHEDULE.calendar.getData=function(){
                 institution_id:institution
             },function(data){
                 if(data.result){
+                    SCHEDULE.calendar.judgeBaseCourse(data.content);
                     scheduler.parse(data.content,"json");
                 }
                 else{
@@ -223,7 +263,9 @@ SCHEDULE.calendar.getData=function(){
                 end_date:scheduler.getState().max_date.toWayneString().day
             },function(data){
                 if(data.result){
+                    SCHEDULE.calendar.judgeBaseCourse(data.content);
                     scheduler.parse(data.content,"json");
+
                     if(callback!==undefined){
                         callback(data.content);
                     }
@@ -238,7 +280,16 @@ SCHEDULE.calendar.getData=function(){
 
     }
 };
-
+SCHEDULE.calendar.judgeBaseCourse=function(content){
+    for(var i=0;i<content.length;i++){
+        if(content[i].is_base==1){
+            content[i].textColor=content[i].color;
+            content[i].color="#fff";
+            content[i].textShadow="none";
+            content[i].border="1px solid #999";
+        }
+    }
+}
 SCHEDULE.calendar.delete_item=function(id){
     //post delete(已经删除掉了，可能要去核心代码里面写ajax)
     var validate;
