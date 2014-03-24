@@ -509,13 +509,13 @@ BACKCOURSE.sub_teacher.service.template=
          <i class="icon collapse" ></i>\
     </div>{{/counts}}';
 BACKCOURSE.post_add_class=function(option){
-    console.log(option);
     $.post("/courses",{ 
             course:option 
     },function(data){
          if(data.result){
              $(".back-index-add .remove").click();
              MessageBox("添加成功","top","success");
+             location.reload();
          }
         else{
              MessageBox_content(data.content);

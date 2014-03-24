@@ -1,7 +1,7 @@
 <div>
   <table style="border-collapse:collapse;border:1px solid rgba(0,0,0,0.8);width:100%">
-    <caption style="margin-bottom:10px;font-size:21px;color:#63A69F">
-      -- 课程表 --
+    <caption style="margin-bottom:15px;font-size:21px;color:#63A69F">
+      ------------------------------------  课程表  ------------------------------------
     </caption> 
     <thead>
     <tr  style="border-bottom:1px solid rgba(0,0,0,0.8)">
@@ -18,7 +18,7 @@
       <td style="padding:15px;text-align:center"><%= i+1%></td>
       <td style="padding:15px;"><%= schedule.institution_name%></td>
       <td style="padding:15px;"><%= schedule.course_name%></td>
-      <td style="padding:15px;font-weight:bold;color:#4092CC"><%= schedule.local_time_string%></td>
+      <td style="padding:15px;"><%= schedule.local_time_string%></td>
     </tr>
     <%end%>
     </tbody>
