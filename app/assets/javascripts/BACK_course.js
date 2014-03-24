@@ -231,7 +231,7 @@ var BACKCOURSE=BACKCOURSE || {};
            }
        }
        else{
-           MessageBox("信息填写不完整","top","warning");
+           MessageBox("请填写课程名称","top","warning");
        }
     });
     //分课程的时候判断后面的disable
