@@ -19,10 +19,12 @@ class StudentCoursePresenter<Presenter
   end
 
   def lesson_display
-    self.lesson.to_s
+    self.lesson
   end
 
   def period_display
-    self.start_date.year.to_s+'.'+self.start_date.month.to_s+'.'+self.start_date.day.to_s + '-' + self.end_date.year.to_s+'.'+self.end_date.month.to_s+'.'+self.end_date.day.to_s
+    if self.start_date
+      self.start_date.year.to_s+'.'+self.start_date.month.to_s+'.'+self.start_date.day.to_s + '-' + self.end_date.year.to_s+'.'+self.end_date.month.to_s+'.'+self.end_date.day.to_s
+    end
   end
 end

@@ -83,6 +83,7 @@ BACKSTUDENT.post_add_student = function(option){
                 if(data.result){
                     $(".back-index-add .remove").click();
                     MessageBox("添加成功","top","success");
+                    location.reload();
                 }
                 else{
                     MessageBox_content(data.content);
