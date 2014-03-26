@@ -6,6 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 //init
+var SCHEDULE = SCHEDULE || {};
 (function() {
      //lighbox中的输入
      $("body").on("keyup", "#schedule-course", function(event) {
@@ -75,48 +76,15 @@
                $(this).addClass("active").siblings().removeClass("active");
           }
      });
+    // search by course
      //右边的搜索框回车事件
      $("body").on("keyup", "#search-courses", function(event) {
           var e = adapt_event(event).event;
           if(e.keyCode == 13 && $("#autoComplete-call .active").length > 0) {
                var id = $("#autoComplete-call .active").attr("id");
                var type = $("#autoComplete-call .active").attr("type");
-               $.get("/schedules/courses", {
-                    id : id,
-                    type : type
-               }, function(data) {
-                    if(data.result) {
-                         $("#search-list").empty();
-                         $("#search-teacher").val("");
-                         SCHEDULE.generate_search_result(data.content);
-
-                    } else {
-                         MessageBox_content(data.content);
-                    }
-               })
-          }
-     });
-     //右边的搜索框的点击事件
-     $("body").on("click", "#search-courses+.search", function() {
-          if($("#autoComplete-call .active").length > 0) {
-               var id = $("#autoComplete-call .active").attr("id");
-               var type = $("#autoComplete-call .active").attr("type");
-               $.get("/schedules/courses", {
-                    id : id,
-                    type : type
-               }, function(data) {
-                    if(data.result) {
-                         $("#search-list").empty();
-                         $("#search-teacher").val("");
-                         if(data.content.length == 0) {
-                              $("#search-list").append($("<p />").text("尚未安排课程..."))
-                         } else {
-                              SCHEDULE.generate_search_result(data.content);
-                         }
-                    } else {
-                         MessageBox_content(data.content);
-                    }
-               })
+              //type=Course
+              SCHEDULE.serchByType(id,type);
           }
      });
      // search by teacher
@@ -125,40 +93,31 @@
           var e = adapt_event(event).event;
           if(e.keyCode == 13 && $("#autoComplete-call .active").length > 0) {
                var id = $("#autoComplete-call .active").attr("id");
-               $.get("/schedules/teacher", {
-                    teacher_id : id
-               }, function(data) {
-                    if(data.result) {
-                         $("#search-list").empty();
-                         $("#search-courses").val("");
-                         SCHEDULE.generate_search_result(data.content);
-                    } else {
-                         MessageBox_content(data.content);
-                    }
-               })
+              SCHEDULE.serchByType(id,null);
+
           }
      });
      //右边的搜索框的点击事件
-     $("body").on("click", "#search-teacher+.search", function() {
-          if($("#autoComplete-call .active").length > 0) {
-               var id = $("#autoComplete-call .active").attr("id");
-               $.get("/schedules/teacher", {
-                    teacher_id : id
-               }, function(data) {
-                    if(data.result) {
-                         $("#search-list").empty();
-                         $("#search-courses").val("");
-                         if(data.content.length == 0) {
-                              $("#search-list").append($("<p />").text("尚未安排课程..."))
-                         } else {
-                              SCHEDULE.generate_search_result(data.content);
-                         }
-                    } else {
-                         MessageBox_content(data.content);
-                    }
-               })
-          }
-     });
+//     $("body").on("click", "#search-teacher+.search", function() {
+//          if($("#autoComplete-call .active").length > 0) {
+//               var id = $("#autoComplete-call .active").attr("id");
+//               $.get("/schedules/teacher", {
+//                    teacher_id : id
+//               }, function(data) {
+//                    if(data.result) {
+//                         $("#search-list").empty();
+//                         $("#search-courses").val("");
+//                         if(data.content.length == 0) {
+//                              $("#search-list").append($("<p />").text("尚未安排课程..."))
+//                         } else {
+//                              SCHEDULE.generate_search_result(data.content);
+//                         }
+//                    } else {
+//                         MessageBox_content(data.content);
+//                    }
+//               })
+//          }
+//     });
 
      //发送课表
      $("body").on("click", "#send-schedule-button", function() {
@@ -228,20 +187,36 @@
           });
      })
 })();
-
-var SCHEDULE = SCHEDULE || {};
-SCHEDULE.generate_search_result = function(content) {
-     var course_name = content[0].text, i, length = content.length;
-     $("#search-list").append($("<p />").addClass("search-class-name").append($("<span />").text("课程：")).append($("<span />").text(course_name)));
+SCHEDULE.generate_search_result = function(content,type) {
+     var course_name = content[0].text,
+         teacher_name = $.trim($("#search-teacher").val()),
+         i,
+         length = content.length;
+    if(type=="Course"){
+        $("#search-list").append($("<p />").addClass("search-class-name")
+            .append($("<span />").text("课程："))
+            .append($("<span />").text(course_name)));
+    }
+    //search by teacher
+    else{
+        $("#search-list").append($("<p />").addClass("search-class-name")
+            .append($("<span />").text("老师："))
+            .append($("<span />").text(teacher_name)));
+    }
      var ul = "<ul class='search-class-schedule'>";
      for( i = 0; i < length; i++) {
           var data = {};
           data.template = content[i];
           data.template.start_date = new Date(parseInt(content[i].start_date)).toWayneString().minute;
           data.template.end_date = (new Date(parseInt(content[i].end_date)).toWayneString().minute).split(" ")[1];
-          data.template.teachers = content[i].teachers.join(",");
+          data.template.teachers = type=="Course"?content[i].teachers.join(","):course_name;
           data.template.sub_courses = content[i].sub_courses.is_default == 0 ? content[i].sub_courses.text : "";
-          var render = Mustache.render("{{#template}}<li id='{{id}}'>" + "<span>{{start_date}}-{{end_date}}</span>" + "<span>{{teachers}}</span>" + "<i class='trash icon' affect='{{id}}'></i>" + "<span>{{sub_courses}}</span>" + "</li>{{/template}}", data);
+          var render = Mustache.render("{{#template}}<li id='{{id}}'>" +
+              "<span>{{start_date}}-{{end_date}}</span>" +
+              "<span>{{teachers}}</span>" +
+              "<i class='trash icon' affect='{{id}}'></i>" +
+              "<span>{{sub_courses}}</span>" +
+              "</li>{{/template}}", data);
           ul += render;
      }
      ul += "</ul>";
@@ -250,3 +225,35 @@ SCHEDULE.generate_search_result = function(content) {
 SCHEDULE.institution.choose = function() {
      SCHEDULE.calendar.getData();
 };
+//2014.3.26
+SCHEDULE.serchByType=function(id,type){
+    if(type=="Course"){
+        $.get("/schedules/courses", {
+            id : id,
+            type : type
+        }, function(data) {
+            if(data.result) {
+                $("#search-list").empty();
+                $("#search-teacher").val("");
+                SCHEDULE.generate_search_result(data.content,type);
+
+            } else {
+                MessageBox_content(data.content);
+            }
+        })
+    }
+    //search via teacher
+    else{
+        $.get("/schedules/teacher", {
+            teacher_id : id
+        }, function(data) {
+            if(data.result) {
+                $("#search-list").empty();
+                $("#search-courses").val("");
+                SCHEDULE.generate_search_result(data.content,null);
+            } else {
+                MessageBox_content(data.content);
+            }
+        })
+    }
+}
